@@ -1,0 +1,1157 @@
+/*Extra large devices (large desktops, 1200px and up)*/
+@media only screen and (min-width: 1321px) and (max-width: 1920px) {
+	.site-content .col-mini {
+		max-width: 20%;
+	}
+	.site-content .col-big {
+		max-width: 80%;
+	}
+	.sidebar-small {
+		display: none;
+	}
+	.mobile-sidebar {
+		display: none;
+	}
+	#main {
+		float: right;
+		width: 78%;
+		padding: 10px 20px;
+	}
+	.hide-desktop {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 1501px) and (max-width: 1920px) {
+	#main {
+		float: right;
+		width: 81%;
+		padding: 10px 20px;
+	}
+	.hide-desktop {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 1321px) and (max-width: 1500px) {
+	#main {
+		float: right;
+		width: 80%;
+		padding: 10px 20px;
+	}
+	.hide-desktop {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 1321px) and (max-width: 1400px) {
+	#main {
+		float: right;
+		width: 78%;
+		padding: 10px 20px;
+	}
+	.hide-desktop {
+		display: none;
+	}
+	.mt330 { margin-top: -380px;}
+	.mt190 { margin-top: -240px; }
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1320px) {
+	.sidebar-small {
+		display: none;
+	}
+	.mobile-sidebar {
+		display: none;
+	}
+	#main {
+		float: right;
+		width: 77%;
+		padding: 10px 20px;
+	}
+	.hide-desktop {
+		display: none;
+	}
+	.mt330 { margin-top: -330px;}
+	.mt190 { margin-top: -220px; }
+	.coaching {
+		width: 100%;
+	}
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+	.schools-section .col-md-4 {
+		margin-bottom: 20px;
+	}
+	.sidebar-small,.mobile-sidebar {
+		display: none;
+	}
+	.sidebar .list-group {
+		width: 70%;
+	}
+	#main {
+		float: right;
+		width: 70%;
+		padding: 10px 20px;
+	}
+	.hide-desktop {
+		display: none;
+	}
+	.sidebar .list-group .list-group-item {
+		font-size: 13px;
+	}
+	.sidebar .list-group .list-group-item:first-child {
+		font-size: 16px;
+	}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+	.school-detail-widget .admission-btn .btn-primary {
+		display: none;
+	}
+	.school-detail-widget .figcaption {
+	    padding: 15px 25px;
+	    left: 40px;
+	    bottom: 40px;
+	}
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.summercamp-popup {
+		right: 150px;
+		top: 5px;
+	}
+	.summer-camp-section .mt50,
+	.summer-camp-section .mt10,
+	.summer-camp-section .mt190,
+	.summer-camp-section .mt330,
+	.summer-camp-section .mat-30 {
+		margin: 0!important;
+	}
+	.hide {
+		display: none;
+	}
+	.schools-section .col-md-4:last-child {
+		margin-bottom: 80px;
+	}
+	/*.navbar-light .navbar-nav .nav-item {
+		background-color: #eaeaea;
+		margin-bottom: 5px;
+		padding: 3px 0 3px 15px !important;
+		font-size: 13px;
+	}
+	.navbar-light .navbar-nav .nav-link {
+		font-size: 12px;
+	}
+	.navbar-brand {
+		margin-bottom: 10px;
+	}*/
+	.sidebar {
+		display: none;
+	}
+	/*.mobile-sidebar {
+		float: left;
+		margin: 0 auto;
+		width: 100%;
+		margin-bottom: 30px;
+		padding: 0 25px;
+	}*/
+	#main {
+		width: 100%;
+		float: left;
+		padding: 0;
+		margin-top: 0px;
+	}
+	.facility-widget .carousel-control-next {
+		right: 35%;
+	}
+	.facility-widget .carousel-control-prev {
+		left: 35%;
+	}
+	/*.navbar-light .navbar-nav .nav-item:nth-child(5),
+	.navbar-light .navbar-nav .nav-item:last-child {
+		display: none;
+	}
+	.mobile-tollfree {
+	    position: absolute;
+	    top: 48px;
+	    right: 120px;
+	}*/
+	.cbse-school-widget figcaption {
+		padding: 25px;
+    }
+    .cbse-school-widget figcaption h2 {
+		font-size: 28px;
+	}
+	.cbse-school-widget small {
+		display: none;
+	}
+	.school-detail-widget .admission-btn .btn-primary {
+		display: none;
+	}
+	.school-detail-widget .figcaption {
+	    padding: 20px 20px;
+	    left: 20px;
+	    bottom: 20px;
+	}
+	.school-detail-widget .figcaption h2 {
+		font-size: 22px;
+	}
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+	.summer-camp-section .mt50,
+	.summer-camp-section .mt10,
+	.summer-camp-section .mt190,
+	.summer-camp-section .mt330,
+	.summer-camp-section .mat-30 {
+		margin: 0!important;
+	}
+	.hide {
+		display: none;
+	}
+	.popup .modal-dialog-centered {
+		width: 100%;
+	}
+	.schools-section .col-md-4:last-child {
+		margin-bottom: 120px;
+	}
+	/*.navbar-light .navbar-nav .nav-item {
+		background-color: #eaeaea;
+		margin-bottom: 5px;
+		padding: 3px 0 3px 15px !important;
+		font-size: 13px;
+	}
+	.navbar-light .navbar-nav .nav-link {
+		font-size: 12px;
+	}
+	.navbar-brand {
+		margin-bottom: 10px;
+    }*/
+	h1 {
+		font-size: 30px;
+	}
+	.sidebar {
+		display: none;
+	}
+	.cbse-school-widget figcaption {
+		position: absolute;
+		width: 100%;
+		left: 0px;
+		bottom: 0px;
+		padding: 20px;
+		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+	}
+	.cbse-school-widget figcaption h2 {
+		font-size: 22px !important;
+	}
+	.copyright .col-lg-6 {
+		text-align: center !important;
+		padding-bottom: 5px;
+	}
+	/*.mobile-sidebar {
+		float: left;
+		margin: 0 auto;
+		width: 100%;
+		margin-bottom: 30px;
+	}*/
+	#main {
+		width: 100%;
+		float: left;
+		padding: 0;
+		margin-top: 0px;
+	}
+	.facility-widget .carousel-control-next {
+		right: 35%;
+	}
+	.facility-widget .carousel-control-prev {
+		left: 35%;
+	}
+	.sticky-widget {
+		display: block;
+		z-index: 1000;
+	}
+	/*.navbar-light .navbar-nav .nav-item:nth-child(4),
+	.navbar-light .navbar-nav .nav-item:last-child {
+		display: none;
+	}
+	.mobile-tollfree {
+	    position: absolute;
+	    top: 48px;
+	    right: 120px;
+	}*/
+	.activity-details-widget figcaption {
+		padding: 25px;
+		text-align: left;
+	}
+	.activity-details-widget figcaption .lead {
+		font-size: 14px;
+	}
+	.cbse-school-widget small {
+		display: none;
+	}
+	h5 {
+		font-size: 18px;
+	}
+	.popular-schools .owl-nav {
+		margin-bottom: 30px;
+    }
+    .school-detail-widget figure img {
+        height: 250px;
+    }
+	.school-detail-widget .figcaption ul li,
+	.school-detail-widget .admission-btn .btn-primary {
+		display: none;
+	}
+	.school-detail-widget .figcaption {
+		position: relative !important;
+		background-color: transparent;
+		left: 0;
+		padding: 0;
+        bottom: 0;
+        margin-top: 20px;
+    }
+    .school-detail-widget .figcaption h1 {
+        margin-bottom: 0px!important;
+    }
+    .school-detail-widget .figcaption ul li:first-child {
+        display: block;
+        font-size: 13px;
+    }
+	.school-detail-widget .figcaption h2 {
+		font-size: 22px;
+	}
+	.content-footer-list ul li .fa {
+		width: 50px;
+		height: 50px;
+		line-height: 50px !important;
+		font-size: 20px;
+	}
+	footer .social-icons .fa {
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+    }
+    .breadrumb-new {
+        padding: 15px;
+    }
+    .breadrumb-new .col-sm-12 {
+        text-align: center!important;
+    }
+    .feedback-form {
+        display: none;
+    }
+    .post-nav .col-lg-6 {
+        text-align: center !important;
+    }
+    .map-section iframe {
+        height: 250px;
+    }
+    .blog-box .col-lg-7 {
+        height: 100%;
+    }
+    .about-widget img {
+        width: 60%!important;
+        margin: 0 auto;
+        display: block;
+    }
+    .admission-widget {
+        height: 270px;
+    }
+    .facility-widget .carousel-item img {
+        width: 50%!important;
+        display: block;
+        margin-bottom: 15px;
+    }
+    .facility-widget .flying .flower,
+    .facility-widget .flying .pencil {
+        display: none;
+    }
+    .recentpost-section,
+    .follow-section {
+        display: none;
+    }
+    .admission-box {
+        margin-top: 25px;
+    }
+    .schools-section .snip1571 {
+    	height: 150px!important;
+    }
+    .search-bar {
+		margin: 0!important;
+	}
+	.cbse-school-widget figcaption .lead {
+    	font-size: 12px;
+    }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 575px) {
+	/*.navbar-brand img {
+		width: 150px;
+	}*/
+	.section-title {
+		text-align: center;
+	}
+	.section-title h1 {
+		margin-bottom: 10px;
+	}
+	.section-title .line {
+		margin: 0 auto;
+	}
+	.summer-camp-section .mt50,
+	.summer-camp-section .mt10,
+	.summer-camp-section .mt190,
+	.summer-camp-section .mt330,
+	.summer-camp-section .mat-30 {
+		margin: 0!important;
+	}
+	.hide {
+		display: none;
+	}
+	.uneven-grid {
+		padding: 0 15px;
+	}
+	.summer-camp-section .grid-item .content {
+		margin-left: 0;
+	}
+    .blog-box .col-lg-7 {
+        height: 340px !important;
+    }
+    .blog-box ul li {
+        font-size: 10px;
+    }
+	.schools-section .col-md-4:last-child {
+		margin-bottom: 120px;
+	}
+	.search-bar form {
+		border: 0;
+	}
+	.search-bar .form-group {
+		margin-bottom: 10px;
+	}
+	.search-bar input {
+		border: 2px solid #eee;
+	}
+	/*header .container-fluid {
+		padding-left: 20px !important;
+		padding-right: 20px !important;
+		background-color: #fff;
+	}*/
+	.sidebar {
+		display: none;
+	}
+	h1 {
+		font-size: 24px !important;
+	}
+	h2 {
+		font-size: 22px !important;
+	}
+	h3 {
+		font-size: 18px !important;	
+	}
+	h4 {
+		font-size: 16px !important;	
+	}
+	.sortby {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.copyright .col-lg-6 {
+		text-align: center !important;
+		padding-bottom: 5px;
+	}
+	/*.navbar-light .navbar-nav .nav-item {
+		background-color: #eaeaea;
+		margin-bottom: 5px;
+		padding: 8px 0 8px 20px !important;
+	}
+	.navbar-brand {
+		margin-bottom: 10px;
+	}*/
+	.cbse-school-widget figcaption {
+		position: absolute;
+		width: 100%;
+		left: 0px;
+		bottom: 0px;
+		padding: 15px;
+		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+	}
+	.cbse-school-widget figcaption h2 {
+		font-size: 18px !important;
+	}
+	/*.navbar-light .navbar-nav .nav-item:last-child {
+		padding: 10px 0 10px 20px !important;
+	}
+	.mobile-sidebar {
+		float: left;
+		margin: 0 auto;
+		width: 100%;
+		margin-bottom: 30px;
+		padding: 0 25px;
+	}*/
+	#main {
+		width: 100%;
+		float: left;
+		padding: 0;
+		margin-top: 0px;
+	}
+	.facility-widget .carousel-control-next {
+		right: 35%;
+	}
+	.facility-widget .carousel-control-prev {
+		left: 35%;
+	}
+	.popular-schools {
+		margin-bottom: 50px;
+	}
+	.sticky-widget {
+		display: block;
+		z-index: 1000;
+	}
+	/*.navbar-light .navbar-nav .nav-item:nth-child(4),
+	.navbar-light .navbar-nav .nav-item:last-child {
+		display: none;
+	}*/
+	.activity-details-widget figcaption {
+		padding: 25px;
+		text-align: left;
+	}
+	.activity-details-widget figcaption .lead {
+		font-size: 14px;
+	}
+	.bread-crumb .container-fluid,
+	.sidebar-section .container-fluid,
+	.school-detail-widget .container-fluid {
+		padding-left: 25px !important;
+    	padding-right: 25px !important;
+	}
+	.bread-crumb ul li {
+	    background-color: #33317c;
+	    color: #fff;
+	    border-radius: 50px;
+	    padding: 3px 10px;
+	    font-size: 10px;
+	    text-transform: uppercase;
+    }
+    .school-detail-widget .figcaption {
+		position: relative !important;
+		background-color: transparent;
+		left: 0;
+		padding: 0;
+        bottom: 0;
+        margin-top: 20px;
+    }
+    .school-detail-widget .figcaption h1 {
+        margin-bottom: 0px!important;
+    }
+    .school-detail-widget .figcaption ul li:first-child {
+        display: block;
+        font-size: 13px;
+    }
+	.school-detail-widget .figcaption ul li,
+	.school-detail-widget .admission-btn .btn-primary {
+		display: none;
+	}
+	.details-section,
+	.school-detail-widget h2 {
+		margin-top: 20px;
+	}
+	.popular-schools .owl-nav {
+		margin-bottom: 30px;
+	}
+	.third-cat .card img {
+		height: 125px;
+	}
+	.content-footer-list ul li .fa {
+		width: 50px;
+		height: 50px;
+		line-height: 50px !important;
+		font-size: 20px;
+	}
+	footer .social-icons .fa {
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+    }
+    .feedback-form {
+        display: none;
+    }
+    .breadrumb-new {
+        padding: 15px;
+    }
+    .breadrumb-new .col-sm-12,
+    .breadrumb-new .col-sm-6 {
+        text-align: center!important;
+    }
+    .breadrumb-new .col-sm-12:first-child {
+        margin-bottom: 15px;
+    }
+    .post-nav .col-lg-6 {
+        text-align: center !important;
+    }
+    .cbse-school-widget .figure img {
+        height: 200px;
+    }
+    .map-section iframe {
+        height: 200px;
+    }
+    .about-widget img {
+        width: 50%!important;
+        margin: 0 auto;
+        display: block;
+    }
+    .school-detail-widget figure img {
+        height: 200px;
+    }
+    .admission-widget {
+        height: 250px;
+    }
+    .facility-widget .carousel-item img {
+        width: 70%!important;
+        display: block;
+        margin: 0 auto 15px auto;
+    }
+    .facility-widget .flying .flower,
+    .facility-widget .flying .pencil {
+        display: none;
+    }
+    .recentpost-section,
+    .follow-section {
+        display: none;
+    }
+    .admission-box {
+        margin-top: 25px;
+    }
+    .home-logo img {
+    	width: 200px;
+    }
+    .schools-section .snip1571 {
+    	height: 150px!important;
+    }
+    .search-bar {
+		margin: 0!important;
+	}
+	.cbse-school-widget figcaption .lead {
+    	font-size: 12px;
+    }
+    .cbse-school-widget figcaption small {
+		display: none;
+	}
+	.third-cat .card-body {
+		padding: 15px;
+	}
+}
+
+@media only screen and (min-width: 360px) and (max-width: 374px) {
+	/*.navbar-brand img {
+		width: 150px;
+	}*/
+	.summer-camp-section .mt50,
+	.summer-camp-section .mt10,
+	.summer-camp-section .mt190,
+	.summer-camp-section .mt330,
+	.summer-camp-section .mat-30 {
+		margin: 0!important;
+	}
+	.hide {
+		display: none;
+	}
+	.uneven-grid {
+		padding: 0 15px;
+	}
+	.summer-camp-section .grid-item .content {
+		margin-left: 0;
+	}
+	.third-cat .card img {
+		height: 125px;
+	}
+	.schools-section .snip1571 {
+    	height: 150px!important;
+    }
+    .search-bar {
+		margin: 0!important;
+	}
+    .blog-box .col-lg-7 {
+        height: 320px !important;
+    }
+    .blog-box ul li {
+        font-size: 12px;
+    }
+    .map-section iframe {
+        height: 200px;
+    }
+	.search-bar form {
+		border: 0;
+	}
+	.search-bar .form-group {
+		margin-bottom: 10px;
+	}
+	.search-bar input {
+		border: 2px solid #eee;
+	}
+	/*header .container-fluid {
+		padding-left: 20px !important;
+		padding-right: 20px !important;
+		background-color: #fff;
+	}*/
+	/*.navbar-brand img {
+		width: 150px;
+	}*/
+	.sidebar {
+		display: none;
+	}
+	p {
+		font-size: 13px;
+	}
+	h1 {
+		font-size: 20px !important;
+	}
+	h2 {
+		font-size: 18px !important;
+	}
+	h3 {
+		font-size: 16px !important;	
+	}
+	h4 {
+		font-size: 15px !important;	
+	}
+	.sortby {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.copyright .col-lg-6 {
+		text-align: center !important;
+		padding-bottom: 5px;
+	}
+	/*.navbar-light .navbar-nav .nav-item {
+		background-color: #eaeaea;
+		margin-bottom: 5px;
+		padding: 3px 0 3px 15px !important;
+		font-size: 13px;
+	}
+	.navbar-light .navbar-nav .nav-link {
+		font-size: 12px;
+	}
+	.navbar-brand {
+		margin-bottom: 10px;
+	}*/
+	.cbse-school-widget figcaption {
+		position: absolute;
+		width: 100%;
+		left: 0px;
+		bottom: 0px;
+		padding: 15px;
+		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+	}
+	.cbse-school-widget figcaption h2 {
+		font-size: 18px !important;
+	}
+	/*.navbar-light .navbar-nav .nav-item:last-child {
+		padding: 10px 0 10px 20px !important;
+	}*/
+	.mobile-sidebar {
+		display: block;
+		float: left;
+		margin: 0 auto;
+		width: 100%;
+		margin-bottom: 30px;
+		padding: 0 25px;
+	}
+	#main {
+		width: 100%;
+		float: left;
+		padding: 0;
+		margin-top: 0px;
+	}
+	.feedback-head,.feedback-body {
+	    padding: 20px;
+	}
+	.feedback .feedback-head img {
+		width: 38px !important;
+	}
+	.feedback h5 {
+	    font-size: 17px;
+	}
+	.feedback ul li {
+	    font-size: 11px;
+	}
+	#header {
+		width: 250px;
+	}
+	.feedback-body .form-group {
+		margin-bottom: 5px !important;
+	}
+	.feedback ::placeholder,
+	.feedback select {
+		font-size: 10px;
+	}
+	.feedback input {
+		height: 30px;
+	}
+	.facility-widget .carousel-control-next {
+		right: 35%;
+	}
+	.facility-widget .carousel-control-prev {
+		left: 35%;
+	}
+	.cbse-school-widget figcaption small {
+		display: none;
+	}
+	.sticky-widget {
+		display: block;
+		z-index: 1000;
+	}
+	/*.navbar-light .navbar-nav .nav-item:nth-child(4),
+	.navbar-light .navbar-nav .nav-item:last-child {
+		display: none;
+	}*/
+	.mobile-tollfree {
+	    position: absolute;
+	    top: 40px;
+	    right: 83px;
+	}
+	.activity-details-widget figcaption {
+		padding: 25px;
+		text-align: left;
+	}
+	.activity-details-widget figcaption .lead {
+		font-size: 14px;
+	}
+	.breadrumb-new .container-fluid,
+	.sidebar-section .container-fluid,
+	.school-detail-widget .container-fluid {
+		padding-left: 25px !important;
+    	padding-right: 25px !important;
+    }
+    .school-detail-widget .figcaption {
+		position: relative !important;
+		background-color: transparent;
+		left: 0;
+		padding: 0;
+        bottom: 0;
+        margin-top: 20px;
+    }
+    .school-detail-widget .figcaption h1 {
+        margin-bottom: 0px!important;
+    }
+    .school-detail-widget .figcaption ul li:first-child {
+        display: block;
+        font-size: 13px;
+    }
+	.bread-crumb ul li {
+	    background-color: #33317c;
+	    color: #fff;
+	    border-radius: 50px;
+	    padding: 3px 10px;
+	    font-size: 10px;
+	    text-transform: uppercase;
+	}
+	.school-detail-widget .figcaption {
+		position: relative !important;
+		background-color: transparent;
+		left: 0;
+		padding: 0;
+		bottom: 0;
+	}
+	.school-detail-widget .figcaption ul li,
+	.school-detail-widget .admission-btn .btn-primary {
+		display: none;
+	}
+	.details-section,
+	.school-detail-widget h2 {
+		margin-top: 20px;
+	}
+	.popular-schools .owl-nav {
+		margin-bottom: 30px;
+	}
+	.content-footer-list ul li .fa {
+		width: 50px;
+		height: 50px;
+		line-height: 50px!important;
+		font-size: 20px;
+	}
+	footer .social-icons .fa {
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+    }
+    .feedback-form {
+        display: none;
+    }
+    .breadrumb-new {
+        padding: 15px;
+    }
+    .breadrumb-new .col-sm-12,
+    .breadrumb-new .col-sm-6 {
+        text-align: center!important;
+    }
+    .post-nav .col-lg-6 {
+        text-align: center !important;
+    }
+    .about-widget img {
+        width: 50%!important;
+        margin: 0 auto;
+        display: block;
+    }
+    .school-detail-widget figure img {
+        height: 200px;
+    }
+    .admission-widget {
+        height: 250px;
+    }
+    .admission-box {
+        margin-top: 25px;
+    }
+    .facility-widget .carousel-item img {
+        width: 70%!important;
+        display: block;
+        margin: 0 auto 15px auto;
+    }
+    .facility-widget .flying .flower,
+    .facility-widget .flying .pencil {
+        display: none;
+    }
+    .cbse-school-widget .figure img {
+        height: 200px;
+    }
+    .blog-details-section ul li {
+        font-size: 13px;
+    }
+    .recentpost-section,
+    .follow-section {
+        display: none;
+    }
+    .home-logo img {
+    	width: 200px;
+    }
+    .schools-section h1, h2, h3 {
+		font-size: 16px;
+    }
+    .cbse-school-widget figcaption .lead {
+    	font-size: 12px;
+    }
+    .third-cat .card-body {
+		padding: 15px;
+	}
+	.section-title {
+		text-align: center;
+	}
+	.section-title h1 {
+		margin-bottom: 10px;
+	}
+	.section-title .line {
+		margin: 0 auto;
+	}
+
+}
+
+@media only screen and (min-width: 320px) and (max-width: 359px) {
+	.section-title {
+		text-align: center;
+	}
+	.section-title h1 {
+		margin-bottom: 10px;
+	}
+	.section-title .line {
+		margin: 0 auto;
+	}
+	.cbse-school-widget figcaption .lead {
+    	font-size: 12px;
+    }
+    .admission-box {
+        margin-top: 25px;
+    }
+    .blog-box .col-lg-7 {
+        height: 320px !important;
+    }
+    .blog-box ul li {
+        font-size: 12px;
+    }
+    .map-section iframe {
+        height: 200px;
+    }
+	.search-bar form {
+		border: 0;
+	}
+	.search-bar .form-group {
+		margin-bottom: 10px;
+	}
+	.search-bar input {
+		border: 2px solid #eee;
+	}
+	/*header .container-fluid {
+		background-color: #fff;
+		padding-left: 20px !important;
+		padding-right: 20px !important;
+	}
+	.navbar-brand img {
+		width: 150px;
+	}*/
+	.sidebar {
+		display: none;
+	}
+	/*.mobile-sidebar {
+		display: block;
+	}*/
+	p {
+		font-size: 13px;
+	}
+	h1 {
+		font-size: 20px !important;
+	}
+	h2 {
+		font-size: 18px !important;
+	}
+	h3 {
+		font-size: 16px !important;	
+	}
+	h4 {
+		font-size: 15px !important;	
+	}
+	.sortby {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.copyright .col-lg-6 {
+		text-align: center !important;
+		padding-bottom: 5px;
+	}
+	/*.navbar-light .navbar-nav .nav-item {
+		background-color: #eaeaea;
+		margin-bottom: 5px;
+		padding: 3px 0 3px 15px !important;
+		font-size: 13px;
+	}
+	.navbar-light .navbar-nav .nav-link {
+		font-size: 12px;
+	}
+	.navbar-brand {
+		margin-bottom: 10px;
+	}*/
+	.cbse-school-widget figcaption {
+		position: absolute;
+		width: 100%;
+		left: 0px;
+		bottom: 0px;
+		padding: 15px;
+		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+	}
+	.cbse-school-widget figcaption h2 {
+		font-size: 18px !important;
+	}
+	/*.navbar-light .navbar-nav .nav-item:last-child {
+		padding: 10px 0 10px 20px !important;
+	}*/
+	.mobile-sidebar {
+		float: left;
+		margin: 0 auto;
+		width: 100%;
+		margin-bottom: 30px;
+		padding: 0 25px;
+	}
+	#main {
+		width: 100%;
+		float: left;
+		padding: 0;
+		margin-top: 0px;
+	}
+	.sticky-widget {
+		display: block;
+		z-index: 1000;
+	}
+	/*.navbar-light .navbar-nav .nav-item:nth-child(4),
+	.navbar-light .navbar-nav .nav-item:last-child {
+		display: none;
+	}*/
+	.mobile-tollfree {
+	    position: absolute;
+	    top: 40px;
+	    right: 83px;
+	}
+	.activity-details-widget figcaption {
+		padding: 25px;
+		text-align: left;
+	}
+	.activity-details-widget figcaption .lead {
+		display: none;
+    }
+    .feedback-form {
+        display: none;
+    }
+    .breadrumb-new {
+        padding: 15px;
+    }
+    .breadrumb-new .col-sm-12,
+    .breadrumb-new .col-sm-6 {
+        text-align: center!important;
+    }
+    .post-nav .col-lg-6 {
+        text-align: center !important;
+    }
+    .school-detail-widget .figcaption {
+		position: relative !important;
+		background-color: transparent;
+		left: 0;
+		padding: 0;
+        bottom: 0;
+        margin-top: 20px;
+    }
+    .school-detail-widget .figcaption h1 {
+        margin-bottom: 0px!important;
+    }
+    .school-detail-widget .figcaption ul li:first-child {
+        display: block;
+        font-size: 13px;
+    }
+    .about-widget img {
+        width: 50%!important;
+        margin: 0 auto;
+        display: block;
+    }
+    .school-detail-widget figure img {
+        height: 200px;
+    }
+    .facility-widget .carousel-item img {
+        width: 70%!important;
+        display: block;
+        margin: 0 auto 15px auto;
+    }
+    .facility-widget .flying .flower,
+    .facility-widget .flying .pencil {
+        display: none;
+    }
+    .cbse-school-widget .figure img {
+        height: 200px;
+    }
+    .recentpost-section,
+    .follow-section {
+        display: none;
+    }
+    .schools-section .snip1571 {
+    	height: 150px!important;
+    }
+    .search-bar {
+		margin: 0!important;
+	}
+	.cbse-school-widget figcaption small {
+		display: none;
+	}
+	.third-cat .card img {
+		height: 125px;
+	}
+	.third-cat .card-body {
+		padding: 15px;
+	}
+}
+@media (min-width: 320px) and (max-width: 767px) {
+	.social-sidebar ul li i {
+		width: 35px;
+		height: 35px;
+		line-height: 35px;
+		font-size: 14px;
+		z-index: 1001;
+	}
+}
