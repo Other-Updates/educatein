@@ -209,7 +209,43 @@ $userid = base64_decode($_GET['id']);
 						<div class="tab-content" id="myTabContent">
 						  	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 						  		<div class="row">
-						  			<div class="col-lg-4">
+						  			<div class="col-lg-3">
+						  				<p class="school-package">School Package</p>
+						  				<div class="package-widget">
+						  					<span class="package-info">Trail Package</span>
+						  					<div class="package-head">
+						  						<p class="lead">Trail</p>
+						  					</div><!-- /package-head -->
+						  					<div class="price-box">
+						  						<p class="price">&#8377;0.00</p>
+						  						<span>10 Days + 5 Days</span>	
+						  					</div><!-- /price-box -->
+						  					<div class="benefit-box">
+						  						<span class="benefits">Benefits</span>
+							  					<p><i class="fa fa-check"></i> Attractive mini website</p>
+							  					<p><i class="fa fa-check"></i> Thumbnail Image</p>
+							  					<p><i class="fa fa-check"></i> Highly impressive to viewers</p>
+							  					<p><i class="fa fa-check"></i> Anytime modify gallery</p>
+							  					<p><i class="fa fa-check"></i> Link home website</p>
+							  					<p><i class="fa fa-check"></i> Search Related Advertisement</p>
+							  					<p><i class="fa fa-check"></i> Report Submission</p>	
+						  					</div><!-- /benefit-box -->
+						  					<div class="text-center">
+						  						<a href="<?php echo base_url(); ?>schoolthird?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  					</div>
+                                            <?php if($free_trial == ""){ ?>
+                                                <!-- <p class="text-center mt-2"><a href="<?php echo base_url(); ?>school-free-trail?id=<?php echo base64_encode($userid); ?>"><u>Free Trial for 5 days</u></a></p>   -->
+
+                                            <?php } ?> 
+
+						  				</div><!-- /package-widget -->
+
+						  				<div class="alert alert-success mat-30" role="alert">
+										  	<p>Advertise on platinum package to get 3 times more than Regular package.</p>
+										</div>
+						  			</div>
+
+									  <div class="col-lg-3">
 						  				<p class="school-package">School Package</p>
 						  				<div class="package-widget">
 						  					<span class="package-info">Regular Package</span>
@@ -245,7 +281,7 @@ $userid = base64_decode($_GET['id']);
 										</div>
 						  			</div>
 
-						  			<div class="col-lg-4">
+						  			<div class="col-lg-3">
 						  				<p class="school-package">School Package</p>
 						  				<div class="package-widget">
 						  					<span class="package-info package-info1">Recommend</span>
@@ -279,7 +315,7 @@ $userid = base64_decode($_GET['id']);
 										</div>
 						  			</div>
 
-						  			<div class="col-lg-4">
+						  			<div class="col-lg-3">
 						  				<p class="school-package">School Package</p>
 						  				<div class="package-widget">
 						  					<span class="package-info package-info2">Highly Recommend</span>
@@ -321,7 +357,43 @@ $userid = base64_decode($_GET['id']);
 
 						  	<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 						  		<div class="row">
-						  			<div class="col-lg-4">
+						  			<div class="col-lg-3">
+						  				<p class="school-package">Activity Class Package</p>
+						  				<div class="package-widget">
+						  					<span class="package-info">Trail Package</span>
+						  					<div class="package-head">
+						  						<p class="lead">Trail</p>
+						  					</div><!-- /package-head -->
+						  					<div class="price-box">
+						  						<p class="price">&#8377;0.00</p>
+						  						<span>10 Days + 5 Days</span>	
+						  					</div><!-- /price-box -->
+						  					<div class="benefit-box">
+						  						<span class="benefits">Benefits</span>
+							  					<p><i class="fa fa-check"></i> Attractive mini website</p>
+							  					<p><i class="fa fa-check"></i> Thumbnail Image</p>
+							  					<p><i class="fa fa-check"></i> Highly impressive to viewers</p>
+							  					<p><i class="fa fa-check"></i> Anytime modify gallery</p>
+							  					<p><i class="fa fa-check"></i> Link home website</p>
+							  					<p><i class="fa fa-check"></i> Search Related Advertisement</p>
+							  					<p><i class="fa fa-check"></i> Report Submission</p>	
+						  					</div><!-- /benefit-box -->
+						  					<div class="text-center">
+						  						<a href="<?php echo base_url(); ?>institutethird?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  					</div>
+                                            <?php if($free_trial == ""){ ?>
+                                                <p class="text-center mt-2"><a href="<?php echo base_url(); ?>institute-free-trail?id=<?php echo base64_encode($userid); ?>"><u>Free Trial for 5 days</u></a></p>
+
+                                            <?php } ?>                                               
+
+						  				</div><!-- /package-widget -->
+
+						  				<div class="alert alert-success mat-30" role="alert">
+										  	<p>Advertise on platinum package to get 3 times more than Regular  package.</p>
+										</div>
+						  			</div>
+
+									  <div class="col-lg-3">
 						  				<p class="school-package">Activity Class Package</p>
 						  				<div class="package-widget">
 						  					<span class="package-info">Regular Package</span>
@@ -357,7 +429,7 @@ $userid = base64_decode($_GET['id']);
 										</div>
 						  			</div>
 
-						  			<div class="col-lg-4">
+						  			<div class="col-lg-3">
 						  				<p class="school-package">Activity Class Package</p>
 						  				<div class="package-widget">
 						  					<span class="package-info package-info1">Recommend</span>
@@ -390,7 +462,7 @@ $userid = base64_decode($_GET['id']);
 										</div>
 						  			</div>
 
-						  			<div class="col-lg-4">
+						  			<div class="col-lg-3">
 						  				<p class="school-package">Activity Class Package</p>
 						  				<div class="package-widget">
 						  					<span class="package-info package-info2">Highly Recommend</span>
