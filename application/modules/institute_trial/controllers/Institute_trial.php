@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Institute_listing_second extends CI_Controller {
+class Institute_trial extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -22,7 +22,7 @@ class Institute_listing_second extends CI_Controller {
         $this->db->where("id", $user_id);
         $user = $this->db->get()->row();
         $data["username"] = $user->name;
-        $this->load->view('institute-listing-two',$data);
+        $this->load->view('institute_trial',$data);
     }
 
     public function insert() {
@@ -107,52 +107,30 @@ class Institute_listing_second extends CI_Controller {
                 
             }
         }
-
-
-
-        $categorybanner = $_FILES['categorybanner']['name'];
-        $categorybanner_ext = pathinfo($categorybanner, PATHINFO_EXTENSION);
-// echo $banner1_ext;
-// exit();
-        $categorybanner_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $categorybanner_ext;
-        $categorybanner_type = $_FILES['categorybanner']['type'];
-        $categorybanner_size = $_FILES['categorybanner']['size'];
-        $categorybanner_tem_loc = $_FILES['categorybanner']['tmp_name'];
-        $categorybanner_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $categorybanner_name;
-
-        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-
-
-        if (in_array($categorybanner_ext, $allowed)) {
-
-            if (move_uploaded_file($categorybanner_tem_loc, $categorybanner_store)) {
-                
-            }
-        }
-
         $schoolinsert = array(
             'category_id' => $category_id,
-            'position_id' => 2,
+            'position_id' => 4,
             'institute_name' => $_POST['institutename'],
             'slug' => $_POST['institutename'],
             'mobile' => $_POST['phone'],
             'email' => $_POST['email'],
             'address' => $_POST['address'],
             'user_id' => $_POST['user_id'],
-            // 'proprietor_image'=>$aboutimage_name,
+            'proprietor_name' => $_POST['propname'],
             'city_id' => $yourcity_id,
             'area_id' => $area_id,
             'about' => $_POST['description'],
-            // 'year_of_establish'=>$_POST['founded'],
-            // 'branches'=>$_POST['branches'],
+            'valitity' => 30,
+            'year_of_establish' => $_POST['founded'],
+            'branches' => $_POST['branches'],
             // 'ad'=>$_POST['ad'],
-            // 'specials'=>$_POST['special'],  
-            // 'website_url'=>$_POST['website'],
+            'specials' => $_POST['special'],
+            'website_url' => $_POST['website'],
             // 'timings'=>$_POST['timing'],
-            'logo' => $categorybanner_name,
+            'logo' => $banner1_name,
+            'activated_at' => date('Y-m-d H:i:s'),
                 // 'news_image'=>$newsbanner1_name,
-                'activated_at' => date('Y-m-d H:i:s'),
-                'valitity'=>100
+                // 'valitity'=>100
         );
 
 
@@ -174,27 +152,7 @@ class Institute_listing_second extends CI_Controller {
 
         $this->db->insert('institute_images', $banner1insert);
 
-// news & events save
-        $news = $_POST['news'];
-        $newsdesc = $_POST['newsdesc'];
-
-
-        if (is_array($news)) {
-            for ($i = 0; $i < count($news); $i++) {
-
-                $newsinsert = array(
-                    'institute_id' => $school_id,
-                    'news' => $news[$i],
-                    'news_brief' => $newsdesc[$i],
-                    'is_active' => 1
-                );
-
-                $this->db->insert('institute_news', $newsinsert);
-            }
-        }
-
-
-// gallery image save
+            // gallery image save
         $gallaryimage = $_FILES['mytext']['name'];
         $gallarytype = $_FILES['mytext']['type'];
         $gallarysize = $_FILES['mytext']['size'];
@@ -230,8 +188,7 @@ class Institute_listing_second extends CI_Controller {
             }
         }
 
-
-// activitys save
+        // activitys save
         $categoryheading = $_POST['categoryheading'];
         $categorydesc = $_POST['categorydesc'];
         $categoryicon = array(
@@ -292,6 +249,7 @@ class Institute_listing_second extends CI_Controller {
             }
         }
 
+
         $user = $this->db->get_where('user_register', array('id' => $_POST['user_id']));
         foreach ($user->result() as $users) {
             $user_name = $users->name;
@@ -303,17 +261,28 @@ class Institute_listing_second extends CI_Controller {
         $to = "sales@edugatein.com";
         $subject = "New institute submitted";
         $txt = "Hi Edugatein,
-            The premium package institute " . $_POST['institutename'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
+        The Trial package institute " . $_POST['institutename'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
         $headers = "From: support@edugatein.com" . "\r\n" .
                 "CC: manikandan@haunuzinfosystems.com";
 
         mail($to, $subject, $txt, $headers);
 
-        // $this->load->view('institute-listing-two');
+
+
+        // $this->load->view('institute-listing-three');
         ?>
-<script src="<?php echo base_url() ?>assets/front/js/jquery.min.js"></script>
+        <?php $userid = $this->session->userdata('user_id'); ?>
+        <script src="<?php echo base_url() ?>assets/front/js/jquery.min.js"></script>
         <script>
-            window.location.href = "https://rzp.io/l/institutepremiumpackage";
+               $(document).ready(function () {
+                swal({
+                    title: "Trial package added successfully",
+                    text: "It will be validated and approved soon",
+                    icon: "success",
+                }).then(function() {
+                    window.location = "<?php echo base_url() ?>plan-details?id=<?php echo base64_encode($userid); ?>";
+                });
+            }); 
         </script>
 
         <?php

@@ -315,10 +315,10 @@ $userid = base64_decode($_GET['id']);
 						  				<div class="alert alert-success mat-30" role="alert">
 										  	<p>Advertise on platinum package to get 3 times more than Regular  package.</p>
 										</div>
+										<a href="<?php echo base_url();?>add_trial?id=<?php echo base64_encode($userid); ?>"><button>School</button></a>
 						  			</div>
 						  		</div><!-- /row -->
 						  	</div>
-
 						  	<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 						  		<div class="row">
 						  			<div class="col-lg-4">
@@ -389,7 +389,6 @@ $userid = base64_decode($_GET['id']);
 										  	<p>Advertise on premium package to get 2 times more than Regular  package.</p>
 										</div>
 						  			</div>
-
 						  			<div class="col-lg-4">
 						  				<p class="school-package">Activity Class Package</p>
 						  				<div class="package-widget">
@@ -429,7 +428,7 @@ $userid = base64_decode($_GET['id']);
 						  	</div>
 						</div><!-- /tab-content -->
 					</div><!-- /package-tab-section -->
-
+					<a href="<?php echo base_url();?>institute_trial?id=<?php echo base64_encode($userid); ?>"><button>Activity</button></a>
 				</div><!-- /col-lg-9 -->
 			</div><!-- /row -->
 		</div><!-- /container-fluid -->

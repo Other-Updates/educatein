@@ -154,6 +154,7 @@ class Add_listing_spectrum extends CI_Controller {
             'type' => $_POST['schooltype'],
             'hostel' => $customRadio1,
             'rte' => $customRadio,
+            'activated_at' => date('Y-m-d H:i:s'),
             // 'students'=>$_POST['students'],
             // 'teachers'=>$_POST['teachers'],
             // 'facebook'=>$_POST['facebook'],
@@ -374,7 +375,7 @@ class Add_listing_spectrum extends CI_Controller {
                 "CC: manikandan@haunuzinfosystems.com";
 
         mail($to, $subject, $txt, $headers);
-         $this->load->view('add-listing-premium');
+         $this->load->view('add-listing-spectrum');
         ?>
 
 

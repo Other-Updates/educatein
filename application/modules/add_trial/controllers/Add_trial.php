@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Add_listing_premium extends CI_Controller {
+class Add_trial extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -16,18 +16,22 @@ class Add_listing_premium extends CI_Controller {
     }
 
     public function index() {
-            $data["user_id"] = $user_id = $this->session->userdata('user_id');
+        $data["user_id"] = $user_id = $this->session->userdata('user_id');
         $this->db->select('*');
         $this->db->from('user_register');
         $this->db->where("id", $user_id);
         $user = $this->db->get()->row();
         $data["username"] = $user->name;
-        $this->load->view('add-listing-premium',$data);
+        $this->load->view('add_trial', $data);
     }
 
     public function insert() {
-// echo $_POST['activity'];
+        // $userid = base64_encode($_GET['id']);
+        // print_r($user_id)
+// echo $_POST['schoolname'];
 // echo "<br>";
+// // echo $_POST['address'];
+// // echo "<br>";
 // exit();
 
         $this->db->select('*')->where('affiliation_name =', $_POST['schoolboard']);
@@ -131,6 +135,7 @@ class Add_listing_premium extends CI_Controller {
             $customRadio = NULL;
         }
 
+
         $schoolinsert = array(
             'school_name' => $_POST['schoolname'],
             'slug' => $_POST['schoolname'],
@@ -142,32 +147,40 @@ class Add_listing_premium extends CI_Controller {
             'area_id' => $area_id,
             'affiliation_id' => $schoolboard_id,
             'schooltype_id' => $level_id,
-            'school_category_id' => 2,
+            'school_category_id' => 4,
             'about' => $_POST['description'],
             'website_url' => $_POST['website'],
             'year_of_establish' => $_POST['founded'],
             // 'ad'=>$_POST['ad'],
             'type' => $_POST['schooltype'],
+            'activated_at' => date('Y-m-d H:i:s'),
             'hostel' => $customRadio1,
             'rte' => $customRadio,
-            'students' => $_POST['students'],
-            'teachers' => $_POST['teachers'],
-            'facebook' => $_POST['facebook'],
-            'twitter' => $_POST['twitter'],
-            'instagram' => $_POST['instagram'],
-            'linkedin' => $_POST['linkedin'],
-            'pinterest' => $_POST['pinterest'],
+            // 'students'=>$_POST['students'],
+            // 'teachers'=>$_POST['teachers'],
+            // 'facebook'=>$_POST['facebook'],
+            // 'twitter'=>$_POST['twitter'],
+            // 'instagram'=>$_POST['instagram'],
+            // 'linkedin'=>$_POST['linkedin'],
+            // 'pinterest'=>$_POST['pinterest'], 
             'logo' => $banner1_name,
-            'activated_at' => date('Y-m-d H:i:s'),
-            'valitity' => 100
+            'valitity' => 30
         );
+
         $this->db->insert('school_details', $schoolinsert);
+
         $this->db->select('*')->where('slug =', $_POST['schoolname']);
         $this->db->from('school_details');
         $schooldetail = $this->db->get();
         foreach ($schooldetail->result() as $schooldetails) {
             $school_id = $schooldetails->id;
         }
+
+
+
+
+
+
 // banner1 image save
         $banner1insert = array(
             'school_id' => $school_id,
@@ -206,80 +219,6 @@ class Add_listing_premium extends CI_Controller {
 //         }
 //     }
 // }
-//platinum data save
-        if (!empty($_POST['founded'])) {
-            $foundedinsert = array(
-                'school_id' => $school_id,
-                'icon_class' => 'fa fa-calendar-check-o',
-                'heading' => 'Founded',
-                'content' => $_POST['founded'],
-                'brief_content' => $_POST['founded'],
-                'is_active' => 1
-            );
-            $this->db->insert('platinum_datas', $foundedinsert);
-        }
-
-        if (!empty($_POST['students'])) {
-            $studentsinsert = array(
-                'school_id' => $school_id,
-                'icon_class' => 'fa fa-group',
-                'heading' => 'Students',
-                'content' => $_POST['students'],
-                'brief_content' => $_POST['students'],
-                'is_active' => 1
-            );
-            $this->db->insert('platinum_datas', $studentsinsert);
-        }
-
-        if (!empty($_POST['level'])) {
-            $levelinsert = array(
-                'school_id' => $school_id,
-                'icon_class' => 'fa fa-graduation-cap',
-                'heading' => 'Level',
-                'content' => $_POST['level'],
-                'brief_content' => $_POST['level'],
-                'is_active' => 1
-            );
-            $this->db->insert('platinum_datas', $levelinsert);
-        }
-
-        if (!empty($_POST['schooltype'])) {
-            $schooltypeinsert = array(
-                'school_id' => $school_id,
-                'icon_class' => 'fa fa-bank',
-                'heading' => 'Schooltype',
-                'content' => $_POST['schooltype'],
-                'brief_content' => $_POST['schooltype'],
-                'is_active' => 1
-            );
-            $this->db->insert('platinum_datas', $schooltypeinsert);
-        }
-
-        if (!empty($_POST['acedemic'])) {
-            $acedemicinsert = array(
-                'school_id' => $school_id,
-                'icon_class' => 'fa fa-percent',
-                'heading' => 'Acedemic',
-                'content' => $_POST['acedemic'],
-                'brief_content' => $_POST['acedemic'],
-                'is_active' => 1
-            );
-            $this->db->insert('platinum_datas', $acedemicinsert);
-        }
-
-        if (!empty($_POST['teachers'])) {
-            $teachersinsert = array(
-                'school_id' => $school_id,
-                'icon_class' => 'fa fa-user',
-                'heading' => 'Teachers',
-                'content' => $_POST['teachers'],
-                'brief_content' => $_POST['teachers'],
-                'is_active' => 1
-            );
-            $this->db->insert('platinum_datas', $teachersinsert);
-        }
-
-
 // activity image save
         $activity = $_POST['activity'];
         $activityimage = $_FILES['activityimage']['name'];
@@ -346,7 +285,7 @@ class Add_listing_premium extends CI_Controller {
         }
 
 
-// facility image save
+        // facility image save
         $facility = $_POST['facility'];
         $facilitydesc = $_POST['facilitydesc'];
         $facilityimage = $_FILES['facilityimage']['name'];
@@ -384,6 +323,43 @@ class Add_listing_premium extends CI_Controller {
             }
         }
 
+
+        // gallery image save
+        $gallaryimage = $_FILES['mytext']['name'];
+        $gallarytype = $_FILES['mytext']['type'];
+        $gallarysize = $_FILES['mytext']['size'];
+        $gallarytmp_name = $_FILES['mytext']['tmp_name'];
+
+        if (is_array($gallaryimage)) {
+            for ($i = 0; $i < count($gallaryimage); $i++) {
+                $gallaryimage = $gallaryimage[$i];
+                $gallary1_ext = pathinfo($gallaryimage, PATHINFO_EXTENSION);
+
+                $gallary1_name = $_POST['schoolname'] . "-" . rand(10000, 10000000) . "." . $gallary1_ext;
+                $gallary1_type = $gallarytype[$i];
+                $gallary1_size = $gallarysize[$i];
+                $gallary1_tem_loc = $gallarytmp_name[$i];
+                $gallary1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $gallary1_name;
+
+                $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+                if (in_array($gallary1_ext, $allowed)) {
+                    if (move_uploaded_file($gallary1_tem_loc, $gallary1_store)) {
+
+                        $schoolgallaryinsert1 = array(
+                            'school_id' => $school_id,
+                            'school_activity_id' => 71,
+                            'images' => $gallary1_name,
+                            'is_active' => 1
+                        );
+
+                        $this->db->insert('school_images', $schoolgallaryinsert1);
+                    }
+                }
+            }
+        }
+
         $user = $this->db->get_where('user_register', array('id' => $_POST['user_id']));
         foreach ($user->result() as $users) {
             $user_name = $users->name;
@@ -392,24 +368,47 @@ class Add_listing_premium extends CI_Controller {
         }
 
         //send email to sales
-        $to = "sales@edugatein.com,mani969806506@gmail.co";
+        $to = "sales@edugatein.com";
         $subject = "New institute submitted";
         $txt = "Hi Edugatein,
-        The premium package school " . $_POST['schoolname'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
+            The trial package school " . $_POST['schoolname'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
         $headers = "From: support@edugatein.com" . "\r\n" .
                 "CC: manikandan@haunuzinfosystems.com";
 
         mail($to, $subject, $txt, $headers);
-
-
-        // $this->load->view('add-listing-premium');
+         $this->load->view('add_trial');
         ?>
+<?php $userid =  $this->session->userdata('user_id'); ?>
+
+
+        <script src="<?php echo base_url() ?>assets/front/js/jquery.min.js"></script>
         <script>
-            window.location.href = "https://rzp.io/l/schoolpremiumpackage";
+            $(document).ready(function () {
+                swal({
+                    title: "Trial package added successfully",
+                    text: "It will be validated and approved soon",
+                    icon: "success",
+                }).then(function() {
+                    window.location = "<?php echo base_url() ?>plan-details?id=<?php echo base64_encode($userid); ?>";
+                });
+            });        
         </script>
-
         <?php
+    }
 
+    public function razorPaySuccess() {
+        $data = [
+            'user_id' => '1',
+            'payment_id' => $this->input->post('razorpay_payment_id'),
+            'amount' => $this->input->post('totalAmount'),
+            'product_id' => $this->input->post('product_id'),
+        ];
+        $insert = $this->db->insert('payments', $data);
+        $arr = array('msg' => 'Payment successfully credited', 'status' => true);
+    }
+
+    public function RazorThankYou() {
+        $this->load->view('welcome_message');
     }
 
 }

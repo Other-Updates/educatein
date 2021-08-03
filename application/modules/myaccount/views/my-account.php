@@ -163,7 +163,7 @@ if ($user->num_rows() > 0) {
                             $spend = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
                             $remain = $valitity - $spend;
 
-                            if ($valitity == "") {
+                            if ($valitity == "" || $remain <= 0) {
                                 ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <!-- <h5 class="alert-heading mb-2">Plan Expired!</h5> -->
@@ -202,7 +202,7 @@ if ($user->num_rows() > 0) {
                             $spend = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
                             $remain = $valitity - $spend;
 
-                            if ($valitity == "") {
+                            if ($valitity == "" || $remain <= 0) {
                                 ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <!-- <h5 class="alert-heading mb-2">Plan Expired!</h5> -->
@@ -242,18 +242,18 @@ if ($user->num_rows() > 0) {
                 <?php if ($address == NULL) { ?>
 
                     <h3 class="mb-3">Personal Information</h3>
-                    <form class="" enctype="multipart/form-data" action="<?php echo base_url() ?>my-account/update" method="post" >
+                    <form class="" enctype="multipart/form-data" name="Form" onsubmit="return validateForm()" method="post" >
                         <div class="form-row">
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <!-- <label for="">Address Line 1</label> -->
-                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address">
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required>
 
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6" style="display:none">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="useremail" name="useremail" value="<?php echo $email; ?>">             
+                                    <input type="text" class="form-control" id="useremail" name="useremail" value="<?php echo $email; ?>" required>             
                                 </div>
                             </div>
                             <?php
@@ -265,8 +265,8 @@ if ($user->num_rows() > 0) {
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <!-- <label for="">City</label> -->
-                                    <select class="form-control" id="city" name="city">
-                                        <option selected disabled>--Select City--</option>
+                                    <select class="form-control" id="city" name="city" required>
+                                        <option value="">--Select City--</option>
                                         <?php
                                         foreach ($city->result() as $cities) {
                                             ?>
@@ -279,7 +279,7 @@ if ($user->num_rows() > 0) {
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <!-- <label for="">Pincode</label> -->
-                                    <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pincode">
+                                    <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pincode" >
                                 </div>
                             </div>
 
@@ -341,7 +341,7 @@ if ($user->num_rows() > 0) {
                                 </div>
 
                             </div><!-- /form-row -->
-                            <button type="submit" class="btn btn-primary btn-save mt-2">SAVE</button>
+                            <button type="submit" class="btn btn-primary btn_save mt-2">SAVE</button>
                         </form>
                     </div><!-- /personal-info-section -->
 
@@ -435,7 +435,7 @@ if ($user->num_rows() > 0) {
                                 </div>
 
                             </div><!-- /form-row -->
-                            <button type="submit" class="btn btn-primary btn-save mt-2">SAVE</button>
+                            <button type="submit" class="btn btn-primary btn_save mt-2">SAVE</button>
                         </form>
                     </div><!-- /personal-info-section -->
 
@@ -550,6 +550,60 @@ if ($user->num_rows() > 0) {
     $('a.logout').click(function () {
         return confirm('Are you sure want to logout....!!!')
     })
+
+    $('.btn-save').click(function(e){
+        e.preventDefault();
+        validateForm();
+        
+    });
+    function validateForm() {
+    var address = $("#address").val();
+    var useremail = $("#useremail").val();
+    var city = $("#city").val();
+    var pincode = $("#pincode").val();
+    var state = $("#state").val();
+    var country = $("#country").val();
+    if ((address == null || address == "")  || (city == null || city == "") || (pincode == null || pincode == "") || (state == null || state == "") || (country == null || country == "")) {
+        swal({
+            title: "Please Fill All Required Field",
+            type: "failure"
+        })
+      return false;
+    }
+    var image = [];
+    var formdata = new FormData();
+    formdata.append('address',$('#address').val());
+    formdata.append('useremail',$('#useremail').val());
+    formdata.append('city',$('#city').val());
+    formdata.append('pincode',$('#pincode').val());
+    formdata.append('state',$('#state').val());
+    formdata.append('country',$('#country').val());
+    var imageData = $('#inputGroupFile01')[0].files;
+    if(imageData.length > 0){
+        image = $('#inputGroupFile01')[0].files[0];
+    }
+    formdata.append('image',image);
+    $.ajax({
+        url:'<?php echo base_url() ?>my-account/update',
+        //data:{address:$('#address').val(),useremail:$('#useremail').val(),city:$('#city').val(),pincode:$('#pincode').val(),state:$('#state').val(),country:$('#country').val(),image: $('#inputGroupFile01')[0].files[0]},  // pass data 
+        data:formdata,
+        processData: false,
+        contentType: false,
+        type:"post",
+        success:function(data){
+            data = JSON.parse(data);
+            if(data.status == 'success'){
+                swal({
+                    title: "Registered Successfully!",
+                    type: "success"
+                }).then(function() {
+                    window.location = "<?php echo base_url() ?>package?id=<?php echo base64_encode($userid); ?>";
+                });
+            }           
+        }
+    });
+  }
+
 
 </script>
 

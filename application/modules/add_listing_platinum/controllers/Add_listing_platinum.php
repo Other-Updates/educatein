@@ -207,9 +207,9 @@ class Add_listing_platinum extends CI_Controller {
             'linkedin' => $school['linkedin'],
             'pinterest' => $school['pinterest'],
             'logo' => $banner1_name,
+            'activated_at' => date('Y-m-d H:i:s'),
             'valitity' => 100
         );
-
         $this->db->insert('school_details', $schoolinsert);
 
         $this->db->select('*')->where('slug =', $school['schoolname']);
@@ -850,7 +850,6 @@ class Add_listing_platinum extends CI_Controller {
             $facility2_size = $_FILES['facilityimage2']['size'];
             $facility2_tem_loc = $_FILES['facilityimage2']['tmp_name'];
             $facility2_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $facility2_name;
-
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
 // exit();

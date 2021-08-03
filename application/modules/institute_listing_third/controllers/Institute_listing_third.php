@@ -127,9 +127,10 @@ class Institute_listing_third extends CI_Controller {
             'specials' => $_POST['special'],
             'website_url' => $_POST['website'],
             // 'timings'=>$_POST['timing'],
+            'activated_at' => date('Y-m-d H:i:s'),
             'logo' => $banner1_name,
                 // 'news_image'=>$newsbanner1_name,
-                // 'valitity'=>100
+                'valitity'=>100
         );
 
 
