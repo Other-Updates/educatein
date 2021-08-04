@@ -159,6 +159,7 @@ class Add_listing_premium extends CI_Controller {
             'pinterest' => $_POST['pinterest'],
             'logo' => $banner1_name,
             'activated_at' => date('Y-m-d H:i:s'),
+            'is_active' => 1,
             'valitity' => 100
         );
         $this->db->insert('school_details', $schoolinsert);

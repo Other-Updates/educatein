@@ -152,6 +152,7 @@ class Institute_listing_second extends CI_Controller {
             'logo' => $categorybanner_name,
                 // 'news_image'=>$newsbanner1_name,
                 'activated_at' => date('Y-m-d H:i:s'),
+                'is_active' => 1,
                 'valitity'=>100
         );
 

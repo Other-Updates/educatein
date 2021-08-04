@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="col-md-2 mb-1">
-        <div class="px-3 py-1 bg-white" style="border-bottom: 3px solid #079346;cursor: pointer">
+        <div class="px-3 py-1 bg-white institutes" style="border-bottom: 3px solid #079346;cursor: pointer">
             <h1 class="mb-0"><i class="icon ion-md-bicycle"  ></i>   <?php echo $institutes; ?></h1>
             <div class="d-flex"> 
                 <div class="ml-auto">Institutes</div>                    
@@ -52,6 +52,10 @@
 <script>
     $('.schools').click(function () {
         window.location.href = '<?php base_url(); ?>schools';
+        return false;
+    });
+    $('.institutes').click(function(){
+        window.location.href ='<?php base_url(); ?>schools/institute'
         return false;
     });
 </script>

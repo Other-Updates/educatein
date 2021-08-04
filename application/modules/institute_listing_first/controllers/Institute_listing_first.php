@@ -174,7 +174,8 @@ class Institute_listing_first extends CI_Controller {
             'logo' => $banner1_name,
             'news_image' => $newsbanner1_name,
             'activated_at' => date('Y-m-d H:i:s'),
-                'valitity'=>100
+            'is_active' => 1,
+            'valitity'=>100
         );
 
         $this->db->insert('institute_details', $schoolinsert);

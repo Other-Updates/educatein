@@ -129,6 +129,7 @@ class Institute_trial extends CI_Controller {
             // 'timings'=>$_POST['timing'],
             'logo' => $banner1_name,
             'activated_at' => date('Y-m-d H:i:s'),
+            'is_active' => 1,
                 // 'news_image'=>$newsbanner1_name,
                 // 'valitity'=>100
         );

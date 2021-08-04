@@ -129,6 +129,7 @@ class Institute_listing_third extends CI_Controller {
             // 'timings'=>$_POST['timing'],
             'activated_at' => date('Y-m-d H:i:s'),
             'logo' => $banner1_name,
+            'is_active' => 1,
                 // 'news_image'=>$newsbanner1_name,
                 'valitity'=>100
         );

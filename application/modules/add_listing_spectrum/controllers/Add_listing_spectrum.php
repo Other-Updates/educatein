@@ -163,6 +163,7 @@ class Add_listing_spectrum extends CI_Controller {
             // 'linkedin'=>$_POST['linkedin'],
             // 'pinterest'=>$_POST['pinterest'], 
             'logo' => $banner1_name,
+            'is_active' => 1,
             'valitity' => 100
         );
 
