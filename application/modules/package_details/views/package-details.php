@@ -218,7 +218,7 @@ $userid = base64_decode($_GET['id']);
 						  					</div><!-- /package-head -->
 						  					<div class="price-box">
 						  						<p class="price">&#8377;0.00</p>
-						  						<span>10 Days + 5 Days</span>	
+						  						<span>10 Days + 20 Days</span>	
 						  					</div><!-- /price-box -->
 						  					<div class="benefit-box">
 						  						<span class="benefits">Benefits</span>
@@ -366,7 +366,7 @@ $userid = base64_decode($_GET['id']);
 						  					</div><!-- /package-head -->
 						  					<div class="price-box">
 						  						<p class="price">&#8377;0.00</p>
-						  						<span>10 Days + 5 Days</span>	
+						  						<span>10 Days + 20 Days</span>	
 						  					</div><!-- /price-box -->
 						  					<div class="benefit-box">
 						  						<span class="benefits">Benefits</span>
