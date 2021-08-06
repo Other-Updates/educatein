@@ -32,7 +32,7 @@
 //                    . "<td align='center' class=' align-middle'>" . $table_record["dob"] . "</td>"
 //                    . "<td class='text-center align-middle'>" . $status . "</td>"
                     . "<td class='text-center align-middle'>"
-                    . "<a href='#' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
+                    . "<a href='". base_url("schools/admin/edit_school?id=". base64_encode($table_record["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
                     . "<a href='#' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0'>Delete</a>"
                     . "<a href='". base_url("admin/schools/details/". base64_encode($table_record["id"]))."'  class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>"
                     . "</td>"

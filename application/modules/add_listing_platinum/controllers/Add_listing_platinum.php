@@ -157,8 +157,7 @@ class Add_listing_platinum extends CI_Controller {
         $banner1_type = $_FILES['banner1']['type'];
         $banner1_size = $_FILES['banner1']['size'];
         $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
-        $banner1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner1_name;
-
+        $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
         $allowed = array('gif', 'png', 'jpg', 'jpeg');
 
         if (in_array($banner1_ext, $allowed)) {
@@ -470,7 +469,7 @@ class Add_listing_platinum extends CI_Controller {
             $banner1_type = $_FILES['banner1']['type'];
             $banner1_size = $_FILES['banner1']['size'];
             $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
-            $banner1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner1_name;
+            $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 
@@ -501,7 +500,7 @@ class Add_listing_platinum extends CI_Controller {
             $banner2_type = $_FILES['banner2']['type'];
             $banner2_size = $_FILES['banner2']['size'];
             $banner2_tem_loc = $_FILES['banner2']['tmp_name'];
-            $banner2_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner2_name;
+            $banner2_store = FCPATH . "/laravel/public/" . $banner2_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
@@ -529,7 +528,7 @@ class Add_listing_platinum extends CI_Controller {
             $banner3_type = $_FILES['banner3']['type'];
             $banner3_size = $_FILES['banner3']['size'];
             $banner3_tem_loc = $_FILES['banner3']['tmp_name'];
-            $banner3_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner3_name;
+            $banner3_store = FCPATH . "/laravel/public/" . $banner3_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
@@ -557,7 +556,7 @@ class Add_listing_platinum extends CI_Controller {
             $aboutimg1_type = $_FILES['aboutimg1']['type'];
             $aboutimg1_size = $_FILES['aboutimg1']['size'];
             $aboutimg1_tem_loc = $_FILES['aboutimg1']['tmp_name'];
-            $aboutimg1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $aboutimg1_name;
+            $aboutimg1_store = FCPATH . "/laravel/public/" . $aboutimg1_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
@@ -585,7 +584,7 @@ class Add_listing_platinum extends CI_Controller {
             $aboutimg2_type = $_FILES['aboutimg2']['type'];
             $aboutimg2_size = $_FILES['aboutimg2']['size'];
             $aboutimg2_tem_loc = $_FILES['aboutimg2']['tmp_name'];
-            $aboutimg2_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $aboutimg2_name;
+            $aboutimg2_store = FCPATH . "/laravel/public/" . $aboutimg2_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
@@ -613,7 +612,7 @@ class Add_listing_platinum extends CI_Controller {
             $activity1_type = $_FILES['activityimage1']['type'];
             $activity1_size = $_FILES['activityimage1']['size'];
             $activity1_tem_loc = $_FILES['activityimage1']['tmp_name'];
-            $activity1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $activity1_name;
+            $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 
@@ -665,7 +664,7 @@ class Add_listing_platinum extends CI_Controller {
             $activity2_type = $_FILES['activityimage2']['type'];
             $activity2_size = $_FILES['activityimage2']['size'];
             $activity2_tem_loc = $_FILES['activityimage2']['tmp_name'];
-            $activity2_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $activity2_name;
+            $activity2_store = FCPATH . "/laravel/public/" . $activity2_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
@@ -717,7 +716,7 @@ class Add_listing_platinum extends CI_Controller {
             $activity3_type = $_FILES['activityimage3']['type'];
             $activity3_size = $_FILES['activityimage3']['size'];
             $activity3_tem_loc = $_FILES['activityimage3']['tmp_name'];
-            $activity3_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $activity3_name;
+            $activity3_store = FCPATH . "/laravel/public/" . $activity3_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
@@ -769,7 +768,7 @@ class Add_listing_platinum extends CI_Controller {
             $activity4_type = $_FILES['activityimage4']['type'];
             $activity4_size = $_FILES['activityimage4']['size'];
             $activity4_tem_loc = $_FILES['activityimage4']['tmp_name'];
-            $activity4_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $activity4_name;
+            $activity4_store = FCPATH . "/laravel/public/" . $activity4_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
@@ -821,7 +820,7 @@ class Add_listing_platinum extends CI_Controller {
             $facility1_type = $_FILES['facilityimage1']['type'];
             $facility1_size = $_FILES['facilityimage1']['size'];
             $facility1_tem_loc = $_FILES['facilityimage1']['tmp_name'];
-            $facility1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $facility1_name;
+            $facility1_store = FCPATH . "/laravel/public/" . $facility1_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 // echo $file_type;
@@ -850,7 +849,7 @@ class Add_listing_platinum extends CI_Controller {
             $facility2_type = $_FILES['facilityimage2']['type'];
             $facility2_size = $_FILES['facilityimage2']['size'];
             $facility2_tem_loc = $_FILES['facilityimage2']['tmp_name'];
-            $facility2_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $facility2_name;
+            $facility2_store = FCPATH . "/laravel/public/" . $facility2_name;
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
 // exit();
@@ -878,7 +877,7 @@ class Add_listing_platinum extends CI_Controller {
             $facility3_type = $_FILES['facilityimage3']['type'];
             $facility3_size = $_FILES['facilityimage3']['size'];
             $facility3_tem_loc = $_FILES['facilityimage3']['tmp_name'];
-            $facility3_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $facility3_name;
+            $facility3_store = FCPATH . "/laravel/public/" . $facility3_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;
@@ -907,7 +906,7 @@ class Add_listing_platinum extends CI_Controller {
             $facility4_type = $_FILES['facilityimage4']['type'];
             $facility4_size = $_FILES['facilityimage4']['size'];
             $facility4_tem_loc = $_FILES['facilityimage4']['tmp_name'];
-            $facility4_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $facility4_name;
+            $facility4_store = FCPATH . "/laravel/public/" . $facility4_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 // echo $file_type;

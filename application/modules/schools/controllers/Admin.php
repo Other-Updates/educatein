@@ -392,7 +392,7 @@ class admin extends CI_Controller {
 //hobbies  as "Favourite Hobbies", outfit as "Favourite Outfit", places   as "Favourite Places", sports   as "Favourite Sports",
 //vegetables   as "Favourite Vegetables", subjects as "Favourite Subjects" ';
         $fields = 'sd.school_name,sd.mobile as Mobile, sd.email as Email, sd.address as Address, c.city_name as "City", a.area_name as "Area", pincode as Pincode, af.affiliation_name as Affiliation,'
-                . 'st.school_type as "School Type",sc.category_name as Catergory,(CASE WHEN sd.school_category_id=1 THEN "PLATINUM" WHEN sd.school_category_id=2 THEN "PREMIUM" WHEN sd.school_category_id=3 THEN "SPECTRUM" WHEN sd.school_category_id=4 THEN "TRIAL" ELSE "" END ) AS Package, sd.grade as Grade, sd.about as About, sd.website_url as Website,sd.map_url as Map, sd.year_of_establish as Establishment,'
+                . 'st.school_type as "School Type",(CASE WHEN sd.school_category_id=1 THEN "PLATINUM" WHEN sd.school_category_id=2 THEN "PREMIUM" WHEN sd.school_category_id=3 THEN "SPECTRUM" WHEN sd.school_category_id=4 THEN "TRIAL" ELSE "" END ) AS Package, sd.grade as Grade, sd.about as About, sd.website_url as Website,sd.map_url as Map, sd.year_of_establish as Establishment,'
                 . 'sd.our_mission as Mission, sd.our_vision as Vision, sd.our_motto as Motto,  sd.ad as AD, sd.type as Type, (CASE WHEN sd.hostel=1 THEN "YES" WHEN sd.hostel=0 THEN "No"   ELSE "" END ) AS Hostel, '
                 . 'sd.rte as "RTE Act.",sd.students as "No of Students", sd.boys as Boys, sd.girls as Girls, sd.teachers as Teachers, sd.facebook, sd.twitter, sd.instagram, sd.linkedin, sd.pinterest, '
                 . '(CASE WHEN sd.is_active=1 THEN "YES" WHEN sd.is_active=0 THEN "No"   ELSE "" END ) AS Status , sd.view_count as Views,date_format( sd.activated_at, "%d-%m-%Y") as "Activated On", '
@@ -573,5 +573,9 @@ class admin extends CI_Controller {
     function getStudentData($student_id) {
         $student = $this->Base_Model->get_record_by_id('students', '*', array("id" => $student_id));
         return $student;
+    }
+
+    function edit_school(){
+        $this->load->view('edit_package');
     }
 }
