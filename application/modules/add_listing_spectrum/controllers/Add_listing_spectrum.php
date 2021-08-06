@@ -110,7 +110,7 @@ class Add_listing_spectrum extends CI_Controller {
         $banner1_type = $_FILES['banner']['type'];
         $banner1_size = $_FILES['banner']['size'];
         $banner1_tem_loc = $_FILES['banner']['tmp_name'];
-        $banner1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner1_name;
+        $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
 
         $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
@@ -154,6 +154,7 @@ class Add_listing_spectrum extends CI_Controller {
             'type' => $_POST['schooltype'],
             'hostel' => $customRadio1,
             'rte' => $customRadio,
+            'activated_at' => date('Y-m-d H:i:s'),
             // 'students'=>$_POST['students'],
             // 'teachers'=>$_POST['teachers'],
             // 'facebook'=>$_POST['facebook'],
@@ -162,6 +163,7 @@ class Add_listing_spectrum extends CI_Controller {
             // 'linkedin'=>$_POST['linkedin'],
             // 'pinterest'=>$_POST['pinterest'], 
             'logo' => $banner1_name,
+            'is_active' => 1,
             'valitity' => 100
         );
 
@@ -236,7 +238,7 @@ class Add_listing_spectrum extends CI_Controller {
                 $activity1_type = $activitytype[$i];
                 $activity1_size = $activitysize[$i];
                 $activity1_tem_loc = $activitytmp_name[$i];
-                $activity1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $activity1_name;
+                $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
 
                 $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
@@ -300,7 +302,7 @@ class Add_listing_spectrum extends CI_Controller {
                 $facility1_type = $facilitytype[$i];
                 $facility1_size = $facilitysize[$i];
                 $facility1_tem_loc = $facilitytmp_name[$i];
-                $facility1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $facility1_name;
+                $facility1_store = FCPATH . "/laravel/public/" . $facility1_name;
 
                 $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
                 // echo $file_type;
@@ -337,7 +339,7 @@ class Add_listing_spectrum extends CI_Controller {
                 $gallary1_type = $gallarytype[$i];
                 $gallary1_size = $gallarysize[$i];
                 $gallary1_tem_loc = $gallarytmp_name[$i];
-                $gallary1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $gallary1_name;
+                $gallary1_store = FCPATH . "/laravel/public/" . $gallary1_name;
 
                 $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
@@ -374,7 +376,7 @@ class Add_listing_spectrum extends CI_Controller {
                 "CC: manikandan@haunuzinfosystems.com";
 
         mail($to, $subject, $txt, $headers);
-         $this->load->view('add-listing-premium');
+         $this->load->view('add-listing-spectrum');
         ?>
 
 

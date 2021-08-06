@@ -97,7 +97,7 @@ class Institute_listing_first extends CI_Controller {
         $banner1_type = $_FILES['banner1']['type'];
         $banner1_size = $_FILES['banner1']['size'];
         $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
-        $banner1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner1_name;
+        $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
 
         $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
@@ -118,7 +118,7 @@ class Institute_listing_first extends CI_Controller {
         $newsbanner1_type = $_FILES['newsbanner']['type'];
         $newsbanner1_size = $_FILES['newsbanner']['size'];
         $newsbanner1_tem_loc = $_FILES['newsbanner']['tmp_name'];
-        $newsbanner1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $newsbanner1_name;
+        $newsbanner1_store = FCPATH . "/laravel/public/" . $newsbanner1_name;
 
         $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
@@ -139,7 +139,7 @@ class Institute_listing_first extends CI_Controller {
         $aboutimage_type = $_FILES['aboutimage']['type'];
         $aboutimage_size = $_FILES['aboutimage']['size'];
         $aboutimage_tem_loc = $_FILES['aboutimage']['tmp_name'];
-        $aboutimage_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $aboutimage_name;
+        $aboutimage_store = FCPATH . "/laravel/public/" . $aboutimage_name;
 
         $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
@@ -173,7 +173,9 @@ class Institute_listing_first extends CI_Controller {
             'timings' => $_POST['timing'],
             'logo' => $banner1_name,
             'news_image' => $newsbanner1_name,
-                // 'valitity'=>100
+            'activated_at' => date('Y-m-d H:i:s'),
+            'is_active' => 1,
+            'valitity'=>100
         );
 
         $this->db->insert('institute_details', $schoolinsert);
@@ -195,7 +197,7 @@ class Institute_listing_first extends CI_Controller {
             $banner1_type = $_FILES['banner1']['type'];
             $banner1_size = $_FILES['banner1']['size'];
             $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
-            $banner1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner1_name;
+            $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
@@ -236,7 +238,7 @@ class Institute_listing_first extends CI_Controller {
             $banner2_type = $_FILES['banner2']['type'];
             $banner2_size = $_FILES['banner2']['size'];
             $banner2_tem_loc = $_FILES['banner2']['tmp_name'];
-            $banner2_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner2_name;
+            $banner2_store = FCPATH . "/laravel/public/" . $banner2_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 // echo $file_type;
@@ -264,7 +266,7 @@ class Institute_listing_first extends CI_Controller {
             $banner3_type = $_FILES['banner3']['type'];
             $banner3_size = $_FILES['banner3']['size'];
             $banner3_tem_loc = $_FILES['banner3']['tmp_name'];
-            $banner3_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $banner3_name;
+            $banner3_store = FCPATH . "/laravel/public/" . $banner3_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 // echo $file_type;
@@ -416,7 +418,7 @@ class Institute_listing_first extends CI_Controller {
                 $activity1_type = $activitytype[$i];
                 $activity1_size = $activitysize[$i];
                 $activity1_tem_loc = $activitytmp_name[$i];
-                $activity1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $activity1_name;
+                $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
 
                 $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
@@ -482,7 +484,7 @@ class Institute_listing_first extends CI_Controller {
                     $gallary1_type = $gallarytype[$i];
                     $gallary1_size = $gallarysize[$i];
                     $gallary1_tem_loc = $gallarytmp_name[$i];
-                    $gallary1_store = $_SERVER['DOCUMENT_ROOT'] . "/laravel/public/" . $gallary1_name;
+                    $gallary1_store = FCPATH . "/laravel/public/" . $gallary1_name;
 
                     $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 

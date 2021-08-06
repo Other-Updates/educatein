@@ -24,7 +24,6 @@ class admin extends CI_Controller {
     }
 
     public function index() {
-       
         $data['listUrl'] = base_url('admin/schools');
         $data['formName'] = 'Schools';
         $data['addLink'] = base_url('admin/schools/add');
@@ -38,10 +37,14 @@ class admin extends CI_Controller {
 //
 //        $sub_where[] = array('direct' => 0, 'rule' => 'where', 'field' => '', 'value' => 0);
         $data['table_records'] = $this->Base_Model->getAdvanceList('school_details', "", "*", "", array('return' => 'result_array'), 'id');
-       
         $this->load->view('view', $data);
     }
 
+    public function institute(){
+        $data['formName'] = 'Institutes';
+        $data['activity_class']= $this->Base_Model->getAdvanceList('institute_details', "", "*", "", array('return' => 'result_array'), 'id');
+        $this->load->view('activity_class',$data);
+    }
     public function add() {
         $data = array('primary_key' => "", 'formType' => 'Add', 'buttonValue' => 'Save', 'student' => array('name' => '', 'gender_id' => '', 'is_active' => ''),
             'sibilings' => array(), 'favourite_value' => array('color' => '', 'food' => '', 'teacher' => '', 'toy' => '', 'snacks' => '', 'hobbies' => '', 'outfit' => '',
@@ -389,11 +392,11 @@ class admin extends CI_Controller {
 //hobbies  as "Favourite Hobbies", outfit as "Favourite Outfit", places   as "Favourite Places", sports   as "Favourite Sports",
 //vegetables   as "Favourite Vegetables", subjects as "Favourite Subjects" ';
         $fields = 'sd.school_name,sd.mobile as Mobile, sd.email as Email, sd.address as Address, c.city_name as "City", a.area_name as "Area", pincode as Pincode, af.affiliation_name as Affiliation,'
-                . 'st.school_type as "School Type",sc.category_name as Catergory, sd.grade as Grade, sd.about as About, sd.website_url as Website,sd.map_url as Map, sd.year_of_establish as Establishment,'
+                . 'st.school_type as "School Type",(CASE WHEN sd.school_category_id=1 THEN "PLATINUM" WHEN sd.school_category_id=2 THEN "PREMIUM" WHEN sd.school_category_id=3 THEN "SPECTRUM" WHEN sd.school_category_id=4 THEN "TRIAL" ELSE "" END ) AS Package, sd.grade as Grade, sd.about as About, sd.website_url as Website,sd.map_url as Map, sd.year_of_establish as Establishment,'
                 . 'sd.our_mission as Mission, sd.our_vision as Vision, sd.our_motto as Motto,  sd.ad as AD, sd.type as Type, (CASE WHEN sd.hostel=1 THEN "YES" WHEN sd.hostel=0 THEN "No"   ELSE "" END ) AS Hostel, '
                 . 'sd.rte as "RTE Act.",sd.students as "No of Students", sd.boys as Boys, sd.girls as Girls, sd.teachers as Teachers, sd.facebook, sd.twitter, sd.instagram, sd.linkedin, sd.pinterest, '
                 . '(CASE WHEN sd.is_active=1 THEN "YES" WHEN sd.is_active=0 THEN "No"   ELSE "" END ) AS Status , sd.view_count as Views,date_format( sd.activated_at, "%d-%m-%Y") as "Activated On", '
-                . ' date_format( sd.valitity, "%d-%m-%Y") as Validity,  date_format( sd.created_at, "%d-%m-%Y") as "Created On"  '; 
+                . ' sd.valitity as Validity,  date_format( sd.created_at, "%d-%m-%Y") as "Created On"  '; 
         $join_tables[] = array(
             'table_name' => 'cities  c',
             'table_condition' => 'c.id = sd.city_id',
@@ -430,6 +433,47 @@ class admin extends CI_Controller {
 //        $data['student_siblings'] = $this->Base_Model->get_records('student_sibilings', $fields, $where, 'result_array', 'id', 'asc');
 
         $this->load->view('details', $data);
+    }
+
+    function institute_details($primary_key){
+        $fields = 'in.institute_name,in.mobile as Mobile, in.email as Email, in.address as Address, c.city_name as "City", a.area_name as "Area", pincode as Pincode,'
+                . 'ic.category_name as Catergory,(CASE WHEN in.position_id=1 THEN "PLATINUM" WHEN in.position_id=2 THEN "PREMIUM" WHEN in.position_id=3 THEN "SPECTRUM" WHEN in.position_id=4 THEN "TRIAL" ELSE "" END ) AS Package,in.about as About, in.website_url as Website,in.map_url as Map, in.year_of_establish as Establishment,'
+                . 'in.facebook, in.twitter, in.instagram, in.linkedin, in.pinterest, '
+                . '(CASE WHEN in.is_active=1 THEN "YES" WHEN in.is_active=0 THEN "No"   ELSE "" END ) AS Status , in.view_count as Views,date_format( in.activated_at, "%d-%m-%Y") as "Activated On", '
+                . ' in.valitity as Validity,  date_format( in.created_at, "%d-%m-%Y") as "Created On"  '; 
+        $join_tables[] = array(
+            'table_name' => 'cities  c',
+            'table_condition' => 'c.id = in.city_id',
+            'table_type' => 'left'
+        );
+        $join_tables[] = array(
+            'table_name' => 'areas  a',
+            'table_condition' => 'a.id = in.area_id',
+            'table_type' => 'left'
+        );
+        // $join_tables[] = array(
+        //     'table_name' => 'affiliations  af',
+        //     'table_condition' => 'af.id = sd.affiliation_id',
+        //     'table_type' => 'left'
+        // );
+        $join_tables[] = array(
+            'table_name' => 'institute_categories  ic',
+            'table_condition' => 'ic.id = in.category_id',
+            'table_type' => 'left'
+        );
+        // $join_tables[] = array(
+        //     'table_name' => 'school_categories  sc',
+        //     'table_condition' => 'sc.id = sd.school_category_id',
+        //     'table_type' => 'left'
+        // );
+        $sub_where[] = array('direct' => 0, 'rule' => 'where', 'field' => 'in.id', 'value' => base64_decode($primary_key));
+        $data['institute'] = $this->Base_Model->getAdvanceList('institute_details in ', $join_tables, $fields, $sub_where, array('return' => 'row_array'), 'in.id');
+        $where[] = array(TRUE, 'institute_id', base64_decode($primary_key));
+        // print_r($data);exit;
+        $fields = array('*');
+        // $data['add_info'] = $this->Base_Model->get_records('institute_platinum_datas', array('*,(CASE WHEN is_active=1 THEN "YES" WHEN is_active=0 THEN "No"   ELSE "" END ) AS is_active'), $where, 'result_array', 'id', 'asc');
+        // print_r($data['add_info']);exit;
+        $this->load->view('activity_list', $data);
     }
 
     function image_upload() {
@@ -531,4 +575,7 @@ class admin extends CI_Controller {
         return $student;
     }
 
+    function edit_school(){
+        $this->load->view('edit_package');
+    }
 }

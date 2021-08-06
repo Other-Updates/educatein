@@ -218,7 +218,7 @@ $userid = base64_decode($_GET['id']);
 						  					</div><!-- /package-head -->
 						  					<div class="price-box">
 						  						<p class="price">&#8377;0.00</p>
-						  						<span>10 Days + 5 Days</span>	
+						  						<span>10 Days + 20 Days</span>	
 						  					</div><!-- /price-box -->
 						  					<div class="benefit-box">
 						  						<span class="benefits">Benefits</span>
@@ -231,7 +231,7 @@ $userid = base64_decode($_GET['id']);
 							  					<p><i class="fa fa-check"></i> Report Submission</p>	
 						  					</div><!-- /benefit-box -->
 						  					<div class="text-center">
-						  						<a href="<?php echo base_url(); ?>schoolthird?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  						<a href="<?php echo base_url(); ?>add_trial?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
                                             <?php if($free_trial == ""){ ?>
                                                 <!-- <p class="text-center mt-2"><a href="<?php echo base_url(); ?>school-free-trail?id=<?php echo base64_encode($userid); ?>"><u>Free Trial for 5 days</u></a></p>   -->
@@ -366,7 +366,7 @@ $userid = base64_decode($_GET['id']);
 						  					</div><!-- /package-head -->
 						  					<div class="price-box">
 						  						<p class="price">&#8377;0.00</p>
-						  						<span>10 Days + 5 Days</span>	
+						  						<span>10 Days + 20 Days</span>	
 						  					</div><!-- /price-box -->
 						  					<div class="benefit-box">
 						  						<span class="benefits">Benefits</span>
@@ -379,7 +379,7 @@ $userid = base64_decode($_GET['id']);
 							  					<p><i class="fa fa-check"></i> Report Submission</p>	
 						  					</div><!-- /benefit-box -->
 						  					<div class="text-center">
-						  						<a href="<?php echo base_url(); ?>institutethird?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  						<a href="<?php echo base_url(); ?>institute_trial?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
                                             <?php if($free_trial == ""){ ?>
                                                 <p class="text-center mt-2"><a href="<?php echo base_url(); ?>institute-free-trail?id=<?php echo base64_encode($userid); ?>"><u>Free Trial for 5 days</u></a></p>

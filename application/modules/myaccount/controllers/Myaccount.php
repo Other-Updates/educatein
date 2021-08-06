@@ -54,38 +54,35 @@ class Myaccount extends CI_Controller {
             'country' => $this->input->post('country'),
             'pincode' => $this->input->post('pincode'),
         );
-
-        $profile = $_FILES['image']['name'];
-        $profile_ext = pathinfo($profile, PATHINFO_EXTENSION);
-        // echo $banner1_ext;
-        // exit();
-        $profile_name = rand(10000, 10000000) . "." . $profile_ext;
-        $profile_type = $_FILES['image']['type'];
-        $profile_size = $_FILES['image']['size'];
-        $profile_tem_loc = $_FILES['image']['tmp_name'];
-        $profile_store = $_SERVER['DOCUMENT_ROOT'] . "/images/myaccount/" . $profile_name;
-
-        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-
-
-        if (in_array($profile_ext, $allowed)) {
-
-            if (move_uploaded_file($profile_tem_loc, $profile_store)) {
-                $data['image'] = $profile_name;
+        if(!empty($_FILES['image'])){
+            $profile = $_FILES['image']['name'];
+            $profile_ext = pathinfo($profile, PATHINFO_EXTENSION);
+            $profile_name = rand(10000, 10000000) . "." . $profile_ext;
+            $profile_type = $_FILES['image']['type'];
+            $profile_size = $_FILES['image']['size'];
+            $profile_tem_loc = $_FILES['image']['tmp_name'];
+            $profile_store = FCPATH . "/images/myaccount/" . $profile_name;
+            
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+            if (in_array($profile_ext, $allowed)) {
+                if (move_uploaded_file($profile_tem_loc, $profile_store)) {
+                    $data['image'] = $profile_name;
+                }
             }
         }
-
-
         $data['email'] = $this->input->post('useremail');
-        $this->db->where('email =', $data['email']);
+        $this->db->where('id =',$this->session->userdata('user_id'));
         $this->db->update('user_register', $data);
-$data["user_id"] = $user_id = $this->session->userdata('user_id');
- $this->db->select('*');
-            $this->db->from('user_register');
-            $this->db->where("id", $user_id);
-            $user = $this->db->get()->row();
-            $data["username"] = $user->name;
-        $this->load->view('my-account', $data);
+        $data["user_id"] = $user_id = $this->session->userdata('user_id');
+        $this->db->select('*');
+        $this->db->from('user_register');
+        $this->db->where("id", $user_id);
+        $user = $this->db->get()->row();
+
+        $data["username"] = $user->name;
+        $data["status"] = 'success';
+        echo json_encode($data);exit;
+        // $this->load->view('my-account', $data);
     }
 
     public function changepassword() {

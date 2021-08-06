@@ -91,6 +91,8 @@ foreach ($user->result() as $users) {
                                 $category = "PREMIUM";
                             } elseif ($schools->school_category_id == 3) {
                                 $category = "SPECTRUM";
+                            } elseif ($schools->school_category_id == 4) {
+                                $category = "TRIAL";
                             }
 
                             $this->db->select('*')->where('id =', $schools->school_category_id);
@@ -333,6 +335,8 @@ foreach ($user->result() as $users) {
                                     $categoryname = "PREMIUM";
                                 } elseif ($institutes->position_id == 3) {
                                     $categoryname = "SPECTRUM";
+                                } elseif ($institutes->position_id == 4) {
+                                    $categoryname = "TRIAL";
                                 }
 
                                 $this->db->select('*')->where('id =', $institutes->category_id);
