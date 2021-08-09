@@ -3,3 +3,9 @@
     margin-bottom: 20px;
     padding: 20px;
 }
+a.btn:not([href]):not([tabindex]) {
+    color: #fff;
+}
+.red {
+    color: red;
+}

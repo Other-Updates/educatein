@@ -34,15 +34,14 @@ foreach ($user->result() as $users) {
     <div class="container-fluid ">
         <div>
             <div class="section-title mb-3">
-                <h1>Enter your details</h1>
+                <h1>Enter Your Details</h1>
                 <?php if($school[0]['school_category_id'] == 3){?>
                 <span>(Spectrum Package)</span>
                 <?php }
                 if($school[0]['school_category_id'] == 4){?>
                     <span>(Trial Package)</span>
                 <?php } ?>
-            </div><!-- /section-title -->
-            <hr>
+            </div><!-- /section-title -->   
 
             <div class="listing-section mat-30">
                 <form action="<?php echo base_url("add_listing_spectrum/insert") ?>" method="post" enctype="multipart/form-data">
@@ -56,13 +55,13 @@ foreach ($user->result() as $users) {
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">School Name</label> -->
+                                <label for="">School Name</label>
                                 <input type="text" class="form-control" id="schoolname" name="schoolname" placeholder="Enter your school name" required>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">School Board</label> -->
+                                <label for="">School Board</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="schoolboard" required>
                                     <option value="">School Board</option>
                                     <option value="cbse">CBSE School</option>
@@ -76,7 +75,7 @@ foreach ($user->result() as $users) {
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">City</label> -->
+                                <label for="">City</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="city" required>
                                     <option  value="">--Select City--</option>
                                     <?php
@@ -92,7 +91,7 @@ foreach ($user->result() as $users) {
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">Area</label> -->
+                                <label for="">Area</label>
                                 <input type="text" class="form-control" id="area" name="area" placeholder="Enter your area" required>
                             </div>
                         </div>
@@ -102,10 +101,10 @@ foreach ($user->result() as $users) {
                         <li class="list-inline-item mr-5">
                             <div class="yesorno">
                                 <label for="customRadio">Eligibility to Avail Admission Under the RTE Act</label>
-                                <div class="form-row">
+                                <div class="form-row ml-0">
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="customRadio1" value="1" name="customRadio" class="custom-control-input" >
-                                        <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>
+                                        <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label> &nbsp; &nbsp; &nbsp; 
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="customRadio2" value="0" name="customRadio" class="custom-control-input" >
@@ -118,10 +117,10 @@ foreach ($user->result() as $users) {
                         <li class="list-inline-item">
                             <div class="yesorno">
                                 <label for="customRadio1">Hostel Facility</label>
-                                <div class="form-row">
+                                <div class="form-row ml-0">
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="customRadio3" value="1" name="customRadio1" class="custom-control-input" >
-                                        <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>
+                                        <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>&nbsp; &nbsp; &nbsp; 
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="customRadio4" value="0" name="customRadio1" class="custom-control-input" >
@@ -153,16 +152,42 @@ foreach ($user->result() as $users) {
                             <label for="file-upload" class="file-upload" style="display: block;">
                                 <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/add-img.png" width="70px" alt="">
                                 <p>Upload Images</p>
-                                <span>Images with format of jpg & png are acceptable.</span>
+                                <small class="red">Images with format of jpg & png are acceptable.</small>
                             </label>
                             <div id="file-upload-filename"></div>
                         </div><!-- /file-img-upload -->
 
                         <div class="col-lg-4">
                             <label for="">Banner Image Sample</label>
-                            <div class="object-fit" style="width: 100%;height: 180px;">
-                                <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/3rd-banner.jpg" class="w-100 rounded" alt="" style="width: 100%;height: 180px;object-fit: cover;">	
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                    <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/3rd-banner.jpg" alt="First slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                    <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/3rd-banner.jpg" alt="Second slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                    <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/3rd-banner.jpg" alt="Third slide">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
+                            <!-- <div class="object-fit" style="width: 100%;height: 180px;">
+                                <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/3rd-banner.jpg" class="w-100 rounded" alt="" style="width: 100%;height: 180px;object-fit: cover;">	
+                            </div> -->
                         </div>
                     </div><!-- /form-row -->
                 </div>
@@ -172,7 +197,7 @@ foreach ($user->result() as $users) {
                     <div class="form-row mt-3">
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">School Type</label> -->
+                                <label for="">School Type</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="schooltype" required>
                                     <option value="">School Type</option>
                                     <option value="Co-Ed">Co-Ed</option>
@@ -184,7 +209,7 @@ foreach ($user->result() as $users) {
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">Grade Level</label> -->
+                                <label for="">Grade Level</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="level" required>
                                     <option value="" >Grade Level</option>
                                     <option value="Elementary School">Elementary School</option>
@@ -197,33 +222,33 @@ foreach ($user->result() as $users) {
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">Founded</label> -->
+                                <label for="">Founded</label>
                                 <input type="text" class="form-control" id="founded" name="founded" placeholder="Founded" >
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">Address</label> -->
+                                <label for="">Address</label>
                                 <input type="text" class="form-control" id="address" name="address" placeholder="Your address">
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">Email</label>  -->
+                                <label for="">Email</label> 
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Your email" >
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">Phone Number</label> -->
+                                <label for="">Phone Number</label>
                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Phone Number">
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
-                                <!-- <label for="">Website</label> -->
+                                <label for="">Website</label>
                                 <input type="text" class="form-control" id="website" name="website" placeholder="Your website" >
                             </div>
                         </div>
@@ -292,7 +317,7 @@ foreach ($user->result() as $users) {
 
                     <h4 class="mb-3">Gallery Images</h4>
                     <hr class="mb-4">
-                    <p class="mt-2">(JPEG and PNG images are only acceptable!).</p>
+                    <small class="red">(JPEG and PNG images are only acceptable!).</small>
                     <div class="input_fields_wrap mt-3">
                         <div class="form-row">
                             <div class="col-lg-4 col-sm-6">
@@ -306,8 +331,9 @@ foreach ($user->result() as $users) {
                         </div><!-- /form-row -->
                     </div><!-- /input_fields_wrap -->
                 </div>
-
-                    <button class="btn btn-primary btn-save mt-3 buy_now" data-amount="1" data-id="3">SUBMIT</button> 
+                <div class="edit-school-inner">
+                    <button class="btn btn-primary btn-save buy_now" data-amount="1" data-id="3">SUBMIT</button> 
+                </div><br>
                 </form>
             </div><!-- /listing-section -->
         </div>
