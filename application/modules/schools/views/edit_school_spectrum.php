@@ -24,6 +24,33 @@ foreach ($user->result() as $users) {
     $username = $users->name;
     $userid = $users->id;
 }
+
+ //getting selected affiliation
+ $this->db->select('*')->where('id=',$school[0]['affiliation_id']);
+ $this->db->from('affiliations');
+ $affiliation = $this->db->get()->result_array();
+
+  //getting selected city
+  $this->db->select('*')->where('id=',$school[0]['city_id']);
+  $this->db->from('cities');
+  $city1 = $this->db->get()->result_array();
+
+   //getting selected area
+   $this->db->select('*')->where('id =', $school[0]['area_id']);
+   $this->db->from('areas');
+   $area = $this->db->get()->result_array();
+
+   //getting school activities
+   $this->db->select('*')->where('id =', $school[0]['id']);
+   $this->db->from('school_images');
+   $school_img = $this->db->get()->result_array();
+   $this->db->select('*')->where('id =', $school_img[0]['school_activity_id']);
+   $this->db->from('school_activities');
+   $activity=$this->db->get()->result_array();
+
+   $this->db->select('*')->where('school_id=',$school[0]['id']);
+   $this->db->from('school_facilities');
+   $facility = $this->db->get()->result_array();
 ?>
 <style>
     .noclick  {
@@ -34,7 +61,7 @@ foreach ($user->result() as $users) {
     <div class="container-fluid ">
         <div>
             <div class="section-title mb-3">
-                <h1>Enter Your Details</h1>
+                <h1><?php echo $school[0]["school_name"]; ?></h1>
                 <?php if($school[0]['school_category_id'] == 3){?>
                 <span>(Spectrum Package)</span>
                 <?php }
@@ -56,7 +83,7 @@ foreach ($user->result() as $users) {
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="">School Name</label>
-                                <input type="text" class="form-control" id="schoolname" name="schoolname" placeholder="Enter your school name" required>
+                                <input type="text" class="form-control" id="schoolname" name="schoolname" value="<?php echo $school[0]["school_name"];?>" placeholder="Enter your school name" required>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
@@ -64,11 +91,11 @@ foreach ($user->result() as $users) {
                                 <label for="">School Board</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="schoolboard" required>
                                     <option value="">School Board</option>
-                                    <option value="cbse">CBSE School</option>
-                                    <option value="international">International School</option>
-                                    <option value="matriculation">Matriculation School</option>
-                                    <option value="special">Special School</option>
-                                    <option value="kindergarten">Kindergarten</option>
+                                    <option value="cbse"<?php if('cbse' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>CBSE School</option>
+                                    <option value="international"<?php if('international' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>International School</option>
+                                    <option value="matriculation"<?php if('matriculation' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Matriculation School</option>
+                                    <option value="special"<?php if('special' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Special School</option>
+                                    <option value="kindergarten"<?php if('kindergarten' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Kindergarten</option>
 
                                 </select>
                             </div>
@@ -84,7 +111,7 @@ foreach ($user->result() as $users) {
                                     $city = $this->db->get();
                                     foreach ($city->result() as $citys) {
                                         ?>
-                                        <option value="<?php echo $citys->city_name; ?>"><?php echo $citys->city_name; ?></option>
+                                        <option value="<?php echo $citys->city_name; ?>" <?php if($citys->city_name == $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -92,7 +119,7 @@ foreach ($user->result() as $users) {
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="">Area</label>
-                                <input type="text" class="form-control" id="area" name="area" placeholder="Enter your area" required>
+                                <input type="text" class="form-control" id="area" name="area" value="<?php echo $area[0]['area_name'];?>" placeholder="Enter your area" required>
                             </div>
                         </div>
                     </div><!-- /form-row -->
@@ -103,11 +130,11 @@ foreach ($user->result() as $users) {
                                 <label for="customRadio">Eligibility to Avail Admission Under the RTE Act</label>
                                 <div class="form-row ml-0">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio1" value="1" name="customRadio" class="custom-control-input" >
+                                        <input type="radio" id="customRadio2" value="1" <?php if($school[0]['rte'] == '1'){echo "checked";} ?> name="customRadio" class="custom-control-input" >
                                         <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label> &nbsp; &nbsp; &nbsp; 
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" value="0" name="customRadio" class="custom-control-input" >
+                                        <input type="radio" id="customRadio2" value="0" <?php if($school[0]['rte'] == '0'){echo "checked";} ?> name="customRadio" class="custom-control-input" >
                                         <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">No</label>
                                     </div>
                                 </div><!-- /form-row -->
@@ -119,11 +146,11 @@ foreach ($user->result() as $users) {
                                 <label for="customRadio1">Hostel Facility</label>
                                 <div class="form-row ml-0">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio3" value="1" name="customRadio1" class="custom-control-input" >
+                                        <input type="radio" id="customRadio1" value="1"<?php if($school[0]['hostel'] == '1'){echo "checked";} ?> name="customRadio1" class="custom-control-input" >
                                         <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>&nbsp; &nbsp; &nbsp; 
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio4" value="0" name="customRadio1" class="custom-control-input" >
+                                        <input type="radio" id="customRadio1" value="0" <?php if($school[0]['hostel'] == '0'){echo "checked";} ?> name="customRadio1" class="custom-control-input" >
                                         <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio4">No</label>
                                     </div>
                                 </div><!-- /form-row -->
@@ -135,7 +162,7 @@ foreach ($user->result() as $users) {
                         <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea class="form-control" id="description" rows="1" name="description" style="height:80px;" ></textarea>
+                                <textarea class="form-control" id="description" rows="1" name="description" style="height:80px;" ><?php echo $school[0]['about'];?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6"></div>
@@ -200,10 +227,10 @@ foreach ($user->result() as $users) {
                                 <label for="">School Type</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="schooltype" required>
                                     <option value="">School Type</option>
-                                    <option value="Co-Ed">Co-Ed</option>
-                                    <option value="Girls">Girls</option>
-                                    <option value="Boys">Boys</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Co-Ed"<?php if($school[0]['type']== "Co-Ed"){echo "selected";}?>>Co-Ed</option>
+                                    <option value="Girls"<?php if($school[0]['type']== "Girls"){echo "selected";}?>>Girls</option>
+                                    <option value="Boys"<?php if($school[0]['type']== "Boys"){echo "selected";}?>>Boys</option>
+                                    <option value="Other"<?php if($school[0]['type']== "Other"){echo "selected";}?>>Other</option>
                                 </select>
                             </div>
                         </div>
@@ -212,44 +239,44 @@ foreach ($user->result() as $users) {
                                 <label for="">Grade Level</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="level" required>
                                     <option value="" >Grade Level</option>
-                                    <option value="Elementary School">Elementary School</option>
-                                    <option value="Preschools">Preschools</option>
-                                    <option value="High School">High School</option>
-                                    <option value="Higher Secondary School">Higher Secondary School</option>
-                                    <option value="Special school">Special school</option>
+                                    <option value="Elementary School"<?php if($school_type[0]['school_type']=="Elementary School"){echo "selected";}?>>Elementary School</option>
+                                    <option value="Preschools"<?php if($school_type[0]['school_type']=="Preschools"){echo "selected";}?>>Preschools</option>
+                                    <option value="High School"<?php if($school_type[0]['school_type']=="High School"){echo "selected";}?>>High School</option>
+                                    <option value="Higher Secondary School"<?php if($school_type[0]['school_type']=="Higher Secondary School"){echo "selected";}?>>Higher Secondary School</option>
+                                    <option value="Special school"<?php if($school_type[0]['school_type']=="Special school"){echo "selected";}?>>Special school</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Founded</label>
-                                <input type="text" class="form-control" id="founded" name="founded" placeholder="Founded" >
+                                <input type="text" class="form-control" id="founded" name="founded" value="<?php echo $school[0]['year_of_establish'];?>" placeholder="Founded" >
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Address</label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Your address">
+                                <input type="text" class="form-control" id="address" name="address" value="<?php echo $school[0]['address'];?>" placeholder="Your address">
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Email</label> 
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Your email" >
+                                <input type="email" class="form-control" id="email" name="email" value="<?php echo $school[0]['email'];?>" placeholder="Your email" >
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Phone Number</label>
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Phone Number">
+                                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $school[0]['mobile'];?>" placeholder="Your Phone Number">
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Website</label>
-                                <input type="text" class="form-control" id="website" name="website" placeholder="Your website" >
+                                <input type="text" class="form-control" id="website" name="website" value="<?php echo $school[0]['website_url'];?>" placeholder="Your website" >
                             </div>
                         </div>
                     </div><!-- /form-row -->
@@ -261,7 +288,7 @@ foreach ($user->result() as $users) {
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="activity[]">Activity Name</label>
-                                <input type="text" class="form-control" id="activity[]" name="activity[]" placeholder="eg.Sports" >
+                                <input type="text" class="form-control" id="activity[]" name="activity[]" values="<?php echo $activity['activity_name'];?>" placeholder="eg.Sports" >
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
@@ -288,7 +315,7 @@ foreach ($user->result() as $users) {
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="facility[]">Facility Name</label>
-                                <input type="text" class="form-control" id="facility[]" name="facility[]" placeholder="eg.Library" >
+                                <input type="text" class="form-control" id="facility[]" name="facility[]" value= "<?php echo $facility[0]['facility']; ?>" placeholder="eg.Library" >
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
@@ -302,7 +329,7 @@ foreach ($user->result() as $users) {
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="facilitydesc">Facility Description</label>
-                                <textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows="1" ></textarea>
+                                <textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows="1" ><?php echo $facility[0]['content']; ?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
