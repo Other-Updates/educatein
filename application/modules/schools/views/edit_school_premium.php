@@ -33,14 +33,14 @@ foreach ($user->result() as $users) {
     }
 </style>
 <div class="dashboard-content">
-    <div class="container">
-        <div class="section-title mb-3">
-            <h1>Enter your details</h1>
-            <span>(Premium Package)</span>
+    <div class="container-fluid1">
+        <div class="section-title mb-2">
+            <h1>Enter Your Details
+            <span>(Premium Package)</span></h1>
         </div><!-- /section-title -->
-        <hr>
         <div class="listing-section mat-30">
             <form action="<?php echo base_url() ?>add_listing_premium/insert" method="post" enctype="multipart/form-data">
+            <div class="edit-school-inner">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6" style="display:none">
                         <div class="form-group">
@@ -95,10 +95,10 @@ foreach ($user->result() as $users) {
                     <li class="list-inline-item mr-5">
                         <div class="yesorno">
                             <label for="area">Eligibility to Avail Admission Under the RTE Act</label>
-                            <div class="form-row">
+                            <div class="form-row ml-0">
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="customRadio1" value="1" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>
+                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>&nbsp; &nbsp; &nbsp; 
                                 </div>
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="customRadio2" value="0" name="customRadio" class="custom-control-input">
@@ -111,10 +111,10 @@ foreach ($user->result() as $users) {
                     <li class="list-inline-item">
                         <div class="yesorno">
                             <label for="customRadio1">Hostel Facility</label>
-                            <div class="form-row">
+                            <div class="form-row ml-0">
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="customRadio3" value="1" name="customRadio1" class="custom-control-input">
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>
+                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>&nbsp; &nbsp; &nbsp; 
                                 </div>
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="customRadio4" value="0" name="customRadio1" class="custom-control-input">
@@ -124,7 +124,10 @@ foreach ($user->result() as $users) {
                         </div><!--/yesorno -->
                     </li>
                 </ul>
-                <hr class="mt-4">
+            </div>
+            <div class="edit-school-inner">
+            <h4 class="mb-3">Banner Image</h4>
+                    <hr class="mb-4">
                 <div class="form-row mat-30">
                     <div class="col-lg-6 col-sm-6 file-img-upload">
                         <label for="banner">Add Banner Image</label>
@@ -132,27 +135,52 @@ foreach ($user->result() as $users) {
                         <label for="file-upload" class="file-upload" style="display: block;">
                             <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/add-img.png" width="70px" alt="Images">
                             <p>Upload Images</p>
-                            <span>Images with format of jpg & png are acceptable.</span>
+                            <small class="red">Images with format of jpg & png are acceptable.</small>
                         </label>
                         <div id="file-upload-filename"></div>
+                        <div class="alert alert-success mt-3" role="alert">
+                            <p class="image-note m-0">Choose your banner images in high quality to attract more peoples.</p>
+                        </div>
                     </div><!-- /file-img-upload -->
 
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-6 col-sm-6">
                         <label for="bannersample">Banner Image Sample</label>
-                        <div class="object-fit" style="width: 100%;height: 180px;">
-                            <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" class="w-100 rounded" alt="" style="width: 100%;height: 180px;object-fit: cover;">	
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" alt="Third slide">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
+                        <!-- <div class="object-fit" style="width: 100%;height: 180px;">
+                            <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" class="w-100 rounded" alt="" style="width: 100%;height: 180px;object-fit: cover;">	
+                        </div> -->
                     </div>
                 </div><!-- /form-row -->
-                <div class="form-row">
-                    <div class="col-lg-6">
-                        <div class="alert alert-primary mt-3" role="alert">
-                            <p class="image-note">Choose your banner images in high quality to attract more peoples.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6"></div>
-                </div>
                 <!-- Alert Content -->
+            </div>
+            <div class="edit-school-inner">
+            <h4 class="mb-3">School Description</h4>
+                    <hr class="mb-4">
 
                 <div class="form-row mt-3">
                     <div class="col-lg-6 col-sm-6">
@@ -163,6 +191,8 @@ foreach ($user->result() as $users) {
                     </div>
                     <div class="col-lg-6 col-sm-6"></div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
                 <h4 class="mt-4 mb-2">Additional Info</h4>
                 <hr class="mb-4">
@@ -217,6 +247,8 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
                 <h4 class="mb-2">School Activities</h4>
                 <hr class="mb-3">
@@ -237,6 +269,8 @@ foreach ($user->result() as $users) {
                         <a class="btn btn-primary add_field_button1" id="addmore">Add More</a>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
 
                 <h4 class="mt-4 mb-3">School Facilities</h4>
@@ -269,6 +303,8 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
                 <h4 class="mb-2 mt-4">Location</h4>
                 <hr class="mb-3">
@@ -298,6 +334,8 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
                 <h4 class="mb-2 mt-4">Social Links</h4>
                 <hr class="mb-3">
@@ -333,8 +371,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
-
+            </div>
+            <div class="edit-school-inner">
                 <button class="btn btn-primary btn-save">SUBMIT</button>
+            </div><br>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->
