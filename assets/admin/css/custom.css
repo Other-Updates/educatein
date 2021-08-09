@@ -9,3 +9,6 @@ a.btn:not([href]):not([tabindex]) {
 .red {
     color: red;
 }
+.section-title span {
+    font-size: 18px;
+}

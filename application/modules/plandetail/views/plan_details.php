@@ -243,7 +243,7 @@ foreach ($user->result() as $users) {
                                                     </div><!-- row -->
                                                     <div class="row mb-3">
                                                         <div class="col-lg-4 text-b"><p><b>Activities</b></p></div>
-                                                        <div class="col-lg-8"><p><?php echo $act_names; ?></p></div>
+                                                        <div class="col-lg-8"><p><?php  print_r($act_names); ?></p></div>
                                                     </div><!-- row -->
                                                     <div class="row mb-3">
                                                         <div class="col-lg-4 text-b"><p><b>Facilities</b></p></div>

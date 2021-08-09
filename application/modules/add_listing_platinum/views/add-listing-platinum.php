@@ -97,6 +97,12 @@ foreach ($user->result() as $users) {
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
+                            <label for="area">Pincode</label>
+                            <input type="text" name="pincode" class="form-control" id="area" placeholder="654001" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-group">
                             <label for="level">Grade Level</label>
                             <select class="form-control" name="level" id="exampleFormControlSelect1" required>
                                 <option value="" >e.g. Elementary School</option>
@@ -253,6 +259,36 @@ foreach ($user->result() as $users) {
                         <div class="form-group">
                             <label for="activity">Activity</label>
                             <input type="text" name="activity" class="form-control" id="activity" placeholder="e.g.Martial Arts">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="academic">No of Boys</label>
+                            <input type="text" name="boys" class="form-control" id="academic" placeholder="No of Boys">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="academic">No of Girls</label>
+                            <input type="text" name="girls" class="form-control" id="academic" placeholder="No of Girls">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="academic">Vision</label>
+                            <input type="text" name="our_vision" class="form-control" id="academic" placeholder="Vision">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="academic">Mission</label>
+                            <input type="text" name="our_mission" class="form-control" id="academic" placeholder="Mission">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="academic">Motto</label>
+                            <input type="text" name="our_motto" class="form-control" id="academic" placeholder="Motto">
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -529,6 +565,12 @@ foreach ($user->result() as $users) {
                         <div class="form-group">
                             <label for="website">Website</label>
                             <input type="text" name="website" class="form-control" id="website" placeholder="e.g.www.yourwebsite.com">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="website">Map</label>
+                            <input type="text" name="map_url" class="form-control" id="website" placeholder="https://www.google.com/maps/@11.0231552,76.9523712,15z">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">

@@ -17,7 +17,7 @@
         </tr>";
         } ?>       
         <tr>
-            <td>Logo</td>
+            <!-- <td>Logo</td> -->
             <td></td>
         </tr>
     </table>
@@ -31,7 +31,7 @@
             echo " <tr>
             <td class='align-middle'>".$facility["facility"]."</td>
             <td class='align-middle'>".$facility["content"]."</td>
-            <td class='align-middle'> <img src='".base_url('laravel/public/').$facility["image"]."' ></td>
+            <td class='align-middle'> <img src='".base_url('laravel/public/').$facility["image"]."'width=250 height=200 ></td>
                 
             <td class='align-middle'>".$facility["is_active"]."</td>
         </tr>";

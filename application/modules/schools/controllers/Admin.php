@@ -565,7 +565,7 @@ class admin extends CI_Controller {
         return $student;
     }
 
-    function edit_school(){
+    function school_edit(){
         $userid=base64_decode($_GET['id']);
         $this->db->select('*')->where('id=',$userid);
         $this->db->from('school_details');
@@ -594,4 +594,217 @@ class admin extends CI_Controller {
             $this->load->view('edit_activity_premium');
         }
     }
+
+    function school_delete(){
+        $userid = base64_decode($_GET['id']);
+        $this->db->where('schooldetails_id', $userid);
+        $this->db->delete('schoolmanagement_activities');
+        $this->db->where('school_id', $userid);
+        $this->db->delete('platinum_datas');
+        $this->db->where('school_id', $userid);
+        $this->db->delete('school_images');
+        $this->db->where('school_id', $userid);
+        $this->db->delete('school_facilities');
+        $this->db->where('id', $userid);
+        $this->db->delete('school_details');
+    ?>
+    <script src="<?php echo base_url() ?>assets/front/js/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                swal({
+                    title: "Deleted",
+                    text: "School deleted successfully",
+                    icon: "success",
+                }).then(function() {
+                    window.location = "<?php echo base_url() ?>schools";
+                });
+            });        
+        </script>
+    <?php } 
+
+    function institute_delete(){
+        $userid = base64_decode($_GET['id']);
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('institute_images');
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('institute_admissions');
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('institute_platinum_datas');
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('program_details');
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('institute_news');
+        $this->db->where('id', $userid);
+        $this->db->delete('institute_details');
+        ?>
+        <script>
+            window.href.location ="<?php base_url(); ?>schools/institute";
+            </script>
+            <?php
+
+
+    }
+
+    function update_school(){
+        $this->db->select('*')->where('city_name =', $_POST['city']);
+    $this->db->from('cities');
+    $yourcityarray = $this->db->get();
+    foreach ($yourcityarray->result() as $yourcitys) {
+        $yourcity_id = $yourcitys->id;
+    }
+
+    $this->db->select('*')->where('area_name =', $_POST['area']);
+        $this->db->from('areas');
+        $area = $this->db->get();
+
+
+        if ($area->num_rows() > 0) {
+            foreach ($area->result() as $areas) {
+                $area_id = $areas->id;
+                //exit();
+            }
+        } else {
+            $areainsert = array(
+                'area_name' => $_POST['area'],
+                'slug' => $_POST['area'],
+                'city_id' => $yourcity_id,
+                'is_active' => 1
+            );
+            $this->db->insert('areas', $areainsert);
+
+            $this->db->select('*')->where('area_name =', $_POST['area']);
+            $this->db->from('areas');
+            $area = $this->db->get();
+            foreach ($area->result() as $areas) {
+                $area_id = $areas->id;
+            }
+        }
+                $this->db->select('*')->where('affiliation_name =', $_POST['schoolboard']);
+        $this->db->from('affiliations');
+        $schoolboardarray = $this->db->get();
+
+        foreach ($schoolboardarray->result() as $schoolboards) {
+            $schoolboard_id = $schoolboards->id;
+        }
+
+        if (isset($_POST['level'])) {
+            $school['level'] = $_POST['level'];
+
+            $this->db->select('*')->where('school_type =', $_POST['level']);
+            $this->db->from('school_types');
+            $level = $this->db->get();
+            foreach ($level->result() as $levels) {
+                $level_id = $levels->id;
+            }
+        } else {
+            $level_id = NULL;
+        }
+
+        if (isset($_POST['customRadio2'])) {
+            $customRadio1 = $_POST['customRadio2'];
+        } else {
+            $customRadio1 = NULL;
+        }
+
+        if (isset($_POST['customRadio1'])) {
+            $customRadio = $_POST['customRadio1'];
+        } else {
+            $customRadio = NULL;
+        }
+
+        $activity = $_POST['activity'];
+        $activityimage = $_FILES['activityimage']['name'];
+        $activitytype = $_FILES['activityimage']['type'];
+        $activitysize = $_FILES['activityimage']['size'];
+        $activitytmp_name = $_FILES['activityimage']['tmp_name'];
+
+        if (is_array($activity)) {
+            for ($i = 0; $i < count($activity); $i++) {
+                // print ($activity[$i]);
+                // if(isset($_FILES['activityimage1']['name']))
+                // {
+                $activity1 = $activityimage[$i];
+                $activity1_ext = pathinfo($activity1, PATHINFO_EXTENSION);
+
+                $activity1_name = $_POST['schoolname'] . "-" . rand(10000, 10000000) . "." . $activity1_ext;
+                $activity1_type = $activitytype[$i];
+                $activity1_size = $activitysize[$i];
+                $activity1_tem_loc = $activitytmp_name[$i];
+                $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
+
+                $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+                if (in_array($activity1_ext, $allowed)) {
+                    if (move_uploaded_file($activity1_tem_loc, $activity1_store)) {
+
+                        $this->db->select('*')->where('activity_name =', $activity[$i]);
+                        $this->db->from('school_activities');
+                        $schoolactivity1 = $this->db->get();
+
+                        if ($schoolactivity1->num_rows() > 0) {
+                            foreach ($schoolactivity1->result() as $schoolactivitys1) {
+                                $schoolactivity_id1 = $schoolactivitys1->id;
+                            }
+                        } else {
+                            $schoolactivityinsert1 = array(
+                                'activity_name' => $activity[$i]
+                            );
+
+                            $this->db->insert('school_activities', $schoolactivityinsert1);
+
+                            $this->db->select('*')->where('activity_name =', $activity[$i]);
+                            $this->db->from('school_activities');
+                            $schoolactivity1 = $this->db->get();
+
+                            foreach ($schoolactivity1->result() as $schoolactivitys1) {
+                                $schoolactivity_id1 = $schoolactivitys1->id;
+                            }
+                        }
+
+                        $schoolactivityinsert1 = array(
+                            'school_activity_id' => $schoolactivity_id1,
+                            'images' => $activity1_name,
+                            'is_active' => 1
+                        );
+                        $this->db->where('school_id',$_POST['user_id']);
+                        $this->db->update('school_images', $schoolactivityinsert1);
+                    }
+                }
+                // }
+            }
+        }
+
+        $school_update=array(
+            'school_name' => $_POST['schoolname'],
+            'slug' => $_POST['schoolname'],
+            'mobile' => $_POST['phone'],
+            'email' => $_POST['email'],
+            'address' => $_POST['address'],
+            'user_id' => $_POST['user_id'],
+            'city_id' => $yourcity_id,
+            'area_id' => $area_id,
+            'affiliation_id' => $schoolboard_id,
+            'schooltype_id' => $level_id,
+            'school_category_id' => 1,
+            'about' => $school['about'],
+            'website_url' => $school['website'],
+            'year_of_establish' => $school['founded'],
+            'ad' => $_POST['ad'],
+            'hostel' => $customRadio1,
+            'rte' => $customRadio2,
+            'students' => $_POST['students'],
+            'boys' => $_POST['boys'],
+            'girls' => $_POST['girls'],
+            'teachers' => $_POST['teachers'],
+            'facebook' => $_POST['facebook'],
+            'twitter' => $_POST['twitter'],
+            'instagram' => $_POST['instagram'],
+            'linkedin' => $_POST['linkedin'],
+            'pinterest' => $_POST['pinterest'],
+            'logo' => $banner1_name,
+            'is_active' => 1,
+        );
+    }
 }
+?>

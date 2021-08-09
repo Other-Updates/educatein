@@ -1,6 +1,11 @@
 <div class="d-flex col-12   mt-3 bg-white pb-3"> 
     <div class="mr-auto"><h3 ><?php echo $formName; ?></h3></div> 
-    <a  class="btn btn-outline-red  ml-auto" href="#"><i class="fas fa-plus"></i> Add School</a>
+    <?php
+    $this->db->select('id')->from('admin_users');
+    $userid = $this->db->get()->result_array(); 
+    // $userid= base64_decode($_GET['id']);
+    ?>
+    <a  class="btn btn-outline-red  ml-auto" href="<?php echo base_url();?>/package?id=<?php ?>"><i class="fas fa-plus"></i> Add School</a>
 </div>
 <div class="col-12 mt-0 bg-white">
     <div class="table-responsive">
@@ -32,8 +37,8 @@
 //                    . "<td align='center' class=' align-middle'>" . $table_record["dob"] . "</td>"
 //                    . "<td class='text-center align-middle'>" . $status . "</td>"
                     . "<td class='text-center align-middle'>"
-                    . "<a href='". base_url("schools/admin/edit_school?id=". base64_encode($table_record["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
-                    . "<a href='#' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0'>Delete</a>"
+                    . "<a href='". base_url("schools/admin/school_edit?id=". base64_encode($table_record["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
+                    . "<a href='". base_url("schools/admin/school_delete?id=". base64_encode($table_record["id"]))."' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0' id='del_btn'>Delete</a>"
                     . "<a href='". base_url("admin/schools/details/". base64_encode($table_record["id"]))."'  class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>"
                     . "</td>"
                     . "</tr>";
@@ -94,4 +99,12 @@ $(document).ready( function(){
 //    $(document).ready(function () {
 //        $('#example').DataTable();
 //    });
+$('#del_btn').click(function(){
+    swal({
+  title: "Are you sure?",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+});
 </script>

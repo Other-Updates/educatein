@@ -272,7 +272,7 @@ class Institute_trial extends CI_Controller {
 
         // $this->load->view('institute-listing-three');
         ?>
-        <?php $userid = $this->session->userdata('user_id'); ?>
+        <?php $userid =  $this->session->userdata('user_id'); ?>
         <script src="<?php echo base_url() ?>assets/front/js/jquery.min.js"></script>
         <script>
                $(document).ready(function () {
