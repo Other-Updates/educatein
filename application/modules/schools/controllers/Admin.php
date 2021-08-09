@@ -451,21 +451,11 @@ class admin extends CI_Controller {
             'table_condition' => 'a.id = in.area_id',
             'table_type' => 'left'
         );
-        // $join_tables[] = array(
-        //     'table_name' => 'affiliations  af',
-        //     'table_condition' => 'af.id = sd.affiliation_id',
-        //     'table_type' => 'left'
-        // );
         $join_tables[] = array(
             'table_name' => 'institute_categories  ic',
             'table_condition' => 'ic.id = in.category_id',
             'table_type' => 'left'
         );
-        // $join_tables[] = array(
-        //     'table_name' => 'school_categories  sc',
-        //     'table_condition' => 'sc.id = sd.school_category_id',
-        //     'table_type' => 'left'
-        // );
         $sub_where[] = array('direct' => 0, 'rule' => 'where', 'field' => 'in.id', 'value' => base64_decode($primary_key));
         $data['institute'] = $this->Base_Model->getAdvanceList('institute_details in ', $join_tables, $fields, $sub_where, array('return' => 'row_array'), 'in.id');
         $where[] = array(TRUE, 'institute_id', base64_decode($primary_key));
@@ -576,6 +566,32 @@ class admin extends CI_Controller {
     }
 
     function edit_school(){
-        $this->load->view('edit_package');
+        $userid=base64_decode($_GET['id']);
+        $this->db->select('*')->where('id=',$userid);
+        $this->db->from('school_details');
+        $school = $this->db->get()->result_array();
+        if($school[0]['school_category_id'] == 1){
+            $this->load->view('edit_school_platinum');
+        }else if($school[0]['school_category_id'] == 3 || $school[0]['school_category_id'] == 4){
+            $this->load->view('edit_school_spectrum');
+        }
+        else if($school[0]['school_category_id'] == 2){
+            $this->load->view('edit_school_premium');
+        }
+    }
+
+    function institute_edit(){
+        $userid=base64_decode($_GET['id']);
+        $this->db->select('*')->where('id=',$userid);
+        $this->db->from('institute_details');
+        $institute = $this->db->get()->result_array();
+        if($institute[0]['position_id'] == 1){
+            $this->load->view('edit_activity_platinum');
+        }else if($institute[0]['position_id'] == 3 || $institute[0]['position_id'] == 4){
+            $this->load->view('edit_activity_spectrum');
+        }
+        else if($institute[0]['position_id'] == 2){
+            $this->load->view('edit_activity_premium');
+        }
     }
 }

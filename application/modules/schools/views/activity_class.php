@@ -2,6 +2,11 @@
     <div class="mr-auto"><h3 ><?php echo $formName; ?></h3></div> 
     <a  class="btn btn-outline-red  ml-auto" href="#"><i class="fas fa-plus"></i> Add Institute</a>
 </div>
+<?php
+    // $this->db->select('id')->from('admin_users');
+    // $userid = $this->db->get()->result_array(); 
+    // $userid= base64_decode($_GET['id']);
+    ?>
 <div class="col-12 mt-0 bg-white">
     <div class="table-responsive">
         <table class="table table-bordered table-sm bg-white" id="example">
@@ -21,7 +26,7 @@
                     . "<td class=' align-middle text-center'>" . $count . "</td>"
                     . "<td class=' align-middle'> " . $table_record["institute_name"] . "</td>"
                     . "<td class='text-center align-middle'>"
-                    . "<a href='#' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
+                    . "<a href='". base_url("admin/schools/institute_edit?id=". base64_encode($table_record["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
                     . "<a href='#' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0'>Delete</a>"
                     . "<a href='". base_url("admin/schools/institute_details/". base64_encode($table_record["id"]))."'  class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>"
                     . "</td>"
