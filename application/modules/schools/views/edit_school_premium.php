@@ -303,7 +303,7 @@ $school_facilities_datas = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                     <?php if($key==0){?><label for="activityimage[]">Activity Image</label><?php } ?>
                         <div class="input-group mb-3 ">
-                        <input type="hidden" name="activityid[]" value="<?php echo $school_activities_data['school_act_id']; ?>">
+                            <input type="hidden" name="activityid[]" value="<?php echo $school_activities_data['school_act_id']; ?>">
                             <input type="hidden" name="activityimage_id[]" value="<?php echo $school_activities_data['image_id']; ?>">
                             <input type="hidden" name="activityoldimage[]" value="<?php echo $school_activities_data['images']; ?>">
                             <input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG"  aria-describedby="activityimage" >

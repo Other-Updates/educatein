@@ -38,8 +38,10 @@ $area = $this->db->get()->result_array();
 $this->db->select('*')->where('id', $school[0]['id']);
 $this->db->from('school_images');
 $school_img = $this->db->get()->result_array();
-$this->db->select('*')->where('id', $school_img[0]['school_activity_id']);
-$this->db->from('school_activities');
+$this->db->select('si.id as image_id,si.school_id,si.images,sa.id as school_act_id,sa.activity_name');
+$this->db->where('si.school_id', $school[0]['id']);
+$this->db->join('school_activities as sa','si.school_activity_id = sa.id','left');
+$this->db->from('school_images as si');
 $activity=$this->db->get()->result_array();
 
 $this->db->select('*')->where('school_id',$school[0]['id']);
@@ -294,6 +296,9 @@ $school_img = $this->db->get()->result_array();
                             <div class="form-group">
                                 <label for="activityimage[]">Activity Image</label>
                                 <div class="input-group">
+                                    <input type="hidden" name="activityid[]" value="<?php echo $activity_data['school_act_id']; ?>">
+                                    <input type="hidden" name="activityimage_id[]" value="<?php echo $activity_data['image_id']; ?>">
+                                    <input type="hidden" name="activityoldimage[]" value="<?php echo $activity_data['images']; ?>">
                                     <input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG"  aria-describedby="info" >
                                 </div>
                             </div>
@@ -301,7 +306,7 @@ $school_img = $this->db->get()->result_array();
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                <a class="btn btn-primary add_field_button1" id="addmore">Add More</a>
+                                <?php if($key==0){ ?><a class="btn btn-primary add_field_button1" id="addmore">Add More</a><?php } ?>
                             </div>
                         </div>
                     </div><!-- /form-row -->
