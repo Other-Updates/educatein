@@ -35,16 +35,14 @@ $this->db->from('areas');
 $area = $this->db->get()->result_array();
 
 //getting school activities
-$this->db->select('*')->where('id', $school[0]['id']);
+$this->db->select('*')->where('id =', $school[0]['id']);
 $this->db->from('school_images');
 $school_img = $this->db->get()->result_array();
-$this->db->select('si.id as image_id,si.school_id,si.images,sa.id as school_act_id,sa.activity_name');
-$this->db->where('si.school_id', $school[0]['id']);
-$this->db->join('school_activities as sa','si.school_activity_id = sa.id','left');
-$this->db->from('school_images as si');
+$this->db->select('*')->where('id =', $school_img[0]['school_activity_id']);
+$this->db->from('school_activities');
 $activity=$this->db->get()->result_array();
 
-$this->db->select('*')->where('school_id',$school[0]['id']);
+$this->db->select('*')->where('school_id=',$school[0]['id']);
 $this->db->from('school_facilities');
 $facility = $this->db->get()->result_array();
 
@@ -53,7 +51,7 @@ $this->db->where('id',$school[0]['schooltype_id']);
 $this->db->from('school_types');
 $schooltype = $this->db->get()->result_array();
 
-$this->db->select('*')->where('school_id',$school[0]['id']);
+$this->db->select('*')->where('school_id =',1047);
 $this->db->from('school_images');
 $school_img = $this->db->get()->result_array();
 ?>
@@ -66,14 +64,13 @@ $school_img = $this->db->get()->result_array();
     <div class="container-fluid ">
         <div>
             <div class="section-title mb-3">
-                <h1><?php echo $school[0]["school_name"]; ?>
+                <h1><?php echo $school[0]["school_name"]; ?></h1>
                 <?php if($school[0]['school_category_id'] == 3){?>
                 <span>(Spectrum Package)</span>
                 <?php }
                 if($school[0]['school_category_id'] == 4){?>
                     <span>(Trial Package)</span>
                 <?php } ?>
-                </h1>
             </div><!-- /section-title -->   
 
             <div class="listing-section mat-30">
@@ -82,7 +79,6 @@ $school_img = $this->db->get()->result_array();
                     <div class="form-row">
                         <div class="col-lg-3 col-sm-6" style="display:none">
                             <div class="form-group">
-                            <input type="hidden" value=<?php echo $school_id; ?> class="form-control" id="school_id" name="school_id">
                                 <label for="user_id">user id</label>
                                 <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>" placeholder="e.g. Haunuz Matriculation" required>
                             </div>
@@ -90,13 +86,13 @@ $school_img = $this->db->get()->result_array();
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="">School Name</label>
-                                <input type="text" class="form-control" id="schoolname" name="schoolname" value="<?php echo $school[0]["school_name"];?>" placeholder="Enter your school name" required>
+                                <input type="text" class="form-control" id="schoolname" name="schoolname" value="<?php echo $school[0]["school_name"];?>" placeholder="Enter your school name" readonly required>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="">School Board</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="schoolboard" required>
+                                <select class="form-control" id="exampleFormControlSelect1" name="schoolboard" readonly required>
                                     <option value="">School Board</option>
                                     <option value="cbse"<?php if('cbse' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>CBSE School</option>
                                     <option value="international"<?php if('international' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>International School</option>
@@ -110,7 +106,7 @@ $school_img = $this->db->get()->result_array();
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="">City</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="city" required>
+                                <select class="form-control" id="exampleFormControlSelect1" name="city" readonly required>
                                     <option  value="">--Select City--</option>
                                     <?php
                                     $this->db->select('*');
@@ -126,50 +122,50 @@ $school_img = $this->db->get()->result_array();
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="">Area</label>
-                                <input type="text" class="form-control" id="area" name="area" value="<?php echo $area[0]['area_name'];?>" placeholder="Enter your area" required>
+                                <input type="text" class="form-control" id="area" name="area" value="<?php echo $area[0]['area_name'];?>" placeholder="Enter your area" readonly required>
                             </div>
                         </div>
                     </div><!-- /form-row -->
 
                     <ul class="list-inline">
-                    <li class="list-inline-item mr-5">
-                        <div class="yesorno">
-                            <label for="customRadio1">Eligibility to Avail Admission Under the RTE Act</label>
-                            <div class="form-row ml-0">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio1" name="customRadio2" value="1" <?php if($school[0]['rte']=='1'){echo "checked";} ?> class="custom-control-input" >
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>&nbsp; &nbsp; &nbsp; 
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" name="customRadio2" value="0" <?php if($school[0]['rte']=='0'){echo "checked";} ?>  class="custom-control-input">
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">No</label>
-                                </div>
-                            </div><!-- /form-row -->
-                        </div><!-- /yesorno -->
-                    </li>
+                        <li class="list-inline-item mr-5">
+                            <div class="yesorno">
+                                <label for="customRadio">Eligibility to Avail Admission Under the RTE Act</label>
+                                <div class="form-row ml-0">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio2" value="1" <?php if($school[0]['rte'] == '1'){echo "checked";} ?> name="customRadio" class="custom-control-input" >
+                                        <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">Yes</label> &nbsp; &nbsp; &nbsp; 
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio2" value="0" <?php if($school[0]['rte'] == '0'){echo "checked";} ?> name="customRadio" class="custom-control-input" >
+                                        <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">No</label>
+                                    </div>
+                                </div><!-- /form-row -->
+                            </div><!-- /yesorno -->
+                        </li>
 
-                    <li class="list-inline-item">
-                        <div class="yesorno">
-                            <label for="customRadio2">Hostel Facility</label>
-                            <div class="form-row ml-0">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio3" name="customRadio1"  value="1" <?php if($school[0]['hostel']=='1'){echo "checked";}?> class="custom-control-input" >
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>&nbsp; &nbsp; &nbsp; 
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio4" name="customRadio1"  value="0" <?php if($school[0]['hostel']=='0'){echo "checked";}?>  class="custom-control-input">
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio4">No</label>
-                                </div>
-                            </div><!-- /form-row -->
-                        </div><!-- /yesorno -->
-                    </li>
-                </ul>
+                        <li class="list-inline-item">
+                            <div class="yesorno">
+                                <label for="customRadio1">Hostel Facility</label>
+                                <div class="form-row ml-0">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio1" value="1"<?php if($school[0]['hostel'] == '1'){echo "checked";} ?> name="customRadio1" class="custom-control-input" >
+                                        <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>&nbsp; &nbsp; &nbsp; 
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio1" value="0" <?php if($school[0]['hostel'] == '0'){echo "checked";} ?> name="customRadio1" class="custom-control-input" >
+                                        <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">No</label>
+                                    </div>
+                                </div><!-- /form-row -->
+                            </div><!-- /yesorno -->
+                        </li>
+                    </ul>
 
                     <div class="form-row mt-3">
                         <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea class="form-control" id="description" rows="1" name="description" style="height:80px;" ><?php echo $school[0]['about'];?></textarea>
+                                <textarea class="form-control" id="description" rows="1" name="description" readonly style="height:80px;" ><?php echo $school[0]['about'];?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6"></div>
@@ -179,25 +175,26 @@ $school_img = $this->db->get()->result_array();
                 <h4 class="mb-3">Banner Image</h4>
                     <hr class="mb-4">
                     <!-- ====== Banner Images Upload Section ====== -->
-                    <div class="form-row">
+                    <!-- <div class="form-row">
                         <div class="col-lg-6 col-sm-6 file-img-upload">
                             <label for="">Add Banner Image</label>
-                            <input type="file" id="file-upload" name="banner" class="opa-0" accept="image/x-png,image/gif,image/jpeg" multiple  />
+                            <input type="file" id="file-upload" name="banner" accept="image/x-png,image/gif,image/jpeg" multiple  />
                             <label for="file-upload" class="file-upload" style="display: block;">
                                 <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/add-img.png" width="70px" alt="">
                                 <p>Upload Images</p>
                                 <small class="red">Images with format of jpg & png are acceptable.</small>
                             </label>
                             <div id="file-upload-filename"></div>
-                        </div><!-- /file-img-upload -->
+                        </div> -->
+                        <!-- /file-img-upload -->
 
-                        <div class="col-lg-6">
-                            <label for="">Banner Image Sample</label>
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <div class="col-lg-6 col-sm-6">
+                        <label for="bannersample"> Image </label>
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                                    <?php foreach($school_img as $key=>$image){ ?>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $key ?>" class="<?php if($key==0){echo 'active';} ?>"></li>
+                                    <?php } ?>
                                 </ol>
                                 <div class="carousel-inner">
                                 <?php foreach($school_img as $key=>$image){ ?>
@@ -226,7 +223,7 @@ $school_img = $this->db->get()->result_array();
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">School Type</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="schooltype" required>
+                                <select class="form-control" id="exampleFormControlSelect1" name="schooltype" readonly required>
                                     <option value="">School Type</option>
                                     <option value="Co-Ed"<?php if($school[0]['type']== "Co-Ed"){echo "selected";}?>>Co-Ed</option>
                                     <option value="Girls"<?php if($school[0]['type']== "Girls"){echo "selected";}?>>Girls</option>
@@ -238,7 +235,7 @@ $school_img = $this->db->get()->result_array();
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Grade Level</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="level" required>
+                                <select class="form-control" id="exampleFormControlSelect1" name="level" readonly required>
                                     <option value="" >Grade Level</option>
                                     <option value="Elementary School"<?php if($schooltype[0]['school_type']=="Elementary School"){echo "selected";}?>>Elementary School</option>
                                     <option value="Preschools"<?php if($schooltype[0]['school_type']=="Preschools"){echo "selected";}?>>Preschools</option>
@@ -251,33 +248,33 @@ $school_img = $this->db->get()->result_array();
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Founded</label>
-                                <input type="text" class="form-control" id="founded" name="founded" value="<?php echo $school[0]['year_of_establish'];?>" placeholder="Founded" >
+                                <input type="text" class="form-control" id="founded" name="founded" value="<?php echo $school[0]['year_of_establish'];?>" readonly placeholder="Founded" >
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Address</label>
-                                <input type="text" class="form-control" id="address" name="address" value="<?php echo $school[0]['address'];?>" placeholder="Your address">
+                                <input type="text" class="form-control" id="address" name="address" value="<?php echo $school[0]['address'];?>" readonly placeholder="Your address">
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Email</label> 
-                                <input type="email" class="form-control" id="email" name="email" value="<?php echo $school[0]['email'];?>" placeholder="Your email" >
+                                <input type="email" class="form-control" id="email" name="email" value="<?php echo $school[0]['email'];?>" readonly placeholder="Your email" >
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Phone Number</label>
-                                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $school[0]['mobile'];?>" placeholder="Your Phone Number">
+                                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $school[0]['mobile'];?>" readonly placeholder="Your Phone Number">
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="">Website</label>
-                                <input type="text" class="form-control" id="website" name="website" value="<?php echo $school[0]['website_url'];?>" placeholder="Your website" >
+                                <input type="text" class="form-control" id="website" name="website" value="<?php echo $school[0]['website_url'];?>" readonly placeholder="Your website" >
                             </div>
                         </div>
                     </div><!-- /form-row -->
@@ -285,72 +282,63 @@ $school_img = $this->db->get()->result_array();
                 <div class="edit-school-inner">
                     <h4 class="mb-2">School Activities</h4>
                     <hr class="mb-3">
-                    <?php foreach($activity as $key=>$activity_data){ ?>
                     <div class="form-row mt-3" id="actmore">
                         <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="activity[]">Activity Name</label>
-                                <input type="text" class="form-control" id="activity[]" name="activity[]" values="<?php echo $activity_data['activity_name'];?>" placeholder="eg.Sports" >
+                                <input type="text" class="form-control" id="activity[]" name="activity[]" readonly values="<?php echo $activity['activity_name'];?>" placeholder="eg.Sports" >
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="activityimage[]">Activity Image</label>
                                 <div class="input-group">
-                                    <input type="hidden" name="activityid[]" value="<?php echo $activity_data['school_act_id']; ?>">
-                                    <input type="hidden" name="activityimage_id[]" value="<?php echo $activity_data['image_id']; ?>">
-                                    <input type="hidden" name="activityoldimage[]" value="<?php echo $activity_data['images']; ?>">
                                     <input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG"  aria-describedby="info" >
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="col-lg-4 col-sm-6">
+                        <!-- <div class="col-lg-4 col-sm-6">
                             <div class="form-group">
                                 <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                <?php if($key==0){ ?><a class="btn btn-primary add_field_button1" id="addmore">Add More</a><?php } ?>
+                                <a class="btn btn-primary add_field_button1" id="addmore">Add More</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div><!-- /form-row -->
-                            <?php } ?>
                 </div>
                 <div class="edit-school-inner">
 
                     <h4 class="mb-3">School Facilities</h4>
                     <hr class="mb-4">
-                    <?php foreach($facility as $key=>$facility_data){ ?>
                     <div class="form-row" id="facilitymore">
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
-                            <?php if($key==0){ ?><label for="facility[]">Facility Name</label><?php } ?>
-                                <input type="text" class="form-control" id="facility[]" name="facility[]" value= "<?php echo $facility_data['facility']; ?>" placeholder="eg.Library" >
+                                <label for="facility[]">Facility Name</label>
+                                <input type="text" class="form-control" id="facility[]" name="facility[]" value= "<?php echo $facility[0]['facility']; ?>" readonly placeholder="eg.Library" >
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
-                        <input type="hidden" name="facilityid[]" value="<?php echo $facility_data['id']; ?>">
-                                <input type="hidden" name="facilityoldimage[]" value="<?php echo $facility_data['image']; ?>">
-                        <?php if($key==0){ ?><label for="facilityimage[]">Facility Images</label><?php } ?>
+                        <!-- <div class="col-lg-3 col-sm-6">
+                            <label for="facilityimage[]">Facility Images</label>
                             <div class="input-group mb-3">
                                 <div class="">
                                     <input type="file" class="" id="facilityimage[]" name="facilityimage[]"  accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG"  aria-describedby="facilityimage" >
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
-                            <?php if($key==0){ ?><label for="facilitydesc">Facility Description</label><?php } ?>
-                                <textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows="1" ><?php echo $facility_data['content']; ?></textarea>
+                                <label for="facilitydesc">Facility Description</label>
+                                <textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" readonly rows="1" ><?php echo $facility[0]['content']; ?></textarea>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <!-- <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="facaddmore" style="visibility: hidden;display: block;">Add More</label>
-                                <?php if($key==0){ ?><a class="btn btn-primary addmore-show1" id="facaddmore">Add More</a><?php } ?>
+                                <a class="btn btn-primary addmore-show1" id="facaddmore">Add More</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div><!-- /form-row -->  
-                        <?php } ?>
                 </div>
-                <div class="edit-school-inner">
+                <!-- <div class="edit-school-inner">
 
                     <h4 class="mb-3">Gallery Images</h4>
                     <hr class="mb-4">
@@ -363,14 +351,14 @@ $school_img = $this->db->get()->result_array();
                                 </div>
                             </div>
                             <div class="col-lg-2 col-sm-6">
-                            <button class="add_field_button btn btn-primary btn-block">Add More</button>
+                                <button class="add_field_button btn btn-primary btn-block">Add More</button>
                             </div>
-                        </div><!-- /form-row -->
-                    </div><!-- /input_fields_wrap -->
-                </div>
-                <div class="edit-school-inner">
+                        </div>    
+                    </div>    
+                </div> -->
+                <!-- <div class="edit-school-inner">
                     <button class="btn btn-primary btn-save buy_now" data-amount="1" data-id="3">SUBMIT</button> 
-                </div><br>
+                </div><br> -->
                 </form>
             </div><!-- /listing-section -->
         </div>

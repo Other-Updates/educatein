@@ -27,15 +27,14 @@ foreach ($user->result() as $users) {
 </style>
 
 <div class="dashboard-content">
-    <div class="container">
+    <div class="container-fluid">
         <div class="section-title mb-3">
-            <h1>Enter your details</h1>
-            <span>(Platinum Package)</span>
-        </div><!-- /section-title -->
-        <hr class="mb-3">
+            <h1>Enter Your Details <span>(Platinum Package)</span></h1>            
+        </div>
 
-        <div class="listing-section">
+        <div class="listing-section  mat-30">
             <form action="<?php echo base_url() ?>institute_listing_first/insert" method="post" enctype="multipart/form-data">
+            <div class="edit-school-inner">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6" style="display:none">
                         <div class="form-group">
@@ -88,11 +87,13 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
-
+            </div>
+            <div class="edit-school-inner">
+                <h4 class="mb-2">Banner Image</h4>
+                <p class="mb-3">You can add 3 banner images in Platinum package.</p>
+                <hr class="mb-4">
                 <div class="form-row mt-3">
                     <div class="col-lg-6 col-sm-6 file-img-upload">
-                        <label for="inputGroupFile" style="margin-bottom: 0px;">Add Banner Images</label>
-                        <small style="display: block;font-weight: 300;" class="mb-3">You can add 3 banner images in Platinum package.</small>
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" class="custom-file-input" id="inputGroupFile02" name="banner1" >
@@ -114,7 +115,7 @@ foreach ($user->result() as $users) {
 
                         <div class="form-row">
                             <div class="col-lg-12">
-                                <div class="alert alert-primary mab-30" role="alert">
+                                <div class="alert alert-info mab-30" role="alert">
                                     <p class="image-note">Banner images are highly visible for Platinum package. So choose your images in high quality to attract peoples.</p>
                                 </div>
                             </div>
@@ -123,13 +124,41 @@ foreach ($user->result() as $users) {
 
                     <div class="col-lg-6">
                         <label for="Images">Banner Image Sample</label>
-                        <div class="object-fit" style="width: 100%;height: 252px;">
-                            <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/1st-banner.jpg" class="w-100 rounded" alt="Images" style="width: 100%;height: 252px;object-fit: cover;">	
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/1_1st-banner.jpg" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/1_1st-banner.jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/1_1st-banner.jpg" alt="Third slide">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
+                        <!-- <div class="object-fit" style="width: 100%;height: 252px;">
+                            <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/1st-banner.jpg" class="w-100 rounded" alt="Images" style="width: 100%;height: 252px;object-fit: cover;">	
+                        </div> -->
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
-                <h4 class="mt-3 mb-2">Additional Info</h4>
+                <h4 class="mb-2">Additional Info</h4>
                 <p class="mb-3">Only 6 additional infos are displayed.</p>
                 <hr class="mb-4">
                 <div class="form-row mt-3">
@@ -195,8 +224,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!--form-row -->
+            </div>
+            <div class="edit-school-inner">
 
-                <h4 class="mt-4 mb-2">About</h4>
+                <h4 class="mb-2">About</h4>
                 <hr class="mb-3">
                 <div class="form-row">
                     <div class="col-lg-6 col-sm-6">
@@ -215,8 +246,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
-                <h4 class="mt-4 mb-3">Institute Categories</h4>
+                <h4 class="mb-3">Institute Categories</h4>
                 <hr class="mb-4">
                 <div class="form-row" id="insmore">
                     <div class="col-lg-3 col-sm-6">
@@ -247,8 +280,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
-                <h3 class="mt-4 mb-3">Gallery Images</h3>
+                <h4 class="mb-3">Gallery Images</h4>
                 <hr class="mb-4">
                 <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
                 <div class="input_fields_wrap mt-3">
@@ -263,8 +298,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div><!-- /form-row -->
                 </div><!-- /input_fields_wrap -->
+            </div>
+            <div class="edit-school-inner">
 
-                <h3 class="mt-4 mb-3">News & Events</h3>
+                <h4 class="mb-3">News & Events</h4>
                 <hr class="mb-4">
 
                 <div class="form-row" >
@@ -301,8 +338,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
-                <h3 class="mt-5 mb-3">Location</h3>
+                <h4 class="mb-3">Location</h4>
                 <hr class="mb-4">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6">
@@ -336,7 +375,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
                 <button type="submit" class="btn btn-primary btn-save">SUBMIT</button>
+            </div><br>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->

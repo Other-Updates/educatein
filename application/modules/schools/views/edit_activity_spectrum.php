@@ -33,21 +33,21 @@ foreach ($user->result() as $users) {
     }
 </style> 
 <div class="dashboard-content">
-    <div class="container">
+    <div class="container-fluid">
         <div class="section-title mb-3">
-            <h1>Enter your details</h1>
+            <h1>Enter your details
             <?php if($institute[0]['position_id'] == 3){ ?>
             <span>(Spectrum Package)</span> 
             <?php } ?>
             <?php if($institute[0]['position_id'] == 4){ ?>
                 <span>(Trial Package)</span> 
             <?php } ?>
+            </h1>
            
-        </div><!-- /section-title -->
-        <hr>
-
+        </div>
         <div class="listing-section mat-30">
             <form action="<?php echo base_url() ?>institute_listing_third/insert" method="post" enctype="multipart/form-data">
+            <div class="edit-school-inner">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6" style="display:none">
                         <div class="form-group">
@@ -100,7 +100,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
-
+            </div>
+            <div class="edit-school-inner">
+            <h4 class="mb-2">About Description</h4>
+                <hr class="mb-4">
                 <div class="form-row mt-3">
                     <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
@@ -110,27 +113,60 @@ foreach ($user->result() as $users) {
                     </div>
                     <div class="col-lg-6 col-sm-6"></div>
                 </div><!-- /form-row -->
-
+            </div>
+            <div class="edit-school-inner">
+            <h4 class="mb-2">About Banner</h4>
+                <hr class="mb-4">
                 <div class="form-row">
                     <div class="col-lg-6 col-sm-6 file-img-upload">
                         <label for="banner">Add Banner Image</label>
-                        <input type="file" id="file-upload" name="banner" accept="image/x-png,image/gif,image/jpeg"  />
+                        <input type="file" id="file-upload" class="opa-0" name="banner" accept="image/x-png,image/gif,image/jpeg"  />
                         <label for="file-upload" class="file-upload" style="display: block;">
                             <img src="<?php echo base_url("assets/front/images/");?>dashboard/add-img.png" width="70px" alt="add-img">
                             <p>Upload Images</p>
-                            <span>Images with format of jpg & png are acceptable.</span>
+                            <small class="red">Images with format of jpg & png are acceptable.</small>
                         </label>
                         <div id="file-upload-filename"></div>
                     </div><!-- /file-img-upload -->
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <label for="3rd-banner">Banner Image Sample</label>
-                        <div class="object-fit" style="width: 100%;height: 180px;">
-                            <img src="<?php echo base_url("assets/front/images/");?>dashboard/3rd-banner.jpg" class="w-100 rounded" alt="3rd-banner" style="width: 100%;height: 180px;object-fit: cover;">	
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/");?>dashboard/3rd-banner.jpg" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/");?>dashboard/3rd-banner.jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/");?>dashboard/3rd-banner.jpg" alt="Third slide">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
+
+                        <!-- <div class="object-fit" style="width: 100%;height: 180px;">
+                            <img src="<?php echo base_url("assets/front/images/");?>dashboard/3rd-banner.jpg" class="w-100 rounded" alt="3rd-banner" style="width: 100%;height: 180px;object-fit: cover;">	
+                        </div> -->
                     </div>
                 </div><!-- /form-row -->
-
+            </div>
+            <div class="edit-school-inner">
+            <h4 class="mb-3">Institute Categories</h4>
+            <hr class="mb-4">
                 <div class="form-row mt-3" id="catmore">
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
@@ -151,7 +187,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
-
+            </div>
+            <div class="edit-school-inner">
+            <h4 class="mb-2">Additional Info</h4>
+                <hr class="mb-4">
                 <div class="form-row mt-3">
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
@@ -208,8 +247,11 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+            </div>
+            <div class="edit-school-inner">
 
-                <h3 class="mt-4">Gallery Images</h3>
+                <h4 class="mb-2">Gallery Images</h4>
+                <hr class="mb-4">
                 <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
                 <div class="input_fields_wrap mt-3">
                     <div class="form-row">
@@ -223,8 +265,10 @@ foreach ($user->result() as $users) {
                         </div>
                     </div><!-- /form-row -->
                 </div><!-- /input_fields_wrap -->
-
+            </div>
+            <div class="edit-school-inner">
                 <button class="btn btn-primary btn-save">Submit</button>
+            </div><br>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->

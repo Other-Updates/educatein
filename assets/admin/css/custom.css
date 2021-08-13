@@ -12,3 +12,10 @@ a.btn:not([href]):not([tabindex]) {
 .section-title span {
     font-size: 18px;
 }
+.opa-0 {
+    opacity: 0;
+}
+.edit-school-inner .form-control {
+    font-weight: 600;
+    color: #000;
+}
