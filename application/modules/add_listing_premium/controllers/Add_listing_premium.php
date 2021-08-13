@@ -147,6 +147,7 @@ class Add_listing_premium extends CI_Controller {
             'website_url' => $_POST['website'],
             'year_of_establish' => $_POST['founded'],
             // 'ad'=>$_POST['ad'],
+            'acadamic' => $_POST['acedemic'],
             'type' => $_POST['schooltype'],
             'hostel' => $customRadio1,
             'rte' => $customRadio,

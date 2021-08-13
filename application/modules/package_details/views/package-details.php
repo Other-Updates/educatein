@@ -382,7 +382,6 @@ $userid = base64_decode($_GET['id']);
 						  						<a href="<?php echo base_url(); ?>institute_trial?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
                                             <?php if($free_trial == ""){ ?>
-                                                <p class="text-center mt-2"><a href="<?php echo base_url(); ?>institute-free-trail?id=<?php echo base64_encode($userid); ?>"><u>Free Trial for 5 days</u></a></p>
 
                                             <?php } ?>                                               
 
@@ -418,7 +417,6 @@ $userid = base64_decode($_GET['id']);
 						  						<a href="<?php echo base_url(); ?>institutethird?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
                                             <?php if($free_trial == ""){ ?>
-                                                <p class="text-center mt-2"><a href="<?php echo base_url(); ?>institute-free-trail?id=<?php echo base64_encode($userid); ?>"><u>Free Trial for 5 days</u></a></p>
 
                                             <?php } ?>                                               
 

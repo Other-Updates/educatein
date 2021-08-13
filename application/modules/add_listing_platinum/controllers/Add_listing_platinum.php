@@ -26,6 +26,7 @@ class Add_listing_platinum extends CI_Controller {
     }
 
     public function insert() {
+
         $school['schoolname'] = $_POST['schoolname'];
         $school['schoolboard'] = $_POST['schoolboard'];
         $school['city'] = $_POST['city'];
@@ -192,6 +193,7 @@ class Add_listing_platinum extends CI_Controller {
             'schooltype_id' => $level_id,
             'school_category_id' => 1,
             'about' => $school['about'],
+            'acadamic' => $_POST['academic'],
             'website_url' => $school['website'],
             'our_mission' => $_POST['our_mission'],
             'our_vision' => $_POST['our_vision'],
@@ -840,7 +842,6 @@ class Add_listing_platinum extends CI_Controller {
                         'image' => $facility1_name,
                         'is_active' => 1
                     );
-
                     $this->db->insert('school_facilities', $schoolfaciltyinsert1);
                 }
             }
@@ -868,7 +869,7 @@ class Add_listing_platinum extends CI_Controller {
                         'image' => $facility2_name,
                         'is_active' => 1
                     );
-
+                    
                     $this->db->insert('school_facilities', $schoolfaciltyinsert2);
                 }
             }

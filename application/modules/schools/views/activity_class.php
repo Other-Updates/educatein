@@ -27,7 +27,7 @@
                     . "<td class=' align-middle'> " . $table_record["institute_name"] . "</td>"
                     . "<td class='text-center align-middle'>"
                     . "<a href='". base_url("admin/schools/institute_edit?id=". base64_encode($table_record["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
-                    . "<a href='". base_url("admin/schools/institute_delete?id=". base64_encode($table_record["id"]))."' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0'>Delete</a>"
+                    . "<a href='". base_url("admin/schools/institute_delete?id=". base64_encode($table_record["id"]))."' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0 delete'>Delete</a>"
                     . "<a href='". base_url("admin/schools/institute_details/". base64_encode($table_record["id"]))."'  class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>"
                     . "</td>"
                     . "</tr>";
@@ -45,4 +45,8 @@
   $(document).ready( function(){
         $('#example').DataTable();
     });
+
+    $('.delete').click(function () {
+        return confirm('Are you sure, want to Delete....!!!')
+    })
 </script>

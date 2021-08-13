@@ -162,7 +162,6 @@ if ($user->num_rows() > 0) {
 
                             $spend = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
                             $remain = $valitity - $spend;
-                            echo empty($valitity)?"true":"false";
                             if (empty($valitity) || $remain <= 0) {
                                 ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">

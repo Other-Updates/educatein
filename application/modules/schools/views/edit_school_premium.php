@@ -7,17 +7,65 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // 	$this->db->where("id", $url);
 // 	$check = $this->db->get();
 
-$userid = base64_decode($_GET['id']);
+$school_id = base64_decode($_GET['id']);
 
 $this->db->select('*');
+$this->db->from('school_details');
+$this->db->where("id", $school_id);
+$school = $this->db->get()->result_array();
+$this->db->select('*');
 $this->db->from('user_register');
-$this->db->where("id", $userid);
-$user = $this->db->get();
+$this->db->where("id", $school[0]['user_id']);
+$user = $this->db->get()->result_array();
+$userid = $user[0]['id'];
 
-foreach ($user->result() as $users) {
-    $username = $users->name;
-    $userid = $users->id;
-}
+//getting selected affiliation
+$this->db->select('*')->where('id=',$school[0]['affiliation_id']);
+$this->db->from('affiliations');
+$affiliation = $this->db->get()->result_array();
+
+//getting selected city
+$this->db->select('*')->where('id=',$school[0]['city_id']);
+$this->db->from('cities');
+$city1 = $this->db->get()->result_array();
+
+//getting selected area
+$this->db->select('*')->where('id =', $school[0]['area_id']);
+$this->db->from('areas');
+$area = $this->db->get()->result_array();
+
+// $this->db->select('*')->where('school_id =', $school[0]['id']);
+// $this->db->from('school_images');
+// $school_img = $this->db->get()->result_array();
+// $this->db->select('*')->where('id =', $school_img[0]['school_activity_id']);
+// $this->db->from('school_activities');
+// $school_activities=$this->db->get()->result_array();
+
+$this->db->select('*');
+$this->db->where('id',$school[0]['schooltype_id']);
+$this->db->from('school_types');
+$schooltype = $this->db->get()->result_array();
+
+$this->db->select('*')->where('school_id=',$school[0]['id']);
+$this->db->from('platinum_datas');
+$this->db->where('heading=','Academic');
+$academic = $this->db->get()->result_array();
+
+//getting school activities
+$this->db->select('*')->where('school_id =', $school[0]['id']);
+$this->db->from('school_images');
+$school_img = $this->db->get()->result_array();
+$this->db->select('si.id as image_id,si.school_id,si.images,sa.id as school_act_id,sa.activity_name');
+$this->db->where('si.school_id', $school[0]['id']);
+$this->db->join('school_activities as sa','si.school_activity_id = sa.id','left');
+$this->db->from('school_images as si');
+$school_activities=$this->db->get()->result_array();
+
+$this->db->select('*');
+$this->db->where('school_id',$school[0]['id']);
+// $this->db->where('school_id',939);
+$this->db->from('school_facilities');
+$school_facilities_datas = $this->db->get()->result_array();
 ?> 
 
 <style>
@@ -35,15 +83,16 @@ foreach ($user->result() as $users) {
 <div class="dashboard-content">
     <div class="container-fluid1">
         <div class="section-title mb-2">
-            <h1>Enter Your Details
+            <h1><?php echo $school[0]["school_name"]; ?>
             <span>(Premium Package)</span></h1>
         </div><!-- /section-title -->
         <div class="listing-section mat-30">
-            <form action="<?php echo base_url() ?>add_listing_premium/insert" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url() ?>schools/admin/update_school" method="post" enctype="multipart/form-data">
             <div class="edit-school-inner">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6" style="display:none">
                         <div class="form-group">
+                        <input type="hidden" value=<?php echo $school_id; ?> class="form-control" id="school_id" name="school_id">
                             <label for="user_id">user id</label>
                             <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>" placeholder="e.g. Haunuz Matriculation" required>
                         </div>
@@ -51,19 +100,19 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="schoolname">School Name</label>
-                            <input type="text" class="form-control" id="schoolname" name="schoolname" placeholder="e.g. Haunuz Matriculation" required>
+                            <input type="text" class="form-control" id="schoolname" name="schoolname" value="<?php echo $school[0]["school_name"]; ?>" placeholder="e.g. Haunuz Matriculation" required>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="schoolboard">School Board</label>
                             <select class="form-control" id="exampleFormControlSelect1" name="schoolboard" required>
-                                <option value="" >e.g. CBSE School</option>
-                                <option value="cbse">CBSE School</option>
-                                <option value="international">International School</option>
-                                <option value="matriculation">Matriculation School</option>
-                                <option value="special">Special School</option>
-                                <option value="kindergarten">Kindergarten</option>
+                                <option value="" >e.g. Matriculation School</option>
+                                <option value="cbse"<?php if('cbse' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>CBSE School</option>
+                                <option value="international"<?php if('international' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>International School</option>
+                                <option value="matriculation"<?php if('matriculation' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Matriculation School</option>
+                                <option value="special"<?php if('special' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Special School</option>
+                                <option value="kindergarten"<?php if('kindergarten' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Kindergarten</option>
                             </select>
                         </div>
                     </div>
@@ -78,7 +127,7 @@ foreach ($user->result() as $users) {
                                 $city = $this->db->get();
                                 foreach ($city->result() as $citys) {
                                     ?>
-                                    <option value="<?php echo $citys->city_name; ?>"><?php echo $citys->city_name; ?></option>
+                                        <option value="<?php echo $citys->city_name; ?>" <?php if($citys->city_name == $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -86,7 +135,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="area">Area</label>
-                            <input type="text" class="form-control" id="area" name="area" placeholder="e.g.Nallampalayam" required>
+                            <input type="text" class="form-control" id="area" name="area" value="<?php echo $area[0]['area_name'];?>" placeholder="e.g.Nallampalayam" required>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -97,11 +146,11 @@ foreach ($user->result() as $users) {
                             <label for="area">Eligibility to Avail Admission Under the RTE Act</label>
                             <div class="form-row ml-0">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio1" value="1" name="customRadio" class="custom-control-input">
+                                    <input type="radio" id="customRadio1" value="1"  <?php if($school[0]['rte']=='1'){echo "checked";} ?> name="customRadio2" class="custom-control-input">
                                     <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>&nbsp; &nbsp; &nbsp; 
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" value="0" name="customRadio" class="custom-control-input">
+                                    <input type="radio" id="customRadio2" value="0"  <?php if($school[0]['rte']=='0'){echo "checked";} ?> name="customRadio2" class="custom-control-input">
                                     <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">No</label>
                                 </div>
                             </div><!-- /form-row -->
@@ -113,11 +162,11 @@ foreach ($user->result() as $users) {
                             <label for="customRadio1">Hostel Facility</label>
                             <div class="form-row ml-0">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio3" value="1" name="customRadio1" class="custom-control-input">
+                                    <input type="radio" id="customRadio3" value="1" <?php if($school[0]['hostel']=='1'){echo "checked";}?> name="customRadio1" class="custom-control-input">
                                     <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>&nbsp; &nbsp; &nbsp; 
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio4" value="0" name="customRadio1" class="custom-control-input">
+                                    <input type="radio" id="customRadio4" value="0" <?php if($school[0]['hostel']=='0'){echo "checked";}?> name="customRadio1" class="custom-control-input">
                                     <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio4">No</label>
                                 </div>
                             </div><!--/form-row -->
@@ -144,23 +193,19 @@ foreach ($user->result() as $users) {
                     </div><!-- /file-img-upload -->
 
                     <div class="col-lg-6 col-sm-6">
-                        <label for="bannersample">Banner Image Sample</label>
+                        <label for="bannersample"> Image </label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" alt="First slide">
-                                </div>
-                                <div class="carousel-item">
-                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" alt="Third slide">
-                                </div>
+                        <ol class="carousel-indicators">
+                                    <?php foreach($school_img as $key=>$image){ ?>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $key; ?>" class="<?php if($key==0){echo 'active';} ?>"></li>
+                                    <?php } ?>
+                                </ol>
+                                <div class="carousel-inner">
+                                <?php foreach($school_img as $key=>$image){ ?>
+                                    <div class="carousel-item <?php if($key==0){echo 'active';} ?> ">
+                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['images']; ?> " alt="<?php echo $key ?> slide">
+                                    </div>
+                                <?php } ?>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -171,9 +216,6 @@ foreach ($user->result() as $users) {
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <!-- <div class="object-fit" style="width: 100%;height: 180px;">
-                            <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/2nd-banner.jpg" class="w-100 rounded" alt="" style="width: 100%;height: 180px;object-fit: cover;">	
-                        </div> -->
                     </div>
                 </div><!-- /form-row -->
                 <!-- Alert Content -->
@@ -186,7 +228,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="description">School Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="1" style="height: 80px;" ></textarea>
+                            <textarea class="form-control" id="description" name="description" rows="1" style="height: 80px;" ><?php echo $school[0]["about"]; ?></textarea>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6"></div>
@@ -200,13 +242,13 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="founded">Founded</label>
-                            <input type="text" class="form-control" id="founded" name="founded" placeholder="e.g.1980" >
+                            <input type="text" class="form-control" id="founded" name="founded" value="<?php echo $school[0]['year_of_establish'];?>" placeholder="e.g.1980" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="students">No.of Students</label>
-                            <input type="text" class="form-control" id="students" name="students" placeholder="e.g.1980" >
+                            <input type="text" class="form-control" id="students" name="students" value="<?php echo $school[0]['students'];?>" placeholder="e.g.1980" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
@@ -214,11 +256,11 @@ foreach ($user->result() as $users) {
                             <label for="level">Grade Level</label>
                             <select class="form-control" id="exampleFormControlSelect3" name="level" required>
                                 <option value="" >e.g. Elementary School</option>
-                                <option value="Elementary School">Elementary School</option>
-                                <option value="Preschools">Preschools</option>
-                                <option value="High School">High School</option>
-                                <option value="Higher Secondary School">Higher Secondary School</option>
-                                <option value="Special school">Special school</option>
+                                <option value="Elementary School"<?php if($schooltype[0]['school_type']=="Elementary School"){echo "selected";}?>>Elementary School</option>
+                                <option value="Preschools"<?php if($schooltype[0]['school_type']=="Preschools"){echo "selected";}?>>Preschools</option>
+                                <option value="High School"<?php if($schooltype[0]['school_type']=="High School"){echo "selected";}?>>High School</option>
+                                <option value="Higher Secondary School"<?php if($schooltype[0]['school_type']=="Higher Secondary School"){echo "selected";}?>>Higher Secondary School</option>
+                                <option value="Special school"<?php if($schooltype[0]['school_type']=="Special school"){echo "selected";}?>>Special school</option>
                             </select>
                         </div>
                     </div>
@@ -227,23 +269,23 @@ foreach ($user->result() as $users) {
                             <label for="schooltype">School Type</label>
                             <select class="form-control" id="exampleFormControlSelect4" name="schooltype" required>
                                 <option value=""  >e.g. Co-Ed</option>
-                                <option value="Co-Ed">Co-Ed</option>
-                                <option value="Girls">Girls</option>
-                                <option value="Boys">Boys</option>
-                                <option value="Other">Other</option>
+                                <option value="Co-Ed"<?php if($school[0]['type']=="Co-Ed"){echo "selected";}?>>Co-Ed</option>
+                                <option value="Girls"<?php if($school[0]['type']=="Girls"){echo "selected";}?>>Girls</option>
+                                <option value="Boys"<?php if($school[0]['type']=="Boys"){echo "selected";}?>>Boys</option>
+                                <option value="Other"<?php if($school[0]['type']=="Other"){echo "selected";}?>>Other</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="acedemic">Academic Percentage</label>
-                            <input type="text" class="form-control" id="acedemic" name="acedemic" placeholder="e.g.78%" >
+                            <input type="text" class="form-control" id="acedemic" name="academic" value="<?php echo $school[0]['acadamic'];?>" placeholder="e.g.78%" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="teachers">No.of Teachers</label>
-                            <input type="text" class="form-control" id="teachers" name="teachers" placeholder="e.g.105" >
+                            <input type="text" class="form-control" id="teachers" name="teachers" value="<?php echo $school[0]['teachers'];?>"placeholder="e.g.105" >
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -252,39 +294,44 @@ foreach ($user->result() as $users) {
 
                 <h4 class="mb-2">School Activities</h4>
                 <hr class="mb-3">
+                <?php foreach($school_activities as $key=>$school_activities_data){ ?>
                 <div class="form-row mt-3" id="actmore">
                     <div class="col-lg-4 col-sm-6 form-group">
-                        <label for="activity[]">Activity Name</label>
-                        <input type="text" class="form-control" id="activity[]" name="activity[]" placeholder="e.g.Sports" >
+                    <?php if($key==0){?><label for="activity[]">Activity Name</label><?php } ?>
+                        <input type="text" class="form-control" id="activity[]" name="activity[]" value="<?php echo $school_activities_data['activity_name']; ?>" placeholder="e.g.Sports" >
                     </div>
                     <div class="col-lg-4 col-sm-6">
-                        <label for="activityimage[]">Activity Image</label>
+                    <?php if($key==0){?><label for="activityimage[]">Activity Image</label><?php } ?>
                         <div class="input-group mb-3 ">
+                        <input type="hidden" name="activityid[]" value="<?php echo $school_activities_data['school_act_id']; ?>">
+                            <input type="hidden" name="activityimage_id[]" value="<?php echo $school_activities_data['image_id']; ?>">
+                            <input type="hidden" name="activityoldimage[]" value="<?php echo $school_activities_data['images']; ?>">
                             <input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG"  aria-describedby="activityimage" >
                             <!-- <label class="custom-file-label" for="">Choose file</label> -->
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 form-group">
                         <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                        <a class="btn btn-primary add_field_button1" id="addmore">Add More</a>
+                        <?php if($key==0){ ?><a class="btn btn-primary add_field_button1" id="addmore">Add More</a><?php } ?>
                     </div>
                 </div><!-- /form-row -->
+                <?php }?>
             </div>
             <div class="edit-school-inner">
-
-
                 <h4 class="mt-4 mb-3">School Facilities</h4>
                 <hr class="mb-4">
+                <?php foreach($school_facilities_datas as $key=>$school_facilities_data){ ?>
                 <div class="form-row" id="facilitymore">
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="facility[]">Facility Name</label>
-                            <input type="text" class="form-control" id="facility[]" name="facility[]" placeholder="e.g.Library" >
+                        <?php if($key==0){ ?> <label for="facility1">Facility Name</label> <?php } ?>
+                            <input type="text" class="form-control" id="facility[]" name="facility[]" value="<?php echo $school_facilities_data['facility'] ?>" placeholder="e.g.Library" >
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
-                        <label for="facilityimage[]">Facility Images</label>
+                    <?php if($key==0){ ?><label for="facilityimage[]">Facility Images</label> <?php } ?>
                         <div class="input-group mb-3">
+                             <input type="hidden" name="facilityid[]" value="<?php echo $school_facilities_data['id']; ?>">
                             <div class="">
                                 <input type="file" class="" id="facilityimage[]" name="facilityimage[]"  accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG"  aria-describedby="facilityimage" >
                             </div>
@@ -292,17 +339,18 @@ foreach ($user->result() as $users) {
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="facilitydesc[]">Facility Description</label>
-                            <textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows="1" ></textarea>
+                        <?php if($key==0){ ?><label for="facilitydesc[]">Facility Description</label> <?php } ?>
+                            <textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows="1" ><?php echo $school_facilities_data['content'] ?></textarea>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="facaddmore" style="visibility: hidden;display: block;">Add More</label>
-                            <a class="btn btn-primary addmore-show1" id="facaddmore">Add More</a>
+                            <?php if($key==0){?><a class="btn btn-primary addmore-show1" id="facaddmore">Add More</a><?php }?>
                         </div>
                     </div>
                 </div><!-- /form-row -->
+                <?php } ?>
             </div>
             <div class="edit-school-inner">
 
@@ -312,25 +360,25 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="e.g.+91 9876543210" >
+                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $school[0]['mobile']; ?>" placeholder="e.g.+91 9876543210" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="e.g.admin@gmail.com" >
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $school[0]['email']; ?>" placeholder="e.g.admin@gmail.com" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="website">Website</label>
-                            <input type="text" class="form-control" id="website" name="website" placeholder="e.g.www.yourwebsite.com" >
+                            <input type="text" class="form-control" id="website" name="website" value="<?php echo $school[0]['website_url']?>" placeholder="e.g.www.yourwebsite.com" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <textarea class="form-control" id="address" name="address" rows="1" style="height: 80px;" ></textarea>
+                            <textarea class="form-control" id="address" name="address" rows="1" style="height: 80px;" ><?php echo $school[0]['address']?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -343,31 +391,31 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="facebook">Facebook</label>
-                            <input type="text" class="form-control" id="facebook" name="facebook" placeholder="e.g.+91 9876543210" >
+                            <input type="text" class="form-control" id="facebook" name="facebook" value="<?php echo $school[0]['facebook']?>" placeholder="e.g.www.yourwebsite.com" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="twitter">Twitter</label>
-                            <input type="text" class="form-control" id="twitter" name="twitter" placeholder="e.g.admin@gmail.com" >
+                            <input type="text" class="form-control" id="twitter" name="twitter" value="<?php echo $school[0]['twitter']?>" placeholder="e.g.admin@gmail.com" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="instagram">Instagram</label>
-                            <input type="text" class="form-control" id="instagram" name="instagram" placeholder="www.yourwebsite.com" >
+                            <input type="text" class="form-control" id="instagram" name="instagram" value="<?php echo $school[0]['instagram']?>" placeholder="www.yourwebsite.com" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="linkedin">Linked in</label>
-                            <input type="text" class="form-control" id="linkedin" name="linkedin" placeholder="e.g.www.yourwebsite.com" >
+                            <input type="text" class="form-control" id="linkedin" name="linkedin" value="<?php echo $school[0]['linkedin']?>" placeholder="e.g.www.yourwebsite.com" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="pinterest">Pinterest</label>
-                            <input type="text" class="form-control" id="pinterest" name="pinterest" placeholder="e.g.www.yourwebsite.com" >
+                            <input type="text" class="form-control" id="pinterest" name="pinterest" value="<?php echo $school[0]['pinterest']?>" placeholder="e.g.www.yourwebsite.com" >
                         </div>
                     </div>
                 </div><!-- /form-row -->
