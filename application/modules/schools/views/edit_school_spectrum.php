@@ -61,13 +61,14 @@ foreach ($user->result() as $users) {
     <div class="container-fluid ">
         <div>
             <div class="section-title mb-3">
-                <h1><?php echo $school[0]["school_name"]; ?></h1>
+                <h1><?php echo $school[0]["school_name"]; ?>
                 <?php if($school[0]['school_category_id'] == 3){?>
                 <span>(Spectrum Package)</span>
                 <?php }
                 if($school[0]['school_category_id'] == 4){?>
                     <span>(Trial Package)</span>
                 <?php } ?>
+                </h1>
             </div><!-- /section-title -->   
 
             <div class="listing-section mat-30">
@@ -175,7 +176,7 @@ foreach ($user->result() as $users) {
                     <div class="form-row">
                         <div class="col-lg-6 col-sm-6 file-img-upload">
                             <label for="">Add Banner Image</label>
-                            <input type="file" id="file-upload" name="banner" accept="image/x-png,image/gif,image/jpeg" multiple  />
+                            <input type="file" id="file-upload" name="banner" class="opa-0" accept="image/x-png,image/gif,image/jpeg" multiple  />
                             <label for="file-upload" class="file-upload" style="display: block;">
                                 <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/add-img.png" width="70px" alt="">
                                 <p>Upload Images</p>
@@ -184,7 +185,7 @@ foreach ($user->result() as $users) {
                             <div id="file-upload-filename"></div>
                         </div><!-- /file-img-upload -->
 
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <label for="">Banner Image Sample</label>
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
