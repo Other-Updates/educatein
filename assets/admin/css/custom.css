@@ -19,3 +19,6 @@ a.btn:not([href]):not([tabindex]) {
     font-weight: 600;
     color: #000;
 }
+.modal-open .modal {
+    z-index: 9999;
+}

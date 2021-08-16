@@ -303,7 +303,7 @@ if ($user->num_rows() > 0) {
                                 <!-- <small id="emailHelp" class="form-text text-muted mt-3" style="font-weight: 300;">Perfect Image file size 150px x 150px.</small> -->
                             </div>
                         </div><!-- /form-row -->
-                        <button type="submit" class="btn btn-primary btn-save mt-2">SAVE</button>
+                        <button type="submit" class="btn btn-primary btn-save mt-2" data-toggle="modal" data-target="#personalinfo-save">SAVE</button>
                     </form>
 
                     <div class="password-settings mt-4">
@@ -505,6 +505,26 @@ if ($user->num_rows() > 0) {
 <!-- /container -->
 <!-- </div> -->
 <!-- /dashboard-content -->
+<!-- Modal -->
+<div class="modal fade" id="personalinfo-save" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Package Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+          <button class="btn btn-pink">ADD SCHOOL</button>
+          <button class="btn btn-primary">ACTIVITY CLASS</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <style>
     .password-settings .input-group-text {

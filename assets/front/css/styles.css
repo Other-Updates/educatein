@@ -1763,10 +1763,10 @@ footer button {
 }
 
 /*OTP-form*/
-.modal-body .btn,
+/* .modal-body .btn,
 .modal-body input {
 	border-radius: 0px;
-}
+} */
 .modal-body .form-group {
 	margin-bottom: 10px;
 }
@@ -2424,8 +2424,24 @@ footer button {
     opacity: 1;
     color: #fff!important;
 }
-
-
+.modal-open .modal {
+    z-index: 9999;
+}
+.btn-pink {
+	background-color: #d12881;
+    border-color: #d12881;
+	color: #fff;
+}
+.btn-pink:not(:disabled):not(.disabled).active, .btn-pink:not(:disabled):not(.disabled):active, .show>.btn-pink.dropdown-toggle {
+    color: #fff;
+    background-color:#e1318e;
+    border-color: #d12881;
+}
+.btn-pink:hover {
+	background-color: #e1318e;
+    border-color: #d12881;
+	color: #fff;
+}
 
 
 
