@@ -404,5 +404,20 @@ class Add_listing_spectrum extends CI_Controller {
         $this->load->view('welcome_message');
     }
 
+    public function update_spectrum($school_id){
+        $data = array();
+        $data[] = array(
+            'school_category_id' => 3,
+            'valitity' => 100,
+            'id' => base64_decode($school_id)
+        );
+        $this->db->update_batch('school_details',$data,'id');
+        ?>
+            <script>
+            window.location.href = "https://rzp.io/l/schoolspectrumpackage";
+            </script>
+        <?php
+    }
+
 }
 ?>

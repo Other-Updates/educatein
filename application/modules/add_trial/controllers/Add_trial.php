@@ -412,5 +412,19 @@ class Add_trial extends CI_Controller {
         $this->load->view('welcome_message');
     }
 
+    public function update_trial($school_id){
+        $this->db->select('*');
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->from('school_details');
+        $userid = $this->db->get()->result_array();
+        $data = array();
+        $data[] = array(
+            'school_category_id' => 4,
+            'valitity' => 30,
+            'id' => base64_decode($school_id)
+        );
+        $this->db->update_batch('school_details',$data,'id');
+        redirect('plandetail?id='.base64_encode($userid[0]['user_id']));
+    }
 }
 ?>

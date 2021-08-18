@@ -348,7 +348,7 @@ class Add_listing_premium extends CI_Controller {
         }
 
 
-// facility image save
+        // facility image save
         $facility = $_POST['facility'];
         $facilitydesc = $_POST['facilitydesc'];
         $facilityimage = $_FILES['facilityimage']['name'];
@@ -412,6 +412,21 @@ class Add_listing_premium extends CI_Controller {
 
         <?php
 
+    }
+
+    public function update_premium($school_id){
+        $data = array();
+        $data[] = array(
+            'school_category_id' => 2,
+            'valitity' => 100,
+            'id' => base64_decode($school_id)
+        );
+        $this->db->update_batch('school_details',$data,'id');
+        ?>
+            <script>
+            window.location.href = "https://rzp.io/l/schoolpremiumpackage";
+            </script>
+        <?php
     }
 
 }

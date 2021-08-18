@@ -19,17 +19,17 @@ $user = $this->db->get()->result_array();
 $userid = $user[0]['id'];
 
 //getting selected affiliation
-$this->db->select('*')->where('id=',$school[0]['affiliation_id']);
+$this->db->select('*')->where('id',$school[0]['affiliation_id']);
 $this->db->from('affiliations');
 $affiliation = $this->db->get()->result_array();
 
 //getting selected city
-$this->db->select('*')->where('id=',$school[0]['city_id']);
+$this->db->select('*')->where('id',$school[0]['city_id']);
 $this->db->from('cities');
 $city1 = $this->db->get()->result_array();
 
 //getting selected area
-$this->db->select('*')->where('id =', $school[0]['area_id']);
+$this->db->select('*')->where('id', $school[0]['area_id']);
 $this->db->from('areas');
 $area = $this->db->get()->result_array();
 
@@ -90,6 +90,11 @@ $this->db->select('*')->where('school_id',$school[0]['id']);
 $this->db->from('platinum_datas');
 $this->db->where('heading','activity');
 $activity = $this->db->get()->result_array();
+
+$this->db->select('*')->where('school_id',$school[0]['id']);
+$this->db->from('platinum_datas');
+$this->db->where('heading','Students');
+$students = $this->db->get()->result_array();
 
 $this->db->select('*')->where('schooldetails_id',$school[0]['id']);
 $this->db->from('schoolmanagement_activities');
@@ -323,7 +328,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="students">No.of Students</label>
-                            <input type="text" name="students" class="form-control" id="students" value="<?php echo $school[0]['students'];?>" placeholder="e.g.2005">
+                            <input type="text" name="students" class="form-control" id="students" value="<?php echo $students[0]['content'];?>" placeholder="e.g.2005">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
@@ -533,7 +538,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="form-row" id="actmore">
                         <div class="col-lg-4 col-sm-6 form-group">
                             <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                            <?php if($key==0){ ?><a class="btn btn-primary add_field_button1" id="addmore">Add More</a><?php } ?>
+                            <?php if($key==0){ ?><a class="btn btn-primary add_field_button1" id="addmore">Add</a><?php } ?>
                         </div>
                     </div>
                 </div>

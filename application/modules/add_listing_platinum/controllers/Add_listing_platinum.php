@@ -189,9 +189,10 @@ class Add_listing_platinum extends CI_Controller {
             'user_id' => $_POST['user_id'],
             'city_id' => $yourcity_id,
             'area_id' => $area_id,
+            'pincode' => $_POST['pincode'],
             'affiliation_id' => $schoolboard_id,
             'schooltype_id' => $level_id,
-            'school_category_id' => 1,
+            // 'school_category_id' => 1,
             'about' => $school['about'],
             'acadamic' => $_POST['academic'],
             'website_url' => $school['website'],
@@ -216,7 +217,7 @@ class Add_listing_platinum extends CI_Controller {
             'logo' => $banner1_name,
             'activated_at' => date('Y-m-d H:i:s'),
             'is_active' => 1,
-            'valitity' => 100
+            // 'valitity' => 100
         );
         $this->db->insert('school_details', $schoolinsert);
 
@@ -940,26 +941,45 @@ class Add_listing_platinum extends CI_Controller {
             $user_email = $users->email;
             $user_phone = $users->phone;
         }
-
+        redirect(base_url()."add_listing_platinum/package/".base64_encode($school_id));
         //send email to sales
-        $to = "sales@edugatein.com";
-        $subject = "New institute submitted";
-        $txt = "Hi Edugatein,
-            The platinum package school " . $_POST['schoolname'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
-        $headers = "From: support@edugatein.com" . "\r\n" .
-                "CC: manikandan@haunuzinfosystems.com";
+        // $to = "sales@edugatein.com";
+        // $subject = "New institute submitted";
+        // $txt = "Hi Edugatein,
+        //     The platinum package school " . $_POST['schoolname'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
+        // $headers = "From: support@edugatein.com" . "\r\n" .
+        //         "CC: manikandan@haunuzinfosystems.com";
 
-        mail($to, $subject, $txt, $headers);
+        // mail($to, $subject, $txt, $headers);
 
         // $this->load->view('add-listing-platinum');
         ?>
-        <script>
+        <!-- <script>
             window.location.href = "https://rzp.io/l/schoolplatinumpackage";
-        </script>
+        </script> -->
 
         <?php
 
     }
 
+    public function package($school_id){
+        $data['school_id'] = base64_decode($school_id);
+        $this->load->view('plan_page',$data);
+    }
+
+    public function update_platinum($school_id){
+        $data = array();
+        $data[] = array(
+            'school_category_id' => 1,
+            'valitity' => 100,
+            'id' => base64_decode($school_id)
+        );
+        $this->db->update_batch('school_details',$data,'id');
+        ?>
+            <script>
+                window.location.href = "https://rzp.io/l/schoolplatinumpackage";
+            </script>
+        <?php
+    }
 }
 ?>

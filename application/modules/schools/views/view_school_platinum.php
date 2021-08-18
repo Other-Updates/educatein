@@ -85,6 +85,11 @@ $this->db->from('platinum_datas');
 $this->db->where('heading=','Language');
 $language = $this->db->get()->result_array();
 
+$this->db->select('*')->where('school_id',$school[0]['id']);
+$this->db->from('platinum_datas');
+$this->db->where('heading','Students');
+$students = $this->db->get()->result_array();
+
 $this->db->select('*')->where('school_id=',$school[0]['id']);
 $this->db->from('platinum_datas');
 $this->db->where('heading=','activity');
@@ -324,7 +329,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="students">No.of Students</label>
-                            <input type="text" name="students" class="form-control" id="students" value="<?php echo $school[0]['students'];?>" readonly>
+                            <input type="text" name="students" class="form-control" id="students" value="<?php echo $students[0]['content'];?>" readonly>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
@@ -513,6 +518,7 @@ $schooltype = $this->db->get()->result_array();
                     <?php } ?>
             </div>
                 <?php } ?>
+                <?php if(isset($school_facilities_datas[0])){ ?>
             <div class="edit-school-inner">
                 <h4 class="mb-3">School Facilities</h4>
                 <hr class="mb-4">
@@ -542,6 +548,7 @@ $schooltype = $this->db->get()->result_array();
                     </div>
                 <?php } ?>
             </div>
+            <?php } ?>
             <div class="edit-school-inner">
 
                 <h4 class="mb-3">Location</h4>
@@ -568,7 +575,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="website">Map</label>
-                            <input type="text" name="map_url" class="form-control" id="website" value="<?php echo $school[0]['map_url']; ?>" placeholder="https://www.google.com/maps/@11.0231552,76.9523712,15z" readonly>
+                            <input type="text" name="map_url" class="form-control" id="website" value="<?php echo $school[0]['map_url']; ?>" readonly>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">

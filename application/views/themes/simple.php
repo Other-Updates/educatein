@@ -140,7 +140,7 @@
                             </div><!-- /dropdown-menu -->
                         </li>
 
-                        <li class="nav-item news">
+                        <!-- <li class="nav-item news">
                             <a class="nav-link" href="<?php echo base_url() ?>blog">News</a>
                         </li>
                         <li class="nav-item career">
@@ -148,7 +148,7 @@
                         </li>
                         <li class="nav-item exam">
                             <a class="nav-link" href="<?php echo base_url() ?>exams/how-to-get-your-exam-results-online">Exams/Results</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item contact">
                             <a class="nav-link" href="<?php echo base_url() ?>contact-us">Contact</a>
                         </li>
@@ -171,7 +171,7 @@
                                             </div>
                                         </div><!-- /media -->
                                     </a>
-                                    <a class="dropdown-item" href="<?php echo base_url() ?>signin-student" target="_blank">
+                                    <!-- <a class="dropdown-item" href="<?php echo base_url() ?>signin-student" target="_blank">
                                         <div class="media">
                                             <div class="media-left">
                                                 <img src="<?php echo base_url() ?>assets/front/images/dashboard/student.png" width="40px" alt="">
@@ -180,8 +180,9 @@
                                                 <h6>Students</h6>
                                                 <small>Student Portal</small>
                                             </div>
-                                        </div><!-- /media -->
-                                    </a>
+                                        </div> -->
+                                        <!-- /media -->
+                                    <!-- </a>
                                     <a class="dropdown-item" href="<?php echo base_url() ?>signin-parent" target="_blank">
                                         <div class="media">
                                             <div class="media-left">
@@ -191,8 +192,9 @@
                                                 <h6>Parents</h6>
                                                 <small>Parent Portal</small>
                                             </div>
-                                        </div><!-- /media -->
-                                    </a>
+                                        </div> -->
+                                        <!-- /media -->
+                                    <!-- </a> -->
                                 </div>
                             </li><!-- /login-dropdown -->
                         <?php } ?>

@@ -98,7 +98,7 @@ $userid = base64_decode($_GET['id']);
 	                    </div><!-- /dropdown-menu -->
 	                </li>
 	                
-	                <li class="nav-item">
+	                <!-- <li class="nav-item">
 	                    <a class="nav-link" href="<?php echo base_url() ?>blog">News</a>
 	                </li>
 	                <li class="nav-item">
@@ -106,7 +106,7 @@ $userid = base64_decode($_GET['id']);
 	                </li>
 	                <li class="nav-item">
 	                    <a class="nav-link" href="<?php echo base_url() ?>exams/how-to-get-your-exam-results-online">Exams/Results</a>
-	                </li>
+	                </li> -->
 	                <li class="nav-item">
 	                    <a class="nav-link" href="<?php echo base_url() ?>contact-us">Contact</a>
 	                </li>

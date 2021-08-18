@@ -565,71 +565,6 @@ class admin extends CI_Controller {
         return $student;
     }
 
-    function school_edit(){
-        $userid=base64_decode($_GET['id']);
-        $this->db->select('*')->where('id=',$userid);
-        $this->db->from('school_details');
-        $school = $this->db->get()->result_array();
-        if($school[0]['school_category_id'] == 1){
-            $this->load->view('edit_school_platinum');
-        }else if($school[0]['school_category_id'] == 3 || $school[0]['school_category_id'] == 4){
-            $this->load->view('edit_school_spectrum');
-        }
-        else if($school[0]['school_category_id'] == 2){
-            $this->load->view('edit_school_premium');
-        }
-    }
-
-    function institute_edit(){
-        $userid=base64_decode($_GET['id']);
-        $this->db->select('*')->where('id=',$userid);
-        $this->db->from('institute_details');
-        $institute = $this->db->get()->result_array();
-        if($institute[0]['position_id'] == 1){
-            $this->load->view('edit_activity_platinum');
-        }else if($institute[0]['position_id'] == 3 || $institute[0]['position_id'] == 4){
-            $this->load->view('edit_activity_spectrum');
-        }
-        else if($institute[0]['position_id'] == 2){
-            $this->load->view('edit_activity_premium');
-        }
-    }
-
-    function school_delete(){
-        $userid = base64_decode($_GET['id']);
-        $this->db->where('schooldetails_id', $userid);
-        $this->db->delete('schoolmanagement_activities');
-        $this->db->where('school_id', $userid);
-        $this->db->delete('platinum_datas');
-        $this->db->where('school_id', $userid);
-        $this->db->delete('school_images');
-        $this->db->where('school_id', $userid);
-        $this->db->delete('school_facilities');
-        $this->db->where('id', $userid);
-        $this->db->delete('school_details');
-        redirect('admin/schools');
-
-    } 
-
-    function institute_delete(){
-        
-        $userid = base64_decode($_GET['id']);
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('institute_images');
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('institute_admissions');
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('institute_platinum_datas');
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('program_details');
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('institute_news');
-        $this->db->where('id', $userid);
-        $this->db->delete('institute_details');
-
-        redirect('admin/schools/institute');
-    }
-
     function update_school(){
 
         //school facilities
@@ -842,135 +777,306 @@ class admin extends CI_Controller {
             $this->db->insert_batch('school_images', $insertschoolactivityinsert);
         }
         //platinum data save
-        if (!empty($_POST['founded'])) {
-            $foundedinsert = array(
+
+        $this->db->select('*');
+        $this->db->where('heading','Founded');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $found = $this->db->get();
+        if($found->num_rows() > 0){
+            if (!empty($_POST['founded'])) {
+                $foundedinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'founded.png',
+                    'content' => $_POST['founded'],
+                    'brief_content' => $_POST['founded'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Founded');
+                $this->db->update('platinum_datas', $foundedinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+
+            $foundednewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'founded.png',
+                'heading' => 'Founded',
                 'content' => $_POST['founded'],
                 'brief_content' => $_POST['founded'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Founded');
-            $this->db->update('platinum_datas', $foundedinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $foundednewinsert);
         }
 
-        if (!empty($_POST['special'])) {
-            $specialinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','Special');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $special = $this->db->get();
+        if($special->num_rows() > 0){
+            if (!empty($_POST['special'])) {
+                $specialinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'special.png',
+                    // 'heading' => 'Special',
+                    'content' => $_POST['special'],
+                    'brief_content' => $_POST['special'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Special');
+                $this->db->update('platinum_datas', $specialinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $specialnewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'special.png',
-                // 'heading' => 'Special',
+                'heading' => 'Special',
                 'content' => $_POST['special'],
                 'brief_content' => $_POST['special'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Special');
-            $this->db->update('platinum_datas', $specialinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $specialnewinsert);
+
         }
 
-        if (!empty($_POST['students'])) {
-            $studentsinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','Students');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $Students = $this->db->get();
+        if($Students->num_rows() > 0){
+            if (!empty($_POST['students'])) {
+                $studentsinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'students.png',
+                    // 'heading' => 'Students',
+                    'content' => $_POST['students'],
+                    'brief_content' => $_POST['students'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Students');
+                $this->db->update('platinum_datas', $studentsinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $studentsnewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'students.png',
-                // 'heading' => 'Students',
+                'heading' => 'Students',
                 'content' => $_POST['students'],
                 'brief_content' => $_POST['students'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Students');
-            $this->db->update('platinum_datas', $studentsinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $studentsnewinsert);
         }
 
-        if (!empty($_POST['events'])) {
-            $eventsinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','Events');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $Events = $this->db->get();
+        if($Students->num_rows() > 0){
+            if (!empty($_POST['events'])) {
+                $eventsinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'Events.png',
+                    // 'heading' => 'Events',
+                    'content' => $_POST['events'],
+                    'brief_content' => $_POST['events'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Events');
+                $this->db->update('platinum_datas', $eventsinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $eventsnewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'Events.png',
-                // 'heading' => 'Events',
+                'heading' => 'Events',
                 'content' => $_POST['events'],
                 'brief_content' => $_POST['events'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Events');
-            $this->db->update('platinum_datas', $eventsinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $eventsnewinsert);
         }
-
-        if (!empty($_POST['achievements'])) {
-            $achievementsinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','Achievements');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $Achievements = $this->db->get();
+        if($Achievements->num_rows() > 0){
+            if (!empty($_POST['achievements'])) {
+                $achievementsinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'achievements.png',
+                    // 'heading' => 'Achievements',
+                    'content' => $_POST['achievements'],
+                    'brief_content' => $_POST['achievements'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Achievements');
+                $this->db->update('platinum_datas', $achievementsinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $achievementsnewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'achievements.png',
-                // 'heading' => 'Achievements',
+                'heading' => 'Achievements',
                 'content' => $_POST['achievements'],
                 'brief_content' => $_POST['achievements'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Achievements');
-            $this->db->update('platinum_datas', $achievementsinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $achievementsnewinsert);
         }
 
-        if (!empty($_POST['teachers'])) {
-            $teachersinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','Teachers');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $Teachers = $this->db->get();
+        if($Teachers->num_rows() > 0){
+            if (!empty($_POST['teachers'])) {
+                $teachersinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'teachers.png',
+                    // 'heading' => 'Teachers',
+                    'content' => $_POST['teachers'],
+                    'brief_content' => $_POST['teachers'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Teachers');
+                $this->db->update('platinum_datas', $teachersinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $teachersnewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'teachers.png',
-                // 'heading' => 'Teachers',
+                'heading' => 'Teachers',
                 'content' => $_POST['teachers'],
                 'brief_content' => $_POST['teachers'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Teachers');
-            $this->db->update('platinum_datas', $teachersinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $teachersnewinsert);
         }
 
-        if (!empty($_POST['branches'])) {
-            $branchesinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','Branches');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $Branches = $this->db->get();
+        if($Branches->num_rows() > 0){
+            if (!empty($_POST['branches'])) {
+                $branchesinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'branch.png',
+                    // 'heading' => 'Branches',
+                    'content' => $_POST['branches'],
+                    'brief_content' => $_POST['branches'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Branches');
+                $this->db->update('platinum_datas', $branchesinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $branchesnewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'branch.png',
-                // 'heading' => 'Branches',
+                'heading' => 'Branches',
                 'content' => $_POST['branches'],
                 'brief_content' => $_POST['branches'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Branches');
-            $this->db->update('platinum_datas', $branchesinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $branchesnewinsert);
         }
 
-        if (!empty($_POST['academic'])) {
-            $academicinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','Academic');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $Academic = $this->db->get();
+        if($Academic->num_rows() > 0){
+            if (!empty($_POST['academic'])) {
+                $academicinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'history.png',
+                    // 'heading' => 'Academic',
+                    'content' => $_POST['academic'],
+                    'brief_content' => $_POST['academic'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Academic');
+                $this->db->update('platinum_datas', $academicinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $academicnewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'history.png',
-                // 'heading' => 'Academic',
+                'heading' => 'Academic',
                 'content' => $_POST['academic'],
                 'brief_content' => $_POST['academic'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Academic');
-            $this->db->update('platinum_datas', $academicinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $academicnewinsert);
         }
 
-        if (!empty($_POST['language'])) {
-            $languageinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','Language');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $Language = $this->db->get();
+        if($Language->num_rows() > 0){
+            if (!empty($_POST['language'])) {
+                $languageinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'language.png',
+                    // 'heading' => 'Language',
+                    'content' => $_POST['language'],
+                    'brief_content' => $_POST['language'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','Language');
+                $this->db->update('platinum_datas', $languageinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $languagenewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'language.png',
-                // 'heading' => 'Language',
+                'heading' => 'Language',
                 'content' => $_POST['language'],
                 'brief_content' => $_POST['language'],
                 'is_active' => 1
             );
-            $this->db->where('heading','Language');
-            $this->db->update('platinum_datas', $languageinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $languagenewinsert);
         }
 
-        if (!empty($_POST['activity'])) {
-            $activityinsert = array(
+        $this->db->select('*');
+        $this->db->where('heading','activity');
+        $this->db->where('school_id',$school_id);
+        $this->db->from('platinum_datas');
+        $activity = $this->db->get();
+        if($activity->num_rows() > 0){
+            if (!empty($_POST['activity'])) {
+                $activityinsert = array(
+                    'school_id' => $school_id,
+                    'icon' => 'activity.png',
+                    // 'heading' => 'activity',
+                    'content' => $_POST['activity'],
+                    'brief_content' => $_POST['activity'],
+                    'is_active' => 1
+                );
+                $this->db->where('heading','activity');
+                $this->db->update('platinum_datas', $activityinsert,array('school_id'=>$_POST['school_id']));
+            }
+        }else{
+            $activitynewinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'activity.png',
-                // 'heading' => 'activity',
+                'heading' => 'activity',
                 'content' => $_POST['activity'],
                 'brief_content' => $_POST['activity'],
                 'is_active' => 1
             );
-            $this->db->where('heading','activity');
-            $this->db->update('platinum_datas', $activityinsert,array('school_id'=>$_POST['school_id']));
+            $this->db->insert('platinum_datas', $activitynewinsert);
         }
-
 
         // banner1 image save
         if (isset($_FILES['banner1']['name'])) {
@@ -1149,20 +1255,238 @@ class admin extends CI_Controller {
 
     }
 
+    function view_activityclass(){
+        $data = array();
+        $userid = base64_decode($_GET['id']);
+        $this->db->select('*');
+        $this->db->where('id',$userid);
+        $this->db->from('institute_details');
+        $data['institute'] = $this->db->get()->result_array();
+
+        $this->db->select('*');
+        $this->db->from('institute_categories');
+        $this->db->where('id', $data['institute'][0]['category_id']);
+        $data['categories'] = $this->db->get()->result_array();
+
+        $this->db->select('*')->where('id',$data['institute'][0]['city_id']);
+        $this->db->from('cities');
+        $data['city1'] = $this->db->get()->result_array();
+
+        $this->db->select('*')->where('id', $data['institute'][0]['area_id']);
+        $this->db->from('areas');
+        $data['area'] = $this->db->get()->result_array();
+        //platinum datas
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Founded');
+        $this->db->from('institute_platinum_datas');
+        $data['founded'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Special');
+        $this->db->from('institute_platinum_datas');
+        $data['special'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Students');
+        $this->db->from('institute_platinum_datas');
+        $data['students'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Events');
+        $this->db->from('institute_platinum_datas');
+        $data['events'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Achievements');
+        $this->db->from('institute_platinum_datas');
+        $data['achievements'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Teachers');
+        $this->db->from('institute_platinum_datas');
+        $data['teachers'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Branches');
+        $this->db->from('institute_platinum_datas');
+        $data['branches'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Language');
+        $this->db->from('institute_platinum_datas');
+        $data['language'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Trainer');
+        $this->db->from('institute_platinum_datas');
+        $data['trainer'] = $this->db->get()->result_array();
+        $this->db->select('*')->where('id=',$userid);
+        $this->db->from('institute_details');
+        $institute = $this->db->get()->result_array();
+        //institute news
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->from('institute_news');
+        $data['news'] = $this->db->get()->result_array();
+        $this->load->view('view_activity_platinum',$data);
+    }
+
     function view_school(){
         $userid=base64_decode($_GET['id']);
         // print_r($userid);exit;
+        $this->db->select('*')->where('id',$userid);
+        $this->db->from('school_details');
+        $school = $this->db->get()->result_array();
+        // if($school[0]['school_category_id'] == 1){
+            $this->load->view('view_school_platinum');
+        // }else if($school[0]['school_category_id'] == 3 || $school[0]['school_category_id'] == 4){
+            // $this->load->view('view_school_spectrum');
+        // }
+        // else if($school[0]['school_category_id'] == 2){
+        //     $this->load->view('view_school_premium');
+        // }
+    }
+
+    function institute_edit(){
+        $data = array();
+        $userid = base64_decode($_GET['id']);
+        $this->db->select('*');
+        $this->db->where('id',$userid);
+        $this->db->from('institute_details');
+        $data['institute'] = $this->db->get()->result_array();
+
+        $this->db->select('*');
+        $this->db->from('institute_categories');
+        $this->db->where('id', $data['institute'][0]['category_id']);
+        $data['categories'] = $this->db->get()->result_array();
+
+        $this->db->select('*')->where('id',$data['institute'][0]['city_id']);
+        $this->db->from('cities');
+        $data['city1'] = $this->db->get()->result_array();
+
+        $this->db->select('*')->where('id', $data['institute'][0]['area_id']);
+        $this->db->from('areas');
+        $data['area'] = $this->db->get()->result_array();
+        //platinum datas
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Founded');
+        $this->db->from('institute_platinum_datas');
+        $data['founded'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Special');
+        $this->db->from('institute_platinum_datas');
+        $data['special'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Students');
+        $this->db->from('institute_platinum_datas');
+        $data['students'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Events');
+        $this->db->from('institute_platinum_datas');
+        $data['events'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Achievements');
+        $this->db->from('institute_platinum_datas');
+        $data['achievements'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Teachers');
+        $this->db->from('institute_platinum_datas');
+        $data['teachers'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Branches');
+        $this->db->from('institute_platinum_datas');
+        $data['branches'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Language');
+        $this->db->from('institute_platinum_datas');
+        $data['language'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('heading','Trainer');
+        $this->db->from('institute_platinum_datas');
+        $data['trainer'] = $this->db->get()->result_array();
+        $this->db->select('*')->where('id=',$userid);
+        $this->db->from('institute_details');
+        $institute = $this->db->get()->result_array();
+        //institute news
+        $this->db->select('*');
+        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->from('institute_news');
+        $data['news'] = $this->db->get()->result_array();
+        $this->db->select('pd.program_id,ip.program_name,pd.image,pd.about');
+        $this->db->where('pd.institute_id', $data['institute'][0]['id']);
+        $this->db->join('program_details as pd','pd.program_id = ip.id','left');
+        $this->db->from(' institute_programs as ip');
+        $inst_category=$this->db->get()->result_array();
+        // echo "<pre>";print_r($inst_category);exit;
+        // if($institute[0]['position_id'] == 1){
+            $this->load->view('edit_activity_platinum',$data);
+        // }else if($institute[0]['position_id'] == 3 || $institute[0]['position_id'] == 4){
+        //     $this->load->view('edit_activity_spectrum',$data);
+        // }
+        // else if($institute[0]['position_id'] == 2){
+        //     $this->load->view('edit_activity_premium',$data);
+        // }
+    }
+
+    function school_edit(){
+        
+        $userid=base64_decode($_GET['id']);
         $this->db->select('*')->where('id=',$userid);
         $this->db->from('school_details');
         $school = $this->db->get()->result_array();
-        if($school[0]['school_category_id'] == 1){
-            $this->load->view('view_school_platinum');
-        }else if($school[0]['school_category_id'] == 3 || $school[0]['school_category_id'] == 4){
-            $this->load->view('view_school_spectrum');
-        }
-        else if($school[0]['school_category_id'] == 2){
-            $this->load->view('view_school_premium');
-        }
+        // if($school[0]['school_category_id'] == 1){
+            $this->load->view('edit_school_platinum');
+        // }else if($school[0]['school_category_id'] == 3 || $school[0]['school_category_id'] == 4){
+        //     $this->load->view('edit_school_spectrum');
+        // }
+        // else if($school[0]['school_category_id'] == 2){
+        //     $this->load->view('edit_school_premium');
+        // }
+    }
+
+    function school_delete(){
+
+        $userid = base64_decode($_GET['id']);
+        $this->db->where('schooldetails_id', $userid);
+        $this->db->delete('schoolmanagement_activities');
+        $this->db->where('school_id', $userid);
+        $this->db->delete('platinum_datas');
+        $this->db->where('school_id', $userid);
+        $this->db->delete('school_images');
+        $this->db->where('school_id', $userid);
+        $this->db->delete('school_facilities');
+        $this->db->where('id', $userid);
+        $this->db->delete('school_details');
+        redirect('admin/schools');
+
+    } 
+
+    function institute_delete(){
+        
+        $userid = base64_decode($_GET['id']);
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('institute_images');
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('institute_admissions');
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('institute_platinum_datas');
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('program_details');
+        $this->db->where('institute_id', $userid);
+        $this->db->delete('institute_news');
+        $this->db->where('id', $userid);
+        $this->db->delete('institute_details');
+        redirect('admin/schools/institute');
     }
 }
 ?>

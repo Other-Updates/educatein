@@ -280,5 +280,19 @@ The spectrum package institute " . $_POST['institutename'] . " has been submitte
 
     }
 
+    public function update_spectrum($school_id){
+        $data = array();
+        $data[] = array(
+            'position_id' => 3,
+            'valitity' => 100,
+            'id' => base64_decode($school_id)
+        );
+        $this->db->update_batch('institute_details',$data,'id');
+        ?>
+            <script>
+            window.location.href = "https://rzp.io/l/insinstitutespectrumpackage";
+            </script>
+        <?php
+    }
 }
 ?>

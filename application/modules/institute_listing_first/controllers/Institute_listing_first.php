@@ -112,8 +112,8 @@ class Institute_listing_first extends CI_Controller {
 
         $newsbanner1 = $_FILES['newsbanner']['name'];
         $newsbanner1_ext = pathinfo($newsbanner1, PATHINFO_EXTENSION);
-// echo $banner1_ext;
-// exit();
+        // echo $banner1_ext;
+        // exit();
         $newsbanner1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $newsbanner1_ext;
         $newsbanner1_type = $_FILES['newsbanner']['type'];
         $newsbanner1_size = $_FILES['newsbanner']['size'];
@@ -133,8 +133,8 @@ class Institute_listing_first extends CI_Controller {
 
         $aboutimage = $_FILES['aboutimage']['name'];
         $aboutimage_ext = pathinfo($aboutimage, PATHINFO_EXTENSION);
-// echo $banner1_ext;
-// exit();
+        // echo $banner1_ext;
+        // exit();
         $aboutimage_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $aboutimage_ext;
         $aboutimage_type = $_FILES['aboutimage']['type'];
         $aboutimage_size = $_FILES['aboutimage']['size'];
@@ -154,7 +154,7 @@ class Institute_listing_first extends CI_Controller {
 
         $schoolinsert = array(
             'category_id' => $category_id,
-            'position_id' => 1,
+            // 'position_id' => 1,
             'institute_name' => $_POST['institutename'],
             'slug' => $_POST['institutename'],
             'mobile' => $_POST['phone'],
@@ -175,7 +175,7 @@ class Institute_listing_first extends CI_Controller {
             'news_image' => $newsbanner1_name,
             'activated_at' => date('Y-m-d H:i:s'),
             'is_active' => 1,
-            'valitity'=>100
+            // 'valitity'=>100
         );
 
         $this->db->insert('institute_details', $schoolinsert);
@@ -187,12 +187,12 @@ class Institute_listing_first extends CI_Controller {
             $school_id = $schooldetails->id;
         }
 
-// banner1 image save
+        // banner1 image save
         if (isset($_FILES['banner1']['name'])) {
             $banner1 = $_FILES['banner1']['name'];
             $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
-// echo $banner1_ext;
-// exit();
+        // echo $banner1_ext;
+        // exit();
             $banner1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
             $banner1_type = $_FILES['banner1']['type'];
             $banner1_size = $_FILES['banner1']['size'];
@@ -228,8 +228,8 @@ class Institute_listing_first extends CI_Controller {
         }
 
 
-// exit();
-// banner2 image save
+        // exit();
+        // banner2 image save
         if (isset($_FILES['banner2']['name'])) {
             $banner2 = $_FILES['banner2']['name'];
             $banner2_ext = pathinfo($banner2, PATHINFO_EXTENSION);
@@ -241,8 +241,8 @@ class Institute_listing_first extends CI_Controller {
             $banner2_store = FCPATH . "/laravel/public/" . $banner2_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-// echo $file_type;
-// exit();
+        // echo $file_type;
+        // exit();
             if (in_array($banner2_ext, $allowed)) {
                 if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
                     $banner2insert = array(
@@ -257,7 +257,7 @@ class Institute_listing_first extends CI_Controller {
             }
         }
 
-// banner3 image save
+        // banner3 image save
         if (isset($_FILES['banner3']['name'])) {
             $banner3 = $_FILES['banner3']['name'];
             $banner3_ext = pathinfo($banner3, PATHINFO_EXTENSION);
@@ -269,8 +269,8 @@ class Institute_listing_first extends CI_Controller {
             $banner3_store = FCPATH . "/laravel/public/" . $banner3_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-// echo $file_type;
-// exit();
+        // echo $file_type;
+        // exit();
             if (in_array($banner3_ext, $allowed)) {
                 if (move_uploaded_file($banner3_tem_loc, $banner3_store)) {
                     $banner3insert = array(
@@ -372,19 +372,20 @@ class Institute_listing_first extends CI_Controller {
             $this->db->insert('institute_platinum_datas', $branchesinsert);
         }
 
-        if (!empty($_POST['language'])) {
+        if (!empty($_POST['languages'])) {
             $languageinsert = array(
                 'institute_id' => $school_id,
                 'icon' => 'language.png',
                 'heading' => 'Language',
-                'content' => $_POST['language'],
-                'brief_content' => $_POST['language'],
+                'content' => $_POST['languages'],
+                'brief_content' => $_POST['languages'],
                 'is_active' => 1
             );
             $this->db->insert('institute_platinum_datas', $languageinsert);
         }
 
         if (!empty($_POST['customRadioInline1'])) {
+            
             if ($_POST['customRadioInline1'] == "yes") {
                 $activityinsert = array(
                     'institute_id' => $school_id,
@@ -398,7 +399,7 @@ class Institute_listing_first extends CI_Controller {
             }
         }
 
-// activity image save
+        // activity image save
         $activity = $_POST['categoryname'];
         $activitydesc = $_POST['categorydesc'];
         $activityimage = $_FILES['categoryimage']['name'];
@@ -466,7 +467,7 @@ class Institute_listing_first extends CI_Controller {
         }
 
 
-// gallery image save
+        // gallery image save
         if (isset($_FILES['mytext']['name'])) {
             $gallaryimage = $_FILES['mytext']['name'];
             $gallarytype = $_FILES['mytext']['type'];
@@ -506,7 +507,7 @@ class Institute_listing_first extends CI_Controller {
             }
         }
 
-// news & events save
+        // news & events save
         $news = $_POST['newsheading'];
         $newsdesc = $_POST['newsdesc'];
 
@@ -531,27 +532,46 @@ class Institute_listing_first extends CI_Controller {
             $user_email = $users->email;
             $user_phone = $users->phone;
         }
-
+        redirect(base_url()."institute_listing_first/package/".base64_encode($school_id));
         //send email to sales
-        $to = "sales@edugatein.com";
-        $subject = "New institute submitted";
-        $txt = "Hi Edugatein,
-            The platinum package institute " . $_POST['institutename'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
-        $headers = "From: support@edugatein.com" . "\r\n" .
-                "CC: manikandan@haunuzinfosystems.com";
+        // $to = "sales@edugatein.com";
+        // $subject = "New institute submitted";
+        // $txt = "Hi Edugatein,
+        //     The platinum package institute " . $_POST['institutename'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
+        // $headers = "From: support@edugatein.com" . "\r\n" .
+        //         "CC: manikandan@haunuzinfosystems.com";
 
-        mail($to, $subject, $txt, $headers);
+        // mail($to, $subject, $txt, $headers);
 
 
-        // $this->load->view('institute-listing-one');
+        // // $this->load->view('institute-listing-one');
         ?>
-        <script>
+        <!-- <script>
             window.location.href = "https://rzp.io/l/instituteplatinumpackage";
-        </script>
+        </script> -->
 
         <?php
 
     }
 
+    public function package($school_id){
+        $data['school_id'] = base64_decode($school_id);
+        $this->load->view('plan_page',$data);
+    }
+
+    public function update_platinum($school_id){
+        $data = array();
+        $data[] = array(
+            'position_id' => 1,
+            'valitity' => 100,
+            'id' => base64_decode($school_id)
+        );
+        $this->db->update_batch('institute_details',$data,'id');
+        ?>
+            <script>
+            window.location.href = "https://rzp.io/l/instituteplatinumpackage";
+            </script>
+        <?php
+    }
 }
 ?>

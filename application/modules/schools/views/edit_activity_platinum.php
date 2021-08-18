@@ -29,7 +29,7 @@ foreach ($user->result() as $users) {
 <div class="dashboard-content">
     <div class="container-fluid">
         <div class="section-title mb-3">
-            <h1>Enter Your Details <span>(Platinum Package)</span></h1>            
+            <h1><?php echo $institute[0]['institute_name']; ?><span>(Platinum Package)</span></h1>            
         </div>
 
         <div class="listing-section  mat-30">
@@ -45,7 +45,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="institutename">Institute Name</label>
-                            <input type="text" class="form-control" id="institutename" placeholder="e.g Haunuz dance school" name="institutename" required>
+                            <input type="text" class="form-control" id="institutename" placeholder="e.g Haunuz dance school" value="<?php echo $institute[0]['institute_name']; ?>" name="institutename" required>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
@@ -59,7 +59,7 @@ foreach ($user->result() as $users) {
                                 $category = $this->db->get();
                                 foreach ($category->result() as $categorys) {
                                     ?>
-                                    <option value="<?php echo $categorys->category_name; ?>"><?php echo $categorys->category_name; ?></option>
+                                    <option value="<?php echo $categorys->category_name; ?>"<?php if($categorys->category_name = $categories[0]['category_name']){echo "selected";}?>><?php echo $categorys->category_name; ?></option>
                                 <?php } ?>
                             </select>                          
                         </div>
@@ -75,7 +75,7 @@ foreach ($user->result() as $users) {
                                 $city = $this->db->get();
                                 foreach ($city->result() as $citys) {
                                     ?>
-                                    <option value="<?php echo $citys->city_name; ?>"><?php echo $citys->city_name; ?></option>
+                                    <option value="<?php echo $citys->city_name; ?>"<?php if($citys->city_name = $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -83,7 +83,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="text">Area</label>
-                            <input type="text" class="form-control" id="text" name="area" placeholder="e.g Nallampalayam" required>
+                            <input type="text" class="form-control" id="text" name="area" value="<?php echo $area[0]['area_name']; ?>"placeholder="e.g Nallampalayam" required>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -165,60 +165,60 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="founded">Founded</label>
-                            <input type="text" class="form-control" id="founded" name="founded" placeholder="e.g 1980" >
+                            <input type="text" class="form-control" id="founded" value="<?php echo $founded[0]['content']; ?>"name="founded" placeholder="e.g 1980" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="special">Special</label>
-                            <input type="text" class="form-control" id="special" name="special" placeholder="e.g French class" >
+                            <input type="text" class="form-control" id="special" name="special" value="<?php echo $special[0]['content']; ?>" placeholder="e.g French class" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="students">No.of Students</label>
-                            <input type="text" class="form-control" id="students" name="students" placeholder="e.g 2005" >
+                            <input type="text" class="form-control" id="students" value="<?php echo $students[0]['content']; ?>"name="students" placeholder="e.g 2005" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="events">Events</label>
-                            <input type="text" class="form-control" id="events" name="events" placeholder="e.g Annual Day celebration" >
+                            <input type="text" class="form-control" id="events" name="events" value="<?php echo $events[0]['content']; ?>"placeholder="e.g Annual Day celebration" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="achievements">Achievements</label>
-                            <input type="text" class="form-control" id="achievements" name="achievements" placeholder="e.g First in Sports" >
+                            <input type="text" class="form-control" id="achievements" name="achievements" value="<?php echo $achievements[0]['content']; ?>"placeholder="e.g First in Sports" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="teachers">No.of Teachers</label>
-                            <input type="text" class="form-control" id="teachers" name="teachers" placeholder="e.g 55" >
+                            <input type="text" class="form-control" id="teachers" name="teachers" value="<?php echo $teachers[0]['content']; ?>"placeholder="e.g 55" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="branches">Branches</label>
-                            <input type="text" class="form-control" id="branches" name="branches" placeholder="e.g Coimbatore" >
+                            <input type="text" class="form-control" id="branches" name="branches" value="<?php echo $branches[0]['content']; ?>" placeholder="e.g Coimbatore" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="languages">Languages</label>
-                            <input type="text" class="form-control" id="languages" name="languages" placeholder="e.g Hindi, Spoken English" >
+                            <input type="text" class="form-control" id="languages" name="languages" value="<?php echo $language[0]['content']; ?>" placeholder="e.g Hindi, Spoken English" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <label for="customRadioInline1" class="pt-4 mb-0">Personal Trainer</label>
                         <div class="form-group">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline1" value="yes" name="customRadioInline1" class="custom-control-input">
+                                <input type="radio" id="customRadioInline1" value="yes" <?php if(!empty($trainer[0]['content'])){echo "checked";} ?> name="customRadioInline1" class="custom-control-input">
                                 <label class="custom-control-label mt-0" for="customRadioInline1">Yes</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" value="no" name="customRadioInline1" class="custom-control-input">
+                                <input type="radio" id="customRadioInline2" value="no" name="customRadioInline1" <?php if(empty($trainer[0]['content'])){echo "checked";} ?> class="custom-control-input">
                                 <label class="custom-control-label mt-0" for="customRadioInline2">No</label>
                             </div>
                         </div>
@@ -242,7 +242,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="aboutdesc">About Description</label>
-                            <textarea class="form-control" name="aboutdesc" id="aboutdesc" rows="1" ></textarea>
+                            <textarea class="form-control" name="aboutdesc" id="aboutdesc"rows="1" ><?php echo $institute[0]['about']; ?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -294,7 +294,7 @@ foreach ($user->result() as $users) {
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6">
-                            <button class="add_field_button btn btn-primary btn-block">Add More</button>
+                            <input type="buton" class="add_field_button btn btn-primary btn-block" value="Add More">
                         </div>
                     </div><!-- /form-row -->
                 </div><!-- /input_fields_wrap -->
@@ -317,27 +317,28 @@ foreach ($user->result() as $users) {
 
                     <div class="col-lg-6"></div>
                 </div><!-- /form-row -->
-
-                <div class="form-row mt-3" id="newsmore">
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="form-group">
-                            <label for="newsheading[]">News Heading</label>
-                            <input type="text" class="form-control" id="newsheading[]" name="newsheading[]" placeholder="e.g Salsa Dance" >
+                <?php foreach($news as $key=>$news1){ ?>
+                    <div class="form-row mt-3" id="newsmore">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-group">
+                                <?php if($key == 0){ ?><label for="newsheading[]">News Heading</label><?php } ?>
+                                <input type="text" class="form-control" id="newsheading[]" name="newsheading[]" value="<?php echo $news1['news']; ?>" placeholder="e.g Salsa Dance" >
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                            <?php if($key == 0){ ?><label for="newsdesc[]">News Description</label><?php } ?>
+                                <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" rows="1" ><?php echo $news1['news_brief']; ?></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <div class="form-group">
+                                <label for="newsadd" style="visibility: hidden;">Add More</label>
+                                <?php if($key == 0){ ?><a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add More</a><?php } ?>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="newsdesc[]">News Description</label>
-                            <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" rows="1" ></textarea>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="form-group">
-                            <label for="newsadd" style="visibility: hidden;">Add More</label>
-                            <a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add More</a>
-                        </div>
-                    </div>
-                </div><!-- /form-row -->
+                <?php } ?><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
 
@@ -347,31 +348,31 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="e.g +91 9876543210" >
+                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $institute[0]['mobile']; ?>" placeholder="e.g +91 9876543210" >
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="e.g admin@gmail.com" >
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $institute[0]['email']; ?>" placeholder="e.g admin@gmail.com" >
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="website">Website</label>
-                            <input type="text" class="form-control" id="website" name="website" placeholder="e.g www.yourwebsite.com" >
+                            <input type="text" class="form-control" id="website" name="website" value="<?php echo $institute[0]['website_url']; ?>" placeholder="e.g www.yourwebsite.com" >
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="timing">Our Timings</label>
-                            <input type="text" class="form-control" id="timing" name="timing" placeholder="e.g 10:00 am - 8:00 pm" >
+                            <input type="text" class="form-control" id="timing" name="timing" value="<?php echo $institute[0]['timings']; ?>" placeholder="e.g 10:00 am - 8:00 pm" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <textarea class="form-control" id="address" name="address" rows="1" placeholder="e.g Enter your address" style="height: 80px;" ></textarea>
+                            <textarea class="form-control" id="address" name="address" rows="1" placeholder="e.g Enter your address" style="height: 80px;" ><?php echo $institute[0]['address']; ?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -453,4 +454,4 @@ foreach ($user->result() as $users) {
 
     });
 </script>
-
+<script src="<?php echo base_url("assets/front/"); ?>js/dashboard.js"></script>

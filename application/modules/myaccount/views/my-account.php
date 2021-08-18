@@ -516,8 +516,8 @@ if ($user->num_rows() > 0) {
         </button>
       </div>
       <div class="modal-body text-center">
-          <button class="btn btn-pink">ADD SCHOOL</button>
-          <button class="btn btn-primary">ACTIVITY CLASS</button>
+      <a href="<?php echo base_url(); ?>schoolfirst?id=<?php echo base64_encode($userid); ?>"><button class="btn btn-pink">ADD SCHOOL</button></a>
+      <a href="<?php echo base_url(); ?>institutefirst?id=<?php echo base64_encode($userid); ?>"><button class="btn btn-primary">ACTIVITY CLASS</button></a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -616,7 +616,7 @@ if ($user->num_rows() > 0) {
                     title: "Registered Successfully!",
                     type: "success"
                 }).then(function() {
-                    window.location = "<?php echo base_url() ?>package?id=<?php echo base64_encode($userid); ?>";
+                    // window.location = "<?php echo base_url() ?>package?id=<?php echo base64_encode($userid); ?>";
                 });
             }           
         }
