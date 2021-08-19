@@ -754,7 +754,7 @@ class admin extends CI_Controller {
 
                 if(!empty($_POST['activityid'][$key])){
                     $schoolactivityUpdate[] = array(
-                        'id' => $image_id_data,
+                        'id' => $_POST['activityid'][$key],
                         'school_activity_id' => $scID,
                         'images' => $image,
                         'is_active' => 1
@@ -1829,82 +1829,87 @@ class admin extends CI_Controller {
             );
             $this->db->insert('institute_platinum_datas', $academicnewinsert);
         }
-// print_r($_POST['program_id']);exit;
-        // $category = $_POST['categoryname'];
-        // $categorydesc = $_POST['categorydesc'];
-        // $categoryupdate = array();$categoryinsert = array();
-        // foreach($_POST['categoryname'] as $key=>$category){
-        //    $program_id= $_POST['program_id'][$key];
-        // //    print_r($program_id);
-        //     if(isset($program_id)){
-        //         $this->db->select('*');
-        //         $this->db->where('id',$program_id);
-        //         $this->db->from('institute_news');
-        //         $program = $this->db->get()->result_array();
-        //         if($program->num_rows() > 0){
 
+        //institute categories
+        $this->db->select('id,program_name');
+        $old_school_activity = $this->db->get('institute_programs')->result_array();
+        // print_r($old_school_activity);exit;
+        $old_school_activity_array=array();
+        foreach($old_school_activity as $old_school_act){
+            $old_school_activity_array[$old_school_act['program_name']] = $old_school_act['id'];
+        }
+        // print_r($old_school_activity_array);exit;
+        $act = $_POST['categoryname']; $activity_ids = $_POST['category_id'];
+        // $image_id = $_POST['activityimage_id'];
 
-        //             $this->db->select('*')->where('program_name', $category]);
-        //                 $this->db->from('institute_programs');
-        //                 $schoolactivity1 = $this->db->get();
+        $insertschoolactivityinsert = array();$schoolactivityUpdate = array();
+        
+        if (is_array($act)) {
+            foreach($act as $key=>$activity) {
 
-        //                 if ($schoolactivity1->num_rows() > 0) {
-        //                     foreach ($schoolactivity1->result() as $schoolactivitys1) {
-        //                         $schoolactivity_id1 = $schoolactivitys1->id;
-        //                     }
-        //                 } else {
-        //                     $schoolactivityinsert1 = array(
-        //                         'program_name' => $category
-        //                     );
+                if(!empty($old_school_activity_array[$_POST['categoryname'][$key]])){
+                    $scID = $old_school_activity_array[$_POST['categoryname'][$key]];
+                }else{
+                    $this->db->insert('institute_programs',array('program_name'=>$_POST['categoryname'][$key]));
+                    $scID = $this->db->insert_id();
 
-        //                     $this->db->insert('institute_programs', $schoolactivityinsert1);
+                }
 
-        //                     $this->db->select('*')->where('program_name', $category);
-        //                     $this->db->from('institute_programs');
-        //                     $schoolactivity1 = $this->db->get();
+                
+                if(!empty($activityimage = $_FILES['categoryimage']['name'][$key])){
+                    $activitytype = $_FILES['categoryimage']['type'][$key];
+                    $activitysize = $_FILES['categoryimage']['size'][$key];
+                    $activitytmp_name = $_FILES['categoryimage']['tmp_name'][$key];
 
-        //                     foreach ($schoolactivity1->result() as $schoolactivitys1) {
-        //                         $schoolactivity_id1 = $schoolactivitys1->id;
-        //                     }
-        //                 }
+                    $activity1 = $activityimage[$key];
+                    $activity1_ext = pathinfo($activity1, PATHINFO_EXTENSION);
 
+                    $activity1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $activity1_ext;
+                    $activity1_type = $activitytype[$key];
+                    $activity1_size = $activitysize[$key];
+                    $activity1_tem_loc = $activitytmp_name[$key];
+                    $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
 
-        //             $categoryupdate[] = array(
-        //                 $schoolactivityinsert1 = array(
-        //                     'institute_id' => $school_id,
-        //                     'program_id' => $schoolactivity_id1,
-        //                     'image' => $activity1_name,
-        //                     'about' => $activitydesc[$i],
-        //                     'is_active' => 1,
-        //                     'id' => $program_id
-        //                 );
-        //             );
-        //         } else{
-        //             $schoolactivityinsert1 = array(
-        //                 'institute_id' => $school_id,
-        //                 'program_id' => $schoolactivity_id1,
-        //                 'image' => $activity1_name,
-        //                 'about' => $activitydesc[$i],
-        //                 'is_active' => 1
-        //             );
-        //         }    
-        //     }else{
-        //         $schoolactivityinsert1 = array(
-        //             'institute_id' => $school_id,
-        //             'program_id' => $schoolactivity_id1,
-        //             'image' => $activity1_name,
-        //             'about' => $activitydesc[$i],
-        //             'is_active' => 1
-        //         );
-        //     }    
-        // }
-        // if(!empty($newsinsert)){
-        //     $this->db->insert_batch('institute_news', $newsinsert);
-        // }
-        // if(!empty($newsupdate)){
-        //     $this->db->update_batch('institute_news',$newsupdate,'id');
-        // }
+                    $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+                    // print_r($activity1_name);exit;
+                    if (in_array($activity1_ext, $allowed)) {
+                        if (move_uploaded_file($activity1_tem_loc, $activity1_store)) {
+                            $image = $activity1_name;
+                            
+                        }
+                    }
+                }else{
+                    $image = $_POST['category_old_image'][$key];
+                }
 
+                if(!empty($_POST['category_id'][$key])){
+                    $schoolactivityUpdate[] = array(
+                        'id' => $_POST['category_id'][$key],
+                        'program_id' => $scID,
+                        'about' => $_POST['categorydesc'][$key],
+                        'image' => $image,
+                        'is_active' => 1
+                    );
+                }else{
+                    $insertschoolactivityinsert[] = array(
+                        'institute_id' => $school_id,
+                        'program_id' => $scID,
+                        'about' => $_POST['categorydesc'][$key],
+                        'image' => $image,
+                        'is_active' => 1
+                    );
+                }
+
+            }
+        }
+        // echo "<pre>";print_r($schoolactivityUpdate);
+        // print_r($insertschoolactivityinsert);exit;
+        if(!empty($schoolactivityUpdate)){
+            $this->db->update_batch('program_details', $schoolactivityUpdate,'id');
+        }
+        if(!empty($insertschoolactivityinsert)){
+            $this->db->insert_batch('program_details', $insertschoolactivityinsert);
+        }
         //news heading
         $news = $_POST['newsheading'];
         $newsdesc = $_POST['newsdesc'];
@@ -1916,6 +1921,7 @@ class admin extends CI_Controller {
                 $this->db->where('id',$newsid);
                 $this->db->from('institute_news');
                 $news_heading = $this->db->get();
+                if($news_heading->num_rows() > 0){
                     $newsupdate[] = array(
                         'institute_id' => $school_id,
                         'news' => $news[$key],
@@ -1923,15 +1929,23 @@ class admin extends CI_Controller {
                         'is_active' => 1,
                         'id' => $newsid
                     );
-                 
-            }else{
+                    
+                } else {
+                    $newsinsert[] = array(
+                        'institute_id' => $school_id,
+                        'news' => $news[$key],
+                        'news_brief' => $newsdesc[$key],
+                        'is_active' => 1
+                    );
+                }  
+            } else {  
                 $newsinsert[] = array(
                     'institute_id' => $school_id,
                     'news' => $news[$key],
                     'news_brief' => $newsdesc[$key],
                     'is_active' => 1
                 );
-            }    
+            } 
         }
         if(!empty($newsinsert)){
             $this->db->insert_batch('institute_news', $newsinsert);
@@ -1967,6 +1981,60 @@ class admin extends CI_Controller {
         );
         $this->db->update('institute_details',$schoolupdate,array('id'=>$school_id));
         redirect('admin/schools/institute');
+    }
+
+    function approve_school($school_id){
+        $data = array(
+            'status' => 1
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('school_details',$data);
+        redirect('admin/schools/view_school?id='.$school_id);
+    }
+
+    function reject_school($school_id){
+        $data = array(
+            'status' => 2
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('school_details',$data);
+        redirect('admin/schools/view_school?id='.$school_id);
+    }
+
+    function hold_school($school_id){
+        $data = array(
+            'status' => NULL
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('school_details',$data);
+        redirect('admin/schools/view_school?id='.$school_id);
+    }
+
+    function approve_class($school_id){
+        $data = array(
+            'status' => 1
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('institute_details',$data);
+        redirect('admin/schools/view_activityclass?id='.$school_id);
+    }
+
+    function reject_class($school_id){
+        $data = array(
+            'status' => 2
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('institute_details',$data);
+        redirect('admin/schools/view_activityclass?id='.$school_id);
+    }
+
+    function hold_class($school_id){
+        $data = array(
+            'status' => NULL
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('institute_details',$data);
+        redirect('admin/schools/view_activityclass?id='.$school_id);
     }
 }
 ?>

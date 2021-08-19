@@ -252,7 +252,7 @@ $user = $this->db->get()->result_array();
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
                                     <?php if($key==0){ ?><label for="categoryname[]">Category Name</label><?php } ?>
-                                    <input type="hidden" name="program_id[]" id="program_id[]" value="<?php echo $category['id']; ?>">
+                                    <input type="hidden" name="category_id[]" id="category_id[]" value="<?php echo $category['id']; ?>">
                                     <input type="text" class="form-control" id="categoryname[]" name="categoryname[]" value="<?php echo $category['program_name'] ?>" placeholder="e.g Sports" >
                                 </div>
                             </div>
@@ -260,6 +260,7 @@ $user = $this->db->get()->result_array();
                             <?php if($key==0){ ?><label for="categoryimage[]">Category Image</label><?php } ?>
                                 <div class=" mb-3">
                                     <div class="">
+                                        <input type="hidden" id="category_old_image" name="category_old_image[]" value="<?php echo $category['image']; ?>">
                                         <input type="file" class=""  accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="categoryimage[]" name="categoryimage[]" aria-describedby="categoryimage[]" >
                                         <!-- <label class="" for="">Choose file</label> -->
                                     </div>

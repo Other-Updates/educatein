@@ -135,9 +135,21 @@ $schooltype = $this->db->get()->result_array();
         <div class="section-title mb-2">
             <h1><?php echo $school[0]["school_name"]; ?><span>(Platinum Package)</span></h1>
             <div class="status-btn">
-                <button class="btn btn-warning" title="Hold"><i class="bi bi-hourglass-bottom"></i> Hold</button>
-                <button class="btn btn-success" title="Approved"><i class="bi bi-check2-square"></i> Approved </button>
-                <button class="btn btn-danger" title="Rejected"><i class="bi bi-x-circle"></i> Rejected</button>
+                <?php if(empty($school[0]['status'])){ ?>
+                <button class="btn btn-warning" title="Hold" disabled ><i class="bi bi-hourglass-bottom"></i> Holded</button>
+                <a href="<?php echo base_url() ?>schools/admin/approve_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approved"> Approve</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/reject_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Rejected">Reject</button></a>
+                <?php } ?>
+                <?php if($school[0]['status'] == 2 && $school[0]['status'] != NULL){ ?>
+                <a href="<?php echo base_url() ?>schools/admin/hold_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/approve_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approved">Approve</button></a>
+                <button class="btn btn-danger" title="Rejected" disabled ><i class="bi bi-x-circle"></i> Rejected</button>
+                <?php } ?>
+                <?php if($school[0]['status']== 1){ ?>
+                <a href="<?php echo base_url() ?>schools/admin/hold_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
+                <button class="btn btn-success" title="Approved" disabled ><i class="bi bi-check2-square"></i> Approved </button>
+                <a href="<?php echo base_url() ?>schools/admin/reject_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Rejected">Reject</button></a>
+                <?php } ?>
             </div>
         </div><!-- /section-title -->
         <div class="listing-section mat-30">
@@ -284,7 +296,7 @@ $schooltype = $this->db->get()->result_array();
                         </div>-->
                     </div>     
                                     <!-- /file-img-upload -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <label for="bannerimagesample" class="mab-30"> Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
