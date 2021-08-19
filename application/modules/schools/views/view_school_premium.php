@@ -83,6 +83,11 @@ $school_facilities_datas = $this->db->get()->result_array();
         <div class="section-title mb-2">
             <h1><?php echo $school[0]["school_name"]; ?>
             <span>(Premium Package)</span></h1>
+            <div class="status-btn">
+                <button class="btn btn-warning" title="Hold"><i class="bi bi-hourglass-bottom"></i> Hold</button>
+                <button class="btn btn-success" title="Approved"><i class="bi bi-check2-square"></i> Approved </button>
+                <button class="btn btn-danger" title="Rejected"><i class="bi bi-x-circle"></i> Rejected</button>
+            </div>
         </div><!-- /section-title -->
         <div class="listing-section mat-30">
             <form action="<?php echo base_url() ?>schools/admin/update_school" method="post" enctype="multipart/form-data">

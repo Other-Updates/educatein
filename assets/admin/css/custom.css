@@ -22,3 +22,14 @@ a.btn:not([href]):not([tabindex]) {
 .modal-open .modal {
     z-index: 9999;
 }
+.section-title {
+    position: relative;
+}
+.status-btn {
+    position: absolute;
+    right: 0;
+    top: 8px;
+}
+.status-btn .btn {
+    text-transform:  uppercase;
+}

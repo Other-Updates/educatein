@@ -22,6 +22,7 @@
         <!-- Le styles -->  <!-- Bootstrap CSS -->       
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/css/bootstrap.min.css'); ?>" >
         <link rel="stylesheet" href="<?php echo base_url('assets/admin/css/custom.css'); ?>" >
+        <link rel="stylesheet" href="<?php echo base_url('assets/admin/css/bootstrap-icons.css'); ?>" >
 
 
         <!--<link rel="stylesheet" href="<?php // echo base_url('assets/admin/fontawesome-free-5.0.8/web-fonts-with-css/css/fontawesome-all.min.css');      ?>" >-->

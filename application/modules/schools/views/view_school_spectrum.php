@@ -64,13 +64,19 @@ $school_img = $this->db->get()->result_array();
     <div class="container-fluid ">
         <div>
             <div class="section-title mb-3">
-                <h1><?php echo $school[0]["school_name"]; ?></h1>
+                <h1><?php echo $school[0]["school_name"]; ?>
                 <?php if($school[0]['school_category_id'] == 3){?>
                 <span>(Spectrum Package)</span>
                 <?php }
                 if($school[0]['school_category_id'] == 4){?>
                     <span>(Trial Package)</span>
                 <?php } ?>
+                </h1>
+                <div class="status-btn">
+                    <button class="btn btn-warning" title="Hold"><i class="bi bi-hourglass-bottom"></i> Hold</button>
+                    <button class="btn btn-success" title="Approved"><i class="bi bi-check2-square"></i> Approved </button>
+                    <button class="btn btn-danger" title="Rejected"><i class="bi bi-x-circle"></i> Rejected</button>
+                </div>
             </div><!-- /section-title -->   
 
             <div class="listing-section mat-30">
