@@ -258,7 +258,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="activity">Activity</label>
-                            <input type="text" name="activity" class="form-control" id="activity" placeholder="e.g.Martial Arts">
+                            <input type="text" name="activity1" class="form-control" id="activity" placeholder="e.g.Martial Arts">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">

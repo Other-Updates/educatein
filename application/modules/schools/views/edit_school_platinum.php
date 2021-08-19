@@ -370,7 +370,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="activity">Activity</label>
-                            <input type="text" name="activity" class="form-control" id="activity" value="<?php echo $activity[0]['content'];?>" placeholder="e.g.Martial Arts">
+                            <input type="text" name="activity1" class="form-control" id="activity" value="<?php echo $activity[0]['content'];?>" placeholder="e.g.Martial Arts">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
