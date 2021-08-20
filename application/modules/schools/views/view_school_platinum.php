@@ -37,8 +37,10 @@ $area = $this->db->get()->result_array();
 $this->db->select('*')->where('school_id =', $school[0]['id']);
 $this->db->from('school_images');
 $school_img = $this->db->get()->result_array();
-$this->db->select('*')->where('id =', $school_img[0]['school_activity_id']);
-$this->db->from('school_activities');
+$this->db->select('si.id as image_id,si.school_id,si.images,sa.id as school_act_id,sa.activity_name');
+$this->db->where('si.school_id', $school[0]['id']);
+$this->db->join('school_activities as sa','si.school_activity_id = sa.id','left');
+$this->db->from('school_images as si');
 $school_activities=$this->db->get()->result_array();
 
 $this->db->select('*')->where('school_id=',$school[0]['id']);
@@ -299,15 +301,24 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-4">
                         <label for="bannerimagesample" class="mab-30"> Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <?php foreach($school_img as $key=>$image){ ?>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $key ?>" class="<?php if($key==0){echo 'active';} ?>"></li>
+                        <ol class="carousel-indicators">
+                                    <?php for($i=0;$i<(count($school_img) + count($school_facilities_datas ));$i++){ ?>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
                                     <?php } ?>
                                 </ol>
-                                <div class="carousel-inner">
+                            <div class="carousel-inner">
+                                <?php $activeslide = true; ?>
+
                                 <?php foreach($school_img as $key=>$image){ ?>
-                                    <div class="carousel-item <?php if($key==0){echo 'active';} ?> ">
+                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
                                     <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['images'] ?> " alt="<?php echo $key ?> slide">
+                                    </div>
+                                <?php } ?>
+
+                                
+                                <?php foreach($school_facilities_datas as $key=>$image){ ?>
+                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
+                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['image'] ?> " alt="<?php echo $key ?> slide">
                                     </div>
                                 <?php } ?>
                                 </div>
@@ -526,7 +537,7 @@ $schooltype = $this->db->get()->result_array();
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="activity1">Activity Name</label>
+                            <?php if($key==0){ ?><label for="activity1">Activity Name</label> <?php } ?>
                             <input type="text" name="activity1" class="form-control" id="activity1" value="<?php echo $school_activities1['activity_name']; ?>"readonly >
                         </div>
                     </div>

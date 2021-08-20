@@ -1263,7 +1263,7 @@ class admin extends CI_Controller {
         $this->db->where('id',$userid);
         $this->db->from('institute_details');
         $data['institute'] = $this->db->get()->result_array();
-
+        $institute_id = $data['institute'][0]['id'];
         $this->db->select('*');
         $this->db->from('institute_categories');
         $this->db->where('id', $data['institute'][0]['category_id']);
@@ -1278,47 +1278,47 @@ class admin extends CI_Controller {
         $data['area'] = $this->db->get()->result_array();
         //platinum datas
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Founded');
         $this->db->from('institute_platinum_datas');
         $data['founded'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Special');
         $this->db->from('institute_platinum_datas');
         $data['special'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Students');
         $this->db->from('institute_platinum_datas');
         $data['students'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Events');
         $this->db->from('institute_platinum_datas');
         $data['events'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Achievements');
         $this->db->from('institute_platinum_datas');
         $data['achievements'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Teachers');
         $this->db->from('institute_platinum_datas');
         $data['teachers'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Branches');
         $this->db->from('institute_platinum_datas');
         $data['branches'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Language');
         $this->db->from('institute_platinum_datas');
         $data['language'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Trainer');
         $this->db->from('institute_platinum_datas');
         $data['trainer'] = $this->db->get()->result_array();
@@ -1327,14 +1327,22 @@ class admin extends CI_Controller {
         $institute = $this->db->get()->result_array();
         //institute news
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->from('institute_news');
         $data['news'] = $this->db->get()->result_array();
         $this->db->select('pd.id,pd.program_id,ip.program_name,pd.image,pd.about');
-        $this->db->where('pd.institute_id', $data['institute'][0]['id']);
+        $this->db->where('pd.institute_id', $institute_id);
         $this->db->join('program_details as pd','pd.program_id = ip.id','left');
         $this->db->from('institute_programs as ip');
         $data['inst_category']=$this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$institute_id);
+        $this->db->from('institute_images');
+        $data['inst_img'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$institute_id);
+        $this->db->from('program_details');
+        $data['category_img'] = $this->db->get()->result_array();
         $this->load->view('view_activity_platinum',$data);
     }
 
@@ -1361,7 +1369,7 @@ class admin extends CI_Controller {
         $this->db->where('id',$userid);
         $this->db->from('institute_details');
         $data['institute'] = $this->db->get()->result_array();
-
+        $institute_id = $data['institute'][0]['id'];
         $this->db->select('*');
         $this->db->from('institute_categories');
         $this->db->where('id', $data['institute'][0]['category_id']);
@@ -1376,47 +1384,47 @@ class admin extends CI_Controller {
         $data['area'] = $this->db->get()->result_array();
         //platinum datas
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Founded');
         $this->db->from('institute_platinum_datas');
         $data['founded'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Special');
         $this->db->from('institute_platinum_datas');
         $data['special'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Students');
         $this->db->from('institute_platinum_datas');
         $data['students'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Events');
         $this->db->from('institute_platinum_datas');
         $data['events'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Achievements');
         $this->db->from('institute_platinum_datas');
         $data['achievements'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Teachers');
         $this->db->from('institute_platinum_datas');
         $data['teachers'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Branches');
         $this->db->from('institute_platinum_datas');
         $data['branches'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Language');
         $this->db->from('institute_platinum_datas');
         $data['language'] = $this->db->get()->result_array();
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->where('heading','Trainer');
         $this->db->from('institute_platinum_datas');
         $data['trainer'] = $this->db->get()->result_array();
@@ -1425,17 +1433,30 @@ class admin extends CI_Controller {
         $institute = $this->db->get()->result_array();
         //institute news
         $this->db->select('*');
-        $this->db->where('institute_id',$data['institute'][0]['id']);
+        $this->db->where('institute_id',$institute_id);
         $this->db->from('institute_news');
         $data['news'] = $this->db->get()->result_array();
         $this->db->select('pd.id,pd.program_id,ip.program_name,pd.image,pd.about');
-        $this->db->where('pd.institute_id', $data['institute'][0]['id']);
+        $this->db->where('pd.institute_id', $institute_id);
         $this->db->join('program_details as pd','pd.program_id = ip.id','left');
         $this->db->from('institute_programs as ip');
         $data['inst_category']=$this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$institute_id);
+        $this->db->from('institute_images');
+        $data['inst_img'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$institute_id);
+        $this->db->from('program_details');
+        $data['category_img'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$institute_id);
+        $this->db->where('category_id',1);
+        $this->db->from('institute_images');
+        $data['aboutimg'] = $this->db->get()->result_array();
         // echo "<pre>";print_r($data['inst_category']);exit;
         // if($institute[0]['position_id'] == 1){
-            $this->load->view('edit_activity_platinum',$data);
+        $this->load->view('edit_activity_platinum',$data);
         // }else if($institute[0]['position_id'] == 3 || $institute[0]['position_id'] == 4){
         //     $this->load->view('edit_activity_spectrum',$data);
         // }
@@ -1558,8 +1579,8 @@ class admin extends CI_Controller {
             $category_id = $levels->id;
         }
 
-        //platinum data save
-// print_r($_POST['founded']);exit;
+                //platinum data save
+        // print_r($_POST['founded']);exit;
         $this->db->select('*');
         $this->db->where('heading','Founded');
         $this->db->where('institute_id',$school_id);
@@ -1568,19 +1589,19 @@ class admin extends CI_Controller {
         if($found->num_rows() > 0){
             if (!empty($_POST['founded'])) {
                 $foundedinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'founded.png',
                     'content' => $_POST['founded'],
                     'brief_content' => $_POST['founded'],
                     'is_active' => 1
                 );
                 $this->db->where('heading','Founded');
-                $this->db->update('institute_platinum_datas', $foundedinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $foundedinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
 
             $foundednewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'founded.png',
                 'heading' => 'Founded',
                 'content' => $_POST['founded'],
@@ -1598,7 +1619,7 @@ class admin extends CI_Controller {
         if($special->num_rows() > 0){
             if (!empty($_POST['special'])) {
                 $specialinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'special.png',
                     // 'heading' => 'Special',
                     'content' => $_POST['special'],
@@ -1606,11 +1627,11 @@ class admin extends CI_Controller {
                     'is_active' => 1
                 );
                 $this->db->where('heading','Special');
-                $this->db->update('institute_platinum_datas', $specialinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $specialinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
             $specialnewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'special.png',
                 'heading' => 'Special',
                 'content' => $_POST['special'],
@@ -1629,7 +1650,7 @@ class admin extends CI_Controller {
         if($Students->num_rows() > 0){
             if (!empty($_POST['students'])) {
                 $studentsinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'students.png',
                     // 'heading' => 'Students',
                     'content' => $_POST['students'],
@@ -1637,11 +1658,11 @@ class admin extends CI_Controller {
                     'is_active' => 1
                 );
                 $this->db->where('heading','Students');
-                $this->db->update('institute_platinum_datas', $studentsinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $studentsinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
             $studentsnewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'students.png',
                 'heading' => 'Students',
                 'content' => $_POST['students'],
@@ -1659,7 +1680,7 @@ class admin extends CI_Controller {
         if($Students->num_rows() > 0){
             if (!empty($_POST['events'])) {
                 $eventsinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'Events.png',
                     // 'heading' => 'Events',
                     'content' => $_POST['events'],
@@ -1667,11 +1688,11 @@ class admin extends CI_Controller {
                     'is_active' => 1
                 );
                 $this->db->where('heading','Events');
-                $this->db->update('institute_platinum_datas', $eventsinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $eventsinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
             $eventsnewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'Events.png',
                 'heading' => 'Events',
                 'content' => $_POST['events'],
@@ -1688,7 +1709,7 @@ class admin extends CI_Controller {
         if($Achievements->num_rows() > 0){
             if (!empty($_POST['achievements'])) {
                 $achievementsinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'achievements.png',
                     // 'heading' => 'Achievements',
                     'content' => $_POST['achievements'],
@@ -1696,11 +1717,11 @@ class admin extends CI_Controller {
                     'is_active' => 1
                 );
                 $this->db->where('heading','Achievements');
-                $this->db->update('institute_platinum_datas', $achievementsinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $achievementsinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
             $achievementsnewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'achievements.png',
                 'heading' => 'Achievements',
                 'content' => $_POST['achievements'],
@@ -1718,7 +1739,7 @@ class admin extends CI_Controller {
         if($Teachers->num_rows() > 0){
             if (!empty($_POST['teachers'])) {
                 $teachersinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'teachers.png',
                     // 'heading' => 'Teachers',
                     'content' => $_POST['teachers'],
@@ -1726,11 +1747,11 @@ class admin extends CI_Controller {
                     'is_active' => 1
                 );
                 $this->db->where('heading','Teachers');
-                $this->db->update('institute_platinum_datas', $teachersinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $teachersinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
             $teachersnewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'teachers.png',
                 'heading' => 'Teachers',
                 'content' => $_POST['teachers'],
@@ -1748,7 +1769,7 @@ class admin extends CI_Controller {
         if($Branches->num_rows() > 0){
             if (!empty($_POST['branches'])) {
                 $branchesinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'branch.png',
                     // 'heading' => 'Branches',
                     'content' => $_POST['branches'],
@@ -1756,11 +1777,11 @@ class admin extends CI_Controller {
                     'is_active' => 1
                 );
                 $this->db->where('heading','Branches');
-                $this->db->update('institute_platinum_datas', $branchesinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $branchesinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
             $branchesnewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'branch.png',
                 'heading' => 'Branches',
                 'content' => $_POST['branches'],
@@ -1778,7 +1799,7 @@ class admin extends CI_Controller {
         if($Language->num_rows() > 0){
             if (!empty($_POST['language'])) {
                 $languageinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'language.png',
                     // 'heading' => 'Language',
                     'content' => $_POST['language'],
@@ -1786,11 +1807,11 @@ class admin extends CI_Controller {
                     'is_active' => 1
                 );
                 $this->db->where('heading','Language');
-                $this->db->update('institute_platinum_datas', $languageinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $languageinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
             $languagenewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'language.png',
                 'heading' => 'Language',
                 'content' => $_POST['language'],
@@ -1808,7 +1829,7 @@ class admin extends CI_Controller {
         if($Trainer->num_rows() > 0){
             if (!empty($_POST['customRadioInline1'])) {
                 $academicinsert = array(
-                    'school_id' => $school_id,
+                    'institute_id' => $school_id,
                     'icon' => 'history.png',
                     // 'heading' => 'Academic',
                     'content' => $_POST['customRadioInline1'],
@@ -1816,11 +1837,11 @@ class admin extends CI_Controller {
                     'is_active' => 1
                 );
                 $this->db->where('heading','Academic');
-                $this->db->update('institute_platinum_datas', $academicinsert,array('school_id'=>$_POST['school_id']));
+                $this->db->update('institute_platinum_datas', $academicinsert,array('institute_id'=>$_POST['school_id']));
             }
         }else{
             $academicnewinsert = array(
-                'school_id' => $school_id,
+                'institute_id' => $school_id,
                 'icon' => 'history.png',
                 'heading' => 'Academic',
                 'content' => $_POST['customRadioInline1'],
@@ -1828,6 +1849,26 @@ class admin extends CI_Controller {
                 'is_active' => 1
             );
             $this->db->insert('institute_platinum_datas', $academicnewinsert);
+        }
+
+        if (!empty($_POST['customRadioInline1'])) {
+            
+            if ($_POST['customRadioInline1'] == "yes") {
+                $activityinsert = array(
+                    'institute_id' => $school_id,
+                    'icon' => 'activity.png',
+                    'heading' => 'Trainer',
+                    'content' => 'Personal Trainer',
+                    'brief_content' => 'Personal Trainer',
+                    'is_active' => 1
+                );
+                $this->db->insert('institute_platinum_datas', $activityinsert);
+            }
+            else if($_POST['customRadioInline1'] == "no"){
+                $this->db->where('heading','Trainer');
+                $this->db->where('institute_id',$school_id);
+                $this->db->delete('institute_platinum_datas');
+            }
         }
 
         //institute categories
@@ -1954,6 +1995,119 @@ class admin extends CI_Controller {
             $this->db->update_batch('institute_news',$newsupdate,'id');
         }
 
+        //about image
+        $aboutimgupdate = array(); $aboutimginsert = array();
+        // print_r($_FILES['aboutimage']);exit;
+        if(!empty($_FILES['aboutimage'])){
+            $aboutimage = $_FILES['aboutimage']['name'];
+            $aboutimage_ext = pathinfo($aboutimage, PATHINFO_EXTENSION);
+            // echo $banner1_ext;
+            // exit();
+            $aboutimage_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $aboutimage_ext;
+            $aboutimage_type = $_FILES['aboutimage']['type'];
+            $aboutimage_size = $_FILES['aboutimage']['size'];
+            $aboutimage_tem_loc = $_FILES['aboutimage']['tmp_name'];
+            $aboutimage_store = FCPATH . "/laravel/public/" . $aboutimage_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+            if(in_array($aboutimage_ext, $allowed)) {
+                if(move_uploaded_file($aboutimage_tem_loc, $aboutimage_store)) {
+                    $image = $aboutimage_name;
+                }
+            }
+        } else {
+            $image = $_POST['aboutoldimage'];
+        }
+
+        if(!empty($_POST['aboutoldimage_id'])){
+            $aboutimgupdate[] = array(
+                'id' => $_POST['aboutoldimage_id'],
+                'category_id' => 1,
+                'image' => $image,
+                'is_active' => 1
+            );
+        }else{
+            $aboutimginsert[] = array(
+                'institute_id' => $school_id,
+                'category_id' => 1,
+                'image' => $image,
+                'is_active' => 1
+            );
+        }
+        // echo "<pre>";print_r($aboutimgupdate);print_r($aboutimginsert); exit;
+        if(!empty($aboutimgupdate)){
+            $this->db->update_batch('institute_images', $aboutimgupdate,'id');
+        }
+        if(!empty($aboutimginsert)){
+            $this->db->insert_batch('institute_images', $aboutimginsert);
+        }
+
+        if(!empty($_FILES['newsbanner'])){
+            $newsbanner1 = $_FILES['newsbanner']['name'];
+            $newsbanner1_ext = pathinfo($newsbanner1, PATHINFO_EXTENSION);
+            // echo $banner1_ext;
+            // exit();
+            $newsbanner1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $newsbanner1_ext;
+            $newsbanner1_type = $_FILES['newsbanner']['type'];
+            $newsbanner1_size = $_FILES['newsbanner']['size'];
+            $newsbanner1_tem_loc = $_FILES['newsbanner']['tmp_name'];
+            $newsbanner1_store = FCPATH . "/laravel/public/" . $newsbanner1_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+            if (in_array($newsbanner1_ext, $allowed)) {
+
+                if (move_uploaded_file($newsbanner1_tem_loc, $newsbanner1_store)) {
+                    $newsbanner1_name = $newsbanner1_name;
+                }
+            }
+        } else {
+            $newsbanner1_name = $_POST['newsoldbanner'];
+        }
+        
+        // gallery image save
+        if (isset($_FILES['mytext']['name'])) {
+            $gallaryimage = $_FILES['mytext']['name'];
+            $gallarytype = $_FILES['mytext']['type'];
+            $gallarysize = $_FILES['mytext']['size'];
+            $gallarytmp_name = $_FILES['mytext']['tmp_name'];
+
+
+
+            if (is_array($gallaryimage)) {
+                for ($i = 0; $i < count($gallaryimage); $i++) {
+                    $gallary1image = $gallaryimage[$i];
+                    $gallary1_ext = pathinfo($gallary1image, PATHINFO_EXTENSION);
+
+                    $gallary1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $gallary1_ext;
+                    $gallary1_type = $gallarytype[$i];
+                    $gallary1_size = $gallarysize[$i];
+                    $gallary1_tem_loc = $gallarytmp_name[$i];
+                    $gallary1_store = FCPATH . "/laravel/public/" . $gallary1_name;
+
+                    $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+                    if (in_array($gallary1_ext, $allowed)) {
+                        if (move_uploaded_file($gallary1_tem_loc, $gallary1_store)) {
+
+                            $schoolgallaryinsert1 = array(
+                                'institute_id' => $school_id,
+                                'category_id' => 2,
+                                'image' => $gallary1_name,
+                                'is_active' => 1
+                            );
+
+                            $this->db->insert('institute_images', $schoolgallaryinsert1);
+                        }
+                    }
+                }
+            }
+        }
+
         $schoolupdate = array(
             'category_id' => $category_id,
             // 'position_id' => 1,
@@ -1989,7 +2143,36 @@ class admin extends CI_Controller {
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('school_details',$data);
-        redirect('admin/schools/view_school?id='.$school_id);
+
+        $this->load->library('email');
+
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'text'; // or html
+        $config['validation'] = TRUE; // bool whether to validate email or not      
+        
+        $this->email->initialize($config);
+        
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject('Edugatein');
+        $this->email->message('Your school request Approved');  
+            if($this->email->send())
+            {
+                $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+            }
+            else
+            {
+            show_error($this->email->print_debugger());
+            }
+
+        redirect('admin/schools/view_school?id='.$school_id,'refresh');
     }
 
     function reject_school($school_id){
@@ -1998,6 +2181,37 @@ class admin extends CI_Controller {
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('school_details',$data);
+
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('school_details',$data);
+
+        $this->load->library('email');
+
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'text'; // or html
+        $config['validation'] = TRUE; // bool whether to validate email or not      
+        
+        $this->email->initialize($config);
+        
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject('Edugatein');
+        $this->email->message('Your school request Rejected');  
+        if($this->email->send())
+        {
+            $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+        }
+        else
+        {
+        show_error($this->email->print_debugger());
+        }
         redirect('admin/schools/view_school?id='.$school_id);
     }
 
@@ -2016,6 +2230,38 @@ class admin extends CI_Controller {
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('institute_details',$data);
+
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('school_details',$data);
+
+        $this->load->library('email');
+
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'text'; // or html
+        $config['validation'] = TRUE; // bool whether to validate email or not      
+        
+        $this->email->initialize($config);
+        
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject('Edugatein');
+        $this->email->message('Your activity class request Approved');  
+            if($this->email->send())
+            {
+                $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+            }
+            else
+            {
+            show_error($this->email->print_debugger());
+            }
+
         redirect('admin/schools/view_activityclass?id='.$school_id);
     }
 
@@ -2025,6 +2271,38 @@ class admin extends CI_Controller {
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('institute_details',$data);
+
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('school_details',$data);
+
+        $this->load->library('email');
+
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'text'; // or html
+        $config['validation'] = TRUE; // bool whether to validate email or not      
+        
+        $this->email->initialize($config);
+        
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject('Edugatein');
+        $this->email->message('Your activity class request Rejected');  
+        if($this->email->send())
+        {
+            $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+        }
+        else
+        {
+        show_error($this->email->print_debugger());
+        }
+
         redirect('admin/schools/view_activityclass?id='.$school_id);
     }
 

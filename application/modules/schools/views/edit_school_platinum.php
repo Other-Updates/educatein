@@ -284,14 +284,20 @@ $schooltype = $this->db->get()->result_array();
                         <label for="bannerimagesample" class="mab-30"> Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <?php foreach($school_img as $key=>$image){ ?>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $key ?>" class="<?php if($key==0){echo 'active';} ?>"></li>
+                                    <?php for($i=0;$i<(count($school_img) + count($school_facilities_datas ));$i++){ ?>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
                                     <?php } ?>
                                 </ol>
-                                <div class="carousel-inner">
+                            <div class="carousel-inner">
+                                <?php $activeslide = true; ?>
                                 <?php foreach($school_img as $key=>$image){ ?>
-                                    <div class="carousel-item <?php if($key==0){echo 'active';} ?> ">
+                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
                                     <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['images'] ?> " alt="<?php echo $key ?> slide">
+                                    </div>
+                                <?php } ?>
+                                <?php foreach($school_facilities_datas as $key=>$image){ ?>
+                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
+                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['image'] ?> " alt="<?php echo $key ?> slide">
                                     </div>
                                 <?php } ?>
                                 </div>

@@ -5,7 +5,7 @@
     $userid = $this->db->get()->result_array(); 
     // $userid= base64_decode($_GET['id']);
     ?>
-    <a  class="btn btn-outline-red  ml-auto" href="<?php echo base_url();?>/package?id=<?php base64_encode($userid['id']) ?>"><i class="fas fa-plus"></i> Add School</a>
+    <!-- <a  class="btn btn-outline-red  ml-auto" href="<?php echo base_url();?>/package?id=<?php base64_encode($userid['id']) ?>"><i class="fas fa-plus"></i> Add School</a> -->
 </div>
 <div class="col-12 mt-0 bg-white">
     <div class="table-responsive">

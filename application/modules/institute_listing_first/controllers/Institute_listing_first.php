@@ -126,7 +126,7 @@ class Institute_listing_first extends CI_Controller {
         if (in_array($newsbanner1_ext, $allowed)) {
 
             if (move_uploaded_file($newsbanner1_tem_loc, $newsbanner1_store)) {
-                
+                $newsbanner1_name = $newsbanner1_name;
             }
         }
 
@@ -147,7 +147,14 @@ class Institute_listing_first extends CI_Controller {
         if (in_array($aboutimage_ext, $allowed)) {
 
             if (move_uploaded_file($aboutimage_tem_loc, $aboutimage_store)) {
-                
+                $banner2insert = array(
+                    'institute_id' => $school_id,
+                    'category_id' => 1,
+                    'image' => $aboutimage_name,
+                    'is_active' => 1
+                );
+
+                $this->db->insert('institute_images', $banner2insert);
             }
         }
 

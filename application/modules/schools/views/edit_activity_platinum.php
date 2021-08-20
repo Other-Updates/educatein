@@ -55,7 +55,7 @@ $user = $this->db->get()->result_array();
                                 $category = $this->db->get();
                                 foreach ($category->result() as $categorys) {
                                     ?>
-                                    <option value="<?php echo $categorys->category_name; ?>"<?php if($categorys->category_name = $categories[0]['category_name']){echo "selected";}?>><?php echo $categorys->category_name; ?></option>
+                                    <option value="<?php echo $categorys->category_name; ?>" <?php if($categorys->category_name = $categories[0]['category_name']){echo "selected";}?>><?php echo $categorys->category_name; ?></option>
                                 <?php } ?>
                             </select>                          
                         </div>
@@ -63,15 +63,15 @@ $user = $this->db->get()->result_array();
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="city">City</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="city" required>
-                                <option  value="">--Select City--</option>
+                            <select class="form-control" name="city" id="exampleFormControlSelect1" required>
+                                <option value="">--Select City--</option>
                                 <?php
                                 $this->db->select('*');
                                 $this->db->from('cities');
                                 $city = $this->db->get();
                                 foreach ($city->result() as $citys) {
                                     ?>
-                                    <option value="<?php echo $citys->city_name; ?>"<?php if($citys->city_name = $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option>
+                                        <option value="<?php echo $citys->city_name; ?>" <?php if($citys->city_name == $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -119,24 +119,32 @@ $user = $this->db->get()->result_array();
                     </div><!-- /file-img-upload -->
 
                     <div class="col-lg-6">
-                        <label for="Images">Banner Image Sample</label>
+                        <label for="Images">Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
+                        <ol class="carousel-indicators">
+                                    <?php for($i=0;$i<(count($inst_img) + count($category_img) + count($institute));$i++){ ?>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
+                                    <?php } ?>
+                                </ol>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/1_1st-banner.jpg" alt="First slide">
+                                <?php $activeslide = true; ?>
+
+                                <?php foreach($inst_img as $key=>$image){ ?>
+                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
+                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['image'] ?> " alt="<?php echo $key ?> slide">
+                                    </div>
+                                <?php } ?>
+                                <?php foreach($category_img as $key=>$image){ ?>
+                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
+                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['image'] ?> " alt="<?php echo $key ?> slide">
+                                    </div>
+                                <?php } ?>
+                                <?php foreach($institute as $key=>$image){ ?>
+                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
+                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['news_image'] ?> " alt="<?php echo $key ?> slide">
+                                    </div>
+                                <?php } ?>
                                 </div>
-                                <div class="carousel-item">
-                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/1_1st-banner.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                <img class="d-block w-100" src="<?php echo base_url("assets/front/images/"); ?>dashboard/1_1st-banner.jpg" alt="Third slide">
-                                </div>
-                            </div>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
@@ -230,7 +238,9 @@ $user = $this->db->get()->result_array();
                         <label for="inputGroupFile01">About Image</label>
                         <div class="input-group mb-3">
                             <div class="custom-file">
+                                <input type="hidden" name="aboutoldimage_id" id="aboutoldimage_id" value="<?php echo $aboutimg[0]['id']; ?>">
                                 <input type="file" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="inputGroupFile01" name="aboutimage" aria-describedby="aboutimage" >
+                                <input type="hidden" name="aboutoldimage" id="aboutoldimage" value="<?php echo $aboutimg[0]['image']; ?>">
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                         </div>
@@ -301,7 +311,7 @@ $user = $this->db->get()->result_array();
                     <div class="form-row">
                         <div class="col-lg-4 col-sm-6">
                             <div class="input-group mb-3">
-                                <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext1[]" >
+                                <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6">
@@ -321,6 +331,7 @@ $user = $this->db->get()->result_array();
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="inputGroupFile01" name ="newsbanner" aria-describedby="inputGroupFile01" >
+                                <input type="hidden" name="newsoldbanner" value="<?php echo $institute[0]['news_image']; ?>">
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                         </div>

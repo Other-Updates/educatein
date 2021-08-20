@@ -265,7 +265,7 @@ foreach ($user->result() as $users) {
                     <div class="form-row">
                         <div class="col-lg-4 col-sm-6">
                             <div class="input-group mb-3">
-                                <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext1[]" >
+                                <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6">
