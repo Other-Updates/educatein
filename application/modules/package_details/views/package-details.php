@@ -231,7 +231,7 @@ $userid = base64_decode($_GET['id']);
 							  					<p><i class="fa fa-check"></i> Report Submission</p>	
 						  					</div><!-- /benefit-box -->
 						  					<div class="text-center">
-						  						<a href="<?php echo base_url(); ?>add_trial?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  						<a href="<?php echo base_url(); ?>schoolfirst?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
                                             <?php if($free_trial == ""){ ?>
                                                 <!-- <p class="text-center mt-2"><a href="<?php echo base_url(); ?>school-free-trail?id=<?php echo base64_encode($userid); ?>"><u>Free Trial for 5 days</u></a></p>   -->
@@ -267,7 +267,7 @@ $userid = base64_decode($_GET['id']);
 							  					<p><i class="fa fa-check"></i> Report Submission</p>	
 						  					</div><!-- /benefit-box -->
 						  					<div class="text-center">
-						  						<a href="<?php echo base_url(); ?>schoolthird?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  						<a href="<?php echo base_url(); ?>schoolfirst?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
                                             <?php if($free_trial == ""){ ?>
                                                 <!-- <p class="text-center mt-2"><a href="<?php echo base_url(); ?>school-free-trail?id=<?php echo base64_encode($userid); ?>"><u>Free Trial for 5 days</u></a></p>   -->
@@ -306,7 +306,7 @@ $userid = base64_decode($_GET['id']);
 							  					<p><i class="fa fa-check"></i> Add Social Links</p>
 						  					</div><!-- /benefit-box -->
 						  					<div class="text-center mb-3">
-						  						<a href="<?php echo base_url(); ?>schoolsecond?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  						<a href="<?php echo base_url(); ?>schoolfirst?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
 						  				</div><!-- /package-widget -->
 
@@ -379,7 +379,7 @@ $userid = base64_decode($_GET['id']);
 							  					<p><i class="fa fa-check"></i> Report Submission</p>	
 						  					</div><!-- /benefit-box -->
 						  					<div class="text-center">
-						  						<a href="<?php echo base_url(); ?>institute_trial?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  						<a href="<?php echo base_url(); ?>institutefirst?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
                                             <?php if($free_trial == ""){ ?>
 
@@ -414,7 +414,7 @@ $userid = base64_decode($_GET['id']);
 							  					<p><i class="fa fa-check"></i> Report Submission</p>	
 						  					</div><!-- /benefit-box -->
 						  					<div class="text-center">
-						  						<a href="<?php echo base_url(); ?>institutethird?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  						<a href="<?php echo base_url(); ?>institutefirst?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
                                             <?php if($free_trial == ""){ ?>
 
@@ -451,7 +451,7 @@ $userid = base64_decode($_GET['id']);
 							  					<p><i class="fa fa-check"></i> Link home website</p>
 						  					</div><!-- /benefit-box -->
 						  					<div class="text-center mb-3">
-						  						<a href="<?php echo base_url(); ?>institutesecond?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
+						  						<a href="<?php echo base_url(); ?>institutefirst?id=<?php echo base64_encode($userid); ?>" class="btn btn-primary btn-plan">Select Plan</a>	
 						  					</div>
 						  				</div><!-- /package-widget -->
 

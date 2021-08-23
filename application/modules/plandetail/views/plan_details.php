@@ -153,13 +153,27 @@ foreach ($user->result() as $users) {
 
                             $act_names = implode(",", $act_name);
                             $facility_names = implode(",", $facility_name);
+                            
+                            if ($school->num_rows() > 0) {
+                                foreach ($school->result() as $schools) {
+                                    $valitity = $schools->valitity;
+        
+                                    $activate = new DateTime($schools->activated_at);
+                                    $act_date = $activate->getTimestamp();
+                                    $date = new DateTime();
+                                    $cur_date = $date->getTimestamp();
+        
+                                    $spend = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
+                                    $remain = $valitity - $spend;
+                                }
+                            }
                             ?>
 
                             <div class="card shadow mb-2">
                                 <div class="card-header" id="heading<?php echo $school_count; ?>">
                                     <h5 class="mb-0 p-2">
                                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $school_count; ?>" aria-expanded="true" aria-controls="collapse<?php echo $school_count; ?>">
-                                            <?php echo $schools->slug; ?> <span class="badge badge-warning"><?php echo $category; ?></span>
+                                            <?php echo $schools->slug; ?> <span class="badge badge-warning"><?php echo $category; ?></span><?php if($remain > 5){ ?><span style="color:blue;font-size:15px">Your plan will be expired in <?php echo $remain ?>days</span><?php } else if($remain < 5){ ?><span style="color:red;font-size:15px">Your plan will be expired in <?php echo $remain ?>days</span><?php } ?>
                                         </button>
                                         <?php
                                         $test = $schools->valitity * 60 * 60 * 24;
@@ -378,13 +392,27 @@ foreach ($user->result() as $users) {
                                 } else {
                                     $website = "-";
                                 }
+
+                                if ($institute->num_rows() > 0) {
+                                    foreach ($institute->result() as $institutes) {
+                                        $valitity = $institutes->valitity;
+            
+                                        $activate = new DateTime($institutes->activated_at);
+                                        $act_date = $activate->getTimestamp();
+                                        $date = new DateTime();
+                                        $cur_date = $date->getTimestamp();
+            
+                                        $spend1 = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
+                                        $remain1 = $valitity - $spend1;
+                                    }
+                                }
                                 ?>
 
                                 <div class="card shadow mb-2">
                                     <div class="card-header" id="heading<?php echo $school_count; ?>">
                                         <h5 class="mb-0 p-2">
                                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $school_count; ?>" aria-expanded="true" aria-controls="collapse<?php echo $school_count; ?>">
-                                                <?php echo $institutes->slug; ?> <span class="badge badge-warning"><?php echo $categoryname; ?></span>
+                                                <?php echo $institutes->slug; ?> <span class="badge badge-warning"><?php echo $categoryname; ?></span><?php if($remain1 > 5){ ?><span style="color:blue;font-size:15px">Your plan will be expired in <?php echo $remain1 ?>days</span><?php } else if($remain1 < 5 && $remain1 > 0){ ?><span style="color:red;font-size:15px">Your plan will be expired in <?php echo $remain1 ?>days</span><?php } else if($remain1 <= 0){ ?><span style="color:red;font-size:15px">Your plan is expired</span><?php } ?>
                                             </button>
                                             <?php
                                             $test = $institutes->valitity * 60 * 60 * 24;
