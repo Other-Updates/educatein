@@ -566,13 +566,13 @@ class admin extends CI_Controller {
     }
 
     function update_school(){
-
         //school facilities
-        $facilityBulkInsert = array();$facilityBulkUpdate = array();
-        foreach($_POST['facility'] as $key=>$faci){
-            $image = "";
-            if(!empty($_POST['facilityoldimage'][$key])){
-                $image = $_POST['facilityoldimage'][$key];
+        $act = $_POST['facility']; $activity_ids = $_POST['facilityid'];
+        $facilityinsert = array();$facilityUpdate = array();
+
+        if (is_array($act)) {
+            foreach($act as $key=>$facility) {
+
                 if(!empty($_FILES['facilityimage']['name'][$key])){
                     $facility2 = $_FILES['facilityimage']['name'][$key];
                     $facility2_ext = pathinfo($facility2, PATHINFO_EXTENSION);
@@ -589,51 +589,38 @@ class admin extends CI_Controller {
                         }
                     }               
                 }
-            }else if(!empty($_FILES['facilityimage']['name'][$key])){
-                if(!empty($_FILES['facilityimage']['name'][$key])){
-                    $facility2 = $_FILES['facilityimage']['name'][$key];
-                    $facility2_ext = pathinfo($facility2, PATHINFO_EXTENSION);
-        
-                    $facility2_name = $_POST['schoolname'] . "-" . rand(10000, 10000000) . "." . $facility2_ext;
-                    $facility2_type = $_FILES['facilityimage']['type'][$key];
-                    $facility2_size = $_FILES['facilityimage']['size'][$key];
-                    $facility2_tem_loc = $_FILES['facilityimage']['tmp_name'][$key];
-                    $facility2_store = FCPATH . "/laravel/public/" . $facility2_name;
-                    $allowed = array('gif', 'png', 'jpg', 'jpeg');
-                    if (in_array($facility2_ext, $allowed)) {
-                        if (move_uploaded_file($facility2_tem_loc, $facility2_store)) {
-                            $image = $facility2_name;
-                        }
-                    }               
+                else{
+                    $image = $_POST['facilityoldimage'][$key];
+                }
+
+                if(!empty($_POST['facilityid'][$key])){
+                    $facilityUpdate[] = array(
+                        'facility'=>$_POST['facility'][$key],
+                        'content'=>$_POST['facilitydesc'][$key],
+                        'image'=>$image,
+                        'is_active'=>1,
+                        'id'=>$_POST['facilityid'][$key],
+                    );
+                }else{
+                    $facilityinsert[] = array(
+                        'facility'=>$_POST['facility'][$key],
+                        'content'=>$_POST['facilitydesc'][$key],
+                        'image'=>$image,
+                        'is_active'=>1,
+                        'school_id'=>$_POST['school_id'],
+                    );
                 }
             }
 
-            if($_POST['facilityid'][$key]){
-                $facilityBulkUpdate[] = array(
-                    'facility'=>$_POST['facility'][$key],
-                    'content'=>$_POST['facilitydesc'][$key],
-                    'image'=>$image,
-                    'is_active'=>1,
-                    'id'=>$_POST['facilityid'][$key],
-                );
-            }else{
-                $facilityBulkInsert[] = array(
-                    'facility'=>$_POST['facility'][$key],
-                    'content'=>$_POST['facilitydesc'][$key],
-                    'image'=>$image,
-                    'is_active'=>1,
-                    'school_id'=>$_POST['school_id'],
-                );
-            }
+        }
+        if(!empty($facilityUpdate)){
+            $this->db->update_batch('school_facilities',$facilityUpdate, 'id');
+        }
+        if(!empty($facilityinsert)){
+            $this->db->insert_batch('school_facilities', $facilityinsert); 
             
+
         }
-        if(!empty($facilityBulkUpdate)){
-            $this->db->update_batch('school_facilities',$facilityBulkUpdate, 'id');
-        }
-        else if(!empty($facilityBulkInsert)){
-            $this->db->insert_batch('school_facilities', $facilityBulkInsert); 
-        }
-       
         
         $school_id=$_POST['school_id'];
         $this->db->select('*')->where('city_name =', $_POST['city']);
@@ -701,60 +688,47 @@ class admin extends CI_Controller {
             $customRadio2 = NULL;
         }
 
-        // school activities
         $this->db->select('id,activity_name');
         $old_school_activity = $this->db->get('school_activities')->result_array();
-        // print_r($old_school_activity);exit;
         $old_school_activity_array=array();
         foreach($old_school_activity as $old_school_act){
             $old_school_activity_array[$old_school_act['activity_name']] = $old_school_act['id'];
         }
-        // print_r($old_school_activity_array);exit;
-        $act = $_POST['activity']; $activity_ids = $_POST['activityid'];$image_id = $_POST['activityimage_id'];
-
+        $act = $_POST['activity']; $activity_ids = $_POST['activityid'];
         $insertschoolactivityinsert = array();$schoolactivityUpdate = array();
-        
         if (is_array($act)) {
             foreach($act as $key=>$activity) {
-
                 if(!empty($old_school_activity_array[$_POST['activity'][$key]])){
                     $scID = $old_school_activity_array[$_POST['activity'][$key]];
                 }else{
                     $this->db->insert('school_activities',array('activity_name'=>$_POST['activity'][$key]));
-                    $scID = $this->db->insert_id();;
-
+                    $scID = $this->db->insert_id();
                 }
-
-                
                 if(!empty($activityimage = $_FILES['activityimage']['name'][$key])){
                     $activitytype = $_FILES['activityimage']['type'][$key];
                     $activitysize = $_FILES['activityimage']['size'][$key];
                     $activitytmp_name = $_FILES['activityimage']['tmp_name'][$key];
 
-                    $activity1 = $activityimage[$key];
+                    $activity1 = $activityimage;
                     $activity1_ext = pathinfo($activity1, PATHINFO_EXTENSION);
 
                     $activity1_name = $_POST['schoolname'] . "-" . rand(10000, 10000000) . "." . $activity1_ext;
-                    $activity1_type = $activitytype[$key];
-                    $activity1_size = $activitysize[$key];
-                    $activity1_tem_loc = $activitytmp_name[$key];
+                    $activity1_type = $activitytype;
+                    $activity1_size = $activitysize;
+                    $activity1_tem_loc = $activitytmp_name;
                     $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
-
                     $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-
                     if (in_array($activity1_ext, $allowed)) {
                         if (move_uploaded_file($activity1_tem_loc, $activity1_store)) {
                             $image = $activity1_name;
-                            
                         }
                     }
                 }else{
                     $image = $_POST['activityoldimage'][$key];
                 }
-
-                if(!empty($_POST['activityid'][$key])){
+                if(!empty($_POST['activityimage_id'][$key])){
                     $schoolactivityUpdate[] = array(
-                        'id' => $_POST['activityid'][$key],
+                        'id' => $_POST['activityimage_id'][$key],
                         'school_activity_id' => $scID,
                         'images' => $image,
                         'is_active' => 1
@@ -767,15 +741,16 @@ class admin extends CI_Controller {
                         'is_active' => 1
                     );
                 }
-
             }
         }
         if(!empty($schoolactivityUpdate)){
             $this->db->update_batch('school_images', $schoolactivityUpdate,'id');
-        }
+        } 
+
         if(!empty($insertschoolactivityinsert)){
             $this->db->insert_batch('school_images', $insertschoolactivityinsert);
         }
+
         //platinum data save
 
         $this->db->select('*');
@@ -1215,6 +1190,227 @@ class admin extends CI_Controller {
             }
         }
 
+        //management activities
+
+        if (isset($_POST['infrastructure'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','infrastructure');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                    'schooldetails_id' => $school_id,
+                    'activity_name' => 'infrastructure',
+                    'content' => 'The school lays a strong foundation for the languages and technical subjects through applied linguistic skills, hands on practical and project work throughout the curriculum.',
+                    'icon' => 'fa fa-home',
+                    'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','infrastructure');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['clubs'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','clubs');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                    'schooldetails_id' => $school_id,
+                    'activity_name' => 'clubs',
+                    'content' => 'The activities of these various clubs will take place on Saturdays (Whenever it is a working day) in the Regular School Time.',
+                    'icon' => 'fa fa-child',
+                    'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','clubs');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['opportunities'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','opportunities');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                    'schooldetails_id' => $school_id,
+                    'activity_name' => 'opportunities',
+                    'content' => 'Students are encouraged to work in groups. Collaborating allows students to talk to each other and listen to all view points of discussion or assignment.',
+                    'icon' => 'fa fa-superpowers',
+                    'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','opportunities');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['progressive'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','progressive');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'progressive',
+                'content' => 'Progressive education is a response to traditional methods of teaching. It is defined as an educational movement which gives more value to experience than formal learning.',
+                'icon' => 'fa fa-book',
+                'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','progressive');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['specialactivity'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','special activity');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                    'schooldetails_id' => $school_id,
+                    'activity_name' => 'special activity',
+                    'content' => 'We also conduct several activities wherein the children get to shape their newly developing skills such as cooperating, understanding, compassion and care for them as well as for those that are around them. Join us today!',
+                    'icon' => 'fa fa-female',
+                    'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','special activity');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['fieldtrips'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','fieldtrips');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'fieldtrips',
+                'content' => 'Experience is the best teacher and learning to take care of oneself , and one’s own belongings independently, without parental supervision , helps the children to become self sufficient.',
+                'icon' => 'fa fa-bicycle',
+                'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','fieldtrips');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['curriculam'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','curriculam');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                    'schooldetails_id' => $school_id,
+                    'activity_name' => 'curriculam',
+                    'content' => 'The school strives to equip students to think logically and act sensibly, to develop strong sensibility and responsibility towards Self and to the Society.',
+                    'icon' => 'fa fa-bookmark',
+                    'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','curriculam');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['transport'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','transport');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'transport',
+                'content' => 'The school operates buses and vans and pick up children from various points in the city.',
+                'icon' => 'fa fa-bus',
+                'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','transport');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['kidsplay'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','kidsplay');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                    'schooldetails_id' => $school_id,
+                    'activity_name' => 'kidsplay',
+                    'content' => 'We have provisions for both indoor and outdoor play areas. There are anti-slip flooring, age-appropriate toys, portable naptime cots, and attractive wall graphics.',
+                    'icon' => 'fa fa-puzzle-piece',
+                    'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','kidsplay');
+            $this->db->delete('schoolmanagement_activities');
+        }
+
+        if (isset($_POST['playground'])) {
+            $this->db->select('*');
+            $this->db->from('schoolmanagement_activities');
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','playground');
+            $infrastructure = $this->db->get();
+            if($infrastructure->num_rows() == 0){ 
+                $infrastructureinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'playground',
+                'content' => 'The playgrounds must be spacious and outdoors, but they must also be secluded so that the children (and their parents) feel safe and do not have to consider the outside world.',
+                'icon' => 'fa fa-soccer-ball-o',
+                'is_active' => 1
+                );
+                $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+            }
+        }else{
+            $this->db->where('schooldetails_id',$school_id);
+            $this->db->where('activity_name','playground');
+            $this->db->delete('schoolmanagement_activities');
+        }
         //school details update
          
         $school_update=array(
@@ -1870,59 +2066,46 @@ class admin extends CI_Controller {
                 $this->db->delete('institute_platinum_datas');
             }
         }
-
         //institute categories
         $this->db->select('id,program_name');
         $old_school_activity = $this->db->get('institute_programs')->result_array();
-        // print_r($old_school_activity);exit;
         $old_school_activity_array=array();
         foreach($old_school_activity as $old_school_act){
             $old_school_activity_array[$old_school_act['program_name']] = $old_school_act['id'];
         }
-        // print_r($old_school_activity_array);exit;
         $act = $_POST['categoryname']; $activity_ids = $_POST['category_id'];
-        // $image_id = $_POST['activityimage_id'];
-
         $insertschoolactivityinsert = array();$schoolactivityUpdate = array();
-        
         if (is_array($act)) {
             foreach($act as $key=>$activity) {
-
                 if(!empty($old_school_activity_array[$_POST['categoryname'][$key]])){
                     $scID = $old_school_activity_array[$_POST['categoryname'][$key]];
                 }else{
                     $this->db->insert('institute_programs',array('program_name'=>$_POST['categoryname'][$key]));
                     $scID = $this->db->insert_id();
-
                 }
-
-                
                 if(!empty($activityimage = $_FILES['categoryimage']['name'][$key])){
                     $activitytype = $_FILES['categoryimage']['type'][$key];
                     $activitysize = $_FILES['categoryimage']['size'][$key];
                     $activitytmp_name = $_FILES['categoryimage']['tmp_name'][$key];
 
-                    $activity1 = $activityimage[$key];
+                    $activity1 = $activityimage;
                     $activity1_ext = pathinfo($activity1, PATHINFO_EXTENSION);
 
                     $activity1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $activity1_ext;
-                    $activity1_type = $activitytype[$key];
-                    $activity1_size = $activitysize[$key];
-                    $activity1_tem_loc = $activitytmp_name[$key];
+                    $activity1_type = $activitytype;
+                    $activity1_size = $activitysize;
+                    $activity1_tem_loc = $activitytmp_name;
                     $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
 
                     $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-                    // print_r($activity1_name);exit;
                     if (in_array($activity1_ext, $allowed)) {
                         if (move_uploaded_file($activity1_tem_loc, $activity1_store)) {
                             $image = $activity1_name;
-                            
                         }
                     }
                 }else{
                     $image = $_POST['category_old_image'][$key];
                 }
-
                 if(!empty($_POST['category_id'][$key])){
                     $schoolactivityUpdate[] = array(
                         'id' => $_POST['category_id'][$key],
@@ -1940,11 +2123,9 @@ class admin extends CI_Controller {
                         'is_active' => 1
                     );
                 }
-
             }
         }
-        // echo "<pre>";print_r($schoolactivityUpdate);
-        // print_r($insertschoolactivityinsert);exit;
+
         if(!empty($schoolactivityUpdate)){
             $this->db->update_batch('program_details', $schoolactivityUpdate,'id');
         }
@@ -1952,6 +2133,7 @@ class admin extends CI_Controller {
             $this->db->insert_batch('program_details', $insertschoolactivityinsert);
         }
         //news heading
+        // if(!empty($_POST['newsheading'])){
         $news = $_POST['newsheading'];
         $newsdesc = $_POST['newsdesc'];
         $newsupdate = array();$newsinsert = array();
@@ -1994,6 +2176,10 @@ class admin extends CI_Controller {
         if(!empty($newsupdate)){
             $this->db->update_batch('institute_news',$newsupdate,'id');
         }
+    // }else{
+    //     $this->db->where('news','');
+    //     $this->db->delete('institute_news');
+    // }
 
         //about image
         $aboutimgupdate = array(); $aboutimginsert = array();
@@ -2129,7 +2315,7 @@ class admin extends CI_Controller {
             'timings' => $_POST['timing'],
             'logo' => $banner1_name,
             'news_image' => $newsbanner1_name,
-            'activated_at' => date('Y-m-d H:i:s'),
+            // 'activated_at' => date('Y-m-d H:i:s'),/
             'is_active' => 1,
             // 'valitity'=>100
         );
@@ -2139,13 +2325,22 @@ class admin extends CI_Controller {
 
     function approve_school($school_id){
         $data = array(
-            'status' => 1
+            'status' => 1,
+            'activated_at' => date('Y-m-d H:i:s')
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('school_details',$data);
-
+        $this->db->select('*');
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->from('school_details');
+        $data['school'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('id',$data['school'][0]['user_id']);
+        $this->db->from('user_register');
+        $data['user'] = $this->db->get()->result_array();
+        $msg = $this->load->view('school_invoice',$data,true);
+        $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' has been approved';
         $this->load->library('email');
-
         $config['protocol']    = 'smtp';
         $config['smtp_host']    = 'ssl://smtp.gmail.com';
         $config['smtp_port']    = '465';
@@ -2154,15 +2349,15 @@ class admin extends CI_Controller {
         $config['smtp_pass']    = 'MotivationS@1';
         $config['charset']    = 'utf-8';
         $config['newline']    = "\r\n";
-        $config['mailtype'] = 'text'; // or html
+        $config['mailtype'] = 'html';
         $config['validation'] = TRUE; // bool whether to validate email or not      
         
         $this->email->initialize($config);
         
         $this->email->from('ftwoftesting@gmail.com');
         $this->email->to('sundarabui2k21@gmail.com'); 
-        $this->email->subject('Edugatein');
-        $this->email->message('Your school request Approved');  
+        $this->email->subject($sub);
+        $this->email->message($msg);  
             if($this->email->send())
             {
                 $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
@@ -2171,6 +2366,28 @@ class admin extends CI_Controller {
             {
             show_error($this->email->print_debugger());
             }
+
+            // Authorisation details.
+        $username = "manikandan@haunuzinfosystems.com";
+        $hash = "cbbb512a1a514916c35b040283ac6dc7df975411a4c6669f738aeab42bfeb128";
+
+        // Config variables. Consult http://api.textlocal.in/docs for more info.
+        $test = "0";
+
+        // Data for text message. This is the text message data.
+        $sender = "TXTLCL"; // This is who the message appears to be from.
+        $numbers = "8667579048"; // A single number or a comma-seperated list of numbers
+        $message = "Hello ".$user_name." your school ".$school_name." has validated and displayed on site,Thank you";
+        // 612 chars or less
+        // A single number or a comma-seperated list of numbers
+        $message = urlencode($message);
+        $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+        $ch = curl_init('http://api.textlocal.in/send/?');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch); // This is the result from the API
+        curl_close($ch);
 
         redirect('admin/schools/view_school?id='.$school_id,'refresh');
     }
@@ -2181,9 +2398,16 @@ class admin extends CI_Controller {
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('school_details',$data);
-
+        $this->db->select('*');
         $this->db->where('id',base64_decode($school_id));
-        $this->db->update('school_details',$data);
+        $this->db->from('school_details');
+        $data['school'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('id',$data['school'][0]['user_id']);
+        $this->db->from('user_register');
+        $data['user'] = $this->db->get()->result_array();
+        $msg = $this->load->view('school_invoice',$data,true);
+        $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' is rejected';
 
         $this->load->library('email');
 
@@ -2195,15 +2419,15 @@ class admin extends CI_Controller {
         $config['smtp_pass']    = 'MotivationS@1';
         $config['charset']    = 'utf-8';
         $config['newline']    = "\r\n";
-        $config['mailtype'] = 'text'; // or html
+        $config['mailtype'] = 'html';
         $config['validation'] = TRUE; // bool whether to validate email or not      
         
         $this->email->initialize($config);
         
         $this->email->from('ftwoftesting@gmail.com');
         $this->email->to('sundarabui2k21@gmail.com'); 
-        $this->email->subject('Edugatein');
-        $this->email->message('Your school request Rejected');  
+        $this->email->subject($sub);
+        $this->email->message($msg);  
         if($this->email->send())
         {
             $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
@@ -2226,13 +2450,23 @@ class admin extends CI_Controller {
 
     function approve_class($school_id){
         $data = array(
-            'status' => 1
+            'status' => 1,
+            'activated_at' => date('Y-m-d H:i:s')
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('institute_details',$data);
 
+        $this->db->select('*');
         $this->db->where('id',base64_decode($school_id));
-        $this->db->update('school_details',$data);
+        $this->db->from('institute_details');
+        $data['institute'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('id',$data['institute'][0]['user_id']);
+        $this->db->from('user_register');
+        $data['user'] = $this->db->get()->result_array();
+
+        $msg = $this->load->view('activity_invoice',$data,true);
+        $sub = 'Edugatein - Your Activity class - '.$data['institute'][0]['institute_name'].' has been approved';
 
         $this->load->library('email');
 
@@ -2244,15 +2478,15 @@ class admin extends CI_Controller {
         $config['smtp_pass']    = 'MotivationS@1';
         $config['charset']    = 'utf-8';
         $config['newline']    = "\r\n";
-        $config['mailtype'] = 'text'; // or html
+        $config['mailtype'] = 'html'; 
         $config['validation'] = TRUE; // bool whether to validate email or not      
         
         $this->email->initialize($config);
         
         $this->email->from('ftwoftesting@gmail.com');
         $this->email->to('sundarabui2k21@gmail.com'); 
-        $this->email->subject('Edugatein');
-        $this->email->message('Your activity class request Approved');  
+        $this->email->subject($sub);
+        $this->email->message($msg);  
             if($this->email->send())
             {
                 $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
@@ -2261,8 +2495,15 @@ class admin extends CI_Controller {
             {
             show_error($this->email->print_debugger());
             }
-
-        redirect('admin/schools/view_activityclass?id='.$school_id);
+?>
+<!-- <script>
+    function myFunction() {
+  setTimeout(function(){ location.reload(); });
+}
+    
+    </script> -->
+<?php
+        // redirect('admin/schools/view_activityclass?id='.$school_id);
     }
 
     function reject_class($school_id){
@@ -2272,8 +2513,17 @@ class admin extends CI_Controller {
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('institute_details',$data);
 
+        $this->db->select('*');
         $this->db->where('id',base64_decode($school_id));
-        $this->db->update('school_details',$data);
+        $this->db->from('institute_details');
+        $data['institute'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('id',$data['institute'][0]['user_id']);
+        $this->db->from('user_register');
+        $data['user'] = $this->db->get()->result_array();
+
+        $msg = $this->load->view('activity_invoice',$data,true);
+        $sub = 'Edugatein - Your Activity class - '.$data['institute'][0]['institute_name'].' is rejected';
 
         $this->load->library('email');
 
@@ -2285,15 +2535,15 @@ class admin extends CI_Controller {
         $config['smtp_pass']    = 'MotivationS@1';
         $config['charset']    = 'utf-8';
         $config['newline']    = "\r\n";
-        $config['mailtype'] = 'text'; // or html
+        $config['mailtype'] = 'html'; 
         $config['validation'] = TRUE; // bool whether to validate email or not      
         
         $this->email->initialize($config);
         
         $this->email->from('ftwoftesting@gmail.com');
         $this->email->to('sundarabui2k21@gmail.com'); 
-        $this->email->subject('Edugatein');
-        $this->email->message('Your activity class request Rejected');  
+        $this->email->subject($sub);
+        $this->email->message($msg);  
         if($this->email->send())
         {
             $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
@@ -2314,5 +2564,1499 @@ class admin extends CI_Controller {
         $this->db->update('institute_details',$data);
         redirect('admin/schools/view_activityclass?id='.$school_id);
     }
+
+    function add_school(){
+        $this->load->view('add_school');
+    }
+
+    function insert_school(){
+
+        $school['schoolname'] = $_POST['schoolname'];
+        $school['schoolboard'] = $_POST['schoolboard'];
+        $school['city'] = $_POST['city'];
+
+        $this->db->select('*')->where('affiliation_name =', $school['schoolboard']);
+        $this->db->from('affiliations');
+        $schoolboardarray = $this->db->get();
+
+        foreach ($schoolboardarray->result() as $schoolboards) {
+            $schoolboard_id = $schoolboards->id;
+        }
+
+        $this->db->select('*')->where('city_name =', $school['city']);
+        $this->db->from('cities');
+        $yourcityarray = $this->db->get();
+
+
+        if ($yourcityarray->num_rows() > 0) {
+            foreach ($yourcityarray->result() as $yourcitys) {
+                $yourcity_id = $yourcitys->id;
+            }
+        } else {
+            $cityinsert = array(
+                'city_name' => $school['city'],
+                'slug' => $school['city'],
+                'state_id' => 2,
+                'is_active' => 1
+            );
+            $this->db->insert('cities', $cityinsert);
+
+            $this->db->select('*')->where('city_name =', $school['city']);
+            $this->db->from('cities');
+            $yourcityarray = $this->db->get();
+            foreach ($yourcityarray->result() as $yourcitys) {
+                $yourcity_id = $yourcitys->id;
+            }
+        }
+
+        $school['area'] = $_POST['area'];
+
+        $this->db->select('*')->where('area_name =', $school['area']);
+        $this->db->from('areas');
+        $area = $this->db->get();
+
+
+        if ($area->num_rows() > 0) {
+            foreach ($area->result() as $areas) {
+                $area_id = $areas->id;
+                //exit();
+            }
+        } else {
+            $areainsert = array(
+                'area_name' => $school['area'],
+                'slug' => $school['area'],
+                'city_id' => $yourcity_id,
+                'is_active' => 1
+            );
+            $this->db->insert('areas', $areainsert);
+
+            $this->db->select('*')->where('area_name =', $school['area']);
+            $this->db->from('areas');
+            $area = $this->db->get();
+            foreach ($area->result() as $areas) {
+                $area_id = $areas->id;
+                //exit();
+            }
+        }
+
+//  echo $area->num_rows(); 
+//  echo "<br>";
+//   echo $area_id;  
+//  exit();  
+        if (isset($_POST['level'])) {
+            $school['level'] = $_POST['level'];
+
+            $this->db->select('*')->where('school_type =', $_POST['level']);
+            $this->db->from('school_types');
+            $level = $this->db->get();
+            foreach ($level->result() as $levels) {
+                $level_id = $levels->id;
+            }
+        } else {
+            $level_id = NULL;
+        }
+// echo $level_id;
+// exit();
+
+        $school['ad'] = $_POST['ad'];
+        // $school['customRadio1'] = $_POST['customRadio1'];
+        // $school['customRadio2'] = $_POST['customRadio2'];
+
+
+        $school['founded'] = $_POST['founded'];
+        $school['students'] = $_POST['students'];
+        $school['teachers'] = $_POST['teachers'];
+
+        $school['about'] = $_POST['about'];
+        $school['activity1'] = $_POST['activity1'];
+        $school['activity2'] = $_POST['activity2'];
+        $school['activity3'] = $_POST['activity3'];
+        $school['activity4'] = $_POST['activity4'];
+        $school['facility1'] = $_POST['facility1'];
+        $school['facility2'] = $_POST['facility2'];
+        $school['facility3'] = $_POST['facility3'];
+        $school['facility4'] = $_POST['facility4'];
+        $school['facilitydes1'] = $_POST['facilitydes1'];
+        $school['facilitydes2'] = $_POST['facilitydes2'];
+        $school['facilitydes3'] = $_POST['facilitydes3'];
+        $school['facilitydes4'] = $_POST['facilitydes4'];
+        $school['phone'] = $_POST['phone'];
+        $school['email'] = $_POST['email'];
+        $school['website'] = $_POST['website'];
+        $school['address'] = $_POST['address'];
+        $school['facebook'] = $_POST['facebook'];
+        $school['twitter'] = $_POST['twitter'];
+        $school['instagram'] = $_POST['instagram'];
+        $school['linkedin'] = $_POST['linkedin'];
+        $school['pinterest'] = $_POST['pinterest'];
+        // echo $school['students'];
+        // echo "<br>";
+        // echo $school['teachers'];
+        // exit(); 
+
+        $banner1 = $_FILES['banner1']['name'];
+        $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
+        // echo $banner1_ext;
+        // exit();
+        $banner1_name = $_POST['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
+        $banner1_type = $_FILES['banner1']['type'];
+        $banner1_size = $_FILES['banner1']['size'];
+        $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
+        $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
+        $allowed = array('gif', 'png', 'jpg', 'jpeg');
+
+        if (in_array($banner1_ext, $allowed)) {
+
+            if (move_uploaded_file($banner1_tem_loc, $banner1_store)) {
+                
+            }
+        }
+
+        if (isset($_POST['customRadio2'])) {
+            $customRadio1 = $_POST['customRadio2'];
+        } else {
+            $customRadio1 = NULL;
+        }
+
+        if (isset($_POST['customRadio1'])) {
+            $customRadio = $_POST['customRadio1'];
+        } else {
+            $customRadio = NULL;
+        }
+
+        $schoolinsert = array(
+            'school_name' => $school['schoolname'],
+            'slug' => $school['schoolname'],
+            'mobile' => $school['phone'],
+            'email' => $school['email'],
+            'address' => $school['address'],
+            'user_id' => $_POST['user_id'],
+            'city_id' => $yourcity_id,
+            'area_id' => $area_id,
+            'pincode' => $_POST['pincode'],
+            'affiliation_id' => $schoolboard_id,
+            'schooltype_id' => $level_id,
+            'school_category_id' => $_POST['school_category'],
+            'status' => $_POST['status'],
+            'about' => $school['about'],
+            'acadamic' => $_POST['academic'],
+            'website_url' => $school['website'],
+            'our_mission' => $_POST['our_mission'],
+            'our_vision' => $_POST['our_vision'],
+            'our_motto' => $_POST['our_motto'],
+            'boys' => $_POST['boys'],
+            'girls' => $_POST['girls'],
+            'map_url' => $_POST['map_url'],
+            'year_of_establish' => $school['founded'],
+            'ad' => $school['ad'],
+            // 'type'=>$school['address'],
+            'hostel' => $customRadio1,
+            'rte' => $customRadio,
+            'students' => $school['students'],
+            'teachers' => $school['teachers'],
+            'facebook' => $school['facebook'],
+            'twitter' => $school['twitter'],
+            'instagram' => $school['instagram'],
+            'linkedin' => $school['linkedin'],
+            'pinterest' => $school['pinterest'],
+            'logo' => $banner1_name,
+            'activated_at' => date('Y-m-d H:i:s'),
+            'is_active' => 1,
+            // 'valitity' => 100
+        );
+        $this->db->insert('school_details', $schoolinsert);
+
+        $this->db->select('*')->where('slug =', $school['schoolname']);
+        $this->db->from('school_details');
+        $schooldetail = $this->db->get();
+        foreach ($schooldetail->result() as $schooldetails) {
+            $school_id = $schooldetails->id;
+        }
+
+
+//platinum data save
+        if (!empty($_POST['founded'])) {
+            $foundedinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'founded.png',
+                'heading' => 'Founded',
+                'content' => $_POST['founded'],
+                'brief_content' => $_POST['founded'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $foundedinsert);
+        }
+
+        if (!empty($_POST['special'])) {
+            $specialinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'special.png',
+                'heading' => 'Special',
+                'content' => $_POST['special'],
+                'brief_content' => $_POST['special'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $specialinsert);
+        }
+
+        if (!empty($_POST['students'])) {
+            $studentsinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'students.png',
+                'heading' => 'Students',
+                'content' => $_POST['students'],
+                'brief_content' => $_POST['students'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $studentsinsert);
+        }
+
+        if (!empty($_POST['events'])) {
+            $eventsinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'Events.png',
+                'heading' => 'Events',
+                'content' => $_POST['events'],
+                'brief_content' => $_POST['events'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $eventsinsert);
+        }
+
+        if (!empty($_POST['achievements'])) {
+            $achievementsinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'achievements.png',
+                'heading' => 'Achievements',
+                'content' => $_POST['achievements'],
+                'brief_content' => $_POST['achievements'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $achievementsinsert);
+        }
+
+        if (!empty($_POST['teachers'])) {
+            $teachersinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'teachers.png',
+                'heading' => 'Teachers',
+                'content' => $_POST['teachers'],
+                'brief_content' => $_POST['teachers'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $teachersinsert);
+        }
+
+        if (!empty($_POST['branches'])) {
+            $branchesinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'branch.png',
+                'heading' => 'Branches',
+                'content' => $_POST['branches'],
+                'brief_content' => $_POST['branches'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $branchesinsert);
+        }
+
+        if (!empty($_POST['academic'])) {
+            $academicinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'history.png',
+                'heading' => 'Academic',
+                'content' => $_POST['academic'],
+                'brief_content' => $_POST['academic'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $academicinsert);
+        }
+
+        if (!empty($_POST['language'])) {
+            $languageinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'language.png',
+                'heading' => 'Language',
+                'content' => $_POST['language'],
+                'brief_content' => $_POST['language'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $languageinsert);
+        }
+
+        if (!empty($_POST['activity1'])) {
+            $activityinsert = array(
+                'school_id' => $school_id,
+                'icon' => 'activity.png',
+                'heading' => 'activity',
+                'content' => $_POST['activity1'],
+                'brief_content' => $_POST['activity1'],
+                'is_active' => 1
+            );
+            $this->db->insert('platinum_datas', $activityinsert);
+        }
+
+
+// schoolmanagement activities 
+
+        if (isset($_POST['playground'])) {
+            $playgroundinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'playground',
+                'content' => 'The playgrounds must be spacious and outdoors, but they must also be secluded so that the children (and their parents) feel safe and do not have to consider the outside world.',
+                'icon' => 'fa fa-soccer-ball-o',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $playgroundinsert);
+        }
+
+        if (isset($_POST['kidsplay'])) {
+            $kidsplayinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'kidsplay',
+                'content' => 'We have provisions for both indoor and outdoor play areas. There are anti-slip flooring, age-appropriate toys, portable naptime cots, and attractive wall graphics.',
+                'icon' => 'fa fa-puzzle-piece',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $kidsplayinsert);
+        }
+
+        if (isset($_POST['transport'])) {
+            $transportinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'transport',
+                'content' => 'The school operates buses and vans and pick up children from various points in the city.',
+                'icon' => 'fa fa-bus',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $transportinsert);
+        }
+
+        if (isset($_POST['curriculam'])) {
+            $curriculaminsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'curriculam',
+                'content' => 'The school strives to equip students to think logically and act sensibly, to develop strong sensibility and responsibility towards Self and to the Society.',
+                'icon' => 'fa fa-bookmark',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $curriculaminsert);
+        }
+
+        if (isset($_POST['fieldtrips'])) {
+            $fieldtripsinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'fieldtrips',
+                'content' => 'Experience is the best teacher and learning to take care of oneself , and one’s own belongings independently, without parental supervision , helps the children to become self sufficient.',
+                'icon' => 'fa fa-bicycle',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $fieldtripsinsert);
+        }
+
+        if (isset($_POST['specialactivity'])) {
+            $specialinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'special activity',
+                'content' => 'We also conduct several activities wherein the children get to shape their newly developing skills such as cooperating, understanding, compassion and care for them as well as for those that are around them. Join us today!',
+                'icon' => 'fa fa-female',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $specialinsert);
+        }
+
+        if (isset($_POST['progressive'])) {
+            $progressiveinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'progressive',
+                'content' => 'Progressive education is a response to traditional methods of teaching. It is defined as an educational movement which gives more value to experience than formal learning.',
+                'icon' => 'fa fa-book',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $progressiveinsert);
+        }
+
+        if (isset($_POST['opportunities'])) {
+            $opportunitiesinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'opportunities',
+                'content' => 'Students are encouraged to work in groups. Collaborating allows students to talk to each other and listen to all view points of discussion or assignment.',
+                'icon' => 'fa fa-superpowers',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $opportunitiesinsert);
+        }
+
+        if (isset($_POST['clubs'])) {
+            $clubsinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'clubs',
+                'content' => 'The activities of these various clubs will take place on Saturdays (Whenever it is a working day) in the Regular School Time.',
+                'icon' => 'fa fa-child',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $clubsinsert);
+        }
+
+        if (isset($_POST['infrastructure'])) {
+            $infrastructureinsert = array(
+                'schooldetails_id' => $school_id,
+                'activity_name' => 'infrastructure',
+                'content' => 'The school lays a strong foundation for the languages and technical subjects through applied linguistic skills, hands on practical and project work throughout the curriculum.',
+                'icon' => 'fa fa-home',
+                'is_active' => 1
+            );
+            $this->db->insert('schoolmanagement_activities', $infrastructureinsert);
+        }
+
+
+
+
+
+
+// banner1 image save
+        if (isset($_FILES['banner1']['name'])) {
+            $banner1 = $_FILES['banner1']['name'];
+            $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
+// echo $banner1_ext;
+// exit();
+            $banner1_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
+            $banner1_type = $_FILES['banner1']['type'];
+            $banner1_size = $_FILES['banner1']['size'];
+            $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
+            $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+
+            if (in_array($banner1_ext, $allowed)) {
+
+                if (move_uploaded_file($banner1_tem_loc, $banner1_store)) {
+
+                    $banner1insert = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => 2,
+                        'images' => $banner1_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $banner1insert);
+                }
+            }
+        }
+
+// echo $banner1_name;
+// exit();
+// banner2 image save
+        if (isset($_FILES['banner2']['name'])) {
+            $banner2 = $_FILES['banner2']['name'];
+            $banner2_ext = pathinfo($banner2, PATHINFO_EXTENSION);
+
+            $banner2_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner2_ext;
+            $banner2_type = $_FILES['banner2']['type'];
+            $banner2_size = $_FILES['banner2']['size'];
+            $banner2_tem_loc = $_FILES['banner2']['tmp_name'];
+            $banner2_store = FCPATH . "/laravel/public/" . $banner2_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($banner2_ext, $allowed)) {
+                if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
+                    $banner2insert = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => 2,
+                        'images' => $banner2_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $banner2insert);
+                }
+            }
+        }
+
+// banner3 image save
+        if (isset($_FILES['banner3']['name'])) {
+            $banner3 = $_FILES['banner3']['name'];
+            $banner3_ext = pathinfo($banner3, PATHINFO_EXTENSION);
+
+            $banner3_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner3_ext;
+            $banner3_type = $_FILES['banner3']['type'];
+            $banner3_size = $_FILES['banner3']['size'];
+            $banner3_tem_loc = $_FILES['banner3']['tmp_name'];
+            $banner3_store = FCPATH . "/laravel/public/" . $banner3_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($banner3_ext, $allowed)) {
+                if (move_uploaded_file($banner3_tem_loc, $banner3_store)) {
+                    $banner3insert = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => 2,
+                        'images' => $banner3_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $banner3insert);
+                }
+            }
+        }
+
+// aboutimg1 image save
+        if (isset($_FILES['aboutimg1']['name'])) {
+            $aboutimg1 = $_FILES['aboutimg1']['name'];
+            $aboutimg1_ext = pathinfo($aboutimg1, PATHINFO_EXTENSION);
+
+            $aboutimg1_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $aboutimg1_ext;
+            $aboutimg1_type = $_FILES['aboutimg1']['type'];
+            $aboutimg1_size = $_FILES['aboutimg1']['size'];
+            $aboutimg1_tem_loc = $_FILES['aboutimg1']['tmp_name'];
+            $aboutimg1_store = FCPATH . "/laravel/public/" . $aboutimg1_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($aboutimg1_ext, $allowed)) {
+                if (move_uploaded_file($aboutimg1_tem_loc, $aboutimg1_store)) {
+                    $aboutimg1insert = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => 1,
+                        'images' => $aboutimg1_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $aboutimg1insert);
+                }
+            }
+        }
+
+// aboutimg2 image save
+        if (isset($_FILES['aboutimg2']['name'])) {
+            $aboutimg2 = $_FILES['aboutimg2']['name'];
+            $aboutimg2_ext = pathinfo($aboutimg2, PATHINFO_EXTENSION);
+
+            $aboutimg2_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $aboutimg2_ext;
+            $aboutimg2_type = $_FILES['aboutimg2']['type'];
+            $aboutimg2_size = $_FILES['aboutimg2']['size'];
+            $aboutimg2_tem_loc = $_FILES['aboutimg2']['tmp_name'];
+            $aboutimg2_store = FCPATH . "/laravel/public/" . $aboutimg2_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($aboutimg2_ext, $allowed)) {
+                if (move_uploaded_file($aboutimg2_tem_loc, $aboutimg2_store)) {
+                    $aboutimg2insert = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => 1,
+                        'images' => $aboutimg2_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $aboutimg2insert);
+                }
+            }
+        }
+
+// activityimage1 image save
+        if (isset($_FILES['activityimage1']['name'])) {
+            $activity1 = $_FILES['activityimage1']['name'];
+            $activity1_ext = pathinfo($activity1, PATHINFO_EXTENSION);
+
+            $activity1_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $activity1_ext;
+            $activity1_type = $_FILES['activityimage1']['type'];
+            $activity1_size = $_FILES['activityimage1']['size'];
+            $activity1_tem_loc = $_FILES['activityimage1']['tmp_name'];
+            $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+
+            if (in_array($activity1_ext, $allowed)) {
+                if (move_uploaded_file($activity1_tem_loc, $activity1_store)) {
+
+                    $this->db->select('*')->where('activity_name =', $_POST['activity1']);
+                    $this->db->from('school_activities');
+                    $schoolactivity1 = $this->db->get();
+
+                    if ($schoolactivity1->num_rows() > 0) {
+                        foreach ($schoolactivity1->result() as $schoolactivitys1) {
+                            $schoolactivity_id1 = $schoolactivitys1->id;
+                        }
+                    } else {
+                        $schoolactivityinsert1 = array(
+                            'activity_name' => $_POST['activity1']
+                        );
+
+                        $this->db->insert('school_activities', $schoolactivityinsert1);
+
+                        $this->db->select('*')->where('activity_name =', $_POST['activity1']);
+                        $this->db->from('school_activities');
+                        $schoolactivity1 = $this->db->get();
+
+                        foreach ($schoolactivity1->result() as $schoolactivitys1) {
+                            $schoolactivity_id1 = $schoolactivitys1->id;
+                        }
+                    }
+
+                    $schoolactivityinsert1 = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => $schoolactivity_id1,
+                        'images' => $activity1_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $schoolactivityinsert1);
+                }
+            }
+        }
+
+// activity2 image save
+        if (isset($_FILES['activityimage2']['name'])) {
+            $activity2 = $_FILES['activityimage2']['name'];
+            $activity2_ext = pathinfo($activity2, PATHINFO_EXTENSION);
+
+            $activity2_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $activity2_ext;
+            $activity2_type = $_FILES['activityimage2']['type'];
+            $activity2_size = $_FILES['activityimage2']['size'];
+            $activity2_tem_loc = $_FILES['activityimage2']['tmp_name'];
+            $activity2_store = FCPATH . "/laravel/public/" . $activity2_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($activity2_ext, $allowed)) {
+                if (move_uploaded_file($activity2_tem_loc, $activity2_store)) {
+                    $this->db->select('*')->where('activity_name =', $_POST['activity2']);
+                    $this->db->from('school_activities');
+                    $schoolactivity2 = $this->db->get();
+
+                    if ($schoolactivity2->num_rows() > 0) {
+                        foreach ($schoolactivity2->result() as $schoolactivitys2) {
+                            $schoolactivity_id2 = $schoolactivitys2->id;
+                        }
+                    } else {
+                        $schoolactivityinsert2 = array(
+                            'activity_name' => $_POST['activity2']
+                        );
+
+                        $this->db->insert('school_activities', $schoolactivityinsert2);
+
+                        $this->db->select('*')->where('activity_name =', $_POST['activity2']);
+                        $this->db->from('school_activities');
+                        $schoolactivity2 = $this->db->get();
+
+                        foreach ($schoolactivity2->result() as $schoolactivitys2) {
+                            $schoolactivity_id2 = $schoolactivitys2->id;
+                        }
+                    }
+
+                    $schoolactivityinsert2 = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => $schoolactivity_id2,
+                        'images' => $activity2_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $schoolactivityinsert2);
+                }
+            }
+        }
+
+// activity3 image save
+        if (isset($_FILES['activityimage3']['name'])) {
+            $activity3 = $_FILES['activityimage3']['name'];
+            $activity3_ext = pathinfo($activity3, PATHINFO_EXTENSION);
+
+            $activity3_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $activity3_ext;
+            $activity3_type = $_FILES['activityimage3']['type'];
+            $activity3_size = $_FILES['activityimage3']['size'];
+            $activity3_tem_loc = $_FILES['activityimage3']['tmp_name'];
+            $activity3_store = FCPATH . "/laravel/public/" . $activity3_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($activity3_ext, $allowed)) {
+                if (move_uploaded_file($activity3_tem_loc, $activity3_store)) {
+                    $this->db->select('*')->where('activity_name =', $_POST['activity3']);
+                    $this->db->from('school_activities');
+                    $schoolactivity3 = $this->db->get();
+
+                    if ($schoolactivity3->num_rows() > 0) {
+                        foreach ($schoolactivity3->result() as $schoolactivitys3) {
+                            $schoolactivity_id3 = $schoolactivitys3->id;
+                        }
+                    } else {
+                        $schoolactivityinsert3 = array(
+                            'activity_name' => $school['activity3']
+                        );
+
+                        $this->db->insert('school_activities', $schoolactivityinsert3);
+
+                        $this->db->select('*')->where('activity_name =', $_POST['activity3']);
+                        $this->db->from('school_activities');
+                        $schoolactivity3 = $this->db->get();
+
+                        foreach ($schoolactivity3->result() as $schoolactivitys3) {
+                            $schoolactivity_id3 = $schoolactivitys3->id;
+                        }
+                    }
+
+                    $schoolactivityinsert3 = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => $schoolactivity_id3,
+                        'images' => $activity3_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $schoolactivityinsert3);
+                }
+            }
+        }
+
+// activity4 image save
+        if (isset($_FILES['activityimage4']['name'])) {
+            $activity4 = $_FILES['activityimage4']['name'];
+            $activity4_ext = pathinfo($activity4, PATHINFO_EXTENSION);
+
+            $activity4_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $activity4_ext;
+            $activity4_type = $_FILES['activityimage4']['type'];
+            $activity4_size = $_FILES['activityimage4']['size'];
+            $activity4_tem_loc = $_FILES['activityimage4']['tmp_name'];
+            $activity4_store = FCPATH . "/laravel/public/" . $activity4_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($activity4_ext, $allowed)) {
+                if (move_uploaded_file($activity4_tem_loc, $activity4_store)) {
+                    $this->db->select('*')->where('activity_name =', $_POST['activity4']);
+                    $this->db->from('school_activities');
+                    $schoolactivity4 = $this->db->get();
+
+                    if ($schoolactivity4->num_rows() > 0) {
+                        foreach ($schoolactivity4->result() as $schoolactivitys4) {
+                            $schoolactivity_id4 = $schoolactivitys4->id;
+                        }
+                    } else {
+                        $schoolactivityinsert4 = array(
+                            'activity_name' => $school['activity4']
+                        );
+
+                        $this->db->insert('school_activities', $schoolactivityinsert4);
+
+                        $this->db->select('*')->where('activity_name =', $_POST['activity4']);
+                        $this->db->from('school_activities');
+                        $schoolactivity4 = $this->db->get();
+
+                        foreach ($schoolactivity4->result() as $schoolactivitys4) {
+                            $schoolactivity_id4 = $schoolactivitys4->id;
+                        }
+                    }
+
+                    $schoolactivityinsert4 = array(
+                        'school_id' => $school_id,
+                        'school_activity_id' => $schoolactivity_id4,
+                        'images' => $activity4_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_images', $schoolactivityinsert4);
+                }
+            }
+        }
+
+// facility1 image save
+        if (isset($_FILES['facilityimage1']['name'])) {
+            $facility1 = $_FILES['facilityimage1']['name'];
+            $facility1_ext = pathinfo($facility1, PATHINFO_EXTENSION);
+
+            $facility1_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $facility1_ext;
+            $facility1_type = $_FILES['facilityimage1']['type'];
+            $facility1_size = $_FILES['facilityimage1']['size'];
+            $facility1_tem_loc = $_FILES['facilityimage1']['tmp_name'];
+            $facility1_store = FCPATH . "/laravel/public/" . $facility1_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+// echo $file_type;
+// exit();
+            if (in_array($facility1_ext, $allowed)) {
+                if (move_uploaded_file($facility1_tem_loc, $facility1_store)) {
+                    $schoolfaciltyinsert1 = array(
+                        'school_id' => $school_id,
+                        'facility' => $school['facility1'],
+                        'content' => $school['facilitydes1'],
+                        'image' => $facility1_name,
+                        'is_active' => 1
+                    );
+                    $this->db->insert('school_facilities', $schoolfaciltyinsert1);
+                }
+            }
+        }
+
+// facility2 image save
+        if (isset($_FILES['facilityimage2']['name'])) {
+            $facility2 = $_FILES['facilityimage2']['name'];
+            $facility2_ext = pathinfo($facility2, PATHINFO_EXTENSION);
+
+            $facility2_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $facility2_ext;
+            $facility2_type = $_FILES['facilityimage2']['type'];
+            $facility2_size = $_FILES['facilityimage2']['size'];
+            $facility2_tem_loc = $_FILES['facilityimage2']['tmp_name'];
+            $facility2_store = FCPATH . "/laravel/public/" . $facility2_name;
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($facility2_ext, $allowed)) {
+                if (move_uploaded_file($facility2_tem_loc, $facility2_store)) {
+                    $schoolfaciltyinsert2 = array(
+                        'school_id' => $school_id,
+                        'facility' => $school['facility2'],
+                        'content' => $school['facilitydes2'],
+                        'image' => $facility2_name,
+                        'is_active' => 1
+                    );
+                    
+                    $this->db->insert('school_facilities', $schoolfaciltyinsert2);
+                }
+            }
+        }
+
+// facility3 image save
+        if (isset($_FILES['facilityimage3']['name'])) {
+            $facility3 = $_FILES['facilityimage3']['name'];
+            $facility3_ext = pathinfo($facility3, PATHINFO_EXTENSION);
+
+            $facility3_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $facility3_ext;
+            $facility3_type = $_FILES['facilityimage3']['type'];
+            $facility3_size = $_FILES['facilityimage3']['size'];
+            $facility3_tem_loc = $_FILES['facilityimage3']['tmp_name'];
+            $facility3_store = FCPATH . "/laravel/public/" . $facility3_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($facility3_ext, $allowed)) {
+                if (move_uploaded_file($facility3_tem_loc, $facility3_store)) {
+                    $schoolfaciltyinsert3 = array(
+                        'school_id' => $school_id,
+                        'facility' => $school['facility3'],
+                        'content' => $school['facilitydes3'],
+                        'image' => $facility3_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('school_facilities', $schoolfaciltyinsert3);
+                }
+            }
+        }
+
+// facility4 image save
+        if (isset($_FILES['facilityimage4']['name'])) {
+            $facility4 = $_FILES['facilityimage4']['name'];
+            $facility4_ext = pathinfo($facility4, PATHINFO_EXTENSION);
+
+            $facility4_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $facility4_ext;
+            $facility4_type = $_FILES['facilityimage4']['type'];
+            $facility4_size = $_FILES['facilityimage4']['size'];
+            $facility4_tem_loc = $_FILES['facilityimage4']['tmp_name'];
+            $facility4_store = FCPATH . "/laravel/public/" . $facility4_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg');
+// echo $file_type;
+// exit();
+            if (in_array($facility4_ext, $allowed)) {
+                if (move_uploaded_file($facility4_tem_loc, $facility4_store)) {
+                    $schoolfaciltyinsert4 = array(
+                        'school_id' => $school_id,
+                        'facility' => $school['facility4'],
+                        'content' => $school['facilitydes4'],
+                        'image' => $facility4_name,
+                        'is_active' => 1
+                    );
+// exit();
+                    $this->db->insert('school_facilities', $schoolfaciltyinsert1);
+                }
+            }
+        }
+
+
+        $user = $this->db->get_where('user_register', array('id' => $_POST['user_id']));
+        foreach ($user->result() as $users) {
+            $user_name = $users->name;
+            $user_email = $users->email;
+            $user_phone = $users->phone;
+        }
+        redirect('admin/schools');
+    }
+
+    function insert_class(){
+        
+        $this->db->select('*')->where('city_name =', $_POST['city']);
+        $this->db->from('cities');
+        $yourcityarray = $this->db->get();
+
+
+        if ($yourcityarray->num_rows() > 0) {
+            foreach ($yourcityarray->result() as $yourcitys) {
+                $yourcity_id = $yourcitys->id;
+            }
+        } else {
+            $cityinsert = array(
+                'city_name' => $_POST['city'],
+                'slug' => $_POST['city'],
+                'state_id' => 2,
+                'is_active' => 1
+            );
+            $this->db->insert('cities', $cityinsert);
+
+            $this->db->select('*')->where('city_name =', $_POST['city']);
+            $this->db->from('cities');
+            $yourcityarray = $this->db->get();
+            foreach ($yourcityarray->result() as $yourcitys) {
+                $yourcity_id = $yourcitys->id;
+            }
+        }
+
+        $this->db->select('*')->where('area_name =', $_POST['area']);
+        $this->db->from('areas');
+        $area = $this->db->get();
+
+
+        if ($area->num_rows() > 0) {
+            foreach ($area->result() as $areas) {
+                $area_id = $areas->id;
+                //exit();
+            }
+        } else {
+            $areainsert = array(
+                'area_name' => $_POST['area'],
+                'slug' => $_POST['area'],
+                'city_id' => $yourcity_id,
+                'is_active' => 1
+            );
+            $this->db->insert('areas', $areainsert);
+
+            $this->db->select('*')->where('area_name =', $_POST['area']);
+            $this->db->from('areas');
+            $area = $this->db->get();
+            foreach ($area->result() as $areas) {
+                $area_id = $areas->id;
+                //exit();
+            }
+        }
+
+        $this->db->select('*')->where('category_name =', $_POST['type']);
+        $this->db->from('institute_categories');
+        $level = $this->db->get();
+        foreach ($level->result() as $levels) {
+            $category_id = $levels->id;
+        }
+
+        $banner1 = $_FILES['banner1']['name'];
+        $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
+        // echo $banner1_ext;
+        // exit();
+        $banner1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
+        $banner1_type = $_FILES['banner1']['type'];
+        $banner1_size = $_FILES['banner1']['size'];
+        $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
+        $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
+
+        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+        if (in_array($banner1_ext, $allowed)) {
+
+            if (move_uploaded_file($banner1_tem_loc, $banner1_store)) {
+                
+            }
+        }
+
+
+        $newsbanner1 = $_FILES['newsbanner']['name'];
+        $newsbanner1_ext = pathinfo($newsbanner1, PATHINFO_EXTENSION);
+        // echo $banner1_ext;
+        // exit();
+        $newsbanner1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $newsbanner1_ext;
+        $newsbanner1_type = $_FILES['newsbanner']['type'];
+        $newsbanner1_size = $_FILES['newsbanner']['size'];
+        $newsbanner1_tem_loc = $_FILES['newsbanner']['tmp_name'];
+        $newsbanner1_store = FCPATH . "/laravel/public/" . $newsbanner1_name;
+
+        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+        if (in_array($newsbanner1_ext, $allowed)) {
+
+            if (move_uploaded_file($newsbanner1_tem_loc, $newsbanner1_store)) {
+                $newsbanner1_name = $newsbanner1_name;
+            }
+        }
+
+
+        $aboutimage = $_FILES['aboutimage']['name'];
+        $aboutimage_ext = pathinfo($aboutimage, PATHINFO_EXTENSION);
+        // echo $banner1_ext;
+        // exit();
+        $aboutimage_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $aboutimage_ext;
+        $aboutimage_type = $_FILES['aboutimage']['type'];
+        $aboutimage_size = $_FILES['aboutimage']['size'];
+        $aboutimage_tem_loc = $_FILES['aboutimage']['tmp_name'];
+        $aboutimage_store = FCPATH . "/laravel/public/" . $aboutimage_name;
+
+        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+        if (in_array($aboutimage_ext, $allowed)) {
+
+            if (move_uploaded_file($aboutimage_tem_loc, $aboutimage_store)) {
+                $banner2insert = array(
+                    'institute_id' => $school_id,
+                    'category_id' => 1,
+                    'image' => $aboutimage_name,
+                    'is_active' => 1
+                );
+
+                $this->db->insert('institute_images', $banner2insert);
+            }
+        }
+
+
+        $schoolinsert = array(
+            'category_id' => $category_id,
+            'position_id' => $_POST['position_id'],
+            'status' => $_POST['status'],
+            'institute_name' => $_POST['institutename'],
+            'slug' => $_POST['institutename'],
+            'mobile' => $_POST['phone'],
+            'email' => $_POST['email'],
+            'address' => $_POST['address'],
+            'user_id' => $_POST['user_id'],
+            'proprietor_image' => $aboutimage_name,
+            'city_id' => $yourcity_id,
+            'area_id' => $area_id,
+            'about' => $_POST['aboutdesc'],
+            'year_of_establish' => $_POST['founded'],
+            'branches' => $_POST['branches'],
+            // 'ad'=>$_POST['ad'],
+            'specials' => $_POST['special'],
+            'website_url' => $_POST['website'],
+            'timings' => $_POST['timing'],
+            'logo' => $banner1_name,
+            'news_image' => $newsbanner1_name,
+            'activated_at' => date('Y-m-d H:i:s'),
+            'is_active' => 1,
+            // 'valitity'=>100
+        );
+
+        $this->db->insert('institute_details', $schoolinsert);
+
+        $this->db->select('*')->where('slug =', $_POST['institutename']);
+        $this->db->from('institute_details');
+        $schooldetail = $this->db->get();
+        foreach ($schooldetail->result() as $schooldetails) {
+            $school_id = $schooldetails->id;
+        }
+
+        // banner1 image save
+        if (isset($_FILES['banner1']['name'])) {
+            $banner1 = $_FILES['banner1']['name'];
+            $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
+        // echo $banner1_ext;
+        // exit();
+            $banner1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
+            $banner1_type = $_FILES['banner1']['type'];
+            $banner1_size = $_FILES['banner1']['size'];
+            $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
+            $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+            if (in_array($banner1_ext, $allowed)) {
+
+                if (move_uploaded_file($banner1_tem_loc, $banner1_store)) {
+
+
+                    $banner1insert = array(
+                        'institute_id' => $school_id,
+                        'category_id' => 3,
+                        'image' => $banner1_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('institute_images', $banner1insert);
+
+                    $admission = array(
+                        'institute_id' => $school_id,
+                        'image' => $banner1_name,
+                        'content' => 'Admissions for the Academic year 2019-20 commences.',
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('institute_admissions', $admission);
+                }
+            }
+        }
+
+
+        // exit();
+        // banner2 image save
+        if (isset($_FILES['banner2']['name'])) {
+            $banner2 = $_FILES['banner2']['name'];
+            $banner2_ext = pathinfo($banner2, PATHINFO_EXTENSION);
+
+            $banner2_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner2_ext;
+            $banner2_type = $_FILES['banner2']['type'];
+            $banner2_size = $_FILES['banner2']['size'];
+            $banner2_tem_loc = $_FILES['banner2']['tmp_name'];
+            $banner2_store = FCPATH . "/laravel/public/" . $banner2_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+        // echo $file_type;
+        // exit();
+            if (in_array($banner2_ext, $allowed)) {
+                if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
+                    $banner2insert = array(
+                        'institute_id' => $school_id,
+                        'category_id' => 3,
+                        'image' => $banner2_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('institute_images', $banner2insert);
+                }
+            }
+        }
+
+        // banner3 image save
+        if (isset($_FILES['banner3']['name'])) {
+            $banner3 = $_FILES['banner3']['name'];
+            $banner3_ext = pathinfo($banner3, PATHINFO_EXTENSION);
+
+            $banner3_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner3_ext;
+            $banner3_type = $_FILES['banner3']['type'];
+            $banner3_size = $_FILES['banner3']['size'];
+            $banner3_tem_loc = $_FILES['banner3']['tmp_name'];
+            $banner3_store = FCPATH . "/laravel/public/" . $banner3_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+        // echo $file_type;
+        // exit();
+            if (in_array($banner3_ext, $allowed)) {
+                if (move_uploaded_file($banner3_tem_loc, $banner3_store)) {
+                    $banner3insert = array(
+                        'institute_id' => $school_id,
+                        'category_id' => 3,
+                        'image' => $banner3_name,
+                        'is_active' => 1
+                    );
+
+                    $this->db->insert('institute_images', $banner3insert);
+                }
+            }
+        }
+
+
+        if (!empty($_POST['founded'])) {
+            $foundedinsert = array(
+                'institute_id' => $school_id,
+                'icon' => 'founded.png',
+                'heading' => 'Founded',
+                'content' => $_POST['founded'],
+                'brief_content' => $_POST['founded'],
+                'is_active' => 1
+            );
+            $this->db->insert('institute_platinum_datas', $foundedinsert);
+        }
+
+
+
+        if (!empty($_POST['special'])) {
+            $specialinsert = array(
+                'institute_id' => $school_id,
+                'icon' => 'special.png',
+                'heading' => 'Special',
+                'content' => $_POST['special'],
+                'brief_content' => $_POST['special'],
+                'is_active' => 1
+            );
+            $this->db->insert('institute_platinum_datas', $specialinsert);
+        }
+
+        if (!empty($_POST['students'])) {
+            $studentsinsert = array(
+                'institute_id' => $school_id,
+                'icon' => 'students.png',
+                'heading' => 'Students',
+                'content' => $_POST['students'],
+                'brief_content' => $_POST['students'],
+                'is_active' => 1
+            );
+            $this->db->insert('institute_platinum_datas', $studentsinsert);
+        }
+
+        if (!empty($_POST['events'])) {
+            $eventsinsert = array(
+                'institute_id' => $school_id,
+                'icon' => 'Events.png',
+                'heading' => 'Events',
+                'content' => $_POST['events'],
+                'brief_content' => $_POST['events'],
+                'is_active' => 1
+            );
+            $this->db->insert('institute_platinum_datas', $eventsinsert);
+        }
+
+        if (!empty($_POST['achievements'])) {
+            $achievementsinsert = array(
+                'institute_id' => $school_id,
+                'icon' => 'achievements.png',
+                'heading' => 'Achievements',
+                'content' => $_POST['achievements'],
+                'brief_content' => $_POST['achievements'],
+                'is_active' => 1
+            );
+            $this->db->insert('institute_platinum_datas', $achievementsinsert);
+        }
+
+        if (!empty($_POST['teachers'])) {
+            $teachersinsert = array(
+                'institute_id' => $school_id,
+                'icon' => 'teachers.png',
+                'heading' => 'Teachers',
+                'content' => $_POST['teachers'],
+                'brief_content' => $_POST['teachers'],
+                'is_active' => 1
+            );
+            $this->db->insert('institute_platinum_datas', $teachersinsert);
+        }
+
+        if (!empty($_POST['branches'])) {
+            $branchesinsert = array(
+                'institute_id' => $school_id,
+                'icon' => 'branch.png',
+                'heading' => 'Branches',
+                'content' => $_POST['branches'],
+                'brief_content' => $_POST['branches'],
+                'is_active' => 1
+            );
+            $this->db->insert('institute_platinum_datas', $branchesinsert);
+        }
+
+        if (!empty($_POST['languages'])) {
+            $languageinsert = array(
+                'institute_id' => $school_id,
+                'icon' => 'language.png',
+                'heading' => 'Language',
+                'content' => $_POST['languages'],
+                'brief_content' => $_POST['languages'],
+                'is_active' => 1
+            );
+            $this->db->insert('institute_platinum_datas', $languageinsert);
+        }
+
+        if (!empty($_POST['customRadioInline1'])) {
+            
+            if ($_POST['customRadioInline1'] == "yes") {
+                $activityinsert = array(
+                    'institute_id' => $school_id,
+                    'icon' => 'activity.png',
+                    'heading' => 'Trainer',
+                    'content' => 'Personal Trainer',
+                    'brief_content' => 'Personal Trainer',
+                    'is_active' => 1
+                );
+                $this->db->insert('institute_platinum_datas', $activityinsert);
+            }
+        }
+
+        // activity image save
+        $activity = $_POST['categoryname'];
+        $activitydesc = $_POST['categorydesc'];
+        $activityimage = $_FILES['categoryimage']['name'];
+        $activitytype = $_FILES['categoryimage']['type'];
+        $activitysize = $_FILES['categoryimage']['size'];
+        $activitytmp_name = $_FILES['categoryimage']['tmp_name'];
+
+        if (is_array($activity)) {
+            for ($i = 0; $i < count($activity); $i++) {
+                // print ($activity[$i]);
+                // if(isset($_FILES['activityimage1']['name']))
+                // {
+                $activity1 = $activityimage[$i];
+                $activity1_ext = pathinfo($activity1, PATHINFO_EXTENSION);
+
+                $activity1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $activity1_ext;
+                $activity1_type = $activitytype[$i];
+                $activity1_size = $activitysize[$i];
+                $activity1_tem_loc = $activitytmp_name[$i];
+                $activity1_store = FCPATH . "/laravel/public/" . $activity1_name;
+
+                $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+                if (in_array($activity1_ext, $allowed)) {
+                    if (move_uploaded_file($activity1_tem_loc, $activity1_store)) {
+
+                        $this->db->select('*')->where('program_name =', $activity[$i]);
+                        $this->db->from('institute_programs');
+                        $schoolactivity1 = $this->db->get();
+
+                        if ($schoolactivity1->num_rows() > 0) {
+                            foreach ($schoolactivity1->result() as $schoolactivitys1) {
+                                $schoolactivity_id1 = $schoolactivitys1->id;
+                            }
+                        } else {
+                            $schoolactivityinsert1 = array(
+                                'program_name' => $activity[$i]
+                            );
+
+                            $this->db->insert('institute_programs', $schoolactivityinsert1);
+
+                            $this->db->select('*')->where('program_name =', $activity[$i]);
+                            $this->db->from('institute_programs');
+                            $schoolactivity1 = $this->db->get();
+
+                            foreach ($schoolactivity1->result() as $schoolactivitys1) {
+                                $schoolactivity_id1 = $schoolactivitys1->id;
+                            }
+                        }
+
+                        $schoolactivityinsert1 = array(
+                            'institute_id' => $school_id,
+                            'program_id' => $schoolactivity_id1,
+                            'image' => $activity1_name,
+                            'about' => $activitydesc[$i],
+                            'is_active' => 1
+                        );
+
+                        $this->db->insert('program_details', $schoolactivityinsert1);
+                    }
+                }
+                // }
+            }
+        }
+
+
+        // gallery image save
+        if (isset($_FILES['mytext']['name'])) {
+            $gallaryimage = $_FILES['mytext']['name'];
+            $gallarytype = $_FILES['mytext']['type'];
+            $gallarysize = $_FILES['mytext']['size'];
+            $gallarytmp_name = $_FILES['mytext']['tmp_name'];
+
+
+
+            if (is_array($gallaryimage)) {
+                for ($i = 0; $i < count($gallaryimage); $i++) {
+                    $gallary1image = $gallaryimage[$i];
+                    $gallary1_ext = pathinfo($gallary1image, PATHINFO_EXTENSION);
+
+                    $gallary1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $gallary1_ext;
+                    $gallary1_type = $gallarytype[$i];
+                    $gallary1_size = $gallarysize[$i];
+                    $gallary1_tem_loc = $gallarytmp_name[$i];
+                    $gallary1_store = FCPATH . "/laravel/public/" . $gallary1_name;
+
+                    $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+                    if (in_array($gallary1_ext, $allowed)) {
+                        if (move_uploaded_file($gallary1_tem_loc, $gallary1_store)) {
+
+                            $schoolgallaryinsert1 = array(
+                                'institute_id' => $school_id,
+                                'category_id' => 2,
+                                'image' => $gallary1_name,
+                                'is_active' => 1
+                            );
+
+                            $this->db->insert('institute_images', $schoolgallaryinsert1);
+                        }
+                    }
+                }
+            }
+        }
+
+        // news & events save
+        $news = $_POST['newsheading'];
+        $newsdesc = $_POST['newsdesc'];
+
+
+        if (is_array($news)) {
+            for ($i = 0; $i < count($news); $i++) {
+
+                $newsinsert = array(
+                    'institute_id' => $school_id,
+                    'news' => $news[$i],
+                    'news_brief' => $newsdesc[$i],
+                    'is_active' => 1
+                );
+
+                $this->db->insert('institute_news', $newsinsert);
+            }
+        }
+
+        $user = $this->db->get_where('user_register', array('id' => $_POST['user_id']));
+        foreach ($user->result() as $users) {
+            $user_name = $users->name;
+            $user_email = $users->email;
+            $user_phone = $users->phone;
+        }
+        redirect("schools/admin/institute");
+        //send email to sales
+        // $to = "sales@edugatein.com";
+        // $subject = "New institute submitted";
+        // $txt = "Hi Edugatein,
+        //     The platinum package institute " . $_POST['institutename'] . " has been submitted by the user " . $user_name . ".Please check the details. Email : " . $user_email . "Mobile : " . $user_phone;
+        // $headers = "From: support@edugatein.com" . "\r\n" .
+        //         "CC: manikandan@haunuzinfosystems.com";
+
+        // mail($to, $subject, $txt, $headers);
+
+
+        // // $this->load->view('institute-listing-one');
+        ?>
+        <!-- <script>
+            window.location.href = "https://rzp.io/l/instituteplatinumpackage";
+        </script> -->
+
+        <?php
+
+    }
+    
+    public function admin_insert() {
+        $data = array(
+            'name' => $this->input->post('name') . " " . $this->input->post('lastname'),
+            'email' => $this->input->post('useremail'),
+            'phone' => $this->input->post('phone'),
+            'password' => base64_encode($this->input->post('password')),
+            'category' => $this->input->post('category'),
+            'ip' => $this->input->post('ip'),
+        );
+        // print_r($data);exit;
+        $this->db->select('*')->where('email =', $data['email']);
+        $this->db->from('user_register');
+        $email = $this->db->get()->result();
+        if (count($email) == 0) {
+            // $test = "0";
+            // $sender = "EDUGAT"; // This is who the message appears to be from.
+            // $numbers = $data['phone']; // A single number or a comma-seperated list of numbers
+            // $data['random'] = $random = rand(1000, 9999);
+            $this->db->insert('account_tracker', $data);
+            $this->db->insert('user_register', $data);
+            $insert_id = $this->db->insert_id();
+            $ip = $_SERVER['REMOTE_ADDR'];
+            // $mobile = substr($this->input->post('phone'), -4);
+            echo json_encode(array('status' => 'success', 'data' => array("mobile" => $mobile,"contact_email" => $data['email'],"user_id" => $insert_id)));
+            die;
+        } else {
+            echo json_encode(array('status' => 'error', "message" => array("text" => "Try using another contact info !!!", "title" => "User Already Exist")));
+            die;
+            $this->load->view('sign-up-school', $data);
+        }
+    }
+
+
 }
 ?>

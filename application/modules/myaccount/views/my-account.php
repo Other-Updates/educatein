@@ -2,6 +2,7 @@
 //defined('BASEPATH') OR exit('No direct script access allowed');
 // echo $this->session->userdata('school'); 
 $email = $this->session->userdata('school');
+$user_id = base64_decode($_GET['id']);
 if ($user_id) {   
     $this->db->select('*');
     $this->db->from('user_register');
@@ -146,9 +147,12 @@ if ($user->num_rows() > 0) {
             $institute = $this->db->get();
             ?>
 
-            <div class="col-lg-9 pl-5">
+            <div class="col-lg-9 pl-8">
                 <div class="plan-expiry-notification mt-3">
-
+                    <div class="modal-body text-center col-lg-12 pl-8" style="margin-left:300px">
+                        <a href="<?php echo base_url(); ?>schoolfirst?id=<?php echo base64_encode($userid); ?>"><button class="btn btn-pink">ADD SCHOOL</button></a>
+                        <a href="<?php echo base_url(); ?>institutefirst?id=<?php echo base64_encode($userid); ?>"><button class="btn btn-primary">ACTIVITY CLASS</button></a>
+                    </div>
                     <?php
                     //school expiry alert
                     if ($school->num_rows() > 0) {
@@ -162,7 +166,7 @@ if ($user->num_rows() > 0) {
 
                             $spend = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
                             $remain = $valitity - $spend;
-                            if ($remain <= 0) {
+                            if ($valitity == "" || $remain <= 0) {
                                 ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <!-- <h5 class="alert-heading mb-2">Plan Expired!</h5> -->
@@ -198,10 +202,10 @@ if ($user->num_rows() > 0) {
                             $date = new DateTime();
                             $cur_date = $date->getTimestamp();
 
-                            $spend1 = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
-                            $remain1 = $valitity - $spend1;
+                            $spend = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
+                            $remain = $valitity - $spend;
 
-                            if ($valitity == "" || $remain1 <= 0) {
+                            if ($valitity == "" || $remain <= 0) {
                                 ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <!-- <h5 class="alert-heading mb-2">Plan Expired!</h5> -->
@@ -211,11 +215,11 @@ if ($user->num_rows() > 0) {
                                     </button>
                                 </div>
                                 <?php
-                            } elseif ($remain1 <= 5) {
+                            } elseif ($remain <= 5) {
                                 ?>
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     <!-- <h5 class="alert-heading mb-2">Plan Expiring Soon!</h5> -->
-                                    <p style="font-weight: 300;">Your premium plan for <strong><?php echo $institutes->slug; ?></strong> will expires in <?php echo $remain1; ?> days. If you wish to receive our service without any interruption please upgrade your plan again.</p>
+                                    <p style="font-weight: 300;">Your premium plan for <strong><?php echo $institutes->slug; ?></strong> will expires in <?php echo $remain; ?> days. If you wish to receive our service without any interruption please upgrade your plan again.</p>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>

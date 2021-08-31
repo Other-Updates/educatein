@@ -301,8 +301,22 @@ class Institute_trial extends CI_Controller {
         $this->db->select('*');
         $this->db->where('id',base64_decode($school_id));
         $this->db->from('institute_details');
-        $userid = $this->db->get()->result_array();      
-        redirect('plandetail?id='.base64_encode($userid[0]['user_id']));
+        $userid = $this->db->get()->result_array();     
+        ?>
+        <script src="<?php echo base_url() ?>assets/front/js/jquery.min.js"></script>
+        <script>
+               $(document).ready(function () {
+                swal({
+                    title: "Trial package added successfully",
+                    text: "It will be validated within two working days",
+                    icon: "success",
+                }).then(function() {
+                    window.location = "<?php echo base_url() ?>plan-details?id=<?php echo base64_encode($userid[0]['user_id']); ?>";
+                });
+            }); 
+        </script>
+        <?php
+        // <!-- redirect('plandetail?id='.base64_encode($userid[0]['user_id'])); -->
     }
 
 }

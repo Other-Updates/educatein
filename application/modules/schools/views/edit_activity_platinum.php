@@ -24,7 +24,25 @@ $user = $this->db->get()->result_array();
 <div class="dashboard-content">
     <div class="container-fluid">
         <div class="section-title mb-3">
-            <h1><?php echo $institute[0]['institute_name']; ?><span>(Platinum Package)</span></h1>            
+            <h1><?php echo $institute[0]['institute_name']; ?>
+            <!-- <span>(Platinum Package)</span></h1>             -->
+            <div class="status-btn">
+                <?php if(empty($institute[0]['status'])){ ?>
+                <button class="btn btn-warning" title="Holded" disabled ><i class="bi bi-hourglass-bottom"></i> Holded</button>
+                <a href="<?php echo base_url() ?>schools/admin/approve_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approve"> Approve</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/reject_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Reject">Reject</button></a>
+                <?php } ?>
+                <?php if($institute[0]['status'] == 2){ ?>
+                <a href="<?php echo base_url() ?>schools/admin/hold_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/approve_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approve">Approve</button></a>
+                <button class="btn btn-danger" title="Rejected" disabled ><i class="bi bi-x-circle"></i> Rejected</button>
+                <?php } ?>
+                <?php if($institute[0]['status']== 1){ ?>
+                <a href="<?php echo base_url() ?>schools/admin/hold_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
+                <button class="btn btn-success" title="Approved" disabled ><i class="bi bi-check2-square"></i> Approved </button>
+                <a href="<?php echo base_url() ?>schools/admin/reject_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Reject">Reject</button></a>
+                <?php } ?>
+            </div>   
         </div>
 
         <div class="listing-section  mat-30">
@@ -55,9 +73,9 @@ $user = $this->db->get()->result_array();
                                 $category = $this->db->get();
                                 foreach ($category->result() as $categorys) {
                                     ?>
-                                    <option value="<?php echo $categorys->category_name; ?>" <?php if($categorys->category_name = $categories[0]['category_name']){echo "selected";}?>><?php echo $categorys->category_name; ?></option>
+                                    <option value="<?php echo $categorys->category_name; ?>" <?php if($categorys->category_name == $categories[0]['category_name']){echo "selected";}?> ><?php echo $categorys->category_name; ?></option>
                                 <?php } ?>
-                            </select>                          
+                            </select>                                
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
@@ -238,9 +256,9 @@ $user = $this->db->get()->result_array();
                         <label for="inputGroupFile01">About Image</label>
                         <div class="input-group mb-3">
                             <div class="custom-file">
-                                <input type="hidden" name="aboutoldimage_id" id="aboutoldimage_id" value="<?php echo $aboutimg[0]['id']; ?>">
                                 <input type="file" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="inputGroupFile01" name="aboutimage" aria-describedby="aboutimage" >
                                 <input type="hidden" name="aboutoldimage" id="aboutoldimage" value="<?php echo $aboutimg[0]['image']; ?>">
+                                <input type="hidden" name="aboutoldimage_id" id="aboutoldimage_id" value="<?php echo $aboutimg[0]['id']; ?>">
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                         </div>
@@ -437,7 +455,7 @@ $user = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(activity).append('<div class="form-row mx-0 w-100" name="insmore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="categoryname[]" placeholder="Sports"></div></div><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" class="" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="" name="categoryimage[]" aria-describedby=""></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="categorydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div></div>'); //add input box
+                $(activity).append('<div class="form-row mx-0 w-100" name="insmore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="categoryname[]" placeholder="Sports"></div></div><input type="hidden" name="category_id[]" value=""><input type="hidden" name="category_old_image[]" value=""><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" class="" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="" name="categoryimage[]" aria-describedby=""></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="categorydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div></div>'); //add input box
             }
         });
 
