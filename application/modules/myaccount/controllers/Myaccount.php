@@ -107,7 +107,7 @@ class Myaccount extends CI_Controller {
                 $(document).ready(function () {
                     swal({
                         title: "Good job!",
-                        text: "Your Password Change successfully",
+                        text: "Your Password Changed successfully",
                         icon: "success",
                         buttons: true,
                     });

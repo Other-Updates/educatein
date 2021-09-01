@@ -51,7 +51,7 @@ class Signupschool extends CI_Controller {
             echo json_encode(array('status' => 'success', 'data' => array("mobile" => $mobile, "otp" => $random, "contact_email" => $data['email'])));
             die;
         } else {
-            echo json_encode(array('status' => 'error', "message" => array("text" => "Try using another contact info !!!", "title" => "User Already Exsist")));
+            echo json_encode(array('status' => 'error', "message" => array("text" => "Try using another contact info !!!", "title" => "User Already Exist")));
             die;
             $this->load->view('sign-up-school', $data);
         }

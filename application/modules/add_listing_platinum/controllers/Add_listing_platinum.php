@@ -962,24 +962,41 @@ class Add_listing_platinum extends CI_Controller {
 
     }
 
+    public function razorPaySuccess() {
+        $data = [
+            'user_id' => '1',
+            'payment_id' => $this->input->post('razorpay_payment_id'),
+            'amount' => $this->input->post('totalAmount'),
+            'product_id' => $this->input->post('product_id'),
+        ];
+        $insert = $this->db->insert('payments', $data);
+        $arr = array('msg' => 'Payment successfully credited', 'status' => true);
+        $this->session->set_flashdata('msg', 'Payment successfully credited');
+        // $this->load->view('payment_success');
+    }
+
     public function package($school_id){
         $data['school_id'] = base64_decode($school_id);
         $this->load->view('plan_page',$data);
     }
 
     public function update_platinum($school_id){
+        // global $school_id;
         $data = array();
         $data[] = array(
-            'school_category_id' => 1,
-            'valitity' => 100,
+            'school_category_id' => NULL,
+            'valitity' => 30,
             'id' => base64_decode($school_id)
         );
         $this->db->update_batch('school_details',$data,'id');
         ?>
             <script>
-                window.location.href = "https://rzp.io/l/schoolplatinumpackage";
+                window.location.href = "https://rzp.io/l/yv8PYEYJR";
             </script>
         <?php
+    }
+    function payment_success($school_id){
+        $this->load->view('payment_success',$school_id);
     }
 }
 ?>
