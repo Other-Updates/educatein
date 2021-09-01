@@ -42,7 +42,7 @@
                     }
                     if($table_record['status'] == 1){$status = "Approved";}
                     else if($table_record['status'] == 2){$status = "Rejected";}
-                    else { $status = "Holded";}
+                    else { $status = "Waiting for validation";}
                     if($table_record['school_category_id'] == 1){$plan = "PLATINUM";}
                     else if($table_record['school_category_id'] == 2){$plan = "PREMIUM";}
                     else if($table_record['school_category_id'] == 3){$plan = "SPECTRUM";}

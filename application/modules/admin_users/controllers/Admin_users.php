@@ -85,7 +85,7 @@ class Admin_users extends CI_Controller {
                     $user_details[$key] = $value;
                 }
                 $this->session->set_userdata($user_details);
-                redirect('admin/schools', 'refresh');
+                redirect('admin/dashboard', 'refresh');
             } else {
                 // if the login was un-successful
                 // redirect them back to the login page

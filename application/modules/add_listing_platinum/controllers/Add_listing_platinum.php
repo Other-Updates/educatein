@@ -984,8 +984,8 @@ class Add_listing_platinum extends CI_Controller {
         // global $school_id;
         $data = array();
         $data[] = array(
-            'school_category_id' => 1,
-            'valitity' => 100,
+            'school_category_id' => NULL,
+            'valitity' => 30,
             'id' => base64_decode($school_id)
         );
         $this->db->update_batch('school_details',$data,'id');
