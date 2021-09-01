@@ -41,7 +41,7 @@
                     }
                     if($table_record['status'] == 1){$status = "Approved";}
                     else if($table_record['status'] == 2){$status = "Rejected";}
-                    else { $status = "Holded";}
+                    else { $status = "Waiting for validation";}
                     if($table_record['position_id'] == 1){$plan = "PLATINUM";}
                     else if($table_record['position_id'] == 2){$plan = "PREMIUM";}
                     else if($table_record['position_id'] == 3){$plan = "SPECTRUM";}

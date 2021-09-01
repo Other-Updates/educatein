@@ -19,14 +19,28 @@ class Admin extends CI_Controller {
     public function index() {
         $data = array();
 //         $data['schools'] = $this->Base_Model->get_records('grades g ', array("short_name, (SELECT count(*) FROM students s  WHERE s.grade_id = g.id AND s.gender_id=1) AS male, (SELECT count(*) FROM students s  WHERE s.grade_id = g.id AND s.gender_id=0) AS female, (SELECT count(*) FROM students s  WHERE s.grade_id = g.id) AS total  "), '','','g.ord','ASC');
-         $data['schools'] = $this->Base_Model->getCount('school_details',array());
-         $data['institutes'] = $this->Base_Model->getCount('institute_details',array());
-         $data['high_school'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 2));
-         $data['higher_secondary_school'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 3)); 
-         $data['elementary_school'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 4)); 
-         $data['preschool'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 5)); 
-         $data['special_school'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 6)); 
+        $data['schools'] = $this->Base_Model->getCount('school_details',array());
+        $data['institutes'] = $this->Base_Model->getCount('institute_details',array());
+        $data['high_school'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 2));
+        $data['higher_secondary_school'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 3)); 
+        $data['elementary_school'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 4)); 
+        $data['preschool'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 5)); 
+        $data['special_school'] = $this->Base_Model->getCount('school_details',array("schooltype_id" => 6)); 
+
+        $this->db->select('*');
+        $this->db->where('status',NULL);
+        $this->db->where('deleted_at =', NULL);
+        $this->db->from('school_details');
+        $this->db->order_by("created_at", "desc");
+        $this->db->limit(5);
+        $data['school_limit'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('status',NULL);
+        $this->db->where('deleted_at =', NULL);
+        $this->db->from('institute_details');
+        $this->db->order_by("created_at", "desc");
+        $this->db->limit(5);
+        $data['class_limit'] = $this->db->get()->result_array();
         $this->load->view('dashboard', $data);
     }
-
 }

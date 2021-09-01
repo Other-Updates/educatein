@@ -60,6 +60,10 @@ foreach ($user->result() as $users) {
             <div class="col-lg-9">
                 <div class="section-title mab-30">
                     <h2 class="mb-2">Plan Details</h2>
+                    <div class="modal-body text-center col-lg-12 pl-8" style="margin-left:300px">
+                        <a href="<?php echo base_url(); ?>schoolfirst?id=<?php echo base64_encode($userid); ?>"><button class="btn btn-pink">ADD SCHOOL</button></a>
+                        <a href="<?php echo base_url(); ?>institutefirst?id=<?php echo base64_encode($userid); ?>"><button class="btn btn-primary">ACTIVITY CLASS</button></a>
+                    </div>
                     <hr>
                 </div><!-- /section-title -->
                 <?php
@@ -68,12 +72,16 @@ foreach ($user->result() as $users) {
                 $this->db->select('*')->where('user_id =', $userid);
 // $this->db->where('is_active =','1');
                 $this->db->where('deleted_at =', NULL);
+                // $this->db->where('status != 2');
+                $this->db->order_by("activated_at", "desc");
                 $this->db->from('school_details');
                 $school = $this->db->get();
-
+                            // print_r($this->db->last_query());exit;
                 $this->db->select('*')->where('user_id =', $userid);
 // $this->db->where('is_active =','1');
                 $this->db->where('deleted_at =', NULL);
+                // $this->db->where('status !=',2);
+                $this->db->order_by("activated_at", "desc");
                 $this->db->from('institute_details');
                 $institute = $this->db->get();
                 ?>
@@ -155,7 +163,6 @@ foreach ($user->result() as $users) {
                             $facility_names = implode(",", $facility_name);
                             
                             if ($school->num_rows() > 0) {
-                                foreach ($school->result() as $schools) {
                                     $valitity = $schools->valitity;
         
                                     $activate = new DateTime($schools->activated_at);
@@ -165,7 +172,8 @@ foreach ($user->result() as $users) {
         
                                     $spend = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
                                     $remain = $valitity - $spend;
-                                }
+                                    $exp_date = strtotime(+$valitity." days", $act_date);
+                                    $expiry_date = date('Y-m-d',$exp_date);
                             }
                             ?>
 
@@ -173,7 +181,7 @@ foreach ($user->result() as $users) {
                                 <div class="card-header" id="heading<?php echo $school_count; ?>">
                                     <h5 class="mb-0 p-2">
                                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $school_count; ?>" aria-expanded="true" aria-controls="collapse<?php echo $school_count; ?>">
-                                            <?php echo $schools->slug; ?> <span class="badge badge-warning"><?php echo $category; ?></span><?php if($remain > 5){ ?><span style="color:blue;font-size:15px">Your plan will be expired in <?php echo $remain ?>days</span><?php } else if($remain < 5){ ?><span style="color:red;font-size:15px">Your plan will be expired in <?php echo $remain ?>days</span><?php } ?>
+                                            <?php echo $schools->slug; ?> <span class="badge badge-warning"><?php echo $category; ?></span><?php if($schools->status == NULL){?><span style="color:green;font-size:15px" >&nbsp;&nbsp;School is under validation</span><?php } else if($schools->status == 2){?><span style="color:#F32013;font-size:15px" >&nbsp;&nbsp;School is rejected</span> <?php }else if($remain > 5){ ?><span style="color:blue;font-size:15px" >&nbsp;&nbsp;Expiry date- <?php echo $expiry_date ?>( <?php echo $remain ?>days to go)</span><?php } else if($remain < 5 && $remain > 0){ ?><span style="color:red;font-size:15px">&nbsp;&nbsp;Your school plan will be expired in <?php echo $remain ?>days&nbsp;</span> <?php } else if($remain <= 0){ ?><span style="color:red;font-size:15px">&nbsp;&nbsp;Your school plan is expired</span><?php } ?>
                                         </button>
                                         <?php
                                         $test = $schools->valitity * 60 * 60 * 24;
@@ -187,17 +195,17 @@ foreach ($user->result() as $users) {
                                         // echo "<br>";
                                         // echo $date->getTimestamp(); 
                                         // exit();
-                                        if ($date->getTimestamp() > $activate->getTimestamp() + $test) {
+                                        // if ($date->getTimestamp() > $activate->getTimestamp() + $test) {
                                             ?>
-                                            <a href="<?php echo base_url() ?>upgrade-package?id=<?php echo base64_encode($userid); ?>&sid=<?php echo base64_encode($schools->id); ?>" class="upgrade" target="_blank">UPGRADE PLAN</a>
+                                            <!-- <a href="<?php echo base_url() ?>upgrade-package?id=<?php echo base64_encode($userid); ?>&sid=<?php echo base64_encode($schools->id); ?>" class="upgrade" target="_blank">UPGRADE PLAN</a> -->
 
                                             <?php
-                                        } else {
+                                        // } else {
                                             ?>
                                             <a href="" class="upgrade" data-toggle="modal" data-target="#exampleModalCenter2">UPGRADE PLAN</a>
 
                                             <?php
-                                        }
+                                        // }
                                         ?>
                                     </h5>
 
@@ -333,8 +341,8 @@ foreach ($user->result() as $users) {
 
                                 <?php
                                 $school_count++;
-                            }
                         }
+                    }
                         ?>
 
                         <?php
@@ -394,7 +402,7 @@ foreach ($user->result() as $users) {
                                 }
 
                                 if ($institute->num_rows() > 0) {
-                                    foreach ($institute->result() as $institutes) {
+                                    // foreach ($institute->result() as $institutes) {
                                         $valitity = $institutes->valitity;
             
                                         $activate = new DateTime($institutes->activated_at);
@@ -404,7 +412,10 @@ foreach ($user->result() as $users) {
             
                                         $spend1 = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
                                         $remain1 = $valitity - $spend1;
-                                    }
+                                        $exp_date = strtotime(+$valitity." days", $act_date);
+                                        $expiry_date = date('Y-m-d',$exp_date);
+
+                                    // }
                                 }
                                 ?>
 
@@ -412,7 +423,7 @@ foreach ($user->result() as $users) {
                                     <div class="card-header" id="heading<?php echo $school_count; ?>">
                                         <h5 class="mb-0 p-2">
                                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $school_count; ?>" aria-expanded="true" aria-controls="collapse<?php echo $school_count; ?>">
-                                                <?php echo $institutes->slug; ?> <span class="badge badge-warning"><?php echo $categoryname; ?></span><?php if($remain1 > 5){ ?><span style="color:blue;font-size:15px">Your plan will be expired in <?php echo $remain1 ?>days</span><?php } else if($remain1 < 5 && $remain1 > 0){ ?><span style="color:red;font-size:15px">Your plan will be expired in <?php echo $remain1 ?>days</span><?php } else if($remain1 <= 0){ ?><span style="color:red;font-size:15px">Your plan is expired</span><?php } ?>
+                                                <?php echo $institutes->slug; ?> <span class="badge badge-warning"><?php echo $categoryname; ?></span><?php if($institutes->status == NULL){ ?><span style="color:green;font-size:15px" >&nbsp;&nbsp;Institute is under validation</span><?php } else if($institutes->status == 2){ ?><span style="color:#F32013;font-size:15px" >&nbsp;&nbsp;Institute is rejected</span><?php }else if($remain1 > 5){ ?><span style="color:blue;font-size:15px">&nbsp;&nbsp;Expiry date- <?php echo $expiry_date?> ( <?php echo $remain1 ?>days to go )</span><?php } else if($remain1 < 5 && $remain1 > 0){ ?><span style="color:red;font-size:15px">&nbsp;&nbsp;Your institute plan will be expired in <?php echo $remain1 ?>days</span><?php } else if($remain1 <= 0){ ?><span style="color:red;font-size:15px">&nbsp;&nbsp;Your institute plan is expired</span><?php } ?>
                                             </button>
                                             <?php
                                             $test = $institutes->valitity * 60 * 60 * 24;
@@ -421,17 +432,17 @@ foreach ($user->result() as $users) {
 
                                             $date = new DateTime();
 
-                                            if ($date->getTimestamp() > $activate->getTimestamp() + $test) {
+                                            // if ($date->getTimestamp() > $activate->getTimestamp() + $test) {
                                                 ?>
-                                                <a href="<?php echo base_url() ?>upgrade-package?id=<?php echo base64_encode($userid); ?>&iid=<?php echo base64_encode($institutes->id); ?>" class="upgrade" target="_blank">UPGRADE PLAN</a>
+                                                <!-- <a href="<?php echo base_url() ?>upgrade-package?id=<?php echo base64_encode($userid); ?>&iid=<?php echo base64_encode($institutes->id); ?>" class="upgrade" target="_blank">UPGRADE PLAN</a> -->
 
                                                 <?php
-                                            } else {
+                                            // } else {
                                                 ?>
                                                 <a href="" class="upgrade" data-toggle="modal" data-target="#exampleModalCenter2">UPGRADE PLAN</a>
 
                                                 <?php
-                                            }
+                                            // }
                                             ?>
                                         </h5>
 

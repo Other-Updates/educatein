@@ -276,19 +276,19 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Vision</label>
-                            <input type="text" name="our_vision" class="form-control" id="academic" placeholder="Vision">
+                            <textarea class="form-control" name="our_vision" id="our_vision" rows="1" style="height: 80px;"></textarea>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Mission</label>
-                            <input type="text" name="our_mission" class="form-control" id="academic" placeholder="Mission">
+                            <textarea class="form-control" name="our_mission" id="our_mission" rows="1" style="height: 80px;"></textarea>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Motto</label>
-                            <input type="text" name="our_motto" class="form-control" id="academic" placeholder="Motto">
+                            <textarea class="form-control" name="our_motto" id="our_motto" rows="1" style="height: 80px;"></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -616,8 +616,47 @@ foreach ($user->result() as $users) {
                     </div>
                 </div><!-- /form-row -->
 
-                <button class="btn btn-primary btn-save" id="formsubmit">SUBMIT</button>
+                <button class="btn btn-primary btn-save buy_now" id="formsubmit">SUBMIT</button>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->
 </div><!-- /dashboard-content -->
+<!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  var SITEURL = "<?php echo base_url()  ?>";
+
+  $('body').on('click', '.buy_now', function(e){
+    var totalAmount = $(this).attr("data-amount");
+    var product_id =  $(this).attr("data-id");
+    var options = {
+    "key": "rzp_live_x0G1AirIMohXPV",
+    "amount": (1*100), // 2000 paise = INR 20
+    "name": "Edugatein",
+    "description": "Payment",
+    "image": "https://www.tutsmake.com/wp-content/uploads/2018/12/cropped-favicon-1024-1-180x180.png",
+    "handler": function (response){
+          $.ajax({
+            url: SITEURL + 'add_listing_platinum/razorPaySuccess',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                razorpay_payment_id: response.razorpay_payment_id , totalAmount : totalAmount ,product_id : product_id,
+            }, 
+            success: function (msg) {
+ 
+               window.location.href = SITEURL;
+            }
+        });
+      
+    },
+ 
+    "theme": {
+        "color": "#528FF0"
+    }
+  };
+  var rzp1 = new Razorpay(options);
+  rzp1.open();
+  e.preventDefault();
+  });
+ 
+</script> -->

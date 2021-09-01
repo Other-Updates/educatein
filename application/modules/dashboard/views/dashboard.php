@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2 mb-1">
+    <!-- <div class="col-md-2 mb-1">
         <div class="px-3 py-1 bg-white" style="border-bottom: 3px solid #079346;cursor: pointer">
             <h1 class="mb-0"><i class="icon ion-md-school"  ></i>   <?php echo $high_school; ?></h1>
             <div class="d-flex"> 
@@ -47,8 +47,96 @@
                 <div class="ml-auto">Special school</div>                    
             </div>
         </div>
+    </div> -->
+</div>
+<div class="row school">
+                <div class="col-lg-4 mab-20">
+                    <?php if($key == 0){ ?><h5 class="mb-2" style="color:red">Recent Schools</h5><?php } ?>
+                </div>
+
+    <div class="col-12 mt-0 bg-white">
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm bg-white" id="example">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-nowrap">School Name</th>
+                    <th class="text-nowrap">Plan</th>
+                        <th class="text-nowrap">Status</th>
+                        <th class="text-nowrap">Action</th>
+                    </tr>
+                </thead>
+                <tbody>    
+                    <?php
+                    foreach ($school_limit as $key=>$school_limit_data) {
+                        if($school_limit_data['status'] == 1){$status = "Approved";}
+                        else if($school_limit_data['status'] == 2){$status = "Rejected";}
+                        else { $status = "Waiting for validation";}
+                        if($school_limit_data['school_category_id'] == 1){$plan = "PLATINUM";}
+                        else if($school_limit_data['school_category_id'] == 2){$plan = "PREMIUM";}
+                        else if($school_limit_data['school_category_id'] == 3){$plan = "SPECTRUM";}
+                        else{ $plan = "TRIAL";}
+                        echo "<tr>"
+                        . "<td class=' align-middle'> " . $school_limit_data["school_name"] . "</td>"
+                    //    . "<td class=' align-middle'> " . $table_record["name"] . "</td>"
+                    . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
+                    . "<td align='center' class=' align-middle'>" . $status . "</td>"
+                    //    . "<td class='text-center align-middle'>" . $status . "</td>"
+                        . "<td class='text-center align-middle'>"
+                        . "<a href='". base_url("schools/admin/school_edit?id=". base64_encode($school_limit_data["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
+                        . "</td>"
+                        . "</tr>";   
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-4 mab-20">
+                    <h5 class="mb-2" style="color:red">Recent Institutes</h5>
+                </div>
+    <div class="col-12 mt-0 bg-white">
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm bg-white" id="example">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-nowrap">Institute Name</th>
+                    <th class="text-nowrap">Plan</th>
+                        <th class="text-nowrap">Status</th>
+                        <th class="text-nowrap">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>    
+                    <?php
+                    foreach ($class_limit as $key=>$class_limit_data) {
+                        if($class_limit_data['status'] == 1){$status = "Approved";}
+                        else if($class_limit_data['status'] == 2){$status = "Rejected";}
+                        else { $status = "Waiting for validation";}
+                        if($class_limit_data['position_id'] == 1){$plan = "PLATINUM";}
+                        else if($class_limit_data['position_id'] == 2){$plan = "PREMIUM";}
+                        else if($class_limit_data['position_id'] == 3){$plan = "SPECTRUM";}
+                        else{ $plan = "TRIAL";}
+                        echo "<tr>"
+                        . "<td class=' align-middle'> " . $class_limit_data["institute_name"] . "</td>"
+                    //    . "<td class=' align-middle'> " . $table_record["name"] . "</td>"
+                    . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
+                    . "<td align='center' class=' align-middle'>" . $status . "</td>"
+                    //    . "<td class='text-center align-middle'>" . $status . "</td>"
+                        . "<td class='text-center align-middle'>"
+                        . "<a href='". base_url("admin/schools/institute_edit?id=". base64_encode($class_limit_data["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
+                        . "</td>"
+                        . "</tr>";   
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+            <style>
+            .school {
+background-color: #f5f5f5;
+}
+</style>
 <script>
     $('.schools').click(function () {
         window.location.href = '<?php base_url(); ?>schools';
