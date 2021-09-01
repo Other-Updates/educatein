@@ -100,6 +100,7 @@ $activity = $this->db->get()->result_array();
 $this->db->select('*')->where('schooldetails_id=',$school[0]['id']);
 $this->db->from('schoolmanagement_activities');
 $management = $this->db->get()->result_array();
+// print_r($management[0]['activity_name']);exit;
 
 $this->db->select('*');
 // $this->db->where('school_id',$school[0]['id']);
@@ -135,22 +136,23 @@ $schooltype = $this->db->get()->result_array();
 <div class="dashboard-content">
     <div class="container-fluid1">
         <div class="section-title mb-2">
-            <h1><?php echo $school[0]["school_name"]; ?><span>(Platinum Package)</span></h1>
+            <h1><?php echo $school[0]["school_name"]; ?>
+            <!-- <span>(Platinum Package)</span></h1> -->
             <div class="status-btn">
                 <?php if(empty($school[0]['status'])){ ?>
-                <button class="btn btn-warning" title="Hold" disabled ><i class="bi bi-hourglass-bottom"></i> Holded</button>
-                <a href="<?php echo base_url() ?>schools/admin/approve_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approved"> Approve</button></a>
-                <a href="<?php echo base_url() ?>schools/admin/reject_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Rejected">Reject</button></a>
+                <button class="btn btn-warning" title="Holded" disabled ><i class="bi bi-hourglass-bottom"></i> Holded</button>
+                <a href="<?php echo base_url() ?>schools/admin/approve_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approve"> Approve</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/reject_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Reject">Reject</button></a>
                 <?php } ?>
                 <?php if($school[0]['status'] == 2 && $school[0]['status'] != NULL){ ?>
                 <a href="<?php echo base_url() ?>schools/admin/hold_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
-                <a href="<?php echo base_url() ?>schools/admin/approve_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approved">Approve</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/approve_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approve">Approve</button></a>
                 <button class="btn btn-danger" title="Rejected" disabled ><i class="bi bi-x-circle"></i> Rejected</button>
                 <?php } ?>
                 <?php if($school[0]['status']== 1){ ?>
                 <a href="<?php echo base_url() ?>schools/admin/hold_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
                 <button class="btn btn-success" title="Approved" disabled ><i class="bi bi-check2-square"></i> Approved </button>
-                <a href="<?php echo base_url() ?>schools/admin/reject_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Rejected">Reject</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/reject_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Reject">Reject</button></a>
                 <?php } ?>
             </div>
         </div><!-- /section-title -->
@@ -194,7 +196,7 @@ $schooltype = $this->db->get()->result_array();
                                 <!-- <option value="">--Select City--</option> -->
                                                                 <input type="text" class="form-control" name="city" id="exampleFormControlSelect1" value="<?php echo $city1[0]['city_name'];?>" readonly>
                                         <!-- <option value="<?php echo $citys->city_name; ?>" <?php if($citys->city_name == $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option> -->
-                            </select>
+                            <!-- </select> -->
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
@@ -231,11 +233,11 @@ $schooltype = $this->db->get()->result_array();
                             <label for="customRadio1">Eligibility to Avail Admission Under the RTE Act</label>
                             <div class="form-row ml-0">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio1" name="customRadio2" value="1" <?php if($school[0]['rte']=='1'){echo "checked";} ?> class="custom-control-input" >
+                                    <input type="radio" id="customRadio1" name="customRadio2" value="1" <?php if($school[0]['rte']=='1'){echo "checked";} ?> class="custom-control-input" disabled >
                                     <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>&nbsp; &nbsp; &nbsp; 
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" name="customRadio2" value="0" <?php if($school[0]['rte']=='0'){echo "checked";} ?>  class="custom-control-input">
+                                    <input type="radio" id="customRadio2" name="customRadio2" value="0" <?php if($school[0]['rte']=='0'){echo "checked";} ?>  class="custom-control-input" disabled>
                                     <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">No</label>
                                 </div>
                             </div><!-- /form-row -->
@@ -247,11 +249,11 @@ $schooltype = $this->db->get()->result_array();
                             <label for="customRadio2">Hostel Facility</label>
                             <div class="form-row ml-0">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio3" name="customRadio1"  value="1" <?php if($school[0]['hostel']=='1'){echo "checked";}?> class="custom-control-input" >
+                                    <input type="radio" id="customRadio3" name="customRadio1"  value="1" <?php if($school[0]['hostel']=='1'){echo "checked";}?> class="custom-control-input" disabled >
                                     <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>&nbsp; &nbsp; &nbsp; 
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio4" name="customRadio1"  value="0" <?php if($school[0]['hostel']=='0'){echo "checked";}?>  class="custom-control-input">
+                                    <input type="radio" id="customRadio4" name="customRadio1"  value="0" <?php if($school[0]['hostel']=='0'){echo "checked";}?>  class="custom-control-input" disabled>
                                     <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio4">No</label>
                                 </div>
                             </div><!-- /form-row -->
@@ -416,19 +418,22 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Vision</label>
-                            <input type="text" name="our_vision" class="form-control" value="<?php echo $school[0]['our_vision']; ?>" id="academic" placeholder="Vision" readonly>
+                            <textarea class="form-control" name="our_vision" id="our_vision" rows="1" style="height: 130px;"readonly><?php echo $school[0]['our_vision']; ?></textarea >
+                            <!-- <input type="text" name="our_vision" class="form-control" value="<?php echo $school[0]['our_vision']; ?>" id="our_vision" placeholder="Vision" readonly> -->
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Mission</label>
-                            <input type="text" name="our_mission" class="form-control" id="academic" value="<?php echo $school[0]['our_mission']; ?>" placeholder="Mission" readonly>
+                            <textarea class="form-control" name="our_mission" id="our_mission" rows="1" style="height: 130px;"readonly><?php echo $school[0]['our_mission']; ?></textarea >
+                            <!-- <input type="text" name="our_mission" class="form-control" id="our_vision" value="<?php echo $school[0]['our_mission']; ?>" placeholder="Mission" readonly> -->
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Motto</label>
-                            <input type="text" name="our_motto" class="form-control" id="academic" value="<?php echo $school[0]['our_motto']; ?>" placeholder="Motto" readonly>
+                            <textarea class="form-control" name="our_motto" id="our_motto" rows="1" style="height: 130px;"readonly><?php echo $school[0]['our_motto']; ?></textarea >
+                            <!-- <input type="text" name="our_motto" class="form-control" id="our_motto" value="<?php echo $school[0]['our_motto']; ?>" placeholder="Motto" readonly> -->
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -461,72 +466,75 @@ $schooltype = $this->db->get()->result_array();
                             </div>
                         </div>
                     </div> -->
+                    <?php $selectedActivity = array();
+                     foreach($management as $key=>$management_data){ 
+                        $selectedActivity[] = $management_data['activity_name'];
+                      } ?>
                     <div class="col-lg-12 col-sm-6">
                         <h5 class="pink mt-2">Special Info</h5>
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="playground" value="playground"<?php if(isset($management[0]['activity_name']) == 'playground'){echo "checked";}?> class="custom-control-input" id="customControlValidation1">
+                                    <input type="checkbox" name="playground" value="playground" <?php if( in_array('playground',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation1" disabled>
                                     <label class="custom-control-label" for="customControlValidation1">Playground</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="kidsplay" value="kidsplay" <?php if(isset($management[0]['activity_name']) == 'kidsplay'){echo "checked";}?> class="custom-control-input" id="customControlValidation2">
+                                    <input type="checkbox" name="kidsplay" value="kidsplay" <?php if( in_array('kidsplay',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation2" disabled>
                                     <label class="custom-control-label" for="customControlValidation2">Kids Playcorner</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="transport"  value="transport" <?php if(isset($management[0]['activity_name']) == 'transport'){echo "checked";}?> class="custom-control-input" id="customControlValidation3">
+                                    <input type="checkbox" name="transport"  value="transport" <?php if( in_array('transport',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation3" disabled>
                                     <label class="custom-control-label" for="customControlValidation3">Transportation</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="curriculam" value="curriculam" <?php if(isset($management[0]['activity_name']) == 'curriculam'){echo "checked";}?> class="custom-control-input" id="customControlValidation4">
+                                    <input type="checkbox" name="curriculam" value="curriculam" <?php if( in_array('curriculam',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation4" disabled>
                                     <label class="custom-control-label" for="customControlValidation4">Curriculam</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="fieldtrips" value="fieldtrips" <?php if(isset($management[0]['activity_name']) == 'fieldtrips'){echo "checked";}?> class="custom-control-input" id="customControlValidation5">
+                                    <input type="checkbox" name="fieldtrips" value="fieldtrips" <?php if( in_array('fieldtrips',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation5" disabled>
                                     <label class="custom-control-label" for="customControlValidation5">Field Trips</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="specialactivity" value="specialactivity" <?php if(isset($management[0]['activity_name']) == 'specialactivity'){echo "checked";}?> class="custom-control-input" id="customControlValidation6">
+                                    <input type="checkbox" name="specialactivity" value="special activity" <?php if( in_array('special activity',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation6" disabled>
                                     <label class="custom-control-label" for="customControlValidation6">Activity</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="progressive" value="progressive" <?php if(isset($management[0]['activity_name']) == 'progressive'){echo "checked";}?> class="custom-control-input" id="customControlValidation7">
+                                    <input type="checkbox" name="progressive" value="progressive" <?php if( in_array('progressive',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation7" disabled>
                                     <label class="custom-control-label" for="customControlValidation7">Progressive Learning</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="opportunities" value="opportunities" <?php if(isset($management[0]['activity_name']) == 'opportunities'){echo "checked";}?> class="custom-control-input" id="customControlValidation8">
+                                    <input type="checkbox" name="opportunities" value="opportunities" <?php if( in_array('opportunities',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation8" disabled>
                                     <label class="custom-control-label" for="customControlValidation8">Opportunities</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="clubs" value="clubs" <?php if(isset($management[0]['activity_name']) == 'clubs'){echo "checked";}?> class="custom-control-input" id="customControlValidation9">
+                                    <input type="checkbox" name="clubs" value="clubs" <?php if( in_array('clubs',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation9" disabled>
                                     <label class="custom-control-label" for="customControlValidation9">Clubs</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="infrastructure" value="infrastructure" <?php if(isset($management[0]['activity_name']) == 'infrastructure'){echo "checked";}?> class="custom-control-input" id="customControlValidation10">
+                                    <input type="checkbox" name="infrastructure" value="infrastructure" <?php if( in_array('infrastructure',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation10" disabled>
                                     <label class="custom-control-label" for="customControlValidation10">Infrastructure</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                         </ul>
-                    </div>
-                </div><!-- /form-row -->
+                    </div><!-- /form-row -->
             </div>
             <?php if(isset($school_activities[0])){ ?>
             <div class="edit-school-inner">

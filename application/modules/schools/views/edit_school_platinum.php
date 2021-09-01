@@ -7,7 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // 	$check = $this->db->get();
 
 $school_id = base64_decode($_GET['id']);
-
 $this->db->select('*');
 $this->db->from('school_details');
 $this->db->where("id", $school_id);
@@ -99,6 +98,7 @@ $students = $this->db->get()->result_array();
 $this->db->select('*')->where('schooldetails_id',$school[0]['id']);
 $this->db->from('schoolmanagement_activities');
 $management = $this->db->get()->result_array();
+// echo "<pre>";print_r($management);exit;
 
 $this->db->select('*');
 // $this->db->where('school_id',$school[0]['id']);
@@ -134,7 +134,25 @@ $schooltype = $this->db->get()->result_array();
 <div class="dashboard-content">
     <div class="container-fluid1">
         <div class="section-title mb-2">
-            <h1><?php echo $school[0]["school_name"]; ?><span>(Platinum Package)</span></h1>
+            <h1><?php echo $school[0]["school_name"]; ?>
+            <!-- <span>(Platinum Package)</span></h1> -->
+            <div class="status-btn">
+                <?php if(empty($school[0]['status'])){ ?>
+                <button class="btn btn-warning" title="Holded" disabled ><i class="bi bi-hourglass-bottom"></i> Holded</button>
+                <a href="<?php echo base_url() ?>schools/admin/approve_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approve"> Approve</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/reject_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Reject">Reject</button></a>
+                <?php } ?>
+                <?php if($school[0]['status'] == 2 && $school[0]['status'] != NULL){ ?>
+                <a href="<?php echo base_url() ?>schools/admin/hold_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/approve_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approve">Approve</button></a>
+                <button class="btn btn-danger" title="Rejected" disabled ><i class="bi bi-x-circle"></i> Rejected</button>
+                <?php } ?>
+                <?php if($school[0]['status']== 1){ ?>
+                <a href="<?php echo base_url() ?>schools/admin/hold_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
+                <button class="btn btn-success" title="Approved" disabled ><i class="bi bi-check2-square"></i> Approved </button>
+                <a href="<?php echo base_url() ?>schools/admin/reject_school/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Reject">Reject</button></a>
+                <?php } ?>
+            </div>
         </div><!-- /section-title -->
         <div class="listing-section mat-30">
             <form action="<?php echo base_url() ?>schools/admin/update_school" method="post" enctype="multipart/form-data">
@@ -394,19 +412,19 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Vision</label>
-                            <input type="text" name="our_vision" class="form-control" value="<?php echo $school[0]['our_vision']; ?>" id="academic" placeholder="Vision">
+                            <textarea class="form-control" name="our_vision" id="our_vision" rows="1" style="height: 130px;"><?php echo $school[0]['our_vision']; ?></textarea >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Mission</label>
-                            <input type="text" name="our_mission" class="form-control" id="academic" value="<?php echo $school[0]['our_mission']; ?>" placeholder="Mission">
+                            <textarea class="form-control" name="our_mission" id="our_mission" rows="1" style="height: 130px;"><?php echo $school[0]['our_mission']; ?></textarea >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="academic">Motto</label>
-                            <input type="text" name="our_motto" class="form-control" id="academic" value="<?php echo $school[0]['our_motto']; ?>" placeholder="Motto">
+                            <textarea class="form-control" name="our_motto" id="our_motto" rows="1" style="height: 130px;"><?php echo $school[0]['our_motto']; ?></textarea >
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -439,71 +457,76 @@ $schooltype = $this->db->get()->result_array();
                             </div>
                         </div>
                     </div>
+                    <?php $selectedActivity = array();
+                     foreach($management as $key=>$management_data){ 
+                        $selectedActivity[] = $management_data['activity_name'];
+                      } ?>
                     <div class="col-lg-12 col-sm-6">
                         <h5 class="pink mt-2">Special Info</h5>
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="playground" value="playground"<?php if(isset($management[0]['activity_name']) == 'playground'){echo "checked";}?> class="custom-control-input" id="customControlValidation1">
+                                    <input type="checkbox" name="playground" value="playground" <?php if( in_array('playground',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation1">
                                     <label class="custom-control-label" for="customControlValidation1">Playground</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="kidsplay" value="kidsplay" <?php if(isset($management[0]['activity_name']) == 'kidsplay'){echo "checked";}?> class="custom-control-input" id="customControlValidation2">
+                                    <input type="checkbox" name="kidsplay" value="kidsplay" <?php if( in_array('kidsplay',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation2">
                                     <label class="custom-control-label" for="customControlValidation2">Kids Playcorner</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="transport"  value="transport" <?php if(isset($management[0]['activity_name']) == 'transport'){echo "checked";}?> class="custom-control-input" id="customControlValidation3">
+                                    <input type="checkbox" name="transport"  value="transport" <?php if( in_array('transport',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation3">
                                     <label class="custom-control-label" for="customControlValidation3">Transportation</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="curriculam" value="curriculam" <?php if(isset($management[0]['activity_name']) == 'curriculam'){echo "checked";}?> class="custom-control-input" id="customControlValidation4">
+                                    <input type="checkbox" name="curriculam" value="curriculam" <?php if( in_array('curriculam',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation4">
                                     <label class="custom-control-label" for="customControlValidation4">Curriculam</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="fieldtrips" value="fieldtrips" <?php if(!empty($management[0]['activity_name']) == 'fieldtrips'){echo "checked";}?> class="custom-control-input" id="customControlValidation5">
+                                    <input type="checkbox" name="fieldtrips" value="fieldtrips" <?php if( in_array('fieldtrips',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation5">
                                     <label class="custom-control-label" for="customControlValidation5">Field Trips</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="specialactivity" value="specialactivity" <?php if(!empty($management[0]['activity_name']) == 'specialactivity'){echo "checked";}?> class="custom-control-input" id="customControlValidation6">
+                                    <input type="checkbox" name="specialactivity" value="special activity" <?php if( in_array('special activity',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation6">
                                     <label class="custom-control-label" for="customControlValidation6">Activity</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="progressive" value="progressive" <?php if(!empty($management[0]['activity_name']) == 'progressive'){echo "checked";}?> class="custom-control-input" id="customControlValidation7">
+                                    <input type="checkbox" name="progressive" value="progressive" <?php if( in_array('progressive',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation7">
                                     <label class="custom-control-label" for="customControlValidation7">Progressive Learning</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="opportunities" value="opportunities" <?php if(!empty($management[0]['activity_name']) == 'opportunities'){echo "checked";}?> class="custom-control-input" id="customControlValidation8">
+                                    <input type="checkbox" name="opportunities" value="opportunities" <?php if( in_array('opportunities',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation8">
                                     <label class="custom-control-label" for="customControlValidation8">Opportunities</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="clubs" value="clubs" <?php if(!empty($management[0]['activity_name']) == 'clubs'){echo "checked";}?> class="custom-control-input" id="customControlValidation9">
+                                    <input type="checkbox" name="clubs" value="clubs" <?php if( in_array('clubs',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation9">
                                     <label class="custom-control-label" for="customControlValidation9">Clubs</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                             <li class="list-inline-item">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="infrastructure" value="infrastructure" <?php if(!empty($management[0]['activity_name']) == 'infrastructure'){echo "checked";}?> class="custom-control-input" id="customControlValidation10">
+                                    <input type="checkbox" name="infrastructure" value="infrastructure" <?php if( in_array('infrastructure',$selectedActivity)){echo "checked";} ?> class="custom-control-input" id="customControlValidation10">
                                     <label class="custom-control-label" for="customControlValidation10">Infrastructure</label>
                                 </div><!-- /custom-checkbox -->
                             </li>
                         </ul>
                     </div>
+                  
                 </div><!-- /form-row -->
             </div>
             <?php if(isset($school_activities[0])){ ?>
@@ -530,9 +553,11 @@ $schooltype = $this->db->get()->result_array();
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 form-group">
-                        <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                        <?php if($key==0){ ?><a class="btn btn-primary add_field_button1" id="addmore">Add More</a><?php } ?>
+                    <div class="form-row" id="actmore">
+                        <div class="col-lg-4 col-sm-6 form-group">
+                            <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
+                            <?php if($key==0){ ?><a class="btn btn-primary add_field_button1" id="addmore">Add More</a><?php } ?>
+                        </div>
                     </div>
                 </div><!-- /form-row -->
                 <?php } ?>
@@ -695,7 +720,7 @@ $schooltype = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(activity).append('<div class="form-row w-100 mx-0" id="actmore"><div class="col-lg-4 col-sm-6 form-group"><input type="text" class="form-control" id="activity[]" name="activity[]" placeholder="Sports"></div><div class="col-lg-4 col-sm-6"><div class="input-group mb-3 custom-file"><input type="hidden" name="activityid[]" value="0"><input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG" aria-describedby=""></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div>'); //add input box
+                $(activity).append('<div class="form-row w-100 mx-0" id="actmore"><div class="col-lg-4 col-sm-6 form-group"><input type="text" class="form-control" id="activity[]" name="activity[]" placeholder="Sports"></div><input type="hidden" name="activityid[]" value=""><input type="hidden" name="activityimage_id[]" value=""><input type="hidden" name="activityoldimage[]" value=""><div class="col-lg-4 col-sm-6"><div class="input-group mb-3 custom-file"><input type="hidden" name="activityid[]" value="0"><input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG" aria-describedby=""></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div>'); //add input box
             }
         });
 
@@ -717,7 +742,7 @@ $schooltype = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(facility).append('<div class="form-row w-100 mx-0" id="facilitymore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="facility[]" name="facility[]" placeholder="Library"></div></div><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" name="facilityimage[]" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg" id="facilityimage1" aria-describedby="facilityimage1" ><label class="custom-file-label" for="facilityimage1">Choose file</label></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field1"><a href="#" class="btn btn-danger">Remove</a></div></div>');
+                $(facility).append('<div class="form-row w-100 mx-0" id="facilitymore"><input type="hidden" name="facilityid[]" value=""><input type="hidden" name="facilityoldimage[]" value=""><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="facility[]" name="facility[]" placeholder="Library"></div></div><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" name="facilityimage[]" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg" id="facilityimage1" aria-describedby="facilityimage1" ><label class="custom-file-label" for="facilityimage1">Choose file</label></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field1"><a href="#" class="btn btn-danger">Remove</a></div></div>');
             }
         });
 

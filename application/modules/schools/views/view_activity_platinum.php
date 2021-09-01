@@ -7,12 +7,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // 	$this->db->where("id", $url);
 // 	$check = $this->db->get();
 
-$school_id = base64_decode($_GET['id']);
+$userid = base64_decode($_GET['id']);
 
 $this->db->select('*');
-$this->db->from('institute_details');
-$this->db->where("id", $school_id);
-$user = $this->db->get()->result_array();
+$this->db->from('user_register');
+$this->db->where("id", $userid);
+$user = $this->db->get();
+
+foreach ($user->result() as $users) {
+    $username = $users->name;
+    $userid = $users->id;
+}
+
+$school_id = $institute[0]['id'];
 ?>
 
 <style>
@@ -25,107 +32,97 @@ $user = $this->db->get()->result_array();
     <div class="container-fluid">
         <div class="section-title mb-3">
             <h1><?php echo $institute[0]['institute_name']; ?>
-            <!-- <span>(Platinum Package)</span></h1>             -->
+            <!-- <span>(Platinum Package)</span></h1>   -->
             <div class="status-btn">
                 <?php if(empty($institute[0]['status'])){ ?>
-                <button class="btn btn-warning" title="Holded" disabled ><i class="bi bi-hourglass-bottom"></i> Holded</button>
-                <a href="<?php echo base_url() ?>schools/admin/approve_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approve"> Approve</button></a>
-                <a href="<?php echo base_url() ?>schools/admin/reject_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Reject">Reject</button></a>
+                <button class="btn btn-warning" title="Hold" disabled ><i class="bi bi-hourglass-bottom"></i> Holded</button>
+                <a href="<?php echo base_url() ?>schools/admin/approve_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approved"> Approve</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/reject_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Rejected">Reject</button></a>
                 <?php } ?>
                 <?php if($institute[0]['status'] == 2){ ?>
                 <a href="<?php echo base_url() ?>schools/admin/hold_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
-                <a href="<?php echo base_url() ?>schools/admin/approve_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approve">Approve</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/approve_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-success" title="Approved">Approve</button></a>
                 <button class="btn btn-danger" title="Rejected" disabled ><i class="bi bi-x-circle"></i> Rejected</button>
                 <?php } ?>
                 <?php if($institute[0]['status']== 1){ ?>
                 <a href="<?php echo base_url() ?>schools/admin/hold_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-warning" title="Hold">Hold</button></a>
                 <button class="btn btn-success" title="Approved" disabled ><i class="bi bi-check2-square"></i> Approved </button>
-                <a href="<?php echo base_url() ?>schools/admin/reject_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Reject">Reject</button></a>
+                <a href="<?php echo base_url() ?>schools/admin/reject_class/<?php echo base64_encode($school_id); ?>"><button class="btn btn-danger" title="Rejected">Reject</button></a>
                 <?php } ?>
-            </div>   
+            </div>          
         </div>
 
         <div class="listing-section  mat-30">
-            <form action="<?php echo base_url() ?>schools/admin/update_activity" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url() ?>institute_listing_first/insert" method="post" enctype="multipart/form-data">
             <div class="edit-school-inner">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6" style="display:none">
                         <div class="form-group">
                             <label for="user_id">user id</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $user[0]['user_id']; ?>">
-                            <input type="text" class="form-control" id="school_id" name="school_id" value="<?php echo $school_id; ?>">
+                            <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>"  placeholder="e.g PSG Matriculation" required>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="institutename">Institute Name</label>
-                            <input type="text" class="form-control" id="institutename" placeholder="e.g Haunuz dance school" value="<?php echo $institute[0]['institute_name']; ?>" name="institutename" required>
+                            <input type="text" class="form-control" id="institutename" placeholder="e.g Haunuz dance school" value="<?php echo $institute[0]['institute_name']; ?>" name="institutename" readonly required>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="type">Institute Type</label>
-                            <select class="form-control" id="type" name="type" required>
+                            <input type="text" class="form-control" id="type" name="type" value="<?php echo $categories[0]['category_name'];?>" readonly >
+                            <!-- <select class="form-control" id="type" name="type" readonly required disabled>
                                 <option  value=""  >--Select Type--</option>
                                 <?php
                                 $this->db->select('*');
                                 $this->db->from('institute_categories');
                                 $category = $this->db->get();
                                 foreach ($category->result() as $categorys) {
-                                    ?>
-                                    <option value="<?php echo $categorys->category_name; ?>" <?php if($categorys->category_name == $categories[0]['category_name']){echo "selected";}?> ><?php echo $categorys->category_name; ?></option>
+                                    ?><label> </label>
+                                    <option value="<?php echo $categorys->category_name; ?>"<?php if($categorys->category_name == $categories[0]['category_name']){echo "selected";}?> ><?php echo $categorys->category_name; ?></option>
                                 <?php } ?>
-                            </select>                                
+                            </select>                           -->
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="city">City</label>
-                            <select class="form-control" name="city" id="exampleFormControlSelect1" required>
-                                <option value="">--Select City--</option>
-                                <?php
-                                $this->db->select('*');
-                                $this->db->from('cities');
-                                $city = $this->db->get();
-                                foreach ($city->result() as $citys) {
-                                    ?>
-                                        <option value="<?php echo $citys->city_name; ?>" <?php if($citys->city_name == $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option>
-                                <?php } ?>
-                            </select>
+                            <input type="text" class="form-control" name="city" id="exampleFormControlSelect1" value="<?php echo $city1[0]['city_name'];?>" readonly >
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="text">Area</label>
-                            <input type="text" class="form-control" id="text" name="area" value="<?php echo $area[0]['area_name']; ?>"placeholder="e.g Nallampalayam" required>
+                            <input type="text" class="form-control" id="text" name="area" value="<?php echo $area[0]['area_name']; ?>" readonly placeholder="e.g Nallampalayam" required>
                         </div>
                     </div>
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
-                <h4 class="mb-2">Banner Image</h4>
-                <p class="mb-3">You can add 3 banner images in Platinum package.</p>
-                <hr class="mb-4">
+                <!-- <h4 class="mb-2">Banner Image</h4>
+                <p class="mb-3">You can add 3 banner images in Platinum package.</p> -->
+                <!-- <hr class="mb-4"> -->
                 <div class="form-row mt-3">
-                    <div class="col-lg-6 col-sm-6 file-img-upload">
+                    <!-- <div class="col-lg-6 col-sm-6 file-img-upload">
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" class="custom-file-input" id="inputGroupFile02" name="banner1" >
                                 <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                             </div>
-                        </div><!-- /input-group -->
+                        </div>
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" class="custom-file-input" id="inputGroupFile03" name="banner2" >
                                 <label class="custom-file-label" for="inputGroupFile03" aria-describedby="inputGroupFileAddon02">Choose file</label>
                             </div>
-                        </div><!-- /input-group -->
+                        </div>
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" class="custom-file-input" id="inputGroupFile04" name="banner3" >
                                 <label class="custom-file-label" for="inputGroupFile04" aria-describedby="inputGroupFileAddon02">Choose file</label>
                             </div>
-                        </div><!-- /input-group -->
+                        </div>
 
                         <div class="form-row">
                             <div class="col-lg-12">
@@ -134,13 +131,15 @@ $user = $this->db->get()->result_array();
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /file-img-upload -->
+                    </div> -->
+                    <!-- /file-img-upload -->
 
                     <div class="col-lg-6">
-                        <label for="Images">Images</label>
+                    <label for="Images">Images</label>
+                        <!-- <label for="Images">Banner Image Sample</label> -->
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                                    <?php for($i=0;$i<(count($inst_img) + count($category_img) + count($institute));$i++){ ?>
+                                    <?php for($i=0;$i<(count($inst_img) + count($category_img));$i++){ ?>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
                                     <?php } ?>
                                 </ol>
@@ -157,11 +156,7 @@ $user = $this->db->get()->result_array();
                                     <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['image'] ?> " alt="<?php echo $key ?> slide">
                                     </div>
                                 <?php } ?>
-                                <?php foreach($institute as $key=>$image){ ?>
-                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
-                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['news_image'] ?> " alt="<?php echo $key ?> slide">
-                                    </div>
-                                <?php } ?>
+                
                                 </div>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -187,60 +182,60 @@ $user = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="founded">Founded</label>
-                            <input type="text" class="form-control" id="founded" value="<?php echo $founded[0]['content']; ?>"name="founded" placeholder="e.g 1980" >
+                            <input type="text" class="form-control" id="founded" value="<?php echo $founded[0]['content']; ?>"name="founded" readonly placeholder="e.g 1980" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="special">Special</label>
-                            <input type="text" class="form-control" id="special" name="special" value="<?php echo $special[0]['content']; ?>" placeholder="e.g French class" >
+                            <input type="text" class="form-control" id="special" name="special" value="<?php echo $special[0]['content']; ?>" readonly placeholder="e.g French class" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="students">No.of Students</label>
-                            <input type="text" class="form-control" id="students" value="<?php echo $students[0]['content']; ?>"name="students" placeholder="e.g 2005" >
+                            <input type="text" class="form-control" id="students" value="<?php echo $students[0]['content']; ?>"name="students" readonly placeholder="e.g 2005" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="events">Events</label>
-                            <input type="text" class="form-control" id="events" name="events" value="<?php echo $events[0]['content']; ?>"placeholder="e.g Annual Day celebration" >
+                            <input type="text" class="form-control" id="events" name="events" value="<?php echo $events[0]['content']; ?>" readonly placeholder="e.g Annual Day celebration" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="achievements">Achievements</label>
-                            <input type="text" class="form-control" id="achievements" name="achievements" value="<?php echo $achievements[0]['content']; ?>"placeholder="e.g First in Sports" >
+                            <input type="text" class="form-control" id="achievements" name="achievements" value="<?php echo $achievements[0]['content']; ?>" readonly placeholder="e.g First in Sports" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="teachers">No.of Teachers</label>
-                            <input type="text" class="form-control" id="teachers" name="teachers" value="<?php echo $teachers[0]['content']; ?>"placeholder="e.g 55" >
+                            <input type="text" class="form-control" id="teachers" name="teachers" value="<?php echo $teachers[0]['content']; ?>" readonly placeholder="e.g 55" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="branches">Branches</label>
-                            <input type="text" class="form-control" id="branches" name="branches" value="<?php echo $branches[0]['content']; ?>" placeholder="e.g Coimbatore" >
+                            <input type="text" class="form-control" id="branches" name="branches" value="<?php echo $branches[0]['content']; ?>" readonly placeholder="e.g Coimbatore" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="languages">Languages</label>
-                            <input type="text" class="form-control" id="languages" name="languages" value="<?php echo $language[0]['content']; ?>" placeholder="e.g Hindi, Spoken English" >
+                            <input type="text" class="form-control" id="languages" name="languages" value="<?php echo $language[0]['content']; ?>" readonly placeholder="e.g Hindi, Spoken English" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <label for="customRadioInline1" class="pt-4 mb-0">Personal Trainer</label>
                         <div class="form-group">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline1" value="yes" <?php if(!empty($trainer[0]['content'])){echo "checked";} ?> name="customRadioInline1" class="custom-control-input">
+                                <input type="radio" id="customRadioInline1" value="yes" <?php if(!empty($trainer[0]['content'])){echo "checked";} ?> name="customRadioInline1" class="custom-control-input" disabled>
                                 <label class="custom-control-label mt-0" for="customRadioInline1">Yes</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" value="no" name="customRadioInline1" <?php if(empty($trainer[0]['content'])){echo "checked";} ?> class="custom-control-input">
+                                <input type="radio" id="customRadioInline2" value="no" name="customRadioInline1" <?php if(empty($trainer[0]['content'])){echo "checked";} ?> class="custom-control-input" disabled>
                                 <label class="custom-control-label mt-0" for="customRadioInline2">No</label>
                             </div>
                         </div>
@@ -252,75 +247,38 @@ $user = $this->db->get()->result_array();
                 <h4 class="mb-2">About</h4>
                 <hr class="mb-3">
                 <div class="form-row">
-                    <div class="col-lg-6 col-sm-6">
-                        <label for="inputGroupFile01">About Image</label>
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="inputGroupFile01" name="aboutimage" aria-describedby="aboutimage" >
-                                <input type="hidden" name="aboutoldimage" id="aboutoldimage" value="<?php echo $aboutimg[0]['image']; ?>">
-                                <input type="hidden" name="aboutoldimage_id" id="aboutoldimage_id" value="<?php echo $aboutimg[0]['id']; ?>">
-                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-6">
+                                <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="aboutdesc">About Description</label>
-                            <textarea class="form-control" name="aboutdesc" id="aboutdesc"rows="1" ><?php echo $institute[0]['about']; ?></textarea>
+                            <textarea class="form-control" name="aboutdesc" id="aboutdesc"rows="1" readonly><?php echo $institute[0]['about']; ?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
             </div>
-                <div class="edit-school-inner">
+            <?php if(isset($inst_category[0])){ ?>
+            <div class="edit-school-inner">
                     <h4 class="mb-3">Institute Categories</h4>
                     <hr class="mb-4">
-                    <?php if(isset($inst_category[0])){ ?>
                     <?php foreach($inst_category as $key=>$category){ ?>
                         <div class="form-row" id="insmore">
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
                                     <?php if($key==0){ ?><label for="categoryname[]">Category Name</label><?php } ?>
-                                    <input type="hidden" name="category_id[]" id="category_id[]" value="<?php echo $category['id']; ?>">
-                                    <input type="text" class="form-control" id="categoryname[]" name="categoryname[]" value="<?php echo $category['program_name'] ?>" placeholder="e.g Sports" >
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                            <?php if($key==0){ ?><label for="categoryimage[]">Category Image</label><?php } ?>
-                                <div class=" mb-3">
-                                    <div class="">
-                                        <input type="hidden" id="category_old_image" name="category_old_image[]" value="<?php echo $category['image']; ?>">
-                                        <input type="file" class=""  accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="categoryimage[]" name="categoryimage[]" aria-describedby="categoryimage[]" >
-                                        <!-- <label class="" for="">Choose file</label> -->
-                                    </div>
+                                    <input type="hidden" name="program_id[]" id="program_id[]" value="<?php echo $category['id']; ?>">
+                                    <input type="text" class="form-control" id="categoryname[]" name="categoryname[]" value="<?php echo $category['program_name'] ?>" placeholder="e.g Sports" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
                                 <?php if($key==0){ ?><label for="categorydesc[]">Category Description</label><?php } ?>
-                                    <textarea class="form-control" id="categorydesc[]" name="categorydesc[]" rows="1" ><?php echo $category['about']; ?></textarea>
+                                    <textarea class="form-control" id="categorydesc[]" name="categorydesc[]" rows="1" readonly><?php echo $category['about']; ?></textarea>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="form-group">
-                                    <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                    <?php if($key==0){ ?><a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add More</a><?php } ?>
-                                </div>
-                            </div>
+                            
                         </div><!-- /form-row -->
                     <?php } ?>
-                    <?php } else { ?>
-                        <div class="form-row" id="insmore">
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="form-group">
-                                    <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                    <a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add</a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>    
-                </div>
-
-            <div class="edit-school-inner">
+                    <?php }?>
+            <!-- <div class="edit-school-inner">
 
                 <h4 class="mb-3">Gallery Images</h4>
                 <hr class="mb-4">
@@ -329,68 +287,50 @@ $user = $this->db->get()->result_array();
                     <div class="form-row">
                         <div class="col-lg-4 col-sm-6">
                             <div class="input-group mb-3">
-                                <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
+                                <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext1[]" >
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6">
                             <input type="buton" class="add_field_button btn btn-primary btn-block" value="Add More">
                         </div>
-                    </div><!-- /form-row -->
-                </div><!-- /input_fields_wrap -->
-            </div>
+                    </div>
+                </div>
+            </div> -->
             <div class="edit-school-inner">
 
                 <h4 class="mb-3">News & Events</h4>
                 <hr class="mb-4">
 
-                <div class="form-row" >
+                <!-- <div class="form-row" >
                     <div class="col-lg-6 col-sm-6">
                         <label for="inputGroupFile01">News Banner Image</label>
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="inputGroupFile01" name ="newsbanner" aria-describedby="inputGroupFile01" >
-                                <input type="hidden" name="newsoldbanner" value="<?php echo $institute[0]['news_image']; ?>">
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-6"></div>
-                </div><!-- /form-row -->
-                <?php if(isset($news[0])){ ?>
-                    <?php foreach($news as $key=>$news1){ ?>
-                        <div class="form-row mt-3" id="newsmore">
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="form-group">
-                                    <?php if($key == 0){ ?><label for="newsheading[]">News Heading</label><?php } ?>
-                                    <input type="hidden" name="news_id[]" id="news_id[]" value="<?php echo $news1['id']; ?>">
-                                    <input type="text" class="form-control" id="newsheading[]" name="newsheading[]" value="<?php echo $news1['news']; ?>" placeholder="e.g Salsa Dance" >
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                <?php if($key == 0){ ?><label for="newsdesc[]">News Description</label><?php } ?>
-                                    <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" rows="1" ><?php echo $news1['news_brief']; ?></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-sm-6">
-                                <div class="form-group">
-                                    <label for="newsadd" style="visibility: hidden;">Add More</label>
-                                    <?php if($key == 0){ ?><a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add More</a><?php } ?>
-                                </div>
+                </div> -->
+                <!-- /form-row -->
+                <?php foreach($news as $key=>$news1){ ?>
+                    <div class="form-row mt-3" id="newsmore">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-group">
+                                <?php if($key == 0){ ?><label for="newsheading[]">News Heading</label><?php } ?>
+                                <input type="text" class="form-control" id="newsheading[]" name="newsheading[]" value="<?php echo $news1['news']; ?>" readonly placeholder="e.g Salsa Dance" >
                             </div>
                         </div>
-                    <?php } ?><!-- /form-row -->
-                <?php } else { ?>
-                    <div class="form-row mt-3" id="newsmore">
-                        <div class="col-lg-2 col-sm-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
-                                <label for="newsadd" style="visibility:;">News Heading</label>
-                                <?php if($key == 0){ ?><a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add</a><?php } ?>
+                            <?php if($key == 0){ ?><label for="newsdesc[]">News Description</label><?php } ?>
+                                <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" rows="1" readonly ><?php echo $news1['news_brief']; ?></textarea>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                <?php } ?><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
 
@@ -400,38 +340,35 @@ $user = $this->db->get()->result_array();
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $institute[0]['mobile']; ?>" placeholder="e.g +91 9876543210" >
+                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $institute[0]['mobile']; ?>" placeholder="e.g +91 9876543210" readonly>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $institute[0]['email']; ?>" placeholder="e.g admin@gmail.com" >
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $institute[0]['email']; ?>" placeholder="e.g admin@gmail.com" readonly>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="website">Website</label>
-                            <input type="text" class="form-control" id="website" name="website" value="<?php echo $institute[0]['website_url']; ?>" placeholder="e.g www.yourwebsite.com" >
+                            <input type="text" class="form-control" id="website" name="website" value="<?php echo $institute[0]['website_url']; ?>" placeholder="e.g www.yourwebsite.com" readonly>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="timing">Our Timings</label>
-                            <input type="text" class="form-control" id="timing" name="timing" value="<?php echo $institute[0]['timings']; ?>" placeholder="e.g 10:00 am - 8:00 pm" >
+                            <input type="text" class="form-control" id="timing" name="timing" value="<?php echo $institute[0]['timings']; ?>" placeholder="e.g 10:00 am - 8:00 pm" readonly>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <textarea class="form-control" id="address" name="address" rows="1" placeholder="e.g Enter your address" style="height: 80px;" ><?php echo $institute[0]['address']; ?></textarea>
+                            <textarea class="form-control" id="address" name="address" rows="1" placeholder="e.g Enter your address" style="height: 80px;" readonly><?php echo $institute[0]['address']; ?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
             </div>
-            <div class="edit-school-inner">
-                <button type="submit" class="btn btn-primary btn-save">SUBMIT</button>
-            </div><br>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->
@@ -455,7 +392,7 @@ $user = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(activity).append('<div class="form-row mx-0 w-100" name="insmore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="categoryname[]" placeholder="Sports"></div></div><input type="hidden" name="category_id[]" value=""><input type="hidden" name="category_old_image[]" value=""><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" class="" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="" name="categoryimage[]" aria-describedby=""></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="categorydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div></div>'); //add input box
+                $(activity).append('<div class="form-row mx-0 w-100" name="insmore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="categoryname[]" placeholder="Sports"></div></div><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" class="" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="" name="categoryimage[]" aria-describedby=""></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="categorydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div></div>'); //add input box
             }
         });
 
