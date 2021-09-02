@@ -705,7 +705,8 @@ $schooltype = $this->db->get()->result_array();
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
-                <button class="btn btn-primary btn-save" id="formsubmit">SUBMIT</button>
+            <a href="<?php echo base_url('schools/admin')?>"><button type="button" class="btn btn-warning">CANCEL</button></a>
+                <button class="btn btn-primary btn-save" style="margin-left:1060px" id="formsubmit">SUBMIT</button>
             </div><br>
             </form>
         </div><!-- /listing-section -->

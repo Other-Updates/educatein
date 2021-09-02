@@ -222,7 +222,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-5 col-sm-6">
                         <div class="form-group">
                             <label for="ad">Admission Info</label>
-                            <input type="text" name="ad" class="form-control" id="ad" value="<?php echo $school[0]['ad'];?>" readonly >
+                            <input type="text" name="ad" class="form-control" id="ad" style="width:950px;" value="<?php echo $school[0]['ad'];?>" readonly >
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -340,7 +340,7 @@ $schooltype = $this->db->get()->result_array();
             <div class="edit-school-inner">
 
                 <h4 class="mb-2">Additional Info</h4>
-                <p class="mb-3">Only 6 additional infos are displayed.</p>
+                <!-- <p class="mb-3">Only 6 additional infos are displayed.</p> -->
                 <hr class="mb-4">
                 <div class="form-row mt-3">
                     <div class="col-lg-4 col-sm-6">
@@ -446,7 +446,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="about">About Description</label>
-                            <textarea class="form-control" name="about" id="about" rows="1" style="height: 130px;"readonly><?php echo $school[0]['about']; ?></textarea >
+                            <textarea class="form-control" name="about" id="about" rows="1" style="height: 130px;width:1250px;"readonly><?php echo $school[0]['about']; ?></textarea >
                         </div>
                     </div>
                     <!-- <div class="col-lg-6 col-sm-6">
@@ -643,7 +643,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <textarea class="form-control" name="address" id="address" rows="1" readonly style="height: 80px;"><?php echo $school[0]['address']; ?></textarea>
+                            <textarea class="form-control" name="address" id="address" rows="1" readonly style="height: 80px;width:600px"><?php echo $school[0]['address']; ?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -685,6 +685,9 @@ $schooltype = $this->db->get()->result_array();
                     </div>
                 </div><!-- /form-row -->
             </div>
+            <div class="edit-school-inner">
+            <a href="<?php echo base_url('schools/admin')?>"><button type="button" style="margin-left:1170px" class="btn btn-warning">BACK</button></a>
+            </div><br>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->

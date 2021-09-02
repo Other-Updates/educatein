@@ -31,11 +31,11 @@
                         if($table_record['school_category_id'] == 4){
                         $date = strtotime($table_record['activated_at']);
                         $date = strtotime("+30 day", $date);
-                        $date = date('Y-m-d', $date);
+                        $date = date('d-m-Y', $date);
                         }else{
                             $date = strtotime($table_record['activated_at']);
                             $date = strtotime("+100 day", $date);
-                            $date = date('Y-m-d', $date);
+                            $date = date('d-m-Y', $date);
                         }
                     }else{
                         $date = "-";
@@ -52,7 +52,7 @@
                     . "<td class=' align-middle'> " . $table_record["school_name"] . "</td>"
                 //    . "<td class=' align-middle'> " . $table_record["name"] . "</td>"
                    . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
-                   . "<td  align='center' class=' align-middle'>" . $table_record["created_at"] . "</td>"
+                   . "<td  align='center' class=' align-middle'>" . date('d-m-Y', strtotime($table_record["created_at"])) . "</td>"
                    . "<td align='center' class=' align-middle'>" . $status . "</td>"
                    . "<td align='center' class=' align-middle'>" . $date . "</td>"
                 //    . "<td class='text-center align-middle'>" . $status . "</td>"
@@ -118,17 +118,25 @@ $(document).ready( function(){
     });
     $('.delete').click(function () {
         return confirm('Are you sure, want to Delete....!!!')
+
+//         swal("Are you sure?", {
+//   dangerMode: true,
+//   buttons: true,
+// });
     })
 
 //    $(document).ready(function () {
 //        $('#example').DataTable();
 //    });
-$('#del_btn').click(function(){
-    swal({
-  title: "Are you sure?",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-});
+// $('#del_btn').click(function(){
+//     swal({
+//   title: "Are you sure?",
+//   icon: "warning",
+//   buttons: true,
+//   dangerMode: true,
+// })
+// });
 </script>
+<!-- <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
+    <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" /> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.cs"></script>
