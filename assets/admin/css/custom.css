@@ -1,4 +1,4 @@
-.edit-school-inner {
+.edit-school-inner, .table-main {
     background: #fff;
     margin-bottom: 20px;
     padding: 20px;
@@ -32,4 +32,37 @@ a.btn:not([href]):not([tabindex]) {
 }
 .status-btn .btn {
     text-transform:  uppercase;
+}
+.footer {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 17px;
+}
+.container-fluid-inner {
+    background-color: #dedede;
+    padding: 15px;
+    min-height: calc(100vh - 97px);
+}
+.table-tit-main {
+    width: 100%;
+    position: relative;
+}
+.table-tit-main .btn-sm {
+    position: absolute;
+    right: 0;
+    top: 8px;
+}
+.table-tit {
+    font-size: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.table-responsive table.dataTable {
+    width: 99.9%;
+}
+.table-main {
+    padding-top: 0;
+    margin-bottom: 0;
 }

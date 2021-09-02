@@ -725,7 +725,7 @@
                     <div class="edit-school-inner">
                         <!-- <button class="btn btn-danger">CANCEL</button> -->
                         <button class="btn btn-primary btn-save buy_now" id="formsubmit">SUBMIT</button>
-                        <a href="<?php echo base_url('schools/admin')?>"><button type="button" style="margin-left:1060px" class="btn btn-warning">CANCEL</button></a>
+                        <a href="<?php echo base_url('schools/admin')?>" class="float-right"><button type="button" class="btn btn-danger">CANCEL</button></a>
                     </div>
                 </form>
             </div><!-- /listing-section -->
@@ -733,7 +733,7 @@
     </div><!-- /dashboard-content -->
 </div>
     <!-- Optional JavaScript -->
-
+<div class="clearfix"></div>
 
 
 <style>
@@ -745,7 +745,7 @@
     <div class="">
         <div class="">
             <div class="section-title mb-3">
-                <h1>Enter Class details</h1>
+                <h3>Enter Activity Class Details</h3>
                 <!-- <span>(Platinum Package)</span> -->
             </div><!-- /section-title -->
             <hr class="mb-3">
@@ -1093,7 +1093,7 @@
                 </div>
                 <div class="edit-school-inner">
                     <button class="btn btn-primary btn-save buy_now" id="formsubmit">SUBMIT</button>
-                    <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" style="margin-left:1060px" class="btn btn-warning">CANCEL</button></a>
+                    <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="float-right btn btn-danger">CANCEL</button></a>
                 </div>
                 </form>
             </div><!-- /listing-section -->
