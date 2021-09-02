@@ -115,7 +115,7 @@
     <div class="">
         <div class="">
             <div class="section-title mb-3">
-                <h3>Enter School Details</h3>
+                <h1>Enter School Details</h1>
                 <!-- <span>(Platinum Package)</span> -->
             </div><!-- /section-title -->
             <hr>
@@ -723,7 +723,7 @@
                         </div>
                     </div>
                     <div class="edit-school-inner">
-                        <button class="btn btn-danger">CANCEL</button>
+                        <!-- <button class="btn btn-danger">CANCEL</button> -->
                         <button class="btn btn-primary btn-save buy_now" id="formsubmit">SUBMIT</button>
                         <a href="<?php echo base_url('schools/admin')?>"><button type="button" style="margin-left:1060px" class="btn btn-warning">CANCEL</button></a>
                     </div>
