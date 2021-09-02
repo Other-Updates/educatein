@@ -615,7 +615,7 @@
 
     <body id="myApp">
         <div  class="wrapper">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0 mt-0">
+            <nav class="navbar navbar-expand-lg navbar-dark theme-bg py-0 mt-0">
                 <a class="navbar-brand" href="<?php echo base_url('admin/dashboard'); ?>"><h3>Edugatein</h3></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -634,7 +634,7 @@
                             <ul class="dropdown-menu dropdown-menu-right icons-right">
 <!--                                <a class="dropdown-item" href="<?php // echo base_url('admin/change_password');       ?>">Change Password</a>
                                 <a class="dropdown-item" href="<?php // echo base_url('admin/edit_profile');       ?>">Edit Profile</a>-->
-                                <div class="dropdown-divider"></div>
+                                <!-- <div class="dropdown-divider"></div> -->
                                 <a class="dropdown-item" href="<?php echo site_url('admin/logout'); ?>">Logout</a>
                             </ul> 
                         </li> 

@@ -51,7 +51,7 @@
 </div>
 <div class="row school">
                 <div class="col-lg-4 mab-20">
-                    <?php if($key == 0){ ?><h5 class="mb-2" style="color:red">Recent Schools</h5><?php } ?>
+                    <?php if($key == 0){ ?><h5 class="mb-2" >Recent Schools</h5><?php } ?>
                 </div>
 
     <div class="col-12">
@@ -94,7 +94,7 @@
         </div>
     </div>
     <div class="col-lg-4 mab-20">
-                    <h5 class="mb-2" style="color:red">Recent Institutes</h5>
+                    <h5 class="mb-2" >Recent Institutes</h5>
                 </div>
     <div class="col-12">
         <div class="edit-school-inner">

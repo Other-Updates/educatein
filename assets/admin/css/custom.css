@@ -36,8 +36,13 @@ a.btn:not([href]):not([tabindex]) {
 .footer {
     position: relative;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #ffadd8;
     padding: 10px 17px;
+}
+.footer a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: underline;
 }
 .container-fluid-inner {
     background-color: #dedede;
@@ -65,4 +70,10 @@ a.btn:not([href]):not([tabindex]) {
 .table-main {
     padding-top: 0;
     margin-bottom: 0;
+}
+a:hover {
+    cursor: pointer;
+}
+.theme-bg {
+    background-color: #d12881;
 }
