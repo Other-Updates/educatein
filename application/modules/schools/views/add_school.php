@@ -115,7 +115,7 @@
     <div class="">
         <div class="">
             <div class="section-title mb-3">
-                <h1>Enter School Details</h1>
+                <h3>Enter School Details</h3>
                 <!-- <span>(Platinum Package)</span> -->
             </div><!-- /section-title -->
             <hr>
@@ -236,7 +236,7 @@
                     <div class="edit-school-inner">
                         <div class="form-row mat-30">
                             <div class="col-lg-6 col-sm-6 file-img-upload">
-                                <label for="banner" style="margin-bottom: 0px;">Add Banner Images</label>
+                                <h4>Add Banner Images</h4>
                                 <small style="display: block;font-weight: 300;" class="mb-3">You can add 3 banner images in Platinum package.</small>
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
@@ -275,7 +275,7 @@
                         </div><!-- /form-row -->
                     </div>
                     <div class="edit-school-inner">
-                        <h4 class="mt-4 mb-2">Additional Info</h4>
+                        <h4>Additional Info</h4>
                         <p class="mb-3">Only 6 additional infos are displayed.</p>
                         <hr class="mb-4">
                         <div class="form-row mt-3">
@@ -372,7 +372,7 @@
                         </div><!-- /form-row -->
                     </div>
                     <div class="edit-school-inner">
-                        <h4 class="mt-4 mb-3">About Info</h4>
+                        <h4>About Info</h4>
                         <hr class="mb-4">
                         <div class="form-row mt-3">
                             <div class="col-lg-6 col-sm-6">
@@ -466,7 +466,7 @@
                         </div><!-- /form-row -->
                     </div>
                     <div class="edit-school-inner">
-                        <h4 class="mt-5 mb-3">School Activities</h4>
+                        <h4>School Activities</h4>
                         <hr class="mb-4">
                         <div class="form-row">
                             <div class="col-lg-3 col-sm-6">
@@ -485,8 +485,6 @@
                                 </div>
                             </div>
                         </div><!-- /form-row -->
-                    </div>
-                    <div class="edit-school-inner">
                         <div class="form-row">
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
@@ -536,7 +534,7 @@
                     </div><!-- /form-row -->
                     </div>
                     <div class="edit-school-inner">
-                        <h4 class="mt-4 mb-3">School Facilities</h4>
+                        <h4>School Facilities</h4>
                         <hr class="mb-4">
                         <div class="form-row">
                             <div class="col-lg-3 col-sm-6">
@@ -627,7 +625,7 @@
                         </div><!-- /form-row -->
                     </div>
                     <div class="edit-school-inner">
-                        <h4 class="mt-5 mb-3">Location</h4>
+                        <h4>Location</h4>
                         <hr class="mb-4">
                         <div class="form-row">
                             <div class="col-lg-4 col-sm-6">
@@ -663,7 +661,7 @@
                         </div><!-- /form-row -->
                     </div>
                     <div class="edit-school-inner">
-                        <h4 class="mt-3 mb-3">Social Links</h4>
+                        <h4>Social Links</h4>
                         <hr class="mb-4">
                         <div class="form-row">
                             <div class="col-lg-4 col-sm-6">
@@ -725,6 +723,7 @@
                         </div>
                     </div>
                     <div class="edit-school-inner">
+                        <button class="btn btn-danger">CANCEL</button>
                         <button class="btn btn-primary btn-save buy_now" id="formsubmit">SUBMIT</button>
                     </div>
                 </form>
