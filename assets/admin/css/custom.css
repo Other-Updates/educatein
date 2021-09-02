@@ -2,6 +2,8 @@
     background: #fff;
     margin-bottom: 20px;
     padding: 20px;
+    box-shadow: 0 6px 8px rgb(4 4 7 / 3%);
+    border-radius: 10px;
 }
 a.btn:not([href]):not([tabindex]) {
     color: #fff;
@@ -45,9 +47,9 @@ a.btn:not([href]):not([tabindex]) {
     text-decoration: underline;
 }
 .container-fluid-inner {
-    background-color: #dedede;
+    background-color: #f0efff;
     padding: 15px;
-    min-height: calc(100vh - 97px);
+    min-height: calc(100vh - 97px);    
 }
 .table-tit-main {
     width: 100%;
