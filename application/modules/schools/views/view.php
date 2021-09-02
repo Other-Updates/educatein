@@ -1,13 +1,15 @@
-<div class="d-flex col-12   mt-3 bg-white pb-3"> 
-    <div class="mr-auto"><h3 ><?php echo $formName; ?></h3></div> 
-    <?php
-    $this->db->select('id')->from('admin_users');
-    $userid = $this->db->get()->result_array(); 
-    // $userid= base64_decode($_GET['id']);
-    ?>
-    <a  class="btn btn-outline-red  ml-auto" href="<?php echo base_url();?>/schools/admin/add_school"><i class="fas fa-plus"></i> Add School</a>
-</div>
-<div class="col-12 mt-0 bg-white">
+
+<div class="table-main">
+    <div class="table-tit-main"> 
+        <div class="table-tit"><?php echo $formName; ?></div> 
+        <?php
+        $this->db->select('id')->from('admin_users');
+        $userid = $this->db->get()->result_array(); 
+        // $userid= base64_decode($_GET['id']);
+        ?>
+        <a class="btn btn-success btn-sm" href="<?php echo base_url();?>/schools/admin/add_school"><i class="fas fa-plus"></i> Add School</a>
+    </div>
+    <div class="clearfix"></div>
     <div class="table-responsive">
         <table class="table table-bordered table-sm bg-white" id="example">
             <thead>

@@ -71,21 +71,7 @@
                 position: relative;
                 min-height: 100%;
             }
-
-
-            body {
-                /* Margin bottom by footer height */
-                margin-bottom: 24px;
-                background-color: #f5f5f5;
-            }
-            .footer {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                /* Set the fixed height of the footer here */
-                height: 24px;
-                background-color: #ffffff;
-            }
+            
 
             .error
             { color: red; font-size: 12px}
@@ -655,21 +641,20 @@
                     </ul>
                 </div> 
             </nav>
-
-            <div class="container-fluid"  style="background-color: #dedede !important">
-                <?php if ($this->load->get_section('text_header') != '') { ?>
-                    <h1><?php echo $this->load->get_section('text_header'); ?></h1>
-                <?php } ?> 
-                <?php echo $output; ?> 
+            <div class="clearfix"></div>
+            <div class="container-fluid container-fluid-inner">
+                
+                    <?php if ($this->load->get_section('text_header') != '') { ?>
+                        <h1><?php echo $this->load->get_section('text_header'); ?></h1>
+                    <?php } ?> 
+                    <?php echo $output; ?> 
+                
             </div> <!--container -->
         </div>
         <!--Wrapper-->
-        <footer class="footer mt-2">
-            <div class="container-fluid" >
-                <div class="span6 b10">
-                      <a target="_blank" href="http://edugatein.com">Edugatein.com</a>  
-                </div>
-            </div>
+        <footer class="footer">
+            © Copyright 2021 <a target="_blank" href="http://edugatein.com">Edugatein</a>. All Rights Reserved. 
+            <span class="float-right">Powered By <a href="http://f2fsolutions.co.in/" target="_blank">F2F Solutions</a></span>
         </footer>
         <div class="overlay">
             <div class="loader"></div>
