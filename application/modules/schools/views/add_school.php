@@ -700,7 +700,7 @@
                                 <div class="form-group">
                                     <label for="school_category">Select Plan</label>
                                     <select class="form-control" name="school_category" id="exampleFormControlSelect1" required>
-                                        <option value="" >eg.Platinum</option>
+                                        <option value="" >--Select--</option>
                                         <option value="1">Platinum</option>
                                         <option value="2">Premium</option>
                                         <option value="3">Spectrum</option>
@@ -725,6 +725,7 @@
                     <div class="edit-school-inner">
                         <button class="btn btn-danger">CANCEL</button>
                         <button class="btn btn-primary btn-save buy_now" id="formsubmit">SUBMIT</button>
+                        <a href="<?php echo base_url('schools/admin')?>"><button type="button" style="margin-left:1060px" class="btn btn-warning">CANCEL</button></a>
                     </div>
                 </form>
             </div><!-- /listing-section -->
@@ -744,7 +745,7 @@
     <div class="">
         <div class="">
             <div class="section-title mb-3">
-                <h1>Enter your details</h1>
+                <h1>Enter Class details</h1>
                 <!-- <span>(Platinum Package)</span> -->
             </div><!-- /section-title -->
             <hr class="mb-3">
@@ -1070,7 +1071,7 @@
                             <div class="form-group">
                                 <label for="plan">Select Plan</label>
                                 <select class="form-control" name="position_id" id="exampleFormControlSelect1" required>
-                                    <option value="" >eg.Platinum</option>
+                                    <option value="" >--Select--</option>
                                     <option value="1" >Platinum</option>
                                     <option value="2">Premium</option>
                                     <option value="3">Spectrum</option>
@@ -1092,6 +1093,7 @@
                 </div>
                 <div class="edit-school-inner">
                     <button class="btn btn-primary btn-save buy_now" id="formsubmit">SUBMIT</button>
+                    <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" style="margin-left:1060px" class="btn btn-warning">CANCEL</button></a>
                 </div>
                 </form>
             </div><!-- /listing-section -->
@@ -1214,7 +1216,7 @@
                     minlength: 5,
                     equalTo: "#password"
                 },
-                terms: "required"
+                // terms: "required"
             },
             messages: {
                 confirm_password: "Password not matching"

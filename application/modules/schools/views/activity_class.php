@@ -30,11 +30,11 @@
                         if($table_record['position_id'] == 4){
                         $date = strtotime($table_record['activated_at']);
                         $date = strtotime("+30 day", $date);
-                        $date = date('Y-m-d', $date);
+                        $date = date('d-m-Y', $date);
                         }else{
                             $date = strtotime($table_record['activated_at']);
                             $date = strtotime("+100 day", $date);
-                            $date = date('Y-m-d', $date);
+                            $date = date('d-m-Y', $date);
                         }
                     }else{
                         $date = "-";
@@ -50,7 +50,7 @@
                     . "<td class=' align-middle text-center'>" . $count . "</td>"
                     . "<td class=' align-middle'> " . $table_record["institute_name"] . "</td>"
                     . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
-                    . "<td  align='center' class=' align-middle'>" . $table_record["created_at"] . "</td>"
+                    . "<td  align='center' class=' align-middle'>" . date('d-m-Y',strtotime($table_record["created_at"])) . "</td>"
                     . "<td align='center' class=' align-middle'>" . $status . "</td>"
                     . "<td align='center' class=' align-middle'>" . $date . "</td>"
                     . "<td class='text-center align-middle'>"

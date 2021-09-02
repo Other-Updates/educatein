@@ -43,7 +43,7 @@ foreach ($user->result() as $users) {
         </div><!-- /section-title -->
         <hr>
         <div class="listing-section mat-30">
-            <form action="<?php echo base_url() ?>add_listing_platinum/insert" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url() ?>add_listing_platinum/insert" id="platinum" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6" style="display:none">
                         <div class="form-group">
@@ -54,7 +54,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="schoolname">School Name</label>
-                            <input type="text" class="form-control" name="schoolname" id="schoolname" placeholder="e.g. Haunuz Matric School" required>
+                            <input type="text" class="form-control" name="schoolname" id="schoolname" placeholder="e.g. Haunuz Matric School" >
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
@@ -258,7 +258,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="activity">Activity</label>
-                            <input type="text" name="activity1" class="form-control" id="activity" placeholder="e.g.Martial Arts">
+                            <input type="text" name="activity" class="form-control" id="activity" placeholder="e.g.Martial Arts">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
@@ -660,3 +660,45 @@ foreach ($user->result() as $users) {
   });
  
 </script> -->
+<script>
+    $(document).ready(function(){
+        $("#formsubmit").on('click',function (event) {
+            event.preventDefault();
+            $("#platinum").validate({
+                rules: {
+                    schoolname: "required",
+                    // schoolboard: "required",
+                    // city:"required",
+                    // area:"required",
+                    // pincode:"required",
+                    // level:"required",
+                    // area:"required"
+                    // password: {
+                    //     minlength: 5
+                    // },
+                //     confirm_password: {
+                //         minlength: 5,
+                //         equalTo: "#password"
+                //     },
+                //     terms: "required"
+                },
+                // messages: {
+                //     confirm_password: "Password not matching"
+                // },
+                errorElement: 'div',
+                errorLabelContainer: '.errorTxt',
+                errorPlacement: function (error, element) {
+                    if (element.attr("name") == "terms")
+                        element.parents('.custom-checkbox').append(error);
+                    else
+                        element.parents('.form-group').append(error);
+                }
+            });
+        });
+    });
+</script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>     
+
+
+

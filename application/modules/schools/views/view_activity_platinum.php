@@ -176,7 +176,7 @@ $school_id = $institute[0]['id'];
             <div class="edit-school-inner">
 
                 <h4 class="mb-2">Additional Info</h4>
-                <p class="mb-3">Only 6 additional infos are displayed.</p>
+                <!-- <p class="mb-3">Only 6 additional infos are displayed.</p> -->
                 <hr class="mb-4">
                 <div class="form-row mt-3">
                     <div class="col-lg-4 col-sm-6">
@@ -250,7 +250,7 @@ $school_id = $institute[0]['id'];
                                 <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="aboutdesc">About Description</label>
-                            <textarea class="form-control" name="aboutdesc" id="aboutdesc"rows="1" readonly><?php echo $institute[0]['about']; ?></textarea>
+                            <textarea class="form-control" name="aboutdesc" id="aboutdesc"rows="1" style="height: 130px;width:1250px;" readonly><?php echo $institute[0]['about']; ?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -326,7 +326,7 @@ $school_id = $institute[0]['id'];
                         <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                             <?php if($key == 0){ ?><label for="newsdesc[]">News Description</label><?php } ?>
-                                <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" rows="1" readonly ><?php echo $news1['news_brief']; ?></textarea>
+                                <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" style="width:800px;" rows="1" readonly ><?php echo $news1['news_brief']; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -369,6 +369,9 @@ $school_id = $institute[0]['id'];
                     </div>
                 </div><!-- /form-row -->
             </div>
+            <div class="edit-school-inner">
+            <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" style="margin-left:1170px" class="btn btn-warning">BACK</button></a>
+            </div><br>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->
