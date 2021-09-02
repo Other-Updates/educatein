@@ -275,8 +275,9 @@ $user = $this->db->get()->result_array();
                     <h4 class="mb-3">Institute Categories</h4>
                     <hr class="mb-4">
                     <?php if(isset($inst_category[0])){ ?>
+                        <div id="insmore">
                     <?php foreach($inst_category as $key=>$category){ ?>
-                        <div class="form-row" id="insmore">
+                        <div class="form-row" >
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
                                     <?php if($key==0){ ?><label for="categoryname[]">Category Name</label><?php } ?>
@@ -303,11 +304,12 @@ $user = $this->db->get()->result_array();
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
                                     <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                    <?php if($key==0){ ?><a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add More</a><?php } ?>
+                                    <?php if(empty($inst_category[$key+1])){ ?><a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add More</a><?php } ?>
                                 </div>
                             </div>
                         </div><!-- /form-row -->
                     <?php } ?>
+                    </div>
                     <?php } else { ?>
                         <div class="form-row" id="insmore">
                             <div class="col-lg-3 col-sm-6">
@@ -358,8 +360,9 @@ $user = $this->db->get()->result_array();
                     <div class="col-lg-6"></div>
                 </div><!-- /form-row -->
                 <?php if(isset($news[0])){ ?>
+                    <div id="newsmore">
                     <?php foreach($news as $key=>$news1){ ?>
-                        <div class="form-row mt-3" id="newsmore">
+                        <div class="form-row mt-3" >
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <?php if($key == 0){ ?><label for="newsheading[]">News Heading</label><?php } ?>
@@ -376,17 +379,18 @@ $user = $this->db->get()->result_array();
                             <div class="col-lg-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="newsadd" style="visibility: hidden;">Add More</label>
-                                    <?php if($key == 0){ ?><a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add More</a><?php } ?>
+                                    <?php if(empty($news[$key+1])){ ?><a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add More</a><?php } ?>
                                 </div>
                             </div>
                         </div>
                     <?php } ?><!-- /form-row -->
+                    </div>
                 <?php } else { ?>
                     <div class="form-row mt-3" id="newsmore">
                         <div class="col-lg-2 col-sm-6">
                             <div class="form-group">
                                 <label for="newsadd" style="visibility:;">News Heading</label>
-                                <?php if($key == 0){ ?><a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add</a><?php } ?>
+                                <a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add</a>
                             </div>
                         </div>
                     </div>

@@ -338,13 +338,13 @@ class Add_listing_platinum extends CI_Controller {
             $this->db->insert('platinum_datas', $languageinsert);
         }
 
-        if (!empty($_POST['activity1'])) {
+        if (!empty($_POST['activity'])) {
             $activityinsert = array(
                 'school_id' => $school_id,
                 'icon' => 'activity.png',
                 'heading' => 'activity',
-                'content' => $_POST['activity1'],
-                'brief_content' => $_POST['activity1'],
+                'content' => $_POST['activity'],
+                'brief_content' => $_POST['activity'],
                 'is_active' => 1
             );
             $this->db->insert('platinum_datas', $activityinsert);
