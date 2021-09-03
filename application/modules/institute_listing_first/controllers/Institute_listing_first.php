@@ -131,37 +131,12 @@ class Institute_listing_first extends CI_Controller {
         }
 
 
-        $aboutimage = $_FILES['aboutimage']['name'];
-        $aboutimage_ext = pathinfo($aboutimage, PATHINFO_EXTENSION);
-        // echo $banner1_ext;
-        // exit();
-        $aboutimage_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $aboutimage_ext;
-        $aboutimage_type = $_FILES['aboutimage']['type'];
-        $aboutimage_size = $_FILES['aboutimage']['size'];
-        $aboutimage_tem_loc = $_FILES['aboutimage']['tmp_name'];
-        $aboutimage_store = FCPATH . "/laravel/public/" . $aboutimage_name;
-
-        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-
-
-        if (in_array($aboutimage_ext, $allowed)) {
-
-            if (move_uploaded_file($aboutimage_tem_loc, $aboutimage_store)) {
-                $banner2insert = array(
-                    'institute_id' => $school_id,
-                    'category_id' => 1,
-                    'image' => $aboutimage_name,
-                    'is_active' => 1
-                );
-
-                $this->db->insert('institute_images', $banner2insert);
-            }
-        }
+        
 
 
         $schoolinsert = array(
             'category_id' => $category_id,
-            // 'position_id' => 1,
+            'position_id' => 4,
             'institute_name' => $_POST['institutename'],
             'slug' => $_POST['institutename'],
             'mobile' => $_POST['phone'],
@@ -192,6 +167,33 @@ class Institute_listing_first extends CI_Controller {
         $schooldetail = $this->db->get();
         foreach ($schooldetail->result() as $schooldetails) {
             $school_id = $schooldetails->id;
+        }
+
+        $aboutimage = $_FILES['aboutimage']['name'];
+        $aboutimage_ext = pathinfo($aboutimage, PATHINFO_EXTENSION);
+        // echo $banner1_ext;
+        // exit();
+        $aboutimage_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $aboutimage_ext;
+        $aboutimage_type = $_FILES['aboutimage']['type'];
+        $aboutimage_size = $_FILES['aboutimage']['size'];
+        $aboutimage_tem_loc = $_FILES['aboutimage']['tmp_name'];
+        $aboutimage_store = FCPATH . "/laravel/public/" . $aboutimage_name;
+
+        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+        if (in_array($aboutimage_ext, $allowed)) {
+
+            if (move_uploaded_file($aboutimage_tem_loc, $aboutimage_store)) {
+                $banner2insert = array(
+                    'institute_id' => $school_id,
+                    'category_id' => 1,
+                    'image' => $aboutimage_name,
+                    'is_active' => 1
+                );
+
+                $this->db->insert('institute_images', $banner2insert);
+            }
         }
 
         // banner1 image save
@@ -568,17 +570,47 @@ class Institute_listing_first extends CI_Controller {
 
     public function update_platinum($school_id){
         $data = array();
-        $data[] = array(
-            'position_id' => 1,
-            'valitity' => 100,
-            'id' => base64_decode($school_id)
+        $data = array(
+            'position_id' => 4,
+            'valitity' => 30,
         );
-        $this->db->update_batch('institute_details',$data,'id');
+        $this->db->update('institute_details',$data,array('id' => base64_decode($school_id)));
+        $the_session = array("planUpdate" => "platinum", "SchoolId" => base64_decode($school_id));
+        $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
-            window.location.href = "https://rzp.io/l/instituteplatinumpackage";
+            window.location.href = "https://rzp.io/l/FClQWkjCke";
             </script>
         <?php
     }
+
+    public function razorPaySuccess() {
+        $data = array();
+        if($this->session->userdata('planUpdate') == 'platinum') { 
+            $data = array(
+                'position_id' => 1,
+                'valitity' => 100,
+            );
+        }
+        if($this->session->userdata('planUpdate') == 'premium') { 
+            $data = array(
+                'position_id' => 2,
+                'valitity' => 100,
+            );
+        }
+        if($this->session->userdata('planUpdate') == 'spectrum') { 
+            $data = array(
+                'position_id' => 3,
+                'valitity' => 100,
+            );
+        }
+        if(!empty($data)){
+            $this->db->update('institute_details',$data,array('id' => $this->session->userdata('SchoolId')));
+        }
+        $this->load->view('add_listing_platinum/payment_success');
+        $array_items = array('planUpdate' => '', 'SchoolId' => '');
+        $this->session->unset_userdata($array_items);
+    }
+
 }
 ?>

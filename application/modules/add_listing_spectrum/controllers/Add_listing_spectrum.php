@@ -406,12 +406,13 @@ class Add_listing_spectrum extends CI_Controller {
 
     public function update_spectrum($school_id){
         $data = array();
-        $data[] = array(
-            'school_category_id' => 3,
-            'valitity' => 100,
-            'id' => base64_decode($school_id)
+        $data = array(
+            'school_category_id' => 4,
+            'valitity' => 30,
         );
-        $this->db->update_batch('school_details',$data,'id');
+        $this->db->update('school_details',$data,array('id' => base64_decode($school_id)));
+        $the_session = array("planUpdate" => "spectrum", "SchoolId" => base64_decode($school_id));
+        $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
             window.location.href = "https://rzp.io/l/schoolspectrumpackage";

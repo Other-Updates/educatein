@@ -573,6 +573,11 @@ class admin extends CI_Controller {
         if (is_array($act)) {
             foreach($act as $key=>$facility) {
 
+                // if(!isset($facility) && isset($_POST['facilityid'][$key])){
+                //     $this->db->where('id',$_POST['facilityid'][$key]);
+                //     $this->db->delete('school_facilities');
+                // }
+
                 if(!empty($_FILES['facilityimage']['name'][$key])){
                     $facility2 = $_FILES['facilityimage']['name'][$key];
                     $facility2_ext = pathinfo($facility2, PATHINFO_EXTENSION);
@@ -2424,7 +2429,7 @@ class admin extends CI_Controller {
         $result = curl_exec($ch); // This is the result from the API
         curl_close($ch);
 
-        // redirect('admin/schools/view_school?id='.$school_id,'refresh');
+        redirect('admin/schools/view_school?id='.$school_id,'refresh');
     }
 
     function reject_school($school_id){
@@ -2538,7 +2543,7 @@ class admin extends CI_Controller {
     
     </script> -->
 <?php
-        // redirect('admin/schools/view_activityclass?id='.$school_id);
+        redirect('admin/schools/view_activityclass?id='.$school_id);
     }
 
     function reject_class($school_id){
@@ -2758,7 +2763,13 @@ class admin extends CI_Controller {
         } else {
             $customRadio = NULL;
         }
-
+        if(isset($_POST['status']) == 1){
+            $status = 1;
+            $act_date = date('Y-m-d H:i:s');
+        }else{
+            $status = null;
+            $act_date = null;
+        }
         $schoolinsert = array(
             'school_name' => $school['schoolname'],
             'slug' => $school['schoolname'],
@@ -2795,7 +2806,7 @@ class admin extends CI_Controller {
             'linkedin' => $school['linkedin'],
             'pinterest' => $school['pinterest'],
             'logo' => $banner1_name,
-            'activated_at' => date('Y-m-d H:i:s'),
+            'activated_at' => $act_date,
             'is_active' => 1,
             // 'valitity' => 100
         );
@@ -3655,12 +3666,18 @@ class admin extends CI_Controller {
                 $this->db->insert('institute_images', $banner2insert);
             }
         }
-
+        if(isset($_POST['status']) == 1){
+            $status = 1;
+            $act_date = date('Y-m-d H:i:s');
+        }else{
+            $status = null;
+            $act_date = null;
+        }
 
         $schoolinsert = array(
             'category_id' => $category_id,
             'position_id' => $_POST['position_id'],
-            'status' => $_POST['status'],
+            'status' => $status,
             'institute_name' => $_POST['institutename'],
             'slug' => $_POST['institutename'],
             'mobile' => $_POST['phone'],
@@ -3679,7 +3696,7 @@ class admin extends CI_Controller {
             'timings' => $_POST['timing'],
             'logo' => $banner1_name,
             'news_image' => $newsbanner1_name,
-            'activated_at' => date('Y-m-d H:i:s'),
+            'activated_at' => $act_date,
             'is_active' => 1,
             // 'valitity'=>100
         );

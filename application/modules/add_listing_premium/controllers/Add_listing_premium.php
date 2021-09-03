@@ -416,12 +416,13 @@ class Add_listing_premium extends CI_Controller {
 
     public function update_premium($school_id){
         $data = array();
-        $data[] = array(
-            'school_category_id' => 2,
-            'valitity' => 100,
-            'id' => base64_decode($school_id)
+        $data = array(
+            'school_category_id' => 4,
+            'valitity' => 30,
         );
-        $this->db->update_batch('school_details',$data,'id');
+        $this->db->update('school_details',$data,array('id' => base64_decode($school_id)));
+        $the_session = array("planUpdate" => "premium", "SchoolId" => base64_decode($school_id));
+        $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
             window.location.href = "https://rzp.io/l/schoolpremiumpackage";

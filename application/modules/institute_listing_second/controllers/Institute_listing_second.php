@@ -324,14 +324,16 @@ class Institute_listing_second extends CI_Controller {
     public function update_premium($school_id){
         $data = array();
         $data[] = array(
-            'position_id' => 2,
-            'valitity' => 100,
+            'position_id' => 4,
+            'valitity' => 30,
             'id' => base64_decode($school_id)
         );
         $this->db->update_batch('institute_details',$data,'id');
+        $the_session = array("planUpdate" => "premium", "SchoolId" => base64_decode($school_id));
+        $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
-            window.location.href = "https://rzp.io/l/schoolpremiumpackage";
+            window.location.href = "https://rzp.io/l/Ver3PUyVi";
             </script>
         <?php
     }

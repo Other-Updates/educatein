@@ -192,7 +192,7 @@ class Add_listing_platinum extends CI_Controller {
             'pincode' => $_POST['pincode'],
             'affiliation_id' => $schoolboard_id,
             'schooltype_id' => $level_id,
-            // 'school_category_id' => 1,
+            'school_category_id' => 4,
             'about' => $school['about'],
             'acadamic' => $_POST['academic'],
             'website_url' => $school['website'],
@@ -963,16 +963,42 @@ class Add_listing_platinum extends CI_Controller {
     }
 
     public function razorPaySuccess() {
-        $data = [
-            'user_id' => '1',
-            'payment_id' => $this->input->post('razorpay_payment_id'),
-            'amount' => $this->input->post('totalAmount'),
-            'product_id' => $this->input->post('product_id'),
-        ];
-        $insert = $this->db->insert('payments', $data);
-        $arr = array('msg' => 'Payment successfully credited', 'status' => true);
-        $this->session->set_flashdata('msg', 'Payment successfully credited');
-        // $this->load->view('payment_success');
+
+        // $data = [
+        //     'user_id' => '1',
+        //     'payment_id' => $this->input->post('razorpay_payment_id'),
+        //     'amount' => $this->input->post('totalAmount'),
+        //     'product_id' => $this->input->post('product_id'),
+        // ];
+        // $insert = $this->db->insert('payments', $data);
+        // $arr = array('msg' => 'Payment successfully credited', 'status' => true);
+        // $this->session->set_flashdata('msg', 'Payment successfully credited');
+        // print_r($this->session->userdata('planUpdate'));exit;
+        $data = array();
+        if($this->session->userdata('planUpdate') == 'platinum') { 
+            $data = array(
+                'school_category_id' => 1,
+                'valitity' => 100,
+            );
+        }
+        if($this->session->userdata('planUpdate') == 'premium') { 
+            $data = array(
+                'school_category_id' => 2,
+                'valitity' => 100,
+            );
+        }
+        if($this->session->userdata('planUpdate') == 'spectrum') { 
+            $data = array(
+                'school_category_id' => 3,
+                'valitity' => 100,
+            );
+        }
+        if(!empty($data)){
+            $this->db->update('school_details',$data,array('id' => $this->session->userdata('SchoolId')));
+        }
+        $this->load->view('payment_success');
+        $array_items = array('planUpdate' => '', 'SchoolId' => '');
+        $this->session->unset_userdata($array_items);
     }
 
     public function package($school_id){
@@ -983,15 +1009,16 @@ class Add_listing_platinum extends CI_Controller {
     public function update_platinum($school_id){
         // global $school_id;
         $data = array();
-        $data[] = array(
-            'school_category_id' => NULL,
+        $data = array(
+            'school_category_id' => 4,
             'valitity' => 30,
-            'id' => base64_decode($school_id)
         );
-        $this->db->update_batch('school_details',$data,'id');
+        $this->db->update('school_details',$data,array('id' => base64_decode($school_id)));
+        $the_session = array("planUpdate" => "platinum", "SchoolId" => base64_decode($school_id));
+        $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
-                window.location.href = "https://rzp.io/l/yv8PYEYJR";
+                window.location.href = "https://rzp.io/l/FEnsGlNP";
             </script>
         <?php
     }

@@ -660,7 +660,7 @@ foreach ($user->result() as $users) {
   });
  
 </script> -->
-<script>
+<!-- <script>
     $(document).ready(function(){
         $("#formsubmit").on('click',function (event) {
             event.preventDefault();
@@ -682,9 +682,9 @@ foreach ($user->result() as $users) {
                 //     },
                 //     terms: "required"
                 },
-                // messages: {
-                //     confirm_password: "Password not matching"
-                // },
+                messages: {
+                    schoolname: "this field is required"
+                },
                 errorElement: 'div',
                 errorLabelContainer: '.errorTxt',
                 errorPlacement: function (error, element) {
@@ -696,9 +696,9 @@ foreach ($user->result() as $users) {
             });
         });
     });
-</script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>     
+</script> -->
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
+<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>   
 
 
 
