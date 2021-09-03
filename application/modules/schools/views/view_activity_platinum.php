@@ -103,42 +103,13 @@ $school_id = $institute[0]['id'];
                 <!-- <h4 class="mb-2">Banner Image</h4>
                 <p class="mb-3">You can add 3 banner images in Platinum package.</p> -->
                 <!-- <hr class="mb-4"> -->
-                <div class="form-row mt-3">
-                    <!-- <div class="col-lg-6 col-sm-6 file-img-upload">
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" class="custom-file-input" id="inputGroupFile02" name="banner1" >
-                                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" class="custom-file-input" id="inputGroupFile03" name="banner2" >
-                                <label class="custom-file-label" for="inputGroupFile03" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" class="custom-file-input" id="inputGroupFile04" name="banner3" >
-                                <label class="custom-file-label" for="inputGroupFile04" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-lg-12">
-                                <div class="alert alert-info mab-30" role="alert">
-                                    <p class="image-note">Banner images are highly visible for Platinum package. So choose your images in high quality to attract peoples.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- /file-img-upload -->
-
-                    <div class="col-lg-6">
-                    <label for="Images">Images</label>
+                
+                                    <div class="row">
+                    <div class="col-lg-12">
+                        <label for="Images">Images</label>
                         <!-- <label for="Images">Banner Image Sample</label> -->
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
+                            <ol class="carousel-indicators">
                                     <?php for($i=0;$i<(count($inst_img) + count($category_img));$i++){ ?>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
                                     <?php } ?>
@@ -171,6 +142,7 @@ $school_id = $institute[0]['id'];
                             <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/1st-banner.jpg" class="w-100 rounded" alt="Images" style="width: 100%;height: 252px;object-fit: cover;">	
                         </div> -->
                     </div>
+                                    </div>
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
@@ -247,10 +219,10 @@ $school_id = $institute[0]['id'];
                 <h4 class="mb-2">About</h4>
                 <hr class="mb-3">
                 <div class="form-row">
-                                <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-12 col-sm-12">
                         <div class="form-group">
                             <label for="aboutdesc">About Description</label>
-                            <textarea class="form-control" name="aboutdesc" id="aboutdesc"rows="1" style="height: 130px;width:1250px;" readonly><?php echo $institute[0]['about']; ?></textarea>
+                            <textarea class="form-control" name="aboutdesc" id="aboutdesc"rows="1" style="height: 130px;" readonly><?php echo $institute[0]['about']; ?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -268,7 +240,7 @@ $school_id = $institute[0]['id'];
                                     <input type="text" class="form-control" id="categoryname[]" name="categoryname[]" value="<?php echo $category['program_name'] ?>" placeholder="e.g Sports" readonly>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6">
+                            <div class="col-lg-9 col-sm-6">
                                 <div class="form-group">
                                 <?php if($key==0){ ?><label for="categorydesc[]">Category Description</label><?php } ?>
                                     <textarea class="form-control" id="categorydesc[]" name="categorydesc[]" rows="1" readonly><?php echo $category['about']; ?></textarea>
@@ -294,8 +266,8 @@ $school_id = $institute[0]['id'];
                             <input type="buton" class="add_field_button btn btn-primary btn-block" value="Add More">
                         </div>
                     </div>
-                </div>
-            </div> -->
+                </div> -->
+            </div>
             <div class="edit-school-inner">
 
                 <h4 class="mb-3">News & Events</h4>
@@ -317,16 +289,16 @@ $school_id = $institute[0]['id'];
                 <!-- /form-row -->
                 <?php foreach($news as $key=>$news1){ ?>
                     <div class="form-row mt-3" id="newsmore">
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <?php if($key == 0){ ?><label for="newsheading[]">News Heading</label><?php } ?>
                                 <input type="text" class="form-control" id="newsheading[]" name="newsheading[]" value="<?php echo $news1['news']; ?>" readonly placeholder="e.g Salsa Dance" >
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-9 col-sm-6">
                             <div class="form-group">
                             <?php if($key == 0){ ?><label for="newsdesc[]">News Description</label><?php } ?>
-                                <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" style="width:800px;" rows="1" readonly ><?php echo $news1['news_brief']; ?></textarea>
+                                <textarea class="form-control" id="newsdesc[]" name="newsdesc[]"  rows="1" readonly ><?php echo $news1['news_brief']; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -361,7 +333,7 @@ $school_id = $institute[0]['id'];
                             <input type="text" class="form-control" id="timing" name="timing" value="<?php echo $institute[0]['timings']; ?>" placeholder="e.g 10:00 am - 8:00 pm" readonly>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-9 col-sm-6">
                         <div class="form-group">
                             <label for="address">Address</label>
                             <textarea class="form-control" id="address" name="address" rows="1" placeholder="e.g Enter your address" style="height: 80px;" readonly><?php echo $institute[0]['address']; ?></textarea>
@@ -370,8 +342,8 @@ $school_id = $institute[0]['id'];
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
-            <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" style="margin-left:1170px" class="btn btn-warning">BACK</button></a>
-            </div><br>
+            <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger">BACK</button></a>
+            </div>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->

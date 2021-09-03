@@ -115,7 +115,7 @@
     <div class="">
         <div class="">
             <div class="section-title mb-3">
-                <h1>Enter School Details</h1>
+                <h3>Enter School Details</h3>
                 <!-- <span>(Platinum Package)</span> -->
             </div><!-- /section-title -->
             <hr>
@@ -208,7 +208,7 @@
                                             <input type="radio" id="customRadio1" name="customRadio1" value="1" class="custom-control-input" >
                                             <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>
                                         </div>
-                                        <div class="custom-control custom-radio">
+                                        <div class="custom-control custom-radio ml-3">
                                             <input type="radio" id="customRadio2" name="customRadio1" value="0"  class="custom-control-input">
                                             <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">No</label>
                                         </div>
@@ -224,7 +224,7 @@
                                             <input type="radio" id="customRadio3" name="customRadio2"  value="1"  class="custom-control-input" >
                                             <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>
                                         </div>
-                                        <div class="custom-control custom-radio">
+                                        <div class="custom-control custom-radio ml-3">
                                             <input type="radio" id="customRadio4" name="customRadio2"  value="0"  class="custom-control-input">
                                             <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio4">No</label>
                                         </div>
@@ -809,7 +809,7 @@
                 <div class="edit-school-inner">
                     <div class="form-row mt-3">
                         <div class="col-lg-6 col-sm-6 file-img-upload">
-                            <label for="inputGroupFile" style="margin-bottom: 0px;">Add Banner Images</label>
+                            <h4>Add Banner Images</h4>
                             <small style="display: block;font-weight: 300;" class="mb-3">You can add 3 banner images in Platinum package.</small>
                             <div class="input-group mb-3">
                                 <div class="custom-file">
@@ -849,7 +849,7 @@
                 </div>
                 <div class="edit-school-inner">
 
-                    <h4 class="mt-3 mb-2">Additional Info</h4>
+                    <h4 >Additional Info</h4>
                     <p class="mb-3">Only 6 additional infos are displayed.</p>
                     <hr class="mb-4">
                     <div class="form-row mt-3">
@@ -918,7 +918,7 @@
                 </div>
                 <div class="edit-school-inner">
 
-                    <h4 class="mt-4 mb-2">About</h4>
+                    <h4 >About</h4>
                     <hr class="mb-3">
                     <div class="form-row">
                         <div class="col-lg-6 col-sm-6">
@@ -940,7 +940,7 @@
                 </div>
                 <div class="edit-school-inner">
 
-                    <h4 class="mt-4 mb-3">Institute Categories</h4>
+                    <h4>Institute Categories</h4>
                     <hr class="mb-4">
                     <div class="form-row" id="insmore">
                         <div class="col-lg-3 col-sm-6">
@@ -974,7 +974,7 @@
                 </div>
                 <div class="edit-school-inner">
 
-                    <h3 class="mt-4 mb-3">Gallery Images</h3>
+                    <h4>Gallery Images</h4>
                     <hr class="mb-4">
                     <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
                     <div class="input_fields_wrap mt-3">
@@ -992,7 +992,7 @@
                 </div>
                 <div class="edit-school-inner">
 
-                    <h3 class="mt-4 mb-3">News & Events</h3>
+                    <h4>News & Events</h4>
                     <hr class="mb-4">
 
                     <div class="form-row" >
@@ -1032,7 +1032,7 @@
                 </div>
                 <div class="edit-school-inner">
 
-                    <h3 class="mt-5 mb-3">Location</h3>
+                    <h4>Location</h4>
                     <hr class="mb-4">
                     <div class="form-row">
                         <div class="col-lg-3 col-sm-6">

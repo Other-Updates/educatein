@@ -434,9 +434,9 @@ $user = $this->db->get()->result_array();
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
-                <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-warning">CANCEL</button></a>
-                <button type="submit" style="margin-left:1060px" class="btn btn-primary btn-save">SUBMIT</button>
-            </div><br>
+                <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger float-right">CANCEL</button></a>
+                <button type="submit" class="btn btn-primary btn-save">SUBMIT</button>
+            </div>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->
