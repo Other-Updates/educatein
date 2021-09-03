@@ -219,10 +219,10 @@ $schooltype = $this->db->get()->result_array();
                             </select> -->
                         </div>
                     </div>
-                    <div class="col-lg-5 col-sm-6">
+                    <div class="col-lg-9 col-sm-6">
                         <div class="form-group">
                             <label for="ad">Admission Info</label>
-                            <input type="text" name="ad" class="form-control" id="ad" style="width:950px;" value="<?php echo $school[0]['ad'];?>" readonly >
+                            <input type="text" name="ad" class="form-control" id="ad" value="<?php echo $school[0]['ad'];?>" readonly >
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -266,41 +266,9 @@ $schooltype = $this->db->get()->result_array();
             <!-- <h4 class="mb-3">Banner Image</h4>
                     <hr class="mb-4"> -->
                 <div class="form-row mat-30">
-                    <div class="col-lg-6 col-sm-6 file-img-upload">
-                        <!-- <label for="banner" style="margin-bottom: 0px;">Add Banner Images</label>
-                        <small style="display: block;font-weight: 300;" class="mb-3">You can add 3 banner images in Platinum package.</small> -->
-                        <!-- <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" name="banner1" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="inputGroupFile02">
-                                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                            </div> -->
-                        <!-- </div> -->
-                        <!-- /input-group -->
-                        <!-- <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" name="banner2" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="inputGroupFile03" >
-                                <label class="custom-file-label" for="inputGroupFile03" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                            </div>
-                        </div> -->
-                        <!-- /input-group -->
-                        <!-- <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" name="banner3" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="inputGroupFile04">
-                                <label class="custom-file-label" for="inputGroupFile04" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                            </div>
-                        </div> -->
-                        <!-- /input-group -->
-
-                        <!-- <div class="form-row">
-                            <div class="col-lg-12">
-                                <div class="alert alert-success mab-30" role="alert">
-                                    <p class="image-note">Banner images are highly visible for Platinum package. So choose your images in high quality to attract peoples.</p>
-                                </div>
-                            </div>
-                        </div>-->
-                    </div>     
+                        
                                     <!-- /file-img-upload -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-12">
                         <label for="bannerimagesample" class="mab-30"> Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
@@ -446,7 +414,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="about">About Description</label>
-                            <textarea class="form-control" name="about" id="about" rows="1" style="height: 130px;width:1250px;"readonly><?php echo $school[0]['about']; ?></textarea >
+                            <textarea class="form-control" name="about" id="about" rows="1" style="height: 130px;" readonly><?php echo $school[0]['about']; ?></textarea >
                         </div>
                     </div>
                     <!-- <div class="col-lg-6 col-sm-6">
@@ -470,7 +438,7 @@ $schooltype = $this->db->get()->result_array();
                      foreach($management as $key=>$management_data){ 
                         $selectedActivity[] = $management_data['activity_name'];
                       } ?>
-                    <div class="col-lg-12 col-sm-6">
+                    <div class="col-lg-6 col-sm-6">
                         <h5 class="pink mt-2">Special Info</h5>
                         <ul class="list-inline">
                             <li class="list-inline-item">
@@ -535,47 +503,54 @@ $schooltype = $this->db->get()->result_array();
                             </li>
                         </ul>
                     </div><!-- /form-row -->
+                </div>
             </div>
             <?php if(isset($school_activities[0])){ ?>
             <div class="edit-school-inner">
 
                 <h4 class="mb-3">School Activities</h4>
                 <hr class="mb-4">
+                <div class="row">
                 <?php foreach($school_activities as $key=>$school_activities1){ ?>
-                <div class="form-row">
+                
                     <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <?php if($key==0){ ?><label for="activity1">Activity Name</label> <?php } ?>
-                            <input type="text" name="activity1" class="form-control" id="activity1" value="<?php echo $school_activities1['activity_name']; ?>"readonly >
-                        </div>
-                    </div>
-                </div><!-- /form-row -->
-                <?php } ?>
-                <div class="col-lg-4">
-                    <label for="bannerimagesample" class="mab-30"> Images</label>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <?php for($i=0;$i<(count($school_img));$i++){ ?>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
-                            <?php } ?>
-                        </ol>
-                        <div class="carousel-inner">
-                            <?php $activeslide = true; ?>
-
-                            <?php foreach($school_img as $key=>$image){ ?>
-                                <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
-                                <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['images'] ?> " alt="<?php echo $key ?> slide">
-                                </div>
-                            <?php } ?>
+                        <div class="">
+                            <div class="form-group">
+                                <?php if($key==0){ ?><label for="activity1">Activity Name</label> <?php } ?>
+                                <input type="text" name="activity1" class="form-control" id="activity1" value="<?php echo $school_activities1['activity_name']; ?>"readonly >
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                        </div>
+                    </div><!-- /form-row -->
+                
+                <?php } ?>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label for="bannerimagesample" class="mab-30"> Images</label>
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <?php for($i=0;$i<(count($school_img));$i++){ ?>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
+                                <?php } ?>
+                            </ol>
+                            <div class="carousel-inner">
+                                <?php $activeslide = true; ?>
+
+                                <?php foreach($school_img as $key=>$image){ ?>
+                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
+                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['images'] ?> " alt="<?php echo $key ?> slide">
+                                    </div>
+                                <?php } ?>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -640,10 +615,10 @@ $schooltype = $this->db->get()->result_array();
                             <input type="text" name="map_url" class="form-control" id="website" value="<?php echo $school[0]['map_url']; ?>" readonly>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <textarea class="form-control" name="address" id="address" rows="1" readonly style="height: 80px;width:600px"><?php echo $school[0]['address']; ?></textarea>
+                            <textarea class="form-control" name="address" id="address" rows="1" readonly style="height: 80px;"><?php echo $school[0]['address']; ?></textarea>
                         </div>
                     </div>
                 </div><!-- /form-row -->
@@ -686,8 +661,8 @@ $schooltype = $this->db->get()->result_array();
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
-            <a href="<?php echo base_url('schools/admin')?>"><button type="button" style="margin-left:1170px" class="btn btn-warning">BACK</button></a>
-            </div><br>
+            <a href="<?php echo base_url('schools/admin')?>"><button type="button" class="btn btn-danger">BACK</button></a>
+            </div>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->
