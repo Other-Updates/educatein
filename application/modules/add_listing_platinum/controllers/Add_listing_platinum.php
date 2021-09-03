@@ -996,8 +996,12 @@ class Add_listing_platinum extends CI_Controller {
         if(!empty($data)){
             $this->db->update('school_details',$data,array('id' => $this->session->userdata('SchoolId')));
         }
-        $this->load->view('payment_success');
-        $array_items = array('planUpdate' => '', 'SchoolId' => '');
+        $this->db->select('*');
+        $this->db->where('id',$this->session->userdata('SchoolId'));
+        $this->db->from('school_details');
+        $data['userid'] = $this->db->get()->result_array();
+        $this->load->view('payment_success',$data);
+        $array_items = array('planUpdate' => '','SchoolId' => '');
         $this->session->unset_userdata($array_items);
     }
 
