@@ -47,7 +47,18 @@
         </div>
         <h1>Success</h1> 
         <p>We received your request<br/> we'll be in touch shortly!</p>
-        <a href="#"><button class="btn btn-success">Go to Home</button></a>
+        <a href="<?php echo base_url() ?>plan-details?id=<?php echo base64_encode($userid[0]['user_id']); ?>"><button class="btn btn-success">Go to Home</button></a>
       </div>
     </body>
+    <script>
+    $(document).ready(function() {
+    setTimeout(function() {
+      window.history.pushState(null, "", window.location.href);        
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        }
+    }, 500);
+        ;
+    });
+    </script>
 </html>

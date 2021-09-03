@@ -607,7 +607,11 @@ class Institute_listing_first extends CI_Controller {
         if(!empty($data)){
             $this->db->update('institute_details',$data,array('id' => $this->session->userdata('SchoolId')));
         }
-        $this->load->view('add_listing_platinum/payment_success');
+        $this->db->select('*');
+        $this->db->where('id',$this->session->userdata('SchoolId'));
+        $this->db->from('institute_details');
+        $data['userid'] = $this->db->get()->result_array();
+        $this->load->view('add_listing_platinum/payment_success',$data);
         $array_items = array('planUpdate' => '', 'SchoolId' => '');
         $this->session->unset_userdata($array_items);
     }
