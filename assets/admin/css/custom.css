@@ -30,7 +30,7 @@ a.btn:not([href]):not([tabindex]) {
 .status-btn {
     position: absolute;
     right: 0;
-    top: 8px;
+    top: -9px;
 }
 .status-btn .btn {
     text-transform:  uppercase;
