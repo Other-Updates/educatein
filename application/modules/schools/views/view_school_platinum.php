@@ -516,7 +516,6 @@ $schooltype = $this->db->get()->result_array();
                     <div class="col-lg-3 col-sm-6">
                         <div class="">
                             <div class="form-group">
-                                <?php if($key==0){ ?><label for="activity1">Activity Name</label> <?php } ?>
                                 <input type="text" name="activity1" class="form-control" id="activity1" value="<?php echo $school_activities1['activity_name']; ?>"readonly >
                             </div>
                         </div>

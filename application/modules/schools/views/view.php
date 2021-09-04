@@ -51,7 +51,7 @@
                     else{ $plan = "TRIAL";}
                     echo "<tr>"
                     . "<td class=' align-middle text-center'>" . $count . "</td>"
-                    . "<td class=' align-middle'> " . $table_record["school_name"] . "</td>"
+                    . "<td class=' align-middle'> " . ucfirst($table_record["school_name"]) . "</td>"
                 //    . "<td class=' align-middle'> " . $table_record["name"] . "</td>"
                    . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
                    . "<td  align='center' class=' align-middle'>" . date('d-m-Y', strtotime($table_record["created_at"])) . "</td>"

@@ -39,12 +39,12 @@ class Summercamp extends CI_Controller {
         $this->load->js('assets/front/js/dot-circle.js');
         $this->load->js('assets/front/js/swiper.min.js');
           
-	<link rel="stylesheet" href="https://www.edugatein.com/css/styles1.css">
-	<link rel="stylesheet" href="https://www.edugatein.com/css/responsive.css">
-	<link rel="stylesheet" href="https://www.edugatein.com/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="https://www.edugatein.com/css/animate.css">
-	<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-	<link rel="stylesheet" href="https://www.edugatein.com/css/jquery.fancybox.min.css">
+	// <link rel="stylesheet" href="https://www.edugatein.com/css/styles1.css">
+	// <link rel="stylesheet" href="https://www.edugatein.com/css/responsive.css">
+	// <link rel="stylesheet" href="https://www.edugatein.com/css/owl.carousel.min.css">
+	// <link rel="stylesheet" href="https://www.edugatein.com/css/animate.css">
+	// <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+	// <link rel="stylesheet" href="https://www.edugatein.com/css/jquery.fancybox.min.css">
 }
 	public function index()
 	{ 

@@ -77,7 +77,7 @@
                             else if($school_limit_data['school_category_id'] == 3){$plan = "SPECTRUM";}
                             else{ $plan = "TRIAL";}
                             echo "<tr>"
-                            . "<td class=' align-middle'> " . $school_limit_data["school_name"] . "</td>"
+                            . "<td class=' align-middle'> " . ucfirst($school_limit_data["school_name"]) . "</td>"
                         //    . "<td class=' align-middle'> " . $table_record["name"] . "</td>"
                         . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
                         . "<td align='center' class=' align-middle'>" . $status . "</td>"
@@ -119,7 +119,7 @@
                             else if($class_limit_data['position_id'] == 3){$plan = "SPECTRUM";}
                             else{ $plan = "TRIAL";}
                             echo "<tr>"
-                            . "<td class=' align-middle'> " . $class_limit_data["institute_name"] . "</td>"
+                            . "<td class=' align-middle'> " . ucfirst($class_limit_data["institute_name"]) . "</td>"
                         //    . "<td class=' align-middle'> " . $table_record["name"] . "</td>"
                         . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
                         . "<td align='center' class=' align-middle'>" . $status . "</td>"
