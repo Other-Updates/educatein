@@ -204,7 +204,7 @@
                             <a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo $city; ?>" >
                                 <figure class="snip1571 wow bounceIn anim1s hss-school-left">
                                     <div class="object-fit">
-                                        <img src="<?php echo base_url() ?>assets/front/images/kinder-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                     </div><!-- /object-fit -->
                                     <figcaption>
                                         <h1><a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo $city; ?>" >Kindergarten Schools</a></h1>
@@ -218,7 +218,7 @@
                             <a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo $city; ?>" >
                                 <figure class="snip1571 wow bounceIn anim2s hss-school-right">
                                     <div class="object-fit">
-                                        <img src="<?php echo base_url(); ?>assets/front/images/cbse-11.jpg" class="w-100" alt="best cbse schools in <?php echo $city; ?>" />
+                                        <img src="<?php echo base_url(); ?>assets/front/images/cbse_1.jpg" class="w-100" alt="best cbse schools in <?php echo $city; ?>" />
                                     </div><!-- /object-fit -->
                                     <figcaption>
                                         <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo $city; ?>" >CBSE Schools</a></h1>
@@ -230,7 +230,7 @@
                             <a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo $city; ?>" >
                                 <figure class="snip1571 wow bounceIn anim4s hss-school-right">
                                     <div class="object-fit">
-                                        <img src="<?php echo base_url() ?>assets/front/images/matric-1.jpg" class="w-100" alt="matriculation schools in <?php echo $city; ?>"/>
+                                        <img src="<?php echo base_url() ?>assets/front/images/matric_1.jpg" class="w-100" alt="matriculation schools in <?php echo $city; ?>"/>
                                     </div>
                                     <figcaption>
                                         <h1><a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo $city; ?>" >Matriculation Schools</a></h1>
@@ -244,7 +244,7 @@
                             <a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo $city; ?>" >
                                 <figure class="snip1571 wow bounceIn anim3s hss-school-right">
                                     <div class="object-fit">
-                                        <img src="<?php echo base_url() ?>assets/front/images/inter-1.jpg" class="w-100" alt="best international schools in <?php echo $city; ?>"/>
+                                        <img src="<?php echo base_url() ?>assets/front/images/inter_1.jpg" class="w-100" alt="best international schools in <?php echo $city; ?>"/>
                                     </div>
                                     <figcaption>
                                         <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo $city; ?>" >International Schools</a></h1>
@@ -256,7 +256,7 @@
                             <a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo $city; ?>" >
                                 <figure class="snip1571 wow bounceIn anim5s hss-school-right">
                                     <div class="object-fit">
-                                        <img src="<?php echo base_url() ?>assets/front/images/state-1.jpg" class="w-100" alt="best state board schools in <?php echo $city; ?>"/>
+                                        <img src="<?php echo base_url() ?>assets/front/images/state_1.jpg" class="w-100" alt="best state board schools in <?php echo $city; ?>"/>
                                     </div>
                                     <figcaption>
                                         <h1><a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo $city; ?>" >Special Schools</a></h1>
