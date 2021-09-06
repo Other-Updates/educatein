@@ -315,7 +315,7 @@ $user = $this->db->get()->result_array();
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
                                     <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                    <a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add</a>
+                                    <a class="btn btn-primary addmore-show" id="addmore" name="addmore" style="margin-left:1200px;">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -335,7 +335,7 @@ $user = $this->db->get()->result_array();
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6">
-                            <input type="buton" class="add_field_button btn btn-primary btn-block" value="Add More">
+                            <input type="buton" class="add_field_button btn btn-primary btn-block" style="margin-left:635px;" value="Add More">
                         </div>
                     </div><!-- /form-row -->
                 </div><!-- /input_fields_wrap -->

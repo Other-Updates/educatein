@@ -571,7 +571,7 @@ $schooltype = $this->db->get()->result_array();
                     <div class="form-row" id="actmore">
                         <div class="col-lg-4 col-sm-6 form-group">
                             <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                            <a class="btn btn-primary add_field_button1" id="addmore">Add</a>
+                            <a class="btn btn-primary add_field_button1" id="addmore" style="margin-left:1200px;">Add</a>
                         </div>
                     </div>
                 </div>
@@ -624,7 +624,7 @@ $schooltype = $this->db->get()->result_array();
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="facaddmore" style="visibility: hidden;display: block;">Add More</label>
-                                <a class="btn btn-primary addmore-show1" id="facaddmore">Add</a>
+                                <a class="btn btn-primary addmore-show1" id="facaddmore" style="margin-left:1200px;">Add</a>
                             </div>
                         </div>
                     </div>

@@ -173,7 +173,7 @@ foreach ($user->result() as $users) {
                                     $spend = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
                                     $remain = $valitity - $spend;
                                     $exp_date = strtotime(+$valitity." days", $act_date);
-                                    $expiry_date = date('Y-m-d',$exp_date);
+                                    $expiry_date = date('d-m-Y',$exp_date);
                             }
                             ?>
 
@@ -185,7 +185,7 @@ foreach ($user->result() as $users) {
                                             <?php if($schools->status == NULL){?><span style="color:green;font-size:15px" >&nbsp;&nbsp;School is under validation</span>
                                                 <?php } else if($schools->status == 2){?><span style="color:#F32013;font-size:15px" >&nbsp;&nbsp;School is rejected</span> 
                                                     <?php }else if($schools->status == 1){ 
-                                                        if($remain > 0){ ?><span style="color:blue;font-size:15px" >&nbsp;&nbsp;Expiry date- <?php echo $expiry_date ?>( <?php echo $remain ?>days to go)</span>
+                                                        if($remain > 0){ ?><span style="color:blue;font-size:15px" >&nbsp;&nbsp;Expiry date <?php echo $expiry_date ?>( <?php echo $remain ?>&nbsp;days to go)</span>
                                                         <?php }else if($remain <= 0){ ?><span style="color:red;font-size:15px">&nbsp;&nbsp;Your school plan is expired</span><?php } ?>
                                                         <?php } ?>
                                         </button>
@@ -419,7 +419,7 @@ foreach ($user->result() as $users) {
                                         $spend1 = round($cur_date / (60 * 60 * 24) - $act_date / (60 * 60 * 24));
                                         $remain1 = $valitity - $spend1;
                                         $exp_date = strtotime(+$valitity." days", $act_date);
-                                        $expiry_date = date('Y-m-d',$exp_date);
+                                        $expiry_date = date('d-m-Y',$exp_date);
 
                                     // }
                                 }
@@ -429,7 +429,7 @@ foreach ($user->result() as $users) {
                                     <div class="card-header" id="heading<?php echo $school_count; ?>">
                                         <h5 class="mb-0 p-2">
                                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $school_count; ?>" aria-expanded="true" aria-controls="collapse<?php echo $school_count; ?>">
-                                                <?php echo $institutes->slug; ?> <span class="badge badge-warning"><?php echo $categoryname; ?></span><?php if($institutes->status == NULL){ ?><span style="color:green;font-size:15px" >&nbsp;&nbsp;Institute is under validation</span><?php } else if($institutes->status == 2){ ?><span style="color:#F32013;font-size:15px" >&nbsp;&nbsp;Institute is rejected</span><?php }else if($institutes->status == 1){ if($remain1 > 0){ ?><span style="color:blue;font-size:15px">&nbsp;&nbsp;Expiry date- <?php echo $expiry_date; ?> ( <?php echo $remain1 ?>days to go )</span><?php } else if($remain1 <= 0){ ?><span style="color:red;font-size:15px">&nbsp;&nbsp;Your institute plan is expired</span><?php } ?><?php } ?>
+                                                <?php echo $institutes->slug; ?> <span class="badge badge-warning"><?php echo $categoryname; ?></span><?php if($institutes->status == NULL){ ?><span style="color:green;font-size:15px" >&nbsp;&nbsp;Institute is under validation</span><?php } else if($institutes->status == 2){ ?><span style="color:#F32013;font-size:15px" >&nbsp;&nbsp;Institute is rejected</span><?php }else if($institutes->status == 1){ if($remain1 > 0){ ?><span style="color:blue;font-size:15px">&nbsp;&nbsp;Expiry date <?php echo $expiry_date; ?> ( <?php echo $remain1 ?>&nbsp;days to go )</span><?php } else if($remain1 <= 0){ ?><span style="color:red;font-size:15px">&nbsp;&nbsp;Your institute plan is expired</span><?php } ?><?php } ?>
                                             </button>
                                             <?php
                                             $test = $institutes->valitity * 60 * 60 * 24;

@@ -2,7 +2,8 @@
 //defined('BASEPATH') OR exit('No direct script access allowed');
 // echo $this->session->userdata('school'); 
 $email = $this->session->userdata('school');
-$user_id = base64_decode($_GET['id']);
+// $user_id = base64_decode($_GET['id']);
+$user_id = $this->session->userdata('user_id');
 if ($user_id) {   
     $this->db->select('*');
     $this->db->from('user_register');
@@ -510,7 +511,7 @@ if ($user->num_rows() > 0) {
 <!-- </div> -->
 <!-- /dashboard-content -->
 <!-- Modal -->
-<div class="modal fade" id="personalinfo-save" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="personalinfo-save" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -528,7 +529,7 @@ if ($user->num_rows() > 0) {
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <style>
     .password-settings .input-group-text {

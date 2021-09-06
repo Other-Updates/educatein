@@ -979,18 +979,21 @@ class Add_listing_platinum extends CI_Controller {
             $data = array(
                 'school_category_id' => 1,
                 'valitity' => 100,
+                'paid' => 65,000.00
             );
         }
         if($this->session->userdata('planUpdate') == 'premium') { 
             $data = array(
                 'school_category_id' => 2,
                 'valitity' => 100,
+                'paid' => 30,000.00
             );
         }
         if($this->session->userdata('planUpdate') == 'spectrum') { 
             $data = array(
                 'school_category_id' => 3,
                 'valitity' => 100,
+                'paid' => 12,500.00
             );
         }
         if(!empty($data)){

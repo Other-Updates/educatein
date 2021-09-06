@@ -698,7 +698,28 @@ foreach ($user->result() as $users) {
     });
 </script> -->
 <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
-<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>   
+<script>
+    $(document).ready(function () {
+        $("#platinum").validate({
+            rules: {
+                schoolname: "required",
+                schoolboard: "required",
+                city: "required",
+                area: "required",
+            },
+            errorElement: 'div',
+            errorLabelContainer: '.errorTxt',
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "terms")
+                    element.parents('.custom-checkbox').append(error);
+                else
+                    element.parents('.form-group').append(error);
+            }
+        });
+    });
+</script>
+<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
 
 
 

@@ -14,9 +14,11 @@
         <table class="table table-bordered table-sm bg-white" id="example">
             <thead>
                 <tr class="text-center">
-                    <th class="text-nowrap">#</th>                     
-                    <th class="text-nowrap">Name</th>
+                    <th class="text-nowrap">#</th>             
+                    <th class="text-nowrap">Customer</th>
+                    <th class="text-nowrap">School Name</th>
                    <th class="text-nowrap">Plan</th>
+                   <th class="text-nowrap" style="text-align:center;">Paid</th>
                     <th class="text-nowrap">Created date</th>
                     <th class="text-nowrap">Status</th>
                     <th class="text-nowrap">Expiry date</th>
@@ -29,6 +31,10 @@
                 $count = 1;
                 foreach ($table_records as $table_record) {
                     // $status = ($table_record["is_active"] == 0 ? "<i class='icon ion-md-checkmark-circle text-success'></i>" : "<i class='icon ion-md-close-circle text-danger'></i>" );
+                    $this->db->select('*');
+                    $this->db->where('id',$table_record['user_id']);
+                    $this->db->from('user_register');
+                    $user = $this->db->get()->result_array();
                     if($table_record['status'] == 1){
                         if($table_record['school_category_id'] == 4){
                         $date = strtotime($table_record['activated_at']);
@@ -51,9 +57,10 @@
                     else{ $plan = "TRIAL";}
                     echo "<tr>"
                     . "<td class=' align-middle text-center'>" . $count . "</td>"
+                   . "<td class=' align-middle'> " . ucfirst($user[0]["name"]) . "</td>"
                     . "<td class=' align-middle'> " . ucfirst($table_record["school_name"]) . "</td>"
-                //    . "<td class=' align-middle'> " . $table_record["name"] . "</td>"
                    . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
+                   . "<td  align='center' class=' align-middle'>" . $table_record["paid"] . "</td>"
                    . "<td  align='center' class=' align-middle'>" . date('d-m-Y', strtotime($table_record["created_at"])) . "</td>"
                    . "<td align='center' class=' align-middle'>" . $status . "</td>"
                    . "<td align='center' class=' align-middle'>" . $date . "</td>"
@@ -138,6 +145,34 @@ $(document).ready( function(){
 //   dangerMode: true,
 // })
 // });
+var table;
+ 
+$(document).ready(function() {
+ 
+    //datatables
+    table = $('#table').DataTable({ 
+ 
+        "processing": true, //Feature control the processing indicator.
+        "serverSide": true, //Feature control DataTables' server-side processing mode.
+        "order": [], //Initial no order.
+ 
+        // Load data for the table's content from an Ajax source
+        "ajax": {
+            "url": "<?php echo site_url('schools/admin')?>",
+            "type": "POST"
+        },
+ 
+        //Set column definition initialisation properties.
+        "columnDefs": [
+        { 
+            "targets": [ 0 ], //first column / numbering column
+            "orderable": false, //set not orderable
+        },
+        ],
+ 
+    });
+ 
+});
 </script>
 <!-- <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
     <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" /> -->
