@@ -205,8 +205,8 @@ header {
     border-color: #33317c;
 }
 .home-search-widget .input-group>.input-group-append>.btn {
-    background-color: #d12881;
-    border-color: #d12881;
+    background-color: #33317c;
+    border-color: #33317c;
     color: #fff;
     padding-right: 15px;
     padding-left: 15px;
@@ -255,16 +255,16 @@ header {
   	background-color: #000;
   	display: inline-block;
   	font-size: 16px;
-  	margin: 10px 0;
+  	margin: 15px 0 0px 0;
   	overflow: hidden;
   	position: relative;
   	text-align: center;
   	width: 100%;
   	z-index: 1000;
-  	border-radius: 8px;
+  	/* border-radius: 8px;
   	-webkit-box-shadow: 0px 5px 21px 0px rgba(0,0,0,0.15);
 	-moz-box-shadow: 0px 5px 21px 0px rgba(0,0,0,0.15);
-	box-shadow: 0px 5px 21px 0px rgba(0,0,0,0.25);
+	box-shadow: 0px 5px 21px 0px rgba(0,0,0,0.25); */
 }
 .schools-section .snip1571 *,
 .schools-section .snip1571 *:before {
@@ -277,7 +277,7 @@ header {
   backface-visibility: hidden;
   max-width: 100%;
   vertical-align: top;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 .schools-section .snip1571 figcaption {
   bottom: 30px;
@@ -1878,7 +1878,7 @@ footer button {
 } */
 
 .content-footer {
-	background-color: #dedede !important;
+	background-color: #f0f4f5 !important;
 	color: #606060;
 	font-size: 13px;
 	font-weight: 400;
@@ -1886,7 +1886,7 @@ footer button {
 }
 .content-footer h5 {
 	margin-top: 25px;
-	color: #606060;
+	color: #000;
 	font-size: 14px;
 	font-weight: 500;
 }
@@ -1895,13 +1895,13 @@ footer button {
 	height: 35px;
 	text-align: center;
 	color: #fff;
-	background-color: #606060;
+	background-color: #d12881;
 	border-radius: 50px;
 	line-height: 35px !important;
 	transition: .2s all;
 }
 .content-footer-list ul li .fa:hover {
-	background-color: #d12881;
+	background-color: #222063;
 }
 .content-footer .heading-collapse > h5,
 .content-footer .heading-collapse > h6 {
@@ -2273,8 +2273,8 @@ footer button {
   	border-radius: 50px;
   	text-align: center;
   	position: fixed;
-  	bottom: 200px;
-  	right: 20px;
+  	bottom: 85px;
+  	right: 15px;
   	transition: background-color .3s, 
 	opacity .5s, visibility .5s;
   	opacity: 0;
@@ -2442,8 +2442,188 @@ footer button {
     border-color: #d12881;
 	color: #fff;
 }
-
-
+.home-search-section {
+    height: 500px;
+    background: url('../images/search-bg.jpg');
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+    width: 100%;
+	position: relative;
+	text-align: center;
+	color: #fff;
+	margin-bottom: 130px;
+}
+.home-search-section-bg{
+	background: #d12881cc;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	height: 100%;
+}
+.hss-inner {
+	position: relative;
+	padding-top: 30px;
+}
+.hss-tit {
+	font-size: 30px;
+    padding: 7px 0;
+}
+.hss-subtit {
+	font-size: 16px;
+	padding-bottom: 40px;
+}
+.home-search-widget .btn-outline-secondary {
+	background-color: #fff;
+}
+.chools-section-inner {
+	background: #fff;
+}
+.hss-school .hss-school-left .object-fit {
+	height: 350px;
+}
+.hss-school .hss-school-left .object-fit img {
+	height: 335px;
+    object-fit: cover;
+}
+.hss-school .hss-school-right .object-fit {
+	height: 160px;
+}
+.hss-school .hss-school-right .object-fit img {
+	height: 160px;
+    object-fit: cover;
+}
+.schools-section .hss-school .snip1571 {
+	display: block;
+	background: #fff;
+}
+.hss-school .hss-school-right .object-fit::after, .hss-school .hss-school-left .object-fit::after {
+	background: #00000069;
+	content: '';
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	height: 100%;
+}
+.hss-school .hss-school-left .object-fit::after {
+	height: calc(100% - 15px);
+}
+.schools-section .hss-school .snip1571 h1 {
+	background-color: #00000080;
+	font-size: 20px;
+}
+.custom-section-title {
+	color: #33317c;
+	border-bottom: 2px solid #c02979;
+}
+.ads-school-widget .ads-inner, .ads-school-widget-bottom .ads-inner {
+	width: 100%;
+	background: #ffc8e4;
+	height: 400px;
+	border-radius: 10px;
+}
+.ads-school-widget-bottom .ads-inner {
+	height: 300px;
+}
+.about-widget-text {
+	position: relative;
+}
+.about-widget-text h3 {
+	padding-top: 40px;
+    font-size: 23px;
+    font-weight: 500;
+    color: #29303b;
+    line-height: 35px;
+}
+.about-widget-text h3:before {
+	content: '';
+	border-top: 4px solid #c52c7b;
+	position: absolute;
+	top: 10px;
+	width: 150px;
+}
+.about-widget-text p {
+	padding: 10px 0;
+}
+.hss-activity-link {
+	padding-top: 13px;
+}
+.hss-activity-link a {
+	color: #fff;
+	font-weight: 500;
+}
+.content-footer-list .col-lg-4 {
+	flex: 0 0 20%;
+    max-width: 20%;
+}
+.content-footer-list .footer-list-inner {
+	text-align: center;
+    background: #fff;
+    padding: 10px 10px 20px 10px;
+    border-radius: 10px;
+	color: #000;
+	height: 100%;
+}
+.content-footer-list .footer-list-inner .footer-list-icon {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute;
+	top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	text-align: center;
+	border: 4px solid #fff;
+	line-height: 50px;
+	text-align: center;
+}
+.content-footer-list .footer-list-inner:first-child {
+	background: #ff97cd;
+}
+.content-footer-list .footer-list-inner:first-child .footer-list-icon {
+	border-color: #ff97cd;
+}
+.content-footer-list .col:nth-child(2) .footer-list-inner {
+	background: #a5a3ee;
+}
+.content-footer-list .col:nth-child(2) .footer-list-inner .footer-list-icon {
+	border-color: #a5a3ee;
+}
+.content-footer-list .col:nth-child(3) .footer-list-inner {
+	background: #b5ff84;
+}
+.content-footer-list .col:nth-child(3) .footer-list-inner .footer-list-icon {
+	border-color: #b5ff84;
+}
+.content-footer-list .col:nth-child(4) .footer-list-inner {
+	background: #fdfc8f;
+}
+.content-footer-list .col:nth-child(4) .footer-list-inner .footer-list-icon {
+	border-color: #fdfc8f;
+}
+.content-footer-list .col:nth-child(5) .footer-list-inner {
+	background: #80f7dc;
+}
+.content-footer-list .col:nth-child(5) .footer-list-inner .footer-list-icon {
+	border-color: #80f7dc;
+}
+.content-footer-list .footer-list-icon img {
+	width: 35px;
+}
+.footer-copyright {
+	background: #33317c;
+	color: #fff;
+	padding: 20px 0;
+}
+.ads-inner p {
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 
 
