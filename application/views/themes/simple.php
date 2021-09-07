@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/front/css/animate.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/front/css/dashboard.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/front/fonts/icon-font/style.css"> 
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/front/css/owl.carousel.min.css"> 
         <link rel="canonical" href="https://www.edugatein.com/">
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
