@@ -106,6 +106,73 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         </div><!-- /row -->
     </div><!-- /container -->
 </div><!-- /breadrumb-new -->
+<div class="educatein-school-detail">
+    <div class="esd-banner">
+        <div class="esd-banner-bg"></div>
+        <div class="container">
+            <div class="esd-banner-details">
+                <div class="row">
+                    <div class="col-md-3"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div></div>
+                    <div class="col-md-9">
+                        <div class="esd-banner-details-right">
+                            <div class="esd-banner-details-tit">St Joseph's Matriculation Higher Secondary School</div>
+                            <div class="esd-banner-details-address"><i class="fa fa-map-marker"></i> 1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</div>
+                            <div class="clearfix"></div>
+                            <div class="row esd-banner-details-hightlight">
+                                <div class="col-md-2">
+                                    <div class="esd-banner-details-hightlight-tit"><i class="fa fa-star text-yellow"></i> 4.0</div>
+                                    <div class="esd-banner-details-hightlight-suntit">Parent Ratings</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="esd-banner-details-hightlight-tit"><i class="fa fa-star text-theme"></i> 4.0</div>
+                                    <div class="esd-banner-details-hightlight-suntit">Educatein Ratings</div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="esd-banner-details-hightlight-tit">CBSE</div>
+                                    <div class="esd-banner-details-hightlight-suntit">School Board</div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="esd-banner-details-hightlight-tit">Higher Secondary School</div>
+                                    <div class="esd-banner-details-hightlight-suntit">Grade Level</div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="esd-banner-details-btn">
+                                <button class="btn btn-theme1"><i class="fa fa-map-marker"></i> Show School On Map</button>
+                                <button class="btn btn-theme2"><i class="fa fa-phone"></i> Call School</button>
+                                <button class="btn btn-theme1-border"><i class="fa fa-file-text-o"></i> Admissions Open Now</button>
+                                <button class="btn btn-theme2-border"><i class="fa fa-eye"></i> Page Views : 135</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- <div class="sd-menu">test</div> -->
+        <div class="row">
+            <div class="col-md-9">
+                <div class="sd-inner-main">
+                    <div class="sd-ection-tit">About Info</div>
+                    <div class="sd-ection-inner">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
+                            </div>
+                            <div class="col-md-8">
+                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                    ads
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 if ($category == 1) {
     $school_img = "is_active=1 AND  school_activity_id=2 AND school_id=" . $school_details->id . " AND deleted_at is NULL";

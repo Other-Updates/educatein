@@ -272,10 +272,67 @@
 </div>   
 <div class="container">
     <div class="custom-section-title">
-        <h3 class="mb-2">Top Schools in <?php echo $yourcity; ?></h3>
+        <h3 class="mb-2">Top Schools in Coimbatore</h3>
     </div>
-    <div class="top-school-widget mab-50">
-        Top Schools List
+    <div class="home-tsw top-school-widget mab-50">
+        <div class="owl-one owl-carousel owl-theme">
+            <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Platinum</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>St Joseph's Matriculation Higher Secondary School</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Premium</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-2.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>Little Flower Matriculation School</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Spectrum</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-3.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>Royal Park Matriculation Higher Secondary School</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Platinum</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>School Name</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 <div class="container">
@@ -289,10 +346,95 @@
 </div>
 <div class="container">
     <div class="custom-section-title">
-        <h3 class="mb-2">Best Schools in <?php echo $yourcity; ?></h3>
+        <h3 class="mb-2">Best Schools in Coimbatore</h3>
     </div>
-    <div class="top-school-widget mab-50">
-        Best Schools List
+    <div class="home-tsw top-school-widget mab-50">
+        <div class="owl-two owl-carousel owl-theme">
+            <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Platinum</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>St Joseph's Matriculation Higher Secondary School</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Premium</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-2.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>Little Flower Matriculation School</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Spectrum</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-3.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>Royal Park Matriculation Higher Secondary School</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Platinum</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>School Name</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Spectrum</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-3.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>Royal Park Matriculation Higher Secondary School</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <a href="#" target="_blank">
+                    <figure>
+                        <div class="package-name">Platinum</div>
+                        <div class="object-fit">
+                            <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                        </div>
+                        <figcaption class="item-footer">
+                            <h6>School Name</h6>
+                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 <div class="container">
@@ -504,6 +646,29 @@ $ip = $_SERVER['REMOTE_ADDR'];
         $("#tags").autocomplete({
             source: availableTags
         });
+    });
+    $(document).ready(function () {
+        $(".owl-one").owlCarousel();
+        $('.owl-two').owlCarousel({
+            loop:true,
+            margin:10,
+            responsiveClass:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:3,
+                    nav:false
+                },
+                1000:{
+                    items:5,
+                    nav:true,
+                    loop:false
+                }
+            }
+        })
     });
 </script> 
 
