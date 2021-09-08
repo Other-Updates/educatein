@@ -37,11 +37,11 @@
     <span class="fill4 shape"></span>
 </div>  
 <?php // if ($aff_url != "") { ?>
-    <div class="summercamp-popup wow bounceIn faster">
+    <!-- <div class="summercamp-popup wow bounceIn faster">
         <a href="<?php echo base_url(); ?>list-of-best-summer-camp-in-<?php echo $city; ?>">
             <img src="<?php echo base_url() ?>assets/front/images/summer-camp.png" width="180" alt="summer-camp">
         </a>
-    </div>
+    </div> -->
     <!-- /summercamp-popup -->
 <?php // } else { ?>
 <!--    <div class="summercamp-popup wow bounceIn faster">
@@ -136,119 +136,193 @@
             </div>
         </div>
     </div><!-- /popup -->
-</div><!-- /popup -->   
-<div class="home-search-widget pt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-10">
+</div><!-- /popup -->
+<div class="home-search-section">
+    <div class="home-search-section-bg"></div>
+    <div class="hss-inner">
+        <div class="hss-tit">Over 100+ inter-connect schools with Edugate-in.</div>
+        <div class="hss-subtit">Parents and education community on a single platform to create mutual benefit</div>
+        <div class="home-search-widget">
+            <div class="container">
                 <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-8">
-                        <form action="<?php echo base_url() ?>schools-list" method="post">
-                            <div class="input-group mb-3 shadow-lg">
-                                <div class="input-group-prepend">
-                                    <?php if ($aff_url != "") { ?>
-                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?> <i class="fa fa-angle-down"></i>  </button>
-                                    <?php } else { ?>
-                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
-                                    <?php } ?> 
-                                    <div class="dropdown-menu shadow-lg">
-                                        <ul class="list-inline">
-                                            <?php
-                                            foreach ($allcity as $allcitys) {
-                                                $lowercity = strtolower($allcitys->city_name);
-                                                ?>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <form action="<?php echo base_url() ?>schools-list" method="post">
+                                    <div class="input-group mb-3 shadow-lg">
+                                        <div class="input-group-prepend">
+                                            <?php if ($aff_url != "") { ?>
+                                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?> <i class="fa fa-angle-down"></i>  </button>
+                                            <?php } else { ?>
+                                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
+                                            <?php } ?> 
+                                            <div class="dropdown-menu shadow-lg">
+                                                <ul class="list-inline">
+                                                    <?php
+                                                    foreach ($allcity as $allcitys) {
+                                                        $lowercity = strtolower($allcitys->city_name);
+                                                        ?>
 
-                                                <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div><!-- /dropdown-menu -->
+                                                        <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div><!-- /dropdown-menu -->
+                                        </div>
+                                        <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                                        <?php if ($aff_url != "") { ?>
+                                            <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
+                                        <?php } else { ?>
+                                            <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
+                                        <?php } ?>
+                                        <!-- <div id="map"></div> -->
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div><!-- /input-group -->
+                                </form>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="hss-activity-link wow bounceIn faster">
+                                    <a href="<?php echo base_url(); ?>list-of-best-summer-camp-in-<?php echo $city; ?>">
+                                        Activity Classes
+                                    </a>
                                 </div>
-                                <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
-                                <?php if ($aff_url != "") { ?>
-                                    <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
-                                <?php } else { ?>
-                                    <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
-                                <?php } ?>
-                                <!-- <div id="map"></div> -->
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>
-                                </div>
-                            </div><!-- /input-group -->
-                        </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-2"></div>
+                    <div class="col-lg-1"></div>
+                </div>
+            </div><!-- /container -->
+        </div><!-- /home-search-widget -->
+        <div class="schools-section mat-30">
+            <div class="container chools-section-inner">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-4">
+                        <div class="hss-school">
+                            <a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo $city; ?>" >
+                                <figure class="snip1571 wow bounceIn anim1s hss-school-left">
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                    </div><!-- /object-fit -->
+                                    <figcaption>
+                                        <h1><a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo $city; ?>" >Kindergarten Schools</a></h1>
+                                    </figcaption>
+                                </figure><!-- /snip1571 -->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 pl-0">
+                        <div class="hss-school">
+                            <a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo $city; ?>" >
+                                <figure class="snip1571 wow bounceIn anim2s hss-school-right">
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url(); ?>assets/front/images/cbse_1.jpg" class="w-100" alt="best cbse schools in <?php echo $city; ?>" />
+                                    </div><!-- /object-fit -->
+                                    <figcaption>
+                                        <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo $city; ?>" >CBSE Schools</a></h1>
+                                    </figcaption>
+                                </figure><!-- /snip1571 -->
+                            </a>
+                        </div>
+                        <div class="hss-school">
+                            <a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo $city; ?>" >
+                                <figure class="snip1571 wow bounceIn anim4s hss-school-right">
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url() ?>assets/front/images/matric_1.jpg" class="w-100" alt="matriculation schools in <?php echo $city; ?>"/>
+                                    </div>
+                                    <figcaption>
+                                        <h1><a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo $city; ?>" >Matriculation Schools</a></h1>
+                                    </figcaption>
+                                </figure><!-- /snip1571 -->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 pl-0">
+                        <div class="hss-school">
+                            <a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo $city; ?>" >
+                                <figure class="snip1571 wow bounceIn anim3s hss-school-right">
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url() ?>assets/front/images/inter_1.jpg" class="w-100" alt="best international schools in <?php echo $city; ?>"/>
+                                    </div>
+                                    <figcaption>
+                                        <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo $city; ?>" >International Schools</a></h1>
+                                    </figcaption>
+                                </figure><!-- /snip1571 -->
+                            </a>
+                        </div>
+                        <div class="hss-school">
+                            <a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo $city; ?>" >
+                                <figure class="snip1571 wow bounceIn anim5s hss-school-right">
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url() ?>assets/front/images/state_1.jpg" class="w-100" alt="best state board schools in <?php echo $city; ?>"/>
+                                    </div>
+                                    <figcaption>
+                                        <h1><a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo $city; ?>" >Special Schools</a></h1>
+                                    </figcaption>
+                                </figure><!-- /snip1571 -->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /container -->
+        </div><!-- /schools-section -->
+    </div>
+</div>   
+<div class="container">
+    <div class="custom-section-title">
+        <h3 class="mb-2">Top Schools in <?php echo $yourcity; ?></h3>
+    </div>
+    <div class="top-school-widget mab-50">
+        Top Schools List
+    </div>
+</div>
+<div class="container">
+    <div class="ads-school-widget mab-50">
+        <div class="row">
+            <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
+            <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
+            <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="custom-section-title">
+        <h3 class="mb-2">Best Schools in <?php echo $yourcity; ?></h3>
+    </div>
+    <div class="top-school-widget mab-50">
+        Best Schools List
+    </div>
+</div>
+<div class="container">
+    <div class="about-widget mab-50">
+        <div class="row">
+            <div class="col-md-6"><img src="<?php echo base_url() ?>assets/front/images/home-abouts-img.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" /></div>
+            <div class="col-md-6">
+                <div class="about-widget-text">
+                    <h3>Edugate-in is to inter-connect schools, parents and education community on a single platform to create mutual benefit.</h3>
+                    <p>Edugatein offer a detailed and well-researched guide about schools type, curriculum, facilities, activity classes, contact details and location through map. This information is directly from school management. In particular, we allocate the separate page for the schools in all over tamilnadu to provide the details of the school. By this information parents can choose schools in efficient manner and school management also gives all their unique information.</p>
+                    <p>If you are looking for the best schools in coimbatore, We have Top and Best schools lists are available here and also to find the best CBSE, International, Matriculation, State Board and Kindergarten in the right place. Our goal is to develop creative skills and extra-curricular activities such as sports, dance, music, swimming, yoga and much more.</p>
                 </div>
             </div>
-            <div class="col-lg-1"></div>
         </div>
-    </div><!-- /container -->
-</div><!-- /home-search-widget -->
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="ads-school-widget-bottom mab-50">
+        <div class="row">
+            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
+            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
+            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
+            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
+            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
+            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>            
+        </div>
+    </div>
+</div>
  
-    <div class="schools-section mat-30">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-sm-6">
-                    <a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo $city; ?>" >
-                        <figure class="snip1571 wow bounceIn anim1s">
-                            <div class="object-fit" style="height: 280px;">
-                                <img src="<?php echo base_url() ?>assets/front/images/kinder-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" style="height: 280px;object-fit: cover;" />
-                            </div><!-- /object-fit -->
-                            <figcaption>
-                                <h1><a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo $city; ?>" >Kindergarten Schools</a></h1>
-                            </figcaption>
-                        </figure><!-- /snip1571 -->
-                    </a>
-                </div>
-                <div class="col-lg-6 col-sm-6">
-                    <a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo $city; ?>" >
-                        <figure class="snip1571 wow bounceIn anim2s">
-                            <div class="object-fit" style="height: 280px;">
-                                <img src="<?php echo base_url(); ?>assets/front/images/cbse-11.jpg" class="w-100" alt="best cbse schools in <?php echo $city; ?>" style="height: 280px;object-fit: cover;" />
-                            </div><!-- /object-fit -->
-                            <figcaption>
-                                <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo $city; ?>" >CBSE Schools</a></h1>
-                            </figcaption>
-                        </figure><!-- /snip1571 -->
-                    </a>
-                </div>
-            </div><!-- /row -->
-
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo $city; ?>" >
-                        <figure class="snip1571 wow bounceIn anim3s">
-                            <img src="<?php echo base_url() ?>assets/front/images/inter-1.jpg" class="w-100" alt="best international schools in <?php echo $city; ?>"/>
-                            <figcaption>
-                                <h2 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo $city; ?>" >International Schools</a></h2>
-                            </figcaption>
-                        </figure><!-- /snip1571 -->
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo $city; ?>" >
-                        <figure class="snip1571 wow bounceIn anim4s">
-                            <img src="<?php echo base_url() ?>assets/front/images/matric-1.jpg" class="w-100" alt="matriculation schools in <?php echo $city; ?>"/>
-                            <figcaption>
-                                <h3><a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo $city; ?>" >Matriculation Schools</a></h3>
-                            </figcaption>
-                        </figure><!-- /snip1571 -->
-                    </a>
-                </div>
-                <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-0" >
-                    <a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo $city; ?>" >
-                        <figure class="snip1571 wow bounceIn anim5s">
-                            <img src="<?php echo base_url() ?>assets/front/images/state-1.jpg" class="w-100" alt="best state board schools in <?php echo $city; ?>"/>
-                            <figcaption>
-                                <h3><a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo $city; ?>" >Special Schools</a></h3>
-                            </figcaption>
-                        </figure><!-- /snip1571 -->
-                    </a>
-                </div>
-            </div><!-- /row -->
-        </div><!-- /container -->
-    </div><!-- /schools-section -->
+    
  
 <div class="sticy-activity-widget" style="display: none;">
     <!-- Modal-Trigger -->

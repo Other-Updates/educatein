@@ -10,7 +10,7 @@
         ?>
         <div class="clearfix"></div>    
         <div class="table-responsive">
-            <table class="table table-bordered table-sm bg-white" id="example">
+            <table class="table table-bordered table-sm bg-white" class= "table" id="example">
                 <thead>
                     <tr class="text-center">
                         <th class="text-nowrap">#</th>  
@@ -24,54 +24,9 @@
                         <th class="text-nowrap">Actions</th> 
                     </tr>
                 </thead>
-                <tbody>    
-                    <?php
-                    $count = 1;
-                    foreach ($activity_class as $table_record) {
-                        // $status = ($table_record["is_active"] == 0 ? "<i class='icon ion-md-checkmark-circle text-success'></i>" : "<i class='icon ion-md-close-circle text-danger'></i>" );
-                        $this->db->select('*');
-                        $this->db->where('id',$table_record['user_id']);
-                        $this->db->from('user_register');
-                        $user = $this->db->get()->result_array();
-                        if($table_record['status'] == 1){
-                            if($table_record['position_id'] == 4){
-                            $date = strtotime($table_record['activated_at']);
-                            $date = strtotime("+30 day", $date);
-                            $date = date('d-m-Y', $date);
-                            }else{
-                                $date = strtotime($table_record['activated_at']);
-                                $date = strtotime("+100 day", $date);
-                                $date = date('d-m-Y', $date);
-                            }
-                        }else{
-                            $date = "-";
-                        }
-                        if($table_record['status'] == 1){$status = "Approved";}
-                        else if($table_record['status'] == 2){$status = "Rejected";}
-                        else { $status = "Waiting for validation";}
-                        if($table_record['position_id'] == 1){$plan = "PLATINUM";}
-                        else if($table_record['position_id'] == 2){$plan = "PREMIUM";}
-                        else if($table_record['position_id'] == 3){$plan = "SPECTRUM";}
-                        else{ $plan = "TRIAL";}
-                        echo "<tr>"
-                        . "<td class=' align-middle text-center'>" . $count . "</td>"
-                        . "<td class=' align-middle'> " . ucfirst($user[0]["name"]) . "</td>"
-                        . "<td class=' align-middle'> " . ucfirst($table_record["institute_name"]) . "</td>"
-                        . "<td  align='center' class=' align-middle'>" . $plan . "</td>"
-                        . "<td  align='center' class=' align-middle'>" . $table_record["paid"] . "</td>"
-                        . "<td  align='center' class=' align-middle'>" . date('d-m-Y',strtotime($table_record["created_at"])) . "</td>"
-                        . "<td align='center' class=' align-middle'>" . $status . "</td>"
-                        . "<td align='center' class=' align-middle'>" . $date . "</td>"
-                        . "<td class='text-center align-middle'>"
-                        . "<a href='". base_url("admin/schools/institute_edit?id=". base64_encode($table_record["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>"
-                        . "<a href='". base_url("admin/schools/institute_delete?id=". base64_encode($table_record["id"]))."' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0 delete'>Delete</a>"
-                        . "<a href='". base_url("admin/schools/view_activityclass?id=". base64_encode($table_record["id"]))."'  class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>"
-                        . "</td>"
-                        . "</tr>";
-                        $count++;
-                    }
-                    ?>
+                <tbody>
                 </tbody>
+              
             </table>
         </div>    
 </div>
@@ -79,6 +34,28 @@
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <script>  
+    $(document).ready(function(){
+        var category_table = $("#example").dataTable({
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            "processing": true, 
+            "serverSide": true, 
+            "searching": true,
+            "language": {
+                "infoFiltered": ""
+            },
+            "order": [[ 5, "desc" ]],
+            "ajax": {
+                url: "<?php echo base_url('schools/admin/class_datatable');?>",
+                "type": "POST",
+                // "dataSrc": ""
+
+            },
+            'columnDefs': [ {
+                'targets': [0,8],
+                'orderable': false, 
+                }]
+        });
+    });
   $(document).ready( function(){
         $('#example').DataTable();
     });

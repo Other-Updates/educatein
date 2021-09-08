@@ -304,7 +304,7 @@ $user = $this->db->get()->result_array();
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
                                     <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                    <?php if(empty($inst_category[$key+1])){ ?><a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add More</a><?php } ?>
+                                    <?php if(empty($inst_category[$key+1])){ ?><a class="btn btn-primary addmore-show" id="addmore" name="addmore" style="margin-left:200px;">Add More</a><?php } ?>
                                 </div>
                             </div>
                         </div><!-- /form-row -->

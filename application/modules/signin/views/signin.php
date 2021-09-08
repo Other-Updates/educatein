@@ -21,7 +21,7 @@
                     <p>Sign in to continue to our application.</p>
                     <div class="row">
                         <div class="col-lg-6">
-                            <form action="<?php echo base_url() ?>signin/myaccount" name="signinform" method="post">
+                            <form action="<?php echo base_url() ?>signin/myaccount" id="signin" name="signinform" method="post">
                                 <div class="form-group">
                                     <i class="lnr lnr-envelope"></i>   
                                     <input type="email" id="signemail" name="signemail" class="form-control pr-6" id="" aria-describedby="emailHelp" placeholder=" ">
@@ -40,7 +40,7 @@
                                 <button type="submit" id="signin" name="signin" class="btn btn-primary mb-4">SIGN IN</button>
                             </form>
 
-                            <p>Don't Have an account? <a href="<?php echo base_url() ?>schools-signup"  class="text-pink"><u>SIGN UP</u></a></p>
+                            <p>Don't Have an account? <a href="<?php echo base_url() ?>schools-signup"  id="formsubmit" class="text-pink"><u>SIGN UP</u></a></p>
                         </div>
 
                         <div class="col-lg-6"></div>
@@ -53,6 +53,29 @@
     </div><!-- /container-fluid -->
 </div><!-- /new-signin-section -->
 <script>
+    $(document).ready(function () {
+        $("#formsubmit").on('click',function (event) {
+            $("#signin").validate({
+                rules: {
+                    signemail: "required",
+                    signpassword: "required",
+
+                    },
+                    messages: {
+                        signemail: "this field is required"
+                    },
+                    errorElement: 'div',
+                    errorLabelContainer: '.errorTxt',
+                    errorPlacement: function (error, element) {
+                        if (element.attr("name") == "terms")
+                            element.parents('.custom-checkbox').append(error);
+                        else
+                            element.parents('.form-group').append(error);
+                    }
+            });
+        });
+    });
+
     //Preloader
     $(window).on("load", function () {
         $('#preloader').fadeOut('slow', function () {
@@ -77,3 +100,5 @@
     //     });
     // });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+

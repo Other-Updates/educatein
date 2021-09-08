@@ -20,6 +20,9 @@ foreach ($user->result() as $users) {
 ?>
 
 <style>
+    .error{
+        color: #D8000C;
+    }
     .noclick  {
         pointer-events: none;
     }
@@ -700,21 +703,31 @@ foreach ($user->result() as $users) {
 <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
 <script>
     $(document).ready(function () {
-        $("#platinum").validate({
-            rules: {
-                schoolname: "required",
-                schoolboard: "required",
-                city: "required",
-                area: "required",
-            },
-            errorElement: 'div',
-            errorLabelContainer: '.errorTxt',
-            errorPlacement: function (error, element) {
-                if (element.attr("name") == "terms")
-                    element.parents('.custom-checkbox').append(error);
-                else
-                    element.parents('.form-group').append(error);
-            }
+        $("#formsubmit").on('click',function (event) {
+            $("#platinum").validate({
+                rules: {
+                        schoolname: "required",
+                        schoolboard: "required",
+                        school_city: "required",
+                        school_area: "required",
+                        pincode: "required",
+                        level: "required",
+                        phone: "required",
+                        email: "required",
+                        address: "required",
+                    },
+                    messages: {
+                        schoolname: "this field is required"
+                    },
+                    errorElement: 'div',
+                    errorLabelContainer: '.errorTxt',
+                    errorPlacement: function (error, element) {
+                        if (element.attr("name") == "terms")
+                            element.parents('.custom-checkbox').append(error);
+                        else
+                            element.parents('.form-group').append(error);
+                    }
+            });
         });
     });
 </script>

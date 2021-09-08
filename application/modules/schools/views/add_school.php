@@ -1219,11 +1219,11 @@
 
     $(document).ready(function () {
         $(".formsubmit").on('click',function (event) {
-            console.log(1);
-            $("#signupschool").validate({
+            if($("#category").val() == 'school') {
+                $("#signupschool").validate({
                     rules: {
-                    name: "required",
-                    phone: "required",
+                        name: "required",
+                        adminphone: "required",
                     password: {
                     minlength: 5
                 },
@@ -1231,23 +1231,6 @@
                     minlength: 5,
                     equalTo: "#password"
                 },
-                },
-                messages: {
-                    schoolname: "this field is required"
-                },
-                errorElement: 'div',
-                errorLabelContainer: '.errorTxt',
-                errorPlacement: function (error, element) {
-                    console.log(element.attr("name"));
-                    if (element.attr("name") == "terms")
-                        element.parents('.custom-checkbox').append(error);
-                    else
-                        element.parents('.form-group').append(error);
-                }
-                });
-            if($("#category").val() == 'school') {
-                $("#signupschool").validate({
-                    rules: {
                     schoolname: "required",
                     schoolboard: "required",
                     school_city: "required",
@@ -1265,7 +1248,6 @@
                 errorElement: 'div',
                 errorLabelContainer: '.errorTxt',
                 errorPlacement: function (error, element) {
-                    console.log(element.attr("name"));
                     if (element.attr("name") == "terms")
                         element.parents('.custom-checkbox').append(error);
                     else
@@ -1276,18 +1258,28 @@
             if($("#category").val() == 'summer_class'){
                 $("#signupschool").validate({
                     rules: {
+                        name: "required",
+                        adminphone: "required",
+                        password: {
+                            minlength: 5
+                        },
+                        confirm_password: {
+                            minlength: 5,
+                            equalTo: "#password"
+                        },
                         institutename: "required",
                         type: "required",
                         city: "required",
                         area: "required",
+                        phone: "required",
                         email: "required",
                         address: "required",
                         position_id: "required",
                         status: "required",
                     },
                     messages: {
-                    schoolname: "this field is required"
-                },
+                        schoolname: "this field is required"
+                    },
                 errorElement: 'div',
                 errorLabelContainer: '.errorTxt',
                 errorPlacement: function (error, element) {
@@ -1299,10 +1291,26 @@
                 });
             }
 
-            if(1){
-                $('#signupschool').submit();
-            }
+            
         });
+        $(".formsubmit").on('click',function (e) {
+            $.ajax({
+                    type: "POST",
+                    processData: false, // Important!
+                    contentType: false,
+                    cache: false,
+                    data: {usermail:$("#useremail").val()},
+                    url: "<?php echo base_url("schools/admin/email_exist") ?>",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "error") {
+                            sweetAlert("error", data.message.title, data.message.text, true);
+                        }
+                    }
+            });
+        });
+
+
         // $(".buy_now").on('click',function (event) {
         //     event.preventDefault();
         //     // $("#btnsubmit").prop("disabled", true);

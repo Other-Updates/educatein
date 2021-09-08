@@ -21,6 +21,9 @@ foreach ($user->result() as $users) {
 ?>
 
 <style>
+    .error{
+        color: #D8000C;
+    }
     .noclick  {
         pointer-events: none;
     }
@@ -45,7 +48,7 @@ foreach ($user->result() as $users) {
         <hr class="mb-3">
 
         <div class="listing-section">
-            <form action="<?php echo base_url() ?>institute_listing_first/insert" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url() ?>institute_listing_first/insert" method="post" id="platinum" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6" style="display:none">
                         <div class="form-group">
@@ -346,7 +349,7 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
-                <button type="submit" class="btn btn-primary btn-save">SUBMIT</button>
+                <button type="submit" class="btn btn-primary btn-save" id="formsubmit">SUBMIT</button>
             </form>
         </div><!-- /listing-section -->
     </div><!-- /container -->
@@ -360,7 +363,32 @@ foreach ($user->result() as $users) {
 
 
     $(document).ready(function () {
-//categories add more
+        $("#formsubmit").on('click',function (event) {
+            $("#platinum").validate({
+                rules: {
+                        institutename: "required",
+                        type: "required",
+                        banner1: "required",
+                        city: "required",
+                        area: "required",
+                        phone: "required",
+                        email: "required",
+                        address: "required",
+                    },
+                    messages: {
+                        schoolname: "this field is required"
+                    },
+                    errorElement: 'div',
+                    errorLabelContainer: '.errorTxt',
+                    errorPlacement: function (error, element) {
+                        if (element.attr("name") == "terms")
+                            element.parents('.custom-checkbox').append(error);
+                        else
+                            element.parents('.form-group').append(error);
+                    }
+            });
+        });
+        //categories add more
         var max_fields = 50; //maximum input boxes allowed
         var activity = $("#insmore"); //Fields wrapper
         var act_button = $("#addmore"); //Add button ID
@@ -380,7 +408,7 @@ foreach ($user->result() as $users) {
             x--;
         })
 
-//newsheading add more
+        //newsheading add more
         var max_fields = 50; //maximum input boxes allowed
         var news = $("#newsmore"); //Fields wrapper
         var news_button = $("#newsadd"); //Add button ID
@@ -400,25 +428,27 @@ foreach ($user->result() as $users) {
             x--;
         })
 
-// var max_fields      = 50; //maximum input boxes allowed
-// var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-// var add_button      = $(".add_field_button"); //Add button ID
+        // var max_fields      = 50; //maximum input boxes allowed
+        // var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        // var add_button      = $(".add_field_button"); //Add button ID
 
-// var x = 1; //initlal text box count
-// $(add_button).click(function(e){ //on add input button click
-//     e.preventDefault();
-//     if(x < max_fields){ //max input box allowed
-//         x++; //text box increment
-//         $(wrapper).append('<div><div class="form-row"><div class="col-lg-4 col-sm-6"><div class="input-group mb-3"><input type="file" accept="image/x-png,image/gif,image/jpeg" name="mytext1[]"/></div></div><a href="#" class="remove_field2">Remove</a></div></div>'); //add input box
-//     }
-// });
+        // var x = 1; //initlal text box count
+        // $(add_button).click(function(e){ //on add input button click
+        //     e.preventDefault();
+        //     if(x < max_fields){ //max input box allowed
+        //         x++; //text box increment
+        //         $(wrapper).append('<div><div class="form-row"><div class="col-lg-4 col-sm-6"><div class="input-group mb-3"><input type="file" accept="image/x-png,image/gif,image/jpeg" name="mytext1[]"/></div></div><a href="#" class="remove_field2">Remove</a></div></div>'); //add input box
+        //     }
+        // });
 
-// $(wrapper).on("click",".remove_field2", function(e){ //user click on remove text
-//     e.preventDefault(); $(this).parent('div').remove(); x--;
-// })
+        // $(wrapper).on("click",".remove_field2", function(e){ //user click on remove text
+        //     e.preventDefault(); $(this).parent('div').remove(); x--;
+        // })
 
 
 
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+
 

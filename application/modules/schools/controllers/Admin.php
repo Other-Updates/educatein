@@ -4057,5 +4057,248 @@ class admin extends CI_Controller {
         }
 
     }
+
+    function email_exist(){
+        $this->db->select('*')->where('email =', $_POST['email']);
+        $this->db->from('user_register');
+        $email = $this->db->get()->result();
+        if (count($email) > 0) {
+                // echo json_encode(array('status' => 'success', 'data' => array("mobile" => $mobile,"contact_email" => $data['email'],"user_id" => $user_id)));
+                // die;
+            // } else {
+                echo json_encode(array('status' => 'error', "message" => array("text" => "Try using another contact info !!!", "title" => "User Already Exist")));
+            //     die;
+            //     $this->load->view('sign-up-school', $data);
+            // }
+        }
+    }
+
+    function school_datatable($is_total_count = 0, $is_count = 0){
+        $data = $input_arr = array();
+		$input_data = $this->input->post();
+        
+
+		if(isset($_POST["length"]) && $_POST["length"] != -1){
+
+            $column = array('','ur.name','sd.school_name','sd.school_category_id','sd.paid','sd.created_at','sd.status');
+            $input_arr['search_val'] = $input_data['search']['value'];
+            $input_arr['order_column'] = $column[$input_data['order'][0]['column']];
+            $input_arr['order_by'] = $input_data['order'][0]['dir'];
+            $input_arr['start'] = $input_data['start'];
+            $input_arr['length'] = $input_data['length'];
+
+            $where ='';
+            $searchVal = trim($input_arr['search_val']);
+            $searchCol= array('ur.name','sd.school_name','sd.paid','sd.created_at');
+            if($searchVal != null && $searchVal != ''){
+                $where .='(';
+                $i=0;
+                foreach($searchCol as $s){
+                    if($i != 0){
+                        $where .=' OR ';
+                    }
+                    $where .='(';
+                    $where .= $s.' = "'.$searchVal.'" or '.$s.' LIKE "%'.$searchVal.'%"';
+                    $i++;
+                    $where .=')';
+                }
+                $where .=')';
+            }
+
+
+            $this->db->select('sd.id,sd.school_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.activated_at');
+            $this->db->from('school_details as sd');
+            $this->db->join('user_register as ur', 'sd.user_id = ur.id', 'left');
+            if($searchVal != null && $searchVal != ''){
+                $this->db->where($where);
+            }
+            $this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
+            $this->db->limit($input_arr['length'],$input_arr['start']);
+            $school_data = $this->db->get()->result_array();
+            
+            $sno = $input_data['start'] + 1;
+            foreach($school_data as $school){
+                $row = array();
+
+                $edit =  "<a href='". base_url("schools/admin/school_edit?id=". base64_encode($school["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>";
+                $delete = "<a href='". base_url("schools/admin/school_delete?id=". base64_encode($school["id"]))."' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0 delete' id='del_btn'>Delete</a>";
+                $view = "<a href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>";
+
+                $row[] = $sno;
+                $row[] = $school['user'];
+                $row[] = $school['school_name'];
+                
+                if($school['school_category_id'] == 1){$row[] = "PLATINUM";}
+                else if($school['school_category_id'] == 2){$row[] = "PREMIUM";}
+                else if($school['school_category_id'] == 3){$row[] = "SPECTRUM";}
+                else{ $row[] = "TRIAL";}
+
+                $row[] = $school['paid'];
+                $row[] = date('d-m-Y',strtotime($school['created_at']));
+                
+                if($school['status'] == 1){$row[] = "Approved";}
+                else if($school['status'] == 2){$row[] = "Rejected";}
+                else { $row[] = "Waiting for validation";}
+
+                if($school['status'] == 1){
+                    if($school['school_category_id'] == 4){
+                    $date = strtotime($school['activated_at']);
+                    $date = strtotime("+30 day", $date);
+                    $row[] = date('d-m-Y', $date);
+                    }else{
+                        $date = strtotime($school['activated_at']);
+                        $date = strtotime("+100 day", $date);
+                        $row[] = date('d-m-Y', $date);
+                    }
+                }else{
+                    $row[] = "-";
+                }
+                $row[] = $edit . '&nbsp;&nbsp;' . $delete . '&nbsp;&nbsp;' . $view;
+
+                $data[] = $row;
+                $sno++;
+            }
+        }   
+        $this->db->select('sd.id,sd.school_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id');
+        $this->db->from('school_details sd');
+        $this->db->join('user_register ur', 'sd.user_id = ur.id', 'left');
+        if($searchVal != null && $searchVal != ''){
+			$this->db->where($where);
+		}
+        if($is_total_count == 1)
+			return $this->db->count_all_results();
+		
+		if($is_count == 1)
+			return $this->db->get()->num_rows();
+		
+		$this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
+		// $this->db->limit($input_arr['length'],$input_arr['start']);
+		$query = $this->db->get();
+
+        // $school_data = $this->db->get()->result_array();
+        $output = array(
+            "draw" => $input_data['draw'],
+            "recordsTotal" => $this->db->count_all_results(),
+            "recordsFiltered" => $query->num_rows(),
+            "data" => $data,
+        );
+        echo json_encode($output);exit;
+    }
+
+    function class_datatable($is_total_count = 0, $is_count = 0){
+
+        $data = $input_arr = array();
+		$input_data = $this->input->post();
+
+		if(isset($_POST["length"]) && $_POST["length"] != -1){
+
+            $column = array('','ur.name','in.institute_name','in.position_id','in.paid','in.created_at','in.status');
+            $input_arr['search_val'] = $input_data['search']['value'];
+            $input_arr['order_column'] = $column[$input_data['order'][0]['column']];
+            $input_arr['order_by'] = $input_data['order'][0]['dir'];
+            $input_arr['start'] = $input_data['start'];
+            $input_arr['length'] = $input_data['length'];
+			
+            $where ='';
+            $searchVal = trim($input_arr['search_val']);
+		    $searchCol= array('ur.name','in.institute_name','in.paid','in.created_at');
+            if($searchVal != null && $searchVal != ''){
+                $where ='';
+                $where .='(';
+                $i=0;
+                foreach($searchCol as $s){
+                    if($i != 0){
+                        $where .='OR';
+                    }
+                    $where .='(';
+                    $where .= $s.' = "'.$searchVal.'" or '.$s.' LIKE "%'.$searchVal.'%"';
+                    $i++;
+                    $where .=')';
+                }
+                $where .=')';
+            }
+
+            $this->db->select('in.id,in.institute_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.activated_at');
+            $this->db->from('institute_details as in');
+            $this->db->join('user_register as ur', 'in.user_id = ur.id', 'left');
+            if($searchVal != null && $searchVal != ''){
+                $this->db->where($where);
+            }
+            $this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
+            $this->db->limit($input_arr['length'],$input_arr['start']);
+            $institute_data = $this->db->get()->result_array();
+
+            $sno = $input_data['start'] + 1;
+            foreach($institute_data as $institute){
+                $row = array();
+
+                $edit = "<a href='". base_url("admin/schools/institute_edit?id=". base64_encode($institute["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>";
+                $delete = "<a href='". base_url("admin/schools/institute_delete?id=". base64_encode($institute["id"]))."'  class=' btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0 delete'>Delete</a>";
+                $view = "<a href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>";
+
+                $row[] = $sno;
+                $row[] = $institute['user'];
+                $row[] = $institute['institute_name'];
+                
+                if($institute['position_id'] == 1){$row[] = "PLATINUM";}
+                else if($institute['position_id'] == 2){$row[] = "PREMIUM";}
+                else if($institute['position_id'] == 3){$row[] = "SPECTRUM";}
+                else{ $row[] = "TRIAL";}
+
+                $row[] = $institute['paid'];
+                $row[] = date('d-m-Y',strtotime($institute['created_at']));
+                
+                if($institute['status'] == 1){$row[] = "Approved";}
+                else if($institute['status'] == 2){$row[] = "Rejected";}
+                else { $row[] = "Waiting for validation";}
+
+                if($institute['status'] == 1){
+                    if($institute['position_id'] == 4){
+                    $date = strtotime($institute['activated_at']);
+                    $date = strtotime("+30 day", $date);
+                    $row[] = date('d-m-Y', $date);
+                    }else{
+                        $date = strtotime($institute['activated_at']);
+                        $date = strtotime("+100 day", $date);
+                        $row[] = date('d-m-Y', $date);
+                    }
+                }else{
+                    $row[] = "-";
+                }
+                $row[] = $edit . '&nbsp;&nbsp;' . $delete . '&nbsp;&nbsp;' . $view;
+
+                $data[] = $row;
+                $sno++;
+            }
+        }
+
+        $this->db->select('in.id,in.institute_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id');
+        $this->db->from('institute_details in');
+        $this->db->join('user_register ur', 'in.user_id = ur.id', 'left');
+        if($searchVal != null && $searchVal != ''){
+			$this->db->where($where);
+		}
+        if($is_total_count == 1)
+			return $this->db->count_all_results();
+		
+		if($is_count == 1)
+			return $this->db->get()->num_rows();
+		
+		$this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
+		// $this->db->limit($input_arr['length'],$input_arr['start']);
+		$query = $this->db->get();
+
+        // $school_data = $this->db->get()->result_array();
+        $output = array(
+            "draw" => $input_data['draw'],
+            "recordsTotal" => $this->db->count_all_results(),
+            "recordsFiltered" => $query->num_rows(),
+            "data" => $data,
+        );
+        echo json_encode($output);exit;
+        
+        
+    }   
+    
 }
 ?>
