@@ -115,8 +115,8 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="col-md-3"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div></div>
                     <div class="col-md-9">
                         <div class="esd-banner-details-right">
-                            <div class="esd-banner-details-tit">St Joseph's Matriculation Higher Secondary School</div>
-                            <div class="esd-banner-details-address"><i class="fa fa-map-marker"></i> 1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</div>
+                            <div class="esd-banner-details-tit"><?php echo ucfirst($school_details->slug) ?></div>
+                            <div class="esd-banner-details-address"><i class="fa fa-map-marker"></i> <?php echo $school_details->address ?></div>
                             <div class="clearfix"></div>
                             <div class="row esd-banner-details-hightlight">
                                 <div class="col-md-2">
@@ -128,11 +128,11 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="esd-banner-details-hightlight-suntit">Educatein Ratings</div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="esd-banner-details-hightlight-tit">CBSE</div>
+                                    <div class="esd-banner-details-hightlight-tit"><?php echo ucfirst($affilis->affiliation_name) ?></div>
                                     <div class="esd-banner-details-hightlight-suntit">School Board</div>
                                 </div>
                                 <div class="col-md-5">
-                                    <div class="esd-banner-details-hightlight-tit">Higher Secondary School</div>
+                                    <div class="esd-banner-details-hightlight-tit"><?php echo ucfirst($school_types->school_type) ?></div>
                                     <div class="esd-banner-details-hightlight-suntit">Grade Level</div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 <button class="btn btn-theme1"><i class="fa fa-map-marker"></i> Show School On Map</button>
                                 <button class="btn btn-theme2"><i class="fa fa-phone"></i> Call School</button>
                                 <button class="btn btn-theme1-border"><i class="fa fa-file-text-o"></i> Admissions Open Now</button>
-                                <button class="btn btn-theme2-border"><i class="fa fa-eye"></i> Page Views : 135</button>
+                                <!-- <button class="btn btn-theme2-border"><i class="fa fa-eye"></i> Page Views : 135</button> -->
                             </div>
                         </div>
                     </div>
@@ -159,9 +159,6 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         <div class="row">
                             <div class="col-md-4">
                                 <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
-                            </div>
-                            <div class="col-md-8">
-                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p>
                             </div>
                         </div>
                     </div>

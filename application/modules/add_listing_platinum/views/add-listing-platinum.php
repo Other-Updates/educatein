@@ -56,13 +56,13 @@ foreach ($user->result() as $users) {
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="schoolname">School Name</label>
+                            <label for="schoolname">School Name<span class="error">*</span></label>
                             <input type="text" class="form-control" name="schoolname" id="schoolname" placeholder="e.g. Haunuz Matric School" >
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="schoolboard">School Board</label>
+                            <label for="schoolboard">School Board<span class="error">*</span></label>
                             <select class="form-control" name="schoolboard" id="exampleFormControlSelect1" required>
                                 <option value="" >e.g. Matriculation School</option>
                                 <option value="cbse">CBSE School</option>
@@ -78,7 +78,7 @@ foreach ($user->result() as $users) {
 
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="city">City</label>
+                            <label for="city">City<span class="error">*</span></label>
                             <select class="form-control" name="city" id="exampleFormControlSelect1" required>
                                 <option value="">--Select City--</option>
                                 <?php
@@ -94,19 +94,19 @@ foreach ($user->result() as $users) {
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="area">Area</label>
+                            <label for="area">Area<span class="error">*</span></label>
                             <input type="text" name="area" class="form-control" id="area" placeholder="e.g.Nallampalayam" required>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="area">Pincode</label>
+                            <label for="area">Pincode<span class="error">*</span></label>
                             <input type="text" name="pincode" class="form-control" id="area" placeholder="654001" required>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="level">Grade Level</label>
+                            <label for="level">Grade Level<span class="error">*</span></label>
                             <select class="form-control" name="level" id="exampleFormControlSelect1" required>
                                 <option value="" >e.g. Elementary School</option>
                                 <option value="Elementary School">Elementary School</option>
@@ -554,13 +554,13 @@ foreach ($user->result() as $users) {
                 <div class="form-row">
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
+                            <label for="phone">Phone Number<span class="error">*</span></label>
                             <input type="text" name="phone" class="form-control" id="phone" placeholder="e.g.+91 9876543210">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Email<span class="error">*</span></label>
                             <input type="email" name="email" class="form-control" id="email" placeholder="e.g.admin@gmail.com">
                         </div>
                     </div>
@@ -578,7 +578,7 @@ foreach ($user->result() as $users) {
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
-                            <label for="address">Address</label>
+                            <label for="address">Address<span class="error">*</span></label>
                             <textarea class="form-control" name="address" id="address" rows="1" style="height: 80px;"></textarea>
                         </div>
                     </div>

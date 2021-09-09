@@ -27,6 +27,7 @@ class Add_listing_platinum extends CI_Controller {
 
     public function insert() {
 
+;
         $school['schoolname'] = $_POST['schoolname'];
         $school['schoolboard'] = $_POST['schoolboard'];
         $school['city'] = $_POST['city'];
@@ -229,7 +230,7 @@ class Add_listing_platinum extends CI_Controller {
         }
 
 
-//platinum data save
+        //platinum data save
         if (!empty($_POST['founded'])) {
             $foundedinsert = array(
                 'school_id' => $school_id,
@@ -351,7 +352,7 @@ class Add_listing_platinum extends CI_Controller {
         }
 
 
-// schoolmanagement activities 
+        // schoolmanagement activities 
 
         if (isset($_POST['playground'])) {
             $playgroundinsert = array(
@@ -468,12 +469,11 @@ class Add_listing_platinum extends CI_Controller {
 
 
 
-// banner1 image save
+        // banner1 image save
         if (isset($_FILES['banner1']['name'])) {
             $banner1 = $_FILES['banner1']['name'];
             $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
-// echo $banner1_ext;
-// exit();
+
             $banner1_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
             $banner1_type = $_FILES['banner1']['type'];
             $banner1_size = $_FILES['banner1']['size'];
@@ -498,9 +498,8 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// echo $banner1_name;
-// exit();
-// banner2 image save
+
+        // banner2 image save
         if (isset($_FILES['banner2']['name'])) {
             $banner2 = $_FILES['banner2']['name'];
             $banner2_ext = pathinfo($banner2, PATHINFO_EXTENSION);
@@ -512,8 +511,7 @@ class Add_listing_platinum extends CI_Controller {
             $banner2_store = FCPATH . "/laravel/public/" . $banner2_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($banner2_ext, $allowed)) {
                 if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
                     $banner2insert = array(
@@ -528,7 +526,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// banner3 image save
+        // banner3 image save
         if (isset($_FILES['banner3']['name'])) {
             $banner3 = $_FILES['banner3']['name'];
             $banner3_ext = pathinfo($banner3, PATHINFO_EXTENSION);
@@ -540,8 +538,7 @@ class Add_listing_platinum extends CI_Controller {
             $banner3_store = FCPATH . "/laravel/public/" . $banner3_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($banner3_ext, $allowed)) {
                 if (move_uploaded_file($banner3_tem_loc, $banner3_store)) {
                     $banner3insert = array(
@@ -556,7 +553,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// aboutimg1 image save
+        // aboutimg1 image save
         if (isset($_FILES['aboutimg1']['name'])) {
             $aboutimg1 = $_FILES['aboutimg1']['name'];
             $aboutimg1_ext = pathinfo($aboutimg1, PATHINFO_EXTENSION);
@@ -568,8 +565,7 @@ class Add_listing_platinum extends CI_Controller {
             $aboutimg1_store = FCPATH . "/laravel/public/" . $aboutimg1_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($aboutimg1_ext, $allowed)) {
                 if (move_uploaded_file($aboutimg1_tem_loc, $aboutimg1_store)) {
                     $aboutimg1insert = array(
@@ -584,7 +580,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// aboutimg2 image save
+        // aboutimg2 image save
         if (isset($_FILES['aboutimg2']['name'])) {
             $aboutimg2 = $_FILES['aboutimg2']['name'];
             $aboutimg2_ext = pathinfo($aboutimg2, PATHINFO_EXTENSION);
@@ -596,8 +592,7 @@ class Add_listing_platinum extends CI_Controller {
             $aboutimg2_store = FCPATH . "/laravel/public/" . $aboutimg2_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($aboutimg2_ext, $allowed)) {
                 if (move_uploaded_file($aboutimg2_tem_loc, $aboutimg2_store)) {
                     $aboutimg2insert = array(
@@ -612,7 +607,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// activityimage1 image save
+        // activityimage1 image save
         if (isset($_FILES['activityimage1']['name'])) {
             $activity1 = $_FILES['activityimage1']['name'];
             $activity1_ext = pathinfo($activity1, PATHINFO_EXTENSION);
@@ -642,14 +637,14 @@ class Add_listing_platinum extends CI_Controller {
                         );
 
                         $this->db->insert('school_activities', $schoolactivityinsert1);
+                        $schoolactivity_id1 = $this->db->insert_id();
+                        // $this->db->select('*')->where('activity_name =', $_POST['activity1']);
+                        // $this->db->from('school_activities');
+                        // $schoolactivity1 = $this->db->get();
 
-                        $this->db->select('*')->where('activity_name =', $_POST['activity1']);
-                        $this->db->from('school_activities');
-                        $schoolactivity1 = $this->db->get();
-
-                        foreach ($schoolactivity1->result() as $schoolactivitys1) {
-                            $schoolactivity_id1 = $schoolactivitys1->id;
-                        }
+                        // foreach ($schoolactivity1->result() as $schoolactivitys1) {
+                        //     $schoolactivity_id1 = $schoolactivitys1->id;
+                        // }
                     }
 
                     $schoolactivityinsert1 = array(
@@ -664,7 +659,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// activity2 image save
+        // activity2 image save
         if (isset($_FILES['activityimage2']['name'])) {
             $activity2 = $_FILES['activityimage2']['name'];
             $activity2_ext = pathinfo($activity2, PATHINFO_EXTENSION);
@@ -676,8 +671,7 @@ class Add_listing_platinum extends CI_Controller {
             $activity2_store = FCPATH . "/laravel/public/" . $activity2_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($activity2_ext, $allowed)) {
                 if (move_uploaded_file($activity2_tem_loc, $activity2_store)) {
                     $this->db->select('*')->where('activity_name =', $_POST['activity2']);
@@ -694,14 +688,15 @@ class Add_listing_platinum extends CI_Controller {
                         );
 
                         $this->db->insert('school_activities', $schoolactivityinsert2);
+                        $schoolactivity_id2 = $this->db->insert_id();
 
-                        $this->db->select('*')->where('activity_name =', $_POST['activity2']);
-                        $this->db->from('school_activities');
-                        $schoolactivity2 = $this->db->get();
+                        // $this->db->select('*')->where('activity_name =', $_POST['activity2']);
+                        // $this->db->from('school_activities');
+                        // $schoolactivity2 = $this->db->get();
 
-                        foreach ($schoolactivity2->result() as $schoolactivitys2) {
-                            $schoolactivity_id2 = $schoolactivitys2->id;
-                        }
+                        // foreach ($schoolactivity2->result() as $schoolactivitys2) {
+                        //     $schoolactivity_id2 = $schoolactivitys2->id;
+                        // }
                     }
 
                     $schoolactivityinsert2 = array(
@@ -716,7 +711,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// activity3 image save
+        // activity3 image save
         if (isset($_FILES['activityimage3']['name'])) {
             $activity3 = $_FILES['activityimage3']['name'];
             $activity3_ext = pathinfo($activity3, PATHINFO_EXTENSION);
@@ -728,8 +723,7 @@ class Add_listing_platinum extends CI_Controller {
             $activity3_store = FCPATH . "/laravel/public/" . $activity3_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($activity3_ext, $allowed)) {
                 if (move_uploaded_file($activity3_tem_loc, $activity3_store)) {
                     $this->db->select('*')->where('activity_name =', $_POST['activity3']);
@@ -746,14 +740,14 @@ class Add_listing_platinum extends CI_Controller {
                         );
 
                         $this->db->insert('school_activities', $schoolactivityinsert3);
+                        $schoolactivity_id3 = $this->db->insert_id();
+                        // $this->db->select('*')->where('activity_name =', $_POST['activity3']);
+                        // $this->db->from('school_activities');
+                        // $schoolactivity3 = $this->db->get();
 
-                        $this->db->select('*')->where('activity_name =', $_POST['activity3']);
-                        $this->db->from('school_activities');
-                        $schoolactivity3 = $this->db->get();
-
-                        foreach ($schoolactivity3->result() as $schoolactivitys3) {
-                            $schoolactivity_id3 = $schoolactivitys3->id;
-                        }
+                        // foreach ($schoolactivity3->result() as $schoolactivitys3) {
+                        //     $schoolactivity_id3 = $schoolactivitys3->id;
+                        // }
                     }
 
                     $schoolactivityinsert3 = array(
@@ -768,7 +762,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// activity4 image save
+        // activity4 image save
         if (isset($_FILES['activityimage4']['name'])) {
             $activity4 = $_FILES['activityimage4']['name'];
             $activity4_ext = pathinfo($activity4, PATHINFO_EXTENSION);
@@ -780,8 +774,7 @@ class Add_listing_platinum extends CI_Controller {
             $activity4_store = FCPATH . "/laravel/public/" . $activity4_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($activity4_ext, $allowed)) {
                 if (move_uploaded_file($activity4_tem_loc, $activity4_store)) {
                     $this->db->select('*')->where('activity_name =', $_POST['activity4']);
@@ -798,14 +791,15 @@ class Add_listing_platinum extends CI_Controller {
                         );
 
                         $this->db->insert('school_activities', $schoolactivityinsert4);
+                        $schoolactivity_id4 = $this->db->insert_id();
 
-                        $this->db->select('*')->where('activity_name =', $_POST['activity4']);
-                        $this->db->from('school_activities');
-                        $schoolactivity4 = $this->db->get();
+                        // $this->db->select('*')->where('activity_name =', $_POST['activity4']);
+                        // $this->db->from('school_activities');
+                        // $schoolactivity4 = $this->db->get();
 
-                        foreach ($schoolactivity4->result() as $schoolactivitys4) {
-                            $schoolactivity_id4 = $schoolactivitys4->id;
-                        }
+                        // foreach ($schoolactivity4->result() as $schoolactivitys4) {
+                        //     $schoolactivity_id4 = $schoolactivitys4->id;
+                        // }
                     }
 
                     $schoolactivityinsert4 = array(
@@ -820,7 +814,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// facility1 image save
+        // facility1 image save
         if (isset($_FILES['facilityimage1']['name'])) {
             $facility1 = $_FILES['facilityimage1']['name'];
             $facility1_ext = pathinfo($facility1, PATHINFO_EXTENSION);
@@ -832,8 +826,7 @@ class Add_listing_platinum extends CI_Controller {
             $facility1_store = FCPATH . "/laravel/public/" . $facility1_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-// echo $file_type;
-// exit();
+
             if (in_array($facility1_ext, $allowed)) {
                 if (move_uploaded_file($facility1_tem_loc, $facility1_store)) {
                     $schoolfaciltyinsert1 = array(
@@ -848,7 +841,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// facility2 image save
+        // facility2 image save
         if (isset($_FILES['facilityimage2']['name'])) {
             $facility2 = $_FILES['facilityimage2']['name'];
             $facility2_ext = pathinfo($facility2, PATHINFO_EXTENSION);
@@ -859,8 +852,7 @@ class Add_listing_platinum extends CI_Controller {
             $facility2_tem_loc = $_FILES['facilityimage2']['tmp_name'];
             $facility2_store = FCPATH . "/laravel/public/" . $facility2_name;
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($facility2_ext, $allowed)) {
                 if (move_uploaded_file($facility2_tem_loc, $facility2_store)) {
                     $schoolfaciltyinsert2 = array(
@@ -876,7 +868,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// facility3 image save
+        // facility3 image save
         if (isset($_FILES['facilityimage3']['name'])) {
             $facility3 = $_FILES['facilityimage3']['name'];
             $facility3_ext = pathinfo($facility3, PATHINFO_EXTENSION);
@@ -888,8 +880,7 @@ class Add_listing_platinum extends CI_Controller {
             $facility3_store = FCPATH . "/laravel/public/" . $facility3_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($facility3_ext, $allowed)) {
                 if (move_uploaded_file($facility3_tem_loc, $facility3_store)) {
                     $schoolfaciltyinsert3 = array(
@@ -905,7 +896,7 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
-// facility4 image save
+        // facility4 image save
         if (isset($_FILES['facilityimage4']['name'])) {
             $facility4 = $_FILES['facilityimage4']['name'];
             $facility4_ext = pathinfo($facility4, PATHINFO_EXTENSION);
@@ -917,8 +908,7 @@ class Add_listing_platinum extends CI_Controller {
             $facility4_store = FCPATH . "/laravel/public/" . $facility4_name;
 
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
-// echo $file_type;
-// exit();
+
             if (in_array($facility4_ext, $allowed)) {
                 if (move_uploaded_file($facility4_tem_loc, $facility4_store)) {
                     $schoolfaciltyinsert4 = array(
@@ -928,7 +918,6 @@ class Add_listing_platinum extends CI_Controller {
                         'image' => $facility4_name,
                         'is_active' => 1
                     );
-// exit();
                     $this->db->insert('school_facilities', $schoolfaciltyinsert1);
                 }
             }
