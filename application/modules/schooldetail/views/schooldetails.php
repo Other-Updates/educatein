@@ -150,22 +150,520 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         </div>
     </div>
     <div class="container">
-        <!-- <div class="sd-menu">test</div> -->
+        <!-- <div class="sd-menu">Menu List</div> -->
+
         <div class="row">
             <div class="col-md-9">
-                <div class="sd-inner-main">
+                <div id="about-info" class="sd-inner-main about-info">
                     <div class="sd-ection-tit">About Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
-                            <div class="col-md-4">
-                                <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
+                            <div class="col-md-3">
+                                <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt="">
+                            </div>
+                            <div class="col-md-9">
+                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p><br>
+                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div id="addit-info" class="sd-inner-main addit-info">
+                    <div class="sd-ection-tit">Additional Info</div>
+                    <div class="sd-ection-inner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/1.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Founded</h6>
+                                        <h3>1966</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/2.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Special</h6>
+                                        <h3>French class</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/3.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Events</h6>
+                                        <h3>Annual Day </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/4.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Achievements</h6>
+                                        <h3>First in Sports</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/5.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Branches</h6>
+                                        <h3>Coimbatore, Thei</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/6.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Academic History</h6>
+                                        <h3>Last year 98% Results</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/7.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Activity</h6>
+                                        <h3>Martial Arts</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/8.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>No of Boys</h6>
+                                        <h3>625</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/9.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Vision</h6>
+                                        <h3>Self-awareness</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/10.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Mission</h6>
+                                        <h3>-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/11.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>No.of Students</h6>
+                                        <h3>1075</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/12.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>No.of Teachers</h6>
+                                        <h3>75</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/13.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Languages</h6>
+                                        <h3>5+</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/14.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>No of Girls</h6>
+                                        <h3>550</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/15.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Motto</h6>
+                                        <h3>Towards Truth and Love</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="special-info" class="sd-inner-main special-info">
+                    <div class="sd-ection-tit">Special Info</div>
+                    <div class="sd-ection-inner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/16.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Playgorund</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/17.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Kids Playcorner</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/18.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Curriculam</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/19.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Field Trips</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/20.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Opportunities</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/21.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Clubs</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/22.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Progressive Learning</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/23.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Hostel Facility</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="gallery" class="sd-inner-main gallery">
+                    <div class="sd-ection-tit">Gallery</div>
+                    <div class="sd-ection-inner">
+                        <div class="row">
+                            <div class="col-md-4"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                            <div class="col-md-4"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                            <div class="col-md-4"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="school-activ" class="sd-inner-main school-activ">
+                    <div class="sd-ection-tit">School Activities</div>
+                    <div class="sd-ection-inner">
+                        <div class="row">
+                            <div class="col-md-3 school-activ-list">
+                                <div><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                                <h6>Independence Day Celebration</h6>
+                            </div>
+                            <div class="col-md-3 school-activ-list">
+                                <div><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                                <h6>Chirstmas Celebration</h6>
+                            </div>
+                            <div class="col-md-3 school-activ-list">
+                                <div><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                                <h6>Kamarajar Day Celebration</h6>
+                            </div>
+                            <div class="col-md-3 school-activ-list">
+                                <div><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                                <h6>Sports Day Celebration</h6>
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+
+                <div id="school-facilities" class="sd-inner-main school-facilities">
+                    <div class="sd-ection-tit">School Facilities</div>
+                    <div class="sd-ection-inner">
+                        <div class="row school-facilities-list">
+                            <div class="col-md-3 sd-faci-img">
+                                <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-faci-img" alt="">
+                            </div>
+                            <div class="col-md-9 sd-faci-detail">
+                                <h6>Library</h6>
+                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p>
+                            </div>
+                        </div>
+                        <div class="row school-facilities-list">
+                            <div class="col-md-3 sd-faci-img">
+                                <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-faci-img" alt="">
+                            </div>
+                            <div class="col-md-9 sd-faci-detail">
+                                <h6>Computer Lab</h6>
+                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-3">
-                    ads
+            <div class="col-md-3 pl-0">
+                <div class="sd-inner-main sd-sidebar">
+                    <div class="sd-ection-tit">Similar Schools</div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="ads-school-widget mb-3">
+                    <div class="ads-inner"><p>Ads Here</p></div>
+                </div>
+                <div class="sd-inner-main sd-sidebar">
+                    <div class="sd-ection-tit">Recent News</div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                    <div class="row sd-sidebar-list">
+                        <div class="col-md-4 sd-sidebar-list-left">
+                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                        </div>
+                        <div class="col-md-8 sd-sidebar-list-right">
+                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="ads-school-widget mb-3">
+                    <div class="ads-inner"><p>Ads Here</p></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div id="contact-info" class="col-md-12">
+                <div class="sd-inner-main contact-info">
+                    <div class="sd-ection-tit">Contact Information</div>
+                    <div class="sd-ection-inner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/24.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Address</h6>
+                                        <h3>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h3>
+                                    </div>
+                                </div>
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/25.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Phone Number</h6>
+                                        <h3>+91 422 2302 443</h3>
+                                    </div>
+                                </div>
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/26.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Email</h6>
+                                        <h3>info@josephs.com</h3>
+                                    </div>
+                                </div>
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/27.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Website</h6>
+                                        <h3>www.josephs.ac.in</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">Map</div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="clearfix"></div>
+            <div id="social-links" class="col-md-12">
+                <div class="sd-inner-main social-links">
+                    <div class="sd-ection-tit">Social Links</div>
+                    <div class="sd-ection-inner">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/28.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Facebook</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/29.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Twitter</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/30.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Instagram</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/31.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Linked in</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/32.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Pinterest</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="ads-school-widget mab-50">
+            <div class="row">
+                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
+                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
+                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
             </div>
         </div>
     </div>
