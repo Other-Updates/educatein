@@ -7,7 +7,7 @@
         $userid = $this->db->get()->result_array(); 
         // $userid= base64_decode($_GET['id']);
         ?>
-        <a class="btn btn-success btn-sm" href="<?php echo base_url();?>/schools/admin/add_school"><i class="fas fa-plus"></i> Add School</a>
+        <a class="btn btn-success btn-sm" href="<?php echo base_url();?>schools/admin/add_school"><i class="fas fa-plus"></i> Add School</a>
     </div>
     <div class="clearfix"></div>
     <div class="table-responsive">
@@ -20,9 +20,8 @@
                    <th class="text-nowrap">Plan</th>
                    <th class="text-nowrap" style="text-align:center;">Paid</th>
                     <th class="text-nowrap">Created date</th>
-                    <th class="text-nowrap">Status</th>
+                    <th class="text-nowrap">Status</th> 
                     <th class="text-nowrap">Expiry date</th>
-                    <!-- <th class="text-nowrap">Status</th>  -->
                     <th class="text-nowrap">Actions</th> 
                 </tr>
             </thead>
@@ -98,7 +97,32 @@ $(document).ready(function(){
 
     });
     $('body').on('click','.delete',function () {
-        return confirm('Are you sure, want to Delete....!!!')
+        // return confirm('Are you sure, want to Delete....!!!')
+        swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    }, function (isConfirm) {
+        if (!isConfirm) return;
+        $.ajax({
+            url: "scriptDelete.php",
+            type: "POST",
+            data: {
+                id: 5
+            },
+            dataType: "html",
+            success: function () {
+                swal("Done!", "It was succesfully deleted!", "success");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                swal("Error deleting!", "Please try again", "error");
+            }
+        });
+    });
 
 //         swal("Are you sure?", {
 //   dangerMode: true,

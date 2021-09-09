@@ -48,6 +48,42 @@ class Welcome extends CI_Controller {
             $data["schools"] = $this->get_schools($city_id);
         }
 
+        //platinum plan schools
+        $this->db->select('sd.school_name as schoolname,si.images as banner');
+        $this->db->from('school_details as sd');
+        $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+        $this->db->where('sd.city_id',$this->session->userdata('city_id'));
+        $this->db->where('sd.deleted_at',NULL);
+        $this->db->where('sd.status',1);
+        $this->db->where('sd.school_category_id',1);
+        // $this->db->where('si.school_activity_id',2);
+        $this->db->order_by('RAND()');
+        $data['platinum_data'] = $this->db->get()->result_array();
+        // print_r($this->db->last_query());exit;
+
+        //premium plan schools
+        $this->db->select('sd.school_name as schoolname,si.images as banner');
+        $this->db->from('school_details as sd');
+        $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+        $this->db->where('sd.city_id',$this->session->userdata('city_id'));
+        $this->db->where('sd.deleted_at',NULL);
+        $this->db->where('sd.status',1);
+        $this->db->order_by('RAND()');
+        $this->db->where('sd.school_category_id',2);
+        $data['premium_data'] = $this->db->get()->result_array();
+
+        //spectrum plan schools
+        $this->db->select('sd.school_name as schoolname,si.images as banner');
+        $this->db->from('school_details as sd');
+        $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+        $this->db->where('sd.city_id',$this->session->userdata('city_id'));
+        $this->db->where('sd.deleted_at',NULL);
+        $this->db->where('sd.status',1);
+        $this->db->order_by('RAND()');
+        $this->db->where('sd.school_category_id',3);
+        $data['spectrum_data'] = $this->db->get()->result_array();
+
+
         $this->load->view('welcome_message', $data);
     }
 

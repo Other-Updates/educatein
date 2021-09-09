@@ -1,7 +1,7 @@
 <div class="table-main">
     <div class="table-tit-main"> 
         <div class="table-tit"><?php echo $formName; ?></div> 
-        <a  class="btn btn-success btn-sm" href="<?php echo base_url();?>/schools/admin/add_school"><i class="fas fa-plus"></i> Add Institute</a>
+        <a  class="btn btn-success btn-sm" href="<?php echo base_url();?>schools/admin/add_school"><i class="fas fa-plus"></i> Add Institute</a>
     </div>
     <?php
         // $this->db->select('id')->from('admin_users');

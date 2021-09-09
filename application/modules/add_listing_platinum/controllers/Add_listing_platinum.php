@@ -150,23 +150,23 @@ class Add_listing_platinum extends CI_Controller {
         // echo $school['teachers'];
         // exit(); 
 
-        $banner1 = $_FILES['banner1']['name'];
-        $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
-        // echo $banner1_ext;
-        // exit();
-        $banner1_name = $_POST['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
-        $banner1_type = $_FILES['banner1']['type'];
-        $banner1_size = $_FILES['banner1']['size'];
-        $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
-        $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
-        $allowed = array('gif', 'png', 'jpg', 'jpeg');
+        // $banner1 = $_FILES['banner1']['name'];
+        // $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
+        // // echo $banner1_ext;
+        // // exit();
+        // $banner1_name = $_POST['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
+        // $banner1_type = $_FILES['banner1']['type'];
+        // $banner1_size = $_FILES['banner1']['size'];
+        // $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
+        // $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
+        // $allowed = array('gif', 'png', 'jpg', 'jpeg');
 
-        if (in_array($banner1_ext, $allowed)) {
+        // if (in_array($banner1_ext, $allowed)) {
 
-            if (move_uploaded_file($banner1_tem_loc, $banner1_store)) {
+        //     if (move_uploaded_file($banner1_tem_loc, $banner1_store)) {
                 
-            }
-        }
+        //     }
+        // }
 
         if (isset($_POST['customRadio2'])) {
             $customRadio1 = $_POST['customRadio2'];

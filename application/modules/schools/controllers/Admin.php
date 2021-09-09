@@ -4078,7 +4078,7 @@ class admin extends CI_Controller {
 		$input_data = $this->input->post();
         
 
-		if(isset($_POST["length"]) && $_POST["length"] != -1){
+		if(isset($_POST["length"])){
 
             $column = array('','ur.name','sd.school_name','sd.school_category_id','sd.paid','sd.created_at','sd.status');
             $input_arr['search_val'] = $input_data['search']['value'];
@@ -4108,14 +4108,16 @@ class admin extends CI_Controller {
 
             $this->db->select('sd.id,sd.school_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.activated_at');
             $this->db->from('school_details as sd');
+            $this->db->where('sd.deleted_at',NULL);
             $this->db->join('user_register as ur', 'sd.user_id = ur.id', 'left');
             if($searchVal != null && $searchVal != ''){
                 $this->db->where($where);
             }
             $this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
-            $this->db->limit($input_arr['length'],$input_arr['start']);
+            if($input_arr['length'] != -1)
+                $this->db->limit($input_arr['length'],$input_arr['start']);
             $school_data = $this->db->get()->result_array();
-            
+
             $sno = $input_data['start'] + 1;
             foreach($school_data as $school){
                 $row = array();
@@ -4125,8 +4127,8 @@ class admin extends CI_Controller {
                 $view = "<a href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>";
 
                 $row[] = $sno;
-                $row[] = $school['user'];
-                $row[] = $school['school_name'];
+                $row[] = ucfirst($school['user']);
+                $row[] = ucfirst($school['school_name']);
                 
                 if($school['school_category_id'] == 1){$row[] = "PLATINUM";}
                 else if($school['school_category_id'] == 2){$row[] = "PREMIUM";}
@@ -4172,7 +4174,8 @@ class admin extends CI_Controller {
 			return $this->db->get()->num_rows();
 		
 		$this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
-		// $this->db->limit($input_arr['length'],$input_arr['start']);
+        // if($input_arr['length'] != -1)
+		//     $this->db->limit($input_arr['length'],$input_arr['start']);
 		$query = $this->db->get();
 
         // $school_data = $this->db->get()->result_array();
@@ -4190,7 +4193,7 @@ class admin extends CI_Controller {
         $data = $input_arr = array();
 		$input_data = $this->input->post();
 
-		if(isset($_POST["length"]) && $_POST["length"] != -1){
+		if(isset($_POST["length"])){
 
             $column = array('','ur.name','in.institute_name','in.position_id','in.paid','in.created_at','in.status');
             $input_arr['search_val'] = $input_data['search']['value'];
@@ -4220,11 +4223,13 @@ class admin extends CI_Controller {
 
             $this->db->select('in.id,in.institute_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.activated_at');
             $this->db->from('institute_details as in');
+            $this->db->where('in.deleted_at',NULL);
             $this->db->join('user_register as ur', 'in.user_id = ur.id', 'left');
             if($searchVal != null && $searchVal != ''){
                 $this->db->where($where);
             }
             $this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
+            if($input_arr['length'] != -1)
             $this->db->limit($input_arr['length'],$input_arr['start']);
             $institute_data = $this->db->get()->result_array();
 
@@ -4237,8 +4242,8 @@ class admin extends CI_Controller {
                 $view = "<a href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>";
 
                 $row[] = $sno;
-                $row[] = $institute['user'];
-                $row[] = $institute['institute_name'];
+                $row[] = ucfirst($institute['user']);
+                $row[] = ucfirst($institute['institute_name']);
                 
                 if($institute['position_id'] == 1){$row[] = "PLATINUM";}
                 else if($institute['position_id'] == 2){$row[] = "PREMIUM";}
