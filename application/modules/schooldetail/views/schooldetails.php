@@ -150,10 +150,11 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         </div>
     </div>
     <div class="container">
-        <!-- <div class="sd-menu">test</div> -->
+        <!-- <div class="sd-menu">Menu List</div> -->
+
         <div class="row">
             <div class="col-md-9">
-                <div class="sd-inner-main about-info">
+                <div id="about-info" class="sd-inner-main about-info">
                     <div class="sd-ection-tit">About Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -168,7 +169,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div class="sd-inner-main addit-info">
+                <div id="addit-info" class="sd-inner-main addit-info">
                     <div class="sd-ection-tit">Additional Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -312,7 +313,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div class="sd-inner-main special-info">
+                <div id="special-info" class="sd-inner-main special-info">
                     <div class="sd-ection-tit">Special Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -384,7 +385,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div class="sd-inner-main gallery">
+                <div id="gallery" class="sd-inner-main gallery">
                     <div class="sd-ection-tit">Gallery</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -395,7 +396,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div class="sd-inner-main school-activ">
+                <div id="school-activ" class="sd-inner-main school-activ">
                     <div class="sd-ection-tit">School Activities</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -419,7 +420,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div class="sd-inner-main school-facilities">
+                <div id="school-facilities" class="sd-inner-main school-facilities">
                     <div class="sd-ection-tit">School Facilities</div>
                     <div class="sd-ection-inner">
                         <div class="row school-facilities-list">
@@ -567,7 +568,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                 </div>
             </div>
             <div class="clearfix"></div>
-            <div class="col-md-12">
+            <div id="contact-info" class="col-md-12">
                 <div class="sd-inner-main contact-info">
                     <div class="sd-ection-tit">Contact Information</div>
                     <div class="sd-ection-inner">
@@ -608,7 +609,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                 </div> 
             </div>
             <div class="clearfix"></div>
-            <div class="col-md-12">
+            <div id="social-links" class="col-md-12">
                 <div class="sd-inner-main social-links">
                     <div class="sd-ection-tit">Social Links</div>
                     <div class="sd-ection-inner">
