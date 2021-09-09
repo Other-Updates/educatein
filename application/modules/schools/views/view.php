@@ -17,8 +17,8 @@
                     <th class="text-nowrap">#</th>             
                     <th class="text-nowrap">Customer</th>
                     <th class="text-nowrap">School Name</th>
-                   <th class="text-nowrap">Plan</th>
-                   <th class="text-nowrap" style="text-align:center;">Paid</th>
+                    <th class="text-nowrap">Plan</th>
+                    <th class="text-nowrap" style="text-align:center;">Paid</th>
                     <th class="text-nowrap">Created date</th>
                     <th class="text-nowrap">Status</th> 
                     <th class="text-nowrap">Expiry date</th>
@@ -30,8 +30,8 @@
         </table>
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/admin/datatables/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/admin/datatables/jquery.dataTables.js"></script>
 <script>  
 $(document).ready(function(){
     var category_table = $("#example").dataTable({
@@ -52,7 +52,11 @@ $(document).ready(function(){
         'columnDefs': [ {
             'targets': [0,8],
             'orderable': false, 
-            }]
+            },{
+            'targets': [0,4,5,6,7,8],
+            'className': 'text-center'
+            }
+        ]
     });
 });
 //    $("#example").on('click', '.delete', function (e) {

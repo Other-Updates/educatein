@@ -160,151 +160,159 @@ $schooltype = $this->db->get()->result_array();
             <form action="<?php echo base_url() ?>schools/admin/update_school" method="post" enctype="multipart/form-data">
             <div class="edit-school-inner">
                 <div class="form-row">
-                    <div class="col-lg-3 col-sm-6" style="display:none">
-                        <div class="form-group">
-                            <label for="user_id">user id</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>" placeholder="e.g. Haunuz Matriculation" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="schoolname">School Name</label>
-                            <input type="text" class="form-control" name="schoolname" id="schoolname" value="<?php echo $school[0]["school_name"];?>" readonly placeholder="e.g. Haunuz Matric School" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="schoolboard">School Board</label>
-                            <input type="text" class="form-control" name="schoolboard" id="exampleFormControlSelect1" value="<?php echo $affiliation[0]['affiliation_name'];?>" readonly placeholder="e.g. Haunuz Matric School" required>
-                            <!-- <select class="form-control" name="schoolboard" id="exampleFormControlSelect1"  required>
-                                <option value="" >e.g. Matriculation School</option>
-                                <option value="cbse"<?php if('cbse' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>CBSE School</option>
-                                <option value="international"<?php if('international' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>International School</option>
-                                <option value="matriculation"<?php if('matriculation' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Matriculation School</option>
-                                <option value="special"<?php if('special' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Special School</option>
-                                <option value="kindergarten"<?php if('kindergarten' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Kindergarten</option> -->
-                                <!-- <option>Other</option> -->
-                            <!-- </select> -->
-                        </div>
-                    </div>
-
-
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <!-- <select class="form-control" name="city" id="exampleFormControlSelect1" required> -->
-                                <!-- <option value="">--Select City--</option> -->
-                                                                <input type="text" class="form-control" name="city" id="exampleFormControlSelect1" value="<?php echo $city1[0]['city_name'];?>" readonly>
-                                        <!-- <option value="<?php echo $citys->city_name; ?>" <?php if($citys->city_name == $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option> -->
-                            <!-- </select> -->
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="area">Area</label>
-                            <input type="text" name="area" class="form-control" id="area" value="<?php echo $area[0]['area_name'];?>"readonly>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="level">Grade Level</label>
-                            <input type="text" name="area" class="form-control" id="area" value="<?php echo $schooltype[0]['school_type'];?>" readonly>
-                            <!-- <select class="form-control" name="level" id="exampleFormControlSelect1" required>
-                                <option value="" >e.g. Elementary School</option>
-                                <option value="Elementary School"<?php if($schooltype[0]['school_type']=="Elementary School"){echo "selected";}?>>Elementary School</option>
-                                <option value="Preschools"<?php if($schooltype[0]['school_type']=="Preschools"){echo "selected";}?>>Preschools</option>
-                                <option value="High School"<?php if($schooltype[0]['school_type']=="High School"){echo "selected";}?>>High School</option>
-                                <option value="Higher Secondary School"<?php if($schooltype[0]['school_type']=="Higher Secondary School"){echo "selected";}?>>Higher Secondary School</option>
-                                <option value="Special school"<?php if($schooltype[0]['school_type']=="Special school"){echo "selected";}?>>Special school</option>
-                            </select> -->
-                        </div>
-                    </div>
-                    <div class="col-lg-9 col-sm-6">
-                        <div class="form-group">
-                            <label for="ad">Admission Info</label>
-                            <input type="text" name="ad" class="form-control" id="ad" value="<?php echo $school[0]['ad'];?>" readonly >
-                        </div>
-                    </div>
-                </div><!-- /form-row -->
-
-                <ul class="list-inline">
-                    <li class="list-inline-item mr-5">
-                        <div class="yesorno">
-                            <label for="customRadio1">Eligibility to Avail Admission Under the RTE Act</label>
-                            <div class="form-row ml-0">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio1" name="customRadio2" value="1" <?php if($school[0]['rte']=='1'){echo "checked";} ?> class="custom-control-input" disabled >
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>&nbsp; &nbsp; &nbsp; 
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-row">
+                            <div class="col-lg-6 col-sm-6" style="display:none">
+                                <div class="form-group">
+                                    <label for="user_id">user id</label>
+                                    <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>" placeholder="e.g. Haunuz Matriculation" required>
                                 </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" name="customRadio2" value="0" <?php if($school[0]['rte']=='0'){echo "checked";} ?>  class="custom-control-input" disabled>
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">No</label>
-                                </div>
-                            </div><!-- /form-row -->
-                        </div><!-- /yesorno -->
-                    </li>
-
-                    <li class="list-inline-item">
-                        <div class="yesorno">
-                            <label for="customRadio2">Hostel Facility</label>
-                            <div class="form-row ml-0">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio3" name="customRadio1"  value="1" <?php if($school[0]['hostel']=='1'){echo "checked";}?> class="custom-control-input" disabled >
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>&nbsp; &nbsp; &nbsp; 
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio4" name="customRadio1"  value="0" <?php if($school[0]['hostel']=='0'){echo "checked";}?>  class="custom-control-input" disabled>
-                                    <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio4">No</label>
-                                </div>
-                            </div><!-- /form-row -->
-                        </div><!-- /yesorno -->
-                    </li>
-                </ul>
-            </div>
-            <?php if(isset($school_img[0])){ ?>
-            <div class="edit-school-inner">
-            <!-- <h4 class="mb-3">Banner Image</h4>
-                    <hr class="mb-4"> -->
-                <div class="form-row mat-30">
-                        
-                                    <!-- /file-img-upload -->
-                    <div class="col-lg-12">
-                        <label for="bannerimagesample" class="mab-30"> Images</label>
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                                    <?php for($i=0;$i<(count($school_img) + count($school_facilities_datas ));$i++){ ?>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
-                                    <?php } ?>
-                                </ol>
-                            <div class="carousel-inner">
-                                <?php $activeslide = true; ?>
-
-                                <?php foreach($school_img as $key=>$image){ ?>
-                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
-                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['images'] ?> " alt="<?php echo $key ?> slide">
-                                    </div>
-                                <?php } ?>
-
-                                
-                                <?php foreach($school_facilities_datas as $key=>$image){ ?>
-                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
-                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['image'] ?> " alt="<?php echo $key ?> slide">
-                                    </div>
-                                <?php } ?>
-                                </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
                             </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="schoolname">School Name</label>
+                                    <input type="text" class="form-control" name="schoolname" id="schoolname" value="<?php echo $school[0]["school_name"];?>" readonly placeholder="e.g. Haunuz Matric School" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="schoolboard">School Board</label>
+                                    <input type="text" class="form-control" name="schoolboard" id="exampleFormControlSelect1" value="<?php echo $affiliation[0]['affiliation_name'];?>" readonly placeholder="e.g. Haunuz Matric School" required>
+                                    <!-- <select class="form-control" name="schoolboard" id="exampleFormControlSelect1"  required>
+                                        <option value="" >e.g. Matriculation School</option>
+                                        <option value="cbse"<?php if('cbse' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>CBSE School</option>
+                                        <option value="international"<?php if('international' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>International School</option>
+                                        <option value="matriculation"<?php if('matriculation' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Matriculation School</option>
+                                        <option value="special"<?php if('special' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Special School</option>
+                                        <option value="kindergarten"<?php if('kindergarten' == $affiliation[0]['affiliation_name']){echo "selected";} ?>>Kindergarten</option> -->
+                                        <!-- <option>Other</option> -->
+                                    <!-- </select> -->
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <!-- <select class="form-control" name="city" id="exampleFormControlSelect1" required> -->
+                                        <!-- <option value="">--Select City--</option> -->
+                                                                        <input type="text" class="form-control" name="city" id="exampleFormControlSelect1" value="<?php echo $city1[0]['city_name'];?>" readonly>
+                                                <!-- <option value="<?php echo $citys->city_name; ?>" <?php if($citys->city_name == $city1[0]['city_name']){echo "selected";} ?>><?php echo $citys->city_name; ?></option> -->
+                                    <!-- </select> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="area">Area</label>
+                                    <input type="text" name="area" class="form-control" id="area" value="<?php echo $area[0]['area_name'];?>"readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="level">Grade Level</label>
+                                    <input type="text" name="area" class="form-control" id="area" value="<?php echo $schooltype[0]['school_type'];?>" readonly>
+                                    <!-- <select class="form-control" name="level" id="exampleFormControlSelect1" required>
+                                        <option value="" >e.g. Elementary School</option>
+                                        <option value="Elementary School"<?php if($schooltype[0]['school_type']=="Elementary School"){echo "selected";}?>>Elementary School</option>
+                                        <option value="Preschools"<?php if($schooltype[0]['school_type']=="Preschools"){echo "selected";}?>>Preschools</option>
+                                        <option value="High School"<?php if($schooltype[0]['school_type']=="High School"){echo "selected";}?>>High School</option>
+                                        <option value="Higher Secondary School"<?php if($schooltype[0]['school_type']=="Higher Secondary School"){echo "selected";}?>>Higher Secondary School</option>
+                                        <option value="Special school"<?php if($schooltype[0]['school_type']=="Special school"){echo "selected";}?>>Special school</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="ad">Admission Info</label>
+                                    <input type="text" name="ad" class="form-control" id="ad" value="<?php echo $school[0]['ad'];?>" readonly >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <div class="yesorno">
+                                        <label for="customRadio1">Eligibility to Avail Admission Under the RTE Act</label>
+                                        <div class="form-row ml-0">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio1" name="customRadio2" value="1" <?php if($school[0]['rte']=='1'){echo "checked";} ?> class="custom-control-input" disabled >
+                                                <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>&nbsp; &nbsp; &nbsp; 
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio2" name="customRadio2" value="0" <?php if($school[0]['rte']=='0'){echo "checked";} ?>  class="custom-control-input" disabled>
+                                                <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio2">No</label>
+                                            </div>
+                                        </div><!-- /form-row -->
+                                    </div><!-- /yesorno -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <div class="yesorno">
+                                        <label for="customRadio2">Hostel Facility</label>
+                                        <div class="form-row ml-0">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio3" name="customRadio1"  value="1" <?php if($school[0]['hostel']=='1'){echo "checked";}?> class="custom-control-input" disabled >
+                                                <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>&nbsp; &nbsp; &nbsp; 
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio4" name="customRadio1"  value="0" <?php if($school[0]['hostel']=='0'){echo "checked";}?>  class="custom-control-input" disabled>
+                                                <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio4">No</label>
+                                            </div>
+                                        </div><!-- /form-row -->
+                                    </div><!-- /yesorno -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <?php if(isset($school_img[0])){ ?>
+                            <div class="">
+                            <!-- <h4 class="mb-3">Banner Image</h4>
+                                    <hr class="mb-4"> -->
+                                <div class="form-row">
+                                        
+                                                    <!-- /file-img-upload -->
+                                    <div class="col-lg-12">
+                                        <label for="bannerimagesample" class="mab-30"> Images</label>
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                                    <?php for($i=0;$i<(count($school_img) + count($school_facilities_datas ));$i++){ ?>
+                                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
+                                                    <?php } ?>
+                                                </ol>
+                                            <div class="carousel-inner">
+                                                <?php $activeslide = true; ?>
+
+                                                <?php foreach($school_img as $key=>$image){ ?>
+                                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
+                                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['images'] ?> " alt="<?php echo $key ?> slide">
+                                                    </div>
+                                                <?php } ?>
+
+                                                
+                                                <?php foreach($school_facilities_datas as $key=>$image){ ?>
+                                                    <div class="carousel-item <?php if($activeslide){echo 'active';$activeslide = false;} ?> ">
+                                                    <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['image'] ?> " alt="<?php echo $key ?> slide">
+                                                    </div>
+                                                <?php } ?>
+                                                </div>
+                                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
+                                    </div>
+                                </div><!-- /form-row -->
+                            </div>
+                            <?php } ?>
+                    </div>
+
                 </div><!-- /form-row -->
             </div>
-            <?php } ?>
+            
             <div class="edit-school-inner">
 
                 <h4 class="mb-2">Additional Info</h4>
@@ -511,20 +519,21 @@ $schooltype = $this->db->get()->result_array();
                 <h4 class="mb-3">School Activities</h4>
                 <hr class="mb-4">
                 <div class="row">
-                <?php foreach($school_activities as $key=>$school_activities1){ ?>
-                
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="">
-                            <div class="form-group">                                
-                                <input type="text" name="activity1" class="form-control" id="activity1" value="<?php echo $school_activities1['activity_name']; ?>"readonly >
-                            </div>
-                        </div>
-                    </div><!-- /form-row -->
-                
-                <?php } ?>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6 col-sm-6">
+                        <?php foreach($school_activities as $key=>$school_activities1){ ?>
+                        
+                            <div class="">
+                                <div class="">
+                                <?php if($key==0){ ?><label for="activity1">Activity Name</label> <?php } ?>
+                                    <div class="form-group">                                
+                                        <input type="text" name="activity1" class="form-control" id="activity1" value="<?php echo $school_activities1['activity_name']; ?>"readonly >
+                                    </div>
+                                </div>
+                            </div><!-- /form-row -->
+                        
+                        <?php } ?>
+                    </div>
+                    <div class="col-lg-6">
                         <label for="bannerimagesample" class="mab-30"> Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">

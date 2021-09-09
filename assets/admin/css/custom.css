@@ -4,6 +4,7 @@
     padding: 20px;
     box-shadow: 0 6px 8px rgb(4 4 7 / 3%);
     border-radius: 10px;
+    position: relative;
 }
 a.btn:not([href]):not([tabindex]) {
     color: #fff;
@@ -78,4 +79,9 @@ a:hover {
 }
 .theme-bg {
     background-color: #d12881;
+}
+.scholl-acti-btn {
+    position: absolute;
+    right: 20px;
+    top: 15;
 }

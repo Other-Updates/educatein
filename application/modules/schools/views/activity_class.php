@@ -30,9 +30,8 @@
             </table>
         </div>    
 </div>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-  
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/admin/datatables/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/admin/datatables/jquery.dataTables.js"></script>
 <script>  
     $(document).ready(function(){
         var category_table = $("#example").dataTable({
@@ -53,7 +52,11 @@
             'columnDefs': [ {
                 'targets': [0,8],
                 'orderable': false, 
-                }]
+                },{
+            'targets': [0,4,5,6,7,8],
+            'className': 'text-center'
+            }
+            ]
         });
     });
   $(document).ready( function(){

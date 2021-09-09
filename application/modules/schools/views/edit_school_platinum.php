@@ -567,13 +567,9 @@ $schooltype = $this->db->get()->result_array();
             <?php } else {?>
                 <div class="edit-school-inner">
                     <h4 class="mb-3">School Activities</h4>
+                    <a class="btn btn-primary add_field_button1 scholl-acti-btn" id="addmore">Add</a>
                     <hr class="mb-4">
-                    <div class="form-row" id="actmore">
-                        <div class="col-lg-4 col-sm-6 form-group">
-                            <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                            <a class="btn btn-primary add_field_button1" id="addmore" style="margin-left:1200px;">Add</a>
-                        </div>
-                    </div>
+                    <div id="actmore"></div>
                 </div>
                 <?php } ?>
                     <?php if(isset($school_facilities_datas[0])){ ?>
@@ -619,12 +615,13 @@ $schooltype = $this->db->get()->result_array();
             <?php } else { ?>
                 <div class="edit-school-inner">
                     <h4 class="mb-3">School Facilities</h4>
+                    <a class="btn btn-primary addmore-show1 scholl-acti-btn" id="facaddmore">Add</a>
                     <hr class="mb-4">
                     <div class="form-row" id="facilitymore">
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group">
                                 <label for="facaddmore" style="visibility: hidden;display: block;">Add More</label>
-                                <a class="btn btn-primary addmore-show1" id="facaddmore" style="margin-left:1200px;">Add</a>
+                               
                             </div>
                         </div>
                     </div>
