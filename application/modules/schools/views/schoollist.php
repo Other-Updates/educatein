@@ -278,7 +278,7 @@ $aff_name = strtolower($aff_name);
     .bubbles h1, .bubbles h2 {
         position: relative;
         margin: 0 0 0;
-        font-family: 'Luckiest Guy', cursive;
+        /* font-family: 'Luckiest Guy', cursive; */
         background: linear-gradient(135deg, rgb(195, 39, 2) 0%,rgb(224, 164, 60) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -331,10 +331,8 @@ $aff_name = strtolower($aff_name);
         </div><!-- /sidebar -->
 
         <div id="main">
-            <div class="section-title mab-30">
-                <div class="bubbles">
-                    <h1 class="display-4">Exclusive Schools</h1>
-                </div><hr>
+            <div class="custom-section-title mab-30">
+                <h3 class="mb-2">Exclusive Schools</h3>
             </div><!-- /section-title -->
             <?php
             $where = "is_active=1 AND activated_at != 'NULL' AND status=1 AND valitity != 'NULL'  AND school_category_id=1 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
@@ -478,11 +476,9 @@ $aff_name = strtolower($aff_name);
             // exit();
             ?>
 
-            <div class="top-school-widget mab-50">
-                <div class="section-title mab-30">
-                    <div class="bubbles">
-                        <h2 class="mb-3">Top Schools in <?php echo $yourcity; ?></h2>
-                    </div><hr>
+            <div class="top-school-widget ">
+                <div class="custom-section-title mab-30">
+                    <h3 class="mb-2">Top Schools in <?php echo $yourcity; ?></h3>
                 </div><!-- /section-title -->
                 <div class="owl-carousel owl-theme">
                     <?php
@@ -556,75 +552,108 @@ $aff_name = strtolower($aff_name);
             $school_premium = $this->db->get();
             ?>
 
-            <div class="third-cat mab-50">
-                <div class="section-title mab-30">
-                    <div class="bubbles">
-                        <h2 class="mb-3"><?php echo ucfirst($aff_name); ?> Schools in <?php echo $yourcity; ?></h2>
-                    </div><hr>  
-                </div><!-- /section-title -->
-
-                <!-- <div class="section-title mab-30">
-                        <h2 class="mb-3"></h2><hr>
-                </div> --><!-- /section-title -->
-                <?php
-                $delay = 4;
-                ?>
+            <div class="third-cat mab-50 home-tsw top-school-widget mab-50">
+                <div class="custom-section-title mab-30">
+                    <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <?php echo $yourcity; ?></h3>
+                </div>
                 <div class="row equal">
-                    <?php
-                    foreach ($school_premium->result() as $schools) {
-                        $this->db->select('*')->where('id =', $schools->city_id);
-                        $this->db->from('cities');
-                        $city = $this->db->get();
-                        foreach ($city->result() as $cities) {
-                            //echo $areas->area_name;
-                            //exit();
-                        }
-
-                        $this->db->select('*')->where('id =', $schools->area_id);
-                        $this->db->from('areas');
-                        $area = $this->db->get();
-                        foreach ($area->result() as $areas) {
-                            //echo $areas->area_name;
-                            //exit();
-                        }
-                        $school_name = str_replace(" ", "-", $schools->school_name);
-                        $affname_url = strtolower($aff_name);
-                        $affname_url = str_replace(" ", "-", $affname_url);
-                        // echo $school_name;
-                        ?>
-                        <div class="col-lg-3 col-sm-4 col-xs-6 mab-30">
-                            <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url; ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank">
-                                <div class="home-tsw top-school-widget mab-50">
-                                    <div class="card wow fadeInUp premium" style="animation-delay: .<?php echo $delay; ?>s;">
-                                                <?php
-                                                if (isset($schools->banner)) {
-                                                    $school_name = str_replace(" ", "-", $schools->school_name);
-                                                    ?>
-                                        <figure>
-                                                <div class="package-name">Premium</div>
-                                                <div class="object-fit">
-                                                    <?php if(isset($schools->banner)){ ?>
-                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $schools->banner ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                                        <?php } else { ?>
-                                                    <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                                    <?php } ?>
-                                                </div>
-                                            <figcaption class="item-footer">
-                                                <h6><?php echo ucfirst($schools->school_name) ?></h6>
-                                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                            </figcaption>
-                                        </figure>
-                                    </div><!-- /card -->
-                                </div>
+                    <div class="col-md-3">
+                        <div class="schoolist-inner">
+                            <a href="#" target="_blank">
+                                <figure>
+                                    <div class="package-name">Premium</div>
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                    </div>
+                                    <figcaption class="item-footer">
+                                        <h6>Trial school</h6>
+                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    </figcaption>
+                                </figure>
                             </a>
-                        </div><!-- /col-lg-4 -->
-                            <?php
-                        }
-                        $delay++;
-                    }
-
-                    ?>
-                </div><!-- /row -->
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="schoolist-inner">
+                            <a href="#" target="_blank">
+                                <figure>
+                                    <div class="package-name">Premium</div>
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                    </div>
+                                    <figcaption class="item-footer">
+                                        <h6>Trial school</h6>
+                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="schoolist-inner">
+                            <a href="#" target="_blank">
+                                <figure>
+                                    <div class="package-name">Premium</div>
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                    </div>
+                                    <figcaption class="item-footer">
+                                        <h6>Trial school</h6>
+                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="schoolist-inner">
+                            <a href="#" target="_blank">
+                                <figure>
+                                    <div class="package-name">Premium</div>
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                    </div>
+                                    <figcaption class="item-footer">
+                                        <h6>Trial school</h6>
+                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="schoolist-inner">
+                            <a href="#" target="_blank">
+                                <figure>
+                                    <div class="package-name">Premium</div>
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                    </div>
+                                    <figcaption class="item-footer">
+                                        <h6>Trial school</h6>
+                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="schoolist-inner">
+                            <a href="#" target="_blank">
+                                <figure>
+                                    <div class="package-name">Premium</div>
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                    </div>
+                                    <figcaption class="item-footer">
+                                        <h6>Trial school</h6>
+                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

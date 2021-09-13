@@ -2935,6 +2935,12 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
     flex: 0 0 80%;
     max-width: 80%;
 }
+.home-tsw .schoolist-inner .object-fit {
+	height: 300px;
+}
+.schoolist-inner {
+	margin-bottom: 20px;
+}
 
 /* Colors
 pink  - d12881
