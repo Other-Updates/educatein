@@ -337,7 +337,7 @@ $aff_name = strtolower($aff_name);
                 </div><hr>
             </div><!-- /section-title -->
             <?php
-            $where = "is_active=1 AND activated_at != 'NULL' AND valitity != 'NULL'  AND school_category_id=1 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
+            $where = "is_active=1 AND activated_at != 'NULL' AND status=1 AND valitity != 'NULL'  AND school_category_id=1 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
             $this->db->select('*')->where($where);
             $this->db->from('school_details');
             $bestschool = $this->db->get();
@@ -349,29 +349,29 @@ $aff_name = strtolower($aff_name);
                 ?>
 
                 <?php
-                $this->db->select('*')->where('id =', $best->affiliation_id);
-                $this->db->from('affiliations');
-                $affili = $this->db->get();
-                foreach ($affili->result() as $affilis) {
-                    //echo $areas->area_name;
-                    //exit();
-                }
+                // $this->db->select('*')->where('id =', $best->affiliation_id);
+                // $this->db->from('affiliations');
+                // $affili = $this->db->get();
+                // foreach ($affili->result() as $affilis) {
+                //     //echo $areas->area_name;
+                //     //exit();
+                // }
 
-                $this->db->select('*')->where('id =', $best->area_id);
-                $this->db->from('areas');
-                $area = $this->db->get();
-                foreach ($area->result() as $areas) {
-                    //echo $areas->area_name;
-                    //exit();
-                }
+                // $this->db->select('*')->where('id =', $best->area_id);
+                // $this->db->from('areas');
+                // $area = $this->db->get();
+                // foreach ($area->result() as $areas) {
+                //     //echo $areas->area_name;
+                //     //exit();
+                // }
 
-                $this->db->select('*')->where('id =', $best->city_id);
-                $this->db->from('cities');
-                $city = $this->db->get();
-                foreach ($city->result() as $cities) {
-                    //echo $areas->area_name;
-                    //exit();
-                }
+                // $this->db->select('*')->where('id =', $best->city_id);
+                // $this->db->from('cities');
+                // $city = $this->db->get();
+                // foreach ($city->result() as $cities) {
+                //     //echo $areas->area_name;
+                //     //exit();
+                // }
 
                 if ($aff_url1 == "enquiry" || $aff_url1 == "otp") {
                     $affili_name = str_replace(" ", "-", $affilis->affiliation_name);
@@ -383,11 +383,15 @@ $aff_name = strtolower($aff_name);
                 ?>
 
                 <a href="<?php echo base_url() ?>list-of-best-<?php echo $affili_name ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank">
-                    <div class="cbse-school-widget mab-50">
+                    <!-- <div class="cbse-school-widget mab-50">
                         <figure class="figure wow fadeInUp">
 
                             <div class="cbse-school-widget-imgbox" style="width: 100%;height: 400px;overflow: hidden;">
-                                <img src="//edugatein.com/laravel/public/<?php echo $best->logo ?>" class="rounded" alt="" style="width: 100%;height: 400px;object-fit: cover;">	
+                            <?php if(isset($best->logo)){ ?>
+                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $best->logo ?>" class="rounded" alt="" style="width: 100%;height: 400px;object-fit: cover;">	
+                            <?php } else { ?>
+                                <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" style="width: 100%;height: 300px;object-fit: cover;" class="w-100" alt="" />
+                            <?php } ?>    
                             </div>
 
                             <figcaption class="figure-caption">
@@ -399,7 +403,8 @@ $aff_name = strtolower($aff_name);
                                 </div>
                             </figcaption>
                         </figure>
-                    </div><!-- /cbse-school-widget -->
+                    </div> -->
+                    <!-- /cbse-school-widget -->
                 </a>
 
                 <?php
@@ -458,10 +463,11 @@ $aff_name = strtolower($aff_name);
                 <?php
             }
 
-            $where1 = "is_active=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=2 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
-            $this->db->select('*')->where($where1);
+            $where1 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $this->db->select('sd.*,si.images as banner')->where($where1);
+            $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
             $this->db->order_by('rand()');
-            $this->db->from('school_details');
+            $this->db->from('school_details as sd');
             $topschool = $this->db->get();
             // echo $topschool->num_rows();
             // exit();
@@ -496,28 +502,35 @@ $aff_name = strtolower($aff_name);
                                 // echo $affname_url;
                                 // exit();
                                 ?>
-                                <div class="item wow bounceIn" style="animation-delay: .<?php echo $delay; ?>s;">
-                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank">
-                                        <figure>
-                                            <?php if (isset($top->logo)) { ?>
-                                                <div class="object-fit" style="width: 100%;height: 300px;overflow: hidden;">
-                                                    <img src="//edugatein.com/laravel/public/<?php echo $top->logo ?>" style="width: 100%;height: 300px;object-fit: cover;" alt="">
-                                                </div>
+                                
+                    <div class="home-tsw top-school-widget mab-50">
+                        <!-- <div class="owl-one owl-carousel owl-theme"> -->
+                            <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
+                                    <figure>
+                                        <div class="package-name">Platinum</div>
+                                        <div class="object-fit">
+                                            <?php if(isset($top->banner)){ ?>
+                                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->banner ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                <?php } else { ?>
+                                            <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                            <?php } ?>
+                                        </div>
+                                        <figcaption class="item-footer">
+                                            <h6><?php echo ucfirst($top->school_name) ?></h6>
+                                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                        </figcaption>
+                                    </figure>
+                                </a>
+                            </div>
+                        <!-- </div> -->
+                    </div>
 
-                                                <figcaption>
-                                                    <h6 class="text-white"><?php echo $top->slug; ?></h6>
-                                                    <p class="text-white"><i class="fa fa-map-marker"></i> <?php echo $areas->area_name; ?></p>
-                                                </figcaption>
-                                            </figure>
-                                        </a>
 
-                                        <div class="figfooter">
-                                            <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank">View Details</a>
-                                        </div><!-- /figfooter -->
-                                    </div><!-- /item -->
+
 
                                     <?php
-                                }
+                                
 
                                 $delay++;
                                 $topcount++;
@@ -525,62 +538,17 @@ $aff_name = strtolower($aff_name);
                         }
                     }
 
-                    for ($topcount = $topcount; $topcount < 5; $topcount++) {
-                        ?>
-
-                        <div class="item wow bounceIn" style="animation-delay: .<?php echo $delay; ?>s;">
-                            <a href="<?php echo base_url() ?>schools-signup" target="_blank">
-                                <figure>
-                                    <?php if ($aff_name == "cbse") { ?>
-                                        <div class="object-fit" style="width: 100%;height: 300px;overflow: hidden;">
-                                            <img src="<?php echo base_url("assets/front/") ?>images/secondcbse-banner.jpg" style="width: 100%;height: 300px;object-fit: cover;" alt="" />
-                                        </div>
-                                        <?php
-                                    } elseif ($aff_name == "international") {
-                                        ?>
-                                        <div class="object-fit" style="width: 100%;height: 300px;overflow: hidden;">
-                                            <img src="<?php echo base_url("assets/front/") ?>images/secondinter-banner.jpg" style="width: 100%;height: 300px;object-fit: cover;" alt="" />
-                                        </div>
-                                        <?php
-                                    } elseif ($aff_name == "matriculation") {
-                                        ?>
-                                        <div class="object-fit" style="width: 100%;height: 300px;overflow: hidden;">
-                                            <img src="<?php echo base_url("assets/front/") ?>images/secondmatri-banner.jpg" style="width: 100%;height: 300px;object-fit: cover;" alt="" />
-                                        </div>
-                                        <?php
-                                    } elseif ($aff_name == "special") {
-                                        ?>
-                                        <div class="object-fit" style="width: 100%;height: 300px;overflow: hidden;">
-                                            <img src="<?php echo base_url("assets/front/") ?>images/secondspecial-banner.jpg" style="width: 100%;height: 300px;object-fit: cover;" alt="" />
-                                        </div>
-                                        <?php
-                                    } elseif ($aff_name == "kindergarten") {
-                                        ?>
-                                        <div class="object-fit" style="width: 100%;height: 300px;overflow: hidden;">
-                                            <img src="<?php echo base_url("assets/front/") ?>images/secondkinder-banner.jpg" style="width: 100%;height: 300px;object-fit: cover;" alt="" />
-                                        </div>
-                                        <?php
-                                    }
-                                    ?>
-                                    <div class="figfooter">
-                                        <a href="<?php echo base_url() ?>schools-signup" target="_blank">Available</a>
-                                    </div><!-- /figfooter -->
-                                </figure>
-                            </a>
-                        </div><!-- /item -->
-                        <?php
-                        $delay++;
-                    }
                     ?>						
                 </div><!-- /owl-carousel -->
             </div><!-- /top-school-widget -->
 
             <?php
-            $where2 = "is_active=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=3 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
-            $this->db->select('*')->where($where2);
+            $where2 = "sd.is_active=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $this->db->select('sd.*,si.images as banner')->where($where2);
+            $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
             $this->db->order_by('rand()');
-            $this->db->from('school_details');
-            $school = $this->db->get();
+            $this->db->from('school_details as sd');
+            $school_premium = $this->db->get();
             ?>
 
             <div class="third-cat mab-50">
@@ -598,7 +566,7 @@ $aff_name = strtolower($aff_name);
                 ?>
                 <div class="row equal">
                     <?php
-                    foreach ($school->result() as $schools) {
+                    foreach ($school_premium->result() as $schools) {
                         $this->db->select('*')->where('id =', $schools->city_id);
                         $this->db->from('cities');
                         $city = $this->db->get();
@@ -621,91 +589,35 @@ $aff_name = strtolower($aff_name);
                         ?>
                         <div class="col-lg-3 col-sm-4 col-xs-6 mab-30">
                             <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url; ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank">
-                                <div class="card wow fadeInUp" style="animation-delay: .<?php echo $delay; ?>s;">
-                                    <?php
-                                    if (isset($schools->logo)) {
-                                        $school_name = str_replace(" ", "-", $schools->school_name);
-                                        ?>
-                                        <div class="object-cover" style="width: 100%;height: 180px;overflow: hidden;">
-                                            <img style="width: 100%;height: 180px;object-fit: cover;" class="card-img-top w-100" src="//edugatein.com/laravel/public/<?php echo $schools->logo ?>" alt="">
-                                        </div>
-
-                                        <div class="card-body">
-                                            <h5 class="card-title single-line-text mb-2"><?php echo $schools->slug; ?></h5>
-                                            <p class="card-subtitle mb-3 text-muted"><?php echo $areas->area_name ?></p>
-                                            <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" class="btn btn-primary" target="_blank">View Details</a>
-                                        </div>
+                                <div class="home-tsw top-school-widget mab-50">
+                                    <div class="card wow fadeInUp premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                                                <?php
+                                                if (isset($schools->banner)) {
+                                                    $school_name = str_replace(" ", "-", $schools->school_name);
+                                                    ?>
+                                        <figure>
+                                                <div class="package-name">Premium</div>
+                                                <div class="object-fit">
+                                                    <?php if(isset($schools->banner)){ ?>
+                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $schools->banner ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                        <?php } else { ?>
+                                                    <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                    <?php } ?>
+                                                </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($schools->school_name) ?></h6>
+                                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                            </figcaption>
+                                        </figure>
                                     </div><!-- /card -->
-                                </a>
-                            </div><!-- /col-lg-4 -->
+                                </div>
+                            </a>
+                        </div><!-- /col-lg-4 -->
                             <?php
                         }
                         $delay++;
                     }
 
-                    for ($schavail = 0; $schavail < 6; $schavail++) {
-                        ?>                         
-                        <?php
-                        if ($aff_name == "cbse") {
-                            ?>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 mab-30">
-
-                                <a href="<?php echo base_url() ?>schools-signup" target="_blank">
-                                    <div class="card wow fadeInUp" style="animation-delay: .<?php echo $delay; ?>s;">
-                                        <img class="card-img-top w-100" src="<?php echo base_url("assets/front/") ?>images/secondcbse-banner.jpg" alt=""> 
-                                    </div><!-- /card -->
-                                </a>
-                            </div><!-- /col-lg-4 -->
-                            <?php
-                        } elseif ($aff_name == "international") {
-                            ?>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 mab-30">
-
-                                <a href="<?php echo base_url() ?>schools-signup" target="_blank">
-                                    <div class="card wow fadeInUp" style="animation-delay: .<?php echo $delay; ?>s;">
-                                        <img class="card-img-top w-100" src="<?php echo base_url("assets/front/") ?>images/secondinter-banner.jpg" alt=""> 
-                                    </div><!-- /card -->
-                                </a>
-                            </div><!-- /col-lg-4 -->
-                            <?php
-                        } elseif ($aff_name == "matriculation") {
-                            ?>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 mab-30">
-
-                                <a href="<?php echo base_url() ?>schools-signup" target="_blank">
-                                    <div class="card wow fadeInUp" style="animation-delay: .<?php echo $delay; ?>s;">
-                                        <img class="card-img-top w-100" src="<?php echo base_url("assets/front/") ?>images/secondmatri-banner.jpg" alt=""> 
-                                    </div><!-- /card -->
-                                </a>
-                            </div><!-- /col-lg-4 -->
-                            <?php
-                        } elseif ($aff_name == "special") {
-                            ?>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 mab-30">
-
-                                <a href="<?php echo base_url() ?>schools-signup" target="_blank">
-                                    <div class="card wow fadeInUp" style="animation-delay: .<?php echo $delay; ?>s;">
-                                        <img class="card-img-top w-100" src="<?php echo base_url("assets/front/") ?>images/secondspecial-banner.jpg" alt=""> 
-                                    </div><!-- /card -->
-                                </a>
-                            </div><!-- /col-lg-4 -->
-                            <?php
-                        } elseif ($aff_name == "kindergarten") {
-                            ?>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 mab-30">
-
-                                <a href="<?php echo base_url() ?>schools-signup" target="_blank">
-                                    <div class="card wow fadeInUp" style="animation-delay: .<?php echo $delay; ?>s;">
-                                        <img class="card-img-top w-100" src="<?php echo base_url("assets/front/") ?>images/secondkinder-banner.jpg" alt=""> 
-                                    </div><!-- /card -->
-                                </a>
-                            </div><!-- /col-lg-4 -->
-                            <?php
-                        }
-                        ?>
-                        <?php
-                        $delay++;
-                    }
                     ?>
                 </div><!-- /row -->
             </div>
