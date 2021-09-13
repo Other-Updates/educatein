@@ -279,7 +279,7 @@
         <div class="owl-one owl-carousel owl-theme">
             <?php foreach($platinum_data as $key=>$platinum){ ?>
             <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
-                <a href="#" target="_blank">
+                <a href="<?php echo base_url() ?>list-of-best-<?php echo $platinum['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$platinum['schoolname']); ?>" target="_blank">
                     <figure>
                         <div class="package-name">Platinum</div>
                         <div class="object-fit">
@@ -317,7 +317,7 @@
         <div class="owl-two owl-carousel owl-theme">
             <?php foreach($premium_data as $key=>$premium){ ?>
             <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
-                <a href="#" target="_blank">
+                <a href="<?php echo base_url() ?>list-of-best-<?php echo $premium['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$premium['schoolname']); ?>" target="_blank">
                     <figure>
                         <div class="package-name">Premium</div>
                         <div class="object-fit">
@@ -337,7 +337,7 @@
             <?php } ?>
             <?php foreach($spectrum_data as $spectrum){ ?>
             <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
-                <a href="#" target="_blank">
+                <a href="<?php echo base_url() ?>list-of-best-<?php echo $spectrum['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$spectrum['schoolname']); ?>" target="_blank">
                     <figure>
                         <div class="package-name">Spectrum</div>
                         <div class="object-fit">

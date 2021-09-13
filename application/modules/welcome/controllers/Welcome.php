@@ -49,9 +49,10 @@ class Welcome extends CI_Controller {
         }
 
         //platinum plan schools
-        $this->db->select('sd.school_name as schoolname,si.images as banner');
+        $this->db->select('sd.school_name as schoolname,sd.affiliation_id,si.images as banner,af.affiliation_name');
         $this->db->from('school_details as sd');
         $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+        $this->db->join('affiliations as af','sd.affiliation_id = af.id');
         $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
@@ -62,9 +63,10 @@ class Welcome extends CI_Controller {
         // print_r($this->db->last_query());exit;
 
         //premium plan schools
-        $this->db->select('sd.school_name as schoolname,si.images as banner');
+        $this->db->select('sd.school_name as schoolname,si.images as banner,af.affiliation_name');
         $this->db->from('school_details as sd');
         $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+        $this->db->join('affiliations as af','sd.affiliation_id = af.id');
         $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
@@ -73,9 +75,10 @@ class Welcome extends CI_Controller {
         $data['premium_data'] = $this->db->get()->result_array();
 
         //spectrum plan schools
-        $this->db->select('sd.school_name as schoolname,si.images as banner');
+        $this->db->select('sd.school_name as schoolname,si.images as banner,af.affiliation_name');
         $this->db->from('school_details as sd');
         $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+        $this->db->join('affiliations as af','sd.affiliation_id = af.id');
         $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);

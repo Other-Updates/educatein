@@ -380,8 +380,8 @@ $aff_name = strtolower($aff_name);
                 $school_name = str_replace(" ", "-", $best->school_name);
                 ?>
 
-                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affili_name ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank">
-                    <!-- <div class="cbse-school-widget mab-50">
+                <!-- <a href="<?php echo base_url() ?>list-of-best-<?php echo $affili_name ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank"> -->
+                    <div class="cbse-school-widget mab-50">
                         <figure class="figure wow fadeInUp">
 
                             <div class="cbse-school-widget-imgbox" style="width: 100%;height: 400px;overflow: hidden;">
@@ -401,8 +401,8 @@ $aff_name = strtolower($aff_name);
                                 </div>
                             </figcaption>
                         </figure>
-                    </div> -->
-                    <!-- /cbse-school-widget -->
+                    </div>
+                    <!-- /cbse-school-widget
                 </a>
 
                 <?php
