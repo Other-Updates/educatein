@@ -66,7 +66,7 @@
         </div><!-- /row -->
     </div><!-- /container -->
 </div><!-- /breadrumb-new -->
-<div class="site-content container-fluid" style="padding-left: 60px;padding-right: 60px;">
+<div class="site-content container-fluid">
     <div class="">
         <div class="sidebar">
             <div id="sticky">
@@ -82,7 +82,7 @@
                             }
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-coimbatore" id="<?php echo $row->id; ?>"><i class="fa fa-angle-right"></i> <?php echo $affiliation_name1; ?> Schools</a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-coimbatore" id="<?php echo $row->id; ?>"><i class="fa fa-circle"></i> <?php echo $affiliation_name1; ?> Schools</a>
                             </li>   
                         <?php } ?>
                         <!-- /School Categories -->
@@ -95,7 +95,7 @@
                             $category_name = strtolower($category_name);
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-coimbatore" id="<?php echo $row1->id; ?>"><i class="fa fa-angle-right"></i> <?php echo $category_name1; ?></a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-coimbatore" id="<?php echo $row1->id; ?>"><i class="fa fa-circle"></i> <?php echo $category_name1; ?></a>
                             </li>    
                         <?php } ?>
                         <!-- /Activity Classes -->
