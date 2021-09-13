@@ -345,7 +345,7 @@ $aff_name = strtolower($aff_name);
                 
             }
 
-            if (isset($best->logo)) {
+            // if (isset($best->logo)) {
                 ?>
 
                 <?php
@@ -408,60 +408,65 @@ $aff_name = strtolower($aff_name);
                 </a>
 
                 <?php
-            } elseif ($aff_name == "cbse") {
+            // } elseif ($aff_name == "cbse") {
                 ?>
 
 
-                <div class="cbse-school-widget mab-50">
+                <!-- <div class="cbse-school-widget mab-50">
                     <figure class="figure wow fadeInUp">
                         <a href="<?php echo base_url() ?>schools-signup" target="_blank"><img src="<?php echo base_url("assets/front/images/cbse-banner.jpg"); ?>" class="figure-img w-100 rounded" alt=""></a>
                     </figure>
-                </div><!-- /cbse-school-widget -->
+                </div> -->
+                <!-- /cbse-school-widget -->
 
                 <?php
-            } elseif ($aff_name == "international") {
+            // } elseif ($aff_name == "international") {
                 ?>
 
-                <div class="cbse-school-widget mab-50">
+                <!-- <div class="cbse-school-widget mab-50">
                     <figure class="figure wow fadeInUp">
                         <a href="<?php echo base_url() ?>schools-signup" target="_blank"><img src="<?php echo base_url("assets/front/images/inter-banner.jpg"); ?>" class="figure-img w-100 rounded" alt=""></a>
                     </figure>
-                </div><!-- /cbse-school-widget -->
+                </div> -->
+                <!-- /cbse-school-widget -->
 
                 <?php
-            } elseif ($aff_name == "matriculation") {
+            // } elseif ($aff_name == "matriculation") {
                 ?>
 
 
-                <div class="cbse-school-widget mab-50">
+                <!-- <div class="cbse-school-widget mab-50">
                     <figure class="figure wow fadeInUp">
                         <a href="<?php echo base_url() ?>schools-signup" target="_blank"><img src="<?php echo base_url("assets/front/") ?>images/matri-banner.jpg" class="figure-img w-100 rounded" alt=""></a>
                     </figure>
-                </div><!-- /cbse-school-widget -->
+                </div> -->
+                <!-- /cbse-school-widget -->
 
                 <?php
-            } elseif ($aff_name == "special") {
+            // } elseif ($aff_name == "special") {
                 ?>
 
 
-                <div class="cbse-school-widget mab-50">
+                <!-- <div class="cbse-school-widget mab-50">
                     <figure class="figure wow fadeInUp">
                         <a href="<?php echo base_url() ?>schools-signup" target="_blank"><img src="<?php echo base_url("assets/front/") ?>images/special-banner.jpg" class="figure-img w-100 rounded" alt=""></a>
                     </figure>
-                </div><!-- /cbse-school-widget -->
+                </div> -->
+                <!-- /cbse-school-widget -->
 
                 <?php
-            } elseif ($aff_name == "kindergarten") {
+            // } elseif ($aff_name == "kindergarten") {
                 ?>
 
-                <div class="cbse-school-widget mab-50">
+                <!-- <div class="cbse-school-widget mab-50">
                     <figure class="figure wow fadeInUp">
                         <a href="<?php echo base_url() ?>schools-signup" target="_blank"><img src="<?php echo base_url("assets/front/") ?>images/kinder-banner.jpg" class="figure-img w-100 rounded" alt=""></a>
                     </figure>
-                </div><!-- /cbse-school-widget -->
+                </div> -->
+                <!-- /cbse-school-widget -->
 
                 <?php
-            }
+            // }
 
             $where1 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,si.images as banner')->where($where1);
