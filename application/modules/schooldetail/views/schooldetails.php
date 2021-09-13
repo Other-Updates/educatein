@@ -112,8 +112,8 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         <div class="container">
             <div class="esd-banner-details">
                 <div class="row">
-                    <div class="col-md-3"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div></div>
-                    <div class="col-md-9">
+                    <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div></div>
+                    <div class="col-md-9 esd-banner-right">
                         <div class="esd-banner-details-right">
                             <div class="esd-banner-details-tit"><?php echo ucfirst($school_details->slug) ?></div>
                             <div class="esd-banner-details-address"><i class="fa fa-map-marker"></i> <?php echo $school_details->address ?></div>
@@ -150,16 +150,24 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         </div>
     </div>
     <div class="container">
-        <!-- <div class="sd-menu">Menu List</div> -->
-
-        <div class="row">
-            <div class="col-md-9">
-                <div id="about-info" class="sd-inner-main about-info">
+        <ul id="sd-menu" class="sd-menu-list">
+            <li class="sd-menu-item"><a href="#about-info">About Info</a></li>
+            <li class="sd-menu-item"><a href="#addit-info">Additional Info</a></li>
+            <li class="sd-menu-item"><a href="#special-info">Special Info</a></li>
+            <li class="sd-menu-item"><a href="#sd-gallery">Gallery</a></li>
+            <li class="sd-menu-item"><a href="#school-activ">Activities</a></li>
+            <li class="sd-menu-item"><a href="#school-facilities">Facilities</a></li>
+            <li class="sd-menu-item"><a href="#contact-info">Contact</a></li>
+            <li class="sd-menu-item"><a href="#social-links">Social Links</a></li>
+        </ul>
+        <div class="row" >
+            <div class="col-md-9">           
+                <div id="about-info" class="sd-inner-main about-info section">
                     <div class="sd-ection-tit">About Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt="">
+                                <a data-fancybox="gallery" data-caption="Computer Lab" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt=""></a>
                             </div>
                             <div class="col-md-9">
                                 <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p><br>
@@ -169,7 +177,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div id="addit-info" class="sd-inner-main addit-info">
+                <div id="addit-info" class="sd-inner-main addit-info section">
                     <div class="sd-ection-tit">Additional Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -313,7 +321,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div id="special-info" class="sd-inner-main special-info">
+                <div id="special-info" class="sd-inner-main special-info section">
                     <div class="sd-ection-tit">Special Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -385,13 +393,25 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div id="gallery" class="sd-inner-main gallery">
+                <div id="sd-gallery" class="sd-inner-main gallery">
                     <div class="sd-ection-tit">Gallery</div>
                     <div class="sd-ection-inner">
                         <div class="row">
-                            <div class="col-md-4"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
-                            <div class="col-md-4"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
-                            <div class="col-md-4"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                            <div class="col-md-4">
+                                <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg">   
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg">   
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg">   
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -401,19 +421,19 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="sd-ection-inner">
                         <div class="row">
                             <div class="col-md-3 school-activ-list">
-                                <div><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                                <div><a data-fancybox="gallery" data-caption="Independence Day Celebration" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a></div>
                                 <h6>Independence Day Celebration</h6>
                             </div>
                             <div class="col-md-3 school-activ-list">
-                                <div><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                                <div><a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a></div>
                                 <h6>Chirstmas Celebration</h6>
                             </div>
                             <div class="col-md-3 school-activ-list">
-                                <div><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                                <div><a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a></div>
                                 <h6>Kamarajar Day Celebration</h6>
                             </div>
                             <div class="col-md-3 school-activ-list">
-                                <div><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div>
+                                <div><a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a></div>
                                 <h6>Sports Day Celebration</h6>
                             </div>                           
                         </div>
@@ -425,7 +445,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="sd-ection-inner">
                         <div class="row school-facilities-list">
                             <div class="col-md-3 sd-faci-img">
-                                <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-faci-img" alt="">
+                                <a data-fancybox="gallery" data-caption="Library" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-faci-img" alt=""></a>
                             </div>
                             <div class="col-md-9 sd-faci-detail">
                                 <h6>Library</h6>
@@ -434,7 +454,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                         <div class="row school-facilities-list">
                             <div class="col-md-3 sd-faci-img">
-                                <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-faci-img" alt="">
+                                <a data-fancybox="gallery" data-caption="Computer Lab" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-faci-img" alt=""></a>
                             </div>
                             <div class="col-md-9 sd-faci-detail">
                                 <h6>Computer Lab</h6>
@@ -443,7 +463,6 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="col-md-3 pl-0">
                 <div class="sd-inner-main sd-sidebar">
@@ -668,6 +687,24 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         </div>
     </div>
 </div>
+<script>
+$('#sd-menu a').click(function(e) {
+    $('#sd-menu a').removeClass('active');
+    $(this).addClass('active');
+});
+</script>
+<script>
+    let distance = $('#sd-menu').offset().top,
+        $window = $(window);
+        $window.scroll(function() {
+            if($window.scrollTop() >= distance){
+                $('#sd-menu').addClass("sticky");
+            } else {
+                $('#sd-menu').removeClass("sticky");
+            }
+        });
+</script>
+
 <?php
 if ($category == 1) {
     $school_img = "is_active=1 AND  school_activity_id=2 AND school_id=" . $school_details->id . " AND deleted_at is NULL";
