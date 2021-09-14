@@ -200,7 +200,24 @@
 		font-size: 22px;
 	}
 }
-
+@media (max-width:768px){
+	.home-search-section, .esd-banner {
+		height: auto;
+		margin-bottom: 20px;
+	}
+	.schools-section .col-lg-4.pl-0 {
+		padding-left: 15px !important;
+	}
+	.ads-school-widget .ads-inner, .ads-school-widget-bottom .ads-inner {
+		margin-bottom: 20px;
+	}
+	.content-footer-list .row .col {
+		flex-basis: auto;
+	}
+	.content-footer-list .footer-list-inner {
+		padding-bottom: 40px;
+	}
+}
 /*Small devices (landscape phones, 576px and up)*/
 @media only screen and (min-width: 576px) and (max-width: 767px) {
 	.summer-camp-section .mt50,
@@ -599,7 +616,7 @@
         height: 200px;
     }
     .about-widget img {
-        width: 50%!important;
+        width: 75%!important;
         margin: 0 auto;
         display: block;
     }
