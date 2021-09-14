@@ -544,12 +544,22 @@ $aff_name = strtolower($aff_name);
             </div><!-- /top-school-widget -->
 
             <?php
-            $where2 = "sd.is_active=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND af.affiliation_name AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,si.images as banner')->where($where2);
             $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+            $this->db->join('affiliations as af','sd.affiliation_id = af.id');
             $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
             $school_premium = $this->db->get();
+
+            $where3 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=3 AND af.affiliation_name AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $this->db->select('sd.*,si.images as banner')->where($where3);
+            $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+            $this->db->join('affiliations as af','sd.affiliation_id = af.id');
+            $this->db->order_by('rand()');
+            $this->db->from('school_details as sd');
+            $school_spectrum = $this->db->get();
+
             ?>
 
             <div class="third-cat mab-50 home-tsw top-school-widget mab-50">
@@ -557,7 +567,43 @@ $aff_name = strtolower($aff_name);
                     <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <?php echo $yourcity; ?></h3>
                 </div>
                 <div class="row equal">
+                    <?php foreach($school_premium->result() as $premium){ ?>
+                        <div class="col-md-3">
+                            <div class="schoolist-inner premium">
+                                <a href="#" target="_blank">
+                                    <figure>
+                                        <div class="package-name">Premium</div>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                        </div>
+                                        <figcaption class="item-footer">
+                                            <h6><?php echo ucfirst($premium->school_name) ?></h6>
+                                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                        </figcaption>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <?php foreach($school_spectrum->result() as $spectrum){ ?>
                     <div class="col-md-3">
+                        <div class="schoolist-inner spectrum">
+                            <a href="#" target="_blank">
+                                <figure>
+                                    <div class="package-name">Spectrum</div>
+                                    <div class="object-fit">
+                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                    </div>
+                                    <figcaption class="item-footer">
+                                        <h6><?php echo ucfirst($spectrum->school_name) ?></h6>
+                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <!-- <div class="col-md-3">
                         <div class="schoolist-inner">
                             <a href="#" target="_blank">
                                 <figure>
@@ -620,39 +666,7 @@ $aff_name = strtolower($aff_name);
                                 </figure>
                             </a>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="schoolist-inner">
-                            <a href="#" target="_blank">
-                                <figure>
-                                    <div class="package-name">Premium</div>
-                                    <div class="object-fit">
-                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
-                                    </div>
-                                    <figcaption class="item-footer">
-                                        <h6>Trial school</h6>
-                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="schoolist-inner">
-                            <a href="#" target="_blank">
-                                <figure>
-                                    <div class="package-name">Premium</div>
-                                    <div class="object-fit">
-                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
-                                    </div>
-                                    <figcaption class="item-footer">
-                                        <h6>Trial school</h6>
-                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

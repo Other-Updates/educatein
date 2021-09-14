@@ -74,6 +74,68 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
 }
 // echo $yourcity;
 // exit();
+    //platinum_datas
+    $found_data = "is_active=1 AND school_id=" . $school_details->id . " AND heading='Founded' AND deleted_at is NULL";
+    $this->db->select('*')->where($found_data);
+    $this->db->from('platinum_datas');
+    $founded = $this->db->get()->result_array();
+
+    $special_data = "is_active=1 AND school_id=" . $school_details->id . " AND heading='Special' AND deleted_at is NULL";
+    $this->db->select('*')->where($special_data);
+    $this->db->from('platinum_datas');
+    $special = $this->db->get()->result_array();
+
+    $events_data = "is_active=1 AND school_id=" . $school_details->id . " AND heading='Events' AND deleted_at is NULL";
+    $this->db->select('*')->where($events_data);
+    $this->db->from('platinum_datas');
+    $events = $this->db->get()->result_array();
+
+    $achievements_data = "is_active=1 AND school_id=" . $school_details->id . " AND heading='Achievements' AND deleted_at is NULL";
+    $this->db->select('*')->where($achievements_data);
+    $this->db->from('platinum_datas');
+    $achievements = $this->db->get()->result_array();
+
+    $branch_data = "is_active=1 AND school_id=" . $school_details->id . " AND heading='Branches' AND deleted_at is NULL";
+    $this->db->select('*')->where($branch_data);
+    $this->db->from('platinum_datas');
+    $branches = $this->db->get()->result_array();
+
+    $academic_data = "is_active=1 AND school_id=" . $school_details->id . " AND heading='Academic' AND deleted_at is NULL";
+    $this->db->select('*')->where($academic_data);
+    $this->db->from('platinum_datas');
+    $academic = $this->db->get()->result_array();
+
+    $activity_data = "is_active=1 AND school_id=" . $school_details->id . " AND heading='activity' AND deleted_at is NULL";
+    $this->db->select('*')->where($activity_data);
+    $this->db->from('platinum_datas');
+    $activity = $this->db->get()->result_array();
+
+    $language_data = "is_active=1 AND school_id=" . $school_details->id . " AND heading='Language' AND deleted_at is NULL";
+    $this->db->select('*')->where($language_data);
+    $this->db->from('platinum_datas');
+    $language = $this->db->get()->result_array();
+
+    //schoolmanagement activities
+    $management_data = "is_active=1 AND schooldetails_id=" . $school_details->id . " AND deleted_at is NULL";
+    $this->db->select('*');
+    $this->db->where($management_data);
+    $this->db->from('schoolmanagement_activities');
+    $management= $this->db->get()->result_array();
+
+    //school activities
+    $this->db->select('si.images as image,sa.activity_name as name');
+    $this->db->from('school_images as si');
+    $this->db->where('si.school_id',$school_details->id);
+    $this->db->where('si.school_activity_id>2');
+    $this->db->join('school_activities as sa','si.school_activity_id=sa.id');
+    $school_activity = $this->db->get();
+
+    //school facilities
+    $facility = "is_active=1 AND school_id=" . $school_details->id . " AND deleted_at IS NULL";
+    $this->db->select('*')->where($facility);
+    $this->db->from('school_facilities');
+    $facility = $this->db->get();
+
 ?>
 <div class="breadrumb-new ">
     <div class="container-fluid" style="padding: 0 60px;">
@@ -170,8 +232,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 <a data-fancybox="gallery" data-caption="Computer Lab" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt=""></a>
                             </div>
                             <div class="col-md-9">
-                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p><br>
-                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p>
+                                <p><?php echo $school_details->about; ?></p><br>
                             </div>
                         </div>
                     </div>
@@ -186,7 +247,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/1.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Founded</h6>
-                                        <h3>1966</h3>
+                                        <h3><?php echo $founded[0]['content'] ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +256,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/2.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Special</h6>
-                                        <h3>French class</h3>
+                                        <h3><?php echo ucfirst($special[0]['content']) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +265,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/3.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Events</h6>
-                                        <h3>Annual Day </h3>
+                                        <h3><?php echo ucfirst($events[0]['content']) ?> </h3>
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +275,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/4.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Achievements</h6>
-                                        <h3>First in Sports</h3>
+                                        <h3><?php echo ucfirst($achievements[0]['content']) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +284,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/5.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Branches</h6>
-                                        <h3>Coimbatore, Thei</h3>
+                                        <h3><?php echo ucfirst($branches[0]['content']) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +293,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/6.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Academic History</h6>
-                                        <h3>Last year 98% Results</h3>
+                                        <h3><?php echo ucfirst($academic[0]['content']) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -241,7 +302,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/7.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Activity</h6>
-                                        <h3>Martial Arts</h3>
+                                        <h3><?php echo ucfirst($activity[0]['content']) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -250,7 +311,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/8.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>No of Boys</h6>
-                                        <h3>625</h3>
+                                        <h3><?php echo $school_details->boys ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +320,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/9.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Vision</h6>
-                                        <h3>Self-awareness</h3>
+                                        <h3><?php echo ucfirst($school_details->our_vision) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +329,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/10.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Mission</h6>
-                                        <h3>-</h3>
+                                        <h3><?php echo ucfirst($school_details->our_mission) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -277,7 +338,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/11.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>No.of Students</h6>
-                                        <h3>1075</h3>
+                                        <h3><?php echo $school_details->students ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +347,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/12.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>No.of Teachers</h6>
-                                        <h3>75</h3>
+                                        <h3><?php echo $school_details->teachers ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -295,7 +356,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/13.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Languages</h6>
-                                        <h3>5+</h3>
+                                        <h3><?php echo ucfirst($language[0]['content']) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +365,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/14.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>No of Girls</h6>
-                                        <h3>550</h3>
+                                        <h3><?php echo $school_details->girls ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -313,7 +374,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/15.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Motto</h6>
-                                        <h3>Towards Truth and Love</h3>
+                                        <h3><?php echo ucfirst($school_details->our_motto) ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -325,14 +386,16 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="sd-ection-tit">Special Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/16.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h3>Playgorund</h3>
+                            <?php if(isset($management[0]['activity_name']) == 'playground'){ ?>
+                                <div class="col-md-6">
+                                    <div class="sd-addit-icon-value">
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/16.png" alt="Educatein"></div>
+                                        <div class="sd-addit-value">
+                                            <h3>Playground</h3>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                             <div class="col-md-6">
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/17.png" alt="Educatein"></div>
@@ -420,22 +483,13 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="sd-ection-tit">School Activities</div>
                     <div class="sd-ection-inner">
                         <div class="row">
-                            <div class="col-md-3 school-activ-list">
-                                <div><a data-fancybox="gallery" data-caption="Independence Day Celebration" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a></div>
-                                <h6>Independence Day Celebration</h6>
-                            </div>
-                            <div class="col-md-3 school-activ-list">
-                                <div><a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a></div>
-                                <h6>Chirstmas Celebration</h6>
-                            </div>
-                            <div class="col-md-3 school-activ-list">
-                                <div><a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a></div>
-                                <h6>Kamarajar Day Celebration</h6>
-                            </div>
-                            <div class="col-md-3 school-activ-list">
-                                <div><a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a></div>
-                                <h6>Sports Day Celebration</h6>
-                            </div>                           
+                            <?php 
+                            foreach($school_activity->result() as $activity){ ?>
+                                <div class="col-md-3 school-activ-list">
+                                    <div><a data-fancybox="gallery" data-caption="Independence Day Celebration" href="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>" alt=""></a></div>
+                                    <h6><?php echo $activity->name ?> </h6>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -443,24 +497,17 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                 <div id="school-facilities" class="sd-inner-main school-facilities">
                     <div class="sd-ection-tit">School Facilities</div>
                     <div class="sd-ection-inner">
-                        <div class="row school-facilities-list">
-                            <div class="col-md-3 sd-faci-img">
-                                <a data-fancybox="gallery" data-caption="Library" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-faci-img" alt=""></a>
+                        <?php foreach($facility->result() as $facility_data ){ ?>
+                            <div class="row school-facilities-list">
+                                <div class="col-md-3 sd-faci-img">
+                                    <a data-fancybox="gallery" data-caption="Library" href="<?php echo base_url() ?>laravel/public/<?php echo $facility_data->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $facility_data->image ?>" class="sd-faci-img" alt=""></a>
+                                </div>
+                                <div class="col-md-9 sd-faci-detail">
+                                    <h6><?php echo $facility_data->facility ?></h6>
+                                    <p><?php echo $facility_data->content ?></p>
+                                </div>
                             </div>
-                            <div class="col-md-9 sd-faci-detail">
-                                <h6>Library</h6>
-                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p>
-                            </div>
-                        </div>
-                        <div class="row school-facilities-list">
-                            <div class="col-md-3 sd-faci-img">
-                                <a data-fancybox="gallery" data-caption="Computer Lab" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-faci-img" alt=""></a>
-                            </div>
-                            <div class="col-md-9 sd-faci-detail">
-                                <h6>Computer Lab</h6>
-                                <p>St. Joseph’s Matriculation School, Coimbatore is established in 1960 by the Institute of the Franciscan Missionaries of Mary. The school prepares the students for the SSLC and Higher Secondary Examination conducted by the government of Tamil Nadu, South India. It is owned by the society of the Franciscan Missionaries of Mary.</p>
-                            </div>
-                        </div>
+                            <?php } ?>
                     </div>
                 </div>
             </div>
@@ -597,28 +644,28 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/24.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Address</h6>
-                                        <h3>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h3>
+                                        <h3><?php echo $school_details->address ?></h3>
                                     </div>
                                 </div>
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/25.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Phone Number</h6>
-                                        <h3>+91 422 2302 443</h3>
+                                        <h3><?php echo $school_details->mobile ?></h3>
                                     </div>
                                 </div>
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/26.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Email</h6>
-                                        <h3>info@josephs.com</h3>
+                                        <h3><?php echo $school_details->email ?></h3>
                                     </div>
                                 </div>
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/27.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Website</h6>
-                                        <h3>www.josephs.ac.in</h3>
+                                        <h3><?php echo $school_details->website_url ?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -637,7 +684,9 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/28.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
+                                        <a href="<?php echo $school_details->facebook ?>">
                                         <h3>Facebook</h3>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
