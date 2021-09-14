@@ -597,7 +597,7 @@ header {
 .top-school-widget figure {
 	position: relative;
 }
-.top-school-widget figcaption {
+.top-school-widget figcaption, .search-schoolist .nearby-widget-body {
 	position: absolute;
   	top: 0;
   	bottom: 0;
@@ -833,7 +833,8 @@ svg {
 	padding-bottom: 50px;
 }
 #sticky {
-	width: 100%;
+	width: auto;
+	min-width: 200px;
 	height: 100%;
 	margin-top: 10px;
 }
@@ -1688,6 +1689,7 @@ footer button {
     overflow: hidden;
     white-space: nowrap;
     display: block;
+	font-size: 12px;
 }
 
 /*Contact-widget*/
@@ -2450,7 +2452,7 @@ blue - 33317c
 	color: #fff;
 }
 .home-search-section, .esd-banner {
-    height: 600px;
+    height: 500px;
     background: url('../images/search-bg.jpg');
 	background-attachment: fixed;
 	background-position: center;
@@ -2460,7 +2462,7 @@ blue - 33317c
 	position: relative;
 	text-align: center;
 	color: #fff;
-	margin-bottom: 130px;
+	margin-bottom: 140px;
 }
 .home-search-section-bg, .esd-banner-bg{
 	background: #d12881cc;
@@ -2749,11 +2751,16 @@ blue - 33317c
 	font-size: 12px;
 	padding-top: 10px;
 }
-.home-tsw .object-fit {
+.home-tsw .object-fit, .search-schoolist .object-fit {
 	width: 100%;
     height: 400px;
     overflow: hidden;
 	border-radius: 10px;
+}
+.search-schoolist .object-fit img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 .home-tsw .package-name {
 	position: absolute;
@@ -2929,9 +2936,9 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 	border-radius: 0;
 	border-bottom: 1px solid #fff;
 }
-.educatein-school-detail .container, .breadrumb-new .container, .sidebar-section .container {
+/* .educatein-school-detail .container, .breadrumb-new .container, .sidebar-section .container {
 	max-width: 90%;
-}
+} */
 .esd-banner-details .esd-banner-left {
 	-ms-flex: 0 0 20%;
     flex: 0 0 20%;
@@ -2988,4 +2995,13 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 }
 .breadrumb-new .list-inline {
 	line-height: 34px;
+}
+.custom-section-title h3 span {
+	font-weight: 600;
+}
+.search-schoolist .nearby-widget {
+	position: relative;
+}
+.search-schoolist .nearby-widget-body, .search-schoolist .nearby-widget-body h6 a {
+	color: #fff;
 }

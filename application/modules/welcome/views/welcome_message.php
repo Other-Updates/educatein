@@ -273,7 +273,7 @@
 </div>   
 <div class="container">
     <div class="custom-section-title">
-        <h3 class="mb-2">Top Schools in <?php echo ucfirst($city) ?></h3>
+        <h3 class="mb-2">Top Schools in <span><?php echo ucfirst($city) ?></span></h3>
     </div>
     <div class="home-tsw top-school-widget mab-50">
         <div class="owl-one owl-carousel owl-theme">
@@ -311,7 +311,7 @@
 </div>
 <div class="container">
     <div class="custom-section-title">
-        <h3 class="mb-2">Best Schools in <?php echo ucfirst($city) ?></h3>
+        <h3 class="mb-2">Best Schools in <span><?php echo ucfirst($city) ?></span></h3>
     </div>
     <div class="home-tsw top-school-widget mab-50">
         <div class="owl-two owl-carousel owl-theme">
@@ -361,8 +361,8 @@
 <div class="container">
     <div class="about-widget mab-50">
         <div class="row">
-            <div class="col-md-6"><img src="<?php echo base_url() ?>assets/front/images/home-abouts-img.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" /></div>
-            <div class="col-md-6">
+            <div class="col-md-5"><img src="<?php echo base_url() ?>assets/front/images/home-abouts-img.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" /></div>
+            <div class="col-md-7">
                 <div class="about-widget-text">
                     <h3>Edugate-in is to inter-connect schools, parents and education community on a single platform to create mutual benefit.</h3>
                     <p>Edugatein offer a detailed and well-researched guide about schools type, curriculum, facilities, activity classes, contact details and location through map. This information is directly from school management. In particular, we allocate the separate page for the schools in all over tamilnadu to provide the details of the school. By this information parents can choose schools in efficient manner and school management also gives all their unique information.</p>
