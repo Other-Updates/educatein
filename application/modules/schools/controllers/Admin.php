@@ -570,6 +570,9 @@ class admin extends CI_Controller {
         $act = $_POST['facility']; $activity_ids = $_POST['facilityid'];
         $facilityinsert = array();$facilityUpdate = array();
 
+        $this->db->select('*')->where('id',$_POST['school_id']);
+        $this->db->from('school_details');
+        $school = $this->db->get()->result_array();
         if (is_array($act)) {
             foreach($act as $key=>$facility) {
 
@@ -1059,16 +1062,15 @@ class admin extends CI_Controller {
         }
 
         // banner1 image save
-        if (isset($_FILES['banner1']['name'])) {
+        if (!empty($_FILES['banner1']['name'])) {
             $banner1 = $_FILES['banner1']['name'];
             $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
 
-            $banner1_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
+            $banner1_name = $school[0]['school_name'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
             $banner1_type = $_FILES['banner1']['type'];
             $banner1_size = $_FILES['banner1']['size'];
             $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
             $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
-
             $allowed = array('gif', 'png', 'jpg', 'jpeg');
 
             if (in_array($banner1_ext, $allowed)) {
@@ -1076,23 +1078,30 @@ class admin extends CI_Controller {
                 if (move_uploaded_file($banner1_tem_loc, $banner1_store)) {
 
                     $banner1insert = array(
-                        // 'school_id' => $school_id,
-                        'school_activity_id' => 2,
                         'images' => $banner1_name,
                         'is_active' => 1
                     );
 
-                    $this->db->update('school_images', $banner1insert,array('school_id'=>$_POST['school_id']));
-                }
+                    $this->db->where('school_activity_id',2);
+                    $this->db->update('school_images', $banner1insert,array('school_id'=>$_POST['school_id']));                }
             }
+        }else{
+            $banner1_name = $_POST['old_banner1'];
+            $banner1insert = array(
+                // 'school_id' => $school_id,
+                'images' => $banner1_name,
+                'is_active' => 1
+            );
+            $this->db->where('school_activity_id',2);
+            $this->db->update('school_images', $banner1insert,array('school_id'=>$_POST['school_id']));
+
         }
 
-
-        if (isset($_FILES['banner2']['name'])) {
+        if (!empty($_FILES['banner2']['name'])) {
             $banner2 = $_FILES['banner2']['name'];
             $banner2_ext = pathinfo($banner2, PATHINFO_EXTENSION);
 
-            $banner2_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner2_ext;
+            $banner2_name = $school[0]['school_name'] . "-" . rand(10000, 10000000) . "." . $banner2_ext;
             $banner2_type = $_FILES['banner2']['type'];
             $banner2_size = $_FILES['banner2']['size'];
             $banner2_tem_loc = $_FILES['banner2']['tmp_name'];
@@ -1104,22 +1113,30 @@ class admin extends CI_Controller {
                 if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
                     $banner2insert = array(
                         // 'school_id' => $school_id,
-                        'school_activity_id' => 2,
                         'images' => $banner2_name,
                         'is_active' => 1
                     );
-
+                    $this->db->where('school_activity_id',169);
                     $this->db->update('school_images', $banner2insert,array('school_id'=>$_POST['school_id']));
                 }
             }
+        }else{
+            $banner2_name = $_POST['old_banner2'];
+            $banner2insert = array(
+                // 'school_id' => $school_id,
+                'images' => $banner2_name,
+                'is_active' => 1
+            );
+            $this->db->where('school_activity_id',169);
+            $this->db->update('school_images', $banner2insert,array('school_id'=>$_POST['school_id']));
         }
 
         // banner3 image save
-        if (isset($_FILES['banner3']['name'])) {
+        if (!empty($_FILES['banner3']['name'])) {
             $banner3 = $_FILES['banner3']['name'];
             $banner3_ext = pathinfo($banner3, PATHINFO_EXTENSION);
 
-            $banner3_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner3_ext;
+            $banner3_name = $school[0]['school_name'] . "-" . rand(10000, 10000000) . "." . $banner3_ext;
             $banner3_type = $_FILES['banner3']['type'];
             $banner3_size = $_FILES['banner3']['size'];
             $banner3_tem_loc = $_FILES['banner3']['tmp_name'];
@@ -1131,22 +1148,30 @@ class admin extends CI_Controller {
                 if (move_uploaded_file($banner3_tem_loc, $banner3_store)) {
                     $banner3insert = array(
                         // 'school_id' => $school_id,
-                        'school_activity_id' => 2,
                         'images' => $banner3_name,
                         'is_active' => 1
                     );
-
+                    $this->db->where('school_activity_id',170);
                     $this->db->update('school_images', $banner3insert,array('school_id'=>$_POST['school_id']));
                 }
             }
+        }else{
+            $banner3_name = $_POST['old_banner3'];
+            $banner3insert = array(
+                // 'school_id' => $school_id,
+                'images' => $banner3_name,
+                'is_active' => 1
+            );
+            $this->db->where('school_activity_id',170);
+            $this->db->update('school_images', $banner3insert,array('school_id'=>$_POST['school_id']));
         }
 
         // aboutimg1 image save
-        if (isset($_FILES['aboutimg1']['name'])) {
+        if (!empty($_FILES['aboutimg1']['name'])) {
             $aboutimg1 = $_FILES['aboutimg1']['name'];
             $aboutimg1_ext = pathinfo($aboutimg1, PATHINFO_EXTENSION);
 
-            $aboutimg1_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $aboutimg1_ext;
+            $aboutimg1_name = $school[0]['school_name'] . "-" . rand(10000, 10000000) . "." . $aboutimg1_ext;
             $aboutimg1_type = $_FILES['aboutimg1']['type'];
             $aboutimg1_size = $_FILES['aboutimg1']['size'];
             $aboutimg1_tem_loc = $_FILES['aboutimg1']['tmp_name'];
@@ -1156,17 +1181,44 @@ class admin extends CI_Controller {
 
             if (in_array($aboutimg1_ext, $allowed)) {
                 if (move_uploaded_file($aboutimg1_tem_loc, $aboutimg1_store)) {
-                    $aboutimg1insert = array(
-                        // 'school_id' => $school_id,
-                        'school_activity_id' => 1,
-                        'images' => $aboutimg1_name,
-                        'is_active' => 1
-                    );
-
-                    $this->db->update('school_images', $aboutimg1insert,array('school_id'=>$_POST['school_id']));
+                        $image = $aboutimg1_name;
                 }
             }
+            $this->db->select('*');
+            $this->db->where('school_activity_id',1);
+            $this->db->where('school_id',$school_id);
+            $this->db->from('school_images');
+            $about_img = $this->db->get();
+            if($about_img->num_rows() == 0 ){
+                $aboutimg1insert = array(
+                    'school_id' => $school_id,
+                    'school_activity_id' => 1,
+                    'images' => $image,
+                    'is_active' => 1
+                );
+                $this->db->insert('school_images',$aboutimg1insert);
+            }else{
+                $aboutimg1insert = array(
+                    // 'school_id' => $school_id,
+                    'images' => $image,
+                    'is_active' => 1
+                );
+                $this->db->where('school_activity_id',1);
+                $this->db->update('school_images', $aboutimg1insert,array('school_id'=>$_POST['school_id']));
+
+            }
+
+        }else{
+            $aboutimg1_name = $_POST['old_aboutimg1'];
+            $aboutimg1insert = array(
+                // 'school_id' => $school_id,
+                'images' => $aboutimg1_name,
+                'is_active' => 1
+            );
         }
+        $this->db->where('school_activity_id',1);
+        $this->db->update('school_images', $aboutimg1insert,array('school_id'=>$_POST['school_id']));
+
 
         // aboutimg2 image save
         if (isset($_FILES['aboutimg2']['name'])) {
@@ -3107,6 +3159,10 @@ class admin extends CI_Controller {
                     }
                 }
             }
+            $logo = array(
+                'logo' => $banner1_name,
+            );
+            $this->db->update('school_details',$logo,array('id' => $school_id));
 
             if (isset($_FILES['school_banner2']['name'])) {
                 $banner2 = $_FILES['banner2']['name'];
@@ -3123,7 +3179,7 @@ class admin extends CI_Controller {
                     if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
                         $banner2insert = array(
                             'school_id' => $school_id,
-                            'school_activity_id' => 2,
+                            'school_activity_id' => 169,
                             'images' => $banner2_name,
                             'is_active' => 1
                         );
@@ -3149,7 +3205,7 @@ class admin extends CI_Controller {
                     if (move_uploaded_file($banner3_tem_loc, $banner3_store)) {
                         $banner3insert = array(
                             'school_id' => $school_id,
-                            'school_activity_id' => 2,
+                            'school_activity_id' => 170,
                             'images' => $banner3_name,
                             'is_active' => 1
                         );
@@ -3160,7 +3216,7 @@ class admin extends CI_Controller {
             }
 
             // aboutimg1 image save
-            if (isset($_FILES['aboutimg1']['name'])) {
+            if (!empty($_FILES['aboutimg1']['name'])) {
                 $aboutimg1 = $_FILES['aboutimg1']['name'];
                 $aboutimg1_ext = pathinfo($aboutimg1, PATHINFO_EXTENSION);
 

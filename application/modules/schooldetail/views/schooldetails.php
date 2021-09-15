@@ -127,6 +127,8 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->from('school_images as si');
     $this->db->where('si.school_id',$school_details->id);
     $this->db->where('si.school_activity_id>2');
+    $this->db->where('si.school_activity_id!=',169);
+    $this->db->where('si.school_activity_id!=',170);
     $this->db->join('school_activities as sa','si.school_activity_id=sa.id');
     $school_activity = $this->db->get();
 
@@ -135,6 +137,14 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->select('*')->where($facility);
     $this->db->from('school_facilities');
     $facility = $this->db->get();
+
+    //about image
+    $this->db->select('*');
+    $this->db->where('school_activity_id',1);
+    $this->db->where('school_id',$school_details->id);
+    $this->db->from('school_images');
+    $about_img = $this->db->get()->result_array();
+
 
 ?>
 <div class="breadrumb-new ">
@@ -174,7 +184,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         <div class="container">
             <div class="esd-banner-details">
                 <div class="row">
-                    <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div></div>
+                    <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>laravel/public/<?php echo $school_details->logo ?>" alt=""></div></div>
                     <div class="col-md-9 esd-banner-right">
                         <div class="esd-banner-details-right">
                             <div class="esd-banner-details-tit"><?php echo ucfirst($school_details->slug) ?></div>
@@ -229,7 +239,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="sd-ection-inner">
                         <div class="row">
                             <div class="col-md-3">
-                                <a data-fancybox="gallery" data-caption="Computer Lab" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt=""></a>
+                                <a data-fancybox="gallery" data-caption="Computer Lab" href="<?php echo base_url() ?>laravel/public/<?php echo $about_img[0]['images'] ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $about_img[0]['images'] ?>" class="sd-about-img" alt=""></a>
                             </div>
                             <div class="col-md-9">
                                 <p><?php echo $school_details->about; ?></p><br>
@@ -681,46 +691,54 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="sd-ection-inner">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/28.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <a href="<?php echo $school_details->facebook ?>">
-                                        <h3>Facebook</h3>
-                                        </a>
+                                <a href="<?php echo $school_details->facebook ?>">
+                                    <div class="sd-addit-icon-value">
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/28.png" alt="Educatein"></div>
+                                        <div class="sd-addit-value">
+                                            <h3>Facebook</h3>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-md-3">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/29.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h3>Twitter</h3>
+                                <a href="<?php echo $school_details->twitter ?>">
+                                    <div class="sd-addit-icon-value">
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/29.png" alt="Educatein"></div>
+                                        <div class="sd-addit-value">
+                                            <h3>Twitter</h3>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-md-3">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/30.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h3>Instagram</h3>
+                                <a href="<?php echo $school_details->instagram ?>">
+                                    <div class="sd-addit-icon-value">
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/30.png" alt="Educatein"></div>
+                                        <div class="sd-addit-value">
+                                            <h3>Instagram</h3>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-md-3">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/31.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h3>Linked in</h3>
+                                <a href="<?php echo $school_details->linkedin ?>">
+                                    <div class="sd-addit-icon-value">
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/31.png" alt="Educatein"></div>
+                                        <div class="sd-addit-value">
+                                            <h3>Linked in</h3>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-md-3">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/32.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h3>Pinterest</h3>
+                                <a href="<?php echo $school_details->pinterest ?>">
+                                    <div class="sd-addit-icon-value">
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/32.png" alt="Educatein"></div>
+                                        <div class="sd-addit-value">
+                                            <h3>Pinterest</h3>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>

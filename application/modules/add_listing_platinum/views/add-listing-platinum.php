@@ -306,7 +306,7 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6">
-                        <label for="aboutimg1">About Image 1</label>
+                        <label for="aboutimg1">About Image </label>
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" name="aboutimg1" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg" id="inputGroupFile01" aria-describedby="aboutimg1" >
@@ -314,13 +314,13 @@ foreach ($user->result() as $users) {
                             </div>
                         </div>
 
-                        <label for="aboutimg2">About Image 2</label>
+                        <!-- <label for="aboutimg2">About Image 2</label>
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" name="aboutimg2" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg" id="inputGroupFile01" aria-describedby="aboutimg2" >
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-lg-12 col-sm-6">
                         <h5 class="pink mt-2">Special Info</h5>
@@ -590,31 +590,31 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="facebook">Facebook</label>
-                            <input type="text" class="form-control" name="facebook" id="facebook" placeholder="e.g.+91 9876543210">
+                            <input type="text" class="form-control" name="facebook" id="facebook" placeholder="e.g.https://yourwebsite.com/">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="twitter">Twitter</label>
-                            <input type="text" class="form-control" name="twitter" id="twitter" placeholder="e.g.admin@gmail.com">
+                            <input type="text" class="form-control" name="twitter" id="twitter" placeholder="e.g.https://yourwebsite.com/">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="instagram">Instagram</label>
-                            <input type="text" class="form-control" name="instagram" id="instagram" placeholder="e.g.www.yourwebsite.com">
+                            <input type="text" class="form-control" name="instagram" id="instagram" placeholder="e.g.https://yourwebsite.com/">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="linkedin">Linked in</label>
-                            <input type="text" class="form-control" name="linkedin" id="linkedin" placeholder="e.g.www.yourwebsite.com">
+                            <input type="text" class="form-control" name="linkedin" id="linkedin" placeholder="e.g.https://yourwebsite.com/">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="pinterest">Pinterest</label>
-                            <input type="text" class="form-control" name="pinterest" id="pinterest" placeholder="e.g.www.yourwebsite.com">
+                            <input type="text" class="form-control" name="pinterest" id="pinterest" placeholder="e.g.https://yourwebsite.com/">
                         </div>
                     </div>
                 </div><!-- /form-row -->

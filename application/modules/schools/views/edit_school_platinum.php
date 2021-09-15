@@ -38,6 +38,9 @@ $this->db->from('school_images');
 $school_img = $this->db->get()->result_array();
 $this->db->select('si.id as image_id,si.school_id,si.images,sa.id as school_act_id,sa.activity_name');
 $this->db->where('si.school_id', $school[0]['id']);
+$this->db->where('si.school_activity_id>',2);
+$this->db->where('si.school_activity_id!=',169);
+$this->db->where('si.school_activity_id!=',170);
 $this->db->join('school_activities as sa','si.school_activity_id = sa.id','left');
 $this->db->from('school_images as si');
 $school_activities=$this->db->get()->result_array();
@@ -110,6 +113,30 @@ $this->db->select('*');
 $this->db->where('id',$school[0]['schooltype_id']);
 $this->db->from('school_types');
 $schooltype = $this->db->get()->result_array();
+
+$this->db->select('*');
+$this->db->where('school_id',$school[0]['id']);
+$this->db->where('school_activity_id',2);
+$this->db->from('school_images');
+$banner1 = $this->db->get()->result_array();
+$this->db->select('*');
+$this->db->where('school_id',$school[0]['id']);
+$this->db->where('school_activity_id',169);
+$this->db->from('school_images');
+$banner2 = $this->db->get()->result_array();
+$this->db->select('*');
+$this->db->where('school_id',$school[0]['id']);
+$this->db->where('school_activity_id',170);
+$this->db->from('school_images');
+$banner3 = $this->db->get()->result_array();
+
+//about image
+$this->db->select('*');
+$this->db->where('school_activity_id',1);
+$this->db->where('school_id',$school[0]['id']);
+$this->db->from('school_images');
+$about_img = $this->db->get()->result_array();
+
 
 ?>
 
@@ -273,18 +300,21 @@ $schooltype = $this->db->get()->result_array();
                         <small style="display: block;font-weight: 300;" class="mb-3">You can add 3 banner images in Platinum package.</small>
                         <div class="input-group mb-3">
                             <div class="custom-file">
+                                <input type="hidden" name="old_banner1" value="<?php echo $banner1[0]['images'] ?>">
                                 <input type="file" name="banner1" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="inputGroupFile02">
                                 <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                             </div>
                         </div><!-- /input-group -->
                         <div class="input-group mb-3">
                             <div class="custom-file">
-                                <input type="file" name="banner2" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="inputGroupFile03" >
+                                <input type="hidden" name="old_banner2" value="<?php echo $banner2[0]['images'] ?>">
+                                <input type="file" name="banner2" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="inputGroupFile03">
                                 <label class="custom-file-label" for="inputGroupFile03" aria-describedby="inputGroupFileAddon02">Choose file</label>
                             </div>
                         </div><!-- /input-group -->
                         <div class="input-group mb-3">
                             <div class="custom-file">
+                                <input type="hidden" name="old_banner3" value="<?php echo $banner3[0]['images'] ?>">
                                 <input type="file" name="banner3" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="inputGroupFile04">
                                 <label class="custom-file-label" for="inputGroupFile04" aria-describedby="inputGroupFileAddon02">Choose file</label>
                             </div>
@@ -441,21 +471,22 @@ $schooltype = $this->db->get()->result_array();
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6">
-                        <label for="aboutimg1">About Image 1</label>
+                        <label for="aboutimg1">About Image </label>
                         <div class="input-group mb-3">
                             <div class="custom-file">
+                                <input type="hidden" name="old_aboutimg1" value="<?php echo $about_img[0]['images'] ?>">
                                 <input type="file" name="aboutimg1" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg" id="inputGroupFile01" aria-describedby="aboutimg1" >
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                         </div>
 
-                        <label for="aboutimg2">About Image 2</label>
+                        <!-- <label for="aboutimg2">About Image 2</label>
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" name="aboutimg2" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg" id="inputGroupFile01" aria-describedby="aboutimg2" >
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <?php $selectedActivity = array();
                      foreach($management as $key=>$management_data){ 

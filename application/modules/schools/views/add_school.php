@@ -383,7 +383,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-6">
-                                    <label for="aboutimg1">About Image 1</label>
+                                    <label for="aboutimg1">About Image</label>
                                     <div class="input-group mb-3">
                                         <div class="custom-file">
                                             <input type="file" name="aboutimg1" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg" id="inputGroupFile01" aria-describedby="aboutimg1" >
@@ -391,13 +391,13 @@
                                         </div>
                                     </div>
 
-                                    <label for="aboutimg2">About Image 2</label>
+                                    <!-- <label for="aboutimg2">About Image 2</label>
                                     <div class="input-group mb-3">
                                         <div class="custom-file">
                                             <input type="file" name="aboutimg2" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg" id="inputGroupFile01" aria-describedby="aboutimg2" >
                                             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-lg-12 col-sm-6">
                                     <h5 class="pink mt-2">Special Info</h5>

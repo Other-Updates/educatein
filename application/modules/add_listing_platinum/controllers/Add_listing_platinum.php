@@ -497,6 +497,10 @@ class Add_listing_platinum extends CI_Controller {
                 }
             }
         }
+        $logo = array(
+            'logo' => $banner1_name,
+        );
+        $this->db->update('school_details',$logo,array('id' => $school_id));
 
 
         // banner2 image save
@@ -516,7 +520,7 @@ class Add_listing_platinum extends CI_Controller {
                 if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
                     $banner2insert = array(
                         'school_id' => $school_id,
-                        'school_activity_id' => 2,
+                        'school_activity_id' => 169,
                         'images' => $banner2_name,
                         'is_active' => 1
                     );
@@ -543,7 +547,7 @@ class Add_listing_platinum extends CI_Controller {
                 if (move_uploaded_file($banner3_tem_loc, $banner3_store)) {
                     $banner3insert = array(
                         'school_id' => $school_id,
-                        'school_activity_id' => 2,
+                        'school_activity_id' => 170,
                         'images' => $banner3_name,
                         'is_active' => 1
                     );

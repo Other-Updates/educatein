@@ -182,49 +182,18 @@ $aff_name = strtolower($aff_name);
 // echo $aff_name;
 // exit();
 ?>
-<div class="breadrumb-new mab-30">
-    <div class="container">
+<div class="breadrumb-new mab-50">
+    <div class="container-fluid" style="padding: 0 60px;">
         <div class="row">
-            <div class="col-lg-6 schoolist-search">
-                <form action="<?php echo base_url() ?>schools-list" method="post">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <?php if ($aff_url != "") { ?>
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?> <i class="fa fa-angle-down"></i>  </button>
-                            <?php } else { ?>
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
-                            <?php } ?> 
-                            <div class="dropdown-menu">
-                                <ul class="list-inline">
-                                    <?php
-                                    foreach ($allcity as $allcitys) {
-                                        $lowercity = strtolower($allcitys->city_name);
-                                        ?>
-
-                                        <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
-                                    <?php } ?>
-                                </ul>
-                            </div><!-- /dropdown-menu -->
-                        </div>
-                        <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
-                        <?php if ($aff_url != "") { ?>
-                            <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
-                        <?php } else { ?>
-                            <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
-                        <?php } ?>
-                        <!-- <div id="map"></div> -->
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>
-                        </div>
-                    </div><!-- /input-group -->
-                </form>
-            </div>
-            <div class="col-lg-6 col-sm-12 text-right">
+            <div class="col-lg-6 col-sm-12">
                 <ul class="list-inline">
                     <li class="list-inline-item"><a href="<?php echo base_url() ?>">Home</a></li>
                     <li class="list-inline-item"><i class="fa fa-angle-right"></i></li>
                     <li class="list-inline-item"><?php echo $affiliations->affiliation_name; ?> Schools</li>
                 </ul>
+            </div>
+            <div class="col-lg-6 col-sm-12 text-right">
+                <p>Find the Right School with us!</p>
             </div>
         </div><!-- /row -->
     </div><!-- /container -->
@@ -324,7 +293,7 @@ $aff_name = strtolower($aff_name);
     }
 </style>
 <div class="sidebar-section">
-    <div class="container">
+    <div class="container-fluid" style="padding-left: 60px;padding-right: 60px;">
         <div class="sidebar">
             <div id="sticky">
                 <div class="sidebar-categories">
@@ -339,7 +308,7 @@ $aff_name = strtolower($aff_name);
                             }
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $yourcity; ?>" id="<?php echo $row->id; ?>"><i class="fa fa-circle"></i> <?php echo $affiliation_name1; ?> Schools</a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $yourcity; ?>" id="<?php echo $row->id; ?>"><i class="fa fa-angle-right"></i> <?php echo $affiliation_name1; ?> Schools</a>
                             </li>
                         <?php } ?>
                         <!-- /School Categories -->
@@ -353,7 +322,7 @@ $aff_name = strtolower($aff_name);
                             $category_name = strtolower($category_name);
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-<?php echo $yourcity; ?>" id="<?php echo $row1->id; ?>"><i class="fa fa-circle"></i> <?php echo $category_name1; ?></a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-<?php echo $yourcity; ?>" id="<?php echo $row1->id; ?>"><i class="fa fa-angle-right"></i> <?php echo $category_name1; ?></a>
                             </li>
                         <?php } // $aff_name = ucwords($affiliations->affiliation_name);  ?>
                     </ul>
@@ -378,29 +347,29 @@ $aff_name = strtolower($aff_name);
                 ?>
 
                 <?php
-                // $this->db->select('*')->where('id =', $best->affiliation_id);
-                // $this->db->from('affiliations');
-                // $affili = $this->db->get();
-                // foreach ($affili->result() as $affilis) {
-                //     //echo $areas->area_name;
-                //     //exit();
-                // }
+                $this->db->select('*')->where('id =', $best->affiliation_id);
+                $this->db->from('affiliations');
+                $affili = $this->db->get();
+                foreach ($affili->result() as $affilis) {
+                    //echo $areas->area_name;
+                    //exit();
+                }
 
-                // $this->db->select('*')->where('id =', $best->area_id);
-                // $this->db->from('areas');
-                // $area = $this->db->get();
-                // foreach ($area->result() as $areas) {
-                //     //echo $areas->area_name;
-                //     //exit();
-                // }
+                $this->db->select('*')->where('id =', $best->area_id);
+                $this->db->from('areas');
+                $area = $this->db->get();
+                foreach ($area->result() as $areas) {
+                    //echo $areas->area_name;
+                    //exit();
+                }
 
-                // $this->db->select('*')->where('id =', $best->city_id);
-                // $this->db->from('cities');
-                // $city = $this->db->get();
-                // foreach ($city->result() as $cities) {
-                //     //echo $areas->area_name;
-                //     //exit();
-                // }
+                $this->db->select('*')->where('id =', $best->city_id);
+                $this->db->from('cities');
+                $city = $this->db->get();
+                foreach ($city->result() as $cities) {
+                    //echo $areas->area_name;
+                    //exit();
+                }
 
                 if ($aff_url1 == "enquiry" || $aff_url1 == "otp") {
                     $affili_name = str_replace(" ", "-", $affilis->affiliation_name);
@@ -412,14 +381,14 @@ $aff_name = strtolower($aff_name);
                 ?>
 
                 <!-- <a href="<?php echo base_url() ?>list-of-best-<?php echo $affili_name ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank"> -->
-                    <div class="cbse-school-widget mab-50 exclusive-schools-banner">
+                    <div class="cbse-school-widget mab-50">
                         <figure class="figure wow fadeInUp">
 
-                            <div class="cbse-school-widget-imgbox">
+                            <div class="cbse-school-widget-imgbox" style="width: 100%;height: 400px;overflow: hidden;">
                             <?php if(isset($best->logo)){ ?>
-                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $best->logo ?>" alt="" style="">	
+                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $best->logo ?>" class="rounded" alt="" style="width: 100%;height: 400px;object-fit: cover;">	
                             <?php } else { ?>
-                                <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" style="" alt="" />
+                                <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" style="width: 100%;height: 300px;object-fit: cover;" class="w-100" alt="" />
                             <?php } ?>    
                             </div>
 
@@ -575,22 +544,21 @@ $aff_name = strtolower($aff_name);
             </div><!-- /top-school-widget -->
 
             <?php
-            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND af.affiliation_name AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            $this->db->select('sd.*,si.images as banner')->where($where2);
-            $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
-            $this->db->join('affiliations as af','sd.affiliation_id = af.id');
+            $where2 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=2 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
+            $this->db->select('*')->where($where2);
             $this->db->order_by('rand()');
-            $this->db->from('school_details as sd');
-            $school_premium = $this->db->get();
+            $this->db->from('school_details');
+            $school_premium = $this->db->get()->result_array();
+            
+            // print_r($this->db->last_query());exit;
 
-            $where3 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=3 AND af.affiliation_name AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            $this->db->select('sd.*,si.images as banner')->where($where3);
-            $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
-            $this->db->join('affiliations as af','sd.affiliation_id = af.id');
+            $where3 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=3 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
+            $this->db->select('*')->where($where3);
             $this->db->order_by('rand()');
-            $this->db->from('school_details as sd');
-            $school_spectrum = $this->db->get();
+            $this->db->from('school_details');
+            $school_spectrum = $this->db->get()->result_array();
 
+            // $school_name = str_replace(" ", "-", $school_premium[0]['school_name']);
             ?>
 
             <div class="third-cat mab-50 home-tsw top-school-widget mab-50">
@@ -598,17 +566,17 @@ $aff_name = strtolower($aff_name);
                     <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <?php echo $yourcity; ?></h3>
                 </div>
                 <div class="row equal">
-                    <?php foreach($school_premium->result() as $premium){ ?>
+                    <?php foreach($school_premium as $premium){ ?>
                         <div class="col-md-3">
                             <div class="schoolist-inner premium">
-                                <a href="#" target="_blank">
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['school_name']); ?>" target="_blank">
                                     <figure>
                                         <div class="package-name">Premium</div>
                                         <div class="object-fit">
                                             <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
                                         </div>
                                         <figcaption class="item-footer">
-                                            <h6><?php echo ucfirst($premium->school_name) ?></h6>
+                                            <h6><?php echo ucfirst($premium['school_name']) ?></h6>
                                             <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
                                         </figcaption>
                                     </figure>
@@ -616,17 +584,17 @@ $aff_name = strtolower($aff_name);
                             </div>
                         </div>
                     <?php } ?>
-                    <?php foreach($school_spectrum->result() as $spectrum){ ?>
+                    <?php foreach($school_spectrum as $spectrum){ ?>
                     <div class="col-md-3">
                         <div class="schoolist-inner spectrum">
-                            <a href="#" target="_blank">
+                            <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['school_name']); ?>" target="_blank">
                                 <figure>
                                     <div class="package-name">Spectrum</div>
                                     <div class="object-fit">
                                         <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
                                     </div>
                                     <figcaption class="item-footer">
-                                        <h6><?php echo ucfirst($spectrum->school_name) ?></h6>
+                                        <h6><?php echo ucfirst($spectrum['school_name']) ?></h6>
                                         <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
                                     </figcaption>
                                 </figure>
@@ -634,70 +602,7 @@ $aff_name = strtolower($aff_name);
                         </div>
                     </div>
                     <?php } ?>
-                    <!-- <div class="col-md-3">
-                        <div class="schoolist-inner">
-                            <a href="#" target="_blank">
-                                <figure>
-                                    <div class="package-name">Premium</div>
-                                    <div class="object-fit">
-                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
-                                    </div>
-                                    <figcaption class="item-footer">
-                                        <h6>Trial school</h6>
-                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="schoolist-inner">
-                            <a href="#" target="_blank">
-                                <figure>
-                                    <div class="package-name">Premium</div>
-                                    <div class="object-fit">
-                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
-                                    </div>
-                                    <figcaption class="item-footer">
-                                        <h6>Trial school</h6>
-                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="schoolist-inner">
-                            <a href="#" target="_blank">
-                                <figure>
-                                    <div class="package-name">Premium</div>
-                                    <div class="object-fit">
-                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
-                                    </div>
-                                    <figcaption class="item-footer">
-                                        <h6>Trial school</h6>
-                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="schoolist-inner">
-                            <a href="#" target="_blank">
-                                <figure>
-                                    <div class="package-name">Premium</div>
-                                    <div class="object-fit">
-                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
-                                    </div>
-                                    <figcaption class="item-footer">
-                                        <h6>Trial school</h6>
-                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                        </div>
-                    </div> -->
+                    
                 </div>
             </div>
         </div>
