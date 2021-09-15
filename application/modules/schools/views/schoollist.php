@@ -350,6 +350,7 @@ $aff_name = strtolower($aff_name);
                 $this->db->select('*')->where('id =', $best->affiliation_id);
                 $this->db->from('affiliations');
                 $affili = $this->db->get();
+                $affiliation_name_ = $affili->result_array();
                 foreach ($affili->result() as $affilis) {
                     //echo $areas->area_name;
                     //exit();
@@ -385,21 +386,30 @@ $aff_name = strtolower($aff_name);
                         <figure class="figure wow fadeInUp">
 
                             <div class="cbse-school-widget-imgbox" style="width: 100%;height: 400px;overflow: hidden;">
-                            <?php if(isset($best->logo)){ ?>
-                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $best->logo ?>" class="rounded" alt="" style="width: 100%;height: 400px;object-fit: cover;">	
-                            <?php } else { ?>
-                                <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" style="width: 100%;height: 300px;object-fit: cover;" class="w-100" alt="" />
-                            <?php } ?>    
+                            <?php //if(isset($best->logo)){ ?>
+                                <!-- <img src="<?php echo base_url() ?>laravel/public/<?php echo $best->logo ?>" class="rounded" alt="" style="width: 100%;height: 400px;object-fit: cover;">	 -->
+                            <?php //} else { ?>
+                                <?php if($affiliation_name_[0]['affiliation_name'] == "cbse"){ ?>
+                                <img src="<?php echo base_url() ?>images/thirdcbse-banner.jpg" style="width: 100%;height: 600px;object-fit: cover;" class="w-100" alt="" />
+                            <?php }else if($affiliation_name_[0]['affiliation_name'] == "international") { ?>    
+                                <img src="<?php echo base_url() ?>images/thirdinter-banner.jpg" style="width: 100%;height: 700px;object-fit: cover;" class="w-100" alt="" />
+                                <?php }else if($affiliation_name_[0]['affiliation_name'] == "matriculation") { ?>    
+                                <img src="<?php echo base_url() ?>images/thirdmatri-banner.jpg" style="width: 100%;height: 700px;object-fit: cover;" class="w-100" alt="" />
+                            <?php }else if($affiliation_name_[0]['affiliation_name'] == "special") { ?>    
+                                <img src="<?php echo base_url() ?>images/thirdspecial-banner.jpg" style="width: 100%;height: 700px;object-fit: cover;" class="w-100" alt="" />
+                            <?php }else if($affiliation_name_[0]['affiliation_name'] == "kindergarten") { ?>    
+                                <img src="<?php echo base_url() ?>images/thirdkinder-banner.jpg" style="width: 100%;height: 700px;object-fit: cover;" class="w-100" alt="" />
+                            <?php } ?>
                             </div>
 
-                            <figcaption class="figure-caption">
+                            <!-- <figcaption class="figure-caption">
                                 <div class="figure-caption-content">
                                     <h2 class="text-white"><?php echo $best->slug; ?> </h2>
                                     <p class="text-white lead"><i class="fa fa-map-marker"></i> &nbsp;<?php echo $areas->area_name ?>, <?php echo $cities->city_name ?></p>
                                     <p><small><?php echo ucfirst($affiliations->affiliation_name); ?> School</small></p>
                                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $affili_name ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" class="btn btn-primary mt-3" target="_blank">View Details</a>
                                 </div>
-                            </figcaption>
+                            </figcaption> -->
                         </figure>
                     </div>
                     <!-- /cbse-school-widget
@@ -501,6 +511,7 @@ $aff_name = strtolower($aff_name);
                                 $affname_url = strtolower($aff_name);
                                 $affname_url = str_replace(" ", "-", $affname_url);
                                 // echo $affname_url;
+                                // print_r($affname_url);exit;
                                 // exit();
                                 ?>
                                 
