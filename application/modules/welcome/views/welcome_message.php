@@ -286,7 +286,7 @@
                             <?php if(isset($platinum['banner'])){ ?>
                             <img src="<?php echo base_url() ?>laravel/public/<?php echo $platinum['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                 <?php } else { ?>
-                            <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                            <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                             <?php } ?>
                         </div>
                         <figcaption class="item-footer">
@@ -324,13 +324,14 @@
                             <?php if(isset($premium['banner'])){ ?>
                                 <img src="<?php echo base_url() ?>laravel/public/<?php echo $premium['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                     <?php } else { ?>
-                                <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                 <?php } ?>
                         </div>
                         <figcaption class="item-footer">
                             <h6><?php echo ucfirst($premium['schoolname']) ?></h6>
                             <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
                         </figcaption>
+
                     </figure>
                 </a>
             </div>
@@ -344,7 +345,7 @@
                         <?php if(isset($premium['banner'])){ ?>
                                 <img src="<?php echo base_url() ?>laravel/public/<?php echo $spectrum['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                     <?php } else { ?>
-                                <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                 <?php } ?>
                         </div>
                         <figcaption class="item-footer">
