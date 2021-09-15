@@ -525,7 +525,7 @@ $aff_name = strtolower($aff_name);
                                             <?php if(isset($top->banner)){ ?>
                                             <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->banner ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                 <?php } else { ?>
-                                            <img src="<?php echo base_url() ?>assets/front/images/list-1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                            <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                             <?php } ?>
                                         </div>
                                         <figcaption class="item-footer">
@@ -584,7 +584,7 @@ $aff_name = strtolower($aff_name);
                                     <figure>
                                         <div class="package-name">Premium</div>
                                         <div class="object-fit">
-                                            <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                            <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
                                         </div>
                                         <figcaption class="item-footer">
                                             <h6><?php echo ucfirst($premium['school_name']) ?></h6>
@@ -602,7 +602,7 @@ $aff_name = strtolower($aff_name);
                                 <figure>
                                     <div class="package-name">Spectrum</div>
                                     <div class="object-fit">
-                                        <img src="<?php echo base_url("assets/front/") ?>images/list-1.jpg" class="w-100" alt="best kindergarten schools in nilgiris">
+                                        <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
                                     </div>
                                     <figcaption class="item-footer">
                                         <h6><?php echo ucfirst($spectrum['school_name']) ?></h6>

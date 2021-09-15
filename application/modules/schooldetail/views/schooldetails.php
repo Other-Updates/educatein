@@ -212,7 +212,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             <div class="esd-banner-details-btn">
                                 <button class="btn btn-theme1"><i class="fa fa-map-marker"></i> Show School On Map</button>
                                 <button class="btn btn-theme2"><i class="fa fa-phone"></i> Call School</button>
-                                <button class="btn btn-theme1-border"><i class="fa fa-file-text-o"></i> Admissions Open Now</button>
+                                <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
                                 <!-- <button class="btn btn-theme2-border"><i class="fa fa-eye"></i> Page Views : 135</button> -->
                             </div>
                         </div>
@@ -238,7 +238,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="sd-ection-tit">About Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 about-info-img">
                                 <a data-fancybox="gallery" data-caption="Computer Lab" href="<?php echo base_url() ?>laravel/public/<?php echo $about_img[0]['images'] ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $about_img[0]['images'] ?>" class="sd-about-img" alt=""></a>
                             </div>
                             <div class="col-md-9">
@@ -324,25 +324,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                         <h3><?php echo $school_details->boys ?></h3>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/9.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h6>Vision</h6>
-                                        <h3><?php echo ucfirst($school_details->our_vision) ?></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/10.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h6>Mission</h6>
-                                        <h3><?php echo ucfirst($school_details->our_mission) ?></h3>
-                                    </div>
-                                </div>
-                            </div>
+                            </div>                            
                             <div class="col-md-6">
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/11.png" alt="Educatein"></div>
@@ -379,7 +361,25 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/9.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Vision</h6>
+                                        <h3><?php echo ucfirst($school_details->our_vision) ?></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/10.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h6>Mission</h6>
+                                        <h3><?php echo ucfirst($school_details->our_mission) ?></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/15.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
@@ -416,6 +416,14 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             </div>
                             <div class="col-md-6">
                                 <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/33.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Transportation</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/18.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h3>Curriculam</h3>
@@ -427,6 +435,14 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/19.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h3>Field Trips</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sd-addit-icon-value">
+                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/34.png" alt="Educatein"></div>
+                                    <div class="sd-addit-value">
+                                        <h3>Activity</h3>
                                     </div>
                                 </div>
                             </div>
@@ -496,7 +512,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             <?php 
                             foreach($school_activity->result() as $activity){ ?>
                                 <div class="col-md-3 school-activ-list">
-                                    <div><a data-fancybox="gallery" data-caption="Independence Day Celebration" href="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>" alt=""></a></div>
+                                    <div class="school-activ-list-img"><a data-fancybox="gallery" data-caption="Independence Day Celebration" href="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>" alt=""></a></div>
                                     <h6><?php echo $activity->name ?> </h6>
                                 </div>
                             <?php } ?>
