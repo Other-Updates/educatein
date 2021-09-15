@@ -328,7 +328,7 @@ $about_img = $this->db->get()->result_array();
                             </div>
                         </div>
                     </div><!-- /file-img-upload -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 banner-image-slider">
                         <label for="bannerimagesample" class="mab-30"> Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">

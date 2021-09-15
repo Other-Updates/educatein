@@ -2860,7 +2860,7 @@ blue - 33317c
 	padding-top: 10px;
 }
 .school-activ  .school-activ-list img {
-	width: 80%;
+	width: 100%;
 	border-radius: 50%;
 }
 .school-facilities-list {
@@ -2870,7 +2870,7 @@ blue - 33317c
 	padding: 10px 0;
 }
 .sd-faci-img img {
-	width: 80%;
+	width: 100%;
 	border-radius: 10px;
 }
 .contact-info h3 {
@@ -3004,4 +3004,24 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 }
 .search-schoolist .nearby-widget-body, .search-schoolist .nearby-widget-body h6 a {
 	color: #fff;
+}
+.about-info-img {
+	width: 200px;
+    height: 200px;
+    overflow: hidden;
+	margin: 0 auto;
+}
+.about-info-img img {
+	height: 200px;
+    object-fit: cover;
+}
+.school-activ-list-img {
+	width: 150px;
+    height: 150px;
+    overflow: hidden;
+	margin: 0 auto;
+}
+.school-activ-list-img img {
+	height: 150px;
+    object-fit: cover;
 }
