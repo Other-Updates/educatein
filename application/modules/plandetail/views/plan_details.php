@@ -73,6 +73,7 @@ foreach ($user->result() as $users) {
 // $this->db->where('is_active =','1');
                 $this->db->where('deleted_at =', NULL);
                 // $this->db->where('status != 2');
+                $this->db->where('status',1);
                 $this->db->order_by("activated_at", "desc");
                 $this->db->from('school_details');
                 $school = $this->db->get();
@@ -81,6 +82,7 @@ foreach ($user->result() as $users) {
 // $this->db->where('is_active =','1');
                 $this->db->where('deleted_at =', NULL);
                 // $this->db->where('status !=',2);
+                $this->db->where('status',1);
                 $this->db->order_by("activated_at", "desc");
                 $this->db->from('institute_details');
                 $institute = $this->db->get();
