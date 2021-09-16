@@ -129,6 +129,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->where('si.school_activity_id>2');
     $this->db->where('si.school_activity_id!=',169);
     $this->db->where('si.school_activity_id!=',170);
+    $this->db->where('si.school_activity_id!=',71);
     $this->db->join('school_activities as sa','si.school_activity_id=sa.id');
     $school_activity = $this->db->get();
 
@@ -161,6 +162,11 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->limit(6);
     $similar_school = $this->db->get()->result();
 
+    $this->db->select('*');
+    $this->db->where('school_id',$school_details->id);
+    $this->db->where('school_activity_id',71);
+    $this->db->from('school_images');
+    $gallery = $this->db->get()->result();
 ?>
 <div class="breadrumb-new ">
     <div class="container-fluid" style="padding: 0 60px;">
@@ -551,30 +557,33 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 </div>
-
-                <div id="sd-gallery" class="sd-inner-main gallery">
-                    <div class="sd-ection-tit">Gallery</div>
-                    <div class="sd-ection-inner">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg">   
-                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg">   
-                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg">   
-                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
-                                </a>
+                <?php if(!empty($gallery)){ ?>
+                    <div id="sd-gallery" class="sd-inner-main gallery">
+                        <div class="sd-ection-tit">Gallery</div>
+                        <div class="sd-ection-inner">
+                            <div class="row">
+                                <?php foreach($gallery as $gallery_data){ ?>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery" href="<?php echo base_url() ?>laravel/public/<?php echo $gallery_data->images ?>">   
+                                        <img src="<?php echo base_url() ?>laravel/public/<?php echo $gallery_data->images ?>" alt="">
+                                    </a>
+                                </div>
+                                <?php } ?>
+                                <!-- <div class="col-md-4">
+                                    <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg">   
+                                        <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg">   
+                                        <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
+                                    </a>
+                                </div> -->
                             </div>
                         </div>
                     </div>
-                </div>
-                <?php if(isset($school_activity)){ ?>
+                <?php } ?>
+                <?php if(!empty($school_activity)){ ?>
                     <div id="school-activ" class="sd-inner-main school-activ">
                         <div class="sd-ection-tit">School Activities</div>
                         <div class="sd-ection-inner">
@@ -590,7 +599,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 <?php } ?>
-                <?php if(isset($facility)){ ?>
+                <?php if(!empty($facility)){ ?>
                     <div id="school-facilities" class="sd-inner-main school-facilities">
                         <div class="sd-ection-tit">School Facilities</div>
                         <div class="sd-ection-inner">

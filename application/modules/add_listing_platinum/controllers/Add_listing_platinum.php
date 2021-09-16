@@ -927,6 +927,46 @@ class Add_listing_platinum extends CI_Controller {
             }
         }
 
+        //gallery images
+        if (isset($_FILES['mytext']['name'])) {
+            $gallaryimage = $_FILES['mytext']['name'];
+            $gallarytype = $_FILES['mytext']['type'];
+            $gallarysize = $_FILES['mytext']['size'];
+            $gallarytmp_name = $_FILES['mytext']['tmp_name'];
+
+
+
+            if (is_array($gallaryimage)) {
+                for ($i = 0; $i < count($gallaryimage); $i++) {
+                    $gallary1image = $gallaryimage[$i];
+                    $gallary1_ext = pathinfo($gallary1image, PATHINFO_EXTENSION);
+
+                    $gallary1_name = $_POST['schoolname'] . "-" . rand(10000, 10000000) . "." . $gallary1_ext;
+                    $gallary1_type = $gallarytype[$i];
+                    $gallary1_size = $gallarysize[$i];
+                    $gallary1_tem_loc = $gallarytmp_name[$i];
+                    $gallary1_store = FCPATH . "/laravel/public/" . $gallary1_name;
+
+                    $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+                    if (in_array($gallary1_ext, $allowed)) {
+                        if (move_uploaded_file($gallary1_tem_loc, $gallary1_store)) {
+
+                            $schoolgallaryinsert1 = array(
+                                'school_id' => $school_id,
+                                'school_activity_id' => 71,
+                                'images' => $gallary1_name,
+                                'is_active' => 1
+                            );
+
+                            $this->db->insert('school_images', $schoolgallaryinsert1);
+                        }
+                    }
+                }
+            }
+        }
+
 
         $user = $this->db->get_where('user_register', array('id' => $_POST['user_id']));
         foreach ($user->result() as $users) {

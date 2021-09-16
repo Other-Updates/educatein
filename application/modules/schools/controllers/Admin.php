@@ -2843,6 +2843,11 @@ class admin extends CI_Controller {
                 $status = null;
                 $act_date = null;
             }
+            if($_POST['school_category'] = 4){
+                $validity = 30;
+            }else{
+                $validity = 100;
+            }
             $schoolinsert = array(
                 'school_name' => $school['schoolname'],
                 'slug' => $school['schoolname'],
@@ -2881,7 +2886,7 @@ class admin extends CI_Controller {
                 'logo' => $banner1_name,
                 'activated_at' => $act_date,
                 'is_active' => 1,
-                // 'valitity' => 100
+                'valitity' => $validity,
             );
             $this->db->insert('school_details', $schoolinsert);
 

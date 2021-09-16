@@ -548,6 +548,22 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+                
+                <h3 class="mt-4 mb-3">Gallery Images</h3>
+                <hr class="mb-4">
+                <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
+                <div class="input_fields_wrap mt-3">
+                    <div class="form-row">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="input-group mb-3">
+                                <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <button class="add_field_button btn btn-primary btn-block">Add More</button>
+                        </div>
+                    </div><!-- /form-row -->
+                </div><!-- /input_fields_wrap -->
 
                 <h4 class="mt-5 mb-3">Location</h4>
                 <hr class="mb-4">

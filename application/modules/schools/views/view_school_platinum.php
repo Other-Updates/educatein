@@ -42,6 +42,7 @@ $this->db->where('si.school_id', $school[0]['id']);
 $this->db->where('si.school_activity_id>',2);
 $this->db->where('si.school_activity_id!=',169);
 $this->db->where('si.school_activity_id!=',170);
+$this->db->where('si.school_activity_id!=',71);
 $this->db->join('school_activities as sa','si.school_activity_id = sa.id','left');
 $this->db->from('school_images as si');
 $school_activities=$this->db->get()->result_array();
