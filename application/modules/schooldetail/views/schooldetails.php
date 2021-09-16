@@ -162,7 +162,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $similar_school = $this->db->get()->result();
 
 ?>
-<div class="breadrumb-new ">
+<div class="breadrumb-new mnone">
     <div class="container-fluid" style="padding: 0 60px;">
         <div class="row">
             <div class="col-lg-6 col-sm-12">
@@ -197,7 +197,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     <div class="esd-banner">
         <div class="esd-banner-bg"></div>
         <div class="container">
-            <div class="esd-banner-details">
+            <div class="esd-banner-details wow fadeIn infinite">
                 <div class="row">
                     <?php if(!empty($school_details->logo)){ ?>
                         <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>laravel/public/<?php echo $school_details->logo ?>" alt=""></div></div>
@@ -206,7 +206,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <?php } ?>
                     <div class="col-md-9 esd-banner-right">
                         <div class="esd-banner-details-right">
-                            <div class="esd-banner-details-tit"><?php echo ucfirst($school_details->slug) ?></div>
+                            <div class="esd-banner-details-tit wow fadeIn" data-wow-delay="300ms"><?php echo ucfirst($school_details->slug) ?></div>
                             <div class="esd-banner-details-address"><i class="fa fa-map-marker"></i> <?php echo $school_details->address ?></div>
                             <div class="clearfix"></div>
                             <div class="row esd-banner-details-hightlight">
@@ -229,9 +229,12 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             </div>
                             <div class="clearfix"></div>
                             <div class="esd-banner-details-btn">
-                                <button class="btn btn-theme1"><i class="fa fa-map-marker"></i> Show School On Map</button>
-                                <button class="btn btn-theme2"><i class="fa fa-phone"></i> Call School</button>
-                                <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
+                                <button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
+                                <button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button>
+                                <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
+                                <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="modal" data-target="#exampleModalCenter" data-wow-delay="1000ms">
+                                    Admission Enquiry
+                                </button>
                                 <!-- <button class="btn btn-theme2-border"><i class="fa fa-eye"></i> Page Views : 135</button> -->
                             </div>
                         </div>
@@ -241,7 +244,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         </div>
     </div>
     <div class="container">
-        <ul id="sd-menu" class="sd-menu-list">
+        <ul id="sd-menu" class="sd-menu-list wow bounce">
             <li class="sd-menu-item"><a href="#about-info">About Info</a></li>
             <li class="sd-menu-item"><a href="#addit-info">Additional Info</a></li>
             <li class="sd-menu-item"><a href="#special-info">Special Info</a></li>
@@ -253,7 +256,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         </ul>
         <div class="row" >
             <div class="col-md-9">           
-                <div id="about-info" class="sd-inner-main about-info section">
+                <div id="about-info" class="sd-inner-main about-info section wow slideInLeft">
                     <div class="sd-ection-tit">About Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -267,7 +270,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div id="addit-info" class="sd-inner-main addit-info section">
+                <div id="addit-info" class="sd-inner-main addit-info section wow slideInLeft">
                     <div class="sd-ection-tit">Additional Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -444,7 +447,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                      foreach($management as $key=>$management_data){ 
                         $selectedActivity[] = $management_data['activity_name'];
                       } ?>
-                <div id="special-info" class="sd-inner-main special-info section">
+                <div id="special-info" class="sd-inner-main special-info section wow slideInLeft">
                     <div class="sd-ection-tit">Special Info</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -552,7 +555,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <div id="sd-gallery" class="sd-inner-main gallery">
+                <div id="sd-gallery" class="sd-inner-main gallery wow slideInLeft">
                     <div class="sd-ection-tit">Gallery</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -575,7 +578,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
                 <?php if(isset($school_activity)){ ?>
-                    <div id="school-activ" class="sd-inner-main school-activ">
+                    <div id="school-activ" class="sd-inner-main school-activ wow slideInLeft">
                         <div class="sd-ection-tit">School Activities</div>
                         <div class="sd-ection-inner">
                             <div class="row">
@@ -591,7 +594,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 <?php } ?>
                 <?php if(isset($facility)){ ?>
-                    <div id="school-facilities" class="sd-inner-main school-facilities">
+                    <div id="school-facilities" class="sd-inner-main school-facilities wow slideInLeft">
                         <div class="sd-ection-tit">School Facilities</div>
                         <div class="sd-ection-inner">
                             <?php foreach($facility->result() as $facility_data ){ ?>
@@ -609,8 +612,8 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 <?php } ?>
             </div>
-            <div class="col-md-3 pl-0">
-                <div class="sd-inner-main sd-sidebar">
+            <div class="col-md-3 pl-0-web">
+                <div class="sd-inner-main sd-sidebar wow fadeInUp">
                     <div class="sd-ection-tit">Similar Schools</div>
                     <?php foreach($similar_school as $similar){ ?>
                     <div class="row sd-sidebar-list">
@@ -627,56 +630,11 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                     <?php } ?>
-                    <!-- <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div> -->
                 </div>
-                <div class="ads-school-widget mb-3">
+                <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><p>Ads Here</p></div>
                 </div>
-                <div class="sd-inner-main sd-sidebar">
+                <div class="sd-inner-main sd-sidebar wow fadeInUp">
                     <div class="sd-ection-tit">Recent News</div>
                     <div class="row sd-sidebar-list">
                         <div class="col-md-4 sd-sidebar-list-left">
@@ -733,13 +691,13 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 </div>
-                <div class="ads-school-widget mb-3">
+                <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><p>Ads Here</p></div>
                 </div>
             </div>
             <div class="clearfix"></div>
             <div id="contact-info" class="col-md-12">
-                <div class="sd-inner-main contact-info">
+                <div class="sd-inner-main contact-info wow fadeInUp">
                     <div class="sd-ection-tit">Contact Information</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -785,7 +743,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
             </div>
             <div class="clearfix"></div>
             <div id="social-links" class="col-md-12">
-                <div class="sd-inner-main social-links">
+                <div class="sd-inner-main social-links wow fadeInUp">
                     <div class="sd-ection-tit">Social Links</div>
                     <div class="sd-ection-inner">
                         <div class="row">
@@ -854,10 +812,24 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     </div>
 </div>
 <script>
-$('#sd-menu a').click(function(e) {
-    $('#sd-menu a').removeClass('active');
-    $(this).addClass('active');
-});
+    $('#sd-menu a').click(function(e) {
+        $('#sd-menu a').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+<script>
+    $(function() {
+        $('a[href*=\\#]:not([href=\\#])').on('click', function() {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.substr(1) +']');
+            if (target.length) {
+                $('html,body').animate({
+                scrollTop: (target.offset().top - 60)
+                }, 1000);
+                return false;
+            }
+        });
+    });
 </script>
 <script>
     let distance = $('#sd-menu').offset().top,
@@ -1015,13 +987,13 @@ if ($category == 1) {
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <div class="modal-body p-5">
+                                <div class="modal-body">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true"><i class="lnr lnr-cross"></i></span>
                                     </button>
                                     <h3 class="text-center mb-3" style="color: #303030;">Admission Enquiry</h3>
 
-                                    <form action="<?php echo base_url() ?>schooldetail/admission" class="form-row" method="post">
+                                    <form action="<?php echo base_url() ?>schooldetail/admission" class="row" method="post">
                                         <div class="col-lg-6 col-sm-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="firstname" name="firstname" aria-describedby="emailHelp" placeholder="First Name*" required>
@@ -1052,7 +1024,9 @@ if ($category == 1) {
                                                 <textarea class="form-control" id="enquiry" name="enquiry" placeholder="Enquiry" rows="3"></textarea>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                        <div class="col-lg-12 col-sm-12">
+                                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                        </div>
                                     </form>
 
                                 </div>
@@ -1064,9 +1038,6 @@ if ($category == 1) {
                 <style>
                     .firstcat-about-section ::placeholder {
                         font-size: 12px;
-                    }
-                    .firstcat-about-section textarea {
-                        border-radius: 0px;
                     }
                 </style>
                 <?php
