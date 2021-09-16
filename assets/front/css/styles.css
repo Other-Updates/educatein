@@ -912,8 +912,6 @@ svg {
 
 /*Modal*/
 .modal-content {
-	box-shadow: 0;
-	border-radius: 0;
 	border: 0;
 }
 .modal .close {
@@ -3024,4 +3022,11 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 .school-activ-list-img img {
 	height: 150px;
     object-fit: cover;
+}
+.form-control {
+	border: 2px solid #c6c5ea;
+    border-radius: .35rem;
+}
+.pl-0-web {
+	padding-left: 0;
 }

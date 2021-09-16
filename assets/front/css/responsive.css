@@ -203,7 +203,6 @@
 @media (max-width:768px){
 	.home-search-section, .esd-banner {
 		height: auto;
-		margin-bottom: 20px;
 	}
 	.schools-section .col-lg-4.pl-0 {
 		padding-left: 15px !important;
@@ -216,6 +215,28 @@
 	}
 	.content-footer-list .footer-list-inner {
 		padding-bottom: 40px;
+	}
+	.esd-banner-details .esd-banner-details-hightlight .esd-banner-details-hightlight-tit, .esd-banner-details .esd-banner-details-hightlight .esd-banner-details-hightlight-suntit, .esd-banner-details-btn {
+		text-align: left;
+	}
+	.esd-banner-details-btn .btn {
+		margin-bottom: 10px;
+	}
+	.esd-banner-details .esd-banner-details-tit {
+		font-size: 20px;
+		padding: 10px 0;
+	}
+	.esd-banner-details .esd-banner-details-address {
+		padding-bottom: 5px;
+	}
+	.school-activ .school-activ-list {
+		margin-bottom: 20px;
+	}
+	.sd-sidebar-list-right {
+		padding: 0 15px;
+	}
+	.pl-0-web {
+		padding-left: 15px;
 	}
 }
 /*Small devices (landscape phones, 576px and up)*/
@@ -1170,5 +1191,48 @@
 		line-height: 35px;
 		font-size: 14px;
 		z-index: 1001;
+	}
+	.esd-banner-details .esd-banner-left, .esd-banner-details .esd-banner-right, .social-links .col-md-3 {
+		-ms-flex: 0 0 100%;
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+	.mnone {
+		display: none;
+	}
+	ul.sd-menu-list {
+		-ms-flex-wrap: inherit;
+    	flex-wrap: inherit;
+		width: 100%;
+    	overflow-y: auto;
+	}
+	.sd-menu-list li {
+		display: block;
+	}
+	ul.sd-menu-list li a {
+		padding: 0 20px;
+		white-space: nowrap;
+	}
+	.esd-banner-details {
+		padding: 15px;
+	}
+	.esd-banner-details .esd-banner-details-hightlight .esd-banner-details-hightlight-tit {
+		font-size: 16px;
+	}
+	.esd-banner-details-hightlight {
+		padding-bottom: 10px;
+	}
+	.gallery img {
+		margin-bottom: 10px;
+	}
+	.sd-sidebar-list .sd-sidebar-img {
+		width: 100px;
+		padding-bottom: 10px;
+	}
+	.sd-sidebar-list-left {
+		text-align: center;
+	}
+	.school-activ .school-activ-list h6 {
+		font-size: 18px;
 	}
 }
