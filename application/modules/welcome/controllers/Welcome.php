@@ -87,24 +87,27 @@ class Welcome extends CI_Controller {
         $data['spectrum_data'] = $this->db->get()->result_array();
 
         //platinum activity classes
-        $where = "is_active=1 AND position_id=1 AND city_id =" . $this->session->userdata('city_id') . " AND status =1 AND valitity IS NOT NULL AND deleted_at is NULL ";
-        $this->db->select('*');
+        $where = "in.is_active=1 AND in.position_id=1 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
+        $this->db->select('in.*,ic.category_name');
         $this->db->where($where);
-        $this->db->from('institute_details');
+        $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
+        $this->db->from('institute_details as in');
         $data['activity_platinum'] = $this->db->get()->result_array();
 
         //premium activity classes 
-        $where = "is_active=1 AND position_id=2 AND city_id =" . $this->session->userdata('city_id') . " AND status=1 AND valitity IS NOT NULL AND deleted_at is NULL ";
-        $this->db->select('*');
+        $where = "in.is_active=1 AND in.position_id=2 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
+        $this->db->select('in.*,ic.category_name');
         $this->db->where($where);
-        $this->db->from('institute_details');
+        $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
+        $this->db->from('institute_details as in');
         $data['activity_premium'] = $this->db->get()->result_array();
 
         //spectrum activity classes 
-        $where = "is_active=1 AND position_id=3 AND city_id =" . $this->session->userdata('city_id') . " AND status=1 AND valitity IS NOT NULL AND deleted_at is NULL ";
-        $this->db->select('*');
+        $where = "in.is_active=1 AND in.position_id=3 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
+        $this->db->select('in.*,ic.category_name');
         $this->db->where($where);
-        $this->db->from('institute_details');
+        $this->db->from('institute_details as in');
+        $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
         $data['activity_spectrum'] = $this->db->get()->result_array();
 
         $this->load->view('welcome_message', $data);

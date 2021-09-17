@@ -483,7 +483,7 @@ if ($aff_url == "dance-class") {
                     <div class="home-tsw top-school-widget mab-50">
                         <!-- <div class="owl-one owl-carousel owl-theme"> -->
                             <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
                                     <figure>
                                         <div class="package-name">Platinum</div>
                                         <div class="object-fit">
@@ -543,7 +543,7 @@ if ($aff_url == "dance-class") {
                     <?php foreach($school_premium as $premium){ ?>
                         <div class="col-md-3">
                             <div class="schoolist-inner premium">
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
                                     <figure>
                                         <div class="package-name">Premium</div>
                                         <div class="object-fit">
@@ -562,7 +562,7 @@ if ($aff_url == "dance-class") {
                     <?php foreach($school_spectrum as $premium){ ?>
                         <div class="col-md-3">
                             <div class="schoolist-inner spectrum">
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
                                     <figure>
                                         <div class="package-name">Spectrum</div>
                                         <div class="object-fit">
