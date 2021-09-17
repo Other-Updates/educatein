@@ -519,7 +519,7 @@ $aff_name = strtolower($aff_name);
             ?>
 
             <?php if(isset($topschool)){ ?>
-                <div class="top-school-widget ">
+                <div class="top-school-widget mab-20">
                     <div class="custom-section-title mab-10">
                         <h3 class="mb-2">Top Schools in <span><?php echo $yourcity; ?></span></h3>
                     </div><!-- /section-title -->
@@ -548,7 +548,7 @@ $aff_name = strtolower($aff_name);
                                     // exit();
                                     ?>
                                     
-                        <div class="home-tsw top-school-widget mab-10">
+                        <div class="home-tsw top-school-widget mab-20">
                             <!-- <div class="owl-one owl-carousel owl-theme"> -->
                                 <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
                                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
