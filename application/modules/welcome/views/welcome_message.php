@@ -283,7 +283,7 @@
                     <figure>
                         <div class="package-name">Platinum</div>
                         <div class="object-fit">
-                            <?php if(isset($platinum['banner'])){ ?>
+                            <?php if(!empty($platinum['banner'])){ ?>
                             <img src="<?php echo base_url() ?>laravel/public/<?php echo $platinum['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                 <?php } else { ?>
                             <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
@@ -300,6 +300,37 @@
         </div>
     </div>
 </div>
+<?php if(!empty($activity_platinum)){ ?>
+    <div class="container">
+        <div class="custom-section-title">
+            <h3 class="mb-2">Top Activity Classes in <span><?php echo ucfirst($city) ?></span></h3>
+        </div>
+        <div class="home-tsw top-school-widget mab-50">
+            <div class="owl-one owl-carousel owl-theme">
+                <?php foreach($activity_platinum as $platinum){ ?>
+                <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $aff_name1; ?>-in-<?php echo $yourcity; ?>/<?php echo $platinum['institute_name']; ?>" target="_blank">
+                        <figure>
+                            <div class="package-name">Platinum</div>
+                            <div class="object-fit">
+                                <?php if(!empty($platinum['logo'])){ ?>
+                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $platinum['logo'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                    <?php } else { ?>
+                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                <?php } ?>
+                            </div>
+                            <figcaption class="item-footer">
+                                <h6><?php echo ucfirst($platinum['institute_name']) ?></h6>
+                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 <div class="container">
     <div class="ads-school-widget mab-50">
         <div class="row">
@@ -309,56 +340,112 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="custom-section-title">
-        <h3 class="mb-2">Best Schools in <span><?php echo ucfirst($city) ?></span></h3>
-    </div>
-    <div class="home-tsw top-school-widget mab-50">
-        <div class="owl-two owl-carousel owl-theme">
-            <?php foreach($premium_data as $key=>$premium){ ?>
-            <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
-                <a href="<?php echo base_url() ?>list-of-best-<?php echo $premium['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$premium['schoolname']); ?>" target="_blank">
-                    <figure>
-                        <div class="package-name">Premium</div>
-                        <div class="object-fit">
-                            <?php if(isset($premium['banner'])){ ?>
-                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $premium['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                    <?php } else { ?>
-                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                <?php } ?>
-                        </div>
-                        <figcaption class="item-footer">
-                            <h6><?php echo ucfirst($premium['schoolname']) ?></h6>
-                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                        </figcaption>
+<?php if(isset($premium_data) || isset($spectrum_data)){ ?>
 
-                    </figure>
-                </a>
+    <div class="container">
+        <div class="custom-section-title">
+            <h3 class="mb-2">Best Schools in <span><?php echo ucfirst($city) ?></span></h3>
+        </div>
+        <div class="home-tsw top-school-widget mab-50">
+            <div class="owl-two owl-carousel owl-theme">
+                <?php foreach($premium_data as $key=>$premium){ ?>
+                <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $premium['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$premium['schoolname']); ?>" target="_blank">
+                        <figure>
+                            <div class="package-name">Premium</div>
+                            <div class="object-fit">
+                                <?php if(!empty($premium['banner'])){ ?>
+                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $premium['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        <?php } else { ?>
+                                    <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                    <?php } ?>
+                            </div>
+                            <figcaption class="item-footer">
+                                <h6><?php echo ucfirst($premium['schoolname']) ?></h6>
+                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                            </figcaption>
+
+                        </figure>
+                    </a>
+                </div>
+                <?php } ?>
+                <?php foreach($spectrum_data as $spectrum){ ?>
+                    <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <a href="<?php echo base_url() ?>list-of-best-<?php echo $spectrum['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$spectrum['schoolname']); ?>" target="_blank">
+                            <figure>
+                                <div class="package-name">Spectrum</div>
+                                <div class="object-fit">
+                                <?php if(!empty($spectrum['banner'])){ ?>
+                                        <img src="<?php echo base_url() ?>laravel/public/<?php echo $spectrum['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                            <?php } else { ?>
+                                        <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        <?php } ?>
+                                </div>
+                                <figcaption class="item-footer">
+                                    <h6><?php echo ucfirst($spectrum['schoolname'])?></h6>
+                                    <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                <?php } ?>
             </div>
-            <?php } ?>
-            <?php foreach($spectrum_data as $spectrum){ ?>
-            <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
-                <a href="<?php echo base_url() ?>list-of-best-<?php echo $spectrum['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$spectrum['schoolname']); ?>" target="_blank">
-                    <figure>
-                        <div class="package-name">Spectrum</div>
-                        <div class="object-fit">
-                        <?php if(isset($premium['banner'])){ ?>
-                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $spectrum['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                    <?php } else { ?>
-                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                <?php } ?>
-                        </div>
-                        <figcaption class="item-footer">
-                            <h6><?php echo ucfirst($spectrum['schoolname'])?></h6>
-                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                        </figcaption>
-                    </figure>
-                </a>
-            </div>
-            <?php } ?>
         </div>
     </div>
-</div>
+    <?php } ?>
+   
+<?php if(!empty($activity_premium) || !empty($activity_spectrum)){ ?>
+    <div class="container">
+        <div class="custom-section-title">
+            <h3 class="mb-2">Best Activity Classes in <span><?php echo ucfirst($city) ?></span></h3>
+        </div>
+        <div class="home-tsw top-school-widget mab-50">
+            <div class="owl-two owl-carousel owl-theme">
+                <?php foreach($activity_premium as $premium){ ?>
+                <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                    <a href="#" target="_blank">
+                        <figure>
+                            <div class="package-name">Premium</div>
+                            <div class="object-fit">
+                                <?php if(!empty($premium['logo'])){ ?>
+                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $premium['logo'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        <?php } else { ?>
+                                    <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                    <?php } ?>
+                            </div>
+                            <figcaption class="item-footer">
+                                <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
+                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                            </figcaption>
+
+                        </figure>
+                    </a>
+                </div>
+                <?php } ?>
+                <?php foreach($activity_spectrum as $spectrum){ ?>
+                <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                    <a href="#" target="_blank">
+                        <figure>
+                            <div class="package-name">Spectrum</div>
+                            <div class="object-fit">
+                            <?php if(!empty($spectrum['logo'])){ ?>
+                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $spectrum['logo'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        <?php } else { ?>
+                                    <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                    <?php } ?>
+                            </div>
+                            <figcaption class="item-footer">
+                                <h6><?php echo ucfirst($spectrum['institute_name'])?></h6>
+                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 <div class="container">
     <div class="about-widget mab-50">
         <div class="row">

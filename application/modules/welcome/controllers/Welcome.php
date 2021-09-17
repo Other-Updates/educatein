@@ -86,6 +86,26 @@ class Welcome extends CI_Controller {
         $this->db->where('sd.school_category_id',3);
         $data['spectrum_data'] = $this->db->get()->result_array();
 
+        //platinum activity classes
+        $where = "is_active=1 AND position_id=1 AND city_id =" . $this->session->userdata('city_id') . " AND status =1 AND valitity IS NOT NULL AND deleted_at is NULL ";
+        $this->db->select('*');
+        $this->db->where($where);
+        $this->db->from('institute_details');
+        $data['activity_platinum'] = $this->db->get()->result_array();
+
+        //premium activity classes 
+        $where = "is_active=1 AND position_id=2 AND city_id =" . $this->session->userdata('city_id') . " AND status=1 AND valitity IS NOT NULL AND deleted_at is NULL ";
+        $this->db->select('*');
+        $this->db->where($where);
+        $this->db->from('institute_details');
+        $data['activity_premium'] = $this->db->get()->result_array();
+
+        //spectrum activity classes 
+        $where = "is_active=1 AND position_id=3 AND city_id =" . $this->session->userdata('city_id') . " AND status=1 AND valitity IS NOT NULL AND deleted_at is NULL ";
+        $this->db->select('*');
+        $this->db->where($where);
+        $this->db->from('institute_details');
+        $data['activity_spectrum'] = $this->db->get()->result_array();
 
         $this->load->view('welcome_message', $data);
     }

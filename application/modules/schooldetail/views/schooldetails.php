@@ -853,6 +853,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
 </script>
 
 <?php
+if(0){
 if ($category == 1) {
     $school_img = "is_active=1 AND  school_activity_id=2 AND school_id=" . $school_details->id . " AND deleted_at is NULL";
     $this->db->select('*')->where($school_img);
@@ -2804,6 +2805,7 @@ if ($category == 1) {
         </div><!-- /popular-schools -->
         <?php
     }
+}
 }
 ?>
 
