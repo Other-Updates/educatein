@@ -275,7 +275,7 @@
     <div class="custom-section-title">
         <h3 class="mb-2">Top Schools in <span><?php echo ucfirst($city) ?></span></h3>
     </div>
-    <div class="home-tsw top-school-widget mab-50">
+    <div class="home-tsw top-school-widget mab-30">
         <div class="owl-one owl-carousel owl-theme">
             <?php foreach($platinum_data as $key=>$platinum){ ?>
             <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
@@ -332,7 +332,7 @@
     </div>
 <?php } ?>
 <div class="container">
-    <div class="ads-school-widget mab-50">
+    <div class="ads-school-widget mab-30">
         <div class="row">
             <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
             <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
@@ -447,7 +447,7 @@
     </div>
 <?php } ?>
 <div class="container">
-    <div class="about-widget mab-50">
+    <div class="about-widget mab-30">
         <div class="row">
             <div class="col-md-5"><img src="<?php echo base_url() ?>assets/front/images/home-abouts-img.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" /></div>
             <div class="col-md-7">
@@ -461,7 +461,7 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div class="ads-school-widget-bottom mab-50">
+    <div class="ads-school-widget-bottom mab-30">
         <div class="row">
             <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
             <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
@@ -657,11 +657,36 @@ $ip = $_SERVER['REMOTE_ADDR'];
         });
     });
     $(document).ready(function () {
-        $(".owl-one").owlCarousel();
+        $(".owl-one").owlCarousel({
+            loop:true,
+            margin:10,
+            responsiveClass:true,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:3,
+                    nav:false
+                },
+                1000:{
+                    items:4,
+                    nav:true,
+                    loop:false
+                }
+            }
+        });
         $('.owl-two').owlCarousel({
             loop:true,
             margin:10,
             responsiveClass:true,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
             responsive:{
                 0:{
                     items:1,
