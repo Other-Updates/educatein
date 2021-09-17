@@ -182,18 +182,51 @@ $aff_name = strtolower($aff_name);
 // echo $aff_name;
 // exit();
 ?>
-<div class="breadrumb-new mab-50">
-    <div class="container-fluid" style="padding: 0 60px;">
+<div class="breadrumb-new mab-20">
+    <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-6 schoolist-search">
+                <div>
+                    <form action="<?php echo base_url() ?>schools-list" method="post">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <?php if ($aff_url != "") { ?>
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?> <i class="fa fa-angle-down"></i>  </button>
+                                <?php } else { ?>
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
+                                <?php } ?> 
+                                <div class="dropdown-menu">
+                                    <ul class="list-inline">
+                                        <?php
+                                        foreach ($allcity as $allcitys) {
+                                            $lowercity = strtolower($allcitys->city_name);
+                                            ?>
+
+                                            <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div><!-- /dropdown-menu -->
+                            </div>
+                            <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <?php if ($aff_url != "") { ?>
+                                <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
+                            <?php } else { ?>
+                                <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
+                            <?php } ?>
+                            <!-- <div id="map"></div> -->
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>
+                            </div>
+                        </div><!-- /input-group -->
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 text-right">
                 <ul class="list-inline">
                     <li class="list-inline-item"><a href="<?php echo base_url() ?>">Home</a></li>
                     <li class="list-inline-item"><i class="fa fa-angle-right"></i></li>
                     <li class="list-inline-item"><?php echo $affiliations->affiliation_name; ?> Schools</li>
                 </ul>
-            </div>
-            <div class="col-lg-6 col-sm-12 text-right">
-                <p>Find the Right School with us!</p>
             </div>
         </div><!-- /row -->
     </div><!-- /container -->
@@ -293,7 +326,7 @@ $aff_name = strtolower($aff_name);
     }
 </style>
 <div class="sidebar-section">
-    <div class="container-fluid" style="padding-left: 60px;padding-right: 60px;">
+    <div class="container">
         <div class="sidebar">
             <div id="sticky">
                 <div class="sidebar-categories">
@@ -308,7 +341,7 @@ $aff_name = strtolower($aff_name);
                             }
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $yourcity; ?>" id="<?php echo $row->id; ?>"><i class="fa fa-angle-right"></i> <?php echo $affiliation_name1; ?> Schools</a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $yourcity; ?>" id="<?php echo $row->id; ?>"><i class="fa fa-circle"></i> <?php echo $affiliation_name1; ?> Schools</a>
                             </li>
                         <?php } ?>
                         <!-- /School Categories -->
@@ -322,7 +355,7 @@ $aff_name = strtolower($aff_name);
                             $category_name = strtolower($category_name);
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-<?php echo $yourcity; ?>" id="<?php echo $row1->id; ?>"><i class="fa fa-angle-right"></i> <?php echo $category_name1; ?></a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-<?php echo $yourcity; ?>" id="<?php echo $row1->id; ?>"><i class="fa fa-circle"></i> <?php echo $category_name1; ?></a>
                             </li>
                         <?php } // $aff_name = ucwords($affiliations->affiliation_name);  ?>
                     </ul>
@@ -331,7 +364,7 @@ $aff_name = strtolower($aff_name);
         </div><!-- /sidebar -->
 
         <div id="main">
-            <div class="custom-section-title mab-30">
+            <div class="custom-section-title mab-30 dnone">
                 <h3 class="mb-2">Exclusive Schools</h3>
             </div><!-- /section-title -->
             <?php
@@ -381,7 +414,7 @@ $aff_name = strtolower($aff_name);
                 $school_name = str_replace(" ", "-", $best->school_name);
                 ?>
                 <!-- <a href="<?php echo base_url() ?>list-of-best-<?php echo $affili_name ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank"> -->
-                    <div class="cbse-school-widget mab-50">
+                    <div class="cbse-school-widget mab-50 dnone">
                         <figure class="figure wow fadeInUp">
 
                             <div class="cbse-school-widget-imgbox" style="width: 100%;height: 400px;overflow: hidden;">
@@ -389,7 +422,7 @@ $aff_name = strtolower($aff_name);
                                 <!-- <img src="<?php echo base_url() ?>laravel/public/<?php echo $best->logo ?>" class="rounded" alt="" style="width: 100%;height: 400px;object-fit: cover;">	 -->
                             <?php //} else { ?>
                                 <?php if($aff_name == "cbse"){ ?>
-                                <img src="<?php echo base_url() ?>images/thirdcbse-banner.jpg" style="width: 100%;height: 600px;object-fit: cover;" class="w-100" alt="" />
+                                <img src="<?php echo base_url() ?>images/cbse-banner.jpg" style="width: 100%;height: 600px;object-fit: cover;" class="w-100" alt="" />
                             <?php }else if($aff_name == "international") { ?>    
                                 <img src="<?php echo base_url() ?>images/thirdinter-banner.jpg" style="width: 100%;height: 700px;object-fit: cover;" class="w-100" alt="" />
                                 <?php }else if($aff_name == "matriculation") { ?>    
@@ -487,8 +520,8 @@ $aff_name = strtolower($aff_name);
 
             <?php if(isset($topschool)){ ?>
                 <div class="top-school-widget ">
-                    <div class="custom-section-title mab-30">
-                        <h3 class="mb-2">Top Schools in <?php echo $yourcity; ?></h3>
+                    <div class="custom-section-title mab-10">
+                        <h3 class="mb-2">Top Schools in <span><?php echo $yourcity; ?></span></h3>
                     </div><!-- /section-title -->
                     <div class="owl-carousel owl-theme">
                         <?php
@@ -515,7 +548,7 @@ $aff_name = strtolower($aff_name);
                                     // exit();
                                     ?>
                                     
-                        <div class="home-tsw top-school-widget mab-50">
+                        <div class="home-tsw top-school-widget mab-10">
                             <!-- <div class="owl-one owl-carousel owl-theme"> -->
                                 <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
                                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
@@ -572,9 +605,9 @@ $aff_name = strtolower($aff_name);
             // $school_name = str_replace(" ", "-", $school_premium[0]['school_name']);
             ?>
 
-            <div class="third-cat mab-50 home-tsw top-school-widget mab-50">
+            <div class="third-cat mab-50 home-tsw top-school-widget mab-10">
                 <div class="custom-section-title mab-30">
-                    <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <?php echo $yourcity; ?></h3>
+                    <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <span><?php echo $yourcity; ?></span></h3>
                 </div>
                 <div class="row equal">
                     <?php foreach($school_premium as $premium){ ?>
@@ -634,7 +667,7 @@ $aff_name = strtolower($aff_name);
                             <span class="wow fadeInLeft" data-wow-delay="700ms">CBSE curriculum is growing forward based on application skills, they study concept and methodology in syllabus. This helps to students apply those concepts in various contexts. Other than all India board exam, the cbse required basic general knowledge for moving to forward in education. The main <h3>benefit of cbse board</h3> is to transferrable working parents across India and easy facing of competitive exams.</span>
                             <br><br>
 
-                            <span>While choosing the <h3>best CBSE School</h3> is not taken an easy. Parent’s way of thinking is different such as faculty, sports and co-curricular activities and value for money. CBSE would be better choice for long term development.</span>
+                            <span class="wow fadeInLeft" data-wow-delay="900ms">While choosing the <h3>best CBSE School</h3> is not taken an easy. Parent’s way of thinking is different such as faculty, sports and co-curricular activities and value for money. CBSE would be better choice for long term development.</span>
                         </div>
 
                     <?php } elseif ($aff_url == "international") { ?>
@@ -871,7 +904,29 @@ $ip = $_SERVER['REMOTE_ADDR'];
 
     // Slider-carousel
     $(document).ready(function () {
-        $(".owl-carousel").owlCarousel();
+        $(".owl-carousel").owlCarousel({
+            loop:true,
+            margin:10,
+            responsiveClass:true,
+            autoplay:true,
+            autoplayTimeout:3000,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:2,
+                    nav:false
+                },
+                1000:{
+                    items:3,
+                    nav:true,
+                    loop:false
+                }
+            }
+        });
     });
 
     // Wow animation trigger

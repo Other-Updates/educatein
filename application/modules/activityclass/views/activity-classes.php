@@ -253,18 +253,51 @@ if ($aff_url == "dance-class") {
     <?php
 }
 ?>
-<div class="breadrumb-new mab-50">
-    <div class="container-fluid" style="padding: 0 60px;">
+<div class="breadrumb-new mab-20">
+    <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-sm-6">
+            <div class="col-lg-6 col-sm-6 schoolist-search">
+                <div>
+                    <form action="<?php echo base_url() ?>schools-list" method="post">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <?php if ($aff_url != "") { ?>
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?> <i class="fa fa-angle-down"></i>  </button>
+                                <?php } else { ?>
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
+                                <?php } ?> 
+                                <div class="dropdown-menu">
+                                    <ul class="list-inline">
+                                        <?php
+                                        foreach ($allcity as $allcitys) {
+                                            $lowercity = strtolower($allcitys->city_name);
+                                            ?>
+
+                                            <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div><!-- /dropdown-menu -->
+                            </div>
+                            <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <?php if ($aff_url != "") { ?>
+                                <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
+                            <?php } else { ?>
+                                <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
+                            <?php } ?>
+                            <!-- <div id="map"></div> -->
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>
+                            </div>
+                        </div><!-- /input-group -->
+                    </form>
+                </div>               
+            </div>
+            <div class="col-lg-6 col-sm-6 text-right">
                 <ul class="list-inline">
                     <li class="list-inline-item"><a href="<?php echo base_url() ?>">Home</a></li>
                     <li class="list-inline-item"><i class="fa fa-angle-right"></i></li>
                     <li class="list-inline-item">Dance Classes</li>
                 </ul>
-            </div>
-            <div class="col-lg-6 col-sm-6 text-right">
-                <p>Find the Right School with us!</p>
             </div>
         </div><!-- /row -->
     </div><!-- /container -->
@@ -277,7 +310,7 @@ if ($aff_url == "dance-class") {
 </div> -->
 <!-- /summercamp-popup -->
 <div class="sidebar-section">
-    <div class="container-fluid" style="padding-left: 60px;padding-right: 60px;">
+    <div class="container">
         <div class="sidebar">
             <div id="sticky">
                 <div class="sidebar-categories">
@@ -292,7 +325,7 @@ if ($aff_url == "dance-class") {
                             }
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $yourcity; ?>" id="<?php echo $row->id; ?>"><i class="fa fa-angle-right"></i> <?php echo $affiliation_name1; ?> Schools</a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $yourcity; ?>" id="<?php echo $row->id; ?>"><i class="fa fa-circle"></i> <?php echo $affiliation_name1; ?> Schools</a>
                             </li>
                         <?php } ?>
                         <!-- /School Categories -->
@@ -306,7 +339,7 @@ if ($aff_url == "dance-class") {
                             $category_name = strtolower($category_name);
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-<?php echo $yourcity; ?>" id="<?php echo $row1->id; ?>"><i class="fa fa-angle-right"></i> <?php echo $category_name1; ?></a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-<?php echo $yourcity; ?>" id="<?php echo $row1->id; ?>"><i class="fa fa-circle"></i> <?php echo $category_name1; ?></a>
                             </li>  
                         <?php } ?>
                     </ul>
@@ -339,7 +372,7 @@ if ($aff_url == "dance-class") {
         $aff_name = ucwords($affiliations->category_name);
         ?>
         <div id="main">
-            <div class="section-title mab-30">
+            <div class="section-title mab-30 dnone">
                 <div class="bubbles">
                     <h1 class="display-4">Exclusive <?php echo $aff_name; ?></h1>
                 </div><hr>
@@ -424,7 +457,7 @@ if ($aff_url == "dance-class") {
             } 
             // else {
                 ?>
-                <div class="cbse-school-widget mab-50">
+                <div class="cbse-school-widget mab-50 dnone">
                     <a href="<?php echo base_url() ?>signupschool" target="_blank">
                         <figure class="figure wow fadeInUp">
                             <div class="object-cover" style="width: 100%;height: 400px;overflow: hidden;">
@@ -453,8 +486,8 @@ if ($aff_url == "dance-class") {
 
 
             <div class="top-school-widget ">    
-                <div class="custom-section-title mab-30">
-                <h2 class="mb-3">Top <?php echo $aff_name; ?> in <?php echo $yourcity; ?></h2>
+                <div class="custom-section-title mab-10">
+                <h3 class="mb-3">Top <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
                 </div><!-- /section-title -->
                 <div class="owl-carousel owl-theme">
                     <?php
@@ -480,7 +513,7 @@ if ($aff_url == "dance-class") {
                                 // exit();
                                 ?>
                                 
-                    <div class="home-tsw top-school-widget mab-50">
+                    <div class="home-tsw top-school-widget mab-20">
                         <!-- <div class="owl-one owl-carousel owl-theme"> -->
                             <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
                                 <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
@@ -579,6 +612,7 @@ if ($aff_url == "dance-class") {
                         <!-- </div> -->
                     <?php } ?>
                 <div>
+            </div>
         </div><!-- /main -->
     </div><!-- /container-fluid -->
 </div><!-- /sidebar-section -->
@@ -834,6 +868,31 @@ $ip = $_SERVER['REMOTE_ADDR'];
                 }
             });
         }
+    });
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+            loop:true,
+            margin:10,
+            responsiveClass:true,
+            autoplay:true,
+            autoplayTimeout:3000,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:2,
+                    nav:false
+                },
+                1000:{
+                    items:3,
+                    nav:true,
+                    loop:false
+                }
+            }
+        });
     });
 
 </script>
