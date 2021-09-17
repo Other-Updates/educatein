@@ -485,7 +485,7 @@ if ($aff_url == "dance-class") {
 
 
 
-            <div class="top-school-widget ">    
+            <div class="top-school-widget mab-20">    
                 <div class="custom-section-title mab-10">
                 <h3 class="mb-3">Top <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
                 </div><!-- /section-title -->
@@ -568,7 +568,7 @@ if ($aff_url == "dance-class") {
             $this->db->from('institute_details');
             $school_spectrum = $this->db->get()->result_array();
             ?>
-            <div class="third-cat mab-50 home-tsw top-school-widget mab-50">
+            <div class="third-cat mab-50 home-tsw top-school-widget mab-20">
                 <div class="custom-section-title mab-30">
                     <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <?php echo $yourcity; ?></h3>
                 </div>
