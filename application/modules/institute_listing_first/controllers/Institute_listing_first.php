@@ -153,6 +153,7 @@ class Institute_listing_first extends CI_Controller {
             'specials' => $_POST['special'],
             'website_url' => $_POST['website'],
             'timings' => $_POST['timing'],
+            'map_url' => $_POST['map_url'],
             'logo' => $banner1_name,
             'news_image' => $newsbanner1_name,
             'activated_at' => date('Y-m-d H:i:s'),

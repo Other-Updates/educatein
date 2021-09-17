@@ -162,7 +162,7 @@ $about_img = $this->db->get()->result_array();
 <div class="dashboard-content">
     <div class="container-fluid1">
         <div class="section-title mb-2">
-            <h1><?php echo $school[0]["school_name"]; ?>
+            <h1><?php echo ucfirst($school[0]["school_name"]); ?>
             <!-- <span>(Platinum Package)</span></h1> -->
             <div class="status-btn">
                 <?php if(empty($school[0]['status'])){ ?>

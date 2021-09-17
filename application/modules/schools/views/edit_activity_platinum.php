@@ -24,7 +24,7 @@ $user = $this->db->get()->result_array();
 <div class="dashboard-content">
     <div class="container-fluid">
         <div class="section-title mb-3">
-            <h1><?php echo $institute[0]['institute_name']; ?>
+            <h1><?php echo ucfirst($institute[0]['institute_name']); ?>
             <!-- <span>(Platinum Package)</span></h1>             -->
             <div class="status-btn">
                 <?php if(empty($institute[0]['status'])){ ?>
@@ -429,6 +429,12 @@ $user = $this->db->get()->result_array();
                         <div class="form-group">
                             <label for="address">Address</label>
                             <textarea class="form-control" id="address" name="address" rows="1" placeholder="e.g Enter your address" style="height: 80px;" ><?php echo $institute[0]['address']; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="text" class="form-control" id="map_url" style="width:650px" name="map_url" value="<?php echo $institute[0]['map_url']; ?>" placeholder="e.g www.yourwebsite.com" >
                         </div>
                     </div>
                 </div><!-- /form-row -->

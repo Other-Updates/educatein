@@ -271,35 +271,37 @@
         </div><!-- /schools-section -->
     </div>
 </div>   
-<div class="container">
-    <div class="custom-section-title">
-        <h3 class="mb-2">Top Schools in <span><?php echo ucfirst($city) ?></span></h3>
-    </div>
-    <div class="home-tsw top-school-widget mab-30">
-        <div class="owl-one owl-carousel owl-theme">
-            <?php foreach($platinum_data as $key=>$platinum){ ?>
-            <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
-                <a href="<?php echo base_url() ?>list-of-best-<?php echo $platinum['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$platinum['schoolname']); ?>" target="_blank">
-                    <figure>
-                        <div class="package-name">Platinum</div>
-                        <div class="object-fit">
-                            <?php if(!empty($platinum['banner'])){ ?>
-                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $platinum['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                <?php } else { ?>
-                            <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                            <?php } ?>
-                        </div>
-                        <figcaption class="item-footer">
-                            <h6><?php echo ucfirst($platinum['schoolname']) ?></h6>
-                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                        </figcaption>
-                    </figure>
-                </a>
+<?php if(!empty($platinum_data)){ ?>
+    <div class="container">
+        <div class="custom-section-title">
+            <h3 class="mb-2">Top Schools in <span><?php echo ucfirst($city) ?></span></h3>
+        </div>
+        <div class="home-tsw top-school-widget mab-30">
+            <div class="owl-one owl-carousel owl-theme">
+                <?php foreach($platinum_data as $key=>$platinum){ ?>
+                <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $platinum['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$platinum['schoolname']); ?>" target="_blank">
+                        <figure>
+                            <div class="package-name">Platinum</div>
+                            <div class="object-fit">
+                                <?php if(!empty($platinum['banner'])){ ?>
+                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $platinum['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                    <?php } else { ?>
+                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                <?php } ?>
+                            </div>
+                            <figcaption class="item-footer">
+                                <h6><?php echo ucfirst($platinum['schoolname']) ?></h6>
+                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+                <?php } ?>
             </div>
-            <?php } ?>
         </div>
     </div>
-</div>
+<?php } ?>
 <?php if(!empty($activity_platinum)){ ?>
     <div class="container">
         <div class="custom-section-title">
@@ -307,9 +309,12 @@
         </div>
         <div class="home-tsw top-school-widget mab-50">
             <div class="owl-one owl-carousel owl-theme">
-                <?php foreach($activity_platinum as $platinum){ ?>
+                <?php foreach($activity_platinum as $platinum){ 
+                $type = str_replace(" ","-",$platinum['type']);
+                $type = strtolower($type);
+                ?>
                 <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
-                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $aff_name1; ?>-in-<?php echo $yourcity; ?>/<?php echo $platinum['institute_name']; ?>" target="_blank">
+                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$platinum['institute_name']); ?>" target="_blank">
                         <figure>
                             <div class="package-name">Platinum</div>
                             <div class="object-fit">
@@ -340,7 +345,7 @@
         </div>
     </div>
 </div>
-<?php if(isset($premium_data) || isset($spectrum_data)){ ?>
+<?php if(!empty($premium_data) || !empty($spectrum_data)){ ?>
 
     <div class="container">
         <div class="custom-section-title">
@@ -401,9 +406,12 @@
         </div>
         <div class="home-tsw top-school-widget mab-50">
             <div class="owl-two owl-carousel owl-theme">
-                <?php foreach($activity_premium as $premium){ ?>
+                <?php foreach($activity_premium as $premium){ 
+                $type = str_replace(" ","-",$platinum['type']);
+                $type = strtolower($type);    
+                ?>
                 <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
                         <figure>
                             <div class="package-name">Premium</div>
                             <div class="object-fit">

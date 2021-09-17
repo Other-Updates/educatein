@@ -2372,6 +2372,7 @@ class admin extends CI_Controller {
             'timings' => $_POST['timing'],
             'logo' => $banner1_name,
             'news_image' => $newsbanner1_name,
+            'map_url' => $_POST['map_url'],
             // 'activated_at' => date('Y-m-d H:i:s'),/
             'is_active' => 1,
             // 'valitity'=>100

@@ -348,6 +348,12 @@ foreach ($user->result() as $users) {
                             <textarea class="form-control" id="address" name="address" rows="1" placeholder="e.g Enter your address" style="height: 80px;" ></textarea>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-group">
+                            <label for="map_url">Map</label>
+                            <input type="text" class="form-control" id="map_url" style="width:650px" name="map_url" placeholder="google.maps" >
+                        </div>
+                    </div>
                 </div><!-- /form-row -->
                 <button type="submit" class="btn btn-primary btn-save" id="formsubmit">SUBMIT</button>
             </form>

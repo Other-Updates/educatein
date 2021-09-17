@@ -31,7 +31,7 @@ $school_id = $institute[0]['id'];
 <div class="dashboard-content">
     <div class="container-fluid">
         <div class="section-title mb-3">
-            <h1><?php echo $institute[0]['institute_name']; ?>
+            <h1><?php echo ucfirst($institute[0]['institute_name']); ?>
             <!-- <span>(Platinum Package)</span></h1>   -->
             <div class="status-btn">
                 <?php if(empty($institute[0]['status'])){ ?>

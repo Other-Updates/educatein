@@ -88,7 +88,7 @@ class Welcome extends CI_Controller {
 
         //platinum activity classes
         $where = "in.is_active=1 AND in.position_id=1 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
-        $this->db->select('in.*,ic.category_name');
+        $this->db->select('in.*,ic.category_name as type');
         $this->db->where($where);
         $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
         $this->db->from('institute_details as in');
@@ -96,7 +96,7 @@ class Welcome extends CI_Controller {
 
         //premium activity classes 
         $where = "in.is_active=1 AND in.position_id=2 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
-        $this->db->select('in.*,ic.category_name');
+        $this->db->select('in.*,ic.category_name as type');
         $this->db->where($where);
         $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
         $this->db->from('institute_details as in');
@@ -104,7 +104,7 @@ class Welcome extends CI_Controller {
 
         //spectrum activity classes 
         $where = "in.is_active=1 AND in.position_id=3 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
-        $this->db->select('in.*,ic.category_name');
+        $this->db->select('in.*,ic.category_name as type');
         $this->db->where($where);
         $this->db->from('institute_details as in');
         $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
