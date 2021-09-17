@@ -3030,3 +3030,6 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 .pl-0-web {
 	padding-left: 0;
 }
+.home-search-widget .form-control {
+	border: 0;
+}
