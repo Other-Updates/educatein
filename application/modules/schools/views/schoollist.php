@@ -516,9 +516,25 @@ $aff_name = strtolower($aff_name);
             $topschool = $this->db->get();
             // echo $topschool->num_rows();
             // exit();
-            ?>
+           
+            $where2 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=2 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
+            $this->db->select('*')->where($where2);
+            $this->db->order_by('rand()');
+            $this->db->from('school_details');
+            $school_premium = $this->db->get()->result_array();
+            
+            // print_r($this->db->last_query());exit;
 
-            <?php if(isset($topschool)){ ?>
+            $where3 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=3 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
+            $this->db->select('*')->where($where3);
+            $this->db->order_by('rand()');
+            $this->db->from('school_details');
+            $school_spectrum = $this->db->get()->result_array();
+
+            // $school_name = str_replace(" ", "-", $school_premium[0]['school_name']);
+            ?>
+        <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum)){ ?>
+            <?php if($topschool->num_rows() != 0){ ?>
                 <div class="top-school-widget mab-20">
                     <div class="custom-section-title mab-10">
                         <h3 class="mb-2">Top Schools in <span><?php echo $yourcity; ?></span></h3>
@@ -587,68 +603,55 @@ $aff_name = strtolower($aff_name);
                     </div><!-- /owl-carousel -->
                 </div><!-- /top-school-widget -->
             <?php } ?>
-            <?php
-            $where2 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=2 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
-            $this->db->select('*')->where($where2);
-            $this->db->order_by('rand()');
-            $this->db->from('school_details');
-            $school_premium = $this->db->get()->result_array();
-            
-            // print_r($this->db->last_query());exit;
-
-            $where3 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=3 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
-            $this->db->select('*')->where($where3);
-            $this->db->order_by('rand()');
-            $this->db->from('school_details');
-            $school_spectrum = $this->db->get()->result_array();
-
-            // $school_name = str_replace(" ", "-", $school_premium[0]['school_name']);
-            ?>
-
-            <div class="third-cat mab-50 home-tsw top-school-widget mab-10">
-                <div class="custom-section-title mab-30">
-                    <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <span><?php echo $yourcity; ?></span></h3>
-                </div>
-                <div class="row equal">
-                    <?php foreach($school_premium as $premium){ ?>
+            <?php if(!empty($school_premium) || !empty($school_spectrum)){ ?>
+                <div class="third-cat mab-50 home-tsw top-school-widget mab-10">
+                    <div class="custom-section-title mab-30">
+                        <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <span><?php echo $yourcity; ?></span></h3>
+                    </div>
+                    <div class="row equal">
+                        <?php foreach($school_premium as $premium){ ?>
+                            <div class="col-md-3">
+                                <div class="schoolist-inner premium">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['school_name']); ?>" target="_blank">
+                                        <figure>
+                                            <div class="package-name">Premium</div>
+                                            <div class="object-fit">
+                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
+                                            </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($premium['school_name']) ?></h6>
+                                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <?php foreach($school_spectrum as $spectrum){ ?>
                         <div class="col-md-3">
-                            <div class="schoolist-inner premium">
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['school_name']); ?>" target="_blank">
+                            <div class="schoolist-inner spectrum">
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['school_name']); ?>" target="_blank">
                                     <figure>
-                                        <div class="package-name">Premium</div>
+                                        <div class="package-name">Spectrum</div>
                                         <div class="object-fit">
                                             <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
                                         </div>
                                         <figcaption class="item-footer">
-                                            <h6><?php echo ucfirst($premium['school_name']) ?></h6>
+                                            <h6><?php echo ucfirst($spectrum['school_name']) ?></h6>
                                             <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
                                         </figcaption>
                                     </figure>
                                 </a>
                             </div>
                         </div>
-                    <?php } ?>
-                    <?php foreach($school_spectrum as $spectrum){ ?>
-                    <div class="col-md-3">
-                        <div class="schoolist-inner spectrum">
-                            <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['school_name']); ?>" target="_blank">
-                                <figure>
-                                    <div class="package-name">Spectrum</div>
-                                    <div class="object-fit">
-                                        <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
-                                    </div>
-                                    <figcaption class="item-footer">
-                                        <h6><?php echo ucfirst($spectrum['school_name']) ?></h6>
-                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                        </div>
+                        <?php } ?>
+                        
                     </div>
-                    <?php } ?>
-                    
                 </div>
-            </div>
+            <?php } ?>
+        <?php }else{ ?>
+            No Record Found
+            <?php } ?>
         </div>
     </div>
 </div>

@@ -3706,6 +3706,11 @@ class admin extends CI_Controller {
                 $act_date = null;
             }
 
+            if($_POST['position_id'] == 4){
+                $validity = 30;
+            }else{
+                $validity = 100;
+            }
             $schoolinsert = array(
                 'category_id' => $category_id,
                 'position_id' => $_POST['position_id'],
@@ -3730,7 +3735,7 @@ class admin extends CI_Controller {
                 'news_image' => $newsbanner1_name,
                 'activated_at' => $act_date,
                 'is_active' => 1,
-                // 'valitity'=>100
+                'valitity'=> $validity,
             );
 
             $this->db->insert('institute_details', $schoolinsert);

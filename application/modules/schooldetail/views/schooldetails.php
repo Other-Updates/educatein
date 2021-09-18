@@ -237,7 +237,11 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             <div class="esd-banner-details-btn">
                                 <button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
                                 <button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button>
-                                <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
+                                <?php if(!empty($school_details->ad)){ ?>
+                                    <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
+                                <?php }else{ ?>
+                                    <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open now</button>
+                                <?php } ?>
                                 <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="modal" data-target="#exampleModalCenter" data-wow-delay="1000ms">
                                     Admission Enquiry
                                 </button>

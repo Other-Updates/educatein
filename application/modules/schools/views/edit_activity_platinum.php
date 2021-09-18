@@ -390,7 +390,7 @@ $user = $this->db->get()->result_array();
                         <div class="col-lg-2 col-sm-6">
                             <div class="form-group">
                                 <label for="newsadd" style="visibility:;">News Heading</label>
-                                <a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add</a>
+                                <a class="btn btn-primary addmore-show2 btn-block" style="margin-left:1050px;" id="newsadd">Add</a>
                             </div>
                         </div>
                     </div>

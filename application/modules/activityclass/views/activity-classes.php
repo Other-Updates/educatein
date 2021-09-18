@@ -296,7 +296,7 @@ if ($aff_url == "dance-class") {
                 <ul class="list-inline">
                     <li class="list-inline-item"><a href="<?php echo base_url() ?>">Home</a></li>
                     <li class="list-inline-item"><i class="fa fa-angle-right"></i></li>
-                    <li class="list-inline-item">Dance Classes</li>
+                    <li class="list-inline-item"><?php echo ucwords($aff_url) ?></li>
                 </ul>
             </div>
         </div><!-- /row -->
@@ -469,7 +469,7 @@ if ($aff_url == "dance-class") {
 
                 <?php
             // }
-            $where1 = "is_active=1 AND position_id=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
+            $where1 = "is_active=1 AND position_id=1 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
             $this->db->select('*')->where($where1);
             $this->db->order_by('rand()');
             $this->db->from('institute_details');
@@ -481,138 +481,150 @@ if ($aff_url == "dance-class") {
             } else {
                 $restriction = $topschool->num_rows();
             }
-            ?>
 
-
-
-            <div class="top-school-widget mab-20">    
-                <div class="custom-section-title mab-10">
-                <h3 class="mb-3">Top <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
-                </div><!-- /section-title -->
-                <div class="owl-carousel owl-theme">
-                    <?php
-                    $delay = 4;
-                    $topcount = 0;
-                    if ($topschool->num_rows() > 0) {
-                        foreach ($topschool->result() as $top) {
-                            
-                            if ($topcount < 5) {
-                                // $this->db->select('*')->where('id =', $top->area_id);
-                                // $this->db->from('areas');
-                                // $area = $this->db->get();
-                                // foreach ($area->result() as $areas) {
-                                //     //echo $areas->area_name;
-                                //     //exit();
-                                // }
-
-                                $school_name = str_replace(" ", "-", $top->institute_name);
-                                $affname_url = strtolower($aff_name);
-                                $affname_url = str_replace(" ", "-", $affname_url);
-                                // echo $affname_url;
-                                // print_r($affname_url);exit;
-                                // exit();
-                                ?>
-                                
-                    <div class="home-tsw top-school-widget mab-20">
-                        <!-- <div class="owl-one owl-carousel owl-theme"> -->
-                            <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
-                                    <figure>
-                                        <div class="package-name">Platinum</div>
-                                        <div class="object-fit">
-                                            <?php if(isset($top->logo)){ ?>
-                                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                                <?php } else { ?>
-                                            <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
-                                            <?php } ?>
-                                        </div>
-                                        <figcaption class="item-footer">
-                                            <h6><?php echo ucfirst($top->institute_name) ?></h6>
-                                            <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
-                                        </figcaption>
-                                    </figure>
-                                </a>
-                            </div>
-                        <!-- </div> -->
-                    </div>
-
-
-
-
-                                    <?php
-                                
-
-                                $delay++;
-                                $topcount++;
-                            }
-                        }
-                    }
-
-                    ?>						
-                </div><!-- /owl-carousel -->
-            </div><!-- /top-school-widget -->
-
-            
-            <?php
             // echo $topcount;
             // exit();
-            $where2 = "is_active=1 AND position_id=2 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
+            $where2 = "is_active=1 AND position_id=2 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
             $this->db->select('*')->where($where2);
             $this->db->order_by('rand()');
             $this->db->from('institute_details');
             $school_premium = $this->db->get()->result_array();
 
-            $where2 = "is_active=1 AND position_id=3 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
+            $where2 = "is_active=1 AND position_id=3 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
             $this->db->select('*')->where($where2);
             $this->db->order_by('rand()');
             $this->db->from('institute_details');
             $school_spectrum = $this->db->get()->result_array();
+            // print_r($school_spectrum);exit;
             ?>
-            <div class="third-cat mab-50 home-tsw top-school-widget mab-20">
-                <div class="custom-section-title mab-30">
-                    <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <?php echo $yourcity; ?></h3>
+
+        <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum)){ ?>
+            <?php if($topschool->num_rows() != 0 ){ ?>
+                <div class="top-school-widget mab-20">    
+                    <div class="custom-section-title mab-10">
+                    <h3 class="mb-3">Top <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
+                    </div><!-- /section-title -->
+                    <div class="owl-carousel owl-theme">
+                        <?php
+                        $delay = 4;
+                        $topcount = 0;
+                        if ($topschool->num_rows() > 0) {
+                            foreach ($topschool->result() as $top) {
+                                
+                                if ($topcount < 5) {
+                                    // $this->db->select('*')->where('id =', $top->area_id);
+                                    // $this->db->from('areas');
+                                    // $area = $this->db->get();
+                                    // foreach ($area->result() as $areas) {
+                                    //     //echo $areas->area_name;
+                                    //     //exit();
+                                    // }
+
+                                    $school_name = str_replace(" ", "-", $top->institute_name);
+                                    $affname_url = strtolower($aff_name);
+                                    $affname_url = str_replace(" ", "-", $affname_url);
+                                    // echo $affname_url;
+                                    // print_r($affname_url);exit;
+                                    // exit();
+                                    ?>
+                                    
+                        <div class="home-tsw top-school-widget mab-20">
+                            <!-- <div class="owl-one owl-carousel owl-theme"> -->
+                                <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
+                                        <figure>
+                                            <div class="package-name">Platinum</div>
+                                            <div class="object-fit">
+                                                <?php if(isset($top->logo)){ ?>
+                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                    <?php } else { ?>
+                                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                <?php } ?>
+                                            </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($top->institute_name) ?></h6>
+                                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+
+
+
+
+                                        <?php
+                                    
+
+                                    $delay++;
+                                    $topcount++;
+                                }
+                            }
+                        }
+
+                        ?>						
+                    </div><!-- /owl-carousel -->
+                </div><!-- /top-school-widget -->
+            <?php } ?>
+            <?php if(!empty($school_premium) || !empty($school_spectrum)){ ?>
+                <div class="third-cat mab-50 home-tsw top-school-widget mab-20">
+                    <div class="custom-section-title mab-30">
+                        <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <?php echo $yourcity; ?></h3>
+                    </div>
+                    <div class="row equal">
+                        <?php foreach($school_premium as $premium){
+                        
+                        $class = strtolower($aff_name);
+                        $class = str_replace(" ","-",$class);
+                        
+                        ?>
+                            <div class="col-md-3">
+                                <div class="schoolist-inner premium">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $class ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
+                                        <figure>
+                                            <div class="package-name">Premium</div>
+                                            <div class="object-fit">
+                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
+                                            </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
+                                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        <?php } ?>
+                        <?php foreach($school_spectrum as $premium){ 
+                            $class = strtolower($aff_name);
+                            $class = str_replace(" ","-",$class);
+                            ?>
+                            <div class="col-md-3">
+                                <div class="schoolist-inner spectrum">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $class ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
+                                        <figure>
+                                            <div class="package-name">Spectrum</div>
+                                            <div class="object-fit">
+                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $yourcity ?>">
+                                            </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
+                                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        <?php } ?>
+                    <div>
                 </div>
-                <div class="row equal">
-                    <?php foreach($school_premium as $premium){ ?>
-                        <div class="col-md-3">
-                            <div class="schoolist-inner premium">
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
-                                    <figure>
-                                        <div class="package-name">Premium</div>
-                                        <div class="object-fit">
-                                            <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
-                                        </div>
-                                        <figcaption class="item-footer">
-                                            <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
-                                            <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
-                                        </figcaption>
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- </div> -->
-                    <?php } ?>
-                    <?php foreach($school_spectrum as $premium){ ?>
-                        <div class="col-md-3">
-                            <div class="schoolist-inner spectrum">
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
-                                    <figure>
-                                        <div class="package-name">Spectrum</div>
-                                        <div class="object-fit">
-                                            <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $yourcity ?>">
-                                        </div>
-                                        <figcaption class="item-footer">
-                                            <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
-                                            <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
-                                        </figcaption>
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- </div> -->
-                    <?php } ?>
-                <div>
-            </div>
+                <?php } ?>
+                <?php }else{ ?>
+                    No record found
+                <?php } ?>
         </div><!-- /main -->
     </div><!-- /container-fluid -->
 </div><!-- /sidebar-section -->

@@ -432,7 +432,7 @@
                 <?php } ?>
                 <?php foreach($activity_spectrum as $spectrum){ ?>
                 <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
-                    <a href="#" target="_blank">
+                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$spectrum['institute_name']); ?>" target="_blank">
                         <figure>
                             <div class="package-name">Spectrum</div>
                             <div class="object-fit">
