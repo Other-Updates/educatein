@@ -66,6 +66,10 @@ class Search extends CI_Controller {
 
         $data["search"] = "Schools in " . ucfirst($session["search_city"]);
 
+        $this->db->select('*')->where('is_active =', 1);
+        $this->db->order_by("city_name", "asc");
+        $this->db->from('cities');
+        $data['allcity'] = $this->db->get()->result();
 
         $this->load->view('search-list', $data);
     }
