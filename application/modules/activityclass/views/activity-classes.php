@@ -142,6 +142,10 @@ foreach ($city->result() as $cities) {
     $aff_url = str_replace("-in-" . $urlcity, "", $aff_url);
 }
 
+$this->db->select('*')->where('is_active =', 1);
+$this->db->order_by("city_name", "asc");
+$this->db->from('cities');
+$allcity = $this->db->get()->result();
 // $aff_url = str_replace("-schools-in-coimbatore","",$aff_url);
 // $aff_url = str_replace("-schools-in-tiruppur","",$aff_url);
 // $aff_url = str_replace("-schools-in-karur","",$aff_url);

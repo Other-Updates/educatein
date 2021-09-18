@@ -181,6 +181,10 @@ $aff_name = ucwords($affiliations->affiliation_name);
 $aff_name = strtolower($aff_name);
 // echo $aff_name;
 // exit();
+$this->db->select('*')->where('is_active =', 1);
+$this->db->order_by("city_name", "asc");
+$this->db->from('cities');
+$allcity = $this->db->get()->result();
 ?>
 <div class="breadrumb-new mab-20">
     <div class="container">
