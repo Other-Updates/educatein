@@ -76,31 +76,51 @@ class Welcome extends CI_Controller {
 
         //spectrum plan schools
         $this->db->select('sd.school_name as schoolname,si.images as banner,af.affiliation_name');
-        $this->db->from('school_details as sd');
         $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
         $this->db->join('affiliations as af','sd.affiliation_id = af.id');
         $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
-        $this->db->order_by('RAND()');
         $this->db->where('sd.school_category_id',3);
-        $data['spectrum_data'] = $this->db->get()->result_array();
+        $this->db->order_by('RAND()');
+        $this->db->from('school_details as sd');
+        $query = $this->db->get();
+        $data['spectrum_data'] = Array();
+        foreach ($query->result_array() as $row) {
+            $data['spectrum_data'][] = $row;
+        }
+        // print_r($data['spectrum_data']);exit;
+        // = $this->db->get()->result_array();
 
         //platinum activity classes
-        $where = "in.is_active=1 AND in.position_id=1 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
-        $this->db->select('in.*,ic.category_name as type');
+        $where = "ind.is_active=1 AND ind.position_id=1 AND ind.city_id =" . $this->session->userdata('city_id') . " AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+        $this->db->select('ind.*,ic.category_name as type');
         $this->db->where($where);
-        $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
-        $this->db->from('institute_details as in');
-        $data['activity_platinum'] = $this->db->get()->result_array();
+        $this->db->join('institute_categories as ic','ind.category_id = ic.id','left');
+        $this->db->from('institute_details as ind');
+        // = $this->db->get()->result_array();
+        $query = $this->db->get();
+        $data['activity_platinum'] = Array();
+        if($query !== FALSE && $query->num_rows() > 0){
+            foreach ($query->result_array() as $row) {
+                $data['activity_platinum'][] = $row;
+            }
+        }
 
         //premium activity classes 
-        $where = "in.is_active=1 AND in.position_id=2 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
-        $this->db->select('in.*,ic.category_name as type');
+        $where = "ind.is_active=1 AND ind.position_id=2 AND ind.city_id =" . $this->session->userdata('city_id') . " AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+        $this->db->select('ind.*,ic.category_name as type');
         $this->db->where($where);
-        $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
-        $this->db->from('institute_details as in');
-        $data['activity_premium'] = $this->db->get()->result_array();
+        $this->db->join('institute_categories as ic','ind.category_id = ic.id','left');
+        $this->db->from('institute_details as ind');
+        // = $this->db->get()->result_array();
+        $query = $this->db->get();
+        $data['activity_premium'] = Array();
+        if($query !== FALSE && $query->num_rows() > 0){
+            foreach ($query->result_array() as $row) {
+                $data['activity_premium'][] = $row;
+            }
+        }
 
         //spectrum activity classes 
         $where = "in.is_active=1 AND in.position_id=3 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
@@ -108,7 +128,14 @@ class Welcome extends CI_Controller {
         $this->db->where($where);
         $this->db->from('institute_details as in');
         $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
-        $data['activity_spectrum'] = $this->db->get()->result_array();
+        // = $this->db->get()->result_array();
+        $query = $this->db->get();
+        $data['activity_spectrum'] = Array();
+        if($query !== FALSE && $query->num_rows() > 0){
+            foreach ($query->result_array() as $row) {
+                $data['activity_spectrum'][] = $row;
+            }
+        }
 
         $this->load->view('welcome_message', $data);
     }
