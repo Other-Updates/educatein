@@ -407,7 +407,7 @@
         <div class="home-tsw top-school-widget mab-50">
             <div class="owl-two owl-carousel owl-theme">
                 <?php foreach($activity_premium as $premium){ 
-                $type = str_replace(" ","-",$platinum['type']);
+                $type = str_replace(" ","-",$premium['type']);
                 $type = strtolower($type);    
                 ?>
                 <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
@@ -430,7 +430,10 @@
                     </a>
                 </div>
                 <?php } ?>
-                <?php foreach($activity_spectrum as $spectrum){ ?>
+                <?php foreach($activity_spectrum as $spectrum){
+                     $type = str_replace(" ","-",$spectrum['type']);
+                     $type = strtolower($type);
+                ?>
                 <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$spectrum['institute_name']); ?>" target="_blank">
                         <figure>
