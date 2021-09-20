@@ -2675,6 +2675,8 @@ blue - 33317c
 .esd-banner-details-img img {
 	width: 100%;
 	border-radius:10px ;
+	object-fit: cover;
+    height: 100%;
 }
 .text-yellow {
 	color: #ffba00;
@@ -3035,4 +3037,17 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 }
 .dnone {
 	display: none;
+}
+.home-tsw .schoolist-inner .object-fit img {
+	height: 100%;
+    object-fit: cover;
+}
+.esd-banner-details-img {
+	height: 200px;
+    overflow: hidden;
+}
+.ads-school-widget .ads-inner img, .ads-school-widget-bottom .ads-inner img {
+	border-radius: 10px;
+	object-fit: cover;
+    height: 100%;
 }

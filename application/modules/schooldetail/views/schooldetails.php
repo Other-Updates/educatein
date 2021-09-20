@@ -647,7 +647,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <?php } ?>
                 </div>
                 <div class="ads-school-widget mb-3 wow fadeInUp">
-                    <div class="ads-inner"><p>Ads Here</p></div>
+                    <div class="ads-inner"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
                 </div>
                 <!-- <div class="sd-inner-main sd-sidebar wow fadeInUp">
                     <div class="sd-ection-tit">Recent News</div>
@@ -707,8 +707,8 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
                 <div class="ads-school-widget mb-3 wow fadeInUp">
-                    <div class="ads-inner"><p>Ads Here</p></div>
-                </div> -->
+                    <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
+                </div>
             </div>
             <div class="clearfix"></div>
             <div id="contact-info" class="col-md-12">
@@ -819,9 +819,9 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         </div>
         <div class="ads-school-widget mab-50">
             <div class="row">
-                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
-                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
-                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
             </div>
         </div>
     </div>
