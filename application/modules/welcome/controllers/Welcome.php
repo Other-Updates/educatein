@@ -53,7 +53,8 @@ class Welcome extends CI_Controller {
         $this->db->from('school_details as sd');
         $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
         $this->db->join('affiliations as af','sd.affiliation_id = af.id');
-        $this->db->where('sd.city_id',$this->session->userdata('city_id'));
+        if(!empty($this->session->userdata('city_id')))
+            $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
         $this->db->where('sd.school_category_id',1);
@@ -67,6 +68,7 @@ class Welcome extends CI_Controller {
         $this->db->from('school_details as sd');
         $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
         $this->db->join('affiliations as af','sd.affiliation_id = af.id');
+        if(!empty($this->session->userdata('city_id')))
         $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
@@ -78,6 +80,7 @@ class Welcome extends CI_Controller {
         $this->db->select('sd.school_name as schoolname,si.images as banner,af.affiliation_name');
         $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
         $this->db->join('affiliations as af','sd.affiliation_id = af.id');
+        if(!empty($this->session->userdata('city_id')))
         $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
@@ -93,9 +96,11 @@ class Welcome extends CI_Controller {
         // = $this->db->get()->result_array();
 
         //platinum activity classes
-        $where = "ind.is_active=1 AND ind.position_id=1 AND ind.city_id =" . $this->session->userdata('city_id') . " AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+        $where = "ind.is_active=1 AND ind.position_id=1 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
         $this->db->select('ind.*,ic.category_name as type');
         $this->db->where($where);
+        if(!empty($this->session->userdata('city_id')))
+            $this->db->where('ind.city_id',$this->session->userdata('city_id'));
         $this->db->join('institute_categories as ic','ind.category_id = ic.id','left');
         $this->db->from('institute_details as ind');
         // = $this->db->get()->result_array();
@@ -108,9 +113,11 @@ class Welcome extends CI_Controller {
         }
 
         //premium activity classes 
-        $where = "ind.is_active=1 AND ind.position_id=2 AND ind.city_id =" . $this->session->userdata('city_id') . " AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+        $where = "ind.is_active=1 AND ind.position_id=2 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
         $this->db->select('ind.*,ic.category_name as type');
         $this->db->where($where);
+        if(!empty($this->session->userdata('city_id')))
+            $this->db->where('ind.city_id',$this->session->userdata('city_id'));
         $this->db->join('institute_categories as ic','ind.category_id = ic.id','left');
         $this->db->from('institute_details as ind');
         // = $this->db->get()->result_array();
@@ -123,9 +130,11 @@ class Welcome extends CI_Controller {
         }
 
         //spectrum activity classes 
-        $where = "in.is_active=1 AND in.position_id=3 AND in.city_id =" . $this->session->userdata('city_id') . " AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
+        $where = "in.is_active=1 AND in.position_id=3 AND in.status=1 AND in.valitity IS NOT NULL AND in.deleted_at is NULL ";
         $this->db->select('in.*,ic.category_name as type');
         $this->db->where($where);
+        if(!empty($this->session->userdata('city_id')))
+            $this->db->where('in.city_id',$this->session->userdata('city_id'));
         $this->db->from('institute_details as in');
         $this->db->join('institute_categories as ic','in.category_id = ic.id','left');
         // = $this->db->get()->result_array();

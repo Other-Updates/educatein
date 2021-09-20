@@ -344,7 +344,7 @@ $allcity = $this->db->get()->result();
                                 $affiliation_name = "state-board-schools";
                             }
                             ?>
-                            <li>
+                            <li class="active">
                                 <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $yourcity; ?>" id="<?php echo $row->id; ?>"><i class="fa fa-circle"></i> <?php echo $affiliation_name1; ?> Schools</a>
                             </li>
                         <?php } ?>
@@ -358,7 +358,7 @@ $allcity = $this->db->get()->result();
                             $category_name = str_replace(" ", "-", $row1->category_name);
                             $category_name = strtolower($category_name);
                             ?>
-                            <li>
+                            <li class="active">
                                 <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-<?php echo $yourcity; ?>" id="<?php echo $row1->id; ?>"><i class="fa fa-circle"></i> <?php echo $category_name1; ?></a>
                             </li>
                         <?php } // $aff_name = ucwords($affiliations->affiliation_name);  ?>
