@@ -398,7 +398,7 @@ $news_heading = $this->db->get()->result();
                     <?php } ?>
                 </div>
                 <div class="ads-school-widget mb-3 wow fadeInUp">
-                    <div class="ads-inner"><p>Ads Here</p></div>
+                    <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/10-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
                 </div>
                 <div class="sd-inner-main sd-sidebar wow fadeInUp">
                     <div class="sd-ection-tit">Recent News</div>
@@ -458,7 +458,7 @@ $news_heading = $this->db->get()->result();
                     </div>
                 </div>
                 <div class="ads-school-widget mb-3 wow fadeInUp">
-                    <div class="ads-inner"><p>Ads Here</p></div>
+                    <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -570,9 +570,9 @@ $news_heading = $this->db->get()->result();
         </div>
         <div class="ads-school-widget mab-50">
             <div class="row">
-                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
-                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
-                <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/11-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/12-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
             </div>
         </div>
     </div>

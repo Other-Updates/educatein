@@ -3046,3 +3046,8 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 	height: 200px;
     overflow: hidden;
 }
+.ads-school-widget .ads-inner img, .ads-school-widget-bottom .ads-inner img {
+	border-radius: 10px;
+	object-fit: cover;
+    height: 100%;
+}

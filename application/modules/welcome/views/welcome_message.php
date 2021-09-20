@@ -339,9 +339,9 @@
 <div class="container">
     <div class="ads-school-widget mab-30">
         <div class="row">
-            <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
-            <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
-            <div class="col-md-4"><div class="ads-inner"><p>Ads Here</p></div></div>
+            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
         </div>
     </div>
 </div>
@@ -474,12 +474,12 @@
 <div class="container-fluid">
     <div class="ads-school-widget-bottom mab-30">
         <div class="row">
-            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
-            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
-            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
-            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
-            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>
-            <div class="col-md-2"><div class="ads-inner"><p>Ads Here</p></div></div>            
+            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/4-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/5-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/6-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/4-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/7-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/8-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>            
         </div>
     </div>
 </div>
