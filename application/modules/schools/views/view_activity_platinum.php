@@ -342,7 +342,7 @@ $school_id = $institute[0]['id'];
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
-            <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger">BACK</button></a>
+            <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger ">BACK</button></a>
             </div>
             </form>
         </div><!-- /listing-section -->

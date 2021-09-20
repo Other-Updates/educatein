@@ -72,6 +72,19 @@ $where = "is_active=1 AND institute_id=" . $institute_dets->id . " AND deleted_a
 $this->db->select('*')->where($where);
 $this->db->from('institute_news');
 $news_heading = $this->db->get()->result();
+
+$this->db->select('ind.*,ic.category_name as type,ci.city_name as city');
+$this->db->where('ind.city_id',$institute_dets->city_id);
+$this->db->where('ind.category_id',$institute_dets->category_id);
+$this->db->where('ind.id!=',$institute_dets->id);
+$this->db->where('ind.deleted_at',NULL);
+$this->db->where('ind.position_id',$institute_dets->position_id);
+$this->db->where('ind.status',1);
+$this->db->from('institute_details as ind');
+$this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
+$this->db->join('cities as ci','ind.city_id=ci.id','left');
+$this->db->limit(6);
+$similar_school = $this->db->get();
 ?>
 <div class="breadrumb-new mnone">
     <div class="container-fluid" style="padding: 0 60px;">
@@ -81,18 +94,26 @@ $news_heading = $this->db->get()->result();
                     <li class="list-inline-item"><a href="<?php echo base_url() ?>">Home</a></li>
                     <li class="list-inline-item"><i class="fa fa-angle-right"></i></li>
                     <?php
-                    $this->db->select('*')->where('id =', $school_details->affiliation_id);
-                    $this->db->from('affiliations');
+                    $this->db->select('*')->where('id =', $institute_dets->category_id);
+                    $this->db->from('institute_categories');
                     $affiliationname = $this->db->get();
                     foreach ($affiliationname->result() as $affiliationnames) {
                         
                     }
-                    $affiliation_name = str_replace(" ", "-", $affiliationnames->affiliation_name);
+                    $this->db->select('*')->where('id =', $institute_dets->city_id);
+                    $this->db->from('cities');
+                    $city = $this->db->get();
+                    foreach ($city->result() as $city_name) {
+                        
+                    }
+                    $yourcity = strtolower($city_name->city_name);
+                    $yourcity = str_replace(" ","-",$yourcity);
+                    $category = str_replace(" ", "-", $affiliationnames->category_name);
                     ?>
-                    <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $yourcity; ?>"><?php echo ucwords($affiliationnames->affiliation_name); ?> Schools</a></li>
+                    <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-<?php echo strtolower($category); ?>-in-<?php echo $yourcity; ?>"><?php echo ucwords($affiliationnames->affiliation_name); ?> <?php echo ucwords($affiliationnames->category_name) ?></a></li>
                     <li class="list-inline-item"><i class="fa fa-angle-right"></i></li>
                     <?php
-                    $slug = strtolower($school_details->slug);
+                    $slug = strtolower($institute_dets->slug);
                     $slug = ucwords($slug);
                     ?>
                     <li class="list-inline-item"><?php echo $slug; ?></li>
@@ -143,7 +164,7 @@ $news_heading = $this->db->get()->result();
                                 <button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
                                 <button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button>
                                 <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open now</button>
-                                <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="modal" data-target="#exampleModalCenter" data-wow-delay="1000ms">
+                                <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="" data-target="#exampleModalCenter" data-wow-delay="1000ms">
                                     Admission Enquiry
                                 </button>
                                 <!-- <button class="btn btn-theme2-border"><i class="fa fa-eye"></i> Page Views : 135</button> -->
@@ -381,7 +402,10 @@ $news_heading = $this->db->get()->result();
             <div class="col-md-3 pl-0-web">
                 <div class="sd-inner-main sd-sidebar wow fadeInUp">
                     <div class="sd-ection-tit">Similar Schools</div>
-                    <?php foreach($similar_school as $similar){ ?>
+                    <?php foreach($similar_school->result() as $similar){ 
+                        $type = strtolower($similar->type);
+                        $type = str_replace(" ","-",$type);
+                        ?>
                     <div class="row sd-sidebar-list">
                         <div class="col-md-4 sd-sidebar-list-left">
                             <?php if(!empty($similar->logo)){ ?>
@@ -391,7 +415,7 @@ $news_heading = $this->db->get()->result();
                             <?php } ?>
                         </div>
                         <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank"> <?php echo $similar->school_name ?></a></h3>
+                            <h3><a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo strtolower($similar->city); ?>/<?php echo str_replace(" ","-",$similar->institute_name); ?>" target="_blank"> <?php echo ucfirst($similar->institute_name) ?></a></h3>
                             <h6><?php echo $similar->address ?></h6>
                         </div>
                     </div>
@@ -400,7 +424,7 @@ $news_heading = $this->db->get()->result();
                 <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><p>Ads Here</p></div>
                 </div>
-                <div class="sd-inner-main sd-sidebar wow fadeInUp">
+                <!-- <div class="sd-inner-main sd-sidebar wow fadeInUp">
                     <div class="sd-ection-tit">Recent News</div>
                     <div class="row sd-sidebar-list">
                         <div class="col-md-4 sd-sidebar-list-left">
@@ -459,7 +483,7 @@ $news_heading = $this->db->get()->result();
                 </div>
                 <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><p>Ads Here</p></div>
-                </div>
+                </div> -->
             </div>
             <div class="clearfix"></div>
             <div id="contact-info" class="col-md-12">

@@ -1736,36 +1736,44 @@ class admin extends CI_Controller {
 
     function school_delete(){
 
-        $userid = base64_decode($_GET['id']);
-        $this->db->where('schooldetails_id', $userid);
-        $this->db->delete('schoolmanagement_activities');
-        $this->db->where('school_id', $userid);
-        $this->db->delete('platinum_datas');
-        $this->db->where('school_id', $userid);
-        $this->db->delete('school_images');
-        $this->db->where('school_id', $userid);
-        $this->db->delete('school_facilities');
-        $this->db->where('id', $userid);
-        $this->db->delete('school_details');
+        $school_id = base64_decode($_GET['id']);
+        // $this->db->where('schooldetails_id', $userid);
+        // $this->db->delete('schoolmanagement_activities');
+        // $this->db->where('school_id', $userid);
+        // $this->db->delete('platinum_datas');
+        // $this->db->where('school_id', $userid);
+        // $this->db->delete('school_images');
+        // $this->db->where('school_id', $userid);
+        // $this->db->delete('school_facilities');
+        // $this->db->where('id', $userid);
+        // $this->db->delete('school_details');
+        $delete = array(
+            'deleted_at' => date('Y-m-d h:i:s'),
+        );
+        $this->db->update('school_details',$delete,array('id' => $school_id));
         redirect('admin/schools');
 
     } 
 
     function institute_delete(){
         
-        $userid = base64_decode($_GET['id']);
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('institute_images');
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('institute_admissions');
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('institute_platinum_datas');
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('program_details');
-        $this->db->where('institute_id', $userid);
-        $this->db->delete('institute_news');
-        $this->db->where('id', $userid);
-        $this->db->delete('institute_details');
+        $institute_id = base64_decode($_GET['id']);
+        // $this->db->where('institute_id', $userid);
+        // $this->db->delete('institute_images');
+        // $this->db->where('institute_id', $userid);
+        // $this->db->delete('institute_admissions');
+        // $this->db->where('institute_id', $userid);
+        // $this->db->delete('institute_platinum_datas');
+        // $this->db->where('institute_id', $userid);
+        // $this->db->delete('program_details');
+        // $this->db->where('institute_id', $userid);
+        // $this->db->delete('institute_news');
+        // $this->db->where('id', $userid);
+        // $this->db->delete('institute_details');
+        $delete = array(
+            'deleted_at' => date('Y-m-d h:i:s'),
+        );
+        $this->db->update('institute_details',$delete,array('id' => $institute_id));
         redirect('admin/schools/institute');
     }
 

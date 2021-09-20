@@ -155,6 +155,8 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->where('sd.affiliation_id',$school_details->affiliation_id);
     $this->db->where('sd.city_id',$school_details->city_id);
     $this->db->where('sd.id!=',$school_details->id);
+    $this->db->where('sd.deleted_at',NULL);
+    $this->db->where('sd.status',1);
     $this->db->where('sd.school_category_id',$school_details->school_category_id);
     $this->db->from('school_details as sd');
     $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
@@ -638,7 +640,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             <?php } ?>
                         </div>
                         <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank"> <?php echo $similar->school_name ?></a></h3>
+                            <h3><a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank"> <?php echo ucfirst($similar->school_name) ?></a></h3>
                             <h6><?php echo $similar->address ?></h6>
                         </div>
                     </div>
@@ -647,7 +649,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                 <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><p>Ads Here</p></div>
                 </div>
-                <div class="sd-inner-main sd-sidebar wow fadeInUp">
+                <!-- <div class="sd-inner-main sd-sidebar wow fadeInUp">
                     <div class="sd-ection-tit">Recent News</div>
                     <div class="row sd-sidebar-list">
                         <div class="col-md-4 sd-sidebar-list-left">
@@ -706,7 +708,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                 </div>
                 <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><p>Ads Here</p></div>
-                </div>
+                </div> -->
             </div>
             <div class="clearfix"></div>
             <div id="contact-info" class="col-md-12">

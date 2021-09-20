@@ -589,7 +589,11 @@ if ($aff_url == "dance-class") {
                                         <figure>
                                             <div class="package-name">Premium</div>
                                             <div class="object-fit">
+                                            <?php if(isset($premium['logo'])){ ?>
+                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
+                                            <?php }else{ ?>
                                                 <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
+                                           <?php } ?>
                                             </div>
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
@@ -611,7 +615,11 @@ if ($aff_url == "dance-class") {
                                         <figure>
                                             <div class="package-name">Spectrum</div>
                                             <div class="object-fit">
+                                            <?php if(isset($premium['logo'])){ ?>
+                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
+                                            <?php }else{ ?>
                                                 <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $yourcity ?>">
+                                            <?php } ?>
                                             </div>
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($premium['institute_name']) ?></h6>

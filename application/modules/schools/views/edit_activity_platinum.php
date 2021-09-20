@@ -433,15 +433,15 @@ $user = $this->db->get()->result_array();
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="text" class="form-control" id="map_url" style="width:650px" name="map_url" value="<?php echo $institute[0]['map_url']; ?>" placeholder="e.g www.yourwebsite.com" >
+                            <label for="website">Map</label>
+                            <input type="text" class="form-control" id="map_url" style="width:650px" name="map_url" value='<?php echo $institute[0]['map_url']; ?>' placeholder="e.g www.yourwebsite.com" >
                         </div>
                     </div>
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
-                <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger float-right">CANCEL</button></a>
-                <button type="submit" class="btn btn-primary btn-save">SUBMIT</button>
+                <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger ">CANCEL</button></a>
+                <button type="submit" class="btn btn-primary btn-save float-right">SUBMIT</button>
             </div>
             </form>
         </div><!-- /listing-section -->

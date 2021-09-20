@@ -734,8 +734,8 @@ $about_img = $this->db->get()->result_array();
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
-            <a href="<?php echo base_url('schools/admin')?>"><button type="button" class="btn btn-danger float-right">CANCEL</button></a>
-                <button class="btn btn-primary btn-save" id="formsubmit">SUBMIT</button>
+            <a href="<?php echo base_url('schools/admin')?>"><button type="button" class="btn btn-danger">CANCEL</button></a>
+                <button class="btn btn-primary btn-save float-right" id="formsubmit">SUBMIT</button>
             </div><br>
             </form>
         </div><!-- /listing-section -->
