@@ -493,7 +493,7 @@ header {
 /*Breadcrumb-new*/
 .breadrumb-new {
     background-color: #f9e1eb;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 .breadrumb-new a {
     color: #202020;
@@ -2731,7 +2731,7 @@ blue - 33317c
 }
 .educatein-school-detail {
 	background: #f5f5f5;
-	margin-bottom: 100px;
+	padding-bottom: 50px;
 }
 .sd-ection-tit {
 	color: #c22a79;
@@ -3050,4 +3050,7 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 	border-radius: 10px;
 	object-fit: cover;
     height: 100%;
+}
+.sidebar-categories ul li.active a, .sidebar-categories li.active a .fa {
+	color: #d12881;
 }

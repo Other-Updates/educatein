@@ -705,7 +705,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
                 </div>
@@ -746,12 +746,12 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">Map
+                            <div class="col-md-6">
                                 <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
                             </div>
                             <!-- <div class="col-lg-8 mab-30 wow bounceIn" data-wow-delay="600ms">
-                    <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div> -->
+                                <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            </div> -->
                         </div>
                     </div>
                 </div> 
@@ -820,10 +820,10 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         <div class="ads-school-widget mab-50">
             <div class="row">
                 <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
                 <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
             </div>
-        </div>
+        </div><br>
     </div>
 </div>
 <script>
@@ -2816,7 +2816,7 @@ if ($category == 1) {
 ?>
 
 
-<svg id="deco-clouds" xmlns="http://www.w3.org/2000/svg" version="1.1" style="background-color: #fff;" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+<svg id="deco-clouds" xmlns="http://www.w3.org/2000/svg" version="1.1" style="background-color: #f5f5f5;" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
 <path d="M-5 100 Q 0 20 5 100 Z
       M0 100 Q 5 0 10 100 M5 100 Q 10 30 15 100 M10 100 Q 15 10 20 100 M15 100 Q 20 30 25 100
       M20 100 Q 25 -10 30 100 M25 100 Q 30 10 35 100 M30 100 Q 35 30 40 100 M35 100 Q 40 10 45 100
