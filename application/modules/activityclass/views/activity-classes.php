@@ -260,7 +260,7 @@ if ($aff_url == "dance-class") {
 <div class="breadrumb-new mab-20">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-sm-6 schoolist-search">
+            <div class="col-lg-6 col-sm-6 home-search-widget">
                 <div>
                     <form action="<?php echo base_url() ?>schools-list" method="post">
                         <div class="input-group">
@@ -270,7 +270,7 @@ if ($aff_url == "dance-class") {
                                 <?php } else { ?>
                                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
                                 <?php } ?> 
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu shadow-lg">
                                     <ul class="list-inline">
                                         <?php
                                         foreach ($allcity as $allcitys) {
