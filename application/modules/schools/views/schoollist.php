@@ -1,4 +1,4 @@
-<?php
+<?php       
 // $this->db->select('*')->where('id =', 1);
 // $this->db->from('careers');
 // $career = $this->db->get();
@@ -523,7 +523,7 @@ $allcity = $this->db->get()->result();
            
             $where2 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=2 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
             $this->db->select('*')->where($where2);
-            $this->db->order_by('rand()');
+            // $this->db->order_by('rand()');
             $this->db->from('school_details');
             $school_premium = $this->db->get()->result_array();
             
@@ -531,10 +531,27 @@ $allcity = $this->db->get()->result();
 
             $where3 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=3 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
             $this->db->select('*')->where($where3);
-            $this->db->order_by('rand()');
+            // $this->db->order_by('rand()');
             $this->db->from('school_details');
             $school_spectrum = $this->db->get()->result_array();
 
+            $where2 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=4 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
+            $this->db->select('*')->where($where2);
+            // $this->db->order_by('rand()');
+            $this->db->from('school_details');
+            $school_trial = $this->db->get()->result_array();
+            
+            // $config = array();
+            // $config["total_rows"] = $this->db->count_all_results();
+            // $config["base_url"] = base_url() . "schools";
+            // $config["per_page"] = 10;
+            // $config["uri_segment"] = 2;
+    
+            // $this->pagination->initialize($config);
+    
+            // $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+    
+            // $links = $this->pagination->create_links();
             // $school_name = str_replace(" ", "-", $school_premium[0]['school_name']);
             ?>
         <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum)){ ?>
@@ -587,6 +604,7 @@ $allcity = $this->db->get()->result();
                                             </figcaption>
                                         </figure>
                                     </a>
+                                    <p><?php echo $links ?></p>
                                 </div>
                             <!-- </div> -->
                         </div>
@@ -636,26 +654,48 @@ $allcity = $this->db->get()->result();
                             </div>
                         <?php } ?>
                         <?php foreach($school_spectrum as $spectrum){ ?>
-                        <div class="col-md-3">
-                            <div class="schoolist-inner spectrum">
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['school_name']); ?>" target="_blank">
-                                    <figure>
-                                        <div class="package-name">Spectrum</div>
-                                        <div class="object-fit">
-                                        <?php if(isset($spectrum['logo'])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
-                                            <?php }else{ ?>
-                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
-                                            <?php } ?>
-                                        </div>
-                                        <figcaption class="item-footer">
-                                            <h6><?php echo ucfirst($spectrum['school_name']) ?></h6>
-                                            <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                        </figcaption>
-                                    </figure>
-                                </a>
+                            <div class="col-md-3">
+                                <div class="schoolist-inner spectrum">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['school_name']); ?>" target="_blank">
+                                        <figure>
+                                            <div class="package-name">Spectrum</div>
+                                            <div class="object-fit">
+                                            <?php if(isset($spectrum['logo'])){ ?>
+                                                    <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
+                                                <?php }else{ ?>
+                                                    <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
+                                                <?php } ?>
+                                            </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($spectrum['school_name']) ?></h6>
+                                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        <?php } ?>
+                        <?php foreach($school_trial as $trial){ ?>
+                            <div class="col-md-3">
+                                <div class="schoolist-inner premium">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$trial['school_name']); ?>" target="_blank">
+                                        <figure>
+                                            <div class="package-name">Trial</div>
+                                            <div class="object-fit">
+                                            <?php if(isset($spectrum['logo'])){ ?>
+                                                    <img src="<?php echo base_url("laravel/public/") ?><?php echo $trial['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
+                                                <?php }else{ ?>
+                                                    <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
+                                                <?php } ?>
+                                            </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($trial['school_name']) ?></h6>
+                                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            </div>
                         <?php } ?>
                         
                     </div>

@@ -156,6 +156,11 @@ class Institute_listing_first extends CI_Controller {
             'map_url' => $_POST['map_url'],
             'logo' => $banner1_name,
             'news_image' => $newsbanner1_name,
+            'facebook' => $_POST['facebook'],
+            'twitter' => $_POST['twitter'],
+            'instagram' => $_POST['instagram'],
+            'linkedin' => $_POST['linkedin'],
+            'pinterest' => $_POST['pinterest'],
             'activated_at' => date('Y-m-d H:i:s'),
             'is_active' => 1,
             'valitity'=>30

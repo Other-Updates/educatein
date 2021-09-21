@@ -42,6 +42,9 @@ class Search extends CI_Controller {
     }
 
     public function index() {
+        $school = $_POST['search']; // school search 
+        $activityclass = $_POST['activity_class']; // activity class search 
+// print_r($activityclass);exit;
         $data = array("search" => "");
         $session = $this->session->userdata();
         $data["city"] = $session["search_city"];
@@ -59,12 +62,41 @@ class Search extends CI_Controller {
         if (!empty($session["city_id"])) {
             $sub_where[] = array('direct' => 0, 'rule' => 'where', 'field' => 'sd.city_id', 'value' => $session["city_id"]);
         }
-        $data['schools'] = $this->Base_Model->getAdvanceList('school_details sd ', $join_tables, $fields, $sub_where, array('return' => 'result_array'), 'sd.id', '', '', 6);
-
+        // $data['schools'] = $this->Base_Model->getAdvanceList('school_details sd ', $join_tables, $fields, $sub_where, array('return' => 'result_array'), 'sd.id', '', '', 6);
+        if(isset($_POST['search'])){
+            $where = "sd.is_active=1 AND sd.status=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
+            $this->db->select('sd.*,af.affiliation_name,ar.area_name');
+            if(!empty($session['city_id']))
+            $this->db->where('sd.city_id',$session['city_id']);
+            $this->db->where($where);
+            $this->db->like('sd.school_name',$search);
+            $this->db->order_by('school_category_id');
+            $this->db->from('school_details as sd');
+            $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
+            $this->db->join('areas as ar','sd.area_id=ar.id','left');
+            $data['schools'] = $this->db->get()->result_array();
+            $data["search"] = "Schools in " . ucfirst($session["search_city"]);
+        }
+        if(isset($_POST['activity_class'])){
+            $where = "ind.is_active=1 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+            $this->db->select('ind.*,ic.category_name,ar.area_name');
+            if(!empty($session['city_id']))
+            $this->db->where('ind.city_id',$session['city_id']);
+            $this->db->where($where);
+            $this->db->like('ind.institute_name',$activityclass);
+            $this->db->order_by('position_id');
+            $this->db->from('institute_details as ind');
+            $this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
+            $this->db->join('areas as ar','ind.area_id=ar.id','left');
+            $data['activityclass'] = $this->db->get()->result_array();
+            $data["search"] = "Activity Classes in " . ucfirst($session["search_city"]);
+        }
+        // echo "<pre>";
+        // print_r($data['schools']);exit;
+        // echo $this->db->last_query();exit;
         $data["affiliations"] = $this->Base_Model->get_records("affiliations", "*", array(array(true, "is_active", 1)), "result");
         $data["institute_categories"] = $this->Base_Model->get_records("institute_categories", "*", array(), "result");
 
-        $data["search"] = "Schools in " . ucfirst($session["search_city"]);
 
         $this->db->select('*')->where('is_active =', 1);
         $this->db->order_by("city_name", "asc");

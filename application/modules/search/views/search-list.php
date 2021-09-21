@@ -136,42 +136,128 @@
                 </div><!-- /sidebar-categories -->
             </div><!-- /sticky -->
         </div><!-- /sidebar -->
-        <div id="main" class="mab-30">
-            <div class="row">
-                <div class="col-lg-12 col-sm-12">
-                    <div class="custom-section-title mab-30">
-                        <h3 class="mb-2"><?php echo $search; ?></h3>
-                    </div><!-- /section-title -->
-                </div>
-            </div><!-- /row -->
-            <div class="row search-schoolist">
-                <?php
-                foreach ($schools as $school) {
-                             $school_name = str_replace(" ", "-", $school["school_name"]);
-                    ?>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="nearby-widget mab-30 wow fadeInUp home-tsw">
-                            <a href="<?php echo base_url('list-of-best-'.$school["affiliation_name"].'-schools-in-'.$city.'/'. strtolower($school_name)); ?>" target="_blank">
-                                <div class="package-name">Platinum</div>
-                                <div class="object-fit">
-                                    <img src="<?php echo base_url("laravel/public/".$school["logo"]); ?>"  alt="schools nearby">
-                                </div>
-                            </a>
-                            <div class="nearby-widget-body">
-                                <h6 class="mb-2"><a href="<?php echo base_url('list-of-best-'.$school["affiliation_name"].'-schools-in-'.$city.'/'. strtolower($school_name)); ?>"><?php echo $school["school_name"]; ?></a></h6>
-                                <ul class="list-unstyled">
-                                    <li class="mb-1"><i class="fa fa-fw fa-book"></i> <?php echo ucfirst($school["affiliation_name"]); ?> School</li>
-                                    <li><i class="fa fa-fw fa-map-marker"></i> <?php echo $school["area_name"]; ?></li>
-                                </ul> 
-                                
-                            </div><!-- /nearby-widget-body -->
-                        </div><!-- /nearby-widget -->
+        <?php //if(!empty($schools) || !empty($activityclass)){ ?>
+            <?php if(!empty($schools)){ ?>
+                <div id="main" class="mab-30">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="custom-section-title mab-30">
+                                <h3 class="mb-2"><?php echo $search; ?></h3>
+                            </div><!-- /section-title -->
+                        </div>
+                    </div><!-- /row -->
+                    <div class="row search-schoolist">
+                        <?php
+                        foreach ($schools as $school) {
+                                    $school_name = str_replace(" ", "-", $school["school_name"]);
+                            ?>
+                            <div class="col-lg-4 col-sm-6 home-tsw">
+                                    <?php if($school['school_category_id'] == 1){ ?>
+                                <div class="nearby-widget mab-30 wow fadeInUp platinum">
+                                    <?php }else if($school['school_category_id'] == 2){ ?>
+                                <div class="nearby-widget mab-30 wow fadeInUp premium">
+                                    <?php }else if($school['school_category_id'] == 3){ ?>
+                                <div class="nearby-widget mab-30 wow fadeInUp spectrum">
+                                    <?php }else if($school['school_category_id'] == 4){ ?>
+                                <div class="nearby-widget mab-30 wow fadeInUp trial">
+                                        <?php } ?>
+                                    <a href="<?php echo base_url('list-of-best-'.$school["affiliation_name"].'-schools-in-'.$city.'/'. strtolower($school_name)); ?>" target="_blank">
+                                        <?php if($school['school_category_id'] == 1){ ?>
+                                            <div class="package-name">Platinum</div>
+                                        <?php }else if($school['school_category_id'] == 2){ ?>
+                                            <div class="package-name">Premium</div>
+                                        <?php }else if($school['school_category_id'] == 3){ ?>
+                                            <div class="package-name">Spectrum</div>
+                                        <?php }else if($school['school_category_id'] == 4){ ?>
+                                            <div class="package-name">Trial</div>
+                                        <?php } ?>
+                                        <div class="object-fit">
+                                            <?php if(!empty($school["logo"])){ ?>
+                                                <img src="<?php echo base_url("laravel/public/".$school["logo"]); ?>"  alt="schools nearby">
+                                            <?php }else{ ?>
+                                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $school['affiliation_name'] ?> in <?php echo $city; ?>" />
+                                            <?php } ?>     
+                                        </div>
+                                    </a>
+                                    <div class="nearby-widget-body">
+                                        <h6 class="mb-2"><a href="<?php echo base_url('list-of-best-'.$school["affiliation_name"].'-schools-in-'.$city.'/'. strtolower($school_name)); ?>"><?php echo $school["school_name"]; ?></a></h6>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-1"><i class="fa fa-fw fa-book"></i> <?php echo ucfirst($school["affiliation_name"]); ?> School</li>
+                                            <li><i class="fa fa-fw fa-map-marker"></i> <?php echo $school["area_name"]; ?></li>
+                                        </ul> 
+                                        
+                                    </div><!-- /nearby-widget-body -->
+                                </div><!-- /nearby-widget -->
+                            </div>
+                        <?php }
+                        ?>
                     </div>
-                <?php }
-                ?>
-            </div>
 
-        </div>
+                </div>
+            <?php } ?>
+
+            <?php if(!empty($activityclass)){ ?>
+                <div id="main" class="mab-30">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="custom-section-title mab-30">
+                                <h3 class="mb-2"><?php echo $search; ?></h3>
+                            </div><!-- /section-title -->
+                        </div>
+                    </div><!-- /row -->
+                    <div class="row search-schoolist">
+                        <?php
+                        foreach ($activityclass as $class) {
+                                    $school_name = str_replace(" ", "-", $class["institute_name"]);
+                                    $type = str_replace(" ","-",$class['category_name'])
+                            ?>
+                            <div class="col-lg-4 col-sm-6 home-tsw">
+                                    <?php if($class['position_id'] == 1){ ?>
+                                <div class="nearby-widget mab-30 wow fadeInUp platinum">
+                                    <?php }else if($class['position_id'] == 2){ ?>
+                                <div class="nearby-widget mab-30 wow fadeInUp premium">
+                                    <?php }else if($class['position_id'] == 3){ ?>
+                                <div class="nearby-widget mab-30 wow fadeInUp spectrum">
+                                    <?php }else if($class['position_id'] == 4){ ?>
+                                <div class="nearby-widget mab-30 wow fadeInUp trial">
+                                        <?php } ?>
+                                    <a href="<?php echo base_url('list-of-best-'.strtolower($type).'-in-'.$city.'/'. strtolower($school_name)); ?>" target="_blank">
+                                        <?php if($class['position_id'] == 1){ ?>
+                                            <div class="package-name">Platinum</div>
+                                        <?php }else if($class['position_id'] == 2){ ?>
+                                            <div class="package-name">Premium</div>
+                                        <?php }else if($class['position_id'] == 3){ ?>
+                                            <div class="package-name">Spectrum</div>
+                                        <?php }else if($class['position_id'] == 4){ ?>
+                                            <div class="package-name">Trial</div>
+                                        <?php } ?>
+                                        <div class="object-fit">
+                                            <?php if(!empty($class["logo"])){ ?>
+                                                <img src="<?php echo base_url("laravel/public/".$class["logo"]); ?>"  alt="schools nearby">
+                                            <?php }else{ ?>
+                                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $class['category_name'] ?> in <?php echo $city; ?>" />
+                                            <?php } ?>     
+                                        </div>
+                                    </a>
+                                    <div class="nearby-widget-body">
+                                        <h6 class="mb-2"><a href="<?php echo base_url('list-of-best-'.strtolower($type).'-in-'.$city.'/'. strtolower($school_name)); ?>"><?php echo $class["institute_name"]; ?></a></h6>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-1"><i class="fa fa-fw fa-book"></i> <?php echo ucfirst($type); ?> School</li>
+                                            <li><i class="fa fa-fw fa-map-marker"></i> <?php echo $class["area_name"]; ?></li>
+                                        </ul> 
+                                        
+                                    </div><!-- /nearby-widget-body -->
+                                </div><!-- /nearby-widget -->
+                            </div>
+                        <?php }
+                        ?>
+                    </div>
+
+                </div>
+            <?php } ?>
+        <?php// }else{ ?>
+        <!-- Record not found -->
+        <?php //} ?>
     </div>
 </div>
 <!-- Footer templete -->

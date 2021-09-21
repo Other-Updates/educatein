@@ -490,19 +490,25 @@ if ($aff_url == "dance-class") {
             // exit();
             $where2 = "is_active=1 AND position_id=2 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
             $this->db->select('*')->where($where2);
-            $this->db->order_by('rand()');
+            // $this->db->order_by('rand()');
             $this->db->from('institute_details');
             $school_premium = $this->db->get()->result_array();
 
             $where2 = "is_active=1 AND position_id=3 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
             $this->db->select('*')->where($where2);
-            $this->db->order_by('rand()');
+            // $this->db->order_by('rand()');
             $this->db->from('institute_details');
             $school_spectrum = $this->db->get()->result_array();
+
+            $where2 = "is_active=1 AND position_id=4 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
+            $this->db->select('*')->where($where2);
+            // $this->db->order_by('rand()');
+            $this->db->from('institute_details');
+            $school_trial = $this->db->get()->result_array();
             // print_r($school_spectrum);exit;
             ?>
 
-        <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum)){ ?>
+        <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum) || !empty($school_trial) ){ ?>
             <?php if($topschool->num_rows() != 0 ){ ?>
                 <div class="top-school-widget mab-20">    
                     <div class="custom-section-title mab-10">
@@ -540,9 +546,9 @@ if ($aff_url == "dance-class") {
                                             <div class="package-name">Platinum</div>
                                             <div class="object-fit">
                                                 <?php if(isset($top->logo)){ ?>
-                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
                                                     <?php } else { ?>
-                                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
                                                 <?php } ?>
                                             </div>
                                             <figcaption class="item-footer">
@@ -590,9 +596,9 @@ if ($aff_url == "dance-class") {
                                             <div class="package-name">Premium</div>
                                             <div class="object-fit">
                                             <?php if(isset($premium['logo'])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
+                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
                                             <?php }else{ ?>
-                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
+                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
                                            <?php } ?>
                                             </div>
                                             <figcaption class="item-footer">
@@ -616,13 +622,39 @@ if ($aff_url == "dance-class") {
                                             <div class="package-name">Spectrum</div>
                                             <div class="object-fit">
                                             <?php if(isset($premium['logo'])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
+                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
                                             <?php }else{ ?>
-                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $yourcity ?>">
+                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
                                             <?php } ?>
                                             </div>
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
+                                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        <?php } ?>
+                        <?php foreach($school_trial as $trial){ 
+                            $class = strtolower($aff_name);
+                            $class = str_replace(" ","-",$class);
+                            ?>
+                            <div class="col-md-3">
+                                <div class="schoolist-inner premium">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $class ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$trial['institute_name']); ?>" target="_blank">
+                                        <figure>
+                                            <div class="package-name">Trial</div>
+                                            <div class="object-fit">
+                                            <?php if(isset($trial['logo'])){ ?>
+                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $trial['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
+                                            <?php }else{ ?>
+                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
+                                            <?php } ?>
+                                            </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($trial['institute_name']) ?></h6>
                                                 <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
                                             </figcaption>
                                         </figure>

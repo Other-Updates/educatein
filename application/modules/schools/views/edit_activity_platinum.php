@@ -438,6 +438,41 @@ $user = $this->db->get()->result_array();
                         </div>
                     </div>
                 </div><!-- /form-row -->
+
+                <h4 class="mt-3 mb-3">Social Links</h4>
+                <hr class="mb-4">
+                <div class="form-row">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="text" class="form-control" name="facebook" id="facebook" value="<?php echo $institute[0]['facebook'] ?>" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="twitter">Twitter</label>
+                            <input type="text" class="form-control" name="twitter" id="twitter" value="<?php echo $institute[0]['twitter'] ?>" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="instagram">Instagram</label>
+                            <input type="text" class="form-control" name="instagram" id="instagram" value="<?php echo $institute[0]['instagram'] ?>" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="linkedin">Linked in</label>
+                            <input type="text" class="form-control" name="linkedin" id="linkedin" value="<?php echo $institute[0]['linkedin'] ?>" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="pinterest">Pinterest</label>
+                            <input type="text" class="form-control" name="pinterest" id="pinterest" value="<?php echo $institute[0]['pinterest'] ?>" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">
                 <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger ">CANCEL</button></a>

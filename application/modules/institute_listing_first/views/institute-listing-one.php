@@ -355,6 +355,41 @@ foreach ($user->result() as $users) {
                         </div>
                     </div>
                 </div><!-- /form-row -->
+
+                <h4 class="mt-3 mb-3">Social Links</h4>
+                <hr class="mb-4">
+                <div class="form-row">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="text" class="form-control" name="facebook" id="facebook" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="twitter">Twitter</label>
+                            <input type="text" class="form-control" name="twitter" id="twitter" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="instagram">Instagram</label>
+                            <input type="text" class="form-control" name="instagram" id="instagram" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="linkedin">Linked in</label>
+                            <input type="text" class="form-control" name="linkedin" id="linkedin" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="pinterest">Pinterest</label>
+                            <input type="text" class="form-control" name="pinterest" id="pinterest" placeholder="e.g.https://yourwebsite.com/">
+                        </div>
+                    </div>
+                </div><!-- /form-row -->
                 <button type="submit" class="btn btn-primary btn-save" id="formsubmit">SUBMIT</button>
             </form>
         </div><!-- /listing-section -->

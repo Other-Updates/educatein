@@ -2380,6 +2380,11 @@ class admin extends CI_Controller {
             'timings' => $_POST['timing'],
             'logo' => $banner1_name,
             'news_image' => $newsbanner1_name,
+            'facebook' => $_POST['facebook'],
+            'twitter' => $_POST['twitter'],
+            'instagram' => $_POST['instagram'],
+            'linkedin' => $_POST['linkedin'],
+            'pinterest' => $_POST['pinterest'],
             'map_url' => $_POST['map_url'],
             // 'activated_at' => date('Y-m-d H:i:s'),/
             'is_active' => 1,
@@ -4182,8 +4187,8 @@ class admin extends CI_Controller {
 
 
             $this->db->select('sd.id,sd.school_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.activated_at');
-            $this->db->from('school_details as sd');
             $this->db->where('sd.deleted_at',NULL);
+            $this->db->from('school_details as sd');
             $this->db->join('user_register as ur', 'sd.user_id = ur.id', 'left');
             if($searchVal != null && $searchVal != ''){
                 $this->db->where($where);
@@ -4297,8 +4302,8 @@ class admin extends CI_Controller {
             }
 
             $this->db->select('in.id,in.institute_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.activated_at');
-            $this->db->from('institute_details as in');
             $this->db->where('in.deleted_at',NULL);
+            $this->db->from('institute_details as in');
             $this->db->join('user_register as ur', 'in.user_id = ur.id', 'left');
             if($searchVal != null && $searchVal != ''){
                 $this->db->where($where);

@@ -22,6 +22,8 @@ class Schools extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->output->set_template('simple');
+        $this->load->library("pagination");
+
         $this->_init();
     }
 
@@ -63,6 +65,36 @@ class Schools extends CI_Controller {
 //        $data["institute_categories"] = $this->Base_Model->get_records("institute_categories", "*", array(), "result");
 //
 //        $data["search"] = "Schools in " . ucfirst($session["search_city"]);
+        // $where2 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=2 AND city_id =" . $this->session->userdata('city_id') . " AND deleted_at is NULL";
+        // $this->db->select('*')->where($where2);
+        // // $this->db->order_by('rand()');
+        // $this->db->from('school_details');
+        // $school_premium = $this->db->get();
+        // $config = array();
+        // $config["total_rows"] = $this->db->count_all_results();
+        // $config["base_url"] = base_url() . "schools";
+        // $config["per_page"] = 10;
+        // $config["uri_segment"] = 2;
+
+        // $this->pagination->initialize($config);
+
+        // $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+
+        // $data["links"] = $this->pagination->create_links();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $this->db->select('*')->where('is_active =', 1);
         $this->db->from('affiliations');
         $query['query'] = $this->db->get();

@@ -57,6 +57,7 @@ class Welcome extends CI_Controller {
             $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
+        $this->db->where('sd.is_active',1);
         $this->db->where('sd.school_category_id',1);
         // $this->db->where('si.school_activity_id',2);
         $this->db->order_by('RAND()');
@@ -72,6 +73,7 @@ class Welcome extends CI_Controller {
         $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
+        $this->db->where('sd.is_active',1);
         $this->db->order_by('RAND()');
         $this->db->where('sd.school_category_id',2);
         $data['premium_data'] = $this->db->get()->result_array();
@@ -84,6 +86,7 @@ class Welcome extends CI_Controller {
         $this->db->where('sd.city_id',$this->session->userdata('city_id'));
         $this->db->where('sd.deleted_at',NULL);
         $this->db->where('sd.status',1);
+        $this->db->where('sd.is_active',1);
         $this->db->where('sd.school_category_id',3);
         $this->db->order_by('RAND()');
         $this->db->from('school_details as sd');
