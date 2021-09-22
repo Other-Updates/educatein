@@ -282,7 +282,7 @@ if ($aff_url == "dance-class") {
                                     </ul>
                                 </div><!-- /dropdown-menu -->
                             </div>
-                            <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <input type="text" id="tags" class="form-control"  name="activity_class" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
                             <?php if ($aff_url != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                             <?php } else { ?>
@@ -667,7 +667,7 @@ if ($aff_url == "dance-class") {
                 </div>
                 <?php } ?>
                 <?php }else{ ?>
-                    No record found
+                    <h1 style="text-align:center;">Record Not Found!</h1>
                 <?php } ?>
         </div><!-- /main -->
     </div><!-- /container-fluid -->

@@ -136,7 +136,7 @@
                 </div><!-- /sidebar-categories -->
             </div><!-- /sticky -->
         </div><!-- /sidebar -->
-        <?php //if(!empty($schools) || !empty($activityclass)){ ?>
+        <?php if(!empty($schools) || !empty($activityclass)){ ?>
             <?php if(!empty($schools)){ ?>
                 <div id="main" class="mab-30">
                     <div class="row">
@@ -255,9 +255,9 @@
 
                 </div>
             <?php } ?>
-        <?php// }else{ ?>
-        <!-- Record not found -->
-        <?php //} ?>
+        <?php }else{ ?>
+        <h1 style="text-align:center;">Record Not Found!</h1>
+        <?php } ?>
     </div>
 </div>
 <!-- Footer templete -->

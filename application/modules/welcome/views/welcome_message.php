@@ -292,7 +292,7 @@
                             </div>
                             <figcaption class="item-footer">
                                 <h6><?php echo ucfirst($platinum['schoolname']) ?></h6>
-                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                <p><i class="fa fa-book"></i>&nbsp;<?php echo ucfirst($platinum['affiliation_name']).' School' ?></p>
                             </figcaption>
                         </figure>
                     </a>
@@ -367,7 +367,7 @@
                             </div>
                             <figcaption class="item-footer">
                                 <h6><?php echo ucfirst($premium['schoolname']) ?></h6>
-                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                <p><i class="fa fa-book"></i>&nbsp;<?php echo ucfirst($premium['affiliation_name']).' School' ?></p>
                             </figcaption>
 
                         </figure>
@@ -388,7 +388,7 @@
                                 </div>
                                 <figcaption class="item-footer">
                                     <h6><?php echo ucfirst($spectrum['schoolname'])?></h6>
-                                    <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    <p><i class="fa fa-book"></i>&nbsp;<?php echo ucfirst($spectrum['affiliation_name']).' School' ?></p>
                                 </figcaption>
                             </figure>
                         </a>

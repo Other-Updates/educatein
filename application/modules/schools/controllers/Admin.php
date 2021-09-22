@@ -2624,14 +2624,14 @@ class admin extends CI_Controller {
         //     {
         //     show_error($this->email->print_debugger());
         //     }
-?>
-<!-- <script>
-    function myFunction() {
-  setTimeout(function(){ location.reload(); });
-}
+
+// <script>
+//     function myFunction() {
+//   setTimeout(function(){ location.reload(); });
+// }
     
-    </script> -->
-<?php
+//     </script>
+
         redirect('admin/schools/view_activityclass?id='.$school_id);
     }
 
@@ -4222,7 +4222,7 @@ class admin extends CI_Controller {
 
 		if(isset($_POST["length"])){
 
-            $column = array('','ur.name','sd.school_name','sd.school_category_id','sd.paid','sd.created_at','sd.status');
+            $column = array('','ur.name','sd.school_name','ci.city_name','sd.school_category_id','sd.paid','sd.created_at','sd.status');
             $input_arr['search_val'] = $input_data['search']['value'];
             $input_arr['order_column'] = $column[$input_data['order'][0]['column']];
             $input_arr['order_by'] = $input_data['order'][0]['dir'];
@@ -4305,9 +4305,10 @@ class admin extends CI_Controller {
                 $sno++;
             }
         }   
-        $this->db->select('sd.id,sd.school_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id');
+        $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id');
         $this->db->from('school_details sd');
         $this->db->join('user_register ur', 'sd.user_id = ur.id', 'left');
+        $this->db->join('cities as ci','sd.city_id=ci.id','left');
         if($searchVal != null && $searchVal != ''){
 			$this->db->where($where);
 		}
@@ -4339,7 +4340,7 @@ class admin extends CI_Controller {
 
 		if(isset($_POST["length"])){
 
-            $column = array('','ur.name','in.institute_name','in.position_id','in.paid','in.created_at','in.status');
+            $column = array('','ur.name','in.institute_name','ci.city_name','in.position_id','in.paid','in.created_at','in.status');
             $input_arr['search_val'] = $input_data['search']['value'];
             $input_arr['order_column'] = $column[$input_data['order'][0]['column']];
             $input_arr['order_by'] = $input_data['order'][0]['dir'];
@@ -4424,9 +4425,10 @@ class admin extends CI_Controller {
             }
         }
 
-        $this->db->select('in.id,in.institute_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id');
+        $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id');
         $this->db->from('institute_details in');
         $this->db->join('user_register ur', 'in.user_id = ur.id', 'left');
+        $this->db->join('cities as ci','in.city_id=ci.id','left');
         if($searchVal != null && $searchVal != ''){
 			$this->db->where($where);
 		}

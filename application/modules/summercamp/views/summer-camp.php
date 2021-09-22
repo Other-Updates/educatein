@@ -133,6 +133,13 @@ if($uccity == "Enquiry" || $uccity == "Otp")
 						</form>
 					</div>
 
+					<div class="col-lg-2">
+						<div class="hss-activity-link wow bounceIn faster">
+							<a style="color:#0c0c0c;"href="<?php echo base_url(); ?>">
+								Schools
+							</a>
+						</div>
+					</div>
 					<div class="col-lg-3"></div>
 				</div><!-- /row -->
 			</div><!-- /summer-search-box -->			

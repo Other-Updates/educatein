@@ -47,7 +47,7 @@ class Welcome extends CI_Controller {
         if (!empty($city_id)) {
             $data["schools"] = $this->get_schools($city_id);
         }
-
+        $this->session->set_userdata('city_id',$data["city_id"]);
         //platinum plan schools
         $this->db->select('sd.school_name as schoolname,sd.affiliation_id,si.images as banner,af.affiliation_name');
         $this->db->from('school_details as sd');

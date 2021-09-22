@@ -702,7 +702,7 @@ $allcity = $this->db->get()->result();
                 </div>
             <?php } ?>
         <?php }else{ ?>
-            No Record Found
+            <h1 style="text-align:center;">Record Not Found!</h1>
             <?php } ?>
         </div>
     </div>

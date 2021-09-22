@@ -73,7 +73,7 @@ $this->db->select('*')->where($where);
 $this->db->from('institute_news');
 $news_heading = $this->db->get()->result();
 
-$this->db->select('ind.*,ic.category_name as type,ci.city_name as city');
+$this->db->select('ind.*,ic.category_name as type,ar.area_name,ci.city_name as city');
 $this->db->where('ind.city_id',$institute_dets->city_id);
 $this->db->where('ind.category_id',$institute_dets->category_id);
 $this->db->where('ind.id!=',$institute_dets->id);
@@ -82,6 +82,7 @@ $this->db->where('ind.position_id',$institute_dets->position_id);
 $this->db->where('ind.status',1);
 $this->db->from('institute_details as ind');
 $this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
+$this->db->join('areas as ar','ind.area_id=ar.id','left');
 $this->db->join('cities as ci','ind.city_id=ci.id','left');
 $this->db->limit(6);
 $similar_school = $this->db->get();
@@ -597,6 +598,51 @@ $similar_school = $this->db->get();
                 <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/11-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
                 <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/12-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
                 <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="custom-section-title">
+            <h3 class="mb-2">Similar Activity Classes</h3>
+        </div>
+        <?php //foreach($similar_school as $similar) ?>
+        <div class="home-tsw top-school-widget mab-50">
+            <div class="owl-two owl-carousel owl-theme">
+                <?php foreach($similar_school->result() as $key=>$similar){ 
+                    $type = strtolower($similar->type);
+                    $type = str_replace(" ","-",$type);
+                    // echo "<pre>";print_r($similar);
+                    print_r($similar->position_id == 2);
+                    ?>
+                        <?php //if($similar->position_id == 1){ ?> 
+                    <!-- <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;"> -->
+                        <?php //}else if($smiliar->position_id == 2){ ?>
+                        <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php //}else if($smiliar->position_id == 3){ ?>
+                    <!-- <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;"> -->
+                        <?php //}else if($smiliar->position_id == 4){ ?>
+                    <!-- <div class="item wow bounceIn trial" style="animation-delay: .<?php echo $delay; ?>s;"> -->
+                        <?php //} ?>
+                        <a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->institute_name); ?>" target="_blank">
+                            <figure>
+                                <div class="package-name">Premium</div>
+                                <div class="object-fit">
+                                    <?php if(!empty($similar->logo)){ ?>
+                                        <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" alt="best <?php echo $type ?>  in <?php echo $yourcity; ?>" />
+                                            <?php } else { ?>
+                                        <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $type ?>  in <?php echo $yourcity; ?>" />
+                                        <?php } ?>
+                                </div>
+                                <figcaption class="item-footer">
+                                    <h6><?php echo ucfirst($similar->institute_name) ?></h6>
+                                    <p><i class="fa fa-book"></i> <?php echo ucfirst($similar->type) ?></p>
+                                    <p><i class="fa fa-fw fa-map-marker"></i> <?php echo ucfirst($similar->area_name) ?></p>
+                                </figcaption>
+
+                            </figure>
+                        </a>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>

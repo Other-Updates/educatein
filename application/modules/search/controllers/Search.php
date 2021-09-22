@@ -44,9 +44,9 @@ class Search extends CI_Controller {
     public function index() {
         $school = $_POST['search']; // school search 
         $activityclass = $_POST['activity_class']; // activity class search 
-// print_r($activityclass);exit;
         $data = array("search" => "");
         $session = $this->session->userdata();
+
         $data["city"] = $session["search_city"];
         $fields = 'sd.*,af.affiliation_name,a.area_name';
         $join_tables[] = array(
@@ -69,7 +69,7 @@ class Search extends CI_Controller {
             if(!empty($session['city_id']))
             $this->db->where('sd.city_id',$session['city_id']);
             $this->db->where($where);
-            $this->db->like('sd.school_name',$search);
+            $this->db->like('sd.school_name',$_POST['search']);
             $this->db->order_by('school_category_id');
             $this->db->from('school_details as sd');
             $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
@@ -83,7 +83,7 @@ class Search extends CI_Controller {
             if(!empty($session['city_id']))
             $this->db->where('ind.city_id',$session['city_id']);
             $this->db->where($where);
-            $this->db->like('ind.institute_name',$activityclass);
+            $this->db->like('ind.institute_name',$_POST['activity_class']);
             $this->db->order_by('position_id');
             $this->db->from('institute_details as ind');
             $this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
@@ -91,9 +91,7 @@ class Search extends CI_Controller {
             $data['activityclass'] = $this->db->get()->result_array();
             $data["search"] = "Activity Classes in " . ucfirst($session["search_city"]);
         }
-        // echo "<pre>";
-        // print_r($data['schools']);exit;
-        // echo $this->db->last_query();exit;
+       
         $data["affiliations"] = $this->Base_Model->get_records("affiliations", "*", array(array(true, "is_active", 1)), "result");
         $data["institute_categories"] = $this->Base_Model->get_records("institute_categories", "*", array(), "result");
 

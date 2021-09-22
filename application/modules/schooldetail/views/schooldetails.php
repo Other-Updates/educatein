@@ -151,7 +151,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->from('schoolmanagement_activities');
     $management = $this->db->get()->result_array();
 
-    $this->db->select('sd.*,af.affiliation_name as aff');
+    $this->db->select('sd.*,ci.city_name,af.affiliation_name as aff');
     $this->db->where('sd.affiliation_id',$school_details->affiliation_id);
     $this->db->where('sd.city_id',$school_details->city_id);
     $this->db->where('sd.id!=',$school_details->id);
@@ -160,6 +160,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->where('sd.school_category_id',$school_details->school_category_id);
     $this->db->from('school_details as sd');
     $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
+    $this->db->join('cities as ci','sd.city_id=ci.id','left');
     $this->db->order_by("sd.id", "desc");
     $this->db->limit(6);
     $similar_school = $this->db->get()->result();
@@ -244,7 +245,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 <?php }else{ ?>
                                     <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open now</button>
                                 <?php } ?>
-                                <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="modal" data-target="#exampleModalCenter" data-wow-delay="1000ms">
+                                <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="" data-target="#exampleModalCenter" data-wow-delay="1000ms">
                                     Admission Enquiry
                                 </button>
                                 <!-- <button class="btn btn-theme2-border"><i class="fa fa-eye"></i> Page Views : 135</button> -->
@@ -824,6 +825,37 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                 <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
             </div>
         </div><br>
+    </div>
+    <div class="container">
+        <div class="custom-section-title">
+            <h3 class="mb-2">Similar Schools</h3>
+        </div>
+        <?php //foreach($similar_school as $similar) ?>
+        <div class="home-tsw top-school-widget mab-50">
+            <div class="owl-two owl-carousel owl-theme">
+                <?php foreach($similar_school as $key=>$similar){ ?>
+                    <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank">
+                            <figure>
+                                <div class="package-name">Premium</div>
+                                <div class="object-fit">
+                                    <?php if(!empty($similar->logo)){ ?>
+                                        <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $yourcity; ?>" />
+                                            <?php } else { ?>
+                                        <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $city; ?>" />
+                                        <?php } ?>
+                                </div>
+                                <figcaption class="item-footer">
+                                    <h6><?php echo ucfirst($similar->school_name) ?></h6>
+                                    <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                </figcaption>
+
+                            </figure>
+                        </a>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
     </div>
 </div>
 <script>
