@@ -685,7 +685,7 @@ $about_img = $this->db->get()->result_array();
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="website">Map</label>
-                            <input type="text" name="map_url" class="form-control" id="website" value="<?php echo $school[0]['map_url']; ?>" placeholder="https://www.google.com/maps/@11.0231552,76.9523712,15z">
+                            <input type="text" name="map_url" class="form-control" id="website" value='<?php echo $school[0]['map_url']; ?>'' placeholder="https://www.google.com/maps/@11.0231552,76.9523712,15z">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">

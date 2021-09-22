@@ -626,6 +626,24 @@
                             </div><!-- /form-row -->
                         </div>
                         <div class="edit-school-inner">
+
+                            <h3 class="mt-4 mb-3">Gallery Images</h3>
+                            <hr class="mb-4">
+                            <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
+                            <div class="input_fields_wrap mt-3">
+                                <div class="form-row">
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="input-group mb-3">
+                                            <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6">
+                                        <button type="button" class="add_field_button btn btn-primary btn-block">Add More</button>
+                                    </div>
+                                </div><!-- /form-row -->
+                            </div><!-- /input_fields_wrap -->
+                        </div>
+                        <div class="edit-school-inner">
                             <h4>Location</h4>
                             <hr class="mb-4">
                             <div class="form-row">
@@ -725,8 +743,8 @@
                         </div>
                         <div class="edit-school-inner">
                             <!-- <button class="btn btn-danger">CANCEL</button> -->
-                            <button class="btn btn-primary btn-save buy_now formsubmit" id="formsubmit">SUBMIT</button>
-                            <a href="<?php echo base_url('schools/admin')?>" class="float-right"><button type="button" class="btn btn-danger">CANCEL</button></a>
+                            <button class="btn btn-primary btn-save buy_now formsubmit float-right" id="formsubmit">SUBMIT</button>
+                            <a href="<?php echo base_url('schools/admin')?>" class=""><button type="button" class="btn btn-danger">CANCEL</button></a>
                         </div>
                     <!-- </form> -->
                 </div><!-- /listing-section -->
@@ -1093,8 +1111,8 @@
                         </div>
                     </div>
                     <div class="edit-school-inner">
-                        <button class="btn btn-primary btn-save buy_now formsubmit" id="formsubmit1">SUBMIT</button>
-                        <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="float-right btn btn-danger">CANCEL</button></a>
+                        <button class="btn btn-primary btn-save buy_now formsubmit float-right" id="formsubmit1">SUBMIT</button>
+                        <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger">CANCEL</button></a>
                     </div>
                 </div><!-- /listing-section -->
             </div><!-- /container -->

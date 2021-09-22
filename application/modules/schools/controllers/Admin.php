@@ -2395,12 +2395,7 @@ class admin extends CI_Controller {
     }
 
     function approve_school($school_id){
-        $data = array(
-            'status' => 1,
-            'activated_at' => date('Y-m-d H:i:s')
-        );
-        $this->db->where('id',base64_decode($school_id));
-        $this->db->update('school_details',$data);
+
         $this->db->select('*');
         $this->db->where('id',base64_decode($school_id));
         $this->db->from('school_details');
@@ -2409,6 +2404,24 @@ class admin extends CI_Controller {
         $this->db->where('id',$data['school'][0]['user_id']);
         $this->db->from('user_register');
         $data['user'] = $this->db->get()->result_array();
+
+        if($data['school'][0]['school_category_id'] == 1){
+            $amount=65000;
+        }else if($data['school'][0]['school_category_id'] == 2){
+            $amount=30000;
+        }else if($data['school'][0]['school_category_id'] == 3){
+            $amount=12500;
+        }else if($data['school'][0]['school_category_id'] == 4){
+            $amount=0;
+        }
+        $data = array(
+            'status' => 1,
+            'paid' => $amount,
+            'activated_at' => date('Y-m-d H:i:s')
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('school_details',$data);
+
         $msg = $this->load->view('school_invoice',$data,true);
         $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' has been approved';
 
@@ -2495,7 +2508,7 @@ class admin extends CI_Controller {
         $result = curl_exec($ch); // This is the result from the API
         curl_close($ch);
 
-        redirect('admin/schools/view_school?id='.$school_id,'refresh');
+        redirect('admin/schools/view_school?id='.$school_id);
     }
 
     function reject_school($school_id){
@@ -2555,13 +2568,6 @@ class admin extends CI_Controller {
     }
 
     function approve_class($school_id){
-        $data = array(
-            'status' => 1,
-            'activated_at' => date('Y-m-d H:i:s')
-        );
-        $this->db->where('id',base64_decode($school_id));
-        $this->db->update('institute_details',$data);
-
         $this->db->select('*');
         $this->db->where('id',base64_decode($school_id));
         $this->db->from('institute_details');
@@ -2570,6 +2576,23 @@ class admin extends CI_Controller {
         $this->db->where('id',$data['institute'][0]['user_id']);
         $this->db->from('user_register');
         $data['user'] = $this->db->get()->result_array();
+
+        if($data['institute'][0]['position_id'] == 1){
+            $amount=65000;
+        }else if($data['institute'][0]['position_id'] == 2){
+            $amount=30000;
+        }else if($data['institute'][0]['position_id'] == 3){
+            $amount=12500;
+        }else if($data['institute'][0]['position_id'] == 4){
+            $amount=0;
+        }
+        $data = array(
+            'status' => 1,
+            'paid' => $amount,
+            'activated_at' => date('Y-m-d H:i:s')
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('institute_details',$data);
 
         // $msg = $this->load->view('activity_invoice',$data,true);
         // $sub = 'Edugatein - Your Activity class - '.$data['institute'][0]['institute_name'].' has been approved';
@@ -2702,6 +2725,7 @@ class admin extends CI_Controller {
             //     $this->load->view('sign-up-school', $data);
             // }
         }
+        //insert school
         if($_POST['category'] == 'school'){
 
             $school['schoolname'] = $_POST['schoolname'];
@@ -3592,7 +3616,45 @@ class admin extends CI_Controller {
                     }
                 }
             }
+            // gallery image save
+            if (isset($_FILES['mytext']['name'])) {
+                $gallaryimage = $_FILES['mytext']['name'];
+                $gallarytype = $_FILES['mytext']['type'];
+                $gallarysize = $_FILES['mytext']['size'];
+                $gallarytmp_name = $_FILES['mytext']['tmp_name'];
 
+
+
+                if (is_array($gallaryimage)) {
+                    for ($i = 0; $i < count($gallaryimage); $i++) {
+                        $gallary1image = $gallaryimage[$i];
+                        $gallary1_ext = pathinfo($gallary1image, PATHINFO_EXTENSION);
+
+                        $gallary1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $gallary1_ext;
+                        $gallary1_type = $gallarytype[$i];
+                        $gallary1_size = $gallarysize[$i];
+                        $gallary1_tem_loc = $gallarytmp_name[$i];
+                        $gallary1_store = FCPATH . "/laravel/public/" . $gallary1_name;
+
+                        $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+                        if (in_array($gallary1_ext, $allowed)) {
+                            if (move_uploaded_file($gallary1_tem_loc, $gallary1_store)) {
+
+                                $schoolgallaryinsert1 = array(
+                                    'school_id' => $school_id,
+                                    'school_activity_id' => 71,
+                                    'images' => $gallary1_name,
+                                    'is_active' => 1
+                                );
+
+                                $this->db->insert('school_images', $schoolgallaryinsert1);
+                            }
+                        }
+                    }
+                }
+            }
 
             $user = $this->db->get_where('user_register', array('id' => $_POST['user_id']));
             foreach ($user->result() as $users) {
@@ -4186,10 +4248,11 @@ class admin extends CI_Controller {
             }
 
 
-            $this->db->select('sd.id,sd.school_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.activated_at');
+            $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.activated_at');
             $this->db->where('sd.deleted_at',NULL);
             $this->db->from('school_details as sd');
             $this->db->join('user_register as ur', 'sd.user_id = ur.id', 'left');
+            $this->db->join('cities as ci','sd.city_id=ci.id','left');
             if($searchVal != null && $searchVal != ''){
                 $this->db->where($where);
             }
@@ -4209,6 +4272,7 @@ class admin extends CI_Controller {
                 $row[] = $sno;
                 $row[] = ucfirst($school['user']);
                 $row[] = ucfirst($school['school_name']);
+                $row[] = ucfirst($school['city_name']);
                 
                 if($school['school_category_id'] == 1){$row[] = "PLATINUM";}
                 else if($school['school_category_id'] == 2){$row[] = "PREMIUM";}
@@ -4301,10 +4365,11 @@ class admin extends CI_Controller {
                 $where .=')';
             }
 
-            $this->db->select('in.id,in.institute_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.activated_at');
+            $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.activated_at');
             $this->db->where('in.deleted_at',NULL);
             $this->db->from('institute_details as in');
             $this->db->join('user_register as ur', 'in.user_id = ur.id', 'left');
+            $this->db->join('cities as ci','in.city_id=ci.id','left');
             if($searchVal != null && $searchVal != ''){
                 $this->db->where($where);
             }
@@ -4324,6 +4389,8 @@ class admin extends CI_Controller {
                 $row[] = $sno;
                 $row[] = ucfirst($institute['user']);
                 $row[] = ucfirst($institute['institute_name']);
+                $row[] = ucfirst($institute['city_name']);
+
                 
                 if($institute['position_id'] == 1){$row[] = "PLATINUM";}
                 else if($institute['position_id'] == 2){$row[] = "PREMIUM";}

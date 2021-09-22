@@ -16,6 +16,7 @@
                         <th class="text-nowrap">#</th>  
                         <th class="text-nowrap">Customer</th>
                         <th class="text-nowrap">Institute Name</th>
+                        <th class="text-nowrap">City</th>
                         <th class="text-nowrap">Plan</th>
                         <th class="text-nowrap" style="text-align:center;">Paid</th>
                         <th class="text-nowrap">Created date</th>

@@ -747,7 +747,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                <?php echo $school_details->map_url; ?>
                             </div>
                             <!-- <div class="col-lg-8 mab-30 wow bounceIn" data-wow-delay="600ms">
                                 <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
