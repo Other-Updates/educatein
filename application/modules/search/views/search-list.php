@@ -191,6 +191,8 @@
                             </div>
                         <?php }
                         ?>
+                        <div class="pagination"><?php echo $links ?></div>
+
                     </div>
 
                 </div>
@@ -258,9 +260,9 @@
         <?php }else{ ?>
         <h1 style="text-align:center;">Record Not Found!</h1>
         <?php } ?>
+
     </div>
 </div>
-<?php echo $links ?>
 
 <!-- Footer templete -->
 <svg id="deco-clouds" xmlns="https://www.w3.org/2000/svg" version="1.1" style="background-color: #fff;" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">

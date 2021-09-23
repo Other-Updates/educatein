@@ -68,22 +68,19 @@ class Search extends CI_Controller {
 
     public function createPageinatation($count,$link){
         $config = array();
+        if ($this->input->get('search')) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
         $config["base_url"] = base_url() . $link;
         $config["total_rows"] = $count;
         $config["per_page"] = $this->page_count;
         $config["uri_segment"] = 2;
-        // if(empty($_GET['search'])){
-        //     $_REQUEST['search'] = $_POST['search'];
-        // }
-        // $config['first_url'] = $config['base_url'].'?'.http_build_query($_REQUEST);
-
+        $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
+        // $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
         return $this->pagination->create_links();
     }
 
 
     public function index() {
-        
         $school = $_GET['search']; // school search 
         $activityclass = $_POST['activity_class']; // activity class search 
         $data = array("search" => "");
@@ -101,9 +98,9 @@ class Search extends CI_Controller {
             'table_condition' => 'a.id = sd.area_id',
             'table_type' => 'left'
         );
-        if (!empty($session["city_id"])) {
-            $sub_where[] = array('direct' => 0, 'rule' => 'where', 'field' => 'sd.city_id', 'value' => $session["city_id"]);
-        }
+        // if (!empty($session["city_id"])) {
+        //     $sub_where[] = array('direct' => 0, 'rule' => 'where', 'field' => 'sd.city_id', 'value' => $session["city_id"]);
+        // }
         // $data['schools'] = $this->Base_Model->getAdvanceList('school_details sd ', $join_tables, $fields, $sub_where, array('return' => 'result_array'), 'sd.id', '', '', 6);
         if(isset($_GET['search'])){
             $data["links"] = $this->createPageinatation($this->search_school($_GET['search']),'schools-list');

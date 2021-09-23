@@ -239,7 +239,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             <div class="clearfix"></div>
                             <div class="esd-banner-details-btn">
                                 <button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
-                                <button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button>
+                                <a href="tel:"<?php echo $school_details->mobile ?>><button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button></a>
                                 <?php if(!empty($school_details->ad)){ ?>
                                     <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
                                 <?php }else{ ?>
