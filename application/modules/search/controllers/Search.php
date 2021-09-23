@@ -46,7 +46,7 @@ class Search extends CI_Controller {
         $activityclass = $_POST['activity_class']; // activity class search 
         $data = array("search" => "");
         $session = $this->session->userdata();
-
+        // print_r($session['city_id']);
         $data["city"] = $session["search_city"];
         $fields = 'sd.*,af.affiliation_name,a.area_name';
         $join_tables[] = array(
@@ -91,7 +91,7 @@ class Search extends CI_Controller {
             $data['activityclass'] = $this->db->get()->result_array();
             $data["search"] = "Activity Classes in " . ucfirst($session["search_city"]);
         }
-       
+
         $data["affiliations"] = $this->Base_Model->get_records("affiliations", "*", array(array(true, "is_active", 1)), "result");
         $data["institute_categories"] = $this->Base_Model->get_records("institute_categories", "*", array(), "result");
 

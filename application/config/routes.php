@@ -188,7 +188,7 @@ $route['schools/enquiry'] = 'schools/enquiry';
 $route['schools/otp'] = 'schools/otp';
 $route['classes/enquiry'] = 'activityclass/enquiry';
 $route['classes/otp'] = 'activityclass/otp';
-$route['about-us/enquiry'] = 'abouts/enquiry';
+$route['about-us/enquiry'] = 'about/enquiry';
 $route['about-us/otp'] = 'abouts/otp';
 
 

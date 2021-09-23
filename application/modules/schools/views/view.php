@@ -36,7 +36,7 @@
 <script>  
 $(document).ready(function(){
     var category_table = $("#example").dataTable({
-        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+        "lengthMenu": [[100, 500, -1], [100, 500, "All"]],
         "processing": true, 
         "serverSide": true, 
         "searching": true,

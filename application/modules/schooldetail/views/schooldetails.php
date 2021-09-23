@@ -2894,7 +2894,7 @@ if ($category == 1) {
 
     <div class="feedback-body">
         <h5 class="mb-3">Submit A Enquiry Form</h5>
-        <form  action="<?php echo base_url() ?>schools/enquiry" method="post">
+        <form  action="<?php echo base_url() ?>about-us/enquiry" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Your Name*"  required>
             </div>

@@ -271,8 +271,8 @@
         </div><!-- /schools-section -->
     </div>
 </div>   
-<?php if(!empty($platinum_data)){ ?>
-    <div class="container">
+<?php //if(!empty($platinum_data)){ ?>
+    <!-- <div class="container">
         <div class="custom-section-title">
             <h3 class="mb-2">Top Schools in <span><?php echo ucfirst($city) ?></span></h3>
         </div>
@@ -300,10 +300,10 @@
                 <?php } ?>
             </div>
         </div>
-    </div>
-<?php } ?>
-<?php if(!empty($activity_platinum)){ ?>
-    <div class="container">
+    </div> -->
+<?php //} ?>
+<?php //if(!empty($activity_platinum)){ ?>
+    <!-- <div class="container">
         <div class="custom-section-title">
             <h3 class="mb-2">Top Activity Classes in <span><?php echo ucfirst($city) ?></span></h3>
         </div>
@@ -326,7 +326,6 @@
                             </div>
                             <figcaption class="item-footer">
                                 <h6><?php echo ucfirst($platinum['institute_name']) ?></h6>
-                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
                             </figcaption>
                         </figure>
                     </a>
@@ -334,8 +333,8 @@
                 <?php } ?>
             </div>
         </div>
-    </div>
-<?php } ?>
+    </div> -->
+<?php //} ?>
 <div class="container">
     <div class="ads-school-widget mab-30">
         <div class="row">
@@ -345,16 +344,16 @@
         </div>
     </div>
 </div>
-<?php if(!empty($premium_data) || !empty($spectrum_data)){ ?>
+<?php //if(!empty($premium_data) || !empty($spectrum_data)){ ?>
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="custom-section-title">
             <h3 class="mb-2">Best Schools in <span><?php echo ucfirst($city) ?></span></h3>
         </div>
         <div class="home-tsw top-school-widget mab-50">
-            <div class="owl-two owl-carousel owl-theme">
-                <?php foreach($premium_data as $key=>$premium){ ?>
-                <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+            <div class="owl-two owl-carousel owl-theme"> -->
+                <?php //foreach($premium_data as $key=>$premium){ ?>
+                <!-- <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $premium['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$premium['schoolname']); ?>" target="_blank">
                         <figure>
                             <div class="package-name">Premium</div>
@@ -372,10 +371,10 @@
 
                         </figure>
                     </a>
-                </div>
-                <?php } ?>
-                <?php foreach($spectrum_data as $spectrum){ ?>
-                    <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                </div> -->
+                <?php //} ?>
+                <?php //foreach($spectrum_data as $spectrum){ ?>
+                    <!-- <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
                         <a href="<?php echo base_url() ?>list-of-best-<?php echo $spectrum['affiliation_name'] ?>-schools-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$spectrum['schoolname']); ?>" target="_blank">
                             <figure>
                                 <div class="package-name">Spectrum</div>
@@ -392,25 +391,25 @@
                                 </figcaption>
                             </figure>
                         </a>
-                    </div>
-                <?php } ?>
+                    </div> -->
+                <?php //} ?>
             </div>
         </div>
     </div>
-    <?php } ?>
+    <?php//} ?>
    
-<?php if(!empty($activity_premium) || !empty($activity_spectrum)){ ?>
-    <div class="container">
+<?php// if(!empty($activity_premium) || !empty($activity_spectrum)){ ?>
+    <!-- <div class="container">
         <div class="custom-section-title">
             <h3 class="mb-2">Best Activity Classes in <span><?php echo ucfirst($city) ?></span></h3>
         </div>
         <div class="home-tsw top-school-widget mab-50">
-            <div class="owl-two owl-carousel owl-theme">
-                <?php foreach($activity_premium as $premium){ 
-                $type = str_replace(" ","-",$premium['type']);
-                $type = strtolower($type);    
+            <div class="owl-two owl-carousel owl-theme"> -->
+                <?php// foreach($activity_premium as $premium){ 
+                // $type = str_replace(" ","-",$premium['type']);
+                // $type = strtolower($type);    
                 ?>
-                <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                <!-- <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
                         <figure>
                             <div class="package-name">Premium</div>
@@ -423,18 +422,17 @@
                             </div>
                             <figcaption class="item-footer">
                                 <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
-                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
                             </figcaption>
 
                         </figure>
                     </a>
-                </div>
-                <?php } ?>
-                <?php foreach($activity_spectrum as $spectrum){
-                     $type = str_replace(" ","-",$spectrum['type']);
-                     $type = strtolower($type);
+                </div> -->
+                <?php// } ?>
+                <?php //foreach($activity_spectrum as $spectrum){
+                    //  $type = str_replace(" ","-",$spectrum['type']);
+                    //  $type = strtolower($type);
                 ?>
-                <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                <!-- <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo $city; ?>/<?php echo str_replace(" ","-",$spectrum['institute_name']); ?>" target="_blank">
                         <figure>
                             <div class="package-name">Spectrum</div>
@@ -447,16 +445,15 @@
                             </div>
                             <figcaption class="item-footer">
                                 <h6><?php echo ucfirst($spectrum['institute_name'])?></h6>
-                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
                             </figcaption>
                         </figure>
                     </a>
-                </div>
-                <?php } ?>
+                </div> -->
+                <?php// } ?>
             </div>
         </div>
     </div>
-<?php } ?>
+<?php //} ?>
 <div class="container">
     <div class="about-widget mab-30">
         <div class="row">

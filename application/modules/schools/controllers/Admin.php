@@ -2863,6 +2863,17 @@ class admin extends CI_Controller {
             //     }
             // }
 
+            if($_POST['school_category'] = 1){
+                $paid = 65000;
+            }else if($_POST['school_category'] = 2){
+                $paid = 30000;
+            }else if($_POST['school_category'] = 1){
+                $paid = 12000;
+            }else if($_POST['school_category'] = 1){
+                $paid = 0;
+            }
+
+
             if (isset($_POST['customRadio2'])) {
                 $customRadio1 = $_POST['customRadio2'];
             } else {
@@ -2914,6 +2925,7 @@ class admin extends CI_Controller {
                 // 'type'=>$school['address'],
                 'hostel' => $customRadio1,
                 'rte' => $customRadio,
+                'paid' => $paid,
                 'students' => $school['school_students'],
                 'teachers' => $school['school_teachers'],
                 'facebook' => $school['facebook'],
@@ -3771,6 +3783,15 @@ class admin extends CI_Controller {
                 }
             }
 
+            if($_POST['position_id'] = 1){
+                $paid = 65000;
+            }else if($_POST['position_id'] = 2){
+                $paid = 30000;
+            }else if($_POST['position_id'] = 1){
+                $paid = 12000;
+            }else if($_POST['position_id'] = 1){
+                $paid = 0;
+            }
 
            
             if(isset($_POST['status']) == 1){
@@ -3807,6 +3828,7 @@ class admin extends CI_Controller {
                 'website_url' => $_POST['website'],
                 'timings' => $_POST['timing'],
                 'logo' => $banner1_name,
+                'paid' => $paid,
                 'news_image' => $newsbanner1_name,
                 'activated_at' => $act_date,
                 'is_active' => 1,
