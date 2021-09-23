@@ -19,10 +19,13 @@ class Search extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
+    public $page_count;
     function __construct() {
         parent::__construct();
         $this->output->set_template('simple');
+        $this->load->library("pagination");
         $this->_init();
+        $this->page_count = 12;
     }
 
     private function _init() {
@@ -41,8 +44,47 @@ class Search extends CI_Controller {
         $this->load->js(base_url('assets/front/js/swiper.min.js'));
     }
 
+
+    public function search_school($search,$limit=null, $start=null){
+        $where = "sd.is_active=1 AND sd.status=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
+        $this->db->select('sd.*,af.affiliation_name,ar.area_name');
+        if(!empty($session['city_id']))
+        $this->db->where('sd.city_id',$session['city_id']);
+        $this->db->where($where);
+        $this->db->like('sd.school_name',$search);
+        $this->db->order_by('school_category_id');
+        $this->db->from('school_details as sd');
+        $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
+        $this->db->join('areas as ar','sd.area_id=ar.id','left');
+        $data["search"] = "Schools in " . ucfirst($session["search_city"]);
+        if(!empty($limit)){
+            $this->db->limit($limit, $start);
+            $data['schools'] = $this->db->get()->result_array();
+            return $data;
+        }else{
+            return $this->db->get()->num_rows();
+        }
+    }
+
+    public function createPageinatation($count,$link){
+        $config = array();
+        $config["base_url"] = base_url() . $link;
+        $config["total_rows"] = $count;
+        $config["per_page"] = $this->page_count;
+        $config["uri_segment"] = 2;
+        // if(empty($_GET['search'])){
+        //     $_REQUEST['search'] = $_POST['search'];
+        // }
+        // $config['first_url'] = $config['base_url'].'?'.http_build_query($_REQUEST);
+
+        $this->pagination->initialize($config);
+        return $this->pagination->create_links();
+    }
+
+
     public function index() {
-        $school = $_POST['search']; // school search 
+        
+        $school = $_GET['search']; // school search 
         $activityclass = $_POST['activity_class']; // activity class search 
         $data = array("search" => "");
         $session = $this->session->userdata();
@@ -63,19 +105,24 @@ class Search extends CI_Controller {
             $sub_where[] = array('direct' => 0, 'rule' => 'where', 'field' => 'sd.city_id', 'value' => $session["city_id"]);
         }
         // $data['schools'] = $this->Base_Model->getAdvanceList('school_details sd ', $join_tables, $fields, $sub_where, array('return' => 'result_array'), 'sd.id', '', '', 6);
-        if(isset($_POST['search'])){
-            $where = "sd.is_active=1 AND sd.status=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
-            $this->db->select('sd.*,af.affiliation_name,ar.area_name');
-            if(!empty($session['city_id']))
-            $this->db->where('sd.city_id',$session['city_id']);
-            $this->db->where($where);
-            $this->db->like('sd.school_name',$_POST['search']);
-            $this->db->order_by('school_category_id');
-            $this->db->from('school_details as sd');
-            $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
-            $this->db->join('areas as ar','sd.area_id=ar.id','left');
-            $data['schools'] = $this->db->get()->result_array();
-            $data["search"] = "Schools in " . ucfirst($session["search_city"]);
+        if(isset($_GET['search'])){
+            $data["links"] = $this->createPageinatation($this->search_school($_GET['search']),'schools-list');
+            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $data1 = $this->search_school($_GET['search'],$this->page_count, $page);
+            $data['schools'] =  $data1['schools'];
+            $data['search'] =  $data1['search'];
+            // $where = "sd.is_active=1 AND sd.status=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
+            // $this->db->select('sd.*,af.affiliation_name,ar.area_name');
+            // if(!empty($session['city_id']))
+            // $this->db->where('sd.city_id',$session['city_id']);
+            // $this->db->where($where);
+            // $this->db->like('sd.school_name',$_POST['search']);
+            // $this->db->order_by('school_category_id');
+            // $this->db->from('school_details as sd');
+            // $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
+            // $this->db->join('areas as ar','sd.area_id=ar.id','left');
+            // $data['schools'] = $this->db->get()->result_array();
+            // $data["search"] = "Schools in " . ucfirst($session["search_city"]);
         }
         if(isset($_POST['activity_class'])){
             $where = "ind.is_active=1 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
@@ -91,6 +138,25 @@ class Search extends CI_Controller {
             $data['activityclass'] = $this->db->get()->result_array();
             $data["search"] = "Activity Classes in " . ucfirst($session["search_city"]);
         }
+
+        // $config = array();
+        // $config["base_url"] = base_url() . "schools-list";
+        // $config["total_rows"] = 50;
+        // $config["per_page"] = 10;
+        // $config["uri_segment"] = 2;
+        // $this->pagination->initialize($config);
+        // $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        // $data["links"] = $this->pagination->create_links();
+
+
+
+        // $data['authors'] = $this->authors_model->get_authors($config["per_page"], $page);
+
+
+
+
+
+
 
         $data["affiliations"] = $this->Base_Model->get_records("affiliations", "*", array(array(true, "is_active", 1)), "result");
         $data["institute_categories"] = $this->Base_Model->get_records("institute_categories", "*", array(), "result");

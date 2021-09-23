@@ -200,6 +200,7 @@ $route['blogdetails/(:any)'] = 'blogdetails/index';
 $route['404_override'] = 'error/index';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['schools-list/(:num)'] = 'search';
 
 
 

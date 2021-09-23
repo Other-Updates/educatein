@@ -135,8 +135,16 @@ class Myaccount extends CI_Controller {
         }
 
 
-$data["user_id"] = $user_id = $this->session->userdata('user_id');
+        $data["user_id"] = $user_id = $this->session->userdata('user_id');
         $this->load->view('my-account', $data);
+    }
+
+    public function edit($user_id){
+        $data = array(
+            'address' =>null
+        );
+        $this->db->update('user_register',$data,array('id'=>base64_decode($user_id)));
+        redirect('myaccount');
     }
 
 }

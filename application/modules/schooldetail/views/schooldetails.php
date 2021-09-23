@@ -245,7 +245,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 <?php }else{ ?>
                                     <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open now</button>
                                 <?php } ?>
-                                <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="" data-target="#exampleModalCenter" data-wow-delay="1000ms">
+                                <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="modal" data-target="#exampleModalCenter" data-wow-delay="1000ms">
                                     Admission Enquiry
                                 </button>
                                 <!-- <button class="btn btn-theme2-border"><i class="fa fa-eye"></i> Page Views : 135</button> -->
@@ -628,89 +628,91 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 <?php } ?>
             </div>
-            <div class="col-md-3 pl-0-web">
-                <div class="sd-inner-main sd-sidebar wow fadeInUp">
-                    <div class="sd-ection-tit">Similar Schools</div>
-                    <?php foreach($similar_school as $similar){ ?>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <?php if(!empty($similar->logo)){ ?>
-                            <img src="<?php echo base_url() ?>public/laravel/<?php echo $similar->logo ?>" class="sd-sidebar-img" alt="">
-                            <?php } else { ?>
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                <div class="col-md-3 pl-0-web">
+                    <?php if(!empty($similar_school)){ ?>
+                        <div class="sd-inner-main sd-sidebar wow fadeInUp">
+                            <div class="sd-ection-tit">Similar Schools</div>
+                            <?php foreach($similar_school as $similar){ ?>
+                            <div class="row sd-sidebar-list">
+                                <div class="col-md-4 sd-sidebar-list-left">
+                                    <?php if(!empty($similar->logo)){ ?>
+                                    <img src="<?php echo base_url() ?>public/laravel/<?php echo $similar->logo ?>" class="sd-sidebar-img" alt="">
+                                    <?php } else { ?>
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                                    <?php } ?>
+                                </div>
+                                <div class="col-md-8 sd-sidebar-list-right">
+                                    <h3><a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank"> <?php echo ucfirst($similar->school_name) ?></a></h3>
+                                    <h6><?php echo $similar->address ?></h6>
+                                </div>
+                            </div>
                             <?php } ?>
                         </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank"> <?php echo ucfirst($similar->school_name) ?></a></h3>
-                            <h6><?php echo $similar->address ?></h6>
+                        <div class="ads-school-widget mb-3 wow fadeInUp">
+                            <div class="ads-inner"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
                         </div>
-                    </div>
+                        <!-- <div class="sd-inner-main sd-sidebar wow fadeInUp">
+                            <div class="sd-ection-tit">Recent News</div>
+                            <div class="row sd-sidebar-list">
+                                <div class="col-md-4 sd-sidebar-list-left">
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                                </div>
+                                <div class="col-md-8 sd-sidebar-list-right">
+                                    <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                                    <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                                </div>
+                            </div>
+                            <div class="row sd-sidebar-list">
+                                <div class="col-md-4 sd-sidebar-list-left">
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                                </div>
+                                <div class="col-md-8 sd-sidebar-list-right">
+                                    <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                                    <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                                </div>
+                            </div>
+                            <div class="row sd-sidebar-list">
+                                <div class="col-md-4 sd-sidebar-list-left">
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                                </div>
+                                <div class="col-md-8 sd-sidebar-list-right">
+                                    <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                                    <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                                </div>
+                            </div>
+                            <div class="row sd-sidebar-list">
+                                <div class="col-md-4 sd-sidebar-list-left">
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                                </div>
+                                <div class="col-md-8 sd-sidebar-list-right">
+                                    <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                                    <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                                </div>
+                            </div>
+                            <div class="row sd-sidebar-list">
+                                <div class="col-md-4 sd-sidebar-list-left">
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                                </div>
+                                <div class="col-md-8 sd-sidebar-list-right">
+                                    <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                                    <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                                </div>
+                            </div>
+                            <div class="row sd-sidebar-list">
+                                <div class="col-md-4 sd-sidebar-list-left">
+                                    <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
+                                </div>
+                                <div class="col-md-8 sd-sidebar-list-right">
+                                    <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
+                                    <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
+                                </div>
+                            </div>
+                        </div> -->
                     <?php } ?>
+                    <div class="ads-school-widget mb-3 wow fadeInUp">
+                        <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
+                    </div>
                 </div>
-                <div class="ads-school-widget mb-3 wow fadeInUp">
-                    <div class="ads-inner"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-                </div>
-                <!-- <div class="sd-inner-main sd-sidebar wow fadeInUp">
-                    <div class="sd-ection-tit">Recent News</div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                    <div class="row sd-sidebar-list">
-                        <div class="col-md-4 sd-sidebar-list-left">
-                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-sidebar-img" alt="">
-                        </div>
-                        <div class="col-md-8 sd-sidebar-list-right">
-                            <h3><a href="#"> St Joseph's Matriculation Higher Secondary School</a></h3>
-                            <h6>1591, Trichy Road, Coimbatore – 641018. Tamilnadu. INDIA</h6>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="ads-school-widget mb-3 wow fadeInUp">
-                    <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
-                </div>
-            </div>
             <div class="clearfix"></div>
             <div id="contact-info" class="col-md-12">
                 <div class="sd-inner-main contact-info wow fadeInUp">
@@ -748,11 +750,13 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <?php echo $school_details->map_url; ?>
+                            <?php   if(substr($school_details->map_url, 0, 5) === "https"){  ?>
+                                        <iframe src="<?php echo $school_details->map_url ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <?php   }else{ 
+                                    echo $school_details->map_url; 
+                                    ?>
+                                    <?php } ?>
                             </div>
-                            <!-- <div class="col-lg-8 mab-30 wow bounceIn" data-wow-delay="600ms">
-                                <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-                            </div> -->
                         </div>
                     </div>
                 </div> 
@@ -826,38 +830,88 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
             </div>
         </div><br>
     </div>
-    <div class="container">
-        <div class="custom-section-title">
-            <h3 class="mb-2">Similar Schools</h3>
-        </div>
-        <?php //foreach($similar_school as $similar) ?>
-        <div class="home-tsw top-school-widget mab-50">
-            <div class="owl-two owl-carousel owl-theme">
-                <?php foreach($similar_school as $key=>$similar){ ?>
-                    <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
-                        <a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank">
-                            <figure>
-                                <div class="package-name">Premium</div>
-                                <div class="object-fit">
-                                    <?php if(!empty($similar->logo)){ ?>
-                                        <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $yourcity; ?>" />
-                                            <?php } else { ?>
-                                        <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $city; ?>" />
-                                        <?php } ?>
-                                </div>
-                                <figcaption class="item-footer">
-                                    <h6><?php echo ucfirst($similar->school_name) ?></h6>
-                                    <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
-                                </figcaption>
+    <?php if(!empty($similar_school)){ ?>
+        <div class="container">
+            <div class="custom-section-title">
+                <h3 class="mb-2">Similar Schools</h3>
+            </div>
+            <?php //foreach($similar_school as $similar) ?>
+            <div class="home-tsw top-school-widget mab-50">
+                <div class="owl-two owl-carousel owl-theme">
+                    <?php foreach($similar_school as $key=>$similar){ ?>
+                        <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                            <a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank">
+                                <figure>
+                                    <div class="package-name">Premium</div>
+                                    <div class="object-fit">
+                                        <?php if(!empty($similar->logo)){ ?>
+                                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $yourcity; ?>" />
+                                                <?php } else { ?>
+                                            <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $city; ?>" />
+                                            <?php } ?>
+                                    </div>
+                                    <figcaption class="item-footer">
+                                        <h6><?php echo ucfirst($similar->school_name) ?></h6>
+                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                    </figcaption>
 
-                            </figure>
-                        </a>
+                                </figure>
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="lnr lnr-cross"></i></span>
+                </button>
+                <h3 class="text-center mb-3" style="color: #303030;">Admission Enquiry</h3>
+
+                <form action="<?php echo base_url() ?>schooldetail/admission" class="row" method="post">
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="firstname" name="firstname" aria-describedby="emailHelp" placeholder="First Name*" required>
+                        </div>
                     </div>
-                <?php } ?>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="lastname" name="lastname" aria-describedby="emailHelp" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Your Email*" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="number" step="any" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp" placeholder="Phone Number*" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6" style="display:none">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="schoolid" name="schoolid" aria-describedby="emailHelp" value="<?php echo $school_details->id; ?>" >
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="form-group">
+                            <textarea class="form-control" id="enquiry" name="enquiry" placeholder="Enquiry" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
+</div><!-- /modal -->
 <script>
     $('#sd-menu a').click(function(e) {
         $('#sd-menu a').removeClass('active');

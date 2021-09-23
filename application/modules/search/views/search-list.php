@@ -55,7 +55,7 @@
         <div class="row">
             <div class="col-lg-6 col-sm-6 home-search-widget">
                 <div>
-                    <form action="<?php echo base_url() ?>schools-list" method="post">
+                    <form action="<?php echo base_url() ?>schools-list" method="get">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <?php if ($aff_url != "") { ?>
@@ -260,6 +260,8 @@
         <?php } ?>
     </div>
 </div>
+<?php echo $links ?>
+
 <!-- Footer templete -->
 <svg id="deco-clouds" xmlns="https://www.w3.org/2000/svg" version="1.1" style="background-color: #fff;" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
 <path d="M-5 100 Q 0 20 5 100 Z

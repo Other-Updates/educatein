@@ -136,13 +136,13 @@ if ($user->num_rows() > 0) {
 
             <?php
             $this->db->select('*')->where('user_id =', $userid);
-// $this->db->where('is_active =','1');
+            $this->db->where('is_active =','1');
             $this->db->where('deleted_at =', NULL);
             $this->db->from('school_details');
             $school = $this->db->get();
 
             $this->db->select('*')->where('user_id =', $userid);
-// $this->db->where('is_active =','1');
+            $this->db->where('is_active =','1');
             $this->db->where('deleted_at =', NULL);
             $this->db->from('institute_details');
             $institute = $this->db->get();
@@ -402,6 +402,13 @@ if ($user->num_rows() > 0) {
                                     <p><?php echo $country; ?></p>	
                                 </div>
                             </div>
+                            <div class="col-lg-4">
+                            <a href="<?php echo base_url() ?>myaccount/edit/<?php echo base64_encode($user_id) ?>"><button type="button" class="btn btn-info">Edit</button></a>
+                                <!-- <div class="your-info-widget">
+                                    <p class="lead"></p>
+                                    <p></p>	
+                                </div> -->
+                            </div>
                         </div><!-- /row -->
                     </div><!-- /your-info -->
 
@@ -621,7 +628,7 @@ if ($user->num_rows() > 0) {
                     title: "Registered Successfully!",
                     type: "success"
                 }).then(function() {
-                    // window.location = "<?php echo base_url() ?>package?id=<?php echo base64_encode($userid); ?>";
+                     window.location = "<?php echo base_url() ?>myaccount?id=<?php echo base64_encode($userid); ?>";
                 });
             }           
         }

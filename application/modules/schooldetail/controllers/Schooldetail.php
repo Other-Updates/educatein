@@ -45,7 +45,8 @@ class Schooldetail extends CI_Controller {
 
         $this->db->insert('admission_enquiries', $data);
 
-        $this->load->view('welcome_message');
+        // $this->load->view('welcome_message');
+        redirect(base_url());
     }
 
     public function newsletter() {

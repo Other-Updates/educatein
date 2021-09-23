@@ -151,7 +151,7 @@
                         <div class="row">
                             <div class="col-lg-2"></div>
                             <div class="col-lg-8">
-                                <form action="<?php echo base_url() ?>schools-list" method="post">
+                                <form action="<?php echo base_url() ?>schools-list" method="get">
                                     <div class="input-group mb-3 shadow-lg">
                                         <div class="input-group-prepend">
                                             <?php if ($aff_url != "") { ?>

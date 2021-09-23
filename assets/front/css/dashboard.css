@@ -238,6 +238,18 @@ body {
 	background-color: #d12881;
 	border-color: #d12881;
 }
+.btn_save {
+	padding: 8px 30px;
+	border-radius: 3px;
+	background-color: #33317c;
+	border-color: #33317c;
+	font-weight: 500;
+	transition: .2s all;
+}
+.btn_save:hover {
+	background-color: #d12881;
+	border-color: #d12881;
+}
 
 .profile-image-section .media-left {
 	position: relative;
