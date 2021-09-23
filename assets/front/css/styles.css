@@ -3054,3 +3054,27 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 .sidebar-categories ul li.active a, .sidebar-categories li.active a .fa {
 	color: #d12881;
 }
+.select-city-tit {
+	font-size: 25px;
+    text-align: center;
+}
+.select-city-icon {
+	text-align: center;
+}
+.select-city-icon img {
+	width: 100px;
+}
+.city-list a {
+	background: #ffd2e7;
+    border-radius: 10px;
+    margin-bottom: 5px;
+	padding: 10px;
+    line-height: 12px;
+	color: #000;
+	display: block;
+}
+.city-list a:hover {
+	background: #d12881;
+	color: #fff;
+	text-decoration: none;
+}

@@ -124,14 +124,20 @@
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-keyboard="false" data-backdrop="static"  >
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-body p-4"> 
+                <div class="modal-body"> 
                     <div class="d-flex flex-wrap">
-                        <?php
-                        foreach ($allcity as $allcitys) {
-                            $lowercity = strtolower($allcitys->city_name);
-                            ?>
-                            <div class="col-12 col-md-4"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></div>                               
-                        <?php } ?> 
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <div class="select-city-tit">Select City</div>
+                                <div class="select-city-icon"><img src="<?php echo base_url() ?>assets/front/images/select_city.gif" alt="best kindergarten schools in <?php echo $city; ?>" /></div>
+                            </div>
+                            <?php
+                            foreach ($allcity as $allcitys) {
+                                $lowercity = strtolower($allcitys->city_name);
+                                ?>
+                                <div class="col-12 col-md-4"><div class="city-list"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="lnr lnr-map-marker"></i> <?php echo $allcitys->city_name; ?></a></div></div>                               
+                            <?php } ?> 
+                        </div>
                     </div> 
                 </div>
             </div>
