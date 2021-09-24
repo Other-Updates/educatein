@@ -37,7 +37,7 @@
                                     <a href="<?php echo base_url() ?>admin/forgot_password" class="mb-3">Forget Your Password?</a>	
                                 </div>
 
-                                <button type="submit" id="signin" name="signin" class="btn btn-primary mb-4">SIGN IN</button>
+                                <button type="submit" id="signin" name="signin" class="btn btn-primary mb-4 signin">SIGN IN</button>
                             </form>
 
                             <p>Don't Have an account? <a href="<?php echo base_url() ?>schools-signup"  id="formsubmit" class="text-pink"><u>SIGN UP</u></a></p>
@@ -54,7 +54,7 @@
 </div><!-- /new-signin-section -->
 <script>
     $(document).ready(function () {
-        $("#formsubmit").on('click',function (event) {
+        $(".signin").on('click',function (event) {
             $("#signin").validate({
                 rules: {
                     signemail: "required",
@@ -62,7 +62,7 @@
 
                     },
                     messages: {
-                        signemail: "this field is required"
+                        signemail: "valid mail required"
                     },
                     errorElement: 'div',
                     errorLabelContainer: '.errorTxt',
@@ -100,5 +100,5 @@
     //     });
     // });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 

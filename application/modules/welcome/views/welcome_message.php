@@ -177,12 +177,12 @@
                                                 </ul>
                                             </div><!-- /dropdown-menu -->
                                         </div>
-                                        <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
-                                        <?php if ($aff_url != "") { ?>
-                                            <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
+                                        <?php if ($searchcity != "") { ?>
+                                            <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo ucfirst($searchcity); ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                                         <?php } else { ?>
                                             <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                                         <?php } ?>
+                                        <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
                                         <!-- <div id="map"></div> -->
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>

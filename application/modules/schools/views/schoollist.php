@@ -191,7 +191,7 @@ $allcity = $this->db->get()->result();
         <div class="row">
             <div class="col-lg-6 col-sm-6 home-search-widget">
                 <div>
-                    <form action="<?php echo base_url() ?>schools-list" method="post">
+                    <form action="<?php echo base_url() ?>schools-list" method="get">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <?php if ($aff_url != "") { ?>
@@ -206,7 +206,7 @@ $allcity = $this->db->get()->result();
                                             $lowercity = strtolower($allcitys->city_name);
                                             ?>
 
-                                            <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
+                                            <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-<?php echo $aff_url ?>-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
                                         <?php } ?>
                                     </ul>
                                 </div><!-- /dropdown-menu -->

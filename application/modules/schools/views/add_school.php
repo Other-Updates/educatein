@@ -1259,6 +1259,7 @@
                     school_email: "required",
                     school_category: "required",
                     school_status: "required",
+                    school_address: "required",
                 },
                 messages: {
                     schoolname: "this field is required"

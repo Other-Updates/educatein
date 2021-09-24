@@ -58,7 +58,7 @@
                     <form action="<?php echo base_url() ?>schools-list" method="get">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <?php if ($aff_url != "") { ?>
+                                <?php if ($searchcity != "") { ?>
                                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?> <i class="fa fa-angle-down"></i>  </button>
                                 <?php } else { ?>
                                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
@@ -76,7 +76,7 @@
                                 </div><!-- /dropdown-menu -->
                             </div>
                             <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
-                            <?php if ($aff_url != "") { ?>
+                            <?php if ($searchcity != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                             <?php } else { ?>
                                 <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
@@ -253,6 +253,7 @@
                             </div>
                         <?php }
                         ?>
+                        <div class="pagination"><?php echo $links ?></div>
                     </div>
 
                 </div>

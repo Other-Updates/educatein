@@ -66,6 +66,28 @@ class Search extends CI_Controller {
         }
     }
 
+    public function search_class($search,$limit=null, $start=null){
+        $where = "ind.is_active=1 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+        $this->db->select('ind.*,ic.category_name,ar.area_name');
+        if(!empty($session['city_id']))
+        $this->db->where('ind.city_id',$session['city_id']);
+        $this->db->where($where);
+        $this->db->like('ind.institute_name',$_GET['search_class']);
+        $this->db->order_by('position_id');
+        $this->db->from('institute_details as ind');
+        $this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
+        $this->db->join('areas as ar','ind.area_id=ar.id','left');
+        // $data['activityclass'] = $this->db->get()->result_array();
+        $data["search"] = "Activity Classes in " . ucfirst($session["search_city"]);
+        if(!empty($limit)){
+            $this->db->limit($limit, $start);
+            $data['activityclass'] = $this->db->get()->result_array();
+            return $data;
+        }else{
+            return $this->db->get()->num_rows();
+        }
+    }
+
     public function createPageinatation($count,$link){
         $config = array();
         if ($this->input->get('search')) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
@@ -82,7 +104,7 @@ class Search extends CI_Controller {
 
     public function index() {
         $school = $_GET['search']; // school search 
-        $activityclass = $_POST['activity_class']; // activity class search 
+        $activityclass = $_GET['search_class']; // activity class search 
         $data = array("search" => "");
         $session = $this->session->userdata();
         // print_r($session['city_id']);
@@ -108,53 +130,14 @@ class Search extends CI_Controller {
             $data1 = $this->search_school($_GET['search'],$this->page_count, $page);
             $data['schools'] =  $data1['schools'];
             $data['search'] =  $data1['search'];
-            // $where = "sd.is_active=1 AND sd.status=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
-            // $this->db->select('sd.*,af.affiliation_name,ar.area_name');
-            // if(!empty($session['city_id']))
-            // $this->db->where('sd.city_id',$session['city_id']);
-            // $this->db->where($where);
-            // $this->db->like('sd.school_name',$_POST['search']);
-            // $this->db->order_by('school_category_id');
-            // $this->db->from('school_details as sd');
-            // $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
-            // $this->db->join('areas as ar','sd.area_id=ar.id','left');
-            // $data['schools'] = $this->db->get()->result_array();
-            // $data["search"] = "Schools in " . ucfirst($session["search_city"]);
         }
-        if(isset($_POST['activity_class'])){
-            $where = "ind.is_active=1 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
-            $this->db->select('ind.*,ic.category_name,ar.area_name');
-            if(!empty($session['city_id']))
-            $this->db->where('ind.city_id',$session['city_id']);
-            $this->db->where($where);
-            $this->db->like('ind.institute_name',$_POST['activity_class']);
-            $this->db->order_by('position_id');
-            $this->db->from('institute_details as ind');
-            $this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
-            $this->db->join('areas as ar','ind.area_id=ar.id','left');
-            $data['activityclass'] = $this->db->get()->result_array();
-            $data["search"] = "Activity Classes in " . ucfirst($session["search_city"]);
+        if(isset($_GET['search_class'])){
+            $data["links"] = $this->createPageinatation($this->search_class($_GET['search_class']),'schools-list');
+            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $data1 = $this->search_class($_GET['search_class'],$this->page_count, $page);
+            $data['activityclass'] =  $data1['activityclass'];
+            $data['search'] =  $data1['search'];
         }
-
-        // $config = array();
-        // $config["base_url"] = base_url() . "schools-list";
-        // $config["total_rows"] = 50;
-        // $config["per_page"] = 10;
-        // $config["uri_segment"] = 2;
-        // $this->pagination->initialize($config);
-        // $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-        // $data["links"] = $this->pagination->create_links();
-
-
-
-        // $data['authors'] = $this->authors_model->get_authors($config["per_page"], $page);
-
-
-
-
-
-
-
         $data["affiliations"] = $this->Base_Model->get_records("affiliations", "*", array(array(true, "is_active", 1)), "result");
         $data["institute_categories"] = $this->Base_Model->get_records("institute_categories", "*", array(), "result");
 
