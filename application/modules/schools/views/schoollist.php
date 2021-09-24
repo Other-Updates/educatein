@@ -513,8 +513,9 @@ $allcity = $this->db->get()->result();
             // }
 
             $where1 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            $this->db->select('sd.*,si.images as banner')->where($where1);
+            $this->db->select('sd.*,si.images as banner,st.school_type')->where($where1);
             $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+            $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
             $topschool = $this->db->get();
@@ -602,10 +603,10 @@ $allcity = $this->db->get()->result();
                                                 <h6><?php echo ucfirst($top->school_name) ?></h6>
                                                 <div class="row">
                                                     <div class="col-lg-9 item-left-section">
-                                                        <p><i class="fa fa-map-marker"></i> Address : <b>407 Hastings St South, Akina, Hastings, P O Box 585, Hastings</b></p>
-                                                        <p><i class="fa fa-book"></i> School Board : <b>Special</b></p>
-                                                        <p><i class="fa fa-university"></i> Grade Level : <b>High School</b></p>
-                                                        <p><i class="fa fa-building-o"></i>  Establishment Year : <b>2000</b></p>
+                                                        <p><i class="fa fa-map-marker"></i> Address : <b><?php echo ucwords($top->address) ?></b></p>
+                                                        <p><i class="fa fa-book"></i> School Board : <b><?php echo ucfirst($aff_name) ?></b></p>
+                                                        <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($top->school_type) ?></b></p>
+                                                        <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                     </div>
                                                     <div class="col-lg-3 item-right-section">
                                                         <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
@@ -617,7 +618,6 @@ $allcity = $this->db->get()->result();
                                             </figcaption>
                                         </figure>
                                     </a>
-                                    <p><?php echo $links ?></p>
                                 </div>
                             <!-- </div> -->
                         </div>
