@@ -135,9 +135,11 @@ class Search extends CI_Controller {
             $data["links"] = $this->createPageinatation($this->search_class($_GET['search_class']),'schools-list');
             $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
             $data1 = $this->search_class($_GET['search_class'],$this->page_count, $page);
+
             $data['activityclass'] =  $data1['activityclass'];
             $data['search'] =  $data1['search'];
         }
+        $data['searchcity'] = $session['search_city'];
         $data["affiliations"] = $this->Base_Model->get_records("affiliations", "*", array(array(true, "is_active", 1)), "result");
         $data["institute_categories"] = $this->Base_Model->get_records("institute_categories", "*", array(), "result");
 
