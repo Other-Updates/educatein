@@ -205,7 +205,7 @@
                                     <div class="yesorno">
                                         <label for="customRadio1">Eligibility to Avail Admission Under the RTE Act</label>
                                         <div class="form-row">
-                                            <div class="custom-control custom-radio">
+                                            <div class="custom-control custom-radio pr-3">
                                                 <input type="radio" id="customRadio1" name="customRadio1" value="1" class="custom-control-input" >
                                                 <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio1">Yes</label>
                                             </div>
@@ -221,7 +221,7 @@
                                     <div class="yesorno">
                                         <label for="customRadio2">Hostel Facility</label>
                                         <div class="form-row">
-                                            <div class="custom-control custom-radio">
+                                            <div class="custom-control custom-radio pr-3">
                                                 <input type="radio" id="customRadio3" name="customRadio2"  value="1"  class="custom-control-input" >
                                                 <label class="custom-control-label" style="margin-top: 0px!important;" for="customRadio3">Yes</label>
                                             </div>
@@ -627,7 +627,7 @@
                         </div>
                         <div class="edit-school-inner">
 
-                            <h3 class="mt-4 mb-3">Gallery Images</h3>
+                            <h4>Gallery Images</h4>
                             <hr class="mb-4">
                             <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
                             <div class="input_fields_wrap mt-3">
@@ -993,7 +993,7 @@
                     </div>
                     <div class="edit-school-inner">
 
-                        <h3 class="mt-4 mb-3">Gallery Images</h3>
+                        <h4>Gallery Images</h4>
                         <hr class="mb-4">
                         <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
                         <div class="input_fields_wrap mt-3">
