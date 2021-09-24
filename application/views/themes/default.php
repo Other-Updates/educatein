@@ -625,6 +625,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('admin/dashboard'); ?>">Dashboard</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('admin/schools'); ?>">Schools</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('admin/schools/institute'); ?>">Institutes</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ml-auto"> 
                         <li class="user dropdown open"> 
