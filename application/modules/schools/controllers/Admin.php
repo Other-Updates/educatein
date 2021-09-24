@@ -4273,6 +4273,15 @@ class admin extends CI_Controller {
             $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.activated_at');
             $this->db->where('sd.deleted_at',NULL);
             $this->db->from('school_details as sd');
+            if($input_data['type'] == 'approved'){
+                $this->db->where('sd.status',1);
+            }
+            if($input_data['type'] == 'hold'){
+                $this->db->where('sd.status',NULL);
+            }
+            if($input_data['type'] == 'reject'){
+                $this->db->where('sd.status',2);
+            }
             $this->db->join('user_register as ur', 'sd.user_id = ur.id', 'left');
             $this->db->join('cities as ci','sd.city_id=ci.id','left');
             if($searchVal != null && $searchVal != ''){
@@ -4348,8 +4357,8 @@ class admin extends CI_Controller {
         // $school_data = $this->db->get()->result_array();
         $output = array(
             "draw" => $input_data['draw'],
-            "recordsTotal" => $this->db->count_all_results(),
-            "recordsFiltered" => $query->num_rows(),
+            "recordsTotal" => count($school_data),
+            "recordsFiltered" => count($school_data),
             "data" => $data,
         );
         echo json_encode($output);exit;

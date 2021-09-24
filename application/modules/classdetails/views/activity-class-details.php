@@ -163,7 +163,7 @@ $similar_school = $this->db->get();
                             <div class="clearfix"></div>
                             <div class="esd-banner-details-btn">
                                 <button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
-                                <button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button>
+                                <a href="tel:"<?php echo $institute_dets->mobile ?>><button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button></a>
                                 <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open now</button>
                                 <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="" data-target="#exampleModalCenter" data-wow-delay="1000ms">
                                     Admission Enquiry
@@ -603,8 +603,6 @@ $similar_school = $this->db->get();
                     <?php foreach($similar_school->result() as $key=>$similar){ 
                         $type = strtolower($similar->type);
                         $type = str_replace(" ","-",$type);
-                        // echo "<pre>";print_r($similar);
-                        print_r($similar->position_id == 2);
                         ?>
                             <?php //if($similar->position_id == 1){ ?> 
                         <!-- <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;"> -->
