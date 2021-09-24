@@ -191,7 +191,7 @@
                             </div>
                         <?php }
                         ?>
-                        <div class="pagination"><?php echo $links ?></div>
+                        <div class="custom-pagination pagination"><?php echo $links ?></div>
 
                     </div>
 
