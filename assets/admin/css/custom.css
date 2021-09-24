@@ -96,13 +96,72 @@ a:hover {
     border-radius: 10px;
     object-fit: cover;
 }
-table.dataTable thead th {
-    background: #f0f0f0;
-    border: 0;
-}
 .btn-wid {
     width: 120px;
 }
 .table td, .table th {
     vertical-align: middle;
+}
+.tab-content .tab-pane.active {
+    background: #f0efff;
+    padding: 20px 10px 10px 10px;
+    border: 2px solid #ddd;
+    border-radius: 0 10px 10px 10px;
+}
+.tab-content .tab-pane.active#approved {
+    border: 2px solid #28a745;
+}
+.tab-content .tab-pane.active#hold {
+    border: 2px solid #ffc107;
+    border-radius:10px;
+}
+.tab-content .tab-pane.active#reject {
+    border: 2px solid #dc3545;
+    border-radius:10px;
+}
+.nav-link {
+    display: block;
+    padding: .6rem 3rem;
+}
+.nav-tabs #approved-tab.nav-link.active {
+	background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+.nav-tabs #approved-tab.nav-link {
+    color: #28a745;
+}
+.nav-tabs #hold-tab.nav-link.active {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.nav-tabs #hold-tab.nav-link {
+    color: #ffc107;
+}
+.nav-tabs #reject-tab.nav-link.active {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.nav-tabs #reject-tab.nav-link {
+    color: #dc3545;
+}
+.nav-tabs {
+    border-bottom: 0px solid #dee2e6;
+}
+.nav-tabs .nav-link {
+    border: 2px solid #0000000f;
+    border-top-left-radius: 0.625rem;
+    border-top-right-radius: 0.625rem;
+}
+.nav-tabs .nav-link:hover {
+    border-bottom: 0;
+    background: #00000009;
+}
+.nav-tabs .nav-item {
+    margin-bottom: -2px;
+}
+.nav-tabs .nav-link i {
+    padding-right: 10px;
 }
