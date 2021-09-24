@@ -556,7 +556,7 @@ $allcity = $this->db->get()->result();
             ?>
         <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum)){ ?>
             <?php if($topschool->num_rows() != 0){ ?>
-                <div class="top-school-widget mab-20">
+                <div class="home-tsw top-school-widget top-school-sigle mab-20">
                     <div class="custom-section-title mab-10">
                         <h3 class="mb-2">Top Schools in <span><?php echo $yourcity; ?></span></h3>
                     </div><!-- /section-title -->
@@ -585,7 +585,7 @@ $allcity = $this->db->get()->result();
                                     // exit();
                                     ?>
                                     
-                        <div class="home-tsw top-school-widget mab-20">
+                        <div class="mab-20">
                             <!-- <div class="owl-one owl-carousel owl-theme"> -->
                                 <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
                                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
@@ -600,7 +600,20 @@ $allcity = $this->db->get()->result();
                                             </div>
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($top->school_name) ?></h6>
-                                                <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                                <div class="row">
+                                                    <div class="col-lg-9 item-left-section">
+                                                        <p><i class="fa fa-map-marker"></i> Address : <b>407 Hastings St South, Akina, Hastings, P O Box 585, Hastings</b></p>
+                                                        <p><i class="fa fa-book"></i> School Board : <b>Special</b></p>
+                                                        <p><i class="fa fa-university"></i> Grade Level : <b>High School</b></p>
+                                                        <p><i class="fa fa-building-o"></i>  Establishment Year : <b>2000</b></p>
+                                                    </div>
+                                                    <div class="col-lg-3 item-right-section">
+                                                        <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
+                                                        <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
+                                                    </div>
+                                                </div>
+                                                
+                                                
                                             </figcaption>
                                         </figure>
                                     </a>
@@ -972,11 +985,11 @@ $ip = $_SERVER['REMOTE_ADDR'];
                     nav:true
                 },
                 600:{
-                    items:2,
+                    items:1,
                     nav:false
                 },
                 1000:{
-                    items:3,
+                    items:1,
                     nav:true,
                     loop:false
                 }

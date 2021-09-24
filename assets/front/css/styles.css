@@ -3078,3 +3078,55 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 	color: #fff;
 	text-decoration: none;
 }
+.custom-pagination {
+	margin: 15px auto;
+}
+.custom-pagination a, .custom-pagination strong {
+	margin: 0 8px;
+    background: #ebeaff;
+    border-radius: 50%;
+    box-shadow: 0px 2px 8px #00000042;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 38px;
+    color: #000;
+    border: 1px solid #fff;
+}
+.custom-pagination strong, .custom-pagination a:hover {
+	background:#33317c;
+	color: #fff;
+	text-decoration: none;
+	font-weight: normal;
+}
+.custom-pagination a:last-child, .custom-pagination a:first-child {
+	background:#d12881;
+	color: #fff;
+	line-height: 37px;
+}
+.top-school-sigle.top-school-widget figcaption h6 {
+	font-size: 30px;
+}
+.top-school-sigle.top-school-widget figcaption {
+	padding: 45px;
+}
+.item-footer .item-right-section .btn img {
+	width: 40px;
+	display: inline-block;
+}
+.item-right-section {
+	text-align: center;
+}
+.top-school-sigle.top-school-widget figcaption {
+	background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.90) 0%, transparent 80%);
+    background-image: linear-gradient(to top, rgb(0 0 0 / 90%) 0%, transparent 80%);
+}
+.item-left-section p {
+	font-weight: normal;
+}
+.item-left-section p b {
+	font-weight: 500;
+}
+.item-left-section p i {
+	padding-right: 5px;
+}
