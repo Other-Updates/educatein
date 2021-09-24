@@ -96,3 +96,13 @@ a:hover {
     border-radius: 10px;
     object-fit: cover;
 }
+table.dataTable thead th {
+    background: #f0f0f0;
+    border: 0;
+}
+.btn-wid {
+    width: 120px;
+}
+.table td, .table th {
+    vertical-align: middle;
+}

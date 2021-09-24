@@ -4287,9 +4287,9 @@ class admin extends CI_Controller {
             foreach($school_data as $school){
                 $row = array();
 
-                $edit =  "<a href='". base_url("schools/admin/school_edit?id=". base64_encode($school["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>";
-                $delete = "<a href='". base_url("schools/admin/school_delete?id=". base64_encode($school["id"]))."' class='delete btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0 delete' id='del_btn'>Delete</a>";
-                $view = "<a href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>";
+                $edit =  "<div class='btn-wid'><a title='Edit' href='". base_url("schools/admin/school_edit?id=". base64_encode($school["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
+                $delete = "<a title='Delete' href='". base_url("schools/admin/school_delete?id=". base64_encode($school["id"]))."' class='delete btn btn-outline-danger delete btn-sm' id='del_btn'><i class='bi bi-trash'></i></a>";
+                $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a></div>";
 
                 $row[] = $sno;
                 $row[] = ucfirst($school['user']);
@@ -4405,9 +4405,9 @@ class admin extends CI_Controller {
             foreach($institute_data as $institute){
                 $row = array();
 
-                $edit = "<a href='". base_url("admin/schools/institute_edit?id=". base64_encode($institute["id"]))."' class='btn btn-outline-info py-0 mr-1 mb-2 mb-md-0'>Edit</a>";
-                $delete = "<a href='". base_url("admin/schools/institute_delete?id=". base64_encode($institute["id"]))."'  class=' btn btn-outline-danger  py-0 mr-1  mb-2  mb-md-0 delete'>Delete</a>";
-                $view = "<a href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark  py-0 mb-2  mb-md-0'>View</a>";
+                $edit = "<div class='btn-wid'><a title='Edit' href='". base_url("admin/schools/institute_edit?id=". base64_encode($institute["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
+                $delete = "<a title='Delete' href='". base_url("admin/schools/institute_delete?id=". base64_encode($institute["id"]))."'  class=' btn btn-outline-danger btn-sm delete'><i class='bi bi-trash'></i></a>";
+                $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a></div>";
 
                 $row[] = $sno;
                 $row[] = ucfirst($institute['user']);

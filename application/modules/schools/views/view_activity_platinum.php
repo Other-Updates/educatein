@@ -56,58 +56,53 @@ $school_id = $institute[0]['id'];
             <form action="<?php echo base_url() ?>institute_listing_first/insert" method="post" enctype="multipart/form-data">
             <div class="edit-school-inner">
                 <div class="form-row">
-                    <div class="col-lg-3 col-sm-6" style="display:none">
-                        <div class="form-group">
-                            <label for="user_id">user id</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>"  placeholder="e.g PSG Matriculation" required>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-row">
+                            <div class="col-lg-12" style="display:none">
+                                <div class="form-group">
+                                    <label for="user_id">user id</label>
+                                    <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>"  placeholder="e.g PSG Matriculation" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="institutename">Institute Name</label>
+                                    <input type="text" class="form-control" id="institutename" placeholder="e.g Haunuz dance school" value="<?php echo $institute[0]['institute_name']; ?>" name="institutename" readonly required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="type">Institute Type</label>
+                                    <input type="text" class="form-control" id="type" name="type" value="<?php echo $categories[0]['category_name'];?>" readonly >
+                                    <!-- <select class="form-control" id="type" name="type" readonly required disabled>
+                                        <option  value=""  >--Select Type--</option>
+                                        <?php
+                                        $this->db->select('*');
+                                        $this->db->from('institute_categories');
+                                        $category = $this->db->get();
+                                        foreach ($category->result() as $categorys) {
+                                            ?><label> </label>
+                                            <option value="<?php echo $categorys->category_name; ?>"<?php if($categorys->category_name == $categories[0]['category_name']){echo "selected";}?> ><?php echo $categorys->category_name; ?></option>
+                                        <?php } ?>
+                                    </select>                           -->
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" class="form-control" name="city" id="exampleFormControlSelect1" value="<?php echo $city1[0]['city_name'];?>" readonly >
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="text">Area</label>
+                                    <input type="text" class="form-control" id="text" name="area" value="<?php echo $area[0]['area_name']; ?>" readonly placeholder="e.g Nallampalayam" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="institutename">Institute Name</label>
-                            <input type="text" class="form-control" id="institutename" placeholder="e.g Haunuz dance school" value="<?php echo $institute[0]['institute_name']; ?>" name="institutename" readonly required>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="type">Institute Type</label>
-                            <input type="text" class="form-control" id="type" name="type" value="<?php echo $categories[0]['category_name'];?>" readonly >
-                            <!-- <select class="form-control" id="type" name="type" readonly required disabled>
-                                <option  value=""  >--Select Type--</option>
-                                <?php
-                                $this->db->select('*');
-                                $this->db->from('institute_categories');
-                                $category = $this->db->get();
-                                foreach ($category->result() as $categorys) {
-                                    ?><label> </label>
-                                    <option value="<?php echo $categorys->category_name; ?>"<?php if($categorys->category_name == $categories[0]['category_name']){echo "selected";}?> ><?php echo $categorys->category_name; ?></option>
-                                <?php } ?>
-                            </select>                           -->
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" class="form-control" name="city" id="exampleFormControlSelect1" value="<?php echo $city1[0]['city_name'];?>" readonly >
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="form-group">
-                            <label for="text">Area</label>
-                            <input type="text" class="form-control" id="text" name="area" value="<?php echo $area[0]['area_name']; ?>" readonly placeholder="e.g Nallampalayam" required>
-                        </div>
-                    </div>
-                </div><!-- /form-row -->
-            </div>
-            <div class="edit-school-inner">
-                <!-- <h4 class="mb-2">Banner Image</h4>
-                <p class="mb-3">You can add 3 banner images in Platinum package.</p> -->
-                <!-- <hr class="mb-4"> -->
-                
-                                    <div class="row">
-                    <div class="col-lg-12">
-                        <label for="Images">Images</label>
-                        <!-- <label for="Images">Banner Image Sample</label> -->
+                    <div class="col-lg-6 banner-image-slider">
+                        <label for="bannerimagesample" class="mab-30"> Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                     <?php for($i=0;$i<(count($inst_img) + count($category_img));$i++){ ?>
@@ -137,12 +132,8 @@ $school_id = $institute[0]['id'];
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
-                        </div>
-                        <!-- <div class="object-fit" style="width: 100%;height: 252px;">
-                            <img src="<?php echo base_url("assets/front/images/"); ?>dashboard/1st-banner.jpg" class="w-100 rounded" alt="Images" style="width: 100%;height: 252px;object-fit: cover;">	
-                        </div> -->
+                        </div>          
                     </div>
-                                    </div>
                 </div><!-- /form-row -->
             </div>
             <div class="edit-school-inner">

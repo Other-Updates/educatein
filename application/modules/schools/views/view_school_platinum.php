@@ -267,22 +267,22 @@ $schooltype = $this->db->get()->result_array();
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-6 banner-image-slider">
                         <?php if(isset($school_img[0])){ ?>
                             <div class="">
                             <!-- <h4 class="mb-3">Banner Image</h4>
                                     <hr class="mb-4"> -->
-                                <div class="form-row">
+                                <div class="">
                                         
                                                     <!-- /file-img-upload -->
-                                    <div class="col-lg-12">
+                                    <div class="">
                                         <label for="bannerimagesample" class="mab-30"> Images</label>
                                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                        <ol class="carousel-indicators">
-                                                    <?php for($i=0;$i<(count($school_img) + count($school_facilities_datas ));$i++){ ?>
-                                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
-                                                    <?php } ?>
-                                                </ol>
+                                            <ol class="carousel-indicators">
+                                                <?php for($i=0;$i<(count($school_img) + count($school_facilities_datas ));$i++){ ?>
+                                                    <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
+                                                <?php } ?>
+                                            </ol>
                                             <div class="carousel-inner">
                                                 <?php $activeslide = true; ?>
 
@@ -298,16 +298,16 @@ $schooltype = $this->db->get()->result_array();
                                                     <img class="d-block w-100" src="<?php echo base_url("/laravel/public/"); ?><?php echo $image['image'] ?> " alt="<?php echo $key ?> slide">
                                                     </div>
                                                 <?php } ?>
-                                                </div>
-                                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
                                             </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div><!-- /form-row -->
                             </div>
@@ -537,12 +537,12 @@ $schooltype = $this->db->get()->result_array();
                         
                         <?php } ?>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 banner-image-slider">
                         <label for="bannerimagesample" class="mab-30"> Images</label>
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <?php for($i=0;$i<(count($school_img));$i++){ ?>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
+                                    <li data-target="#carouselExampleIndicators2" data-slide-to="<?php echo $i ?>" class="<?php if($i==0){echo 'active';} ?>"></li>
                                 <?php } ?>
                             </ol>
                             <div class="carousel-inner">
@@ -554,11 +554,11 @@ $schooltype = $this->db->get()->result_array();
                                     </div>
                                 <?php } ?>
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
@@ -588,7 +588,7 @@ $schooltype = $this->db->get()->result_array();
                                 </div>
                             </div>
                         </div> -->
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col-lg-9 col-sm-6">
                             <div class="form-group">
                             <?php if($key==0){ ?><label for="facilitydes1">Facility Description</label><?php } ?>
                                 <textarea class="form-control" name="facilitydes1" id="facilitydes1" rows="1" readonly><?php echo $school_facilities_data['content'] ?></textarea>
@@ -679,3 +679,8 @@ $schooltype = $this->db->get()->result_array();
         </div><!-- /listing-section -->
     </div><!-- /container -->
 </div><!-- /dashboard-content -->
+<script>
+    $(document).ready(function(){
+        $('#carouselExampleIndicators2').carousel();
+    })
+</script>
