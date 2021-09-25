@@ -4313,9 +4313,9 @@ class admin extends CI_Controller {
                 $row[] = $school['paid'];
                 $row[] = date('d-m-Y',strtotime($school['created_at']));
                 
-                if($school['status'] == 1){$row[] = "Approved";}
-                else if($school['status'] == 2){$row[] = "Rejected";}
-                else { $row[] = "Waiting for validation";}
+                // if($school['status'] == 1){$row[] = "Approved";}
+                // else if($school['status'] == 2){$row[] = "Rejected";}
+                // else { $row[] = "Waiting for validation";}
 
                 if($school['status'] == 1){
                     if($school['school_category_id'] == 4){
@@ -4400,6 +4400,15 @@ class admin extends CI_Controller {
             $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.activated_at');
             $this->db->where('in.deleted_at',NULL);
             $this->db->from('institute_details as in');
+            if($input_data['type'] == 'approved'){
+                $this->db->where('in.status',1);
+            }
+            if($input_data['type'] == 'hold'){
+                $this->db->where('in.status',NULL);
+            }
+            if($input_data['type'] == 'reject'){
+                $this->db->where('in.status',2);
+            }
             $this->db->join('user_register as ur', 'in.user_id = ur.id', 'left');
             $this->db->join('cities as ci','in.city_id=ci.id','left');
             if($searchVal != null && $searchVal != ''){
@@ -4432,9 +4441,9 @@ class admin extends CI_Controller {
                 $row[] = $institute['paid'];
                 $row[] = date('d-m-Y',strtotime($institute['created_at']));
                 
-                if($institute['status'] == 1){$row[] = "Approved";}
-                else if($institute['status'] == 2){$row[] = "Rejected";}
-                else { $row[] = "Waiting for validation";}
+                // if($institute['status'] == 1){$row[] = "Approved";}
+                // else if($institute['status'] == 2){$row[] = "Rejected";}
+                // else { $row[] = "Waiting for validation";}
 
                 if($institute['status'] == 1){
                     if($institute['position_id'] == 4){
@@ -4476,8 +4485,8 @@ class admin extends CI_Controller {
         // $school_data = $this->db->get()->result_array();
         $output = array(
             "draw" => $input_data['draw'],
-            "recordsTotal" => $this->db->count_all_results(),
-            "recordsFiltered" => $query->num_rows(),
+            "recordsTotal" => count($institute_data),
+            "recordsFiltered" => count($institute_data),
             "data" => $data,
         );
         echo json_encode($output);exit;

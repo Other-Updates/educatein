@@ -480,4 +480,14 @@ class Welcome extends CI_Controller {
         redirect(base_url());
     }
 
+    function search_school(){
+        $this->db->select('school_name');
+        $this->db->like('school_name',$_POST['keyword']);
+        $this->db->from('school_details');
+        $this->db->limit(6);
+        $get_school = $this->db->get()->result_array();
+        echo json_encode($get_school);
+        exit;
+    }
+
 }

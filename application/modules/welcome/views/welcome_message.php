@@ -182,7 +182,9 @@
                                         <?php } else { ?>
                                             <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                                         <?php } ?>
-                                        <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                                        <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                                        <div id="suggesstion-box"></div>
+                                        
                                         <!-- <div id="map"></div> -->
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>
@@ -718,6 +720,29 @@ $ip = $_SERVER['REMOTE_ADDR'];
             }
         })
     });
+$(document).ready(function(){
+	$("#search_school").keyup(function(){
+		$.ajax({
+		type: "POST",
+		url: "<?php echo base_url() ?>welcome/search_school",
+		data:'keyword='+$(this).val(),
+		beforeSend: function(){
+			$("#search_school").css("background","#FFF");
+		},
+		success: function(data){
+            // data = JSON.parse(data);
+			$("#suggesstion-box").show();
+			$("#suggesstion-box").html(data);
+			$("#search_school").css("background","#FFF");
+		}
+		});
+	});
+});
+//To select country name
+function selectSchool(val) {
+$("#search_school").val(val);
+$("#suggesstion-box").hide();
+}    
 </script> 
 
 

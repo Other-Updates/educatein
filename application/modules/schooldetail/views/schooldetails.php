@@ -731,21 +731,25 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/25.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Phone Number</h6>
-                                        <h3><?php echo $school_details->mobile ?></h3>
+                                        <a href="tel:<?php echo $school_details->mobile ?>"><h3><?php echo $school_details->mobile ?></h3></a>
                                     </div>
                                 </div>
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/26.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Email</h6>
-                                        <h3><?php echo $school_details->email ?></h3>
+                                        <a href="mailto:<?php echo $school_details->email ?>"><h3><?php echo $school_details->email ?></h3></a>
                                     </div>
                                 </div>
                                 <div class="sd-addit-icon-value">
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/27.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Website</h6>
-                                        <h3><?php echo $school_details->website_url ?></h3>
+                                    <?php if(substr($school_details->website_url, 0, 5) === "https"){  ?>
+                                        <a href="<?php echo $school_details->website_url ?>"><h3><?php echo $school_details->website_url ?></h3></a>
+                                    <?php }else{ ?>
+                                        <a href="https://<?php echo $school_details->website_url ?>"><h3><?php echo $school_details->website_url ?></h3></a>
+                                    <?php } ?>
                                     </div>
                                 </div>
                             </div>

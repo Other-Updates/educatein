@@ -24,7 +24,7 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="approved" role="tabpanel" aria-labelledby="approved-tab">
             <div class="table-responsive">
-                <table class="table table-bordered table-sm bg-white" id="example">
+                <table class="table table-bordered table-sm bg-white" id="approved_datatable">
                     <thead>
                         <tr class="text-center">
                             <th class="text-nowrap">#</th>             
@@ -34,7 +34,7 @@
                             <th class="text-nowrap">Plan</th>
                             <th class="text-nowrap" style="text-align:center;">Paid</th>
                             <th class="text-nowrap">Created date</th>
-                            <th class="text-nowrap">Status</th> 
+                            <!-- <th class="text-nowrap">Status</th>  -->
                             <th class="text-nowrap">Expiry date</th>
                             <th class="text-nowrap">Actions</th> 
                         </tr>
@@ -56,7 +56,7 @@
                             <th class="text-nowrap">Plan</th>
                             <th class="text-nowrap" style="text-align:center;">Paid</th>
                             <th class="text-nowrap">Created date</th>
-                            <th class="text-nowrap">Status</th> 
+                            <!-- <th class="text-nowrap">Status</th>  -->
                             <th class="text-nowrap">Expiry date</th>
                             <th class="text-nowrap">Actions</th> 
                         </tr>
@@ -78,7 +78,7 @@
                             <th class="text-nowrap">Plan</th>
                             <th class="text-nowrap" style="text-align:center;">Paid</th>
                             <th class="text-nowrap">Created date</th>
-                            <th class="text-nowrap">Status</th> 
+                            <!-- <th class="text-nowrap">Status</th>  -->
                             <th class="text-nowrap">Expiry date</th>
                             <th class="text-nowrap">Actions</th> 
                         </tr>
@@ -95,7 +95,7 @@
 <script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/admin/datatables/jquery.dataTables.js"></script>
 <script>  
 $(document).ready(function(){
-    var approved_table = $("#example").dataTable({
+    var approved_table = $("#approved_datatable").dataTable({
         "lengthMenu": [[100, 500, -1], [100, 500, "All"]],
         "processing": true, 
         "serverSide": true, 
@@ -113,7 +113,7 @@ $(document).ready(function(){
 
         },
         'columnDefs': [ {
-            'targets': [0,9],
+            'targets': [0,8],
             'orderable': false, 
             },{
             'targets': [0,4,5,6,7,8],
@@ -139,7 +139,7 @@ $(document).ready(function(){
 
         },
         'columnDefs': [ {
-            'targets': [0,9],
+            'targets': [0,8],
             'orderable': false, 
             },{
             'targets': [0,4,5,6,7,8],
@@ -165,7 +165,7 @@ $(document).ready(function(){
 
         },
         'columnDefs': [ {
-            'targets': [0,9],
+            'targets': [0,8],
             'orderable': false, 
             },{
             'targets': [0,4,5,6,7,8],

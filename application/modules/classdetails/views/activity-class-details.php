@@ -484,27 +484,37 @@ $similar_school = $this->db->get();
                                         <h3><?php echo $institute_dets->address; ?></h3>
                                     </div>
                                 </div>
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/25.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h6>Phone Number</h6>
-                                        <h3><?php echo $institute_dets->mobile ?></h3>
+                                <?php if(!empty($institute_dets->email)){ ?>
+                                    <div class="sd-addit-icon-value">
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/25.png" alt="Educatein"></div>
+                                        <div class="sd-addit-value">
+                                            <h6>Phone Number</h6>
+                                            <a href="tel:<?php echo $institute_dets->mobile ?>"><h3><?php echo $institute_dets->mobile ?></h3></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/26.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h6>Email</h6>
-                                        <h3><?php echo $institute_dets->email ?></h3>
+                                <?php } ?>
+                                <?php if(!empty($institute_dets->email)){ ?>
+                                    <div class="sd-addit-icon-value">
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/26.png" alt="Educatein"></div>
+                                        <div class="sd-addit-value">
+                                            <h6>Email</h6>
+                                            <a href="mailto:<?php echo $institute_dets->email ?>"><h3><?php echo $institute_dets->email ?></h3>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/27.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h6>Website</h6>
-                                        <a href="<?php echo $institute_dets->website_url ?>"><h3><?php echo $institute_dets->website_url ?></h3></a>
-                                    </div>
-                                </div>
+                                <?php } ?>
+                                    <?php if(!empty($institute_dets->website_url)){ ?>
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/27.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Website</h6>
+                                                <?php if(substr($institute_dets->website_url, 0, 5) === "https"){  ?>
+                                                <a href="<?php echo $institute_dets->website_url ?>"><h3><?php echo $institute_dets->website_url ?></h3></a>
+                                                <?php }else{ ?>
+                                                <a href="https://<?php echo $institute_dets->website_url ?>"><h3><?php echo $institute_dets->website_url ?></h3></a>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
                             </div>
                             <?php if(!empty($institute_dets->map_url)){ ?>
                                 <div class="col-md-6">
@@ -517,8 +527,8 @@ $similar_school = $this->db->get();
                                 </div>
                             <?php } ?>
                             <div class="col-lg-8 mab-30 wow bounceIn" data-wow-delay="600ms">
-                    <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div>
+                                <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                 </div> 
