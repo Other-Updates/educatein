@@ -488,22 +488,25 @@ if ($aff_url == "dance-class") {
 
             // echo $topcount;
             // exit();
-            $where2 = "is_active=1 AND position_id=2 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
-            $this->db->select('*')->where($where2);
+            $where2 = "ind.is_active=1 AND ind.position_id=2 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $this->db->select('ind.*,ar.area_name')->where($where2);
             // $this->db->order_by('rand()');
-            $this->db->from('institute_details');
+            $this->db->from('institute_details as ind');
+            $this->db->join('areas as ar','ind.area_id=ar.id','left');
             $school_premium = $this->db->get()->result_array();
 
-            $where2 = "is_active=1 AND position_id=3 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
-            $this->db->select('*')->where($where2);
+            $where2 = "ind.is_active=1 AND ind.position_id=3 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $this->db->select('ind.*,ar.area_name')->where($where2);
             // $this->db->order_by('rand()');
-            $this->db->from('institute_details');
+            $this->db->join('areas as ar','ind.area_id=ar.id','left');
+            $this->db->from('institute_details as ind');
             $school_spectrum = $this->db->get()->result_array();
 
-            $where2 = "is_active=1 AND position_id=4 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND valitity IS NOT NULL AND deleted_at IS NULL";
+            $where2 = "ind.is_active=1 AND ind.position_id=4 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
             $this->db->select('*')->where($where2);
             // $this->db->order_by('rand()');
-            $this->db->from('institute_details');
+            $this->db->from('institute_details as ind');
+            $this->db->join('areas as ar','ind.area_id=ar.id','left');
             $school_trial = $this->db->get()->result_array();
             // print_r($school_spectrum);exit;
             ?>
@@ -584,7 +587,7 @@ if ($aff_url == "dance-class") {
                     </div><!-- /owl-carousel -->
                 </div><!-- /top-school-widget -->
             <?php } ?>
-            <?php if($topschool->num_rows() != 0 ){ ?>
+            <?php if(!empty($school_premium)){ ?>
                 <div class="top-school-widget mab-20">    
                     <div class="custom-section-title mab-10">
                     <h3 class="mb-3">Best <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
@@ -593,10 +596,9 @@ if ($aff_url == "dance-class") {
                         <?php
                         $delay = 4;
                         $topcount = 0;
-                        if ($topschool->num_rows() > 0) {
-                            foreach ($topschool->result() as $top) {
+                            foreach ($school_premium as $top) {
                                 
-                                if ($topcount < 5) {
+                                // if ($topcount < 5) {
                                     // $this->db->select('*')->where('id =', $top->area_id);
                                     // $this->db->from('areas');
                                     // $area = $this->db->get();
@@ -605,7 +607,7 @@ if ($aff_url == "dance-class") {
                                     //     //exit();
                                     // }
 
-                                    $school_name = str_replace(" ", "-", $top->institute_name);
+                                    $school_name = str_replace(" ", "-", $top['institute_name']);
                                     $affname_url = strtolower($aff_name);
                                     $affname_url = str_replace(" ", "-", $affname_url);
                                     // echo $affname_url;
@@ -620,14 +622,16 @@ if ($aff_url == "dance-class") {
                                         <figure>
                                             <div class="package-name">Premium</div>
                                             <div class="object-fit">
-                                                <?php if(isset($top->logo)){ ?>
-                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
+                                                <?php if(isset($top['logo'])){ ?>
+                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
                                                     <?php } else { ?>
                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
                                                 <?php } ?>
                                             </div>
                                             <figcaption class="item-footer">
-                                                <h6><?php echo ucfirst($top->institute_name) ?></h6>
+                                                <h6><?php echo ucfirst($top['institute_name']) ?></h6>
+                                                <?php if(!empty($top['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top['year_of_establish'] ?></b></p><?php } ?>
+                                                <p>Area: <b><?php echo $top['area_name'] ?></b></p>
                                                 <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
                                             </figcaption>
                                         </figure>
@@ -640,67 +644,39 @@ if ($aff_url == "dance-class") {
 
                                     $delay++;
                                     $topcount++;
-                                }
+                                // }
                             }
-                        }
 
                         ?>						
                     </div><!-- /owl-carousel -->
                 </div><!-- /top-school-widget -->
             <?php } ?>
-            <?php if(!empty($school_premium) || !empty($school_spectrum)){ ?>
+            <?php if(!empty($school_trial) || !empty($school_spectrum)){ ?>
                 <div class="third-cat mab-50 home-tsw top-school-widget mab-20">
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <span><?php echo $yourcity; ?></span></h3>
                     </div>
                     <div class="row equal">
-                        <?php foreach($school_premium as $premium){
-                        
-                        $class = strtolower($aff_name);
-                        $class = str_replace(" ","-",$class);
-                        
-                        ?>
-                            <div class="col-md-3">
-                                <div class="schoolist-inner premium">
-                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $class ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
-                                        <figure>
-                                            <div class="package-name">Premium</div>
-                                            <div class="object-fit">
-                                            <?php if(isset($premium['logo'])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
-                                            <?php }else{ ?>
-                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
-                                           <?php } ?>
-                                            </div>
-                                            <figcaption class="item-footer">
-                                                <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
-                                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- </div> -->
-                        <?php } ?>
-                        <?php foreach($school_spectrum as $premium){ 
+                        <?php foreach($school_spectrum as $spectrum){ 
                             $class = strtolower($aff_name);
                             $class = str_replace(" ","-",$class);
                             ?>
                             <div class="col-md-3">
                                 <div class="schoolist-inner spectrum">
-                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $class ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['institute_name']); ?>" target="_blank">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $class ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['institute_name']); ?>" target="_blank">
                                         <figure>
                                             <div class="package-name">Spectrum</div>
                                             <div class="object-fit">
-                                            <?php if(isset($premium['logo'])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
+                                            <?php if(isset($spectrum['logo'])){ ?>
+                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
                                             <?php }else{ ?>
                                                 <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
                                             <?php } ?>
                                             </div>
                                             <figcaption class="item-footer">
-                                                <h6><?php echo ucfirst($premium['institute_name']) ?></h6>
-                                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                                                <h6><?php echo ucfirst($spectrum['institute_name']) ?></h6>
+                                                <?php if(!empty($spectrum['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $spectrum['year_of_establish'] ?></b></p><?php } ?>
+                                                <p>Area : <?php echo $spectrum['area_name'] ?></p>
                                             </figcaption>
                                         </figure>
                                     </a>
@@ -726,7 +702,8 @@ if ($aff_url == "dance-class") {
                                             </div>
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($trial['institute_name']) ?></h6>
-                                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                                                <?php if(!empty($trial['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $trial['year_of_establish'] ?></b></p><?php } ?>
+                                                <p>Area : <?php echo $trial['area_name'] ?></p>
                                             </figcaption>
                                         </figure>
                                     </a>

@@ -513,8 +513,7 @@ $allcity = $this->db->get()->result();
             // }
 
             $where1 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            $this->db->select('sd.*,si.images as banner,st.school_type')->where($where1);
-            $this->db->join('school_images as si', 'sd.id = si.school_id and school_activity_id = 2', 'left');
+            $this->db->select('sd.*,st.school_type')->where($where1);
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
@@ -522,24 +521,27 @@ $allcity = $this->db->get()->result();
             // echo $topschool->num_rows();
             // exit();
            
-            $where2 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=2 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
-            $this->db->select('*')->where($where2);
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $this->db->select('sd.*,st.school_type')->where($where2);
+            $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             // $this->db->order_by('rand()');
-            $this->db->from('school_details');
+            $this->db->from('school_details as sd');
             $school_premium = $this->db->get()->result_array();
             
             // print_r($this->db->last_query());exit;
 
-            $where3 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=3 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
-            $this->db->select('*')->where($where3);
+            $where3 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=3 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $this->db->select('sd.*,st.school_type')->where($where3);
+            $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             // $this->db->order_by('rand()');
-            $this->db->from('school_details');
+            $this->db->from('school_details as sd');
             $school_spectrum = $this->db->get()->result_array();
 
-            $where2 = "is_active=1 AND status=1 AND activated_at != 'NULL' AND valitity != 'NULL' AND school_category_id=4 AND affiliation_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
-            $this->db->select('*')->where($where2);
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=4 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $this->db->select('sd.*,st.school_type')->where($where2);
+            $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             // $this->db->order_by('rand()');
-            $this->db->from('school_details');
+            $this->db->from('school_details as sd');
             $school_trial = $this->db->get()->result_array();
             
             // $config = array();
@@ -592,8 +594,8 @@ $allcity = $this->db->get()->result();
                                             <figure>
                                                 <div class="package-name">Platinum</div>
                                                 <div class="object-fit">
-                                                    <?php if(isset($top->banner)){ ?>
-                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->banner ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                    <?php if(isset($top->logo)){ ?>
+                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                         <?php } else { ?>
                                                     <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                     <?php } ?>
@@ -639,25 +641,25 @@ $allcity = $this->db->get()->result();
                         <?php
                             $delay = 4;
                             $topcount = 0;
-                            if ($topschool->num_rows() > 0) {
-                                foreach ($topschool->result() as $top) {
+                            if (!empty($school_premium)) {
+                                foreach ($school_premium as $top) {
 
-                                    if ($topcount < 5) {
+                                    // if ($topcount < 5) {
 
-                                        $this->db->select('*')->where('id =', $top->area_id);
-                                        $this->db->from('areas');
-                                        $area = $this->db->get();
-                                        foreach ($area->result() as $areas) {
-                                            //echo $areas->area_name;
-                                            //exit();
-                                        }
+                                    //     $this->db->select('*')->where('id =', $top->area_id);
+                                    //     $this->db->from('areas');
+                                    //     $area = $this->db->get();
+                                    //     foreach ($area->result() as $areas) {
+                                    //         //echo $areas->area_name;
+                                    //         //exit();
+                                    //     }
 
-                                        $school_name = str_replace(" ", "-", $top->school_name);
+                                        $school_name = str_replace(" ", "-", $top['school_name']);
                                         $affname_url = strtolower($aff_name);
                                         $affname_url = str_replace(" ", "-", $affname_url);
-                                        // echo $affname_url;
-                                        // print_r($affname_url);exit;
-                                        // exit();
+                                    //     // echo $affname_url;
+                                    //     // print_r($affname_url);exit;
+                                    //     // exit();
                                         ?>                                    
                             <div class="mab-20">
                                 <!-- <div class="owl-one owl-carousel owl-theme"> -->
@@ -666,17 +668,17 @@ $allcity = $this->db->get()->result();
                                             <figure>
                                                 <div class="package-name">Premium</div>
                                                 <div class="object-fit">
-                                                    <?php if(isset($top->banner)){ ?>
-                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->banner ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                    <?php if(isset($top['banner'])){ ?>
+                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                         <?php } else { ?>
                                                     <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                     <?php } ?>
                                                 </div>
                                                 <figcaption class="item-footer">
-                                                    <h6><?php echo ucfirst($top->school_name) ?></h6>
+                                                    <h6><?php echo ucfirst($top['school_name']) ?></h6>
                                                     <div class="row">
                                                         <div class="col-lg-12 item-left-section">
-                                                            <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($top->school_type) ?></b></p>                                                            
+                                                            <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($top['school_type']) ?></b></p>                                                            
                                                         </div>
                                                     </div>
                                                 </figcaption>
@@ -690,7 +692,6 @@ $allcity = $this->db->get()->result();
 
                                         $delay++;
                                         $topcount++;
-                                    }
                                 }
                             }
 
@@ -698,34 +699,12 @@ $allcity = $this->db->get()->result();
                     </div><!-- /owl-carousel -->
                 </div><!-- /top-school-widget -->
             <?php } ?>
-            <?php if(!empty($school_premium) || !empty($school_spectrum)){ ?>
+            <?php if(!empty($school_trial) || !empty($school_spectrum)){ ?>
                 <div class="third-cat mab-50 home-tsw top-school-widget mab-10">
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <span><?php echo $yourcity; ?></span></h3>
                     </div>
                     <div class="row equal">
-                        <?php foreach($school_premium as $premium){ ?>
-                            <div class="col-md-3">
-                                <div class="schoolist-inner premium">
-                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$premium['school_name']); ?>" target="_blank">
-                                        <figure>
-                                            <div class="package-name">Premium</div>
-                                            <div class="object-fit">
-                                            <?php if(isset($premium['logo'])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $premium['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
-                                            <?php }else{ ?>
-                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
-                                            <?php } ?>
-                                            </div>
-                                            <figcaption class="item-footer">
-                                                <h6><?php echo ucfirst($premium['school_name']) ?></h6>
-                                                <p><i class="fa fa-university"></i> Grade Level : KG To Class 10</p>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php } ?>
                         <?php foreach($school_spectrum as $spectrum){ ?>
                             <div class="col-md-3">
                                 <div class="schoolist-inner spectrum">
