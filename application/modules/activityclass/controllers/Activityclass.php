@@ -21,6 +21,20 @@ class Activityclass extends CI_Controller {
     }
 
     public function index() {
+
+        $yourcity = array();
+        $aff_url = end($this->uri->segments);
+        $yourcity = explode("-", $aff_url);
+        $yourcity = end($yourcity);
+        $uccity = ucfirst($yourcity);
+        
+        $this->db->select('*');
+        $this->db->where('city_name',$uccity);
+        $this->db->from('cities');
+        $cityid = $this->db->get()->result_array();
+        $this->session->set_userdata('search_city',$yourcity);
+        $this->session->set_userdata('city_id',$cityid[0]['id']);
+
         $this->db->select('*')->where('is_active =', 1);
         $this->db->from('affiliations');
         $query['query'] = $this->db->get();

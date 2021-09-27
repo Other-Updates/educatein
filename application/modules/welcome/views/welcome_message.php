@@ -1,11 +1,11 @@
  
 <?php
 // print_r($platinum_data);exit;
-//$yourcity = array();
-//$aff_url = end($this->uri->segments);
-//$yourcity = explode("-", $aff_url);
-//$yourcity = $this->session->userdata("search_city");
-//$uccity = ucfirst($yourcity);
+$yourcity = array();
+$aff_url = end($this->uri->segments);
+$yourcity = explode("-", $aff_url);
+$yourcity = $this->session->userdata("search_city");
+$uccity = ucfirst($yourcity);
 // echo $uccity;
 // exit();
 //if ($uccity == "Enquiry" || $uccity == "Otp") {

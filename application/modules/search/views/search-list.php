@@ -49,7 +49,12 @@
         text-transform: uppercase;
     }
 </style> 
-
+<?php 
+// print_r($_GET['searchcity']);
+    if(!empty($_GET['searchcity'])){
+        $searchcity = $_GET['searchcity'];
+    }
+?>
 <div class="breadrumb-new mab-30">
     <div class="container">
         <div class="row">
@@ -59,18 +64,19 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <?php if ($searchcity != "") { ?>
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?> <i class="fa fa-angle-down"></i>  </button>
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($searchcity) ? "select your city" : $searchcity ); ?> <i class="fa fa-angle-down"></i>  </button>
                                 <?php } else { ?>
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($uccity) ? "select your city" : $uccity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="lnr lnr-map-marker"></i> <?php echo (empty($searchcity) ? "select your city" : $searchcity ); ?><span id="uccity"></span> <i class="fa fa-angle-down"></i>  </button>
                                 <?php } ?> 
                                 <div class="dropdown-menu shadow-lg">
                                     <ul class="list-inline">
                                         <?php
                                         foreach ($allcity as $allcitys) {
                                             $lowercity = strtolower($allcitys->city_name);
+                                            // $lowercity = $allcitys->city_name;
                                             ?>
 
-                                            <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
+                                            <li class="list-inline-item"><a href="<?php echo base_url() ?>schools-list?searchcity=<?php echo $lowercity ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
                                         <?php } ?>
                                     </ul>
                                 </div><!-- /dropdown-menu -->

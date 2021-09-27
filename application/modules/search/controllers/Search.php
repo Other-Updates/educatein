@@ -46,6 +46,7 @@ class Search extends CI_Controller {
 
 
     public function search_school($search,$limit=null, $start=null){
+        $session = $this->session->userdata();
         $where = "sd.is_active=1 AND sd.status=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
         $this->db->select('sd.*,af.affiliation_name,ar.area_name');
         if(!empty($session['city_id']))
@@ -67,6 +68,7 @@ class Search extends CI_Controller {
     }
 
     public function search_class($search,$limit=null, $start=null){
+        $session = $this->session->userdata();
         $where = "ind.is_active=1 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
         $this->db->select('ind.*,ic.category_name,ar.area_name');
         if(!empty($session['city_id']))
@@ -103,6 +105,14 @@ class Search extends CI_Controller {
 
 
     public function index() {
+        if(!empty($_GET['searchcity'])){
+            $this->db->select('*');
+            $this->db->where('city_name',ucfirst($_GET['searchcity']));
+            $this->db->from('cities');
+            $cityid = $this->db->get()->result_array();
+            $this->session->set_userdata('search_city',$_GET['searchcity']);
+            $this->session->set_userdata('city_id',$cityid[0]['id']);
+        }
         $school = $_GET['search']; // school search 
         $activityclass = $_GET['search_class']; // activity class search 
         $data = array("search" => "");

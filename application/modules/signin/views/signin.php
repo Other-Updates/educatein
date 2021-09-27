@@ -46,7 +46,7 @@
                         <div class="col-lg-6"></div>
                     </div><!-- /row -->
 
-                    <p class="new-signin-copyright">&copy; 2019 Edugatein.com All Rights Reserved.</p>
+                    <p class="new-signin-copyright">&copy; <?php echo date('Y'); ?> Edugatein.com All Rights Reserved.</p>
                 </div><!-- /new-signin-right -->
             </div>
         </div><!-- /row -->
