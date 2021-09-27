@@ -369,17 +369,19 @@ $similar_school = $this->db->get();
                     <div id="special-info" class="sd-inner-main school-facilities wow slideInLeft">
                         <div class="sd-ection-tit">News Heading</div>
                         <div class="sd-ection-inner">
+                        <div class="row school-facilities-list pt-0">
                             <?php foreach($news_heading as $news ){ ?>
-                                <div class="row school-facilities-list">
+                                
                                     <!-- <div class="col-md-3 sd-faci-img">
                                         <a data-fancybox="gallery" data-caption="<?php echo ucfirst($category->program_name) ?>" href="<?php echo base_url() ?>laravel/public/<?php echo $category->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $category->image ?>" class="sd-faci-img" alt=""></a>
                                     </div> -->
-                                    <div class="col-md-9 sd-faci-detail">
+                                    <div class="col-md-12 sd-faci-detail pb-3">
                                         <h6><?php echo ucfirst($news->news) ?></h6>
                                         <p><?php echo ucfirst($news->news_brief) ?></p>
                                     </div>
-                                </div>
+                                
                                 <?php } ?>
+                            </div>
                         </div>
                     </div>
                 <?php } ?>
@@ -526,9 +528,6 @@ $similar_school = $this->db->get();
                                             <?php } ?>
                                 </div>
                             <?php } ?>
-                            <div class="col-lg-8 mab-30 wow bounceIn" data-wow-delay="600ms">
-                                <iframe src="<?php echo $school_details->map_url; ?>" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-                            </div>
                         </div>
                     </div>
                 </div> 
@@ -594,13 +593,7 @@ $similar_school = $this->db->get();
                 </div> 
             </div>
         </div>
-        <div class="ads-school-widget mab-50">
-            <div class="row">
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/11-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/12-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            </div>
-        </div>
+        
     </div>
     <?php if(!empty($similar_school->result())){ ?>
         <div class="container">
@@ -647,6 +640,15 @@ $similar_school = $this->db->get();
             </div>
         </div>
     <?php } ?>
+</div>
+<div class="container">
+    <div class="ads-school-widget mab-50">
+        <div class="row">
+            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/11-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/12-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+        </div>
+    </div>
 </div>
 <script>
     $('#sd-menu a').click(function(e) {
