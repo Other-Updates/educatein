@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<title>EdugateIn-Signin</title>
 <?php
 		 foreach($js as $file){
 				echo "\n\t\t"; 

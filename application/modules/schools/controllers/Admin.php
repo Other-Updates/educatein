@@ -1736,7 +1736,7 @@ class admin extends CI_Controller {
 
     function school_delete(){
 
-        $school_id = base64_decode($_GET['id']);
+        $school_id = base64_decode($_POST['id']);
         // $this->db->where('schooldetails_id', $userid);
         // $this->db->delete('schoolmanagement_activities');
         // $this->db->where('school_id', $userid);
@@ -1757,7 +1757,7 @@ class admin extends CI_Controller {
 
     function institute_delete(){
         
-        $institute_id = base64_decode($_GET['id']);
+        $institute_id = base64_decode($_POST['id']);
         // $this->db->where('institute_id', $userid);
         // $this->db->delete('institute_images');
         // $this->db->where('institute_id', $userid);
@@ -4297,7 +4297,7 @@ class admin extends CI_Controller {
                 $row = array();
 
                 $edit =  "<div class='btn-wid'><a title='Edit' href='". base_url("schools/admin/school_edit?id=". base64_encode($school["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
-                $delete = "<a title='Delete' href='". base_url("schools/admin/school_delete?id=". base64_encode($school["id"]))."' class='delete btn btn-outline-danger delete btn-sm' id='del_btn'><i class='bi bi-trash'></i></a>";
+                $delete = "<a title='Delete' href='' delete_id='".base64_encode($school["id"])."' class='delete btn btn-outline-danger delete btn-sm' id='del_btn'><i class='bi bi-trash'></i></a>";
                 $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a></div>";
 
                 $row[] = $sno;
@@ -4424,7 +4424,7 @@ class admin extends CI_Controller {
                 $row = array();
 
                 $edit = "<div class='btn-wid'><a title='Edit' href='". base_url("admin/schools/institute_edit?id=". base64_encode($institute["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
-                $delete = "<a title='Delete' href='". base_url("admin/schools/institute_delete?id=". base64_encode($institute["id"]))."'  class=' btn btn-outline-danger btn-sm delete'><i class='bi bi-trash'></i></a>";
+                $delete = "<a title='Delete' href='' delete_id='".base64_encode($institute["id"])."' class=' btn btn-outline-danger btn-sm delete'><i class='bi bi-trash'></i></a>";
                 $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a></div>";
 
                 $row[] = $sno;
