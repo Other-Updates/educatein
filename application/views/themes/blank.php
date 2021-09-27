@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="icon" type="image/png" href="<?php echo base_url('assets/front/images/favicon.ico'); ?>"/>
 <head>
 <?php
 		 foreach($js as $file){
