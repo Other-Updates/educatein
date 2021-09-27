@@ -510,11 +510,86 @@ if ($aff_url == "dance-class") {
 
         <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum) || !empty($school_trial) ){ ?>
             <?php if($topschool->num_rows() != 0 ){ ?>
-                <div class="top-school-widget mab-20">    
+                <div class="home-tsw top-school-widget top-school-sigle mab-20">    
                     <div class="custom-section-title mab-10">
                     <h3 class="mb-3">Top <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
                     </div><!-- /section-title -->
-                    <div class="owl-carousel owl-theme">
+                    <div class="owl-carousel owl-carousel-1 owl-theme">
+                        <?php
+                        $delay = 4;
+                        $topcount = 0;
+                        if ($topschool->num_rows() > 0) {
+                            foreach ($topschool->result() as $top) {
+                                
+                                if ($topcount < 5) {
+                                    // $this->db->select('*')->where('id =', $top->area_id);
+                                    // $this->db->from('areas');
+                                    // $area = $this->db->get();
+                                    // foreach ($area->result() as $areas) {
+                                    //     //echo $areas->area_name;
+                                    //     //exit();
+                                    // }
+
+                                    $school_name = str_replace(" ", "-", $top->institute_name);
+                                    $affname_url = strtolower($aff_name);
+                                    $affname_url = str_replace(" ", "-", $affname_url);
+                                    // echo $affname_url;
+                                    // print_r($affname_url);exit;
+                                    // exit();
+                                    ?>
+                                    
+                        <div class="mab-20">
+                            <!-- <div class="owl-one owl-carousel owl-theme"> -->
+                                <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
+                                        <figure>
+                                            <div class="package-name">Platinum</div>
+                                            <div class="object-fit">
+                                                <?php if(isset($top->logo)){ ?>
+                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
+                                                    <?php } else { ?>
+                                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
+                                                <?php } ?>
+                                            </div>
+                                            <figcaption class="item-footer">
+                                                <h6><?php echo ucfirst($top->institute_name) ?></h6>
+                                                <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
+                                                <div class="row">
+                                                    <div class="col-lg-9 item-left-section">
+                                                        <p><i class="fa fa-map-marker"></i> Address : <b><?php echo ucwords($top->address) ?></b></p>
+                                                        <p><i class="fa fa-book"></i> Type : <b><?php echo ucfirst($aff_name) ?></b></p>                                                        
+                                                        <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
+                                                    </div>
+                                                    <div class="col-lg-3 item-right-section">
+                                                        <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
+                                                        <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                                    <?php
+                                    
+
+                                    $delay++;
+                                    $topcount++;
+                                }
+                            }
+                        }
+
+                        ?>						
+                    </div><!-- /owl-carousel -->
+                </div><!-- /top-school-widget -->
+            <?php } ?>
+            <?php if($topschool->num_rows() != 0 ){ ?>
+                <div class="top-school-widget mab-20">    
+                    <div class="custom-section-title mab-10">
+                    <h3 class="mb-3">Best <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
+                    </div><!-- /section-title -->
+                    <div class="owl-carousel owl-carousel-2 owl-theme">
                         <?php
                         $delay = 4;
                         $topcount = 0;
@@ -540,10 +615,10 @@ if ($aff_url == "dance-class") {
                                     
                         <div class="home-tsw top-school-widget mab-20">
                             <!-- <div class="owl-one owl-carousel owl-theme"> -->
-                                <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
                                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
                                         <figure>
-                                            <div class="package-name">Platinum</div>
+                                            <div class="package-name">Premium</div>
                                             <div class="object-fit">
                                                 <?php if(isset($top->logo)){ ?>
                                                 <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
@@ -560,11 +635,7 @@ if ($aff_url == "dance-class") {
                                 </div>
                             <!-- </div> -->
                         </div>
-
-
-
-
-                                        <?php
+                                    <?php
                                     
 
                                     $delay++;
@@ -580,7 +651,7 @@ if ($aff_url == "dance-class") {
             <?php if(!empty($school_premium) || !empty($school_spectrum)){ ?>
                 <div class="third-cat mab-50 home-tsw top-school-widget mab-20">
                     <div class="custom-section-title mab-30">
-                        <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <?php echo $yourcity; ?></h3>
+                        <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <span><?php echo $yourcity; ?></span></h3>
                     </div>
                     <div class="row equal">
                         <?php foreach($school_premium as $premium){
@@ -926,12 +997,37 @@ $ip = $_SERVER['REMOTE_ADDR'];
         }
     });
     $(document).ready(function () {
-        $(".owl-carousel").owlCarousel({
+        $(".owl-carousel-1").owlCarousel({
             loop:true,
             margin:10,
             responsiveClass:true,
             autoplay:true,
             autoplayTimeout:3000,
+            dots: false,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:1,
+                    nav:false
+                },
+                1000:{
+                    items:1,
+                    nav:true,
+                    loop:false
+                }
+            }
+        });
+        $(".owl-carousel-2").owlCarousel({
+            loop:true,
+            margin:10,
+            responsiveClass:true,
+            autoplay:true,
+            autoplayTimeout:4000,
+            dots: false,
             autoplayHoverPause:true,
             responsive:{
                 0:{

@@ -826,13 +826,6 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                 </div> 
             </div>
         </div>
-        <div class="ads-school-widget mab-50">
-            <div class="row">
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            </div>
-        </div><br>
     </div>
     <?php if(!empty($similar_school)){ ?>
         <div class="container">
@@ -867,7 +860,17 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
             </div>
         </div>
     <?php } ?>
+    <div class="container">
+        <div class="ads-school-widget mab-50">
+            <div class="row">
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
