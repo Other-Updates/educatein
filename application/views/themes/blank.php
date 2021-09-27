@@ -2,6 +2,7 @@
 <html lang="en">
 <link rel="icon" type="image/png" href="<?php echo base_url('assets/front/images/favicon.ico'); ?>"/>
 <head>
+	<title>EdugateIn-Signin</title>
 <?php
 		 foreach($js as $file){
 				echo "\n\t\t"; 

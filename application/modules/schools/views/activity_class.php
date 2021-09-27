@@ -176,7 +176,37 @@
         $('#example').DataTable();
     });
 
-    $('.delete').click(function () {
-        return confirm('Are you sure, want to Delete....!!!')
+    $('body').on('click','.delete',function (e) {
+        e.preventDefault();
+        var id = $(this).attr('delete_id');
+        // return confirm('Are you sure, want to Delete....!!!')
+        swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+        }, function (isConfirm) {
+            if (!isConfirm) return;
+            $.ajax({
+                url: "<?php echo base_url()."schools/admin/institute_delete" ?>",
+                type: "POST",
+                data: { id: id },
+                // dataType: "html",
+                success: function () {
+                    swal("Done!", "It was succesfully deleted!", "success");
+                    rejected_table.ajax.reload();
+                    approved_table.ajax.reload();
+                    holded_table.ajax.reload();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    swal("Error deleting!", "Please try again", "error");
+                }
+            });
+        });
     })
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>

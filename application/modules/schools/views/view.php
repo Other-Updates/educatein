@@ -215,11 +215,12 @@ $(document).ready(function(){
 
 
     });
-    $('body').on('click','.delete',function () {
-        // console.log(1);
-        return confirm('Are you sure, want to Delete....!!!')
-    });
-    $('body').on('click','.delete',function () {
+    // $('body').on('click','.delete',function () {
+    //     return confirm('Are you sure, want to Delete....!!!')
+    // });
+    $('body').on('click','.delete',function (e) {
+        e.preventDefault();
+        var id = $(this).attr('delete_id');
         // return confirm('Are you sure, want to Delete....!!!')
         swal({
         title: "Are you sure?",
@@ -232,14 +233,15 @@ $(document).ready(function(){
     }, function (isConfirm) {
         if (!isConfirm) return;
         $.ajax({
-            url: "scriptDelete.php",
+            url: "<?php echo base_url()."schools/admin/school_delete" ?>",
             type: "POST",
-            data: {
-                id: 5
-            },
-            dataType: "html",
+            data: { id: id },
+            // dataType: "html",
             success: function () {
                 swal("Done!", "It was succesfully deleted!", "success");
+                rejected_table.ajax.reload();
+                approved_table.ajax.reload();
+                holded_table.ajax.reload();
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 swal("Error deleting!", "Please try again", "error");
@@ -296,3 +298,5 @@ $(document).ready(function() {
 <!-- <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
     <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" /> -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.cs"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
