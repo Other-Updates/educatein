@@ -216,6 +216,10 @@ $(document).ready(function(){
 
     });
     $('body').on('click','.delete',function () {
+        // console.log(1);
+        return confirm('Are you sure, want to Delete....!!!')
+    });
+    $('body').on('click','.delete',function () {
         // return confirm('Are you sure, want to Delete....!!!')
         swal({
         title: "Are you sure?",
