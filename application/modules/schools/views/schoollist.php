@@ -513,8 +513,9 @@ $allcity = $this->db->get()->result();
             // }
 
             $where1 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            $this->db->select('sd.*,st.school_type')->where($where1);
+            $this->db->select('sd.*,st.school_type,ar.area_name')->where($where1);
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
+            $this->db->join('areas as ar','sd.area_id=ar.id','left');
             $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
             $topschool = $this->db->get();
@@ -522,8 +523,9 @@ $allcity = $this->db->get()->result();
             // exit();
            
             $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            $this->db->select('sd.*,st.school_type')->where($where2);
+            $this->db->select('sd.*,st.school_type,ar.area_name')->where($where2);
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
+            $this->db->join('areas as ar','sd.area_id=ar.id','left');
             // $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
             $school_premium = $this->db->get()->result_array();
@@ -607,6 +609,7 @@ $allcity = $this->db->get()->result();
                                                             <p><i class="fa fa-map-marker"></i> Address : <b><?php echo ucwords($top->address) ?></b></p>
                                                             <p><i class="fa fa-book"></i> School Board : <b><?php echo ucfirst($aff_name) ?></b></p>
                                                             <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($top->school_type) ?></b></p>
+                                                            <p><i class="fa fa-university"></i> Area : <b><?php echo ucwords($top->area_name) ?></b></p>
                                                             <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                         </div>
                                                         <div class="col-lg-3 item-right-section">
@@ -668,8 +671,8 @@ $allcity = $this->db->get()->result();
                                             <figure>
                                                 <div class="package-name">Premium</div>
                                                 <div class="object-fit">
-                                                    <?php if(isset($top['banner'])){ ?>
-                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['banner'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                    <?php if(isset($top['logo'])){ ?>
+                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                         <?php } else { ?>
                                                     <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                     <?php } ?>
@@ -679,6 +682,7 @@ $allcity = $this->db->get()->result();
                                                     <div class="row">
                                                         <div class="col-lg-12 item-left-section">
                                                             <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($top['school_type']) ?></b></p>                                                            
+                                                            <p><i class="fa fa-university"></i> Area : <b><?php echo ucwords($top['area_name']) ?></b></p>                                                            
                                                         </div>
                                                     </div>
                                                 </figcaption>
@@ -720,7 +724,7 @@ $allcity = $this->db->get()->result();
                                             </div>
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($spectrum['school_name']) ?></h6>
-                                                <p><i class="fa fa-university"></i> Grade Level : KG To Class 10</p>
+                                                <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($spectrum['school_type']) ?></b></p>                                                            
                                             </figcaption>
                                         </figure>
                                     </a>
@@ -742,7 +746,7 @@ $allcity = $this->db->get()->result();
                                             </div>
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($trial['school_name']) ?></h6>
-                                                <p><i class="fa fa-university"></i> Grade Level : KG To Class 10</p>
+                                                <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($trial['school_type']) ?></b></p>                                                            
                                             </figcaption>
                                         </figure>
                                     </a>
