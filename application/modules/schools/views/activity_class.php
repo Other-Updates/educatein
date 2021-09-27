@@ -1,7 +1,7 @@
 <div class="table-main">
     <div class="table-tit-main"> 
         <div class="table-tit"><?php echo $formName; ?></div> 
-        <a  class="btn btn-success btn-sm" href="<?php echo base_url();?>schools/admin/add_school"><i class="fas fa-plus"></i> Add Institute</a>
+        <a  class="btn btn-success btn-sm" title="Add Institute" href="<?php echo base_url();?>schools/admin/add_school"><i class="fas fa-plus"></i> Add Institute</a>
     </div>
     <?php
         // $this->db->select('id')->from('admin_users');
@@ -11,13 +11,13 @@
     <div class="clearfix"></div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="approved-tab" data-toggle="tab" href="#approved" role="tab" aria-controls="approved" aria-selected="true"><i class="bi bi-check2-circle"></i> Approved</a>
+            <a class="nav-link active" id="approved-tab" data-toggle="tab" title="Approved" href="#approved" role="tab" aria-controls="approved" aria-selected="true"><i class="bi bi-check2-circle"></i> Approved</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="hold-tab" data-toggle="tab" href="#hold" role="tab" aria-controls="hold" aria-selected="false"><i class="bi bi-hourglass"></i> Hold</a>
+            <a class="nav-link" id="hold-tab" data-toggle="tab" title="Hold" href="#hold" role="tab" aria-controls="hold" aria-selected="false"><i class="bi bi-hourglass"></i> Hold</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="reject-tab" data-toggle="tab" href="#reject" role="tab" aria-controls="reject" aria-selected="false"><i class="bi bi-x-circle"></i> Reject</a>
+            <a class="nav-link" id="reject-tab" data-toggle="tab" title="Reject" href="#reject" role="tab" aria-controls="reject" aria-selected="false"><i class="bi bi-x-circle"></i> Reject</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
