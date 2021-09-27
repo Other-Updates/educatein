@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title><?php echo $title; ?> Edugatein.com - Admin Panel</title>
 
-        <link rel="icon" type="image/png" href="<?php echo base_url('assets/'); ?>img/Appicon.png"/>
+        <link rel="icon" type="image/png" href="<?php echo base_url('assets/'); ?>/front/images/favicon.ico">
         <!-- Bootstrap CSS -->       
         <link rel="stylesheet" href="<?php echo base_url('assets/front/css/bootstrap.min.css'); ?>" >
 

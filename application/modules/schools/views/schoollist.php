@@ -597,7 +597,7 @@ $allcity = $this->db->get()->result();
                                                     <?php if(isset($top->logo)){ ?>
                                                     <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                         <?php } else { ?>
-                                                    <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                    <img src="<?php echo base_url() ?>assets/front/images/list-default-single.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                     <?php } ?>
                                                 </div>
                                                 <figcaption class="item-footer">

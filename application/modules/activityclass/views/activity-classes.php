@@ -551,7 +551,7 @@ if ($aff_url == "dance-class") {
                                                 <?php if(isset($top->logo)){ ?>
                                                 <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
                                                     <?php } else { ?>
-                                                <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
+                                                <img src="<?php echo base_url() ?>assets/front/images/list-default-single.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
                                                 <?php } ?>
                                             </div>
                                             <figcaption class="item-footer">
