@@ -660,8 +660,9 @@
         <!--Wrapper-->
         <footer class="footer">
             © Copyright 2021 <a target="_blank" href="http://edugatein.com">Edugatein</a>. All Rights Reserved. 
-            <span class="float-right">Powered By <a href="http://f2fsolutions.co.in/" target="_blank">F2F Solutions</a></span>
+            <span class="float-right pr-5">Powered By <a href="http://f2fsolutions.co.in/" target="_blank">F2F Solutions</a></span>
         </footer>
+        <a id="back-to-top" href="#" class="back-to-top" title="Back to Top" role="button"><i class="bi bi-arrow-up-square-fill"></i></a>
         <div class="overlay">
             <div class="loader"></div>
         </div> 
@@ -793,6 +794,22 @@ if ($this->form_validation->error_array()) {
                         });
                     }
                 });
+            });
+            $(document).ready(function(){
+                $(window).scroll(function () {
+                        if ($(this).scrollTop() > 50) {
+                            $('#back-to-top').fadeIn();
+                        } else {
+                            $('#back-to-top').fadeOut();
+                        }
+                    });
+                    // scroll body to 0px on click
+                    $('#back-to-top').click(function () {
+                        $('body,html').animate({
+                            scrollTop: 0
+                        }, 400);
+                        return false;
+                    });
             });
         </script>
     </body>
