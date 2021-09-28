@@ -443,19 +443,24 @@ $ip = $_SERVER['REMOTE_ADDR'];
 				url: "<?php echo base_url() ?>summercamp/search_activity_class",
 				data:'keyword='+$(this).val(),
 				beforeSend: function(){
-					$("#search_class").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+					$("#search_class").css("background");
 				},
 				success: function(data){
+					data = JSON.parse(data);
+					var html = '';
+					$.each(data, function(key,val) {
+						html += '<li onClick="selectSchool(`'+val['institute_name']+'`)">'+val['institute_name']+'</li>';
+					});
 					$("#suggesstion-box").show();
-					$("#suggesstion-box").html(data);
+					$("#suggesstion-box").html(html);
 					$("#search_class").css("background","#FFF");
 				}
 				});
 			});
 		});
 
-function selectCountry(val) {
-$("#search-box").val(val);
+function selectSchool(val) {
+$("#search_class").val(val);
 $("#suggesstion-box").hide();
 }
 	</script>

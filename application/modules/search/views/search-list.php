@@ -167,7 +167,7 @@
                                     <?php }else if($school['school_category_id'] == 4){ ?>
                                 <div class="nearby-widget mab-30 wow fadeInUp trial">
                                         <?php } ?>
-                                    <a href="<?php echo base_url('list-of-best-'.$school["affiliation_name"].'-schools-in-'.$city.'/'. strtolower($school_name)); ?>" target="_blank">
+                                    <a href="<?php echo base_url('list-of-best-'.$school["affiliation_name"].'-schools-in-'.strtolower($city).'/'. strtolower($school_name)); ?>" target="_blank">
                                         <?php if($school['school_category_id'] == 1){ ?>
                                             <div class="package-name">Platinum</div>
                                         <?php }else if($school['school_category_id'] == 2){ ?>
@@ -186,7 +186,7 @@
                                         </div>
                                     </a>
                                     <div class="nearby-widget-body">
-                                        <h6 class="mb-2"><a href="<?php echo base_url('list-of-best-'.$school["affiliation_name"].'-schools-in-'.$city.'/'. strtolower($school_name)); ?>"><?php echo $school["school_name"]; ?></a></h6>
+                                        <h6 class="mb-2"><a href="<?php echo base_url('list-of-best-'.$school["affiliation_name"].'-schools-in-'.strtolower($city).'/'. strtolower($school_name)); ?>"><?php echo $school["school_name"]; ?></a></h6>
                                         <ul class="list-unstyled">
                                             <li class="mb-1"><i class="fa fa-fw fa-book"></i> <?php echo ucfirst($school["affiliation_name"]); ?> School</li>
                                             <li><i class="fa fa-fw fa-map-marker"></i> <?php echo $school["area_name"]; ?></li>
@@ -248,7 +248,7 @@
                                         </div>
                                     </a>
                                     <div class="nearby-widget-body">
-                                        <h6 class="mb-2"><a href="<?php echo base_url('list-of-best-'.strtolower($type).'-in-'.$city.'/'. strtolower($school_name)); ?>"><?php echo $class["institute_name"]; ?></a></h6>
+                                        <h6 class="mb-2"><a href="<?php echo base_url('list-of-best-'.strtolower($type).'-in-'.strtolower($city).'/'. strtolower($school_name)); ?>"><?php echo $class["institute_name"]; ?></a></h6>
                                         <ul class="list-unstyled">
                                             <li class="mb-1"><i class="fa fa-fw fa-book"></i> <?php echo ucfirst($type); ?> School</li>
                                             <li><i class="fa fa-fw fa-map-marker"></i> <?php echo $class["area_name"]; ?></li>

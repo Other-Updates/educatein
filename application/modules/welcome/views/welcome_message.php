@@ -721,17 +721,22 @@ $ip = $_SERVER['REMOTE_ADDR'];
 $(document).ready(function(){
 	$("#search_school").keyup(function(){
 		$.ajax({
-		type: "POST",
-		url: "<?php echo base_url() ?>welcome/search_school",
-		data:'keyword='+$(this).val(),
-		beforeSend: function(){
-			$("#search_school").css("background","#FFF");
-		},
-		success: function(data){
-			$("#suggesstion-box").show();
-			$("#suggesstion-box").html(data);
-			$("#search_school").css("background","#FFF");
-		}
+            type: "POST",
+            url: "<?php echo base_url() ?>welcome/search_school",
+            data:'keyword='+$(this).val(),
+            beforeSend: function(){
+                $("#search_school").css("background","#FFF");
+            },
+            success: function(data){
+                data = JSON.parse(data);
+                var html = '';
+                $.each(data, function(key,val) {
+                    html += '<li onClick="selectSchool(`'+val['school_name']+'`)">'+val['school_name']+'</li>';
+                });
+                    $("#suggesstion-box").show();
+                    $("#suggesstion-box").html(html);
+                    $("#search_school").css("background","#FFF");
+            }
 		});
 	});
 });

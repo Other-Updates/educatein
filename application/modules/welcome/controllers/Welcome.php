@@ -481,12 +481,17 @@ class Welcome extends CI_Controller {
     }
 
     function search_school(){
-        $where = "is_active=1 AND status=1 AND valitity IS NOT NULL AND deleted_at is NULL ";
-        $this->db->select('school_name');
-        $this->db->where('city_id',$this->session->userdata('city_id'));
-        $this->db->like('school_name',$_POST['keyword']);
-        $this->db->from('school_details');
-        $this->db->limit(6);
+        $where = "sd.is_active=1 AND sd.status=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
+        $this->db->select('sd.school_name');
+        $this->db->where($where);
+        if(!empty($this->session->userdata('city_id')))
+        $this->db->where('sd.city_id',$this->session->userdata('city_id'));
+        if(!empty($this->session->userdata('search_city')))
+        $this->db->where('ci.city_name',ucfirst($this->session->userdata('search_city')));
+        $this->db->like('sd.school_name',$_POST['keyword']);
+        $this->db->from('school_details as sd');
+        $this->db->join('cities as ci','sd.city_id=ci.id','left');
+        $this->db->limit(10);
         $get_school = $this->db->get()->result_array();
         echo json_encode($get_school);
         exit;

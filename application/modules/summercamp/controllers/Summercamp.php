@@ -99,13 +99,19 @@ class Summercamp extends CI_Controller {
   	}
 
 	  public function search_activity_class(){
-		$where = "is_active=1 AND status=1 AND valitity IS NOT NULL AND deleted_at is NULL ";
+		$where = "ind.is_active=1 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
         $this->db->select('institute_name');
-        $this->db->where('city_id',$this->session->userdata('city_id'));
-        $this->db->like('institute_name',$_POST['keyword']);
-        $this->db->from('institute_details');
-        $this->db->limit(6);
+		$this->db->where($where);
+        if(!empty($this->session->userdata('city_id')))
+        $this->db->where('ind.city_id',$this->session->userdata('city_id'));
+        if(!empty($this->session->userdata('search_city')))
+        $this->db->where('ci.city_name',ucfirst($this->session->userdata('search_city')));
+        $this->db->like('ind.institute_name',$_POST['keyword']);
+        $this->db->from('institute_details as ind');
+		$this->db->join('cities as ci','ind.city_id=ci.id','left');
+        $this->db->limit(10);
         $get_class = $this->db->get()->result_array();
+		// echo $this->db->last_query();exit;
         echo json_encode($get_class);
         exit;
 	  }
