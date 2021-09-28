@@ -585,7 +585,7 @@ class Institute_listing_first extends CI_Controller {
         $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
-            window.location.href = "https://rzp.io/l/FClQWkjCke";
+                window.location.href = "https://rzp.io/l/FEnsGlNP";
             </script>
         <?php
     }
@@ -596,21 +596,21 @@ class Institute_listing_first extends CI_Controller {
             $data = array(
                 'position_id' => 1,
                 'valitity' => 100,
-                'paid' => 65,000.00
+                'paid' => 65000,
             );
         }
         if($this->session->userdata('planUpdate') == 'premium') { 
             $data = array(
                 'position_id' => 2,
                 'valitity' => 100,
-                'paid' => 30,000.00
+                'paid' => 30000,
             );
         }
         if($this->session->userdata('planUpdate') == 'spectrum') { 
             $data = array(
                 'position_id' => 3,
                 'valitity' => 100,
-                'paid' => 12,500.00
+                'paid' => 12500,
             );
         }
         if(!empty($data)){

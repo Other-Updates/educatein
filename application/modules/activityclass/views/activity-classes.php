@@ -757,11 +757,12 @@ if ($aff_url == "dance-class") {
 $trainer_url = str_replace(" ", "-", $aff_url);
 if ($trainer_url != "school-kits" && $trainer_url != "event-managements" && $trainer_url != "transports") {
     ?>
-    <div class="trainers">
+    <!-- <div class="trainers">
         <a href="<?php echo base_url() ?>list-of-best-<?php echo $trainer_url; ?>-trainers-in-coimbatore">
             <img src="<?php echo base_url("assets/front/images/");?>trainers.png" class="w-100" alt="">
         </a>
-    </div><!-- /trainers -->
+    </div> -->
+    <!-- /trainers -->
     <?php
 }
 ?>
@@ -820,7 +821,7 @@ if ($trainer_url != "school-kits" && $trainer_url != "event-managements" && $tra
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Your email*" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp" placeholder="Mobile Number*" pattern="[6789][0-9]{9}" required>
+                <input type="number" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp" placeholder="Mobile Number*" pattern="[6789][0-9]{9}" required>
             </div>
 
             <div class="form-group">

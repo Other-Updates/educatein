@@ -481,7 +481,9 @@ class Welcome extends CI_Controller {
     }
 
     function search_school(){
+        $where = "is_active=1 AND status=1 AND valitity IS NOT NULL AND deleted_at is NULL ";
         $this->db->select('school_name');
+        $this->db->where('city_id',$this->session->userdata('city_id'));
         $this->db->like('school_name',$_POST['keyword']);
         $this->db->from('school_details');
         $this->db->limit(6);

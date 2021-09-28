@@ -46,41 +46,24 @@ class Summercamp extends CI_Controller {
 	// <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 	// <link rel="stylesheet" href="https://www.edugatein.com/css/jquery.fancybox.min.css">
 }
-	public function index()
-	{ 
+	public function index(){ 
 		$this->load->view('summer-camp');
 
 	}
 
-	public function newsletter()
-	{ 
+	public function newsletter(){ 
 		$data = array(
 			'email' => $this->input->post('email'),
 			);
-			
-			
-
 		$email = $data['email'];
-
-
-
-
 		if($email != " "){
-		    
-
 		   $where = "email = '$email'";
-
 		   $this->db->select('*')->where($where);
 		   $this->db->from('newletters');
 		   $contact = $this->db->get()->result();
-		   
-
 		          if(count($contact) == 0){	
-		              
 					$this->db->insert('newletters',$data);
-					
 								?>
-
 					<!-- Success-Alert -->
 					<script type="text/javascript">
 						$(document).ready(function(){
@@ -92,15 +75,10 @@ class Summercamp extends CI_Controller {
 					    	});
 						});
 					</script>
-
-
 		<?php
-
 					$this->load->view('welcome_message');
 				  }else{
-
 		?>
-
 			        <!-- Success-Alert -->
 			        <script type="text/javascript">
 			            $(document).ready(function(){
@@ -113,14 +91,23 @@ class Summercamp extends CI_Controller {
 			            });
 			        </script>	    
 		    <?php
-
 			       $this->load->view('welcome_message');  
-			
 				}
-
 		}else{
     		$this->load->view('welcome_message');  
   		}
   	}
+
+	  public function search_activity_class(){
+		$where = "is_active=1 AND status=1 AND valitity IS NOT NULL AND deleted_at is NULL ";
+        $this->db->select('institute_name');
+        $this->db->where('city_id',$this->session->userdata('city_id'));
+        $this->db->like('institute_name',$_POST['keyword']);
+        $this->db->from('institute_details');
+        $this->db->limit(6);
+        $get_class = $this->db->get()->result_array();
+        echo json_encode($get_class);
+        exit;
+	  }
 
 }

@@ -733,7 +733,7 @@ foreach ($user->result() as $users) {
                         address: "required",
                     },
                     messages: {
-                        schoolname: "this field is required"
+                        schoolname: "This field is required"
                     },
                     errorElement: 'div',
                     errorLabelContainer: '.errorTxt',

@@ -171,6 +171,10 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->from('school_images');
     $gallery = $this->db->get()->result();
 ?>
+<?php $selectedActivity = array();
+                     foreach($management as $key=>$management_data){ 
+                        $selectedActivity[] = $management_data['activity_name'];
+                      } ?>
 <div class="breadrumb-new mnone">
     <div class="container-fluid" style="padding: 0 60px;">
         <div class="row">
@@ -260,10 +264,10 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         <ul id="sd-menu" class="sd-menu-list wow bounce">
             <li class="sd-menu-item"><a href="#about-info">About Info</a></li>
             <li class="sd-menu-item"><a href="#addit-info">Additional Info</a></li>
-            <li class="sd-menu-item"><a href="#special-info">Special Info</a></li>
-            <li class="sd-menu-item"><a href="#sd-gallery">Gallery</a></li>
-            <li class="sd-menu-item"><a href="#school-activ">Activities</a></li>
-            <li class="sd-menu-item"><a href="#school-facilities">Facilities</a></li>
+            <?php if(!empty($selectedActivity)){ ?><li class="sd-menu-item"><a href="#special-info">Special Info</a></li><?php } ?>
+            <?php if(!empty($gallery)){ ?><li class="sd-menu-item"><a href="#sd-gallery">Gallery</a></li><?php } ?>
+            <?php if(!empty($school_activity)){ ?><li class="sd-menu-item"><a href="#school-activ">Activities</a></li><?php } ?>
+            <?php if(!empty($facility)){ ?><li class="sd-menu-item"><a href="#school-facilities">Facilities</a></li><?php } ?>
             <li class="sd-menu-item"><a href="#contact-info">Contact</a></li>
             <li class="sd-menu-item"><a href="#social-links">Social Links</a></li>
         </ul>
@@ -456,117 +460,115 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div>
 
-                <?php $selectedActivity = array();
-                     foreach($management as $key=>$management_data){ 
-                        $selectedActivity[] = $management_data['activity_name'];
-                      } ?>
-                <div id="special-info" class="sd-inner-main special-info section wow slideInLeft">
-                    <div class="sd-ection-tit">Special Info</div>
-                    <div class="sd-ection-inner">
-                        <div class="row">
-                            <?php if( in_array('playground',$selectedActivity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/16.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Playground</h3>
+                <?php if(!empty($selectedActivity)){ ?>
+                    <div id="special-info" class="sd-inner-main special-info section wow slideInLeft">
+                        <div class="sd-ection-tit">Special Info</div>
+                        <div class="sd-ection-inner">
+                            <div class="row">
+                                <?php if( in_array('playground',$selectedActivity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/16.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Playground</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('kidsplay',$selectedActivity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/17.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Kids Playcorner</h3>
+                                <?php } ?>
+                                <?php if( in_array('kidsplay',$selectedActivity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/17.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Kids Playcorner</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('transport',$selectedActivity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/33.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Transportation</h3>
+                                <?php } ?>
+                                <?php if( in_array('transport',$selectedActivity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/33.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Transportation</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('curriculam',$selectedActivity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/18.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Curriculam</h3>
+                                <?php } ?>
+                                <?php if( in_array('curriculam',$selectedActivity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/18.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Curriculam</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('fieldtrips',$selectedActivity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/19.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Field Trips</h3>
+                                <?php } ?>
+                                <?php if( in_array('fieldtrips',$selectedActivity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/19.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Field Trips</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('special activity',$selectedActivity)){ ?>    
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/34.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Activity</h3>
+                                <?php } ?>
+                                <?php if( in_array('special activity',$selectedActivity)){ ?>    
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/34.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Activity</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('opportunities',$selectedActivity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/20.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Opportunities</h3>
+                                <?php } ?>
+                                <?php if( in_array('opportunities',$selectedActivity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/20.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Opportunities</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('clubs',$selectedActivity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/21.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Clubs</h3>
+                                <?php } ?>
+                                <?php if( in_array('clubs',$selectedActivity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/21.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Clubs</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if( in_array('progressive',$selectedActivity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/22.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Progressive Learning</h3>
+                                <?php } ?>
+                                <?php if( in_array('progressive',$selectedActivity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/22.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Progressive Learning</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if($school_details->hostel == 1){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/23.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Hostel Facility</h3>
+                                <?php } ?>
+                                <?php if($school_details->hostel == 1){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/23.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h3>Hostel Facility</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php } ?>
                 <?php if(!empty($gallery)){ ?>
                     <div id="sd-gallery" class="sd-inner-main gallery wow slideInLeft">
                         <div class="sd-ection-tit">Gallery</div>
@@ -2963,7 +2965,7 @@ if ($category == 1) {
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Your email*" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp" placeholder="Mobile Number*" pattern="[6789][0-9]{9}" required>
+                <input type="number" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp" placeholder="Mobile Number*" pattern="[6789][0-9]{9}" required>
             </div>
 
             <div class="form-group">

@@ -295,9 +295,10 @@ class Institute_trial extends CI_Controller {
         $data[] = array(
             'position_id' => 4,
             'valitity' => 30,
-            'id' => base64_decode($school_id)
+            'paid' => 0,
+            // 'id' => base64_decode($school_id)
         );
-        $this->db->update_batch('institute_details',$data,'id');
+        $this->db->update('institute_details',$data,array('id'=>base64_decode($school_id)));
         $this->db->select('*');
         $this->db->where('id',base64_decode($school_id));
         $this->db->from('institute_details');

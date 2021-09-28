@@ -1,6 +1,4 @@
- 
 <?php
-// print_r($platinum_data);exit;
 $yourcity = array();
 $aff_url = end($this->uri->segments);
 $yourcity = explode("-", $aff_url);
@@ -157,7 +155,7 @@ $uccity = ucfirst($yourcity);
                         <div class="row">
                             <div class="col-lg-2"></div>
                             <div class="col-lg-8">
-                                <form action="<?php echo base_url() ?>schools-list" method="get">
+                                <form action="<?php echo base_url() ?>schools-list" id="school_search_form" method="get">
                                     <div class="input-group mb-3 shadow-lg">
                                         <div class="input-group-prepend">
                                             <?php if ($aff_url != "") { ?>
@@ -187,14 +185,14 @@ $uccity = ucfirst($yourcity);
                                         
                                         <!-- <div id="map"></div> -->
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>
+                                            <button class="btn btn-outline-secondary" id="search_school_submit" type="submit" ><i class="fa fa-search"></i></button>
                                         </div>
                                     </div><!-- /input-group -->
                                 </form>
                             </div>
                             <div class="col-lg-2">
                                 <div class="hss-activity-link wow bounceIn faster">
-                                    <a href="<?php echo base_url(); ?>list-of-best-summer-camp-in-<?php echo $city; ?>">
+                                    <a href="<?php echo base_url(); ?>list-of-best-summer-camp-in-<?php echo strtolower($city); ?>">
                                         Activity Classes
                                     </a>
                                 </div>
@@ -210,13 +208,13 @@ $uccity = ucfirst($yourcity);
                 <div class="row">
                     <div class="col-lg-4 col-sm-4">
                         <div class="hss-school">
-                            <a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo $city; ?>" >
+                            <a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo strtolower($city); ?>" >
                                 <figure class="snip1571 wow bounceIn anim1s hss-school-left">
                                     <div class="object-fit">
                                         <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                     </div><!-- /object-fit -->
                                     <figcaption>
-                                        <h1><a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo $city; ?>" >Kindergarten Schools</a></h1>
+                                        <h1><a href="<?php echo base_url() ?>list-of-best-kindergarten-schools-in-<?php echo strtolower($city); ?>" >Kindergarten Schools</a></h1>
                                     </figcaption>
                                 </figure><!-- /snip1571 -->
                             </a>
@@ -224,25 +222,25 @@ $uccity = ucfirst($yourcity);
                     </div>
                     <div class="col-lg-4 col-sm-4 pl-0">
                         <div class="hss-school">
-                            <a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo $city; ?>" >
+                            <a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo strtolower($city); ?>" >
                                 <figure class="snip1571 wow bounceIn anim2s hss-school-right">
                                     <div class="object-fit">
                                         <img src="<?php echo base_url(); ?>assets/front/images/cbse_1.jpg" class="w-100" alt="best cbse schools in <?php echo $city; ?>" />
                                     </div><!-- /object-fit -->
                                     <figcaption>
-                                        <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo $city; ?>" >CBSE Schools</a></h1>
+                                        <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-cbse-schools-in-<?php echo strtolower($city); ?>" >CBSE Schools</a></h1>
                                     </figcaption>
                                 </figure><!-- /snip1571 -->
                             </a>
                         </div>
                         <div class="hss-school">
-                            <a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo $city; ?>" >
+                            <a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo strtolower($city); ?>" >
                                 <figure class="snip1571 wow bounceIn anim4s hss-school-right">
                                     <div class="object-fit">
                                         <img src="<?php echo base_url() ?>assets/front/images/matric_1.jpg" class="w-100" alt="matriculation schools in <?php echo $city; ?>"/>
                                     </div>
                                     <figcaption>
-                                        <h1><a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo $city; ?>" >Matriculation Schools</a></h1>
+                                        <h1><a href="<?php echo base_url() ?>list-of-best-matriculation-schools-in-<?php echo strtolower($city); ?>" >Matriculation Schools</a></h1>
                                     </figcaption>
                                 </figure><!-- /snip1571 -->
                             </a>
@@ -250,25 +248,25 @@ $uccity = ucfirst($yourcity);
                     </div>
                     <div class="col-lg-4 col-sm-4 pl-0">
                         <div class="hss-school">
-                            <a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo $city; ?>" >
+                            <a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo strtolower($city); ?>" >
                                 <figure class="snip1571 wow bounceIn anim3s hss-school-right">
                                     <div class="object-fit">
                                         <img src="<?php echo base_url() ?>assets/front/images/inter_1.jpg" class="w-100" alt="best international schools in <?php echo $city; ?>"/>
                                     </div>
                                     <figcaption>
-                                        <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo $city; ?>" >International Schools</a></h1>
+                                        <h1 style="font-size: 20px;"><a href="<?php echo base_url() ?>list-of-best-international-schools-in-<?php echo strtolower($city) ?>" >International Schools</a></h1>
                                     </figcaption>
                                 </figure><!-- /snip1571 -->
                             </a>
                         </div>
                         <div class="hss-school">
-                            <a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo $city; ?>" >
+                            <a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo strtolower($city); ?>" >
                                 <figure class="snip1571 wow bounceIn anim5s hss-school-right">
                                     <div class="object-fit">
                                         <img src="<?php echo base_url() ?>assets/front/images/state_1.jpg" class="w-100" alt="best state board schools in <?php echo $city; ?>"/>
                                     </div>
                                     <figcaption>
-                                        <h1><a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo $city; ?>" >Special Schools</a></h1>
+                                        <h1><a href="<?php echo base_url() ?>list-of-best-special-schools-in-<?php echo strtolower($city); ?>" >Special Schools</a></h1>
                                     </figcaption>
                                 </figure><!-- /snip1571 -->
                             </a>
@@ -730,7 +728,6 @@ $(document).ready(function(){
 			$("#search_school").css("background","#FFF");
 		},
 		success: function(data){
-            // data = JSON.parse(data);
 			$("#suggesstion-box").show();
 			$("#suggesstion-box").html(data);
 			$("#search_school").css("background","#FFF");
@@ -743,7 +740,32 @@ function selectSchool(val) {
 $("#search_school").val(val);
 $("#suggesstion-box").hide();
 }    
+$(document).ready(function(){
+    // $("#search_school_submit").on('click',function (event) {
+    //     event.preventDefault();
+    //     $("#school_search_form").validate({
+    //         rules: {
+    //             search: "required",
+    //             },
+    //             // messages: {
+    //             //     search: "required"
+    //             // },
+    //             errorElement: 'div',
+    //             errorLabelContainer: '.errorTxt',
+    //             errorPlacement: function (error, element) {
+    
+    //                     element.parents('.form-group').append(error);
+    //             }
+    //     });
+    // });
+});
+</script>
+<!-- <script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
 </script> 
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
 
 
 
