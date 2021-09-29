@@ -81,7 +81,8 @@
                                     </ul>
                                 </div><!-- /dropdown-menu -->
                             </div>
-                            <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <div class="search-list"><ul id="suggesstion-box"></ul></div>
                             <?php if ($searchcity != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                             <?php } else { ?>
@@ -473,4 +474,31 @@
             delay: 1300,
         },
     });
+    $(document).ready(function(){
+        $("#search_school").keyup(function(){
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url() ?>welcome/search_school",
+                data:'keyword='+$(this).val(),
+                beforeSend: function(){
+                    $("#search_school").css("background","#FFF");
+                },
+                success: function(data){
+                    data = JSON.parse(data);
+                    var html = '';
+                    $.each(data, function(key,val) {
+                        html += '<li onClick="selectSchool(`'+val['school_name']+'`)">'+val['school_name']+'</li>';
+                    });
+                        $("#suggesstion-box").show();
+                        $("#suggesstion-box").html(html);
+                        $("#search_school").css("background","#FFF");
+                }
+            });
+        });
+    });
+    //To select country name
+    function selectSchool(val) {
+        $("#search_school").val(val);
+        $("#suggesstion-box").hide();
+    } 
 </script>

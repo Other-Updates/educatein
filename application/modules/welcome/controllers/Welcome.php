@@ -491,6 +491,7 @@ class Welcome extends CI_Controller {
         $this->db->like('sd.school_name',$_POST['keyword']);
         $this->db->from('school_details as sd');
         $this->db->join('cities as ci','sd.city_id=ci.id','left');
+        $this->db->order_by('sd.school_name','asc');
         $this->db->limit(10);
         $get_school = $this->db->get()->result_array();
         if(empty($_POST['keyword'])){

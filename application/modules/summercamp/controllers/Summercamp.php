@@ -107,6 +107,7 @@ class Summercamp extends CI_Controller {
         if(!empty($this->session->userdata('search_city')))
         $this->db->where('ci.city_name',ucfirst($this->session->userdata('search_city')));
         $this->db->like('ind.institute_name',$_POST['keyword']);
+		$this->db->order_by('ind.institute_name');
         $this->db->from('institute_details as ind');
 		$this->db->join('cities as ci','ind.city_id=ci.id','left');
         $this->db->limit(10);
