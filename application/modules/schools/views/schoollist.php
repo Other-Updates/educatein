@@ -211,7 +211,8 @@ $allcity = $this->db->get()->result();
                                     </ul>
                                 </div><!-- /dropdown-menu -->
                             </div>
-                            <input type="text" id="tags" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <div id="suggesstion-box"></div>
                             <?php if ($aff_url != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                             <?php } else { ?>
@@ -613,7 +614,7 @@ $allcity = $this->db->get()->result();
                                                             <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                         </div>
                                                         <div class="col-lg-3 item-right-section">
-                                                            <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
+                                                            <a href="tel:<?php echo $top->mobile ?>"><button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button></a><br>
                                                             <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
                                                         </div>
                                                     </div>
@@ -1099,4 +1100,31 @@ $ip = $_SERVER['REMOTE_ADDR'];
             });
         }
     });
+    $(document).ready(function(){
+        $("#search_school").keyup(function(){
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url() ?>welcome/search_school",
+                data:'keyword='+$(this).val(),
+                beforeSend: function(){
+                    $("#search_school").css("background","#FFF");
+                },
+                success: function(data){
+                    data = JSON.parse(data);
+                    var html = '';
+                    $.each(data, function(key,val) {
+                        html += '<li onClick="selectSchool(`'+val['school_name']+'`)">'+val['school_name']+'</li>';
+                    });
+                        $("#suggesstion-box").show();
+                        $("#suggesstion-box").html(html);
+                        $("#search_school").css("background","#FFF");
+                }
+            });
+        });
+    });
+    //To select country name
+    function selectSchool(val) {
+    $("#search_school").val(val);
+    $("#suggesstion-box").hide();
+    }    
 </script> 

@@ -283,7 +283,7 @@ if ($user->num_rows() > 0) {
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <!-- <label for="">Pincode</label> -->
-                                    <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pincode" >
+                                    <input type="text" class="form-control" id="pincode" <?php if(!empty($users->pincode)){ ?> value="<?php echo $users->pincode ?>" <?php } ?> name="pincode" placeholder="Pincode" >
                                 </div>
                             </div>
 
@@ -579,7 +579,32 @@ if ($user->num_rows() > 0) {
     }
 
     $('a.logout').click(function () {
-        return confirm('Are you sure want to logout....!!!')
+        // return confirm('Are you sure want to logout....!!!')
+        swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    }, function (isConfirm) {
+        if (!isConfirm) return;
+        $.ajax({
+            url: "scriptDelete.php",
+            type: "POST",
+            data: {
+                id: 5
+            },
+            dataType: "html",
+            success: function () {
+                swal("Done!", "It was succesfully deleted!", "success");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                swal("Error deleting!", "Please try again", "error");
+            }
+        });
+    });
     })
 
     $('.btn-save').click(function(e){

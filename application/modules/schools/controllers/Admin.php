@@ -4244,7 +4244,7 @@ class admin extends CI_Controller {
 
 		if(isset($_POST["length"])){
 
-            $column = array('','ur.name','sd.school_name','ci.city_name','sd.school_category_id','sd.paid','sd.created_at','sd.status');
+            $column = array('','ur.name','sd.school_name','ci.city_name','sd.school_category_id','sd.paid','sd.created_at','sd.activated_at');
             $input_arr['search_val'] = $input_data['search']['value'];
             $input_arr['order_column'] = $column[$input_data['order'][0]['column']];
             $input_arr['order_by'] = $input_data['order'][0]['dir'];
@@ -4371,7 +4371,7 @@ class admin extends CI_Controller {
 
 		if(isset($_POST["length"])){
 
-            $column = array('','ur.name','in.institute_name','ci.city_name','in.position_id','in.paid','in.created_at','in.status');
+            $column = array('','ur.name','in.institute_name','ci.city_name','in.position_id','in.paid','in.created_at','in.activated_at');
             $input_arr['search_val'] = $input_data['search']['value'];
             $input_arr['order_column'] = $column[$input_data['order'][0]['column']];
             $input_arr['order_by'] = $input_data['order'][0]['dir'];
