@@ -617,11 +617,10 @@ $allcity = $this->db->get()->result();
                                                             <p><i class="fa fa-map-marker"></i> Address : <b><?php echo ucwords($top->address) ?></b></p>
                                                             <p><i class="fa fa-book"></i> School Board : <b><?php echo ucfirst($aff_name) ?></b></p>
                                                             <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($top->school_type) ?></b></p>
-                                                            <p><i class="fa fa-university"></i> Area : <b><?php echo ucwords($top->area_name) ?></b></p>
                                                             <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                         </div>
                                                         <div class="col-lg-3 item-right-section">
-                                                            <a href="tel:<?php echo $top->mobile ?>"><button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button></a><br>
+                                                            <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
                                                             <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
                                                         </div>
                                                     </div>
@@ -690,7 +689,7 @@ $allcity = $this->db->get()->result();
                                                     <div class="row">
                                                         <div class="col-lg-12 item-left-section">
                                                             <p><i class="fa fa-university"></i> Grade Level : <b><?php echo ucwords($top['school_type']) ?></b></p>                                                            
-                                                            <p><i class="fa fa-university"></i> Area : <b><?php echo ucwords($top['area_name']) ?></b></p>                                                            
+                                                                                                                      
                                                         </div>
                                                     </div>
                                                 </figcaption>

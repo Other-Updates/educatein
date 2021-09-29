@@ -496,7 +496,7 @@ if ($aff_url == "dance-class") {
             $this->db->join('areas as ar','ind.area_id=ar.id','left');
             $school_premium = $this->db->get()->result_array();
 
-            $where2 = "ind.is_active=1 AND ind.position_id=3 OR ind.position_id=3 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $where2 = "ind.is_active=1 AND ind.position_id=3 OR ind.position_id=4 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
             $this->db->select('ind.*,ar.area_name')->where($where2);
             // $this->db->order_by('rand()');
             $this->db->order_by('ind.institute_name');
@@ -566,7 +566,7 @@ if ($aff_url == "dance-class") {
                                                         <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                     </div>
                                                     <div class="col-lg-3 item-right-section">
-                                                        <a href="tel:<?php echo $top->mobile ?>"><button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button></a><br>
+                                                        <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
                                                         <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
                                                     </div>
                                                 </div>
@@ -633,7 +633,7 @@ if ($aff_url == "dance-class") {
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($top['institute_name']) ?></h6>
                                                 <?php if(!empty($top['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top['year_of_establish'] ?></b></p><?php } ?>
-                                                <p>Area: <b><?php echo $top['area_name'] ?></b></p>
+                                                <!-- <p>Area: <b><?php echo $top['area_name'] ?></b></p> -->
                                                 <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
                                             </figcaption>
                                         </figure>
@@ -653,7 +653,7 @@ if ($aff_url == "dance-class") {
                     </div><!-- /owl-carousel -->
                 </div><!-- /top-school-widget -->
             <?php } ?>
-            <?php if(!empty($school_trial) || !empty($school_spectrum)){ ?>
+            <?php if(!empty($school_spectrum)){ ?>
                 <div class="third-cat mab-50 home-tsw top-school-widget mab-20">
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <span><?php echo $yourcity; ?></span></h3>
@@ -683,7 +683,7 @@ if ($aff_url == "dance-class") {
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($spectrum['institute_name']) ?></h6>
                                                 <?php if(!empty($spectrum['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $spectrum['year_of_establish'] ?></b></p><?php } ?>
-                                                <p>Area : <?php echo $spectrum['area_name'] ?></p>
+                                                <!-- <p>Area : <?php echo $spectrum['area_name'] ?></p> -->
                                             </figcaption>
                                         </figure>
                                     </a>
