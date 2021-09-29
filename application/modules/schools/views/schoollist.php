@@ -759,7 +759,118 @@ $allcity = $this->db->get()->result();
                 </div>
             <?php } ?>
         <?php }else{ ?>
-            <h1 style="text-align:center;">Record Not Found..!</h1>
+            <!-- Data Not Found -->
+            <div class="no-data-list">
+                <div class="home-tsw top-school-widget top-school-sigle mab-30">
+                    <div class="custom-section-title mab-10">
+                        <h3 class="mb-2">Top <?php echo $search; ?></h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="wow bounceIn no-data-img" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>schools-signup">
+                                    <figure>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url() ?>assets/front/images/no-data-single.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        </div>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-tsw top-school-widget mab-30">
+                    <div class="custom-section-title mab-10">
+                        <h3 class="mb-2">Best <?php echo $search; ?></h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="wow bounceIn no-data-img" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>schools-signup">
+                                    <figure>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url() ?>assets/front/images/no-data.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        </div>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="wow bounceIn no-data-img" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>schools-signup">
+                                    <figure>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url() ?>assets/front/images/no-data.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        </div>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="wow bounceIn no-data-img" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>schools-signup">
+                                    <figure>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url() ?>assets/front/images/no-data.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        </div>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="schoolist-inner mab-20">
+                    <div class="custom-section-title mab-10">
+                        <h3 class="mb-2">Best <?php echo $search; ?></h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="wow bounceIn no-data-img" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>schools-signup">
+                                    <figure>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url() ?>assets/front/images/no-data.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        </div>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="wow bounceIn no-data-img" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>schools-signup">
+                                    <figure>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url() ?>assets/front/images/no-data.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        </div>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="wow bounceIn no-data-img" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>schools-signup">
+                                    <figure>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url() ?>assets/front/images/no-data.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        </div>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="wow bounceIn no-data-img" style="animation-delay: .<?php echo $delay; ?>s;">
+                                <a href="<?php echo base_url() ?>schools-signup">
+                                    <figure>
+                                        <div class="object-fit">
+                                            <img src="<?php echo base_url() ?>assets/front/images/no-data.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                        </div>
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php } ?>
         </div>
     </div>
