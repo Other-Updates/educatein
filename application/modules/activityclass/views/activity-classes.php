@@ -719,7 +719,7 @@ if ($aff_url == "dance-class") {
                     <div class="no-data-list">
                         <div class="home-tsw top-school-widget top-school-sigle mab-30">
                             <div class="custom-section-title mab-10">
-                                <h3 class="mb-2">Exclusive <?php echo $search; ?></h3>
+                                <h3 class="mb-2">Exclusive Activity Class in <b><?php echo ucfirst($yourcity); ?></b></h3>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -737,7 +737,7 @@ if ($aff_url == "dance-class") {
                         </div>
                         <div class="home-tsw top-school-widget mab-30">
                             <div class="custom-section-title mab-10">
-                                <h3 class="mb-2">Top <?php echo $search; ?></h3>
+                                <h3 class="mb-2">Top Activity Class in <b><?php echo ucfirst($yourcity); ?></b></h3>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
@@ -777,7 +777,7 @@ if ($aff_url == "dance-class") {
                         </div>
                         <div class="schoolist-inner mab-20">
                             <div class="custom-section-title mab-10">
-                                <h3 class="mb-2">Best <?php echo $search; ?></h3>
+                                <h3 class="mb-2">Best Activity Class in <b><?php echo ucfirst($yourcity); ?></b></h3>
                             </div>
                             <div class="row">
                                 <div class="col-lg-3">
