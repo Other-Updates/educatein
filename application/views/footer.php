@@ -52,7 +52,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-6 col-sm-6">
-							<p>&copy; 2019 <b>Edugatein.</b> All Rights Reserved.</p>
+							<p>&copy; 2021 <b>Edugatein.</b> All Rights Reserved.</p>
 						</div>
 
 						<div class="col-lg-6 col-sm-6 text-right">

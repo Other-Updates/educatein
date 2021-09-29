@@ -3131,3 +3131,27 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 .item-left-section p i {
 	padding-right: 5px;
 }
+.no-data-list .home-tsw .object-fit, .no-data-list .schoolist-inner .object-fit {
+	box-shadow: 0 3px 6px rgb(0 0 0 / 12%), 0 3px 6px rgb(0 0 0 / 20%);
+	transition: .2s all;
+	border-radius: 10px;
+}
+.no-data-list .home-tsw .object-fit img, .no-data-list .schoolist-inner img {
+	border-radius: 10px;
+}
+.no-data-img {
+	transition: .2s all;
+}
+.no-data-img:hover {
+    box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+    margin-top: -3px;
+    margin-bottom: 3px;
+    cursor: pointer;
+	border-radius: 10px;
+}
+.no-data-list .home-tsw .object-fit {
+	height: 430px;
+}
+.no-data-list .schoolist-inner .no-data-img {
+	margin-bottom: 40px;
+}
