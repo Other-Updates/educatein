@@ -282,7 +282,8 @@ if ($aff_url == "dance-class") {
                                     </ul>
                                 </div><!-- /dropdown-menu -->
                             </div>
-                            <input type="text" id="tags" class="form-control"  name="search_class" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <input type="text" id="search_class" class="form-control"  name="search_class" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <div id="suggesstion-box"></div>
                             <?php if ($aff_url != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                             <?php } else { ?>
@@ -564,7 +565,7 @@ if ($aff_url == "dance-class") {
                                                         <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                     </div>
                                                     <div class="col-lg-3 item-right-section">
-                                                        <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
+                                                        <a href="tel:<?php echo $top->mobile ?>"><button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button></a><br>
                                                         <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
                                                     </div>
                                                 </div>
@@ -1024,5 +1025,31 @@ $ip = $_SERVER['REMOTE_ADDR'];
             }
         });
     });
+    $(document).ready(function(){
+        $("#search_class").keyup(function(){
+            $.ajax({
+            type: "POST",
+            url: "<?php echo base_url() ?>summercamp/search_activity_class",
+            data:'keyword='+$(this).val(),
+            beforeSend: function(){
+                $("#search_class").css("background");
+            },
+            success: function(data){
+                data = JSON.parse(data);
+                var html = '';
+                $.each(data, function(key,val) {
+                    html += '<li onClick="selectSchool(`'+val['institute_name']+'`)">'+val['institute_name']+'</li>';
+                });
+                $("#suggesstion-box").show();
+                $("#suggesstion-box").html(html);
+                $("#search_class").css("background","#FFF");
+            }
+            });
+        });
+    });
+    function selectSchool(val) {
+        $("#search_class").val(val);
+        $("#suggesstion-box").hide();
+    }
 
 </script>

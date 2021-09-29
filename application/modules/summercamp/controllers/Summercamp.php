@@ -111,8 +111,10 @@ class Summercamp extends CI_Controller {
 		$this->db->join('cities as ci','ind.city_id=ci.id','left');
         $this->db->limit(10);
         $get_class = $this->db->get()->result_array();
-		// echo $this->db->last_query();exit;
-        echo json_encode($get_class);
+		if(empty($_POST['keyword'])){
+			$get_class = array();
+		}
+		echo json_encode($get_class);
         exit;
 	  }
 
