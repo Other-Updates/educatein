@@ -45,6 +45,7 @@ p, ul {
 }
 a:hover {
 	color: #d12881;
+	text-decoration: none;
 }
 .section-pad {
 	padding: 80px 0 50px 0;

@@ -565,7 +565,7 @@ if ($aff_url == "dance-class") {
                                                         <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                     </div>
                                                     <div class="col-lg-3 item-right-section">
-                                                        <a href="tel:<?php echo $top->mobile ?>"><button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button></a><br>
+                                                        <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
                                                         <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
                                                     </div>
                                                 </div>
@@ -632,7 +632,7 @@ if ($aff_url == "dance-class") {
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($top['institute_name']) ?></h6>
                                                 <?php if(!empty($top['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top['year_of_establish'] ?></b></p><?php } ?>
-                                                <p>Area: <b><?php echo $top['area_name'] ?></b></p>
+                                                <!-- <p>Area: <b><?php echo $top['area_name'] ?></b></p> -->
                                                 <!-- <p><i class="fa fa-book"></i> Grades : KG To Class 10</p> -->
                                             </figcaption>
                                         </figure>
@@ -677,7 +677,7 @@ if ($aff_url == "dance-class") {
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($spectrum['institute_name']) ?></h6>
                                                 <?php if(!empty($spectrum['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $spectrum['year_of_establish'] ?></b></p><?php } ?>
-                                                <p>Area : <?php echo $spectrum['area_name'] ?></p>
+                                                <!-- <p>Area : <?php echo $spectrum['area_name'] ?></p> -->
                                             </figcaption>
                                         </figure>
                                     </a>
@@ -704,7 +704,7 @@ if ($aff_url == "dance-class") {
                                             <figcaption class="item-footer">
                                                 <h6><?php echo ucfirst($trial['institute_name']) ?></h6>
                                                 <?php if(!empty($trial['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $trial['year_of_establish'] ?></b></p><?php } ?>
-                                                <p>Area : <?php echo $trial['area_name'] ?></p>
+                                                <!-- <p>Area : <?php echo $trial['area_name'] ?></p> -->
                                             </figcaption>
                                         </figure>
                                     </a>
