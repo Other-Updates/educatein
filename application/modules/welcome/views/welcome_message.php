@@ -181,7 +181,7 @@ $uccity = ucfirst($yourcity);
                                             <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                                         <?php } ?>
                                         <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
-                                        <div id="suggesstion-box"></div>
+                                        <div class="search-list"><ul id="suggesstion-box"></ul></div>
                                         
                                         <!-- <div id="map"></div> -->
                                         <div class="input-group-append">
