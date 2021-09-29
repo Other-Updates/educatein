@@ -459,10 +459,10 @@ $ip = $_SERVER['REMOTE_ADDR'];
 			});
 		});
 
-function selectSchool(val) {
-$("#search_class").val(val);
-$("#suggesstion-box").hide();
-}
+		function selectSchool(val) {
+			$("#search_class").val(val);
+			$("#suggesstion-box").hide();
+		}
 	</script>
 	<!--End of Tawk.to Script-->
     

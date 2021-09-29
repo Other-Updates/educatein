@@ -190,7 +190,7 @@ $about_img = $this->db->get()->result_array();
                         <div class="form-group">
                         <input type="hidden" value=<?php echo $school_id; ?> class="form-control" id="school_id" name="school_id">
                             <label for="user_id">user id</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>" placeholder="e.g. Haunuz Matriculation" required>
+                            <input type="text" class="form-control" id="user_id" name="user_id" value="<?php echo $userid; ?>" placeholder="e.g. Haunuz Matriculation">
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">

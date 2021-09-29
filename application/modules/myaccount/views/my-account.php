@@ -591,11 +591,11 @@ if ($user->num_rows() > 0) {
     }, function (isConfirm) {
         if (!isConfirm) return;
         $.ajax({
-            url: "scriptDelete.php",
-            type: "POST",
-            data: {
-                id: 5
-            },
+            url: "<?php echo base_url() ?>logout",
+            // type: "POST",
+            // data: {
+            //     id: 5
+            // },
             dataType: "html",
             success: function () {
                 swal("Done!", "It was succesfully deleted!", "success");
@@ -668,3 +668,5 @@ if ($user->num_rows() > 0) {
         pointer-events: none;
     }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
