@@ -212,7 +212,7 @@ $allcity = $this->db->get()->result();
                                 </div><!-- /dropdown-menu -->
                             </div>
                             <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
-                            <div id="suggesstion-box"></div>
+                            <div class="search-list"><ul id="suggesstion-box"></ul></div>
                             <?php if ($aff_url != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                             <?php } else { ?>
