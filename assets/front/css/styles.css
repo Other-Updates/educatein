@@ -3152,6 +3152,9 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 .no-data-list .home-tsw .object-fit {
 	height: 430px;
 }
+.no-data-list .home-tsw.top-school-sigle .object-fit {
+	height: 400px;
+}
 .no-data-list .schoolist-inner .no-data-img {
 	margin-bottom: 40px;
 }
