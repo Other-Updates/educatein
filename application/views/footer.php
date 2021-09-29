@@ -57,7 +57,7 @@
 
 						<div class="col-lg-6 col-sm-6 text-right">
 							<ul class="list-inline">
-								<li class="list-inline-item"><a href="<?php echo base_url() ?>privacy-policy">Privacy Policy</a></li>
+								<li class="list-inline-item"><a href="#">Privacy Policy</a></li>
 								<li class="list-inline-item"><a href="<?php echo base_url() ?>terms-and-conditions">Terms & Conditions</a></li>
 							</ul>
 						</div>
