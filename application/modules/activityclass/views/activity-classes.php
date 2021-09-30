@@ -379,7 +379,7 @@ if ($aff_url == "dance-class") {
         <div id="main">
             <div class="section-title mab-30 dnone">
                 <div class="bubbles">
-                    <h1 class="display-4">Exclusive <?php echo $aff_name; ?></h1>
+                    <!-- <h1 class="display-4">Exclusive <?php echo $aff_name; ?></h1> -->
                 </div><hr>
             </div><!-- /section-title -->
 
@@ -495,6 +495,17 @@ if ($aff_url == "dance-class") {
             $this->db->from('institute_details as ind');
             $this->db->join('areas as ar','ind.area_id=ar.id','left');
             $school_premium = $this->db->get()->result_array();
+            
+            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $where2 = "ind.is_active=1 AND ind.position_id=3 OR ind.position_id=4 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $this->db->select('ind.*,ar.area_name')->where($where2);
+            // $this->db->order_by('rand()');
+            $this->db->order_by('ind.institute_name');
+            $this->db->join('areas as ar','ind.area_id=ar.id','left');
+            $this->db->from('institute_details as ind');
+            $this->db->limit(12, $page);
+            $school_spectrum = $this->db->get()->result_array();
+
 
             $where2 = "ind.is_active=1 AND ind.position_id=3 OR ind.position_id=4 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
             $this->db->select('ind.*,ar.area_name')->where($where2);
@@ -502,15 +513,12 @@ if ($aff_url == "dance-class") {
             $this->db->order_by('ind.institute_name');
             $this->db->join('areas as ar','ind.area_id=ar.id','left');
             $this->db->from('institute_details as ind');
-            $school_spectrum = $this->db->get()->result_array();
-
-            // $where2 = "ind.is_active=1 AND ind.position_id=4 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
-            // $this->db->select('*')->where($where2);
-            // // $this->db->order_by('rand()');
-            // $this->db->from('institute_details as ind');
-            // $this->db->join('areas as ar','ind.area_id=ar.id','left');
-            // $school_trial = $this->db->get()->result_array();
-            // print_r($school_spectrum);exit;
+            $school_spectrum_count = $this->db->get()->num_rows();
+            $class_type = str_replace(" ","-",$aff_url);
+            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $link = "list-of-best-".$class_type."-in-".$yourcity."/page";
+            $school_links = customcreatePageinatation($school_spectrum_count,$page,$link);
+            
             ?>
 
         <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum) ){ ?>
@@ -551,7 +559,7 @@ if ($aff_url == "dance-class") {
                                             <div class="package-name">Platinum</div>
                                             <div class="object-fit">
                                                 <?php if(isset($top->logo)){ ?>
-                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
+                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100"  />
                                                     <?php } else { ?>
                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default-single.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
                                                 <?php } ?>
@@ -625,7 +633,7 @@ if ($aff_url == "dance-class") {
                                             <div class="package-name">Premium</div>
                                             <div class="object-fit">
                                                 <?php if(isset($top['logo'])){ ?>
-                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
+                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100"  />
                                                     <?php } else { ?>
                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
                                                 <?php } ?>
@@ -675,7 +683,7 @@ if ($aff_url == "dance-class") {
                                             <?php } ?>
                                             <div class="object-fit">
                                             <?php if(isset($spectrum['logo'])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
+                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100">
                                             <?php }else{ ?>
                                                 <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
                                             <?php } ?>
@@ -691,6 +699,7 @@ if ($aff_url == "dance-class") {
                             </div>
                             <!-- </div> -->
                         <?php } ?>
+                        <div class="custom-pagination pagination"><?php echo $school_links ?></div>
                         
                     <div>
                 </div>
@@ -1143,3 +1152,19 @@ $ip = $_SERVER['REMOTE_ADDR'];
     }
 
 </script>
+<?php 
+function customcreatePageinatation($count,$page,$link){
+    $CI =& get_instance();
+    $CI->load->library('pagination'); // load library 
+    $config = array();
+    // if ($this->input->get('search')) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+    $config["base_url"] = base_url() . $link;
+    $config["total_rows"] = $count;
+    $config["per_page"] = 12;
+    $config["uri_segment"] = 2;
+    // $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
+    // $config['use_page_numbers'] = TRUE;
+    $CI->pagination->initialize($config);
+    return $CI->pagination->create_links();
+}
+?>

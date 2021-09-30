@@ -94,6 +94,14 @@ foreach( $result as $cities )
 	$route['list-of-best-matriculation-schools-in-'.$urlcity] = 'schools/index/matriculation';
 	$route['list-of-best-special-schools-in-'.$urlcity] = 'schools/index/stateboard';
 	$route['list-of-best-kindergarten-schools-in-'.$urlcity] = 'schools/index/kindergarten';
+
+//school affiliation pagination
+	$route['list-of-best-cbse-schools-in-'.$urlcity.'/page/(:num)'] = 'schools/index/cbse';
+	$route['list-of-best-international-schools-in-'.$urlcity.'/page/(:num)'] = 'schools/index/international';
+	$route['list-of-best-matriculation-schools-in-'.$urlcity.'/page/(:num)'] = 'schools/index/matriculation';
+	$route['list-of-best-special-schools-in-'.$urlcity.'/page/(:num)'] = 'schools/index/stateboard';
+	$route['list-of-best-kindergarten-schools-in-'.$urlcity.'/page/(:num)'] = 'schools/index/kindergarten';
+
 //Enquiry Page
 	$route['list-of-best-cbse-schools-in-'.$urlcity.'/enquiry'] = 'schooldetail/enquiry';
 	$route['list-of-best-international-schools-in-'.$urlcity.'/enquiry'] = 'schooldetail/enquiry';
@@ -130,6 +138,20 @@ foreach( $result as $cities )
 	$route['list-of-best-costume-designers-in-'.$urlcity] = 'activityclass/index';
 	$route['list-of-best-arts-in-'.$urlcity] = 'activityclass/index';
 	$route['list-of-best-transports-in-'.$urlcity] = 'activityclass/index';
+
+//Activity class pagination 
+
+	$route['list-of-best-dance-class-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-music-class-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-coaching-centres-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-school-kits-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-fitness-centre-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-sports-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-martial-arts-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-event-managements-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-costume-designers-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-arts-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
+	$route['list-of-best-transports-in-'.$urlcity.'/page/(:num)'] = 'activityclass/index';
 
 //Trainers Page
 	$route['list-of-best-dance-class-trainers-in-'.$urlcity] = 'trainer/index';
@@ -376,18 +398,3 @@ $route['payment/razorPaySuccess'] = 'payment/razorPaySuccess';
 
 
 $route['cart'] = 'cart/index';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

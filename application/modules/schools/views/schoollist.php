@@ -551,17 +551,7 @@ $allcity = $this->db->get()->result();
             $this->db->from('school_details as sd');
             $school_spectrum_count = $this->db->get()->num_rows();
 
-        //     $config = array();
-        //     $config["total_rows"] = $this->db->count_all_results();
-        //     $config["base_url"] = base_url() . "schools";
-        //     $config["per_page"] = 12;
-        //     $config["uri_segment"] = 2;
-    
-        //    $this->pagination->initialize($config);
-    
-            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-            // $pagination = $this->pagination->create_links();
-                // $link = "schools";
+            $link = "list-of-best-".$aff_url."-schools-in-".$yourcity."/page";
             $school_links = customcreatePageinatation($school_spectrum_count,$page,$link);
 
 
@@ -607,7 +597,7 @@ $allcity = $this->db->get()->result();
                                                 <div class="package-name">Platinum</div>
                                                 <div class="object-fit">
                                                     <?php if(isset($top->logo)){ ?>
-                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" />
                                                         <?php } else { ?>
                                                     <img src="<?php echo base_url() ?>assets/front/images/list-default-single.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                     <?php } ?>
@@ -658,16 +648,17 @@ $allcity = $this->db->get()->result();
                                         $school_name = str_replace(" ", "-", $top['school_name']);
                                         $affname_url = strtolower($aff_name);
                                         $affname_url = str_replace(" ", "-", $affname_url);
+                                        echo $affname_url;
                                         ?>                                    
                             <div class="mab-20">
                                 <!-- <div class="owl-one owl-carousel owl-theme"> -->
                                     <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
-                                        <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo $school_name; ?>" target="_blank" target="_blank">
+                                        <a href="<?php echo base_url() ?>list-of-best-<?php echo $affname_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo strtolower($school_name); ?>" target="_blank" target="_blank">
                                             <figure>
                                                 <div class="package-name">Premium</div>
                                                 <div class="object-fit">
                                                     <?php if(isset($top['logo'])){ ?>
-                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
+                                                    <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100" />
                                                         <?php } else { ?>
                                                     <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
                                                     <?php } ?>
@@ -716,7 +707,7 @@ $allcity = $this->db->get()->result();
                                             <?php } ?>
                                             <div class="object-fit">
                                             <?php if(isset($spectrum['logo'])){ ?>
-                                                    <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100" alt="best kindergarten schools in nilgiris">
+                                                    <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100" >
                                                 <?php }else{ ?>
                                                     <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
                                                 <?php } ?>
@@ -1215,3 +1206,19 @@ $ip = $_SERVER['REMOTE_ADDR'];
     $("#suggesstion-box").hide();
     }    
 </script> 
+<?php 
+function customcreatePageinatation($count,$page,$link){
+    $CI =& get_instance();
+    $CI->load->library('pagination'); // load library 
+    $config = array();
+    // if ($this->input->get('search')) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+    $config["base_url"] = base_url() . $link;
+    $config["total_rows"] = $count;
+    $config["per_page"] = 12;
+    $config["uri_segment"] = 2;
+    // $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
+    // $config['use_page_numbers'] = TRUE;
+    $CI->pagination->initialize($config);
+    return $CI->pagination->create_links();
+}
+?>

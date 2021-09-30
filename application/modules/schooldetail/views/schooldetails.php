@@ -269,7 +269,9 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
             <?php if(!empty($school_activity)){ ?><li class="sd-menu-item"><a href="#school-activ">Activities</a></li><?php } ?>
             <?php if(!empty($facility)){ ?><li class="sd-menu-item"><a href="#school-facilities">Facilities</a></li><?php } ?>
             <li class="sd-menu-item"><a href="#contact-info">Contact</a></li>
+            <?php if(!empty($school_details->facebook) || !empty($school_details->twitter) || !empty($school_details->instagram) || !empty($school_details->linkedin) || !empty($school_details->pinterest)){  ?>
             <li class="sd-menu-item"><a href="#social-links">Social Links</a></li>
+            <?php } ?>
         </ul>
         <div class="row" >
             <div class="col-md-9">           
@@ -767,66 +769,78 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                 </div> 
             </div>
+            <?php if(!empty($school_details->facebook) || !empty($school_details->twitter) || !empty($school_details->instagram) || !empty($school_details->linkedin) || !empty($school_details->pinterest)){  ?>
             <div class="clearfix"></div>
-            <div id="social-links" class="col-md-12">
-                <div class="sd-inner-main social-links wow fadeInUp">
-                    <div class="sd-ection-tit">Social Links</div>
-                    <div class="sd-ection-inner">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <a href="<?php echo $school_details->facebook ?>">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/28.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Facebook</h3>
-                                        </div>
+                <div id="social-links" class="col-md-12">
+                    <div class="sd-inner-main social-links wow fadeInUp">
+                        <div class="sd-ection-tit">Social Links</div>
+                        <div class="sd-ection-inner">
+                            <div class="row">
+                                <?php if(!empty($school_details->facebook)){ ?>
+                                    <div class="col-md-3">
+                                        <a href="<?php echo $school_details->facebook ?>">
+                                            <div class="sd-addit-icon-value">
+                                                <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/28.png" alt="Educatein"></div>
+                                                <div class="sd-addit-value">
+                                                    <h3>Facebook</h3>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-md-3">
-                                <a href="<?php echo $school_details->twitter ?>">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/29.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Twitter</h3>
-                                        </div>
+                                <?php } ?>
+                                <?php if(!empty($school_details->twitter)){ ?>
+                                    <div class="col-md-3">
+                                        <a href="<?php echo $school_details->twitter ?>">
+                                            <div class="sd-addit-icon-value">
+                                                <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/29.png" alt="Educatein"></div>
+                                                <div class="sd-addit-value">
+                                                    <h3>Twitter</h3>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-md-3">
-                                <a href="<?php echo $school_details->instagram ?>">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/30.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Instagram</h3>
-                                        </div>
+                                    <?php } ?>
+                                <?php if(!empty($school_details->instagram)){ ?>
+                                    <div class="col-md-3">
+                                        <a href="<?php echo $school_details->instagram ?>">
+                                            <div class="sd-addit-icon-value">
+                                                <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/30.png" alt="Educatein"></div>
+                                                <div class="sd-addit-value">
+                                                    <h3>Instagram</h3>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-md-3">
-                                <a href="<?php echo $school_details->linkedin ?>">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/31.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Linked in</h3>
-                                        </div>
+                                <?php } ?>
+                                <?php if(!empty($school_details->linkedin)){ ?>
+                                    <div class="col-md-3">
+                                        <a href="<?php echo $school_details->linkedin ?>">
+                                            <div class="sd-addit-icon-value">
+                                                <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/31.png" alt="Educatein"></div>
+                                                <div class="sd-addit-value">
+                                                    <h3>Linked in</h3>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-md-3">
-                                <a href="<?php echo $school_details->pinterest ?>">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/32.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h3>Pinterest</h3>
-                                        </div>
+                                <?php } ?>
+                                <?php if(!empty($school_details->pinterest)){ ?>
+                                    <div class="col-md-3">
+                                        <a href="<?php echo $school_details->pinterest ?>">
+                                            <div class="sd-addit-icon-value">
+                                                <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/32.png" alt="Educatein"></div>
+                                                <div class="sd-addit-value">
+                                                    <h3>Pinterest</h3>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
+                                <?php } ?>
                             </div>
                         </div>
-                    </div>
-                </div> 
-            </div>
+                    </div> 
+                </div>
+            <?php } ?>
         </div>
     </div>
     <?php if(!empty($similar_school)){ ?>
