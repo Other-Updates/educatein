@@ -2806,6 +2806,9 @@ blue - 33317c
 .home-tsw .spectrum .package-name {
 	background: #6cca19;
 }
+.home-tsw .trial .package-name {
+	background: #33317c;
+}
 .home-tsw .platinum .package-name::after {
 	border-left: 10px solid #fc3838;
 }
@@ -2814,6 +2817,9 @@ blue - 33317c
 }
 .home-tsw .spectrum .package-name::after {
 	border-left: 10px solid #6cca19;
+}
+.home-tsw .trial .package-name::after {
+	border-left: 10px solid #33317c;
 }
 .home-tsw .owl-two .object-fit {
 	height: 290px;
@@ -3082,6 +3088,9 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 }
 .custom-pagination {
 	margin: 15px auto;
+	width: 100%;
+    text-align: center;
+    display: block;
 }
 .custom-pagination a, .custom-pagination strong {
 	margin: 0 8px;
@@ -3094,6 +3103,7 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
     line-height: 38px;
     color: #000;
     border: 1px solid #fff;
+	display: inline-block;
 }
 .custom-pagination strong, .custom-pagination a:hover {
 	background:#33317c;
@@ -3110,7 +3120,7 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 	font-size: 30px;
 }
 .top-school-sigle.top-school-widget figcaption {
-	padding: 45px;
+	padding: 35px 45px;
 }
 .item-footer .item-right-section .btn img {
 	width: 40px;
