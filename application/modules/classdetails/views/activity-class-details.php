@@ -389,7 +389,7 @@ $similar_school = $this->db->get();
                 <?php } ?>
             </div>
             <div class="col-md-3 pl-0-web">
-                <div class="sd-inner-main sd-sidebar wow fadeInUp">
+                <!-- <div class="sd-inner-main sd-sidebar wow fadeInUp">
                     <div class="sd-ection-tit">Similar Schools</div>
                     <?php foreach($similar_school->result() as $similar){ 
                         $type = strtolower($similar->type);
@@ -409,7 +409,7 @@ $similar_school = $this->db->get();
                         </div>
                     </div>
                     <?php } ?>
-                </div>
+                </div> -->
                 <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/10-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
                 </div>
@@ -472,6 +472,9 @@ $similar_school = $this->db->get();
                 </div> -->
                 <div class="ads-school-widget mb-3 wow fadeInUp">
                     <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
+                </div>
+                <div class="ads-school-widget mb-3 wow fadeInUp">
+                    <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -616,7 +619,7 @@ $similar_school = $this->db->get();
             </div>
             <?php //foreach($similar_school as $similar) ?>
             <div class="home-tsw top-school-widget mab-50">
-                <div class="owl-two owl-carousel owl-theme">
+                <div class="owl-carousel owl-theme">
                     <?php foreach($similar_school->result() as $key=>$similar){ 
                         $type = strtolower($similar->type);
                         $type = str_replace(" ","-",$type);
@@ -654,13 +657,13 @@ $similar_school = $this->db->get();
             </div>
         </div>
     <?php } ?>
-</div>
-<div class="container">
-    <div class="ads-school-widget mab-50">
-        <div class="row">
-            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/11-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/12-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+    <div class="container">
+        <div class="ads-school-widget mab-50">
+            <div class="row">
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/11-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/12-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+            </div>
         </div>
     </div>
 </div>
@@ -919,6 +922,37 @@ $ip = $_SERVER['REMOTE_ADDR'];
                 btt.hide();
             }
         });
+    });
+    $(document).ready(function(){
+      	// Owl-carousel
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            // center: true,
+            margin:10,
+            nav:true,
+            autoplay:true,
+            navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+            responsive:{
+                0:{
+                    items:1
+                },
+                350:{
+                    items:1
+                },
+                575:{
+                    items:1
+                },
+                767:{
+                    items:1
+                },
+                991:{
+                    items:3
+                },
+                1200:{
+                    items:5
+                }
+            }
+        })
     });
 </script>
  

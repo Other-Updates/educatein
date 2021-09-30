@@ -670,54 +670,54 @@ $ip = $_SERVER['REMOTE_ADDR'];
             source: availableTags
         });
     });
-    $(document).ready(function () {
-        $(".owl-one").owlCarousel({
-            loop:true,
-            margin:10,
-            responsiveClass:true,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:true
-                },
-                600:{
-                    items:3,
-                    nav:false
-                },
-                1000:{
-                    items:4,
-                    nav:true,
-                    loop:false
-                }
-            }
-        });
-        $('.owl-two').owlCarousel({
-            loop:true,
-            margin:10,
-            responsiveClass:true,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:true
-                },
-                600:{
-                    items:3,
-                    nav:false
-                },
-                1000:{
-                    items:5,
-                    nav:true,
-                    loop:false
-                }
-            }
-        })
-    });
+    // $(document).ready(function () {
+    //     $(".owl-one").owlCarousel({
+    //         loop:true,
+    //         margin:10,
+    //         responsiveClass:true,
+    //         autoplay:true,
+    //         autoplayTimeout:5000,
+    //         autoplayHoverPause:true,
+    //         responsive:{
+    //             0:{
+    //                 items:1,
+    //                 nav:true
+    //             },
+    //             600:{
+    //                 items:3,
+    //                 nav:false
+    //             },
+    //             1000:{
+    //                 items:4,
+    //                 nav:true,
+    //                 loop:false
+    //             }
+    //         }
+    //     });
+    //     $('.owl-two').owlCarousel({
+    //         loop:true,
+    //         margin:10,
+    //         responsiveClass:true,
+    //         autoplay:true,
+    //         autoplayTimeout:5000,
+    //         autoplayHoverPause:true,
+    //         responsive:{
+    //             0:{
+    //                 items:1,
+    //                 nav:true
+    //             },
+    //             600:{
+    //                 items:3,
+    //                 nav:false
+    //             },
+    //             1000:{
+    //                 items:5,
+    //                 nav:true,
+    //                 loop:false
+    //             }
+    //         }
+    //     })
+    // });
 $(document).ready(function(){
 	$("#search_school").keyup(function(){
 		$.ajax({

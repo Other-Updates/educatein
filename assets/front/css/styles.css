@@ -2773,6 +2773,7 @@ blue - 33317c
 	font-size: 12px;
     font-weight: 500;
 	left: -8px;
+	z-index: 1;
 }
 .home-tsw .package-name::after {
 	content: '';
@@ -3230,4 +3231,8 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 }
 ::-webkit-scrollbar-track {
     border-radius: 10px;
+}
+#contact-info iframe {
+	height: 300px;
+    width: 100%;
 }
