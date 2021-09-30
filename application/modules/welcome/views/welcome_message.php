@@ -193,7 +193,7 @@ $uccity = ucfirst($yourcity);
                             <div class="col-lg-2">
                                 <div class="hss-activity-link wow bounceIn faster">
                                     <a href="<?php echo base_url(); ?>list-of-best-summer-camp-in-<?php echo strtolower($city); ?>">
-                                        Activity Classes
+                                        <img src="<?php echo base_url(); ?>assets/front/images/summer-camp.png" class="w-100" alt="best schools in <?php echo $city; ?>" />
                                     </a>
                                 </div>
                             </div>

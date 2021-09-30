@@ -2783,7 +2783,7 @@ blue - 33317c
     border-left: 14px solid #fc3838;
     position: absolute;
     top: 0;
-    right: -10px;
+    right: -9px;
 }
 .home-tsw .package-name::before {
 	content: '';
