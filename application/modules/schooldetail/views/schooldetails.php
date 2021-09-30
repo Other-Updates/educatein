@@ -632,7 +632,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
             </div>
                 <div class="col-md-3 pl-0-web">
                     <?php if(!empty($similar_school)){ ?>
-                        <div class="sd-inner-main sd-sidebar wow fadeInUp">
+                        <!-- <div class="sd-inner-main sd-sidebar wow fadeInUp">
                             <div class="sd-ection-tit">Similar Schools</div>
                             <?php foreach($similar_school as $similar){ ?>
                             <div class="row sd-sidebar-list">
@@ -649,7 +649,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 </div>
                             </div>
                             <?php } ?>
-                        </div>
+                        </div> -->
                         <div class="ads-school-widget mb-3 wow fadeInUp">
                             <div class="ads-inner"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
                         </div>
@@ -713,6 +713,9 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <?php } ?>
                     <div class="ads-school-widget mb-3 wow fadeInUp">
                         <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
+                    </div>
+                    <div class="ads-school-widget mb-3 wow fadeInUp">
+                        <div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div>
                     </div>
                 </div>
             <div class="clearfix"></div>
@@ -3206,9 +3209,37 @@ if ($category == 1) {
 
 
 <script>
-    //$(document).ready(function(){
-    //   	$(".owl-carousel").owlCarousel();
-    // });
+    $(document).ready(function(){
+      	// Owl-carousel
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            // center: true,
+            margin:10,
+            nav:true,
+            autoplay:true,
+            navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+            responsive:{
+                0:{
+                    items:1
+                },
+                350:{
+                    items:1
+                },
+                575:{
+                    items:1
+                },
+                767:{
+                    items:1
+                },
+                991:{
+                    items:3
+                },
+                1200:{
+                    items:5
+                }
+            }
+        })
+    });
 
     new WOW().init();
 

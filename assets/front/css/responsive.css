@@ -201,8 +201,16 @@
 	}
 }
 @media (max-width:768px){
+	.top-school-sigle.top-school-widget figcaption {
+		padding: 30px;
+		background-image: linear-gradient(to top, rgb(0 0 0 / 90%) 0%, #0000005c 80%);
+	}
+	.item-right-section {
+		padding-top: 20px;
+	}
 	.home-search-section, .esd-banner {
 		height: auto;
+		margin-bottom: 30px;
 	}
 	.schools-section .col-lg-4.pl-0 {
 		padding-left: 15px !important;
