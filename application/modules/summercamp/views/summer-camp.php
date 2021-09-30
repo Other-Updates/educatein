@@ -135,9 +135,9 @@ if($uccity == "Enquiry" || $uccity == "Otp")
 					</div>
 
 					<div class="col-lg-2">
-						<div class="hss-activity-link wow bounceIn faster">
+						<div class="hss-activity-link pt-2 wow bounceIn faster">
 							<a style="color:#0c0c0c;"href="<?php echo base_url(); ?>">
-								Schools
+								<img src="<?php echo base_url(); ?>assets/front/images/school-camp.png" class="w-100" alt="best schools in <?php echo $city; ?>" />
 							</a>
 						</div>
 					</div>
