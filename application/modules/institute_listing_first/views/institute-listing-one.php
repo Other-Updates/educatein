@@ -149,7 +149,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="founded">Founded</label>
-                            <input type="text" class="form-control" id="founded" name="founded" placeholder="e.g 1980" >
+                            <input type="number" class="form-control" id="founded" name="founded" placeholder="e.g 1980" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
@@ -161,7 +161,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="students">No.of Students</label>
-                            <input type="text" class="form-control" id="students" name="students" placeholder="e.g 2005" >
+                            <input type="number" class="form-control" id="students" name="students" placeholder="e.g 2005" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
@@ -179,7 +179,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="teachers">No.of Teachers</label>
-                            <input type="text" class="form-control" id="teachers" name="teachers" placeholder="e.g 55" >
+                            <input type="number" class="form-control" id="teachers" name="teachers" placeholder="e.g 55" >
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">

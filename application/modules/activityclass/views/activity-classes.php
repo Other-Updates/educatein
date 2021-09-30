@@ -513,7 +513,7 @@ if ($aff_url == "dance-class") {
             // print_r($school_spectrum);exit;
             ?>
 
-        <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum) || !empty($school_trial) ){ ?>
+        <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum) ){ ?>
             <?php if($topschool->num_rows() != 0 ){ ?>
                 <div class="home-tsw top-school-widget top-school-sigle mab-20">    
                     <div class="custom-section-title mab-10">
@@ -566,7 +566,7 @@ if ($aff_url == "dance-class") {
                                                         <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                     </div>
                                                     <div class="col-lg-3 item-right-section">
-                                                        <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
+                                                        <button class="btn btn-theme2 mb-2" onclick="window.open('tel:<?php echo $top->mobile ?>');"><i class="fa fa-phone"></i> Call School</button><br>
                                                         <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
                                                     </div>
                                                 </div>

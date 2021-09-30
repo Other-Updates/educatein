@@ -94,19 +94,35 @@ class Schools extends CI_Controller {
         $this->session->set_userdata('search_city',$yourcity);
         $this->session->set_userdata('city_id',$cityid[0]['id']);
 
-
-
-
-
-
-
-
-
-
         $this->db->select('*')->where('is_active =', 1);
         $this->db->from('affiliations');
         $query['query'] = $this->db->get();
+
+
+        $this->db->select('sd.*,st.school_type');
+        $this->db->order_by('sd.school_category_id');
+        $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
+        // $this->db->order_by('rand()');
+        $this->db->from('school_details as sd');
+        $school_spectrum_count = $this->db->get()->num_rows();
+
+        $query["links"] = $this->createPageinatation($school_spectrum_count,'schools-list');
+
         $this->load->view('schoollist', $query); 
+    }
+
+    
+    public function createPageinatation($count,$link){
+        $config = array();
+        if ($this->input->get('search')) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+        $config["base_url"] = base_url() . $link;
+        $config["total_rows"] = $count;
+        $config["per_page"] = $this->page_count;
+        $config["uri_segment"] = 2;
+        $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
+        // $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        return $this->pagination->create_links();
     }
 
 }

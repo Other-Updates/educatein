@@ -514,9 +514,9 @@ $allcity = $this->db->get()->result();
             // }
 
             $where1 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            $this->db->select('sd.*,st.school_type,ar.area_name')->where($where1);
+            $this->db->select('sd.*,st.school_type')->where($where1);
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
-            $this->db->join('areas as ar','sd.area_id=ar.id','left');
+            // $this->db->join('areas as ar','sd.area_id=ar.id','left');
             $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
             $topschool = $this->db->get();
@@ -524,28 +524,13 @@ $allcity = $this->db->get()->result();
             // exit();
            
             $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            $this->db->select('sd.*,st.school_type,ar.area_name')->where($where2);
+            $this->db->select('sd.*,st.school_type')->where($where2);
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
-            $this->db->join('areas as ar','sd.area_id=ar.id','left');
+            // $this->db->join('areas as ar','sd.area_id=ar.id','left');
             // $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
             $school_premium = $this->db->get()->result_array();
-            
-            // print_r($this->db->last_query());exit;
-
-            // $where3 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=3 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            // $this->db->select('sd.*,st.school_type')->where($where3);
-            // $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
-            // // $this->db->order_by('rand()');
-            // $this->db->from('school_details as sd');
-            // $school_spectrum = $this->db->get()->result_array();
-
-            // $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=4 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
-            // $this->db->select('sd.*,st.school_type')->where($where2);
-            // $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
-            // // $this->db->order_by('rand()');
-            // $this->db->from('school_details as sd');
-            // $school_trial = $this->db->get()->result_array();
+            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
 
             $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=4 OR sd.school_category_id=3 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,st.school_type')->where($where2);
@@ -553,16 +538,33 @@ $allcity = $this->db->get()->result();
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             // $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
+            $this->db->limit(12, $page);
+
             $school_spectrum = $this->db->get()->result_array();
-            // $config = array();
-            // $config["total_rows"] = $this->db->count_all_results();
-            // $config["base_url"] = base_url() . "schools";
-            // $config["per_page"] = 10;
-            // $config["uri_segment"] = 2;
+
+
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=4 OR sd.school_category_id=3 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $this->db->select('sd.*,st.school_type')->where($where2);
+            $this->db->order_by('sd.school_category_id');
+            $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
+            // $this->db->order_by('rand()');
+            $this->db->from('school_details as sd');
+            $school_spectrum_count = $this->db->get()->num_rows();
+
+        //     $config = array();
+        //     $config["total_rows"] = $this->db->count_all_results();
+        //     $config["base_url"] = base_url() . "schools";
+        //     $config["per_page"] = 12;
+        //     $config["uri_segment"] = 2;
     
-            // $this->pagination->initialize($config);
+        //    $this->pagination->initialize($config);
     
-            // $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            // $pagination = $this->pagination->create_links();
+                // $link = "schools";
+            $school_links = customcreatePageinatation($school_spectrum_count,$page,$link);
+
+
     
             // $links = $this->pagination->create_links();
             // $school_name = str_replace(" ", "-", $school_premium[0]['school_name']);
@@ -620,7 +622,7 @@ $allcity = $this->db->get()->result();
                                                             <?php if(!empty($top->year_of_establish)){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $top->year_of_establish ?></b></p><?php } ?>
                                                         </div>
                                                         <div class="col-lg-3 item-right-section">
-                                                            <button class="btn btn-theme2 mb-2"><i class="fa fa-phone"></i> Call School</button><br>
+                                                            <button class="btn btn-theme2 mb-2" onclick="window.open('tel:<?php echo $top->mobile ?>');"><i class="fa fa-phone"></i> Call School</button><br>
                                                             <button class="btn btn-theme1-border"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open</button>
                                                         </div>
                                                     </div>
@@ -653,23 +655,9 @@ $allcity = $this->db->get()->result();
                             $topcount = 0;
                             if (!empty($school_premium)) {
                                 foreach ($school_premium as $top) {
-
-                                    // if ($topcount < 5) {
-
-                                    //     $this->db->select('*')->where('id =', $top->area_id);
-                                    //     $this->db->from('areas');
-                                    //     $area = $this->db->get();
-                                    //     foreach ($area->result() as $areas) {
-                                    //         //echo $areas->area_name;
-                                    //         //exit();
-                                    //     }
-
                                         $school_name = str_replace(" ", "-", $top['school_name']);
                                         $affname_url = strtolower($aff_name);
                                         $affname_url = str_replace(" ", "-", $affname_url);
-                                    //     // echo $affname_url;
-                                    //     // print_r($affname_url);exit;
-                                    //     // exit();
                                         ?>                                    
                             <div class="mab-20">
                                 <!-- <div class="owl-one owl-carousel owl-theme"> -->
@@ -710,7 +698,7 @@ $allcity = $this->db->get()->result();
                     </div><!-- /owl-carousel -->
                 </div><!-- /top-school-widget -->
             <?php } ?>
-            <?php if(!empty($school_trial) || !empty($school_spectrum)){ ?>
+            <?php if(!empty($school_spectrum)){ ?>
                 <div class="third-cat mab-50 home-tsw top-school-widget mab-10">
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <span><?php echo $yourcity; ?></span></h3>
@@ -742,6 +730,7 @@ $allcity = $this->db->get()->result();
                                 </div>
                             </div>
                         <?php } ?>
+                        <div class="custom-pagination pagination"><?php echo $school_links ?></div>
                     </div>
                 </div>
             <?php } ?>

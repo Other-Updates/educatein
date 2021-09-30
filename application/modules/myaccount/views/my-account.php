@@ -177,17 +177,18 @@ if ($user->num_rows() > 0) {
                                     </button>
                                 </div>
                                 <?php
-                            } elseif ($remain <= 5 ) {
+                            } 
+                            // elseif ($remain <= 5 ) {
                                 ?>
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert"> -->
                                     <!-- <h5 class="alert-heading mb-2">Plan Expiring Soon!</h5> -->
-                                    <p style="font-weight: 300;">Your premium plan for <strong><?php echo $schools->slug; ?></strong> will expires in <?php echo $remain; ?> days. If you wish to receive our service without any interruption please upgrade your plan again.</p>
+                                    <!-- <p style="font-weight: 300;">Your premium plan for <strong><?php //echo $schools->slug; ?></strong> will expires in <?php //echo $remain; ?> days. If you wish to receive our service without any interruption please upgrade your plan again.</p>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                </div>
+                                </div> -->
                                 <?php
-                            }
+                            // }
 
                             // exit();
                         }
