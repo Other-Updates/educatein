@@ -51,10 +51,13 @@ class Search extends CI_Controller {
         $this->db->select('sd.*,af.affiliation_name,ar.area_name');
         if(!empty($session['city_id']))
         $this->db->where('sd.city_id',$session['city_id']);
+        if(!empty($session['search_city']))
+        $this->db->where('ci.city_name',ucfirst($session['search_city']));
         $this->db->where($where);
         $this->db->like('sd.school_name',$search);
         $this->db->order_by('school_category_id');
         $this->db->from('school_details as sd');
+        $this->db->join('cities as ci','sd.city_id=ci.id','left');
         $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
         $this->db->join('areas as ar','sd.area_id=ar.id','left');
         $data["search"] = "Schools in " . ucfirst($session["search_city"]);

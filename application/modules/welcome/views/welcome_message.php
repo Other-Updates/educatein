@@ -658,17 +658,17 @@ $ip = $_SERVER['REMOTE_ADDR'];
 
     moveBackground();
     $(function () {
-        var availableTags = [
-            <?php
-                    foreach (@$schools as $school) {
-                        echo '"'.@$school["school_name"]. '",';
-                    }
-            ?>
+        // var availableTags = [
+        //     <?php
+        //             foreach (@$schools as $school) {
+        //                 echo '"'.@$school["school_name"]. '",';
+        //             }
+        //     ?>
              
-        ];
-        $("#tags").autocomplete({
-            source: availableTags
-        });
+        // ];
+        // $("#tags").autocomplete({
+        //     source: availableTags
+        // });
     });
     // $(document).ready(function () {
     //     $(".owl-one").owlCarousel({
