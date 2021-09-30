@@ -81,7 +81,7 @@
                                     </ul>
                                 </div><!-- /dropdown-menu -->
                             </div>
-                            <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search school" aria-label="" aria-describedby="button-addon2">
                             <div class="search-list"><ul id="suggesstion-box"></ul></div>
                             <?php if ($searchcity != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
@@ -180,7 +180,7 @@
                                         <?php } ?>
                                         <div class="object-fit">
                                             <?php if(!empty($school["logo"])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/".$school["logo"]); ?>"  alt="schools nearby">
+                                                <img src="<?php echo base_url("laravel/public/".$school["logo"]); ?>">
                                             <?php }else{ ?>
                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $school['affiliation_name'] ?> in <?php echo $city; ?>" />
                                             <?php } ?>     

@@ -8,7 +8,7 @@
 //        exit();
 // }
 $yourcity = array();
-$aff_url = end($this->uri->segments);
+$aff_url = $this->uri->segments[1];
 $yourcity = explode("-", $aff_url);
 $yourcity = end($yourcity);
 $uccity = ucfirst($yourcity);
@@ -211,7 +211,7 @@ $allcity = $this->db->get()->result();
                                     </ul>
                                 </div><!-- /dropdown-menu -->
                             </div>
-                            <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search school" aria-label="" aria-describedby="button-addon2">
                             <div class="search-list"><ul id="suggesstion-box"></ul></div>
                             <?php if ($aff_url != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
@@ -530,7 +530,7 @@ $allcity = $this->db->get()->result();
             // $this->db->order_by('rand()');
             $this->db->from('school_details as sd');
             $school_premium = $this->db->get()->result_array();
-            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $page = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
 
             $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=4 OR sd.school_category_id=3 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,st.school_type')->where($where2);
@@ -979,7 +979,7 @@ $allcity = $this->db->get()->result();
                 </select>
             </div>
             <div class="form-group">
-                <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Your Comments"></textarea>
+                <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Your Comments" required></textarea>
             </div>
 
             <!-- Button trigger modal -->
@@ -1214,7 +1214,7 @@ function customcreatePageinatation($count,$page,$link){
     $config["base_url"] = base_url() . $link;
     $config["total_rows"] = $count;
     $config["per_page"] = 12;
-    $config["uri_segment"] = 2;
+    $config["uri_segment"] = 3;
     // $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
     // $config['use_page_numbers'] = TRUE;
     $CI->pagination->initialize($config);

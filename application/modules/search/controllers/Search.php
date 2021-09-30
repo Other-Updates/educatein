@@ -93,9 +93,9 @@ class Search extends CI_Controller {
         }
     }
 
-    public function createPageinatation($count,$link){
+    public function createPageinatation($count,$link,$params=''){
         $config = array();
-        if ($this->input->get('search')) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+        if ($this->input->get($params)) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
         $config["base_url"] = base_url() . $link;
         $config["total_rows"] = $count;
         $config["per_page"] = $this->page_count;
@@ -138,14 +138,14 @@ class Search extends CI_Controller {
         // }
         // $data['schools'] = $this->Base_Model->getAdvanceList('school_details sd ', $join_tables, $fields, $sub_where, array('return' => 'result_array'), 'sd.id', '', '', 6);
         if(isset($_GET['search'])){
-            $data["links"] = $this->createPageinatation($this->search_school($_GET['search']),'schools-list');
+            $data["links"] = $this->createPageinatation($this->search_school($_GET['search']),'schools-list','search');
             $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
             $data1 = $this->search_school($_GET['search'],$this->page_count, $page);
             $data['schools'] =  $data1['schools'];
             $data['search'] =  $data1['search'];
         }
         if(isset($_GET['search_class'])){
-            $data["links"] = $this->createPageinatation($this->search_class($_GET['search_class']),'schools-list');
+            $data["links"] = $this->createPageinatation($this->search_class($_GET['search_class']),'schools-list','search_class');
             $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
             $data1 = $this->search_class($_GET['search_class'],$this->page_count, $page);
 

@@ -291,13 +291,13 @@ if ($user->num_rows() > 0) {
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <!-- <label for="">State</label> -->
-                                    <input type="text" class="form-control" id="state" name="state" placeholder="State">
+                                    <input type="text" class="form-control" id="state" name="state" <?php if(!empty($users->state)){ ?> value="<?php echo $users->state ?>" <?php } ?> placeholder="State">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <!-- <label for="">Country</label> -->
-                                    <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                                    <input type="text" class="form-control" id="country" name="country" <?php if(!empty($users->country)){ ?> value="<?php echo $users->country ?>" <?php } ?> placeholder="Country">
                                 </div>
                             </div>
                             <div class="form-group col-md-4">

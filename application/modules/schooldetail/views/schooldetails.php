@@ -927,7 +927,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     </div>
                     <div class="col-lg-12 col-sm-12">
                         <div class="form-group">
-                            <textarea class="form-control" id="enquiry" name="enquiry" placeholder="Enquiry" rows="3"></textarea>
+                            <textarea class="form-control" id="enquiry" name="enquiry" placeholder="Enquiry" rows="3" required></textarea>
                         </div>
                     </div>
                     <div class="col-lg-12 col-sm-12">
@@ -3005,7 +3005,7 @@ if ($category == 1) {
                 </select>
             </div>
             <div class="form-group">
-                <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Your Comments"></textarea>
+                <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Your Comments" required></textarea>
             </div>
 
             <!-- Button trigger modal -->

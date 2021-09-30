@@ -42,10 +42,38 @@ class Schooldetail extends CI_Controller {
             'school_id' => $this->input->post('schoolid'),
             'enquiry' => $this->input->post('enquiry'),
         );
-
         $this->db->insert('admission_enquiries', $data);
+        $this->db->select('*');
+        $this->db->where('id',$this->input->post('schoolid'));
+        $this->db->from('school_details');
+        $school = $this->db->get()->result_array();
 
-        // $this->load->view('welcome_message');
+        // $this->load->library('email');
+        // $config['protocol']    = 'smtp';
+        // $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        // $config['smtp_port']    = '465';
+        // $config['smtp_timeout'] = '7';
+        // $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        // $config['smtp_pass']    = 'MotivationS@1';
+        // $config['charset']    = 'utf-8';
+        // $config['newline']    = "\r\n";
+        // $config['mailtype'] = 'html';
+        // $config['validation'] = TRUE; // bool whether to validate email or not      
+        
+        // $this->email->initialize($config);
+        
+        // $this->email->from('ftwoftesting@gmail.com');
+        // $this->email->to($school[0]['mobile']); 
+        // $this->email->subject('Admission Enquiry');
+        // $this->email->message($this->input->post('enquiry'));  
+        //     if($this->email->send())
+        //     {
+        //         $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+        //     }
+        //     else
+        //     {
+        //     show_error($this->email->print_debugger());
+        //     }
         redirect(base_url());
     }
 

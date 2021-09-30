@@ -676,7 +676,7 @@ $similar_school = $this->db->get();
                 </button>
                 <h3 class="text-center mb-3" style="color: #303030;">Admission Enquiry</h3>
 
-                <form action="<?php echo base_url() ?>schooldetail/admission" class="row" method="post">
+                <form action="<?php echo base_url() ?>classdetails/admission" class="row" method="post">
                     <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <input type="text" class="form-control" id="firstname" name="firstname" aria-describedby="emailHelp" placeholder="First Name*" required>
@@ -699,12 +699,12 @@ $similar_school = $this->db->get();
                     </div>
                     <div class="col-lg-6 col-sm-6" style="display:none">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="schoolid" name="schoolid" aria-describedby="emailHelp" value="<?php echo $school_details->id; ?>" >
+                            <input type="text" class="form-control" id="schoolid" name="instituteid" aria-describedby="emailHelp" value="<?php echo $institute_dets->id; ?>" >
                         </div>
                     </div>
                     <div class="col-lg-12 col-sm-12">
                         <div class="form-group">
-                            <textarea class="form-control" id="enquiry" name="enquiry" placeholder="Enquiry" rows="3"></textarea>
+                            <textarea class="form-control" id="enquiry" name="enquiry" placeholder="Enquiry" rows="3" required></textarea>
                         </div>
                     </div>
                     <div class="col-lg-12 col-sm-12">
@@ -819,7 +819,7 @@ $similar_school = $this->db->get();
                 </select>
             </div>
             <div class="form-group">
-                <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Your Comments"></textarea>
+                <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Your Comments" required></textarea>
             </div>
 
             <!-- Button trigger modal -->

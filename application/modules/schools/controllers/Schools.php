@@ -83,7 +83,8 @@ class Schools extends CI_Controller {
         // $data["links"] = $this->pagination->create_links();
 
         $yourcity = array();
-        $aff_url = end($this->uri->segments);
+        $aff_url = $this->uri->segments[1];
+        // print_r($aff_url);exit;
         $yourcity = explode("-", $aff_url);
         $yourcity = end($yourcity);
         $uccity = ucfirst($yourcity);

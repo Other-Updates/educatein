@@ -113,7 +113,7 @@
 </style>
 <?php
 $yourcity = array();
-$aff_url = end($this->uri->segments);
+$aff_url = $this->uri->segments[1];
 $yourcity = explode("-", $aff_url);
 $yourcity = end($yourcity);
 $uccity = ucfirst($yourcity);
@@ -282,7 +282,7 @@ if ($aff_url == "dance-class") {
                                     </ul>
                                 </div><!-- /dropdown-menu -->
                             </div>
-                            <input type="text" id="search_class" class="form-control"  name="search_class" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                            <input type="text" id="search_class" class="form-control"  name="search_class" placeholder="Search institute" aria-label="" aria-describedby="button-addon2">
                             <div class="search-list"><ul id="suggesstion-box"></ul></div>
                             <?php if ($aff_url != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
@@ -496,7 +496,7 @@ if ($aff_url == "dance-class") {
             $this->db->join('areas as ar','ind.area_id=ar.id','left');
             $school_premium = $this->db->get()->result_array();
             
-            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
             $where2 = "ind.is_active=1 AND ind.position_id=3 OR ind.position_id=4 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
             $this->db->select('ind.*,ar.area_name')->where($where2);
             // $this->db->order_by('rand()');
@@ -515,7 +515,7 @@ if ($aff_url == "dance-class") {
             $this->db->from('institute_details as ind');
             $school_spectrum_count = $this->db->get()->num_rows();
             $class_type = str_replace(" ","-",$aff_url);
-            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
             $link = "list-of-best-".$class_type."-in-".$yourcity."/page";
             $school_links = customcreatePageinatation($school_spectrum_count,$page,$link);
             
@@ -1161,7 +1161,7 @@ function customcreatePageinatation($count,$page,$link){
     $config["base_url"] = base_url() . $link;
     $config["total_rows"] = $count;
     $config["per_page"] = 12;
-    $config["uri_segment"] = 2;
+    $config["uri_segment"] = 3;
     // $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
     // $config['use_page_numbers'] = TRUE;
     $CI->pagination->initialize($config);
