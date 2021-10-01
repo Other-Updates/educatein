@@ -3249,6 +3249,6 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 	color: #d12881;
 	font-weight: 500;
 }
-@media screen and (max-width:1340px) {
-	
+.input-group #search_school.search-err {
+	border: 1px solid red;
 }

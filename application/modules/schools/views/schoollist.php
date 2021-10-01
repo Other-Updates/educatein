@@ -1204,15 +1204,25 @@ $ip = $_SERVER['REMOTE_ADDR'];
     $("#search_school").val(val);
     $("#suggesstion-box").hide();
     }
-    $('.search_filter_button').on('click',function(e){ 
+    $('body').on('click','.search_filter_button',function(e){ 
         e.preventDefault(); 
         if($(this).closest('form').find('.search_filter').val() == ''){
-            $(this).closest('form').find('.search_filter').css({'background':'red'});
+        $(this).closest('form').find('.search_filter').addClass('search-err');
             return 
         }else{
-            $(this).closest('form').submit()
+            $(this).closest('form').submit();
         }
-    })    
+    });
+
+    $('body').on('keyup','.search_filter',function(e){ 
+        e.preventDefault(); 
+        if($(this).val() == ''){
+        $(this).addClass('search-err');
+            return 
+        }else{
+            $(this).removeClass('search-err');
+        }
+    });   
 </script> 
 <?php 
 function customcreatePageinatation1($count,$page,$link){

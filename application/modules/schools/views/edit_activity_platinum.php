@@ -138,7 +138,7 @@ $user = $this->db->get()->result_array();
                         </div>
                     </div><!-- /file-img-upload -->
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 banner-image-slider">
                         <label for="Images">Images</label>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
