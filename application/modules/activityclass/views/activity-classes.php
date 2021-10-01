@@ -497,23 +497,25 @@ if ($aff_url == "dance-class") {
             $school_premium = $this->db->get()->result_array();
             
             $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-            $where2 = "ind.is_active=1 AND ind.position_id=3 OR ind.position_id=4 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
-            $this->db->select('ind.*,ar.area_name')->where($where2);
+            $where2 = "ind.is_active=1 AND (ind.position_id=3 OR ind.position_id=4) AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $this->db->select('ind.*')->where($where2);
             // $this->db->order_by('rand()');
+            if(!empty($this->session->userdata('search_city')))
+            $this->db->where('ci.city_name',ucfirst($this->session->userdata('search_city')));
             $this->db->order_by('ind.institute_name');
-            $this->db->join('areas as ar','ind.area_id=ar.id','left');
+            $this->db->join('cities as ci','ind.city_id=ci.id','left');
             $this->db->from('institute_details as ind');
             $this->db->limit(12, $page);
             $school_spectrum = $this->db->get()->result_array();
 
-
-            $where2 = "ind.is_active=1 AND ind.position_id=3 OR ind.position_id=4 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $where2 = "ind.is_active=1 AND (ind.position_id=3 OR ind.position_id=4) AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
             $this->db->select('ind.*,ar.area_name')->where($where2);
             // $this->db->order_by('rand()');
             $this->db->order_by('ind.institute_name');
             $this->db->join('areas as ar','ind.area_id=ar.id','left');
             $this->db->from('institute_details as ind');
             $school_spectrum_count = $this->db->get()->num_rows();
+
             $class_type = str_replace(" ","-",$aff_url);
             $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
             $link = "list-of-best-".$class_type."-in-".$yourcity."/page";
