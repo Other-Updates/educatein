@@ -2912,7 +2912,7 @@ class admin extends CI_Controller {
                 'school_category_id' => $_POST['school_category'],
                 'status' => $_POST['school_status'],
                 'about' => $school['about'],
-                'acadamic' => $_POST['school_academic'],
+                // 'acadamic' => $_POST['school_academic'],
                 'website_url' => $_POST['school_website'],
                 'our_mission' => $_POST['our_mission'],
                 'our_vision' => $_POST['our_vision'],

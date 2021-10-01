@@ -246,9 +246,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 <a href="tel:"<?php echo $school_details->mobile ?>><button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button></a>
                                 <?php if(!empty($school_details->ad)){ ?>
                                     <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
-                                <?php }else{ ?>
-                                    <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open now</button>
-                                <?php } ?>
+                                    <?php } ?>
                                 <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="modal" data-target="#exampleModalCenter" data-wow-delay="1000ms">
                                     Admission Enquiry
                                 </button>
