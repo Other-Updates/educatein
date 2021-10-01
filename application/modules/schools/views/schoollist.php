@@ -543,7 +543,7 @@ $allcity = $this->db->get()->result();
             $school_spectrum = $this->db->get()->result_array();
 
 
-            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=4 OR sd.school_category_id=3 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND (sd.school_category_id=4 OR sd.school_category_id=3) AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,st.school_type')->where($where2);
             $this->db->order_by('sd.school_category_id');
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
@@ -552,7 +552,7 @@ $allcity = $this->db->get()->result();
             $school_spectrum_count = $this->db->get()->num_rows();
 
             $link = "list-of-best-".$aff_url."-schools-in-".$yourcity."/page";
-            $school_links = customcreatePageinatation($school_spectrum_count,$page,$link);
+            $school_links = customcreatePageinatation1($school_spectrum_count,$page,$link);
 
 
     
@@ -1206,7 +1206,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
     }    
 </script> 
 <?php 
-function customcreatePageinatation($count,$page,$link){
+function customcreatePageinatation1($count,$page,$link){
     $CI =& get_instance();
     $CI->load->library('pagination'); // load library 
     $config = array();

@@ -1706,6 +1706,11 @@ class admin extends CI_Controller {
         $this->db->where('category_id',1);
         $this->db->from('institute_images');
         $data['aboutimg'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->where('institute_id',$institute_id);
+        $this->db->where('category_id',3);
+        $this->db->from('institute_images');
+        $data['logo'] = $this->db->get()->result_array();
         // echo "<pre>";print_r($data['inst_category']);exit;
         // if($institute[0]['position_id'] == 1){
         $this->load->view('edit_activity_platinum',$data);
@@ -2288,10 +2293,10 @@ class admin extends CI_Controller {
         }
         // echo "<pre>";print_r($aboutimgupdate);print_r($aboutimginsert); exit;
         if(!empty($aboutimgupdate)){
-            $this->db->update_batch('institute_images', $aboutimgupdate,'id');
+            $this->db->update('institute_images', $aboutimgupdate,array('id'=>$_POST['aboutoldimage_id']));
         }
         if(!empty($aboutimginsert)){
-            $this->db->insert_batch('institute_images', $aboutimginsert);
+            $this->db->insert('institute_images', $aboutimginsert);
         }
 
         if(!empty($_FILES['newsbanner'])){
@@ -2356,6 +2361,50 @@ class admin extends CI_Controller {
                     }
                 }
             }
+        }
+        if(isset($_FILES['banner'])){
+            $banner1 = $_FILES['banner1']['name'];
+            $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
+            // echo $banner1_ext;
+            // exit();
+            $banner1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
+            $banner1_type = $_FILES['banner1']['type'];
+            $banner1_size = $_FILES['banner1']['size'];
+            $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
+            $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
+
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+
+
+            if (in_array($banner1_ext, $allowed)) {
+
+                if (move_uploaded_file($banner1_tem_loc, $banner1_store)) {
+                    $banner1_name = $banner1_name;
+                }
+            }
+        }else{
+            $banner1_name = $_POST['old_logo_image'];
+        }
+        if(!empty($_POST['old_logo_imageid'])){
+            $banner1update = array(
+                        'id' => $_POST['old_logo_imageid'],
+                        'category_id' => 3,
+                        'image' => $banner1_name,
+                        'is_active' => 1
+            );
+        }else{
+                $banner1insert = array(
+                    'institute_id' => $school_id,
+                    'category_id' => 3,
+                    'image' => $banner1_name,
+                    'is_active' => 1
+                );
+        }
+        if(!empty($banner1update)){
+            $this->db->update('institute_images',$banner1update,array('id'=>$_POST['old_logo_imageid']));
+        }
+        if(!empty($bannerinsert)){
+            $this->db->insert('institute_images',$banner1insert);
         }
 
         $schoolupdate = array(

@@ -110,6 +110,8 @@ $user = $this->db->get()->result_array();
                     <div class="col-lg-6 col-sm-6 file-img-upload">
                         <div class="input-group mb-3">
                             <div class="custom-file">
+                                <input type="hidden" name="old_logo_imageid" value="<?php echo $logo[0]['id'] ?>">
+                                <input type="hidden" name="old_logo_image" value="<?php echo $logo[0]['image'] ?>">
                                 <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" class="custom-file-input" id="inputGroupFile02" name="banner1" >
                                 <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                             </div>

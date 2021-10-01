@@ -23,7 +23,7 @@ class Activityclass extends CI_Controller {
     public function index() {
 
         $yourcity = array();
-        $aff_url = end($this->uri->segments);
+        $aff_url = $this->uri->segments[1];
         $yourcity = explode("-", $aff_url);
         $yourcity = end($yourcity);
         $uccity = ucfirst($yourcity);
