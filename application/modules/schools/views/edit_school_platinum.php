@@ -574,7 +574,7 @@ $about_img = $this->db->get()->result_array();
                             <input type="text" name="activity[]" class="form-control" id="activity1" value="<?php echo $school_activities1['activity_name']; ?>"placeholder="e.g.Sports" >
                         </div>
                     </div>
-                    <div class="col-lg-7 col-sm-6">
+                    <div class="col-lg-3 col-sm-6">
                         <?php if($key==0){ ?><label for="activityimage1">Activity Image</label><?php } ?>
                             <input type="hidden" name="activityid[]" value="<?php echo $school_activities1['school_act_id']; ?>">
                             <input type="hidden" name="activityimage_id[]" value="<?php echo $school_activities1['image_id']; ?>">
@@ -586,8 +586,8 @@ $about_img = $this->db->get()->result_array();
                             </div>
                         </div>
                     </div>
-                    <div class="form-row" id="actmore">
-                        <div class="col-lg-4 col-sm-6 form-group">
+                    <div class="col-lg-2 col-sm-6 form-group" id="actmore">
+                        <div class="">
                             <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
                             <?php if(empty($school_activities[$key+1])){ ?><a class="btn btn-primary add_field_button1" id="addmore">Add More</a><?php } ?>
                         </div>
@@ -634,10 +634,10 @@ $about_img = $this->db->get()->result_array();
                                 <textarea class="form-control" name="facilitydesc[]" id="facilitydes1" rows="1" ><?php echo $school_facilities_data['content']; ?></textarea>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-2 col-sm-6">
                             <div class="form-group">
                                 <label for="facaddmore" style="visibility: hidden;display: block;">Add More</label>
-                                <?php if(empty($school_facilities_datas[$key+1])){?><a class="btn btn-primary addmore-show1" style="margin-left:1100px"id="facaddmore">Add More</a><?php }?>
+                                <?php if(empty($school_facilities_datas[$key+1])){?><a class="btn btn-primary addmore-show1" id="facaddmore">Add More</a><?php }?>
                             </div>
                         </div>
                     </div>
@@ -754,7 +754,7 @@ $about_img = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(activity).append('<div class="form-row w-100 mx-0" id="actmore"><div class="col-lg-4 col-sm-6 form-group"><input type="text" class="form-control" id="activity[]" name="activity[]" placeholder="Sports"></div><input type="hidden" name="activityid[]" value=""><input type="hidden" name="activityimage_id[]" value=""><input type="hidden" name="activityoldimage[]" value=""><div class="col-lg-4 col-sm-6"><div class="input-group mb-3 custom-file"><input type="hidden" name="activityid[]" value="0"><input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG" aria-describedby=""></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div>'); //add input box
+                $(activity).append('<div class="form-row w-100 mx-0" id="actmore"><div class="col-lg-3 col-sm-6 form-group"><input type="text" class="form-control" id="activity[]" name="activity[]" placeholder="Sports"></div><input type="hidden" name="activityid[]" value=""><input type="hidden" name="activityimage_id[]" value=""><input type="hidden" name="activityoldimage[]" value=""><div class="col-lg-3 col-sm-6"><div class="input-group mb-3 custom-file"><input type="hidden" name="activityid[]" value="0"><input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG" aria-describedby=""></div></div><div class="col-lg-2 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div>'); //add input box
             }
         });
 
@@ -776,7 +776,7 @@ $about_img = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(facility).append('<div class="form-row w-100 mx-0" id="facilitymore"><input type="hidden" name="facilityid[]" value=""><input type="hidden" name="facilityoldimage[]" value=""><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="facility[]" name="facility[]" placeholder="Library"></div></div><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" name="facilityimage[]" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg" id="facilityimage1" aria-describedby="facilityimage1" ><label class="custom-file-label" for="facilityimage1">Choose file</label></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field1"><a href="#" class="btn btn-danger">Remove</a></div></div>');
+                $(facility).append('<div class="form-row w-100 mx-0" id="facilitymore"><input type="hidden" name="facilityid[]" value=""><input type="hidden" name="facilityoldimage[]" value=""><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="facility[]" name="facility[]" placeholder="Library"></div></div><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" name="facilityimage[]" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg" id="facilityimage1" aria-describedby="facilityimage1" ><label class="custom-file-label" for="facilityimage1">Choose file</label></div></div></div><div class="col-lg-4 col-sm-6"><div class="form-group"><textarea class="form-control" id="facilitydesc[]" name="facilitydesc[]" rows=""></textarea></div></div><div class="col-lg-2 col-sm-6 remove_field1"><a href="#" class="btn btn-danger">Remove</a></div></div>');
             }
         });
 

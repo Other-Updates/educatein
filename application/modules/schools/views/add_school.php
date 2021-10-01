@@ -476,7 +476,7 @@
                                         <input type="text" name="activity1" class="form-control" id="activity1" placeholder="e.g.Sports" >
                                     </div>
                                 </div>
-                                <div class="col-lg-7 col-sm-6">
+                                <div class="col-lg-3 col-sm-6">
                                     <label for="activityimage1">Activity Image</label>
                                     <div class="input-group mb-3">
                                         <div class="custom-file">
@@ -492,7 +492,7 @@
                                         <input type="text" name="activity2" class="form-control" id="activity2" placeholder="e.g.Sports">
                                     </div>
                                 </div>
-                                <div class="col-lg-7 col-sm-6">
+                                <div class="col-lg-3 col-sm-6">
                                     <div class="input-group mb-3">
                                         <div class="custom-file">
                                             <input type="file" name="activityimage2" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg" id="activityimage2" aria-describedby="activityimage2">
@@ -508,7 +508,7 @@
                                     <input type="text" name="activity3" class="form-control" id="activity3" placeholder="e.g.Sports">
                                 </div>
                             </div>
-                            <div class="col-lg-7 col-sm-6">
+                            <div class="col-lg-3 col-sm-6">
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
                                         <input type="file" name="activityimage3" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg" id="activityimage3" aria-describedby="activityimage3">
@@ -524,7 +524,7 @@
                                     <input type="text" name="activity4" class="form-control" id="activity4" placeholder="e.g.Sports">
                                 </div>
                             </div>
-                            <div class="col-lg-7 col-sm-6">
+                            <div class="col-lg-3 col-sm-6">
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
                                         <input type="file" name="activityimage4" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg,image/jpg" id="activityimage4" aria-describedby="activityimage4">
@@ -553,7 +553,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-6 col-sm-6">
                                     <div class="form-group">
                                         <label for="facilitydes1">Facility Description</label>
                                         <textarea class="form-control" name="facilitydes1" id="facilitydes1" rows="1" ></textarea>
@@ -575,7 +575,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-6 col-sm-6">
                                     <div class="form-group">
                                         <textarea class="form-control" name="facilitydes2"   rows="1"></textarea>
                                     </div>
@@ -596,7 +596,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-6 col-sm-6">
                                     <div class="form-group">
                                         <textarea class="form-control" name="facilitydes3" id="facilitydes3" rows="1"></textarea>
                                     </div>
@@ -618,7 +618,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-6 col-sm-6">
                                     <div class="form-group">
                                         <textarea class="form-control" name="facilitydes4" id="facilitydes4" rows="1"></textarea>
                                     </div>
@@ -637,8 +637,8 @@
                                             <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 col-sm-6">
-                                        <button type="button" class="add_field_button btn btn-primary btn-block">Add More</button>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <button type="button" class="add_field_button btn btn-primary">Add More</button>
                                     </div>
                                 </div><!-- /form-row -->
                             </div><!-- /input_fields_wrap -->
@@ -714,6 +714,10 @@
                                     </div>
                                 </div>
                             </div><!-- /form-row -->
+                        </div>
+                        <div class="edit-school-inner">
+                            <h4>Plan Details</h4>
+                            <hr class="mb-4">
                             <div class="form-row">
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="form-group">
@@ -826,9 +830,9 @@
                         </div><!-- /form-row -->
                     </div>
                     <div class="edit-school-inner">
-                        <div class="form-row mt-3">
+                        <div class="form-row">
                             <div class="col-lg-6 col-sm-6 file-img-upload">
-                                <label for="inputGroupFile" style="margin-bottom: 0px;">Add Banner Images</label>
+                            <h4>Add Banner Images</h4>
                                 <small style="display: block;font-weight: 300;" class="mb-3">You can add 3 banner images in Platinum package.</small>
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
@@ -868,7 +872,7 @@
                     </div>
                     <div class="edit-school-inner">
 
-                        <h4 class="mt-3 mb-2">Additional Info</h4>
+                        <h4>Additional Info</h4>
                         <p class="mb-3">Only 6 additional infos are displayed.</p>
                         <hr class="mb-4">
                         <div class="form-row mt-3">
@@ -937,7 +941,7 @@
                     </div>
                     <div class="edit-school-inner">
 
-                        <h4 class="mt-4 mb-2">About</h4>
+                        <h4>About</h4>
                         <hr class="mb-3">
                         <div class="form-row">
                             <div class="col-lg-6 col-sm-6">
@@ -959,7 +963,7 @@
                     </div>
                     <div class="edit-school-inner">
 
-                        <h4 class="mt-4 mb-3">Institute Categories</h4>
+                        <h4>Institute Categories</h4>
                         <hr class="mb-4">
                         <div class="form-row" id="insmore">
                             <div class="col-lg-3 col-sm-6">
@@ -977,13 +981,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6">
+                            <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <label for="categorydesc[]">Category Description</label>
-                                    <textarea class="form-control" id="categorydesc[]" name="categorydesc[]" rows="1" ></textarea>
+                                    <textarea class="form-control" id="categorydesc[]" name="categorydesc[]" ></textarea>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6">
+                            <div class="col-lg-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
                                     <a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add More</a>
@@ -1003,15 +1007,15 @@
                                         <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-sm-6">
-                                    <button type="button" class="add_field_button btn btn-primary btn-block">Add More</button>
+                                <div class="col-lg-4 col-sm-6">
+                                    <button type="button" class="add_field_button btn btn-primary">Add More</button>
                                 </div>
                             </div><!-- /form-row -->
                         </div><!-- /input_fields_wrap -->
                     </div>
                     <div class="edit-school-inner">
 
-                        <h3 class="mt-4 mb-3">News & Events</h3>
+                        <h4>News & Events</h4>
                         <hr class="mb-4">
 
                         <div class="form-row" >
@@ -1038,20 +1042,20 @@
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="newsdesc[]">News Description</label>
-                                    <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" rows="1" ></textarea>
+                                    <textarea class="form-control" id="newsdesc[]" name="newsdesc[]" ></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="newsadd" style="visibility: hidden;">Add More</label>
-                                    <a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add More</a>
+                                    <label for="newsadd" style="visibility: hidden;">Add More</label><br>
+                                    <a class="btn btn-primary addmore-show2" id="newsadd">Add More</a>
                                 </div>
                             </div>
                         </div><!-- /form-row -->
                     </div>
                     <div class="edit-school-inner">
 
-                        <h3 class="mt-5 mb-3">Location</h3>
+                        <h4>Location</h4>
                         <hr class="mb-4">
                         <div class="form-row">
                             <div class="col-lg-3 col-sm-6">
@@ -1078,13 +1082,17 @@
                                     <input type="text" class="form-control" id="timing" name="timing" placeholder="e.g 10:00 am - 8:00 pm" >
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <textarea class="form-control" id="address" name="address" rows="1" placeholder="e.g Enter your address" style="height: 80px;" ></textarea>
                                 </div>
                             </div>
                         </div><!-- /form-row -->
+                    </div>
+                    <div class="edit-school-inner">
+                        <h4>Plan Details</h4>
+                        <hr class="mb-4">
                         <div class="form-row">
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
@@ -1157,7 +1165,7 @@
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(activity).append('<div class="form-row mx-0 w-100" name="insmore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="categoryname[]" placeholder="Sports"></div></div><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" class="" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="" name="categoryimage[]" aria-describedby=""></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="categorydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div></div>'); //add input box
+                $(activity).append('<div class="form-row mx-0 w-100" name="insmore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="categoryname[]" placeholder="Sports"></div></div><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" class="" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="" name="categoryimage[]" aria-describedby=""></div></div></div><div class="col-lg-4 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="categorydesc[]" rows=""></textarea></div></div><div class="col-lg-2 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div></div>'); //add input box
             }
         });
 
@@ -1177,7 +1185,7 @@
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(news).append('<div class="form-row w-100 mx-0" id="newsmore"><div class="col-lg-4 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="newsheading[]" placeholder="Salsa Dance"></div></div><div class="col-lg-6 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="newsdesc[]" rows=""></textarea></div></div><div class="form-group"></div><div class="col-lg-2 col-sm-6  remove_field1"><a href="#" class="btn btn-danger btn-block">Remove</a></div></div>'); //add input box 
+                $(news).append('<div class="form-row w-100 mx-0" id="newsmore"><div class="col-lg-4 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="newsheading[]" placeholder="Salsa Dance"></div></div><div class="col-lg-6 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="newsdesc[]" rows=""></textarea></div></div><div class="form-group"></div><div class="col-lg-2 col-sm-6  remove_field1"><a href="#" class="btn btn-danger">Remove</a></div></div>'); //add input box 
             }
         });
 
