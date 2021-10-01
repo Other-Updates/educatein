@@ -467,7 +467,7 @@ body {
 .package-head .lead:after {
   	height: 0;
   	width: 0;
-  	right: -15.5px;
+  	right: -15px;
   	border-top: 25px solid transparent;
   	border-bottom: 25px solid transparent;
   	border-left: 15px solid #33317c;

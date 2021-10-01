@@ -505,7 +505,7 @@ $similar_school = $this->db->get();
                                         <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/26.png" alt="Educatein"></div>
                                         <div class="sd-addit-value">
                                             <h6>Email</h6>
-                                            <a href="mailto:<?php echo $institute_dets->email ?>"><h3><?php echo $institute_dets->email ?></h3>
+                                            <a href="mailto:<?php echo $institute_dets->email ?>"><h3><?php echo $institute_dets->email ?></h3></a>
                                         </div>
                                     </div>
                                 <?php } ?>

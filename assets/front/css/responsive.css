@@ -55,6 +55,12 @@
 	}
 	.mt330 { margin-top: -380px;}
 	.mt190 { margin-top: -240px; }
+	.header-text h2 {
+		font-size: 20px;
+	}
+	.header-text h6 {
+		font-size: 12px;
+	}
 }
 
 @media only screen and (min-width: 1201px) and (max-width: 1320px) {
@@ -76,6 +82,12 @@
 	.mt190 { margin-top: -220px; }
 	.coaching {
 		width: 100%;
+	}
+	.header-text h2 {
+		font-size: 20px;
+	}
+	.header-text h6 {
+		font-size: 12px;
 	}
 }
 
