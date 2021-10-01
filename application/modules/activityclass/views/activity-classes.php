@@ -282,7 +282,7 @@ if ($aff_url == "dance-class") {
                                     </ul>
                                 </div><!-- /dropdown-menu -->
                             </div>
-                            <input type="text" id="search_class" class="form-control"  name="search_class" placeholder="Search institute" aria-label="" aria-describedby="button-addon2">
+                            <input type="text" id="search_class" class="form-control search_filter"  name="search_class" placeholder="Search institute" aria-label="" aria-describedby="button-addon2">
                             <div class="search-list"><ul id="suggesstion-box"></ul></div>
                             <?php if ($aff_url != "") { ?>
                                 <input type="hidden" style="display:none"  class="form-control"  name="searchcity" value="<?php echo $searchcity; ?>" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
@@ -291,7 +291,7 @@ if ($aff_url == "dance-class") {
                             <?php } ?>
                             <!-- <div id="map"></div> -->
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit" ><i class="fa fa-search"></i></button>
+                                <button class="btn btn-outline-secondary search_filter_button" type="submit" ><i class="fa fa-search"></i></button>
                             </div>
                         </div><!-- /input-group -->
                     </form>
@@ -1154,6 +1154,15 @@ $ip = $_SERVER['REMOTE_ADDR'];
         $("#search_class").val(val);
         $("#suggesstion-box").hide();
     }
+    $('.search_filter_button').on('click',function(e){ 
+        e.preventDefault(); 
+        if($(this).closest('form').find('.search_filter').val() == ''){
+            $(this).closest('form').find('.search_filter').css({'background':'red'});
+            return 
+        }else{
+            $(this).closest('form').submit()
+        }
+    })
 
 </script>
 <?php 

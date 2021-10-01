@@ -144,7 +144,7 @@
 
 <div id="infoMessage"><?php echo $message;?></div>
 
-<?php  echo form_open("https://edugatein.com/admin/forgot_password"); ?>
+<?php  echo form_open(base_url("admin/forgot_password")); ?>
 
       <p>
       	<label for="identity">Email</label> <br />

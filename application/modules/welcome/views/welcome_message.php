@@ -178,12 +178,12 @@ $uccity = ucfirst($yourcity);
                                         <?php } else { ?>
                                             <input type="hidden" style="display:none" id="searchcity" class="form-control"  name="searchcity" placeholder="Search..." aria-label="" aria-describedby="button-addon2" required>                                    
                                         <?php } ?>
-                                        <input type="text" id="search_school" class="form-control"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
+                                        <input type="text" id="search_school" class="form-control search_filter"  name="search" placeholder="Search..." aria-label="" aria-describedby="button-addon2">
                                         <div class="search-list"><ul id="suggesstion-box"></ul></div>
                                         
                                         <!-- <div id="map"></div> -->
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" id="search_school_submit" type="submit" ><i class="fa fa-search"></i></button>
+                                            <button class="btn btn-outline-secondary search_filter_button" id="search_school_submit" type="submit" ><i class="fa fa-search"></i></button>
                                         </div>
                                     </div><!-- /input-group -->
                                 </form>
@@ -762,6 +762,23 @@ $(document).ready(function(){
     //     });
     // });
 });
+
+
+
+$('.search_filter_button').on('click',function(e){ 
+    e.preventDefault(); 
+    if($(this).closest('form').find('.search_filter').val() == ''){
+        $(this).closest('form').find('.search_filter').css({'background':'red'});
+        return 
+    }else{
+        $(this).closest('form').submit()
+    }
+})
+
+
+
+
+
 </script>
 <!-- <script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>   -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 

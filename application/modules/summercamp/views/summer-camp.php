@@ -123,12 +123,12 @@ if($uccity == "Enquiry" || $uccity == "Otp")
 					<div class="col-lg-6">
 						<form action="<?php echo base_url() ?>schools-list" method="get">
 							<div class="input-group">
-							  	<input type="text" class="form-control" name="search_class" id="search_class" placeholder="Search your activity classes..." aria-label="Recipient's username" aria-describedby="button-addon2">
+							  	<input type="text" class="form-control" name="search_class search_filter" id="search_class" placeholder="Search your activity classes..." aria-label="Recipient's username" aria-describedby="button-addon2">
 							  	<input type="hidden" class="form-control" name="city" value="<?php echo $yourcity; ?>"  aria-label="Recipient's username" aria-describedby="button-addon2">
 								  <div class="search-list"><ul id="suggesstion-box"></ul></div>
 			
 							  	<div class="input-group-append">
-							    	<button class="btn btn-primary" type="submit" id="button-addon2">SEARCH</button>
+							    	<button class="btn btn-primary search_filter_button" type="submit" id="button-addon2">SEARCH</button>
 							  	</div>
 							</div><!-- /input-group -->
 						</form>
@@ -463,6 +463,15 @@ $ip = $_SERVER['REMOTE_ADDR'];
 			$("#search_class").val(val);
 			$("#suggesstion-box").hide();
 		}
+		$('body').on('click','.search_filter_button',function(e){ 
+			e.preventDefault(); 
+			if($(this).closest('form').find('.search_filter').val() == ''){
+				$(this).closest('form').find('.search_filter').css({'background':'red'});
+					return 
+				}else{
+					$(this).closest('form').submit()
+				}
+		})
 	</script>
 	<!--End of Tawk.to Script-->
     
