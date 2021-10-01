@@ -123,7 +123,7 @@ if($uccity == "Enquiry" || $uccity == "Otp")
 					<div class="col-lg-6">
 						<form action="<?php echo base_url() ?>schools-list" method="get">
 							<div class="input-group">
-							  	<input type="text" class="form-control" name="search_class search_filter" id="search_class" placeholder="Search your activity classes..." aria-label="Recipient's username" aria-describedby="button-addon2">
+							  	<input type="text" class="form-control search_filter" name="search_class" id="search_class" placeholder="Search your activity classes..." aria-label="Recipient's username" aria-describedby="button-addon2">
 							  	<input type="hidden" class="form-control" name="city" value="<?php echo $yourcity; ?>"  aria-label="Recipient's username" aria-describedby="button-addon2">
 								  <div class="search-list"><ul id="suggesstion-box"></ul></div>
 			

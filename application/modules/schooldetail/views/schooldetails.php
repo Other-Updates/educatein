@@ -859,14 +859,14 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="package-name">Premium</div>
                                     <div class="object-fit">
                                         <?php if(!empty($similar->logo)){ ?>
-                                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $yourcity; ?>" />
+                                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100"  />
                                                 <?php } else { ?>
                                             <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $city; ?>" />
                                             <?php } ?>
                                     </div>
                                     <figcaption class="item-footer">
                                         <h6><?php echo ucfirst($similar->school_name) ?></h6>
-                                        <p><i class="fa fa-book"></i> Grades : KG To Class 10</p>
+                                        <p><i class="fa fa-book"></i> <?php echo ucfirst($similar->aff) ?></p>
                                     </figcaption>
 
                                 </figure>

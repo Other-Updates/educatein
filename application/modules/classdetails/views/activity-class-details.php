@@ -638,7 +638,7 @@ $similar_school = $this->db->get();
                                     <div class="package-name">Premium</div>
                                     <div class="object-fit">
                                         <?php if(!empty($similar->logo)){ ?>
-                                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" alt="best <?php echo $type ?>  in <?php echo $yourcity; ?>" />
+                                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" />
                                                 <?php } else { ?>
                                             <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $type ?>  in <?php echo $yourcity; ?>" />
                                             <?php } ?>
