@@ -632,12 +632,12 @@
                             <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
                             <div class="input_fields_wrap mt-3">
                                 <div class="form-row">
-                                    <div class="col-lg-4 col-sm-6">
+                                    <div class="col-lg-10 col-sm-6">
                                         <div class="input-group mb-3">
                                             <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-sm-6">
+                                    <div class="col-lg-2 col-sm-6">
                                         <button type="button" class="add_field_button btn btn-primary">Add More</button>
                                     </div>
                                 </div><!-- /form-row -->
@@ -1002,12 +1002,12 @@
                         <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
                         <div class="input_fields_wrap mt-3">
                             <div class="form-row">
-                                <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-10 col-sm-6">
                                     <div class="input-group mb-3">
                                         <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-2 col-sm-6">
                                     <button type="button" class="add_field_button btn btn-primary">Add More</button>
                                 </div>
                             </div><!-- /form-row -->
@@ -1411,5 +1411,8 @@
     });
 </script>
 <script src="<?php echo base_url("assets/front/"); ?>js/dashboard.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="<?php echo base_url('assets/admin/js/sweetalert.min.js'); ?>" ></script>
+<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->

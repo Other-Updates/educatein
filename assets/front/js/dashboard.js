@@ -114,7 +114,7 @@ $(document).ready(function() {
             x++; //text box increment
             // $(wrapper).append('<div><div class="input-group mb-2"><div class="custom-file"><input type="file" class="custom-file-input" id="" aria-describedby="" accept="image/x-png,image/gif,image/jpeg" name="mytext[]"><label class="custom-file-label" for="">Choose file</label></div><div class="input-group-append remove_field"><button class="btn btn-danger" style="color:#fff!important;" type="button" id="">Remove</button></div></div></div>');
 
-            $(wrapper).append('<div><div class="form-row mb-2"><div class="col-lg-4 col-sm-6"><div class="input-group mb-3"><input type="file" accept="image/x-png,image/gif,image/jpeg" name="mytext[]"/></div></div><div class="col-lg-4 col-sm-6 remove_field"><a href="#" class="btn btn-danger" style="color:#fff!important;">Remove</a></div></div></div>'); //add input box
+            $(wrapper).append('<div><div class="form-row mb-2"><div class="col-lg-10 col-sm-6"><div class="input-group mb-3"><input type="file" accept="image/x-png,image/gif,image/jpeg" name="mytext[]"/></div></div><div class="col-lg-2 col-sm-6 remove_field"><a href="#" class="btn btn-danger" style="color:#fff!important;">Remove</a></div></div></div>'); //add input box
         }
     });
     

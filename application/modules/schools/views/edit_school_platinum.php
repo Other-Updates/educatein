@@ -574,7 +574,7 @@ $about_img = $this->db->get()->result_array();
                             <input type="text" name="activity[]" class="form-control" id="activity1" value="<?php echo $school_activities1['activity_name']; ?>"placeholder="e.g.Sports" >
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-7 col-sm-6">
                         <?php if($key==0){ ?><label for="activityimage1">Activity Image</label><?php } ?>
                             <input type="hidden" name="activityid[]" value="<?php echo $school_activities1['school_act_id']; ?>">
                             <input type="hidden" name="activityimage_id[]" value="<?php echo $school_activities1['image_id']; ?>">
@@ -754,7 +754,7 @@ $about_img = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(activity).append('<div class="form-row w-100 mx-0" id="actmore"><div class="col-lg-3 col-sm-6 form-group"><input type="text" class="form-control" id="activity[]" name="activity[]" placeholder="Sports"></div><input type="hidden" name="activityid[]" value=""><input type="hidden" name="activityimage_id[]" value=""><input type="hidden" name="activityoldimage[]" value=""><div class="col-lg-3 col-sm-6"><div class="input-group mb-3 custom-file"><input type="hidden" name="activityid[]" value="0"><input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG" aria-describedby=""></div></div><div class="col-lg-2 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div>'); //add input box
+                $(activity).append('<div class="form-row w-100 mx-0" id="actmore"><div class="col-lg-3 col-sm-6 form-group"><input type="text" class="form-control" id="activity[]" name="activity[]" placeholder="Sports"></div><input type="hidden" name="activityid[]" value=""><input type="hidden" name="activityimage_id[]" value=""><input type="hidden" name="activityoldimage[]" value=""><div class="col-lg-7 col-sm-6"><div class="input-group mb-3 custom-file"><input type="hidden" name="activityid[]" value="0"><input type="file" class="" id="activityimage[]" name="activityimage[]" accept="image/x-png,image/jpg,image/jpeg,image/x-PNG,image/JPG,image/JPEG" aria-describedby=""></div></div><div class="col-lg-2 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div>'); //add input box
             }
         });
 
