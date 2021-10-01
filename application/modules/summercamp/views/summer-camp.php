@@ -43,7 +43,7 @@ if($uccity == "Enquiry" || $uccity == "Otp")
 
 	<!-- <div class="summercamp-popup wow bounceIn slower">
     	<a href="https://www.edugatein.com/list-of-best-cbse-schools-in-coimbatore">
-    		<img src="https://www.edugatein.com/images/back-to-school.png" width="150" alt="summer-camp">
+    		<img src="<?php echo base_url(); ?>assets/front/images/back-to-school.png" width="150" alt="summer-camp">
     	</a>
     </div> -->
     <!-- /summercamp-popup -->
@@ -150,93 +150,93 @@ if($uccity == "Enquiry" || $uccity == "Otp")
 			<div class="row">
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow slideInLeft" data-wow-delay="100ms">
 					<a href="<?php echo base_url();?>list-of-best-dance-class-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/dance.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/dance.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow slideInLeft" data-wow-delay="200ms">
 					<a href="<?php echo base_url();?>list-of-best-music-class-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/music.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/music.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow slideInRight" data-wow-delay="300ms">
 					<a href="<?php echo base_url();?>list-of-best-coaching-centres-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/coaching.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/coaching.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow slideInRight" data-wow-delay="400ms">
 					<a href="<?php echo base_url();?>list-of-best-fitness-centre-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/yoga.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/yoga.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow bounceIn" data-wow-delay="500ms">
 					<a href="<?php echo base_url();?>list-of-best-martial-arts-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/karate.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/karate.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow bounceIn" data-wow-delay="600ms">
 					<a href="<?php echo base_url();?>list-of-best-school-kits-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/kits.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/kits.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow bounceIn" data-wow-delay="700ms">
 					<a href="<?php echo base_url();?>list-of-best-arts-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/drawing.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/drawing.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow bounceIn" data-wow-delay="800ms">
 					<a href="<?php echo base_url();?>list-of-best-sports-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/badminton.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/badminton.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow fadeInUp" data-wow-delay="200ms">
 					<a href="<?php echo base_url();?>list-of-best-coaching-centres-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/neet.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/neet.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow fadeInUp" data-wow-delay="300ms">
 					<a href="<?php echo base_url();?>list-of-best-coaching-centres-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/spoken-english.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/spoken-english.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow bounceIn" data-wow-delay="400ms">
 					<a href="<?php echo base_url();?>list-of-best-sports-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/cricket.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/cricket.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow bounceIn" data-wow-delay="500ms">
 					<a href="<?php echo base_url();?>list-of-best-sports-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/swimming.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/swimming.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow slideInLeft" data-wow-delay="300ms">
 					<a href="<?php echo base_url();?>list-of-best-sports-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/skating.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/skating.png" class="w-100" alt="">
 					</a>
 				</div>
 				<!-- <div class="col-lg-3 p-4 mab-30 wow slideInLeft" data-wow-delay="400ms">
 					<a href="https://www.edugatein.com/list-of-best-sports-in-coimbatore">
-						<img src="https://www.edugatein.com/images/summer-camp/tennis.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/tennis.png" class="w-100" alt="">
 					</a>
 				</div> -->
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow slideInRight" data-wow-delay="500ms">
 					<a href="<?php echo base_url();?>list-of-best-costume-designers-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/embroidery.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/embroidery.png" class="w-100" alt="">
 					</a>
 				</div>
 				<div class="col-lg-3 col-sm-4 p-4 mab-30 wow slideInRight" data-wow-delay="600ms">
 					<a href="<?php echo base_url();?>list-of-best-coaching-centres-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/multimedia.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/multimedia.png" class="w-100" alt="">
 					</a>
 				</div>
 				<!-- <div class="col-lg-3"></div> -->
 				<div class="col-lg-3 col-sm-4 p-4 wow bounceIn" data-wow-delay="700ms">
 					<a href="<?php echo base_url();?>list-of-best-transports-in-<?php echo $yourcity ?>">
-						<img src="https://www.edugatein.com/images/summer-camp/transport1.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/transport1.png" class="w-100" alt="">
 					</a>
 				</div>
 				<!-- <div class="col-lg-3 p-4 wow bounceIn" data-wow-delay="800ms">
 					<a href="https://www.edugatein.com/list-of-best-transports-in-coimbatore">
-						<img src="https://www.edugatein.com/images/summer-camp/driving.png" class="w-100" alt="">
+						<img src="<?php echo base_url(); ?>assets/front/images/summer-camp/driving.png" class="w-100" alt="">
 					</a>
 				</div> -->
 			</div><!-- /row -->
@@ -374,19 +374,19 @@ $ip = $_SERVER['REMOTE_ADDR'];
    	<?php } ?>
 
 	<!-- Core JS -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://www.edugatein.com/js/popper.min.js"></script>
-    <script src="https://www.edugatein.com/js/bootstrap.min.js"></script>
+    <script src="https://www.edugatein.com/js/bootstrap.min.js"></script> -->
 
     <!-- Other JS -->
-    <script src="https://www.edugatein.com/js/custom.js"></script>
+    <!-- <script src="https://www.edugatein.com/js/custom.js"></script>
     <script src="https://www.edugatein.com/js/owl.carousel.min.js"></script>
     <script src="https://www.edugatein.com/js/wow.min.js"></script>
     <script src="https://www.edugatein.com/js/jquery.easeScroll.js"></script>
     <script src="https://www.edugatein.com/js/parallax.min.js"></script>
     <script src="https://www.edugatein.com/js/jquery.fancybox.min.js"></script>
     <script src="https://www.edugatein.com/js/dashboard.js"></script>
-    <script src="js/jquery.sticky-kit.min.js"></script>
+    <script src="js/jquery.sticky-kit.min.js"></script> -->
 
     <script>
     	new WOW().init();
