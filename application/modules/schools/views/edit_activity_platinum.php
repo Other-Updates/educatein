@@ -330,7 +330,7 @@ $user = $this->db->get()->result_array();
                 <p class="mt-2">Add Gallery Images (jpg and png images only acceptable!).</p>
                 <div class="input_fields_wrap mt-3">
                     <div class="form-row">
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col-lg-10 col-sm-6">
                             <div class="input-group mb-3">
                                 <input type="file" class="mytext1[]" id="mytext1[]" aria-describedby="inputGroupFile01" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" name="mytext[]" >
                             </div>
