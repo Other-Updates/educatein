@@ -304,7 +304,7 @@ $user = $this->db->get()->result_array();
                                 </div>
                             </div>
                             <div class="col-lg-2 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group"><br>
                                     <?php if(empty($inst_category[$key+1])){ ?><a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add More</a><?php } ?>
                                 </div>
                             </div>
