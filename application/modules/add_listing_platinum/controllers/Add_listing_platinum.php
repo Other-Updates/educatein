@@ -195,7 +195,6 @@ class Add_listing_platinum extends CI_Controller {
             'schooltype_id' => $level_id,
             'school_category_id' => 4,
             'about' => $school['about'],
-            'acadamic' => $_POST['academic'],
             'website_url' => $school['website'],
             'our_mission' => $_POST['our_mission'],
             'our_vision' => $_POST['our_vision'],
