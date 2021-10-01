@@ -295,16 +295,15 @@ $user = $this->db->get()->result_array();
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6">
+                            <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                 <?php if($key==0){ ?><label for="categorydesc[]">Category Description</label><?php } ?>
                                     <textarea class="form-control" id="categorydesc[]" name="categorydesc[]" rows="1" ><?php echo $category['about']; ?></textarea>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6">
+                            <div class="col-lg-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                    <?php if(empty($inst_category[$key+1])){ ?><a class="btn btn-primary addmore-show" id="addmore" name="addmore" style="margin-left:200px;">Add More</a><?php } ?>
+                                    <?php if(empty($inst_category[$key+1])){ ?><a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add More</a><?php } ?>
                                 </div>
                             </div>
                         </div><!-- /form-row -->
@@ -312,10 +311,10 @@ $user = $this->db->get()->result_array();
                     </div>
                     <?php } else { ?>
                         <div class="form-row" id="insmore">
-                            <div class="col-lg-3 col-sm-6">
+                            <div class="col-lg-10 col-sm-6"></div>
+                            <div class="col-lg-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="addmore" style="visibility: hidden;display: block;">Add More</label>
-                                    <a class="btn btn-primary addmore-show" id="addmore" name="addmore" style="margin-left:1200px;">Add</a>
+                                    <a class="btn btn-primary addmore-show" id="addmore" name="addmore">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -335,7 +334,7 @@ $user = $this->db->get()->result_array();
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6">
-                            <input type="buton" class="add_field_button btn btn-primary btn-block" style="margin-left:635px;" value="Add More">
+                            <button class="add_field_button btn btn-primary">Add More</button>
                         </div>
                     </div><!-- /form-row -->
                 </div><!-- /input_fields_wrap -->
@@ -378,8 +377,8 @@ $user = $this->db->get()->result_array();
                             </div>
                             <div class="col-lg-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="newsadd" style="visibility: hidden;">Add More</label>
-                                    <?php if(empty($news[$key+1])){ ?><a class="btn btn-primary addmore-show2 btn-block" id="newsadd">Add More</a><?php } ?>
+                                    <!-- <label for="newsadd" style="visibility: hidden;">Add More</label> -->
+                                    <?php if(empty($news[$key+1])){ ?><a class="btn btn-primary addmore-show2 " id="newsadd">Add More</a><?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -387,10 +386,14 @@ $user = $this->db->get()->result_array();
                     </div>
                 <?php } else { ?>
                     <div class="form-row mt-3" id="newsmore">
-                        <div class="col-lg-2 col-sm-6">
+                        <div class="col-lg-10 col-sm-6">
                             <div class="form-group">
                                 <label for="newsadd" style="visibility:;">News Heading</label>
-                                <a class="btn btn-primary addmore-show2 btn-block" style="margin-left:1050px;" id="newsadd">Add</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <div class="form-group">
+                                <a class="btn btn-primary addmore-show2" id="newsadd">Add</a>
                             </div>
                         </div>
                     </div>
@@ -486,7 +489,7 @@ $user = $this->db->get()->result_array();
 
 <script>
 // $("#addmore").click(function () {
-//   $("#actmore").append('<div class="form-row mt-3" id="actmore"><div class="col-lg-3 col-sm-6 form-group"><input type="text" class="form-control" id="activity" name="activity" placeholder="Sports"></div><div class="col-lg-7 col-sm-6"><div class="input-group mb-3 custom-file"><input type="file" class="" id="activityimage" name="activityimage" accept="image/x-png,image/gif,image/jpeg" id="" aria-describedby=""></div></div><div class="col-lg-2 col-sm-6 form-group"><a class="btn btn-primary addmore-show btn-block add_field_button1" id="addmore">Add More</a><a href="#" class="btn btn-danger">Remove</a></div></div>');
+//   $("#actmore").append('<div class="form-row mt-3" id="actmore"><div class="col-lg-3 col-sm-6 form-group"><input type="text" class="form-control" id="activity" name="activity" placeholder="Sports"></div><div class="col-lg-7 col-sm-6"><div class="input-group mb-3 custom-file"><input type="file" class="" id="activityimage" name="activityimage" accept="image/x-png,image/gif,image/jpeg" id="" aria-describedby=""></div></div><div class="col-lg-2 col-sm-6 form-group"><a class="btn btn-primary addmore-show  add_field_button1" id="addmore">Add More</a><a href="#" class="btn btn-danger">Remove</a></div></div>');
 // });
 
 
@@ -501,7 +504,7 @@ $user = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(activity).append('<div class="form-row mx-0 w-100" name="insmore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="categoryname[]" placeholder="Sports"></div></div><input type="hidden" name="category_id[]" value=""><input type="hidden" name="category_old_image[]" value=""><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" class="" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="" name="categoryimage[]" aria-describedby=""></div></div></div><div class="col-lg-3 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="categorydesc[]" rows=""></textarea></div></div><div class="col-lg-3 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div></div>'); //add input box
+                $(activity).append('<div class="form-row mx-0 w-100" name="insmore"><div class="col-lg-3 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="categoryname[]" placeholder="Sports"></div></div><input type="hidden" name="category_id[]" value=""><input type="hidden" name="category_old_image[]" value=""><div class="col-lg-3 col-sm-6"><div class="input-group mb-3"><div class="custom-file"><input type="file" class="" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/X-PNG,image/GIF,image/JPEG,image/JPG" id="" name="categoryimage[]" aria-describedby=""></div></div></div><div class="col-lg-4 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="categorydesc[]" rows=""></textarea></div></div><div class="col-lg-2 col-sm-6 remove_field"><a href="#" class="btn btn-danger ">Remove</a></div></div></div>'); //add input box
             }
         });
 
@@ -521,7 +524,7 @@ $user = $this->db->get()->result_array();
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $(news).append('<div class="form-row w-100 mx-0" id="newsmore"><div class="col-lg-4 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="newsheading[]" placeholder="Salsa Dance"></div></div><div class="col-lg-6 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="newsdesc[]" rows=""></textarea></div></div><div class="form-group"></div><div class="col-lg-2 col-sm-6  remove_field1"><a href="#" class="btn btn-danger btn-block">Remove</a></div></div>'); //add input box 
+                $(news).append('<div class="form-row w-100 mx-0" id="newsmore"><div class="col-lg-4 col-sm-6"><div class="form-group"><input type="text" class="form-control" id="" name="newsheading[]" placeholder="Salsa Dance"></div></div><div class="col-lg-6 col-sm-6"><div class="form-group"><textarea class="form-control" id="" name="newsdesc[]" rows=""></textarea></div></div><div class="form-group"></div><div class="col-lg-2 col-sm-6  remove_field1"><a href="#" class="btn btn-danger">Remove</a></div></div>'); //add input box 
             }
         });
 
