@@ -201,6 +201,13 @@
 	}
 }
 @media (max-width:768px){
+	.header-text h6 {
+		font-size: 12px;
+	}
+	.header-text {
+		padding-left: 0;
+		text-align: center;
+	}
 	.top-school-sigle.top-school-widget figcaption {
 		padding: 30px;
 		background-image: linear-gradient(to top, rgb(0 0 0 / 90%) 0%, #0000005c 80%);

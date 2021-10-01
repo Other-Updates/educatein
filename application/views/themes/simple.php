@@ -86,14 +86,17 @@
         <!--header Start-->
         <header>
             <!--  START NAVBAR   -->
-            <nav class="navbar navbar-expand-xl navbar-light border bg-light navbar-offcanvas px-5">
+            <nav class="navbar navbar-expand-xl navbar-light border bg-light navbar-offcanvas px-4">
                 <a class="navbar-brand mr-auto" href="<?php echo base_url() ?>">
                     <img src="<?php echo base_url() ?>assets/front/images/logo.png" width="180" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" id="navToggle">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                <div class="header-text">
+                    <h2>Over 100+ inter-connect schools with Edugate-in.</h2>
+                    <h6>Parents and education community on a single platform to create mutual benefit.</h6>
+                </div>
                 <div class="navbar-collapse offcanvas-collapse">
                     <div class="close-btn" id="navToggle">
                         <i class="fa fa-close"></i>

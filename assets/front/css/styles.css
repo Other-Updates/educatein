@@ -2451,7 +2451,7 @@ blue - 33317c
 	color: #fff;
 }
 .home-search-section, .esd-banner {
-    height: 500px;
+    height: 400px;
     background: url('../images/search-bg.jpg');
 	background-attachment: fixed;
 	background-position: center;
@@ -2472,7 +2472,7 @@ blue - 33317c
 }
 .hss-inner {
 	position: relative;
-	padding-top: 30px;
+	padding-top: 50px;
 }
 .hss-tit {
 	font-size: 30px;
@@ -3096,9 +3096,9 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 .custom-pagination a, .custom-pagination strong {
 	margin: 0 8px;
     background: #ebeaff;
-    border-radius: 50%;
+    border-radius:8px;
     box-shadow: 0px 2px 8px #00000042;
-    width: 40px;
+    width: 45px;
     height: 40px;
     text-align: center;
     line-height: 38px;
@@ -3235,4 +3235,17 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 #contact-info iframe {
 	height: 300px;
     width: 100%;
+}
+.header-text {
+	padding-left: 50px;	
+}
+.header-text h2 {
+	font-size: 25px;
+	font-weight: 500;
+	padding-bottom: 7px;
+}
+.header-text h6 {
+	font-size: 18px;
+	color: #d12881;
+	font-weight: 500;
 }
