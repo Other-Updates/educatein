@@ -585,7 +585,7 @@ class Institute_listing_first extends CI_Controller {
         $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
-                window.location.href = "https://rzp.io/l/FEnsGlNP";
+                window.location.href = "https://rzp.io/l/instituteplatinumpackage";
             </script>
         <?php
     }

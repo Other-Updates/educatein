@@ -291,7 +291,7 @@ The spectrum package institute " . $_POST['institutename'] . " has been submitte
         $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
-            window.location.href = "https://rzp.io/l/v4CwWMLP";
+            window.location.href = "https://rzp.io/l/insinstitutespectrumpackage";
             </script>
         <?php
     }

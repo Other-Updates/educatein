@@ -1057,7 +1057,7 @@ class Add_listing_platinum extends CI_Controller {
         $sess = $this->session->set_userdata($the_session);
         ?>
             <script>
-                window.location.href = "https://rzp.io/l/FEnsGlNP";
+                window.location.href = "https://rzp.io/l/schoolplatinumpackage";
             </script>
         <?php
     }
