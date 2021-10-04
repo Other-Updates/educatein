@@ -523,7 +523,7 @@ $allcity = $this->db->get()->result();
             // echo $topschool->num_rows();
             // exit();
            
-            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 sd.expiry_status !=1 AND AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND sd.expiry_status != 1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,st.school_type')->where($where2);
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             // $this->db->join('areas as ar','sd.area_id=ar.id','left');

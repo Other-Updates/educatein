@@ -34,7 +34,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <a href="<?php echo base_url() ?>admin/forgot_password" class="mb-3">Forget Your Password?</a>	
+                                    <!-- <a href="<?php echo base_url() ?>admin/forgot_password" class="mb-3">Forget Your Password?</a>	 -->
                                 </div>
 
                                 <button type="submit" id="signin" name="signin" class="btn btn-primary mb-4 signin">SIGN IN</button>
