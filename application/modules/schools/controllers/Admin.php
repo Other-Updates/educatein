@@ -4345,7 +4345,7 @@ class admin extends CI_Controller {
 
                 $edit =  "<div class='btn-wid'><a title='Edit' href='". base_url("schools/admin/school_edit?id=". base64_encode($school["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
                 $delete = "<a title='Delete' href='' delete_id='".base64_encode($school["id"])."' class='delete btn btn-outline-danger delete btn-sm' id='del_btn'><i class='bi bi-trash'></i></a>";
-                $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a></div>";
+                $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
 
                 $row[] = $sno;
                 $row[] = ucfirst($school['user']);
@@ -4472,7 +4472,7 @@ class admin extends CI_Controller {
 
                 $edit = "<div class='btn-wid'><a title='Edit' href='". base_url("admin/schools/institute_edit?id=". base64_encode($institute["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
                 $delete = "<a title='Delete' href='' delete_id='".base64_encode($institute["id"])."' class=' btn btn-outline-danger btn-sm delete'><i class='bi bi-trash'></i></a>";
-                $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a></div>";
+                $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
 
                 $row[] = $sno;
                 $row[] = ucfirst($institute['user']);
