@@ -474,7 +474,7 @@ if ($aff_url == "dance-class") {
 
                 <?php
             // }
-            $where1 = "is_active=1 AND position_id=1 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
+            $where1 = "is_active=1 AND position_id=1 AND expiry_status !=1 AND status=1 AND category_id=" . $affiliation . " AND city_id =" . $yourcity_id . " AND deleted_at is NULL";
             $this->db->select('*')->where($where1);
             $this->db->order_by('rand()');
             $this->db->from('institute_details');
@@ -489,7 +489,7 @@ if ($aff_url == "dance-class") {
 
             // echo $topcount;
             // exit();
-            $where2 = "ind.is_active=1 AND ind.position_id=2 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $where2 = "ind.is_active=1 AND ind.position_id=2 AND ind.expiry_status !=1 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
             $this->db->select('ind.*,ar.area_name')->where($where2);
             // $this->db->order_by('rand()');
             $this->db->from('institute_details as ind');
@@ -497,7 +497,7 @@ if ($aff_url == "dance-class") {
             $school_premium = $this->db->get()->result_array();
             
             $page = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
-            $where2 = "ind.is_active=1 AND (ind.position_id=3 OR ind.position_id=4) AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $where2 = "ind.is_active=1 AND (ind.position_id=3 OR ind.position_id=4) AND ind.expiry_status !=1 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
             $this->db->select('ind.*')->where($where2);
             // $this->db->order_by('rand()');
             if(!empty($this->session->userdata('search_city')))
@@ -508,7 +508,7 @@ if ($aff_url == "dance-class") {
             $this->db->limit(12, $page);
             $school_spectrum = $this->db->get()->result_array();
 
-            $where2 = "ind.is_active=1 AND (ind.position_id=3 OR ind.position_id=4) AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+            $where2 = "ind.is_active=1 AND (ind.position_id=3 OR ind.position_id=4) AND ind.expiry_status !=1 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
             $this->db->select('ind.*')->where($where2);
             // $this->db->order_by('rand()');
             if(!empty($this->session->userdata('search_city')))
@@ -1185,6 +1185,7 @@ function customcreatePageinatation($count,$page,$link){
     $config["total_rows"] = $count;
     $config["per_page"] = 12;
     $config["uri_segment"] = 3;
+    $config["first_url"] = 1;
     // $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
     // $config['use_page_numbers'] = TRUE;
     $CI->pagination->initialize($config);

@@ -479,6 +479,33 @@ $user = $this->db->get()->result_array();
                     </div>
                 </div><!-- /form-row -->
             </div>
+            <?php if($institute[0]['expiry_status'] == 1){ ?>
+                <div class="edit-school-inner">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-group">
+                            <label for="schoolboard">Expiry status</label>
+                            <select class="form-control" name="expiry_status" id="exampleFormControlSelect1" required>
+                                <option value="1"<?php if('1' == $institute[0]['expiry_status']){echo "selected";} ?>>Expired</option>
+                                <option value="0"<?php if('0' == $institute[0]['expiry_status']){echo "selected";} ?>>Extend</option>
+                                <!-- <option>Other</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-group">
+                            <label for="schoolboard">Plan</label>
+                            <select class="form-control" name="position" id="exampleFormControlSelect1" required>
+                            <option value="" >--Select--</option>
+                                        <option value="1" <?php if('1' == $institute[0]['position_id']){ echo "selected"; } ?>>Platinum</option>
+                                        <option value="2" <?php if('2' == $institute[0]['position_id']){ echo "selected"; } ?>>Premium</option>
+                                        <option value="3" <?php if('3' == $institute[0]['position_id']){ echo "selected"; } ?>>Spectrum</option>
+                                        <option value="4" <?php if('4' == $institute[0]['position_id']){ echo "selected"; } ?>>Trial</option>
+                                <!-- <option>Other</option> -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
             <div class="edit-school-inner">
                 <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger ">CANCEL</button></a>
                 <button type="submit" class="btn btn-primary btn-save float-right">SUBMIT</button>

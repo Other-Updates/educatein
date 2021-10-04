@@ -1468,6 +1468,14 @@ class admin extends CI_Controller {
             $this->db->where('activity_name','playground');
             $this->db->delete('schoolmanagement_activities');
         }
+
+        if(!empty($_POST['expiry_status'] = 1)){
+            $expiry_status = 1;
+        }
+        if(!empty($_POST['expiry_status'] = 0)){
+            $expiry_status = 0;
+            $act_date = date('Y-m-d');
+        }
         //school details update
          
         $school_update=array(
@@ -1484,6 +1492,7 @@ class admin extends CI_Controller {
             'type' =>$_POST['schooltype'],
             'website_url' => $_POST['website'],
             'map_url' => $_POST['map_url'],
+            'expiry_status' => $expiry_status,
             'year_of_establish' => $_POST['founded'],
             'ad' => $_POST['ad'],
             'hostel' => $customRadio1,
@@ -1500,6 +1509,7 @@ class admin extends CI_Controller {
             'instagram' => $_POST['instagram'],
             'linkedin' => $_POST['linkedin'],
             'pinterest' => $_POST['pinterest'],
+            'activated_at' => $act_date,
             'logo' => $banner1_name,
             'is_active' => 1,
         );
@@ -2406,6 +2416,13 @@ class admin extends CI_Controller {
         if(!empty($bannerinsert)){
             $this->db->insert('institute_images',$banner1insert);
         }
+        if(!empty($_POST['expiry_status'] == 1)){
+            $expiry_status = 1;
+        }
+        if(!empty($_POST['expiry_status'] == 0)){
+            $expiry_status = 0;
+            $act_date = date('Y-m-d');
+        }
 
         $schoolupdate = array(
             'category_id' => $category_id,
@@ -2427,6 +2444,8 @@ class admin extends CI_Controller {
             'website_url' => $_POST['website'],
             'timings' => $_POST['timing'],
             'logo' => $banner1_name,
+            'expiry_status' => $expiry_status,
+            'activated_at' => $act_date,
             'news_image' => $newsbanner1_name,
             'facebook' => $_POST['facebook'],
             'twitter' => $_POST['twitter'],
@@ -4364,11 +4383,14 @@ class admin extends CI_Controller {
             $this->db->from('school_details as sd');
             if($input_data['type'] == 'approved'){
                 $this->db->where('sd.status',1);
+                // $this->db->where('sd.expiry_status',0);
             }
             if($input_data['type'] == 'hold'){
+                // $this->db->where('sd.expiry_status',1);
                 $this->db->where('sd.status',NULL);
             }
             if($input_data['type'] == 'reject'){
+                $this->db->where('sd.expiry_status',0);
                 $this->db->where('sd.status',2);
             }
             $this->db->join('user_register as ur', 'sd.user_id = ur.id', 'left');
@@ -4387,8 +4409,12 @@ class admin extends CI_Controller {
 
                 $edit =  "<div class='btn-wid'><a title='Edit' href='". base_url("schools/admin/school_edit?id=". base64_encode($school["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
                 $delete = "<a title='Delete' href='' delete_id='".base64_encode($school["id"])."' class='delete btn btn-outline-danger delete btn-sm' id='del_btn'><i class='bi bi-trash'></i></a>";
+                if($school['expiry_status'] == 1){
                 $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
-
+                }
+                if($school['expiry_status'] == 0){
+                $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;</div>";
+                }
                 $row[] = $sno;
                 $row[] = ucfirst($school['user']);
                 $row[] = ucfirst($school['school_name']);
@@ -4486,11 +4512,14 @@ class admin extends CI_Controller {
             $this->db->from('institute_details as in');
             if($input_data['type'] == 'approved'){
                 $this->db->where('in.status',1);
+                $this->db->where('in.expiry_status',0);
             }
             if($input_data['type'] == 'hold'){
+                // $this->db->where('in.expiry_status',1);
                 $this->db->where('in.status',NULL);
             }
             if($input_data['type'] == 'reject'){
+                $this->db->where('in.expiry_status',0);
                 $this->db->where('in.status',2);
             }
             $this->db->join('user_register as ur', 'in.user_id = ur.id', 'left');
@@ -4509,8 +4538,12 @@ class admin extends CI_Controller {
 
                 $edit = "<div class='btn-wid'><a title='Edit' href='". base_url("admin/schools/institute_edit?id=". base64_encode($institute["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
                 $delete = "<a title='Delete' href='' delete_id='".base64_encode($institute["id"])."' class=' btn btn-outline-danger btn-sm delete'><i class='bi bi-trash'></i></a>";
-                $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
-
+                if($institute['expiry_status'] == 1){
+                    $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
+                }
+                if($institute['expiry_status'] == 0){
+                    $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a></div>";
+                }
                 $row[] = $sno;
                 $row[] = ucfirst($institute['user']);
                 $row[] = ucfirst($institute['institute_name']);

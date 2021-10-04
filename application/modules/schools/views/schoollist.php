@@ -513,7 +513,7 @@ $allcity = $this->db->get()->result();
                 <?php
             // }
 
-            $where1 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $where1 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=1 AND sd.expiry_status !=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,st.school_type')->where($where1);
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             // $this->db->join('areas as ar','sd.area_id=ar.id','left');
@@ -523,7 +523,7 @@ $allcity = $this->db->get()->result();
             // echo $topschool->num_rows();
             // exit();
            
-            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND sd.school_category_id=2 sd.expiry_status !=1 AND AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,st.school_type')->where($where2);
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
             // $this->db->join('areas as ar','sd.area_id=ar.id','left');
@@ -532,7 +532,7 @@ $allcity = $this->db->get()->result();
             $school_premium = $this->db->get()->result_array();
             $page = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
 
-            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND (sd.school_category_id=4 OR sd.school_category_id=3) AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND (sd.school_category_id=4 OR sd.school_category_id=3) AND sd.expiry_status !=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,st.school_type')->where($where2);
             $this->db->order_by('sd.school_category_id');
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
@@ -543,7 +543,7 @@ $allcity = $this->db->get()->result();
             $school_spectrum = $this->db->get()->result_array();
 
 
-            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND (sd.school_category_id=4 OR sd.school_category_id=3) AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
+            $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND (sd.school_category_id=4 OR sd.school_category_id=3) AND sd.expiry_status !=1 AND sd.affiliation_id=" . $affiliation . " AND sd.city_id =" . $yourcity_id . " AND sd.deleted_at is NULL";
             $this->db->select('sd.*,st.school_type')->where($where2);
             $this->db->order_by('sd.school_category_id');
             $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
@@ -553,7 +553,6 @@ $allcity = $this->db->get()->result();
 
             $link = "list-of-best-".$aff_url."-schools-in-".$yourcity."/page";
             $school_links = customcreatePageinatation1($school_spectrum_count,$page,$link);
-
 
     
             // $links = $this->pagination->create_links();
@@ -1233,6 +1232,7 @@ function customcreatePageinatation1($count,$page,$link){
     $config["base_url"] = base_url() . $link;
     $config["total_rows"] = $count;
     $config["per_page"] = 12;
+    $config["first_url"] = 1;
     $config["uri_segment"] = 3;
     // $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
     // $config['use_page_numbers'] = TRUE;
