@@ -3249,6 +3249,15 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 	color: #d12881;
 	font-weight: 500;
 }
-.input-group #search_school.search-err {
-	border: 1px solid red;
+.input-group #search_school, .input-group #search_class {
+	border: 1px solid #fff;
+}
+.input-group #search_school.search-err, .input-group #search_class.search-err {
+	border-color: red;
+}
+.home-search-widget .input-group-prepend {
+    margin-right: 0px;
+}
+.home-search-widget .input-group>.form-control+.form-control {
+	margin-left: 0;
 }
