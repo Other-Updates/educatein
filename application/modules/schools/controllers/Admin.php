@@ -2469,7 +2469,30 @@ class admin extends CI_Controller {
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('school_details',$data);
-
+        
+        $this->db->select('*');
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->from('school_details');
+        $data['school'] = $this->db->get()->result_array();
+        
+        if($data['school'][0]['school_category_id'] == 4){
+        $date = strtotime($data['school'][0]['activated_at']);
+        $date = strtotime("+30 day", $date);
+        $date = date('Y-m-d', $date);
+        
+        }else{
+            $date = strtotime($data['school'][0]['activated_at']);
+            $date = strtotime("+100 day", $date);
+            $date = date('Y-m-d', $date);
+        }
+        $date = array(
+            'expiry_date' => $date,
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('school_details',$date);
+        
+        
+        
         $msg = $this->load->view('school_invoice',$data,true);
         $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' has been approved';
 
@@ -2642,6 +2665,25 @@ class admin extends CI_Controller {
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('institute_details',$data);
 
+        $this->db->select('*');
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->from('institute_details');
+        $data['institute'] = $this->db->get()->result_array();
+
+        if($data['institute'][0]['position_id'] == 4){
+            $date = strtotime($data['institute'][0]['activated_at']);
+            $date = strtotime("+30 day", $date);
+            $date = date('Y-m-d', $date);
+        }else{
+            $date = strtotime($data['institute'][0]['activated_at']);
+            $date = strtotime("+100 day", $date);
+            $date = date('Y-m-d', $date);
+        }
+        $date = array(
+            'expiry_date' => $date,
+        );
+        $this->db->where('id',base64_decode($school_id));
+        $this->db->update('institute_details',$date);
         // $msg = $this->load->view('activity_invoice',$data,true);
         // $sub = 'Edugatein - Your Activity class - '.$data['institute'][0]['institute_name'].' has been approved';
 
@@ -4317,7 +4359,7 @@ class admin extends CI_Controller {
             }
 
 
-            $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.activated_at');
+            $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.expiry_date');
             $this->db->where('sd.deleted_at',NULL);
             $this->db->from('school_details as sd');
             if($input_data['type'] == 'approved'){
@@ -4364,26 +4406,21 @@ class admin extends CI_Controller {
                 // else if($school['status'] == 2){$row[] = "Rejected";}
                 // else { $row[] = "Waiting for validation";}
 
-                if($school['status'] == 1){
-                    if($school['school_category_id'] == 4){
-                    $date = strtotime($school['activated_at']);
-                    $date = strtotime("+30 day", $date);
-                    $row[] = date('d-m-Y', $date);
-                    }else{
-                        $date = strtotime($school['activated_at']);
-                        $date = strtotime("+100 day", $date);
-                        $row[] = date('d-m-Y', $date);
+                // if($school['status'] == 1){
+                    if(!empty($school['expiry_date'])){
+                    $row[] = $school['expiry_date'];
                     }
-                }else{
+                else{
                     $row[] = "-";
                 }
+            // }
                 $row[] = $edit . '&nbsp;&nbsp;' . $delete . '&nbsp;&nbsp;' . $view;
 
                 $data[] = $row;
                 $sno++;
             }
         }   
-        $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id');
+        $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.expiry_date');
         $this->db->from('school_details sd');
         $this->db->join('user_register ur', 'sd.user_id = ur.id', 'left');
         $this->db->join('cities as ci','sd.city_id=ci.id','left');
@@ -4418,7 +4455,7 @@ class admin extends CI_Controller {
 
 		if(isset($_POST["length"])){
 
-            $column = array('','ur.name','in.institute_name','ci.city_name','in.position_id','in.paid','in.created_at','in.activated_at');
+            $column = array('','ur.name','in.institute_name','ci.city_name','in.position_id','in.paid','in.created_at','in.expiry_date');
             $input_arr['search_val'] = $input_data['search']['value'];
             $input_arr['order_column'] = $column[$input_data['order'][0]['column']];
             $input_arr['order_by'] = $input_data['order'][0]['dir'];
@@ -4444,7 +4481,7 @@ class admin extends CI_Controller {
                 $where .=')';
             }
 
-            $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.activated_at');
+            $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.expiry_date');
             $this->db->where('in.deleted_at',NULL);
             $this->db->from('institute_details as in');
             if($input_data['type'] == 'approved'){
@@ -4492,16 +4529,18 @@ class admin extends CI_Controller {
                 // else if($institute['status'] == 2){$row[] = "Rejected";}
                 // else { $row[] = "Waiting for validation";}
 
-                if($institute['status'] == 1){
-                    if($institute['position_id'] == 4){
-                    $date = strtotime($institute['activated_at']);
-                    $date = strtotime("+30 day", $date);
-                    $row[] = date('d-m-Y', $date);
-                    }else{
-                        $date = strtotime($institute['activated_at']);
-                        $date = strtotime("+100 day", $date);
-                        $row[] = date('d-m-Y', $date);
-                    }
+                // if($institute['status'] == 1){
+                //     if($institute['position_id'] == 4){
+                //     $date = strtotime($institute['activated_at']);
+                //     $date = strtotime("+30 day", $date);
+                //     $row[] = date('d-m-Y', $date);
+                //     }else{
+                //         $date = strtotime($institute['activated_at']);
+                //         $date = strtotime("+100 day", $date);
+                //         $row[] = date('d-m-Y', $date);
+                //     }
+                if(!empty($institute['expiry_date'])){
+                    $row[] = $institute['expiry_date'];
                 }else{
                     $row[] = "-";
                 }
@@ -4512,7 +4551,7 @@ class admin extends CI_Controller {
             }
         }
 
-        $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id');
+        $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.expiry_date');
         $this->db->from('institute_details in');
         $this->db->join('user_register ur', 'in.user_id = ur.id', 'left');
         $this->db->join('cities as ci','in.city_id=ci.id','left');
@@ -4540,6 +4579,28 @@ class admin extends CI_Controller {
         
         
     }   
+
+    function expire_plan(){
+        $data = array(
+            'expiry_status' => 1
+        );
+        $this->db->select('*');
+        $this->db->from('school_details');
+        $school = $this->db->get()->result_array();
+        foreach($school as $schools){
+            $date = date('d-m-Y');
+            $this->db->where('expiry_date<',$date);
+            $this->db->update('school_details',$data,array('id'=>$schools['id']));
+        }
+        $this->db->select('*');
+        $this->db->from('institute_details');
+        $class = $this->db->get()->result_array();
+        foreach($class as $classes){
+            $date = date('d-m-Y');
+            $this->db->where('expiry_date<',$date);
+            $this->db->update('institute_details',$data,array('id'=>$classes['id']));
+        }
+    }
     
 }
 ?>
