@@ -212,7 +212,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
         <div class="container">
             <div class="esd-banner-details wow fadeIn infinite">
                 <div class="row">
-                    <?php if(!empty($school_details->logo)){ ?>
+                    <?php if(file_exists(FCPATH.'laravel/public/'.$school_details->logo) && !empty($school_details->logo)){ ?>
                         <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>laravel/public/<?php echo $school_details->logo ?>" alt=""></div></div>
                     <?php }else{ ?>
                         <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div></div>
@@ -278,7 +278,11 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                     <div class="sd-ection-inner">
                         <div class="row">
                             <div class="col-md-3 about-info-img">
+                                <?php if(file_exists(FCPATH.'laravel/public/'.$about_img[0]['images']) && !empty($about_img)){ ?>
                                 <a data-fancybox="gallery" data-caption="" href="<?php echo base_url() ?>laravel/public/<?php echo $about_img[0]['images'] ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $about_img[0]['images'] ?>" class="sd-about-img" alt=""></a>
+                                <?php } else { ?> 
+                                <a data-fancybox="gallery" data-caption="" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt=""></a>
+                                <?php } ?>
                             </div>
                             <div class="col-md-9">
                                 <p><?php echo ucfirst($school_details->about); ?></p><br>
@@ -603,8 +607,12 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 <?php 
                                 foreach($school_activity->result() as $activity){ ?>
                                     <div class="col-md-3 school-activ-list">
+                                    <?php if(file_exists(FCPATH.'laravel/public/'.$activity->image) && !empty($activity->image)){ ?>
                                         <div class="school-activ-list-img"><a data-fancybox="gallery" data-caption="<?php echo ucfirst($activity->name) ?>" href="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>" alt=""></a></div>
-                                        <h6><?php echo ucfirst($activity->name) ?> </h6>
+                                        <?php }else{ ?>
+                                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt="">
+                                        <?php } ?>
+                                            <h6><?php echo ucfirst($activity->name) ?> </h6>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -618,7 +626,11 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             <?php foreach($facility->result() as $facility_data ){ ?>
                                 <div class="row school-facilities-list">
                                     <div class="col-md-3 sd-faci-img">
+                                    <?php if(file_exists(FCPATH.'laravel/public/'.$facility_data->facility) && !empty($facility_data->facility)){ ?>
                                         <a data-fancybox="gallery" data-caption="<?php echo ucfirst($facility_data->facility) ?>" href="<?php echo base_url() ?>laravel/public/<?php echo $facility_data->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $facility_data->image ?>" class="sd-faci-img" alt=""></a>
+                                        <?php }else{ ?>
+                                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt="">
+                                        <?php } ?>
                                     </div>
                                     <div class="col-md-9 sd-faci-detail">
                                         <h6><?php echo ucfirst($facility_data->facility) ?></h6>
@@ -858,7 +870,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 <figure>
                                     <div class="package-name">Premium</div>
                                     <div class="object-fit">
-                                        <?php if(!empty($similar->logo)){ ?>
+                                        <?php if(file_exists(FCPATH.'laravel/public/'.$similar->logo) && !empty($similar->logo)){ ?>
                                             <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100"  />
                                                 <?php } else { ?>
                                             <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $similar->aff ?> schools in <?php echo $city; ?>" />

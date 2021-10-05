@@ -132,7 +132,7 @@ $similar_school = $this->db->get();
         <div class="container">
             <div class="esd-banner-details wow fadeIn infinite">
                 <div class="row">
-                    <?php if(!empty($institute_det->logo)){ ?>
+                    <?php if(file_exists(FCPATH.'laravel/public/'.$institute_det->logo) && !empty($institute_det->logo)){ ?>
                         <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>laravel/public/<?php echo $institute_det->logo ?>" alt=""></div></div>
                     <?php }else{ ?>
                         <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div></div>
@@ -204,7 +204,11 @@ $similar_school = $this->db->get();
                         <div class="sd-ection-inner">
                             <div class="row">
                                 <div class="col-md-3 about-info-img">
+                                <?php if(file_exists(FCPATH.'laravel/public/'.$about_img_[0]['image']) && !empty($about_img_[0]['image'])){ ?>
                                     <a data-fancybox="gallery" data-caption="" href="<?php echo base_url() ?>laravel/public/<?php echo $about_img_[0]['image'] ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $about_img_[0]['image'] ?>" class="sd-about-img" alt=""></a>
+                                <?php }else { ?>
+                                    <a data-fancybox="gallery" data-caption="" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt=""></a>
+                                    <?php } ?>
                                 </div>
                                 <div class="col-md-9">
                                     <p><?php echo ucfirst($institute_dets->about); ?></p><br>
@@ -340,9 +344,13 @@ $similar_school = $this->db->get();
                             <div class="row">
                                 <?php foreach($gallery as $gallery_data){ ?>
                                     <div class="col-md-4">
+                                    <?php if(file_exists(FCPATH.'laravel/public/'.$gallery_data->image) && !empty($gallery_data->image)){ ?>
                                         <a data-fancybox="gallery" href="<?php echo base_url() ?>laravel/public/<?php echo $gallery_data->image ?>">   
                                             <img src="<?php echo base_url() ?>laravel/public/<?php echo $gallery_data->image ?>" alt="">
                                         </a>
+                                        <?php }else{ ?>
+                                        <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt="">
+                                            <?php } ?>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -356,7 +364,11 @@ $similar_school = $this->db->get();
                             <?php foreach($inst_categories as $category ){ ?>
                                 <div class="row school-facilities-list">
                                     <div class="col-md-3 sd-faci-img">
+                                    <?php if(file_exists(FCPATH.'laravel/public/'.$category->image) && !empty($category->image)){ ?>
                                         <a data-fancybox="gallery" data-caption="<?php echo ucfirst($category->program_name) ?>" href="<?php echo base_url() ?>laravel/public/<?php echo $category->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $category->image ?>" class="sd-faci-img" alt=""></a>
+                                    <?php }else{ ?>
+                                        <a data-fancybox="gallery" data-caption="" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt=""></a>
+                                        <?php } ?>
                                     </div>
                                     <div class="col-md-9 sd-faci-detail">
                                         <h6><?php echo ucfirst($category->program_name) ?></h6>
@@ -637,7 +649,7 @@ $similar_school = $this->db->get();
                                 <figure>
                                     <div class="package-name">Premium</div>
                                     <div class="object-fit">
-                                        <?php if(!empty($similar->logo)){ ?>
+                                        <?php if(file_exists(FCPATH.'laravel/public/'.$similar->logo) && !empty($similar->logo)){ ?>
                                             <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" />
                                                 <?php } else { ?>
                                             <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $type ?>  in <?php echo $yourcity; ?>" />

@@ -562,7 +562,7 @@ if ($aff_url == "dance-class") {
                                         <figure>
                                             <div class="package-name">Platinum</div>
                                             <div class="object-fit">
-                                                <?php if(isset($top->logo)){ ?>
+                                                <?php if( file_exists(FCPATH.'laravel/public/'.$top->logo) && !empty($top->logo)){ ?>
                                                 <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100"  />
                                                     <?php } else { ?>
                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default-single.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
@@ -636,7 +636,7 @@ if ($aff_url == "dance-class") {
                                         <figure>
                                             <div class="package-name">Premium</div>
                                             <div class="object-fit">
-                                                <?php if(isset($top['logo'])){ ?>
+                                                <?php if( file_exists(FCPATH.'laravel/public/'.$top['logo']) && !empty($top['logo'])){ ?>
                                                 <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100"  />
                                                     <?php } else { ?>
                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>" />
@@ -686,7 +686,7 @@ if ($aff_url == "dance-class") {
                                                 <div class="package-name">Trial</div>
                                             <?php } ?>
                                             <div class="object-fit">
-                                            <?php if(isset($spectrum['logo'])){ ?>
+                                            <?php if(file_exists(FCPATH.'laravel/public/'.$spectrum['logo']) && isset($spectrum['logo'])){ ?>
                                                 <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100">
                                             <?php }else{ ?>
                                                 <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">

@@ -4351,7 +4351,7 @@ class admin extends CI_Controller {
 
 		if(isset($_POST["length"])){
 
-            $column = array('','ur.name','sd.school_name','ci.city_name','sd.school_category_id','sd.paid','sd.created_at','sd.activated_at');
+            $column = array('','ur.name','sd.school_name','ci.city_name','sd.school_category_id','sd.paid','sd.created_at','sd.expiry_date');
             $input_arr['search_val'] = $input_data['search']['value'];
             $input_arr['order_column'] = $column[$input_data['order'][0]['column']];
             $input_arr['order_by'] = $input_data['order'][0]['dir'];
@@ -4360,7 +4360,7 @@ class admin extends CI_Controller {
 
             $where ='';
             $searchVal = trim($input_arr['search_val']);
-            $searchCol= array('ur.name','sd.school_name','sd.paid','sd.created_at');
+            $searchCol= array('ur.name','sd.school_name','ci.city_name','school_category_id','sd.paid','sd.created_at','sd.expiry_date');
             if($searchVal != null && $searchVal != ''){
                 $where .='(';
                 $i=0;
@@ -4436,7 +4436,7 @@ class admin extends CI_Controller {
                 if($school['expiry_status'] == 1){
                 $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
                 }
-                if($school['expiry_status'] == 0){
+                if($school['expiry_status'] != 1){
                 $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;</div>";
                 }
                 $row[] = $sno;
@@ -4514,7 +4514,7 @@ class admin extends CI_Controller {
 			
             $where ='';
             $searchVal = trim($input_arr['search_val']);
-		    $searchCol= array('ur.name','in.institute_name','in.paid','in.created_at');
+		    $searchCol= array('ur.name','in.institute_name','ci.city_name','in.position_id','in.paid','in.created_at','in.expiry_date');
             if($searchVal != null && $searchVal != ''){
                 $where ='';
                 $where .='(';

@@ -179,7 +179,7 @@
                                             <div class="package-name">Trial</div>
                                         <?php } ?>
                                         <div class="object-fit">
-                                            <?php if(!empty($school["logo"])){ ?>
+                                            <?php if(file_exists(FCPATH.'laravel/public/'.$school['logo']) && !empty($school["logo"])){ ?>
                                                 <img src="<?php echo base_url("laravel/public/".$school["logo"]); ?>">
                                             <?php }else{ ?>
                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $school['affiliation_name'] ?> in <?php echo $city; ?>" />
@@ -241,7 +241,7 @@
                                             <div class="package-name">Trial</div>
                                         <?php } ?>
                                         <div class="object-fit">
-                                            <?php if(!empty($class["logo"])){ ?>
+                                            <?php if(file_exists(FCPATH.'laravel/public/'.$class['logo']) && !empty($class["logo"])){ ?>
                                                 <img src="<?php echo base_url("laravel/public/".$class["logo"]); ?>"  alt="schools nearby">
                                             <?php }else{ ?>
                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best <?php echo $class['category_name'] ?> in <?php echo $city; ?>" />
