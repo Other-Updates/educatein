@@ -2856,16 +2856,25 @@ blue - 33317c
 	justify-content: center;
 	align-items: center;
 }
+.gallery a img {
+	width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
 .gallery img {
 	width: 100%;
-	border-radius: 6px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    object-fit: cover;
+    height: 100%;
 }
 .school-activ  .school-activ-list, .sd-faci-img  {
 	text-align: center;
 }
-.school-activ  .school-activ-list h6 {
+.school-activ .school-activ-list h6 {
 	font-size: 15px;
 	padding-top: 10px;
+	padding-bottom: 20px;
 }
 .school-activ  .school-activ-list img {
 	width: 100%;
@@ -2880,6 +2889,7 @@ blue - 33317c
 .sd-faci-img img {
 	width: 100%;
 	border-radius: 10px;
+	background: #9e9e9e;
 }
 .contact-info h3 {
 	font-size: 16px;
@@ -3260,4 +3270,8 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 }
 .home-search-widget .input-group>.form-control+.form-control {
 	margin-left: 0;
+}
+.top-school-widget .object-fit img {
+	height: 100%;
+    object-fit: cover;
 }
