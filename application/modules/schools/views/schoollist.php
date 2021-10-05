@@ -595,7 +595,7 @@ $allcity = $this->db->get()->result();
                                                         <figure>
                                                             <div class="package-name">Platinum</div>
                                                             <div class="object-fit">
-                                                                <?php if(isset($top->logo)){ ?>
+                                                                <?php if(file_exists(base_url('laravel/public/').$top->logo)){ ?>
                                                                 <img src="<?php echo base_url() ?>laravel/public/<?php echo $top->logo ?>" class="w-100" />
                                                                     <?php } else { ?>
                                                                 <img src="<?php echo base_url() ?>assets/front/images/list-default-single.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
@@ -655,7 +655,8 @@ $allcity = $this->db->get()->result();
                                             <figure>
                                                 <div class="package-name">Premium</div>
                                                 <div class="object-fit">
-                                                    <?php if(isset($top['logo'])){ ?>
+                                                    <?php //print_r(base_url('laravel/public/').$top['logo']); ?>
+                                                    <?php if(file_exists(base_url('laravel/public/').$top['logo']) || !empty($top['logo'])){ ?>
                                                     <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100" />
                                                         <?php } else { ?>
                                                     <img src="<?php echo base_url() ?>assets/front/images/list-default.png" class="w-100" alt="best kindergarten schools in <?php echo $city; ?>" />
@@ -695,7 +696,11 @@ $allcity = $this->db->get()->result();
                     <div class="row equal">
                         <?php foreach($school_spectrum as $spectrum){ ?>
                             <div class="col-md-3">
+                                <?php if($spectrum['school_category_id'] == 3){ ?>
                                 <div class="schoolist-inner spectrum">
+                                    <?php } if($spectrum['school_category_id'] == 4){ ?>
+                                <div class="schoolist-inner trial">
+                                        <?php } ?>
                                     <a href="<?php echo base_url() ?>list-of-best-<?php echo $aff_url ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['school_name']); ?>" target="_blank">
                                         <figure>
                                             <?php if($spectrum['school_category_id'] == 3){ ?>
@@ -704,7 +709,7 @@ $allcity = $this->db->get()->result();
                                                 <div class="package-name">Trial</div>
                                             <?php } ?>
                                             <div class="object-fit">
-                                            <?php if(isset($spectrum['logo'])){ ?>
+                                            <?php if(file_exists(base_url('laravel/public/').$spectrum['logo']) && ($spectrum['logo'] != '')){ ?>
                                                     <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100" >
                                                 <?php }else{ ?>
                                                     <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">

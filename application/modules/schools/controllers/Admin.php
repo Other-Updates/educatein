@@ -4398,6 +4398,31 @@ class admin extends CI_Controller {
                 $this->db->where($where);
             }
             $this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
+            $school_data_count = $this->db->get()->result_array();
+
+
+
+            $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.expiry_date');
+            $this->db->where('sd.deleted_at',NULL);
+            $this->db->from('school_details as sd');
+            if($input_data['type'] == 'approved'){
+                $this->db->where('sd.status',1);
+                // $this->db->where('sd.expiry_status',0);
+            }
+            if($input_data['type'] == 'hold'){
+                // $this->db->where('sd.expiry_status',1);
+                $this->db->where('sd.status',NULL);
+            }
+            if($input_data['type'] == 'reject'){
+                $this->db->where('sd.expiry_status',0);
+                $this->db->where('sd.status',2);
+            }
+            $this->db->join('user_register as ur', 'sd.user_id = ur.id', 'left');
+            $this->db->join('cities as ci','sd.city_id=ci.id','left');
+            if($searchVal != null && $searchVal != ''){
+                $this->db->where($where);
+            }
+            $this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
             if($input_arr['length'] != -1)
                 $this->db->limit($input_arr['length'],$input_arr['start']);
             $school_data = $this->db->get()->result_array();
@@ -4466,8 +4491,8 @@ class admin extends CI_Controller {
         // $school_data = $this->db->get()->result_array();
         $output = array(
             "draw" => $input_data['draw'],
-            "recordsTotal" => count($school_data),
-            "recordsFiltered" => count($school_data),
+            "recordsTotal" => count($school_data_count),
+            "recordsFiltered" => count($school_data_count),
             "data" => $data,
         );
         echo json_encode($output);exit;
@@ -4505,6 +4530,29 @@ class admin extends CI_Controller {
                 }
                 $where .=')';
             }
+
+            $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.expiry_date');
+            $this->db->where('in.deleted_at',NULL);
+            $this->db->from('institute_details as in');
+            if($input_data['type'] == 'approved'){
+                $this->db->where('in.status',1);
+                $this->db->where('in.expiry_status',0);
+            }
+            if($input_data['type'] == 'hold'){
+                // $this->db->where('in.expiry_status',1);
+                $this->db->where('in.status',NULL);
+            }
+            if($input_data['type'] == 'reject'){
+                $this->db->where('in.expiry_status',0);
+                $this->db->where('in.status',2);
+            }
+            $this->db->join('user_register as ur', 'in.user_id = ur.id', 'left');
+            $this->db->join('cities as ci','in.city_id=ci.id','left');
+            if($searchVal != null && $searchVal != ''){
+                $this->db->where($where);
+            }
+            $this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
+            $institute_data_count = $this->db->get()->result_array();
 
             $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.expiry_date');
             $this->db->where('in.deleted_at',NULL);
@@ -4603,8 +4651,8 @@ class admin extends CI_Controller {
         // $school_data = $this->db->get()->result_array();
         $output = array(
             "draw" => $input_data['draw'],
-            "recordsTotal" => count($institute_data),
-            "recordsFiltered" => count($institute_data),
+            "recordsTotal" => count($institute_data_count),
+            "recordsFiltered" => count($institute_data_count),
             "data" => $data,
         );
         echo json_encode($output);exit;
