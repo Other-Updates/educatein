@@ -580,9 +580,13 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             <div class="row">
                                 <?php foreach($gallery as $gallery_data){ ?>
                                     <div class="col-md-4">
-                                        <a data-fancybox="gallery" href="<?php echo base_url() ?>laravel/public/<?php echo $gallery_data->images ?>">   
-                                            <img src="<?php echo base_url() ?>laravel/public/<?php echo $gallery_data->images ?>" alt="">
-                                        </a>
+                                        <?php if(file_exists(FCPATH.'laravel/public/'.$gallery_data->images) && !empty($gallery_data->images)){ ?>
+                                            <a data-fancybox="gallery" href="<?php echo base_url() ?>laravel/public/<?php echo $gallery_data->images ?>">   
+                                                <img src="<?php echo base_url() ?>laravel/public/<?php echo $gallery_data->images ?>" alt="">
+                                            </a>
+                                            <?php }else{ ?>
+                                            <a data-fancybox="gallery" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></a>  
+                                            <?php } ?> 
                                     </div>
                                 <?php } ?>
                                 <!-- <div class="col-md-4">
@@ -599,7 +603,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 <?php } ?>
-                <?php if(isset($school_activity)){ ?>
+                <?php if(!empty($school_activity)){ ?>
                     <div id="school-activ" class="sd-inner-main school-activ wow slideInLeft">
                         <div class="sd-ection-tit">School Activities</div>
                         <div class="sd-ection-inner">
@@ -610,7 +614,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <?php if(file_exists(FCPATH.'laravel/public/'.$activity->image) && !empty($activity->image)){ ?>
                                         <div class="school-activ-list-img"><a data-fancybox="gallery" data-caption="<?php echo ucfirst($activity->name) ?>" href="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $activity->image ?>" alt=""></a></div>
                                         <?php }else{ ?>
-                                            <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt="">
+                                            <div class="school-activ-list-img"><a data-fancybox="gallery" data-caption="<?php echo ucfirst($activity->name) ?>" href="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg"  alt=""></a></div>
                                         <?php } ?>
                                             <h6><?php echo ucfirst($activity->name) ?> </h6>
                                     </div>
@@ -619,14 +623,14 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 <?php } ?>
-                <?php if(isset($facility)){ ?>
+                <?php if(!empty($facility)){ ?>
                     <div id="school-facilities" class="sd-inner-main school-facilities wow slideInLeft">
                         <div class="sd-ection-tit">School Facilities</div>
                         <div class="sd-ection-inner">
                             <?php foreach($facility->result() as $facility_data ){ ?>
                                 <div class="row school-facilities-list">
                                     <div class="col-md-3 sd-faci-img">
-                                    <?php if(file_exists(FCPATH.'laravel/public/'.$facility_data->facility) && !empty($facility_data->facility)){ ?>
+                                    <?php if(file_exists(FCPATH.'laravel/public/'.$facility_data->image) && !empty($facility_data->image)){ ?>
                                         <a data-fancybox="gallery" data-caption="<?php echo ucfirst($facility_data->facility) ?>" href="<?php echo base_url() ?>laravel/public/<?php echo $facility_data->image ?>"><img src="<?php echo base_url() ?>laravel/public/<?php echo $facility_data->image ?>" class="sd-faci-img" alt=""></a>
                                         <?php }else{ ?>
                                             <img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" class="sd-about-img" alt="">

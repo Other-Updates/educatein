@@ -132,8 +132,8 @@ $similar_school = $this->db->get();
         <div class="container">
             <div class="esd-banner-details wow fadeIn infinite">
                 <div class="row">
-                    <?php if(file_exists(FCPATH.'laravel/public/'.$institute_det->logo) && !empty($institute_det->logo)){ ?>
-                        <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>laravel/public/<?php echo $institute_det->logo ?>" alt=""></div></div>
+                    <?php if(file_exists(FCPATH.'laravel/public/'.$institute_dets->logo) && !empty($institute_dets->logo)){ ?>
+                        <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>laravel/public/<?php echo $institute_dets->logo ?>" alt=""></div></div>
                     <?php }else{ ?>
                         <div class="col-md-3 esd-banner-left"><div class="esd-banner-details-img"><img src="<?php echo base_url() ?>assets/front/images/kinder_1.jpg" alt=""></div></div>
                     <?php } ?>
