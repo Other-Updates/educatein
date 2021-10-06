@@ -23,6 +23,7 @@ class Schools extends CI_Controller {
         parent::__construct();
         $this->output->set_template('simple');
         $this->load->library("pagination");
+        $page_count = 12;
 
         $this->_init();
     }
@@ -118,7 +119,7 @@ class Schools extends CI_Controller {
         if ($this->input->get('search')) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
         $config["base_url"] = base_url() . $link;
         $config["total_rows"] = $count;
-        $config["per_page"] = 12;
+        $config["per_page"] = $this->page_count;
         $config["uri_segment"] = 2;
         $config['first_url'] = $config["base_url"].'?'.http_build_query($_GET);
         // $config['use_page_numbers'] = TRUE;

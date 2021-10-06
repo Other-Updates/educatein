@@ -762,7 +762,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                     <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/27.png" alt="Educatein"></div>
                                     <div class="sd-addit-value">
                                         <h6>Website</h6>
-                                    <?php if(substr($school_details->website_url, 0, 5) === "https"){  ?>
+                                    <?php if(substr($school_details->website_url, 0, 4) === "http"){  ?>
                                         <a href="<?php echo $school_details->website_url ?>"><h3><?php echo $school_details->website_url ?></h3></a>
                                     <?php }else{ ?>
                                         <a href="https://<?php echo $school_details->website_url ?>"><h3><?php echo $school_details->website_url ?></h3></a>
@@ -771,7 +771,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                                 </div>
                             </div>
                             <div class="col-md-6">
-                            <?php   if(substr($school_details->map_url, 0, 5) === "https"){  ?>
+                            <?php   if(substr($school_details->map_url, 0, 4) === "http"){  ?>
                                         <iframe src="<?php echo $school_details->map_url ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                             <?php   }else{ 
                                     echo $school_details->map_url; 

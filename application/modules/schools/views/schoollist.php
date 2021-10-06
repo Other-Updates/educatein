@@ -655,7 +655,6 @@ $allcity = $this->db->get()->result();
                                             <figure>
                                                 <div class="package-name">Premium</div>
                                                 <div class="object-fit">
-                                                    <?php //print_r(base_url('laravel/public/').$top['logo']); ?>
                                                     <?php if(file_exists(FCPATH.'laravel/public/'.$top['logo']) && !empty($top['logo'])){ ?>
                                                     <img src="<?php echo base_url() ?>laravel/public/<?php echo $top['logo'] ?>" class="w-100" />
                                                         <?php } else { ?>
@@ -709,7 +708,7 @@ $allcity = $this->db->get()->result();
                                                 <div class="package-name">Trial</div>
                                             <?php } ?>
                                             <div class="object-fit">
-                                                <?php if(file_exists(FCPATH.'laravel/public/'.$spectrum['logo']) && !empty($spectrum['logo'])){ ?>
+                                            <?php if(file_exists(FCPATH.'laravel/public/'.$spectrum['logo']) && !empty($spectrum['logo'])){ ?>
                                                     <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100" >
                                                 <?php }else{ ?>
                                                     <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best kindergarten schools in nilgiris">
