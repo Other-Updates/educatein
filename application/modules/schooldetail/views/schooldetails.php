@@ -162,7 +162,6 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
     $this->db->join('cities as ci','sd.city_id=ci.id','left');
     $this->db->order_by("sd.id", "desc");
-    $this->db->limit(6);
     $similar_school = $this->db->get()->result();
 
     $this->db->select('*');
@@ -242,7 +241,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             </div>
                             <div class="clearfix"></div>
                             <div class="esd-banner-details-btn">
-                                <button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
+                                <a href=""><button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
                                 <a href="tel:"<?php echo $school_details->mobile ?>><button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button></a>
                                 <?php if(!empty($school_details->ad)){ ?>
                                     <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
@@ -261,11 +260,12 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
     <div class="container">
         <ul id="sd-menu" class="sd-menu-list wow bounce">
             <li class="sd-menu-item"><a href="#about-info">About Info</a></li>
-            <li class="sd-menu-item"><a href="#addit-info">Additional Info</a></li>
+            <?php if(!empty($founded) || !empty($special) || !empty($events) || !empty($achievements) || !empty($branches) || !empty($academic) || !empty($activity) || !empty($school_details->boys) || !empty($school_details->students) || !empty($school_details->teachers) || !empty($school_details->girls) || !empty($language) || !empty($school_details->our_mission) || !empty($school_details->our_vision) || !empty($school_details->our_moto)){ ?>
+            <li class="sd-menu-item"><a href="#addit-info">Additional Info</a></li><?php } ?>
             <?php if(!empty($selectedActivity)){ ?><li class="sd-menu-item"><a href="#special-info">Special Info</a></li><?php } ?>
             <?php if(!empty($gallery)){ ?><li class="sd-menu-item"><a href="#sd-gallery">Gallery</a></li><?php } ?>
-            <?php if(!empty($school_activity)){ ?><li class="sd-menu-item"><a href="#school-activ">Activities</a></li><?php } ?>
-            <?php if(!empty($facility)){ ?><li class="sd-menu-item"><a href="#school-facilities">Facilities</a></li><?php } ?>
+            <?php if(!empty($school_activity->result())){ ?><li class="sd-menu-item"><a href="#school-activ">Activities</a></li><?php } ?>
+            <?php if(!empty($facility->result())){ ?><li class="sd-menu-item"><a href="#school-facilities">Facilities</a></li><?php } ?>
             <li class="sd-menu-item"><a href="#contact-info">Contact</a></li>
             <?php if(!empty($school_details->facebook) || !empty($school_details->twitter) || !empty($school_details->instagram) || !empty($school_details->linkedin) || !empty($school_details->pinterest)){  ?>
             <li class="sd-menu-item"><a href="#social-links">Social Links</a></li>
@@ -290,179 +290,180 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 </div>
-
-                <div id="addit-info" class="sd-inner-main addit-info section wow slideInLeft">
-                    <div class="sd-ection-tit">Additional Info</div>
-                    <div class="sd-ection-inner">
-                        <div class="row">
-                            <?php if(!empty($founded)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/1.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Founded</h6>
-                                            <h3><?php echo $founded[0]['content'] ?></h3>
+                <?php if(!empty($founded) || !empty($special) || !empty($events) || !empty($achievements) || !empty($branches) || !empty($academic) || !empty($activity) || !empty($school_details->boys) || !empty($school_details->students) || !empty($school_details->teachers) || !empty($school_details->girls) || !empty($language) || !empty($school_details->our_mission) || !empty($school_details->our_vision) || !empty($school_details->our_moto)){ ?>
+                    <div id="addit-info" class="sd-inner-main addit-info section wow slideInLeft">
+                        <div class="sd-ection-tit">Additional Info</div>
+                        <div class="sd-ection-inner">
+                            <div class="row">
+                                <?php if(!empty($founded)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/1.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Founded</h6>
+                                                <h3><?php echo $founded[0]['content'] ?></h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($special)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/2.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Special</h6>
-                                            <h3><?php echo ucfirst($special[0]['content']) ?></h3>
+                                <?php } ?>
+                                <?php if(!empty($special)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/2.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Special</h6>
+                                                <h3><?php echo ucfirst($special[0]['content']) ?></h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($special)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/3.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Events</h6>
-                                            <h3><?php echo ucfirst($events[0]['content']) ?> </h3>
+                                <?php } ?>
+                                <?php if(!empty($events)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/3.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Events</h6>
+                                                <h3><?php echo ucfirst($events[0]['content']) ?> </h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($achievements)){ ?>
+                                <?php } ?>
+                                <?php if(!empty($achievements)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/4.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Achievements</h6>
+                                                <h3><?php echo ucfirst($achievements[0]['content']) ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                <?php if(!empty($branches)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/5.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Branches</h6>
+                                                <h3><?php echo ucfirst($branches[0]['content']) ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <?php if(!empty($academic)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/6.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Academic History</h6>
+                                                <h3><?php echo ucfirst($academic[0]['content']) ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <?php if(!empty($activity)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/7.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Activity</h6>
+                                                <h3><?php echo ucfirst($activity[0]['content']) ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <?php if(!empty($school_details->boys)){ ?>
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/8.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>No of Boys</h6>
+                                                <h3><?php echo $school_details->boys ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>       
+                                <?php } ?>      
+                                <?php if(!empty($school_details->students)){ ?>               
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/11.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>No.of Students</h6>
+                                                <h3><?php echo $school_details->students ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <?php if(!empty($school_details->teachers)){ ?>               
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/12.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>No.of Teachers</h6>
+                                                <h3><?php echo $school_details->teachers ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <?php if(!empty($language)){ ?>               
                                 <div class="col-md-6">
                                     <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/4.png" alt="Educatein"></div>
+                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/13.png" alt="Educatein"></div>
                                         <div class="sd-addit-value">
-                                            <h6>Achievements</h6>
-                                            <h3><?php echo ucfirst($achievements[0]['content']) ?></h3>
+                                            <h6>Languages</h6>
+                                            <h3><?php echo ucfirst($language[0]['content']) ?></h3>
                                         </div>
                                     </div>
                                 </div>
                                 <?php } ?>
-                            <?php if(!empty($branches)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/5.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Branches</h6>
-                                            <h3><?php echo ucfirst($branches[0]['content']) ?></h3>
+                                <?php if(!empty($school_details->girls)){ ?>               
+                                    <div class="col-md-6">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/14.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>No of Girls</h6>
+                                                <h3><?php echo $school_details->girls ?></h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($academic)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/6.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Academic History</h6>
-                                            <h3><?php echo ucfirst($academic[0]['content']) ?></h3>
+                                <?php } ?>
+                                <?php if(!empty($school_details->our_vision)){ ?>               
+                                    <div class="col-md-12">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/9.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Vision</h6>
+                                                <h3><?php echo ucfirst($school_details->our_vision) ?></h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($activity)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/7.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Activity</h6>
-                                            <h3><?php echo ucfirst($activity[0]['content']) ?></h3>
+                                <?php } ?>
+                                <?php if(!empty($school_details->our_mission)){ ?>               
+                                    <div class="col-md-12">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/10.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Mission</h6>
+                                                <h3><?php echo ucfirst($school_details->our_mission) ?></h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($school_details->boys)){ ?>
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/8.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>No of Boys</h6>
-                                            <h3><?php echo $school_details->boys ?></h3>
+                                <?php } ?>
+                                <?php if(!empty($school_details->our_motto)){ ?>               
+                                    <div class="col-md-12">
+                                        <div class="sd-addit-icon-value">
+                                            <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/15.png" alt="Educatein"></div>
+                                            <div class="sd-addit-value">
+                                                <h6>Motto</h6>
+                                                <h3><?php echo ucfirst($school_details->our_motto) ?></h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>       
-                            <?php } ?>      
-                            <?php if(!empty($school_details->students)){ ?>               
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/11.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>No.of Students</h6>
-                                            <h3><?php echo $school_details->students ?></h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($school_details->teachers)){ ?>               
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/12.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>No.of Teachers</h6>
-                                            <h3><?php echo $school_details->teachers ?></h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($language)){ ?>               
-                            <div class="col-md-6">
-                                <div class="sd-addit-icon-value">
-                                    <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/13.png" alt="Educatein"></div>
-                                    <div class="sd-addit-value">
-                                        <h6>Languages</h6>
-                                        <h3><?php echo ucfirst($language[0]['content']) ?></h3>
-                                    </div>
-                                </div>
+                                <?php } ?>
                             </div>
-                            <?php } ?>
-                            <?php if(!empty($school_details->girls)){ ?>               
-                                <div class="col-md-6">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/14.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>No of Girls</h6>
-                                            <h3><?php echo $school_details->girls ?></h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($school_details->our_vision)){ ?>               
-                                <div class="col-md-12">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/9.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Vision</h6>
-                                            <h3><?php echo ucfirst($school_details->our_vision) ?></h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($school_details->our_mission)){ ?>               
-                                <div class="col-md-12">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/10.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Mission</h6>
-                                            <h3><?php echo ucfirst($school_details->our_mission) ?></h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <?php if(!empty($school_details->our_motto)){ ?>               
-                                <div class="col-md-12">
-                                    <div class="sd-addit-icon-value">
-                                        <div class="sd-addit-icon"><img src="<?php echo base_url() ?>assets/front/images/icons/sd/15.png" alt="Educatein"></div>
-                                        <div class="sd-addit-value">
-                                            <h6>Motto</h6>
-                                            <h3><?php echo ucfirst($school_details->our_motto) ?></h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
                         </div>
                     </div>
-                </div>
+                <?php } ?>
 
                 <?php if(!empty($selectedActivity)){ ?>
                     <div id="special-info" class="sd-inner-main special-info section wow slideInLeft">
@@ -603,7 +604,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 <?php } ?>
-                <?php if(!empty($school_activity)){ ?>
+                <?php if(!empty($school_activity->result())){ ?>
                     <div id="school-activ" class="sd-inner-main school-activ wow slideInLeft">
                         <div class="sd-ection-tit">School Activities</div>
                         <div class="sd-ection-inner">
@@ -623,7 +624,7 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 <?php } ?>
-                <?php if(!empty($facility)){ ?>
+                <?php if(!empty($facility->result())){ ?>
                     <div id="school-facilities" class="sd-inner-main school-facilities wow slideInLeft">
                         <div class="sd-ection-tit">School Facilities</div>
                         <div class="sd-ection-inner">

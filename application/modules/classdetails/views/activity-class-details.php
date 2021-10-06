@@ -84,7 +84,6 @@ $this->db->from('institute_details as ind');
 $this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
 $this->db->join('areas as ar','ind.area_id=ar.id','left');
 $this->db->join('cities as ci','ind.city_id=ci.id','left');
-$this->db->limit(6);
 $similar_school = $this->db->get();
 ?>
 <div class="breadrumb-new mnone">
@@ -185,10 +184,10 @@ $similar_school = $this->db->get();
             <?php if(!empty($gallery)){ ?>
             <li class="sd-menu-item"><a href="#sd-gallery">Gallery</a></li>
             <?php } ?>
-            <?php if(isset($inst_categories)){ ?>
+            <?php if(!empty($inst_categories)){ ?>
             <li class="sd-menu-item"><a href="#school-facilities">Institute Categories</a></li>
             <?php } ?>
-            <?php if(isset($news_heading)){ ?>
+            <?php if(!empty($news_heading)){ ?>
             <li class="sd-menu-item"><a href="#special-info">News Heading</a></li>
             <?php } ?>
             <li class="sd-menu-item"><a href="#contact-info">Contact</a></li>
