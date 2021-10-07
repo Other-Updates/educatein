@@ -16,15 +16,20 @@ class Plandetail extends CI_Controller {
         $this->load->js('assets/front/js/jquery.stickit.js');
     }
 
-    public function index() {          
-        $data["user_id"] = $user_id = $this->session->userdata('user_id');
-        $this->db->select('*');
-        $this->db->from('user_register');
-        $this->db->where("id", $user_id);
-        $user = $this->db->get()->row();
-       
-        $data["username"] = $user->name;
-        $this->load->view('plan_details',$data);
+    public function index() {       
+        if (empty($this->session->userdata('user_id'))) {
+            $this->session->unset_userdata('school_logged_in');
+            redirect(base_url());
+        }else{    
+            $data["user_id"] = $user_id = $this->session->userdata('user_id');
+            $this->db->select('*');
+            $this->db->from('user_register');
+            $this->db->where("id", $user_id);
+            $user = $this->db->get()->row();
+        
+            $data["username"] = $user->name;
+            $this->load->view('plan_details',$data);
+        }
     }
 
     public function gallery() {

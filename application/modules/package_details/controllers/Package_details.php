@@ -14,9 +14,14 @@ class Package_details extends CI_Controller {
 
     }
 
-    public function index() {           
+    public function index() {   
+      if (empty($this->session->userdata('user_id'))) {
+        $this->session->unset_userdata('school_logged_in');
+        redirect(base_url());
+    }else{        
       $this->load->view('package-details');
     }
+  }
 
 }
 

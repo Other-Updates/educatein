@@ -321,7 +321,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="e.g +91 9876543210" >
+                            <input type="number" class="form-control" id="phone" name="phone" placeholder="e.g +91 9876543210" >
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">

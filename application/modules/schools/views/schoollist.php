@@ -621,7 +621,7 @@ $allcity = $this->db->get()->result();
                                                 </div>
                                             <!-- </div> -->
                                         </div>
-                    <?php
+                        <?php
                                         $delay++;
                                         $topcount++;
                                     }

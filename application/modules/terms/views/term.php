@@ -133,7 +133,7 @@
         <ul class="list-inline py-3 mab-30">
             <li class="list-inline-item"><a href="<?php echo base_url() ?>"><b>Home</b></a></li>
             <li class="list-inline-item">/</li>
-            <li class="list-inline-item"><b>Privacy Policy</b></li>
+            <li class="list-inline-item"><b>Terms And Conditions</b></li>
         </ul>
     </div>
 </div>

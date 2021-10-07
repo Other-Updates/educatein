@@ -515,15 +515,5 @@ class Welcome extends CI_Controller {
             echo json_encode(array('status' => 'error', "message" => "No data with your location"));
             exit;
         }
-        // foreach($city as $cityname){
-        //     if($cityname['city_name'] = $current_city){
-        //         $this->session->set_userdata('search_city',$current_city);
-        //         echo json_encode(array('status' => 'success'));
-        //         exit;
-        //     }else{
-        //         echo json_encode(array('status' => 'error', "message" => "No data with your location"));
-        //         exit;
-        //     }
-        // }
     }
 }
