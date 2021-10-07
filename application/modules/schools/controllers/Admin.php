@@ -1486,6 +1486,7 @@ class admin extends CI_Controller {
             'address' => $_POST['address'],
             'city_id' => $yourcity_id,
             'area_id' => $area_id,
+            'school_category_id' => $_POST['school_category'],
             'affiliation_id' => $schoolboard_id,
             'schooltype_id' => $level_id,
             'about' => $_POST['description'],
@@ -2425,7 +2426,7 @@ class admin extends CI_Controller {
         }
         $schoolupdate = array(
             'category_id' => $category_id,
-            // 'position_id' => 1,
+            'position_id' => $_POST['position'],
             'institute_name' => $_POST['institutename'],
             'slug' => $_POST['institutename'],
             'mobile' => $_POST['phone'],
@@ -2835,7 +2836,6 @@ class admin extends CI_Controller {
         }
         //insert school
         if($_POST['category'] == 'school'){
-
             $school['schoolname'] = $_POST['schoolname'];
             $school['schoolboard'] = $_POST['schoolboard'];
             $school['city'] = $_POST['school_city'];
@@ -2993,10 +2993,11 @@ class admin extends CI_Controller {
             } else {
                 $customRadio = NULL;
             }
-            if(isset($_POST['school_status']) == 1){
+            if($_POST['school_status'] == 1){
                 $status = 1;
                 $act_date = date('Y-m-d H:i:s');
-            }else{
+            }
+            if($_POST['school_status'] == 0){
                 $status = null;
                 $act_date = null;
             }
@@ -3018,7 +3019,7 @@ class admin extends CI_Controller {
                 'affiliation_id' => $schoolboard_id,
                 'schooltype_id' => $level_id,
                 'school_category_id' => $_POST['school_category'],
-                'status' => $_POST['school_status'],
+                'status' => $status,
                 'about' => $school['about'],
                 'website_url' => $_POST['school_website'],
                 'our_mission' => $_POST['our_mission'],
@@ -3045,6 +3046,7 @@ class admin extends CI_Controller {
                 'is_active' => 1,
                 'valitity' => $validity,
             );
+            echo "<pre>";print_r($schoolinsert);exit;
             $this->db->insert('school_details', $schoolinsert);
 
             $this->db->select('*')->where('slug =', $school['schoolname']);
@@ -3901,10 +3903,11 @@ class admin extends CI_Controller {
             }
 
            
-            if(isset($_POST['status']) == 1){
+            if($_POST['status'] == 1){
                 $status = 1;
                 $act_date = date('Y-m-d H:i:s');
-            }else{
+            }
+            if($_POST['status'] == 0){
                 $status = null;
                 $act_date = null;
             }
@@ -4347,7 +4350,6 @@ class admin extends CI_Controller {
     function school_datatable($is_total_count = 0, $is_count = 0){
         $data = $input_arr = array();
 		$input_data = $this->input->post();
-        
 
 		if(isset($_POST["length"])){
 
@@ -4382,10 +4384,8 @@ class admin extends CI_Controller {
             $this->db->from('school_details as sd');
             if($input_data['type'] == 'approved'){
                 $this->db->where('sd.status',1);
-                // $this->db->where('sd.expiry_status',0);
             }
             if($input_data['type'] == 'hold'){
-                // $this->db->where('sd.expiry_status',1);
                 $this->db->where('sd.status',NULL);
             }
             if($input_data['type'] == 'reject'){
@@ -4402,7 +4402,7 @@ class admin extends CI_Controller {
 
 
 
-            $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.expiry_date');
+            $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.expiry_date,sd.expiry_status');
             $this->db->where('sd.deleted_at',NULL);
             $this->db->from('school_details as sd');
             if($input_data['type'] == 'approved'){
@@ -4433,12 +4433,13 @@ class admin extends CI_Controller {
 
                 $edit =  "<div class='btn-wid'><a title='Edit' href='". base_url("schools/admin/school_edit?id=". base64_encode($school["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
                 $delete = "<a title='Delete' href='' delete_id='".base64_encode($school["id"])."' class='delete btn btn-outline-danger delete btn-sm' id='del_btn'><i class='bi bi-trash'></i></a>";
-                if($school['expiry_status'] == 1){
-                $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
-                }
-                if($school['expiry_status'] != 1){
-                $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;</div>";
-                }
+                // if($school['expiry_status'] == 1){
+                $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a>";
+                // }
+                // if($school['expiry_status'] != 1){
+                // $view = "<a title='View' href='". base_url("admin/schools/view_school?id=". base64_encode($school["id"]))."'  class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;</div>";
+                // }
+                $expiry = "<a title='Expired' href='". base_url("admin/schools/school_edit?id=". base64_encode($school["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
                 $row[] = $sno;
                 $row[] = ucfirst($school['user']);
                 $row[] = ucfirst($school['school_name']);
@@ -4452,20 +4453,16 @@ class admin extends CI_Controller {
                 $row[] = $school['paid'];
                 $row[] = date('d-m-Y',strtotime($school['created_at']));
                 
-                // if($school['status'] == 1){$row[] = "Approved";}
-                // else if($school['status'] == 2){$row[] = "Rejected";}
-                // else { $row[] = "Waiting for validation";}
-
-                // if($school['status'] == 1){
                     if(!empty($school['expiry_date'])){
                     $row[] = $school['expiry_date'];
                     }
                 else{
                     $row[] = "-";
                 }
-            // }
-                $row[] = $edit . '&nbsp;&nbsp;' . $delete . '&nbsp;&nbsp;' . $view;
-
+                $row[] = $edit . '&nbsp;&nbsp;' . $delete . '&nbsp;&nbsp;' . $view.'&nbsp;&nbsp;' .(($school['expiry_status'] == 1)?$expiry:'');
+                // if($school['expiry_status'] == 1){
+                //     $row[] = $edit . '&nbsp;&nbsp;' . $delete . '&nbsp;&nbsp;' . $view. '&nbsp;&nbsp;' . $expiry;
+                // }
                 $data[] = $row;
                 $sno++;
             }
@@ -4488,7 +4485,6 @@ class admin extends CI_Controller {
 		//     $this->db->limit($input_arr['length'],$input_arr['start']);
 		$query = $this->db->get();
 
-        // $school_data = $this->db->get()->result_array();
         $output = array(
             "draw" => $input_data['draw'],
             "recordsTotal" => count($school_data_count),
@@ -4539,7 +4535,6 @@ class admin extends CI_Controller {
                 $this->db->where('in.expiry_status',0);
             }
             if($input_data['type'] == 'hold'){
-                // $this->db->where('in.expiry_status',1);
                 $this->db->where('in.status',NULL);
             }
             if($input_data['type'] == 'reject'){
@@ -4554,7 +4549,7 @@ class admin extends CI_Controller {
             $this->db->order_by($input_arr['order_column'],$input_arr['order_by']);
             $institute_data_count = $this->db->get()->result_array();
 
-            $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.expiry_date');
+            $this->db->select('in.id,in.institute_name,ci.city_name,in.created_at,ur.name as user,in.status,in.paid,in.position_id,in.expiry_date,in.expiry_status');
             $this->db->where('in.deleted_at',NULL);
             $this->db->from('institute_details as in');
             if($input_data['type'] == 'approved'){
@@ -4585,12 +4580,14 @@ class admin extends CI_Controller {
 
                 $edit = "<div class='btn-wid'><a title='Edit' href='". base_url("admin/schools/institute_edit?id=". base64_encode($institute["id"]))."' class='btn btn-outline-info btn-sm'><i class='bi bi-pencil'></i></a>";
                 $delete = "<a title='Delete' href='' delete_id='".base64_encode($institute["id"])."' class=' btn btn-outline-danger btn-sm delete'><i class='bi bi-trash'></i></a>";
-                if($institute['expiry_status'] == 1){
-                    $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
-                }
-                if($institute['expiry_status'] != 1){
-                    $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a></div>";
-                }
+                // if($institute['expiry_status'] == 1){
+                //     $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a> &nbsp;<a title='Expired' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
+                // }
+                // if($institute['expiry_status'] != 1){
+                $view = "<a title='View' href='". base_url("admin/schools/view_activityclass?id=". base64_encode($institute["id"]))."'   class='btn btn-outline-dark btn-sm'><i class='bi bi-eye'></i></a>";
+                // }
+                $expiry = "<a title='Expired' href='". base_url("admin/schools/institute_edit?id=". base64_encode($institute["id"]))."'  class='btn btn-danger btn-sm'><i class='bi bi-exclamation-triangle-fill'></i></a></div>";
+
                 $row[] = $sno;
                 $row[] = ucfirst($institute['user']);
                 $row[] = ucfirst($institute['institute_name']);
@@ -4624,7 +4621,7 @@ class admin extends CI_Controller {
                 }else{
                     $row[] = "-";
                 }
-                $row[] = $edit . '&nbsp;&nbsp;' . $delete . '&nbsp;&nbsp;' . $view;
+                $row[] = $edit . '&nbsp;&nbsp;' . $delete . '&nbsp;&nbsp;' . $view. '&nbsp;&nbsp;'. (($institute['expiry_status'] == 1)?$expiry:'');
 
                 $data[] = $row;
                 $sno++;
@@ -4662,13 +4659,14 @@ class admin extends CI_Controller {
 
     function expire_plan(){
         $data = array(
-            'expiry_status' => 1
+            'expiry_status' => 1,
+            'status' =>  NULL,
         );
         $this->db->select('*');
         $this->db->from('school_details');
         $school = $this->db->get()->result_array();
         foreach($school as $schools){
-            $date = date('d-m-Y');
+            $date = date('Y-m-d');
             $this->db->where('expiry_date<',$date);
             $this->db->update('school_details',$data,array('id'=>$schools['id']));
         }
@@ -4676,7 +4674,7 @@ class admin extends CI_Controller {
         $this->db->from('institute_details');
         $class = $this->db->get()->result_array();
         foreach($class as $classes){
-            $date = date('d-m-Y');
+            $date = date('Y-m-d');
             $this->db->where('expiry_date<',$date);
             $this->db->update('institute_details',$data,array('id'=>$classes['id']));
         }

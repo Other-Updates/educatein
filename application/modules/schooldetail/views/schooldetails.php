@@ -464,7 +464,6 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                         </div>
                     </div>
                 <?php } ?>
-
                 <?php if(!empty($selectedActivity)){ ?>
                     <div id="special-info" class="sd-inner-main special-info section wow slideInLeft">
                         <div class="sd-ection-tit">Special Info</div>

@@ -265,9 +265,9 @@ if($uccity == "Enquiry" || $uccity == "Otp")
     
     <!-- Feedback-form -->
   	<div class="feedback-form shadow-lg">
-		<div class="feedback-img">
+		<!-- <div class="feedback-img">
 			<img src="<?php echo base_url() ?>images/feed.png" class="toggle" alt="feedback">	
-		</div>
+		</div> -->
 
  		<div class="feedback-head">
  			<div class="media mb-2">
