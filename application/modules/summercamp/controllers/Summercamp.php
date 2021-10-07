@@ -99,7 +99,7 @@ class Summercamp extends CI_Controller {
   	}
 
 	  public function search_activity_class(){
-		$where = "ind.is_active=1 AND ind.status=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+		$where = "ind.is_active=1 AND ind.status=1 AND ind.expiry_status!=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
         $this->db->select('institute_name');
 		$this->db->where($where);
         if(!empty($this->session->userdata('city_id')))

@@ -135,6 +135,7 @@ $uccity = ucfirst($yourcity);
                                 ?>
                                 <div class="col-12 col-md-4"><div class="city-list"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="lnr lnr-map-marker"></i> <?php echo $allcitys->city_name; ?></a></div></div>                               
                             <?php } ?> 
+                            <button type="button" class="btn" id="get_location">Get nearby location</button>
                         </div>
                     </div> 
                 </div>
@@ -168,7 +169,7 @@ $uccity = ucfirst($yourcity);
                                                         $lowercity = strtolower($allcitys->city_name);
                                                         ?>
 
-                                                        <li class="list-inline-item"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
+                                                        <li class="list-inline-item nearby_location"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="fa fa-angle-right"></i> <?php echo $allcitys->city_name; ?></a></li>
                                                     <?php } ?>
                                                 </ul>
                                             </div><!-- /dropdown-menu -->
@@ -784,7 +785,30 @@ $('body').on('keyup','.search_filter',function(e){
         $(this).removeClass('search-err');
     }
 });
-
+$('#get_location').on('click',function(){
+    $.ajax({
+        url: "https://geolocation-db.com/jsonp",
+        jsonpCallback: "callback",
+        dataType: "jsonp",
+        success: function(location) {
+             var city = location.city; 
+            $.ajax({
+                type: "post",
+                url: "<?php echo base_url() ?>welcome/get_location",
+                data: {city:city},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if(data.status == "success"){
+                        window.location.reload();
+                    }
+                    if(data.status == "error") {
+                            sweetAlert("", data.message);
+                    }
+                }
+            });
+        }
+    });
+})
 
 
 
@@ -792,6 +816,7 @@ $('body').on('keyup','.search_filter',function(e){
 </script>
 <!-- <script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>   -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </script> 
 <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script> -->
 <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->

@@ -481,7 +481,7 @@ class Welcome extends CI_Controller {
     }
 
     function search_school(){
-        $where = "sd.is_active=1 AND sd.status=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
+        $where = "sd.is_active=1 AND sd.status=1 AND sd.expiry_status!=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
         $this->db->select('sd.school_name');
         $this->db->where($where);
         if(!empty($this->session->userdata('city_id')))
@@ -501,4 +501,29 @@ class Welcome extends CI_Controller {
         exit;
     }
 
+    function get_location(){
+        $current_city = $_POST['city'];
+        $this->db->select('*');
+        $this->db->from('cities');
+        $this->db->where('city_name',$current_city);
+        $city = $this->db->get();
+        if($city->num_rows() > 0){
+            $this->session->set_userdata('search_city',$current_city);
+            echo json_encode(array('status' => 'success'));
+            exit;
+        }else{
+            echo json_encode(array('status' => 'error', "message" => "No data with your location"));
+            exit;
+        }
+        // foreach($city as $cityname){
+        //     if($cityname['city_name'] = $current_city){
+        //         $this->session->set_userdata('search_city',$current_city);
+        //         echo json_encode(array('status' => 'success'));
+        //         exit;
+        //     }else{
+        //         echo json_encode(array('status' => 'error', "message" => "No data with your location"));
+        //         exit;
+        //     }
+        // }
+    }
 }
