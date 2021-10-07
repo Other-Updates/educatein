@@ -129,13 +129,15 @@ $uccity = ucfirst($yourcity);
                                 <div class="select-city-tit">Select City</div>
                                 <div class="select-city-icon"><img src="<?php echo base_url() ?>assets/front/images/select_city.gif" alt="best kindergarten schools in <?php echo $city; ?>" /></div>
                             </div>
+                            <div class="col-12 col-md-12 text-center"><button type="button" title="Get Nearby Location" class="btn btn-success get-location mb-2" id="get_location"><i class="lnr lnr-map"></i> Get Nearby Location</button></div>
+                            <div class="clearfix"></div>
                             <?php
                             foreach ($allcity as $allcitys) {
                                 $lowercity = strtolower($allcitys->city_name);
                                 ?>
                                 <div class="col-12 col-md-4"><div class="city-list"><a href="<?php echo base_url() ?>list-of-best-schools-in-<?php echo $lowercity; ?>"><i class="lnr lnr-map-marker"></i> <?php echo $allcitys->city_name; ?></a></div></div>                               
                             <?php } ?> 
-                            <button type="button" class="btn" id="get_location">Get nearby location</button>
+                            
                         </div>
                     </div> 
                 </div>
