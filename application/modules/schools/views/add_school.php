@@ -1245,6 +1245,21 @@
 
     $(document).ready(function () {
         $(".formsubmit").on('click',function (event) {
+            // var usermail = $("#useremail").val();
+            // $.ajax({
+            //         type: "POST",
+            //         data: {usermail:usermail},
+            //         url: "<?php echo base_url("schools/admin/email_exist") ?>",
+            //         dataType: "json",
+            //         success: function (data) {
+            //             if (data.status == "error") {
+            //                 swal(data.message.title);
+            //                 return false;   
+            //             }else{
+            //                 $('#signupschool').submit();
+            //             }
+            //         }
+            // });
             if($("#category").val() == 'school') {
                 $("#signupschool").validate({
                     rules: {
@@ -1321,20 +1336,8 @@
             
         });
         $(".formsubmit").on('click',function (e) {
-            $.ajax({
-                    type: "POST",
-                    processData: false, // Important!
-                    contentType: false,
-                    cache: false,
-                    data: {usermail:$("#useremail").val()},
-                    url: "<?php echo base_url("schools/admin/email_exist") ?>",
-                    dataType: "json",
-                    success: function (data) {
-                        if (data.status == "error") {
-                            sweetAlert("error", data.message.title, data.message.text, true);
-                        }
-                    }
-            });
+            // e.preventDefault();
+            
         });
 
 

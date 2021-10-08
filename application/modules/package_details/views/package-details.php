@@ -820,11 +820,29 @@ $userid = base64_decode($_GET['id']);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url("assets/front/"); ?>js/dashboard.js"></script>
     <script src="<?php echo base_url("assets/front/"); ?>js/jquery.stickit.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
-    $('a.logout').click(function(){
-        return confirm('Are you sure want to logout....!!!')
-    })
+    // $('a.logout').click(function(){
+    //     return confirm('Are you sure want to logout....!!!')
+    // })
+	$("a.logout").on("click", function(e) {
+			e.preventDefault();
+		swal({
+			title: 'Log Out?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'OK',
+			closeOnConfirm: true,
+			closeOnCancel: true
+		}).then((result) => { 
+			if (result==true) { 
+				$('.logout').submit(); // this submits the form 
+			} 
+		}) 
+	})   
     </script>
     
 	<style>

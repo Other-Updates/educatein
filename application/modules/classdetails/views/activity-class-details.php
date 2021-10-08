@@ -161,7 +161,16 @@ $similar_school = $this->db->get();
                             </div>
                             <div class="clearfix"></div>
                             <div class="esd-banner-details-btn">
-                                <button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
+                            <?php if(substr($institute_dets->map_url, 0, 5) === "https"){
+                                $map = $institute_dets->map_url;
+                                $map = str_replace("embed","",$map);
+                            }else{
+                                preg_match('/src="([^"]+)"/', $institute_dets->map_url, $match);
+                                $map = $match[1];
+                                $map = str_replace("embed","",$map);
+                            } 
+                            ?>
+                                <a href="<?php echo $map ?>"><button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button></a>
                                 <a href="tel:"<?php echo $institute_dets->mobile ?>><button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button></a>
                                 <!-- <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> Admission open now</button> -->
                                 <button type="button" class="btn btn-theme2-border wow flipInY" data-toggle="modal" data-target="#exampleModalCenter" data-wow-delay="1000ms">

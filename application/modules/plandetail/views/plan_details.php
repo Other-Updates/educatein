@@ -354,7 +354,7 @@ foreach ($user->result() as $users) {
                         ?>
 
                         <?php
-// institute plan listing
+                    // institute plan listing
                         if ($institute->num_rows() > 0) {
                             // $institute_count = 1;
 
@@ -560,9 +560,26 @@ foreach ($user->result() as $users) {
             </a>
         </div><!-- /top-to-bottom --> 
         <script>
-            $('a.logout').click(function () {
-                return confirm('Are you sure want to logout....!!!')
-            })
+            // $('a.logout').click(function () {
+            //     return confirm('Are you sure want to logout....!!!')
+            // })
+            $("a.logout").on("click", function(e) {
+			e.preventDefault();
+		swal({
+			title: 'Log Out?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'OK',
+			closeOnConfirm: true,
+			closeOnCancel: true
+		}).then((result) => { 
+			if (result==true) { 
+				$('.logout').submit(); // this submits the form 
+			} 
+		}) 
+	})   
 
         </script>
 

@@ -266,6 +266,11 @@ if ($user->num_rows() > 0) {
                             $this->db->select('*')->where('is_active', 1);
                             $this->db->from('cities');
                             $city = $this->db->get();
+
+                            $this->db->select('*')->where('id',$users->city_id);
+                            $this->db->from('cities');
+                            $city_name = $this->db->get()->result_array();
+
                             ?>
 
                             <div class="col-lg-4 col-sm-6">
@@ -277,7 +282,7 @@ if ($user->num_rows() > 0) {
                                         foreach ($city->result() as $cities) {
                                             ?>
 
-                                            <option value="<?php echo $cities->id; ?> "><?php echo $cities->city_name; ?></option>
+                                            <option value="<?php echo $cities->id; ?>"<?php if($cities->id == $users->city_id){ echo "selected"; }?>><?php echo $cities->city_name; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -580,35 +585,51 @@ if ($user->num_rows() > 0) {
 
     }
 
-    $('a.logout').click(function () {
-        // return confirm('Are you sure want to logout....!!!')
-        swal({
-        title: "Are you sure?",
-        text: "You will not be able to recover this imaginary file!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-    }, function (isConfirm) {
-        if (!isConfirm) return;
-        $.ajax({
-            url: "<?php echo base_url() ?>logout",
-            // type: "POST",
-            // data: {
-            //     id: 5
-            // },
-            dataType: "html",
-            success: function () {
-                swal("Done!", "It was succesfully deleted!", "success");
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                swal("Error deleting!", "Please try again", "error");
-            }
-        });
-    });
-    })
-
+    // $('a.logout').click(function () {
+    //     // return confirm('Are you sure want to logout....!!!')
+    //     swal({
+    //     title: "Are you sure?",
+    //     text: "You will not be able to recover this imaginary file!",
+    //     type: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#DD6B55",
+    //     confirmButtonText: "Yes, delete it!",
+    //     closeOnConfirm: false
+    // }, function (isConfirm) {
+    //     if (!isConfirm) return;
+    //     $.ajax({
+    //         url: "<?php echo base_url() ?>logout",
+    //         // type: "POST",
+    //         // data: {
+    //         //     id: 5
+    //         // },
+    //         dataType: "html",
+    //         success: function () {
+    //             swal("Done!", "It was succesfully deleted!", "success");
+    //         },
+    //         error: function (xhr, ajaxOptions, thrownError) {
+    //             swal("Error deleting!", "Please try again", "error");
+    //         }
+    //     });
+    // });
+    // })
+    $("a.logout").on("click", function(e) {
+			e.preventDefault();
+		swal({
+			title: 'Log Out?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'OK',
+			closeOnConfirm: true,
+			closeOnCancel: true
+		}).then((result) => { 
+			if (result==true) { 
+				$('.logout').submit(); // this submits the form 
+			} 
+		}) 
+	})   
     $('.btn-save').click(function(e){
         e.preventDefault();
         validateForm();

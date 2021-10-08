@@ -92,8 +92,42 @@ class About extends CI_Controller {
         $data['city'] = $_POST['city'];
         $data['comment'] = $_POST['comment'];
 
-//echo $data['mobile'];
-//exit();	    
+        //echo $data['mobile'];
+        //exit();	    
+        $sub = 'Enquiry - Edugatein';
+        $msg .= "Name : ".$data['name']."<br>";
+        $msg .= "Email : ".$data['email']."<br>";
+        $msg .= "Mobile : ".$data['mobile']."<br>";
+        $msg .= "City : ".$data['city']."<br>";
+        $msg .= "Enquiry : ".$data['comment'];
+        $this->load->library('email');
+
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html'; 
+        $config['validation'] = TRUE; // bool whether to validate email or not      
+
+        $this->email->initialize($config);
+
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject($sub);
+        $this->email->message($msg);  
+            if($this->email->send())
+            {
+                $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+            }
+            else
+            {
+            show_error($this->email->print_debugger());
+            }
+
 
         $username = "manikandan@haunuzinfosystems.com";
         $hash = "23ac5a688f4e027886766d2f5e799c8ae74dc96976b879299ba0df1d9f3eafb9";

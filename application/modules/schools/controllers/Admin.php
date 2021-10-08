@@ -2493,7 +2493,10 @@ class admin extends CI_Controller {
         $this->db->where('id',base64_decode($school_id));
         $this->db->from('school_details');
         $data['school'] = $this->db->get()->result_array();
-        
+        $this->db->select('*');
+        $this->db->where('id',$data['school'][0]['user_id']);
+        $this->db->from('user_register');
+        $data['user'] = $this->db->get()->result_array();
         if($data['school'][0]['school_category_id'] == 4){
         $date = strtotime($data['school'][0]['activated_at']);
         $date = strtotime("+30 day", $date);
@@ -2515,66 +2518,29 @@ class admin extends CI_Controller {
         $msg = $this->load->view('school_invoice',$data,true);
         $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' has been approved';
 
+        $this->load->library('email');
 
-        $to = "sundarabui2k21@gmail.com";
-        // $subject = "This is subject";
-        
-        // $message = "<b>This is HTML message.</b>";
-        // $message .= "<h1>This is headline.</h1>";
-        
-        $header = "From:ftwoftesting@gmail.com \r\n";
-        // $header .= "Cc:afgh@somedomain.com \r\n";
-        $header .= "MIME-Version: 1.0\r\n";
-        $header .= "Content-type: text/html\r\n";
-        
-        $send = mail($to,$sub,$msg,$header);
-        
-        if( $send == true ) 
-        {
-            $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-        }
-        else
-        {
-            show_error($this->email->print_debugger());
-        }
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html'; 
+        $config['validation'] = TRUE; // bool whether to validate email or not      
 
+        $this->email->initialize($config);
 
+        $this->email->from('ftwoftesting@gmail.com','Tester');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject($sub);
+        $this->email->message($msg);  
 
-            
-        // use wordwrap() if lines are longer than 70 characters
-        // $msg = wordwrap($msg, 70, "\r\n");
+        $this->email->send();
 
-        // send email
-        // mail("sundarabui2k21@gmail.com",$sub,$msg);
-
-
-
-        // $this->load->library('email');
-        // $config['protocol']    = 'smtp';
-        // $config['smtp_host']    = 'ssl://smtp.gmail.com';
-        // $config['smtp_port']    = '465';
-        // $config['smtp_timeout'] = '7';
-        // $config['smtp_user']    = 'ftwoftesting@gmail.com';
-        // $config['smtp_pass']    = 'MotivationS@1';
-        // $config['charset']    = 'utf-8';
-        // $config['newline']    = "\r\n";
-        // $config['mailtype'] = 'html';
-        // $config['validation'] = TRUE; // bool whether to validate email or not      
-        
-        // $this->email->initialize($config);
-        
-        // $this->email->from('ftwoftesting@gmail.com');
-        // $this->email->to('sundarabui2k21@gmail.com'); 
-        // $this->email->subject($sub);
-        // $this->email->message($msg);  
-        //     if($this->email->send())
-        //     {
-        //         $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-        //     }
-        //     else
-        //     {
-        //     show_error($this->email->print_debugger());
-        //     }
+        echo $this->email->print_debugger();
 
             // Authorisation details.
         $username = "manikandan@haunuzinfosystems.com";
@@ -2615,36 +2581,36 @@ class admin extends CI_Controller {
         $this->db->where('id',$data['school'][0]['user_id']);
         $this->db->from('user_register');
         $data['user'] = $this->db->get()->result_array();
-        // $msg = $this->load->view('school_invoice',$data,true);
-        // $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' is rejected';
+        $msg = $this->load->view('school_invoice',$data,true);
+        $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' is rejected';
 
-        // $this->load->library('email');
+        $this->load->library('email');
 
-        // $config['protocol']    = 'smtp';
-        // $config['smtp_host']    = 'ssl://smtp.gmail.com';
-        // $config['smtp_port']    = '465';
-        // $config['smtp_timeout'] = '7';
-        // $config['smtp_user']    = 'ftwoftesting@gmail.com';
-        // $config['smtp_pass']    = 'MotivationS@1';
-        // $config['charset']    = 'utf-8';
-        // $config['newline']    = "\r\n";
-        // $config['mailtype'] = 'html';
-        // $config['validation'] = TRUE; // bool whether to validate email or not      
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html';
+        $config['validation'] = TRUE; // bool whether to validate email or not      
         
-        // $this->email->initialize($config);
+        $this->email->initialize($config);
         
-        // $this->email->from('ftwoftesting@gmail.com');
-        // $this->email->to('sundarabui2k21@gmail.com'); 
-        // $this->email->subject($sub);
-        // $this->email->message($msg);  
-        // if($this->email->send())
-        // {
-        //     $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-        // }
-        // else
-        // {
-        // show_error($this->email->print_debugger());
-        // }
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject($sub);
+        $this->email->message($msg);  
+        if($this->email->send())
+        {
+            $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+        }
+        else
+        {
+        show_error($this->email->print_debugger());
+        }
         redirect('admin/schools/view_school?id='.$school_id);
     }
 
@@ -2688,7 +2654,10 @@ class admin extends CI_Controller {
         $this->db->where('id',base64_decode($school_id));
         $this->db->from('institute_details');
         $data['institute'] = $this->db->get()->result_array();
-
+        $this->db->select('*');
+        $this->db->where('id',$data['institute'][0]['user_id']);
+        $this->db->from('user_register');
+        $data['user'] = $this->db->get()->result_array();
         if($data['institute'][0]['position_id'] == 4){
             $date = strtotime($data['institute'][0]['activated_at']);
             $date = strtotime("+30 day", $date);
@@ -2703,36 +2672,36 @@ class admin extends CI_Controller {
         );
         $this->db->where('id',base64_decode($school_id));
         $this->db->update('institute_details',$date);
-        // $msg = $this->load->view('activity_invoice',$data,true);
-        // $sub = 'Edugatein - Your Activity class - '.$data['institute'][0]['institute_name'].' has been approved';
+        $msg = $this->load->view('activity_invoice',$data,true);
+        $sub = 'Edugatein - Your Activity class - '.$data['institute'][0]['institute_name'].' has been approved';
 
-        // $this->load->library('email');
+        $this->load->library('email');
 
-        // $config['protocol']    = 'smtp';
-        // $config['smtp_host']    = 'ssl://smtp.gmail.com';
-        // $config['smtp_port']    = '465';
-        // $config['smtp_timeout'] = '7';
-        // $config['smtp_user']    = 'ftwoftesting@gmail.com';
-        // $config['smtp_pass']    = 'MotivationS@1';
-        // $config['charset']    = 'utf-8';
-        // $config['newline']    = "\r\n";
-        // $config['mailtype'] = 'html'; 
-        // $config['validation'] = TRUE; // bool whether to validate email or not      
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html'; 
+        $config['validation'] = TRUE; // bool whether to validate email or not      
         
-        // $this->email->initialize($config);
+        $this->email->initialize($config);
         
-        // $this->email->from('ftwoftesting@gmail.com');
-        // $this->email->to('sundarabui2k21@gmail.com'); 
-        // $this->email->subject($sub);
-        // $this->email->message($msg);  
-        //     if($this->email->send())
-        //     {
-        //         $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-        //     }
-        //     else
-        //     {
-        //     show_error($this->email->print_debugger());
-        //     }
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject($sub);
+        $this->email->message($msg);  
+            if($this->email->send())
+            {
+                $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+            }
+            else
+            {
+            show_error($this->email->print_debugger());
+            }
 
 // <script>
 //     function myFunction() {
@@ -2760,36 +2729,36 @@ class admin extends CI_Controller {
         $this->db->from('user_register');
         $data['user'] = $this->db->get()->result_array();
 
-        // $msg = $this->load->view('activity_invoice',$data,true);
-        // $sub = 'Edugatein - Your Activity class - '.$data['institute'][0]['institute_name'].' is rejected';
+        $msg = $this->load->view('activity_invoice',$data,true);
+        $sub = 'Edugatein - Your Activity class - '.$data['institute'][0]['institute_name'].' is rejected';
 
-        // $this->load->library('email');
+        $this->load->library('email');
 
-        // $config['protocol']    = 'smtp';
-        // $config['smtp_host']    = 'ssl://smtp.gmail.com';
-        // $config['smtp_port']    = '465';
-        // $config['smtp_timeout'] = '7';
-        // $config['smtp_user']    = 'ftwoftesting@gmail.com';
-        // $config['smtp_pass']    = 'MotivationS@1';
-        // $config['charset']    = 'utf-8';
-        // $config['newline']    = "\r\n";
-        // $config['mailtype'] = 'html'; 
-        // $config['validation'] = TRUE; // bool whether to validate email or not      
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html'; 
+        $config['validation'] = TRUE; // bool whether to validate email or not      
         
-        // $this->email->initialize($config);
+        $this->email->initialize($config);
         
-        // $this->email->from('ftwoftesting@gmail.com');
-        // $this->email->to('sundarabui2k21@gmail.com'); 
-        // $this->email->subject($sub);
-        // $this->email->message($msg);  
-        // if($this->email->send())
-        // {
-        //     $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-        // }
-        // else
-        // {
-        // show_error($this->email->print_debugger());
-        // }
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject($sub);
+        $this->email->message($msg);  
+        if($this->email->send())
+        {
+            $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+        }
+        else
+        {
+        show_error($this->email->print_debugger());
+        }
 
         redirect('admin/schools/view_activityclass?id='.$school_id);
     }
@@ -2820,6 +2789,7 @@ class admin extends CI_Controller {
         $this->db->select('*')->where('email =', $data['email']);
         $this->db->from('user_register');
         $email = $this->db->get()->result();
+
         if (count($email) == 0) {
             $this->db->insert('account_tracker', $data);
             $this->db->insert('user_register', $data);
@@ -2973,12 +2943,16 @@ class admin extends CI_Controller {
 
             if($_POST['school_category'] = 1){
                 $paid = 65000;
+                $validity = 100;
             }else if($_POST['school_category'] = 2){
                 $paid = 30000;
+                $validity = 100;
             }else if($_POST['school_category'] = 1){
                 $paid = 12000;
+                $validity = 100;
             }else if($_POST['school_category'] = 1){
                 $paid = 0;
+                $validity = 30;
             }
 
 
@@ -3000,11 +2974,6 @@ class admin extends CI_Controller {
             if($_POST['school_status'] == 0){
                 $status = null;
                 $act_date = null;
-            }
-            if($_POST['school_category'] = 4){
-                $validity = 30;
-            }else{
-                $validity = 100;
             }
             $schoolinsert = array(
                 'school_name' => $school['schoolname'],
@@ -3046,7 +3015,6 @@ class admin extends CI_Controller {
                 'is_active' => 1,
                 'valitity' => $validity,
             );
-            echo "<pre>";print_r($schoolinsert);exit;
             $this->db->insert('school_details', $schoolinsert);
 
             $this->db->select('*')->where('slug =', $school['schoolname']);
@@ -3894,12 +3862,16 @@ class admin extends CI_Controller {
 
             if($_POST['position_id'] = 1){
                 $paid = 65000;
+                $validity = 100;
             }else if($_POST['position_id'] = 2){
                 $paid = 30000;
+                $validity = 100;
             }else if($_POST['position_id'] = 1){
                 $paid = 12000;
+                $validity = 100;
             }else if($_POST['position_id'] = 1){
                 $paid = 0;
+                $validity = 30;
             }
 
            
@@ -3912,12 +3884,7 @@ class admin extends CI_Controller {
                 $act_date = null;
             }
 
-            if($_POST['position_id'] == 4){
-                $validity = 30;
-            }else{
-                $validity = 100;
-            }
-            $schoolinsert = array(
+            $classinsert = array(
                 'category_id' => $category_id,
                 'position_id' => $_POST['position_id'],
                 'status' => $status,
@@ -3944,8 +3911,8 @@ class admin extends CI_Controller {
                 'is_active' => 1,
                 'valitity'=> $validity,
             );
-
-            $this->db->insert('institute_details', $schoolinsert);
+            echo "<pre>";print_r($classinsert);
+            $this->db->insert('institute_details', $classinsert);
 
             $this->db->select('*')->where('slug =', $_POST['institutename']);
             $this->db->from('institute_details');
@@ -4333,17 +4300,12 @@ class admin extends CI_Controller {
     }
 
     function email_exist(){
-        $this->db->select('*')->where('email =', $_POST['email']);
+        $this->db->select('*')->where('email =', $_POST['usermail']);
         $this->db->from('user_register');
         $email = $this->db->get()->result();
         if (count($email) > 0) {
-                // echo json_encode(array('status' => 'success', 'data' => array("mobile" => $mobile,"contact_email" => $data['email'],"user_id" => $user_id)));
-                // die;
-            // } else {
-                echo json_encode(array('status' => 'error', "message" => array("text" => "Try using another contact info !!!", "title" => "User Already Exist")));
-            //     die;
-            //     $this->load->view('sign-up-school', $data);
-            // }
+            echo json_encode(array('status' => 'error', "message" => array("text" => "Try using another contact info !!!", "title" => "User Already Exist")));
+            exit;
         }
     }
 

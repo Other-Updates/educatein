@@ -21,7 +21,8 @@
                     <p>Sign in to continue to our application.</p>
                     <div class="row">
                         <div class="col-lg-6">
-                            <form action="<?php echo base_url() ?>signin/myaccount" id="signin" name="signinform" method="post">
+                        <!-- action="<?php echo base_url() ?>signin/myaccount" -->
+                            <form  id="signin" name="signinform" method="post">
                                 <div class="form-group">
                                     <i class="lnr lnr-envelope"></i>   
                                     <input type="email" id="signemail" name="signemail" class="form-control pr-6" id="" aria-describedby="emailHelp" placeholder=" ">
@@ -37,7 +38,7 @@
                                     <!-- <a href="<?php echo base_url() ?>admin/forgot_password" class="mb-3">Forget Your Password?</a>	 -->
                                 </div>
 
-                                <button type="submit" id="signin" name="signin" class="btn btn-primary mb-4 signin">SIGN IN</button>
+                                <button type="submit" id="login" name="signin" class="btn btn-primary mb-4 login signin">SIGN IN</button>
                             </form>
 
                             <p>Don't Have an account? <a href="<?php echo base_url() ?>schools-signup"  id="formsubmit" class="text-pink"><u>SIGN UP</u></a></p>
@@ -55,24 +56,7 @@
 <script>
     $(document).ready(function () {
         $(".signin").on('click',function (event) {
-            $("#signin").validate({
-                rules: {
-                    signemail: "required",
-                    signpassword: "required",
-
-                    },
-                    messages: {
-                        signemail: "valid mail required"
-                    },
-                    errorElement: 'div',
-                    errorLabelContainer: '.errorTxt',
-                    errorPlacement: function (error, element) {
-                        if (element.attr("name") == "terms")
-                            element.parents('.custom-checkbox').append(error);
-                        else
-                            element.parents('.form-group').append(error);
-                    }
-            });
+            
         });
     });
 
@@ -99,8 +83,47 @@
     //         });
     //     });
     // });
+    $(document).ready(function () {
+        $('#login').on('click',function(e){
+            $("#signin").validate({
+                rules: {
+                    signemail: "required",
+                    signpassword: "required",
+
+                    },
+                    messages: {
+                        signemail: "valid mail required"
+                    },
+                    errorElement: 'div',
+                    errorLabelContainer: '.errorTxt',
+                    errorPlacement: function (error, element) {
+                        if (element.attr("name") == "terms")
+                            element.parents('.custom-checkbox').append(error);
+                        else
+                            element.parents('.form-group').append(error);
+                    }
+            });
+            // e.preventDefault();
+            var signemail = $('#signemail').val();
+            var signpassword = $('#signpassword').val();
+            if(signemail != '' && signpassword != ''){
+                $.ajax({
+                    type: 'POST',
+                    url: "<?php echo base_url() ?>signin/myaccount",
+                    data: {signemail:signemail,signpassword:signpassword},
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if(data.status == "error"){
+                            swal(data.message);
+                        }
+                    },
+                })  
+            }
+        })
+    });
 </script>
 <script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 

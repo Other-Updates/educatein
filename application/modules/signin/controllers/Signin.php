@@ -45,18 +45,8 @@ class Signin extends CI_Controller {
         $this->db->where('password =', $password);
         $check = $this->db->get()->row();
         if (count($check) == 0) {
-            $this->output->unset_template('simple');
-            $this->output->set_template('blank');
-            $this->_init();
-            if ($this->session->userdata('school_logged_in'))
-                $this->session->set_userdata('school_logged_in', FALSE);
-            $this->load->view('signin');
-            ?>
-            <script type="text/javascript">
-                alert("Your Username or Password Is Incorrect...!");
-            </script>
-
-            <?php
+            echo json_encode(array('status'=>'error',"message"=>"Your Username or Password Is Incorrect...!"));
+            exit;
 
         } else {
             $this->output->unset_template('blank');

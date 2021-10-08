@@ -508,7 +508,7 @@ class Welcome extends CI_Controller {
         $this->db->where('city_name',$current_city);
         $city = $this->db->get();
         if($city->num_rows() > 0){
-            $this->session->set_userdata('search_city',$current_city);
+            $this->session->set_userdata('search_city',strtolower($current_city));
             echo json_encode(array('status' => 'success'));
             exit;
         }else{

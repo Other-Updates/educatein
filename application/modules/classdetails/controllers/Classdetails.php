@@ -253,33 +253,34 @@ class Classdetails extends CI_Controller {
         $this->db->where('id',$this->input->post('instituteid'));
         $this->db->from('institute_details');
         $school = $this->db->get()->result_array();
+        $message = "Name : ".ucfirst($_POST['firstname'])." ".$_POST['lastname']."<br>"."Mobile : ".$_POST['mobile']."<br>"."Email : ".$_POST['email']."<br>"."Enquiry : ".$_POST['enquiry'];
+        $this->load->library('email');
 
-        // $this->load->library('email');
-        // $config['protocol']    = 'smtp';
-        // $config['smtp_host']    = 'ssl://smtp.gmail.com';
-        // $config['smtp_port']    = '465';
-        // $config['smtp_timeout'] = '7';
-        // $config['smtp_user']    = 'ftwoftesting@gmail.com';
-        // $config['smtp_pass']    = 'MotivationS@1';
-        // $config['charset']    = 'utf-8';
-        // $config['newline']    = "\r\n";
-        // $config['mailtype'] = 'html';
-        // $config['validation'] = TRUE; // bool whether to validate email or not      
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html'; 
+        $config['validation'] = TRUE; // bool whether to validate email or not      
         
-        // $this->email->initialize($config);
+        $this->email->initialize($config);
         
-        // $this->email->from('ftwoftesting@gmail.com');
-        // $this->email->to($school[0]['mobile']); 
-        // $this->email->subject('Admission Enquiry');
-        // $this->email->message($this->input->post('enquiry'));  
-        //     if($this->email->send())
-        //     {
-        //         $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-        //     }
-        //     else
-        //     {
-        //     show_error($this->email->print_debugger());
-        //     }
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject('Admission Enquiry');
+        $this->email->message($message);  
+            if($this->email->send())
+            {
+                $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+            }
+            else
+            {
+            show_error($this->email->print_debugger());
+            }
         redirect(base_url());
     }
 

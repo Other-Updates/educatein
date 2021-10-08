@@ -7,7 +7,7 @@
 			            <small>We will send updates once a week.</small>
 		          	</div><!-- /footer-heading -->
 
-		          	<form action="<?php echo base_url() ?>abouts/newsletter" class="form-inline" method="post">
+		          	<form action="<?php echo base_url() ?>about/newsletter" class="form-inline" method="post">
 		              	<div class="input-group w-100">
 		                	<input type="email" name="email" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Enter your email*" required>
 		                	<div class="input-group-prepend">

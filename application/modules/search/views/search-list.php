@@ -53,6 +53,8 @@
 // print_r($_GET['searchcity']);
     if(!empty($_GET['searchcity'])){
         $searchcity = $_GET['searchcity'];
+    }else{
+        $searchcity = $this->session->userdata('search_city');
     }
 ?>
 <div class="breadrumb-new mab-30">
@@ -122,7 +124,7 @@
                             }
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-coimbatore" id="<?php echo $row->id; ?>"><i class="fa fa-circle"></i> <?php echo $affiliation_name1; ?> Schools</a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $affiliation_name; ?>-schools-in-<?php echo $searchcity ?>" id="<?php echo $row->id; ?>"><i class="fa fa-circle"></i> <?php echo $affiliation_name1; ?> Schools</a>
                             </li>   
                         <?php } ?>
                         <!-- /School Categories -->
@@ -135,7 +137,7 @@
                             $category_name = strtolower($category_name);
                             ?>
                             <li>
-                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-coimbatore" id="<?php echo $row1->id; ?>"><i class="fa fa-circle"></i> <?php echo $category_name1; ?></a>
+                                <a href="<?php echo base_url() ?>list-of-best-<?php echo $category_name; ?>-in-<?php echo $searchcity ?>" id="<?php echo $row1->id; ?>"><i class="fa fa-circle"></i> <?php echo $category_name1; ?></a>
                             </li>    
                         <?php } ?>
                         <!-- /Activity Classes -->

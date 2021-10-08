@@ -241,7 +241,16 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
                             </div>
                             <div class="clearfix"></div>
                             <div class="esd-banner-details-btn">
-                                <a href=""><button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button>
+                            <?php if(substr($school_details->map_url, 0, 5) === "https"){
+                                $map = $school_details->map_url;
+                                $map = str_replace("embed","",$map);
+                            }else{
+                                preg_match('/src="([^"]+)"/', $school_details->map_url, $match);
+                                $map = $match[1];
+                                $map = str_replace("embed","",$map);
+                            } 
+                            ?>
+                                <a href="<?php echo $map ?>"><button class="btn btn-theme1 wow flipInY" data-wow-delay="500ms"><i class="fa fa-map-marker"></i> Show School On Map</button></a>
                                 <a href="tel:"<?php echo $school_details->mobile ?>><button class="btn btn-theme2 wow flipInY" data-wow-delay="700ms"><i class="fa fa-phone"></i> Call School</button></a>
                                 <?php if(!empty($school_details->ad)){ ?>
                                     <button class="btn btn-theme1-border wow flipInY" data-wow-delay="900ms"><img src="https://www.edugatein.com/images/new.gif" alt=""> <?php echo $school_details->ad; ?></button>
