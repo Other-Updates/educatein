@@ -626,7 +626,7 @@ if ($user->num_rows() > 0) {
 			closeOnCancel: true
 		}).then((result) => { 
 			if (result==true) { 
-				$('.logout').submit(); // this submits the form 
+                window.location.href = "<?php echo base_url("logout") ?>";
 			} 
 		}) 
 	})   

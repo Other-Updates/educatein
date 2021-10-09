@@ -564,7 +564,7 @@ $allcity = $this->db->get()->result();
                     <div class="custom-section-title mab-10">
                         <h3 class="mb-2">Top Schools in <span><?php echo $yourcity; ?></span></h3>
                     </div><!-- /section-title -->
-                    <div class="owl-carousel owl-carousel-1 owl-theme">
+                    <div class="owl-carousel owl-carousel-1 owl-theme platinumSlider">
                         <?php
                             $delay = 4;
                             $topcount = 0;
@@ -587,7 +587,8 @@ $allcity = $this->db->get()->result();
                                         // echo $affname_url;
                                         // print_r($affname_url);exit;
                                         // exit();
-                                        ?>                                    
+                                        ?>   
+                                                             
                                         <div class="mab-20">
                                             <!-- <div class="owl-one owl-carousel owl-theme"> -->
                                                 <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
@@ -638,7 +639,7 @@ $allcity = $this->db->get()->result();
                     <div class="custom-section-title mab-10">
                         <h3 class="mb-2">Best Schools in <span><?php echo $yourcity; ?></span></h3>
                     </div><!-- /section-title -->
-                    <div class="owl-carousel owl-carousel-2 owl-theme">
+                    <div class="owl-carousel owl-carousel-2 owl-theme premiumSlider">
                         <?php
                             $delay = 4;
                             $topcount = 0;
@@ -1226,6 +1227,16 @@ $ip = $_SERVER['REMOTE_ADDR'];
             $(this).removeClass('search-err');
         }
     });   
+    // setTimeout(() => {
+        $(document).ready(function(){
+        if($('.platinumSlider').find('.item').length ==1){
+            $('.platinumSlider').find('.owl-nav button').remove();
+        }
+        if($('.premiumSlider').find('.item').length >11){
+            $('.premiumSlider').find('.owl-nav button').remove();
+        }
+    });
+    // }, 500);
 </script> 
 <?php 
 function customcreatePageinatation1($count,$page,$link){

@@ -295,7 +295,7 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="form-group">
                                         <label for="students">No.of Students</label>
-                                        <input type="text" name="school_students" class="form-control" id="students" placeholder="e.g.2005">
+                                        <input type="number" name="school_students" class="form-control" id="students" placeholder="e.g.2005">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-6">
@@ -313,7 +313,7 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="form-group">
                                         <label for="teachers">No.of Teachers</label>
-                                        <input type="text" name="school_teachers" class="form-control" id="teachers" placeholder="e.g.55">
+                                        <input type="number" name="school_teachers" class="form-control" id="teachers" placeholder="e.g.55">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-6">
@@ -343,13 +343,13 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="form-group">
                                         <label for="academic">No of Boys</label>
-                                        <input type="text" name="boys" class="form-control" id="boys" placeholder="No of Boys">
+                                        <input type="number" name="boys" class="form-control" id="boys" placeholder="No of Boys">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="form-group">
                                         <label for="academic">No of Girls</label>
-                                        <input type="text" name="girls" class="form-control" id="girls" placeholder="No of Girls">
+                                        <input type="number" name="girls" class="form-control" id="girls" placeholder="No of Girls">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-6">
@@ -650,7 +650,7 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="form-group">
                                         <label for="phone">Phone Number</label>
-                                        <input type="text" name="school_phone" class="form-control" id="phone" placeholder="e.g.+91 9876543210">
+                                        <input type="number" name="school_phone" class="form-control" id="phone" placeholder="e.g.+91 9876543210">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-6">
@@ -909,7 +909,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <label for="teachers">No.of Teachers</label>
-                                    <input type="text" class="form-control" id="teachers" name="teachers" placeholder="e.g 55" >
+                                    <input type="number" class="form-control" id="teachers" name="teachers" placeholder="e.g 55" >
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6">
@@ -1061,7 +1061,7 @@
                             <div class="col-lg-3 col-sm-6">
                                 <div class="form-group">
                                     <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="e.g +91 9876543210" >
+                                    <input type="number" class="form-control" id="phone" name="phone" placeholder="e.g +91 9876543210" >
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6">

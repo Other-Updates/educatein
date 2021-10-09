@@ -129,7 +129,7 @@ foreach ($user->result() as $users) {
                                 $website = "-";
                             }
 
-                            $school_activity = "is_active=1 AND school_id=" . $schools->id . " AND deleted_at is NULL";
+                            $school_activity = "is_active=1 AND school_id=" . $schools->id . " AND school_activity_id!=1 AND school_activity_id!=2 AND deleted_at is NULL";
                             $this->db->select('school_activity_id')->where($school_activity);
                             $this->db->from('school_images');
                             $this->db->distinct();
@@ -576,7 +576,7 @@ foreach ($user->result() as $users) {
 			closeOnCancel: true
 		}).then((result) => { 
 			if (result==true) { 
-				$('.logout').submit(); // this submits the form 
+                window.location.href = "<?php echo base_url("logout") ?>";
 			} 
 		}) 
 	})   
