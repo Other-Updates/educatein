@@ -1476,6 +1476,12 @@ class admin extends CI_Controller {
             $expiry_status = '0';
             $act_date = date('Y-m-d');
         }
+        if(!empty($_POST['school_category'])){
+            $data = array(
+                'school_category_id' => $_POST['school_category'],
+            );
+            $this->db->update('school_details',$data,array('id'=>$school_id));
+        }
         //school details update
          
         $school_update=array(
@@ -1486,7 +1492,7 @@ class admin extends CI_Controller {
             'address' => $_POST['address'],
             'city_id' => $yourcity_id,
             'area_id' => $area_id,
-            'school_category_id' => $_POST['school_category'],
+            // 'school_category_id' => $_POST['school_category'],
             'affiliation_id' => $schoolboard_id,
             'schooltype_id' => $level_id,
             'about' => $_POST['description'],
@@ -2424,9 +2430,15 @@ class admin extends CI_Controller {
             $expiry_status = 0;
             $act_date = date('Y-m-d');
         }
+        if(!empty($_POST['position'])){
+            $data = array(
+                'position_id' => $_POST['position'],
+            );
+            $this->db->update('institute_details',$data,array('id'=>$school_id));
+        }
         $schoolupdate = array(
             'category_id' => $category_id,
-            'position_id' => $_POST['position'],
+            // 'position_id' => $_POST['position'],
             'institute_name' => $_POST['institutename'],
             'slug' => $_POST['institutename'],
             'mobile' => $_POST['phone'],
