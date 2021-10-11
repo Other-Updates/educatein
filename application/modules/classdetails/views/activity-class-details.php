@@ -696,7 +696,7 @@ $similar_school = $this->db->get();
                 </button>
                 <h3 class="text-center mb-3" style="color: #303030;">Admission Enquiry</h3>
 
-                <form action="<?php echo base_url() ?>classdetails/admission" class="row" method="post">
+                <form action="<?php echo base_url() ?>classdetails/admission" id="enquiry_form" class="row" method="post">
                     <div class="col-lg-6 col-sm-6">
                         <div class="form-group">
                             <input type="text" class="form-control" id="firstname" name="firstname" aria-describedby="emailHelp" placeholder="First Name*" required>
@@ -728,7 +728,7 @@ $similar_school = $this->db->get();
                         </div>
                     </div>
                     <div class="col-lg-12 col-sm-12">
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-block" id="enquiry_submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -736,6 +736,51 @@ $similar_school = $this->db->get();
     </div>
 </div><!-- /modal -->
 <script>
+    $(document).ready(function(){
+        $('#enquiry_submit').on('click',function(){
+            $("#enquiry_form").validate({
+            rules: {
+                firstname: "required",
+                mobile: {
+                    minlength: 10,
+                    maxlength: 10,
+                },
+                email: "required",
+                enquiry: "required",
+            },
+            errorElement: 'div',
+            errorLabelContainer: '.errorTxt',
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "terms")
+                    element.parents('.custom-checkbox').append(error);
+                else
+                    element.parents('.form-group').append(error);
+            }
+            });
+        });
+        $('#submit_enq').on('click',function(){
+            $("#enquiry_form1").validate({
+            rules: {
+                name: "required",
+                city: "required",
+                mobile: {
+                    minlength: 10,
+                    maxlength: 10,
+                },
+                email: "required",
+                comment: "required",
+            },
+            errorElement: 'div',
+            errorLabelContainer: '.errorTxt',
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "terms")
+                    element.parents('.custom-checkbox').append(error);
+                else
+                    element.parents('.form-group').append(error);
+            }
+            });
+        });
+    });
     $('#sd-menu a').click(function(e) {
         $('#sd-menu a').removeClass('active');
         $(this).addClass('active');
@@ -813,7 +858,7 @@ $similar_school = $this->db->get();
 
     <div class="feedback-body">
         <h5 class="mb-3">Submit A Enquiry Form</h5>
-        <form  action="<?php echo base_url() ?>about-us/enquiry" method="post">
+        <form  action="<?php echo base_url() ?>about-us/enquiry" id="enquiry_form1" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Your Name*"  required>
             </div>
@@ -843,7 +888,7 @@ $similar_school = $this->db->get();
             </div>
 
             <!-- Button trigger modal -->
-            <button type="submit" class="btn btn-primary btn-block mb-2" data-toggle="modal">Submit</button>
+            <button type="submit" class="btn btn-primary btn-block mb-2" data-toggle="modal" id="submit_enq">Submit</button>
         </form>
     </div><!-- /feedback-body -->
 </div><!-- /feedback-form -->
@@ -898,7 +943,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
 <?php } ?>
 
  
-
+<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>
 <script>
 //    $('.carousel').carousel({
 //        interval: 3000,

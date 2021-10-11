@@ -89,10 +89,6 @@
                 rules: {
                     signemail: "required",
                     signpassword: "required",
-
-                    },
-                    messages: {
-                        signemail: "valid mail required"
                     },
                     errorElement: 'div',
                     errorLabelContainer: '.errorTxt',
@@ -103,6 +99,9 @@
                             element.parents('.form-group').append(error);
                     }
             });
+            
+        })
+        $('#login').on('click',function(e){
             // e.preventDefault();
             var signemail = $('#signemail').val();
             var signpassword = $('#signpassword').val();
@@ -119,7 +118,7 @@
                     },
                 })  
             }
-        })
+        });
     });
 </script>
 <script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  

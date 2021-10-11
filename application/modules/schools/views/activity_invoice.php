@@ -35,7 +35,7 @@
             </td>
             <td style="text-align: right;">
                 <b>Invoice</b><br>
-                <?php $invoice_date = date('d-m-Y',$institute[0]['created_at']); ?>
+                <?php $invoice_date = date('d-m-Y',strtotime($institute[0]['created_at'])); ?>
                 <!-- ID: <b style="font-size: 15px;">#111-222</b><br> -->
                 Invoice Date : <b><?php echo $invoice_date ?></b>
             </td>

@@ -951,7 +951,7 @@ $allcity = $this->db->get()->result();
 
     <div class="feedback-body">
         <h5 class="mb-3">Submit A Enquiry Form</h5>
-        <form  action="<?php echo base_url() ?>about-us/enquiry" method="post">
+        <form  action="<?php echo base_url() ?>about-us/enquiry" id="enquiry_form" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Your Name*"  required>
             </div>
@@ -987,7 +987,7 @@ $allcity = $this->db->get()->result();
             </div>
 
             <!-- Button trigger modal -->
-            <button type="submit" class="btn btn-primary btn-block mb-2" data-toggle="modal">Submit</button>
+            <button type="submit" class="btn btn-primary btn-block mb-2" id="enquiry_submit"data-toggle="modal">Submit</button>
         </form>
     </div><!-- /feedback-body -->
 </div><!-- /feedback-form -->
@@ -1041,6 +1041,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
     </div><!-- /modal -->
 <?php } ?> 
 <script>
+    
     $(window).on("load", function () {
         //Preloader
         $('#preloader').fadeOut('slow', function () {
@@ -1094,6 +1095,30 @@ $ip = $_SERVER['REMOTE_ADDR'];
             $('.feedback-form').toggleClass('active')
         })
     })
+    $(document).ready(function(){
+        $('#enquiry_submit').on('click',function(){
+            $("#enquiry_form").validate({
+            rules: {
+                name: "required",
+                city: "required",
+                mobile: {
+                    minlength: 10,
+                    maxlength: 10,
+                },
+                email: "required",
+                comment: "required",
+            },
+            errorElement: 'div',
+            errorLabelContainer: '.errorTxt',
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "terms")
+                    element.parents('.custom-checkbox').append(error);
+                else
+                    element.parents('.form-group').append(error);
+            }
+            });
+        });
+    });
 
     // Slider-carousel
     $(document).ready(function () {
@@ -1238,6 +1263,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
         });
     // }, 500);
 </script> 
+<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  
 <?php 
 function customcreatePageinatation1($count,$page,$link){
     $CI =& get_instance();

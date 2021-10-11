@@ -1322,14 +1322,14 @@
                     messages: {
                         schoolname: "this field is required"
                     },
-                errorElement: 'div',
-                errorLabelContainer: '.errorTxt',
-                errorPlacement: function (error, element) {
-                    if (element.attr("name") == "terms")
-                        element.parents('.custom-checkbox').append(error);
-                    else
-                        element.parents('.form-group').append(error);
-                }
+                    errorElement: 'div',
+                    errorLabelContainer: '.errorTxt',
+                    errorPlacement: function (error, element) {
+                        if (element.attr("name") == "terms")
+                            element.parents('.custom-checkbox').append(error);
+                        else
+                            element.parents('.form-group').append(error);
+                    }
                 });
             }
 
