@@ -531,7 +531,7 @@ if ($aff_url == "dance-class") {
                     <div class="custom-section-title mab-10">
                     <h3 class="mb-3">Top <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
                     </div><!-- /section-title -->
-                    <div class="owl-carousel owl-carousel-1 owl-theme">
+                    <div class="owl-carousel owl-carousel-1 owl-theme platinumSlider">
                         <?php
                         $delay = 4;
                         $topcount = 0;
@@ -606,7 +606,7 @@ if ($aff_url == "dance-class") {
                     <div class="custom-section-title mab-10">
                     <h3 class="mb-3">Best <?php echo $aff_name; ?> in <span><?php echo $yourcity; ?></span></h3>
                     </div><!-- /section-title -->
-                    <div class="owl-carousel owl-carousel-2 owl-theme">
+                    <div class="owl-carousel owl-carousel-2 owl-theme premiumSlider">
                         <?php
                         $delay = 4;
                         $topcount = 0;
@@ -1177,6 +1177,14 @@ $ip = $_SERVER['REMOTE_ADDR'];
         }else{
             $(this).removeClass('search-err');
         }
+    });
+    $(document).ready(function(){
+    if($('.platinumSlider').find('.item').length ==1){
+        $('.platinumSlider').find('.owl-nav button').remove();
+    }
+    if($('.premiumSlider').find('.item').length ==1){
+        $('.premiumSlider').find('.owl-nav button').remove();
+    }
     });
 
 </script>

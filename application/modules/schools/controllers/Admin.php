@@ -2483,7 +2483,7 @@ class admin extends CI_Controller {
         }
         $data = array(
             'status' => 1,
-            'paid' => $amount,
+            // 'paid' => $amount,
             'activated_at' => date('Y-m-d H:i:s')
         );
         $this->db->where('id',base64_decode($school_id));
@@ -2644,7 +2644,7 @@ class admin extends CI_Controller {
         }
         $data = array(
             'status' => 1,
-            'paid' => $amount,
+            // 'paid' => $amount,
             'activated_at' => date('Y-m-d H:i:s')
         );
         $this->db->where('id',base64_decode($school_id));

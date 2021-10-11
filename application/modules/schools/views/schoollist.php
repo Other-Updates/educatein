@@ -1232,10 +1232,10 @@ $ip = $_SERVER['REMOTE_ADDR'];
         if($('.platinumSlider').find('.item').length ==1){
             $('.platinumSlider').find('.owl-nav button').remove();
         }
-        if($('.premiumSlider').find('.item').length >11){
+        if($('.premiumSlider').find('.item').length ==1){
             $('.premiumSlider').find('.owl-nav button').remove();
         }
-    });
+        });
     // }, 500);
 </script> 
 <?php 
