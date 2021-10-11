@@ -1264,7 +1264,11 @@
                 $("#signupschool").validate({
                     rules: {
                         name: "required",
-                        adminphone: "required",
+                        adminphone: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                        },
                     password: {
                     minlength: 5
                 },
@@ -1278,7 +1282,11 @@
                     school_area: "required",
                     pincode: "required",
                     level: "required",
-                    school_phone: "required",
+                    school_phone: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                        },
                     school_email: "required",
                     school_category: "required",
                     school_status: "required",
@@ -1301,7 +1309,11 @@
                 $("#signupschool").validate({
                     rules: {
                         name: "required",
-                        adminphone: "required",
+                        adminphone: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                        },
                         password: {
                             minlength: 5
                         },
@@ -1313,7 +1325,11 @@
                         type: "required",
                         city: "required",
                         area: "required",
-                        phone: "required",
+                        phone: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                        },
                         email: "required",
                         address: "required",
                         position_id: "required",

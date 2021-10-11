@@ -412,7 +412,11 @@ foreach ($user->result() as $users) {
                         banner1: "required",
                         city: "required",
                         area: "required",
-                        phone: "required",
+                        phone: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                        },
                         email: "required",
                         address: "required",
                     },

@@ -571,7 +571,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="phone">Phone Number<span class="error">*</span></label>
-                            <input type="text" name="phone" class="form-control" id="phone" placeholder="e.g.+91 9876543210">
+                            <input type="number" name="phone" class="form-control" id="phone" placeholder="e.g.+91 9876543210">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
@@ -728,7 +728,11 @@ foreach ($user->result() as $users) {
                         school_area: "required",
                         pincode: "required",
                         level: "required",
-                        phone: "required",
+                        phone: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                        },
                         email: "required",
                         address: "required",
                     },
