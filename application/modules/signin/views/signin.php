@@ -25,12 +25,12 @@
                             <form  id="signin" name="signinform" method="post">
                                 <div class="form-group">
                                     <i class="lnr lnr-envelope"></i>   
-                                    <input type="email" id="signemail" name="signemail" class="form-control pr-6" id="" aria-describedby="emailHelp" placeholder=" ">
+                                    <input type="email" id="signemail" name="signemail" class="form-control fieldValidation pr-6" id="" aria-describedby="emailHelp" placeholder=" ">
                                     <label>Email address</label>
                                 </div>
                                 <div class="form-group">
                                     <i class="lnr lnr-lock"></i>   
-                                    <input type="password" id="signpassword" name="signpassword" class="form-control pr-6" id="" placeholder=" ">
+                                    <input type="password" id="signpassword" name="signpassword" class="form-control fieldValidation pr-6" id="" placeholder=" ">
                                     <label>Password</label>
                                 </div>
 
@@ -84,27 +84,28 @@
     //     });
     // });
     $(document).ready(function () {
-        $('#login').on('click',function(e){
-            $("#signin").validate({
-                rules: {
-                    signemail: "required",
-                    signpassword: "required",
-                    },
-                    errorElement: 'div',
-                    errorLabelContainer: '.errorTxt',
-                    errorPlacement: function (error, element) {
-                        if (element.attr("name") == "terms")
-                            element.parents('.custom-checkbox').append(error);
-                        else
-                            element.parents('.form-group').append(error);
-                    }
-            });
+        // $('#login').on('click',function(e){
+        //     $("#signin").validate({
+        //         rules: {
+        //             signemail: "required",
+        //             signpassword: "required",
+        //             },
+        //             errorElement: 'div',
+        //             errorLabelContainer: '.errorTxt',
+        //             errorPlacement: function (error, element) {
+        //                 if (element.attr("name") == "terms")
+        //                     element.parents('.custom-checkbox').append(error);
+        //                 else
+        //                     element.parents('.form-group').append(error);
+        //             }
+        //     });
             
-        })
+        // })
         $('#login').on('click',function(e){
-            // e.preventDefault();
+            e.preventDefault();
             var signemail = $('#signemail').val();
             var signpassword = $('#signpassword').val();
+            var _this = $(this);
             if(signemail != '' && signpassword != ''){
                 $.ajax({
                     type: 'POST',
@@ -112,14 +113,43 @@
                     data: {signemail:signemail,signpassword:signpassword},
                     success: function (data) {
                         data = JSON.parse(data);
+                        // console.log(data);
                         if(data.status == "error"){
                             swal(data.message);
+                        }if(data.status == "success"){
+                            // _this.closest('form').submit();
+                            location.reload();
                         }
                     },
                 })  
+            }else{
+                if(signemail == ''){
+                    $('#signemail').css("border-color", "red");
+                    // swal("Username and password is wmpty");
+                }else{
+                    $('#signemail').css("border-color", "");
+                }
+                if(signpassword == ''){
+                    $('#signpassword').css("border-color", "red");
+                
+                // swal("Username and password is wmpty");
+
+                }
             }
         });
+        $('.fieldValidation').keyup(function(){
+            if ($.trim($(this).val()) == '') {
+                $(this).css("border-color", "red");
+            }else{
+                $(this).css("border-color", "");
+
+            }
+
+        })
+
     });
+
+
 </script>
 <script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

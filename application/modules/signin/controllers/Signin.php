@@ -6,6 +6,8 @@ class Signin extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->library('form_validation');
+        $this->load->helper('form');
         if ($this->session->userdata('school_logged_in'))
             redirect('my-account');
     }
@@ -62,6 +64,8 @@ class Signin extends CI_Controller {
             $data["username"] = $user->name;
             $data["email"] = $user->email;
             $this->load->view('my-account', $data);
+            echo json_encode(array('status'=>'success'));
+            exit;
         }
     }
 
