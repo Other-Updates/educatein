@@ -1482,6 +1482,31 @@ class admin extends CI_Controller {
             );
             $this->db->update('school_details',$data,array('id'=>$school_id));
         }
+
+        if(!empty($_POST['expiry_status'] == 0)){
+            if($_POST['school_category'] == 1){
+                $plan = 'PLATINUM';
+                $amount = 65000;
+            }
+            if($_POST['school_category'] == 2){
+                $plan = 'PREMIUM';
+                $amount = 30000;
+            }
+            if($_POST['school_category'] == 3){
+                $plan = 'SPECTRUM';
+                $amount = 12500;
+            }
+            if($_POST['school_category'] == 4){
+                $plan = 'TRIAL';
+                $amount = 0;
+            }
+            $data = array(
+                'school_id' => $school_id,
+                'plan' => $plan,
+                'paid_amount' => $amount,
+            );
+            $this->db->insert('plan_details',$data);
+        }
         //school details update
          
         $school_update=array(
@@ -2430,12 +2455,42 @@ class admin extends CI_Controller {
             $expiry_status = 0;
             $act_date = date('Y-m-d');
         }
+
+        //plan update
         if(!empty($_POST['position'])){
             $data = array(
                 'position_id' => $_POST['position'],
             );
             $this->db->update('institute_details',$data,array('id'=>$school_id));
         }
+
+        //plan history
+        if(!empty($_POST['expiry_status'] == 0)){
+            if($_POST['position'] == 1){
+                $plan = 'PLATINUM';
+                $amount = 65000;
+            }
+            if($_POST['position'] == 2){
+                $plan = 'PREMIUM';
+                $amount = 30000;
+            }
+            if($_POST['position'] == 3){
+                $plan = 'SPECTRUM';
+                $amount = 12500;
+            }
+            if($_POST['position'] == 4){
+                $plan = 'TRIAL';
+                $amount = 0;
+            }
+            $data = array(
+                'institute_id' => $school_id,
+                'plan' => $plan,
+                'paid_amount' => $amount,
+            );
+            $this->db->insert('plan_details',$data);
+        }
+
+
         $schoolupdate = array(
             'category_id' => $category_id,
             // 'position_id' => $_POST['position'],
@@ -2536,13 +2591,13 @@ class admin extends CI_Controller {
         $config['smtp_host']    = 'ssl://smtp.googlemail.com';
         $config['smtp_port']    = '465';
         $config['smtp_timeout'] = '7';
-        // $config['smtp_secure'] = 'tls';
         $config['smtp_user']    = 'ftwoftesting@gmail.com';
         $config['smtp_pass']    = 'MotivationS@1';
         $config['charset']    = 'utf-8';
         $config['newline']    = "\r\n";
         $config['mailtype'] = 'html'; 
         $config['validation'] = TRUE; // bool whether to validate email or not      
+
 
         $this->email->initialize($config);
 
@@ -2603,33 +2658,33 @@ class admin extends CI_Controller {
         $msg = $this->load->view('school_invoice',$data,true);
         $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' is rejected';
 
-        // $this->load->library('email');
+        $this->load->library('email');
 
-        // $config['protocol']    = 'smtp';
-        // $config['smtp_host']    = 'ssl://smtp.gmail.com';
-        // $config['smtp_port']    = '465';
-        // $config['smtp_timeout'] = '7';
-        // $config['smtp_user']    = 'ftwoftesting@gmail.com';
-        // $config['smtp_pass']    = 'MotivationS@1';
-        // $config['charset']    = 'utf-8';
-        // $config['newline']    = "\r\n";
-        // $config['mailtype'] = 'html';
-        // $config['validation'] = TRUE; // bool whether to validate email or not      
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.googlemail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html'; 
+        $config['validation'] = TRUE; // bool whether to validate email or not      
         
-        // $this->email->initialize($config);
+        $this->email->initialize($config);
         
-        // $this->email->from('ftwoftesting@gmail.com');
-        // $this->email->to('sundarabui2k21@gmail.com'); 
-        // $this->email->subject($sub);
-        // $this->email->message($msg);  
-        // if($this->email->send())
-        // {
-        //     $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-        // }
-        // else
-        // {
-        // show_error($this->email->print_debugger());
-        // }
+        $this->email->from('ftwoftesting@gmail.com');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject($sub);
+        $this->email->message($msg);  
+        if($this->email->send())
+        {
+            $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+        }
+        else
+        {
+        show_error($this->email->print_debugger());
+        }
         redirect('admin/schools/view_school?id='.$school_id);
     }
 
@@ -4645,28 +4700,28 @@ class admin extends CI_Controller {
         
     }   
 
-    function expire_plan(){
-        $data = array(
-            'expiry_status' => 1,
-            'status' =>  NULL,
-        );
-        $this->db->select('*');
-        $this->db->from('school_details');
-        $school = $this->db->get()->result_array();
-        foreach($school as $schools){
-            $date = date('Y-m-d');
-            $this->db->where('expiry_date<',$date);
-            $this->db->update('school_details',$data,array('id'=>$schools['id']));
-        }
-        $this->db->select('*');
-        $this->db->from('institute_details');
-        $class = $this->db->get()->result_array();
-        foreach($class as $classes){
-            $date = date('Y-m-d');
-            $this->db->where('expiry_date<',$date);
-            $this->db->update('institute_details',$data,array('id'=>$classes['id']));
-        }
-    }
+    // function expire_plan(){
+    //     $data = array(
+    //         'expiry_status' => 1,
+    //         'status' =>  NULL,
+    //     );
+    //     $this->db->select('*');
+    //     $this->db->from('school_details');
+    //     $school = $this->db->get()->result_array();
+    //     foreach($school as $schools){
+    //         $date = date('Y-m-d');
+    //         $this->db->where('expiry_date<',$date);
+    //         $this->db->update('school_details',$data,array('id'=>$schools['id']));
+    //     }
+    //     $this->db->select('*');
+    //     $this->db->from('institute_details');
+    //     $class = $this->db->get()->result_array();
+    //     foreach($class as $classes){
+    //         $date = date('Y-m-d');
+    //         $this->db->where('expiry_date<',$date);
+    //         $this->db->update('institute_details',$data,array('id'=>$classes['id']));
+    //     }
+    // }
     
 }
 ?>

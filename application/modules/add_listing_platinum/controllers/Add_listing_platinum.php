@@ -228,6 +228,13 @@ class Add_listing_platinum extends CI_Controller {
             $school_id = $schooldetails->id;
         }
 
+            $data = array(
+                'school_id' => $school_id,
+                'plan' => 'TRIAL',
+                'paid_amount' => 0,
+            );
+            $this->db->insert('plan_details',$data);
+
 
         //platinum data save
         if (!empty($_POST['founded'])) {
@@ -995,19 +1002,13 @@ class Add_listing_platinum extends CI_Controller {
     }
 
     public function razorPaySuccess() {
-
-        // $data = [
-        //     'user_id' => '1',
-        //     'payment_id' => $this->input->post('razorpay_payment_id'),
-        //     'amount' => $this->input->post('totalAmount'),
-        //     'product_id' => $this->input->post('product_id'),
-        // ];
-        // $insert = $this->db->insert('payments', $data);
-        // $arr = array('msg' => 'Payment successfully credited', 'status' => true);
-        // $this->session->set_flashdata('msg', 'Payment successfully credited');
-        // print_r($this->session->userdata('planUpdate'));exit;
         $data = array();
-        if($this->session->userdata('planUpdate') == 'platinum') { 
+        if($this->session->userdata('planUpdate') == 'platinum') {
+            $plan_detail = array(
+                'plan' =>'PLATINUM',
+                'paid_amount' => 65000,
+                // 'school_id' => $this->session->userdata('SchoolId'),
+            );
             $data = array(
                 'school_category_id' => 1,
                 'valitity' => 100,
@@ -1015,13 +1016,23 @@ class Add_listing_platinum extends CI_Controller {
             );
         }
         if($this->session->userdata('planUpdate') == 'premium') { 
+            $plan_detail = array(
+                'plan' =>'PREMIUM',
+                'paid_amount' => 30000,
+                // 'school_id' => $this->session->userdata('SchoolId'),
+            );            
             $data = array(
                 'school_category_id' => 2,
                 'valitity' => 100,
                 'paid' => 30000,
             );
         }
-        if($this->session->userdata('planUpdate') == 'spectrum') { 
+        if($this->session->userdata('planUpdate') == 'spectrum') {
+            $plan_detail = array(
+                'plan' =>'SPECTRUM',
+                'paid_amount' => 12500,
+                // 'school_id' => $this->session->userdata('SchoolId'),
+            );            
             $data = array(
                 'school_category_id' => 3,
                 'valitity' => 100,
@@ -1030,6 +1041,9 @@ class Add_listing_platinum extends CI_Controller {
         }
         if(!empty($data)){
             $this->db->update('school_details',$data,array('id' => $this->session->userdata('SchoolId')));
+        }
+        if(!empty($plan_detail)){
+            $this->db->update('plan_details',$plan_detail,array('id' => $this->session->userdata('SchoolId')));
         }
         $this->db->select('*');
         $this->db->where('id',$this->session->userdata('SchoolId'));

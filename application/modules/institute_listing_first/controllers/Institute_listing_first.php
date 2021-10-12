@@ -175,6 +175,13 @@ class Institute_listing_first extends CI_Controller {
             $school_id = $schooldetails->id;
         }
 
+        $data = array(
+            'institute_id' => $school_id,
+            'plan' => 'TRIAL',
+            'paid_amount' => 0,
+        );
+        $this->db->insert('plan_details',$data);
+
         $aboutimage = $_FILES['aboutimage']['name'];
         $aboutimage_ext = pathinfo($aboutimage, PATHINFO_EXTENSION);
         // echo $banner1_ext;
@@ -593,6 +600,10 @@ class Institute_listing_first extends CI_Controller {
     public function razorPaySuccess() {
         $data = array();
         if($this->session->userdata('planUpdate') == 'platinum') { 
+            $plan_detail = array(
+                'plan' =>'PLATINUM',
+                'paid_amount' => 65000,
+            );
             $data = array(
                 'position_id' => 1,
                 'valitity' => 100,
@@ -600,6 +611,10 @@ class Institute_listing_first extends CI_Controller {
             );
         }
         if($this->session->userdata('planUpdate') == 'premium') { 
+            $plan_detail = array(
+                'plan' =>'PREMIUM',
+                'paid_amount' => 30000,
+            );
             $data = array(
                 'position_id' => 2,
                 'valitity' => 100,
@@ -607,6 +622,10 @@ class Institute_listing_first extends CI_Controller {
             );
         }
         if($this->session->userdata('planUpdate') == 'spectrum') { 
+            $plan_detail = array(
+                'plan' =>'SPECTRUM',
+                'paid_amount' => 12500,
+            );
             $data = array(
                 'position_id' => 3,
                 'valitity' => 100,
@@ -615,6 +634,10 @@ class Institute_listing_first extends CI_Controller {
         }
         if(!empty($data)){
             $this->db->update('institute_details',$data,array('id' => $this->session->userdata('SchoolId')));
+        }
+        if(!empty($plan_detail)){
+            $this->db->update('plan_details',$plan_detail,array('id' => $this->session->userdata('SchoolId')));
+
         }
         $this->db->select('*');
         $this->db->where('id',$this->session->userdata('SchoolId'));
