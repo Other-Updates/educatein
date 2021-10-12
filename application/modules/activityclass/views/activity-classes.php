@@ -1210,6 +1210,11 @@ $ip = $_SERVER['REMOTE_ADDR'];
             });
         });
     });
+    $(document).ready(function(){
+        $( '#enquiry_form' ).each(function(){
+            this.reset();
+        });
+    })
 
 </script>
 <script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  

@@ -1019,6 +1019,11 @@ $ip = $_SERVER['REMOTE_ADDR'];
             }
         })
     });
+    $(document).ready(function(){
+        $( '#enquiry_form1' ).each(function(){
+            this.reset();
+        });
+    })
 </script>
  
  

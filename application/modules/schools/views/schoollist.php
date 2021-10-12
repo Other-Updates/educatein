@@ -1228,6 +1228,11 @@ $ip = $_SERVER['REMOTE_ADDR'];
             });
         });
     });
+    $(document).ready(function(){
+        $( '#enquiry_form' ).each(function(){
+            this.reset();
+        });
+    })
     //To select country name
     function selectSchool(val) {
     $("#search_school").val(val);
