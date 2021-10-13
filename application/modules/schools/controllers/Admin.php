@@ -4448,10 +4448,10 @@ class admin extends CI_Controller {
 
 
 
-            $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,(COALESCE(sd.paid + pd.paid_amount))as paid,sd.school_category_id,sd.expiry_date,sd.expiry_status');
+            $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.expiry_date,sd.expiry_status');
             $this->db->where('sd.deleted_at',NULL);
             $this->db->from('school_details as sd');
-            $this->db->join('plan_details as pd','sd.id=pd.school_id','left');
+            // $this->db->join('plan_details as pd','sd.id=pd.school_id','left');
             if($input_data['type'] == 'approved'){
                 $this->db->where('sd.status',1);
                 // $this->db->where('sd.expiry_status',0);
