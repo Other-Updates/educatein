@@ -1,4 +1,8 @@
-
+<style>
+body{
+    overflow-x: hidden;
+}
+</style>
 <?php
   $this->session->userdata('school');
 //Get User id from url
