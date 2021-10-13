@@ -125,15 +125,12 @@
             }else{
                 if(signemail == ''){
                     $('#signemail').css("border-color", "red");
-                    // swal("Username and password is wmpty");
                 }else{
                     $('#signemail').css("border-color", "");
                 }
                 if(signpassword == ''){
                     $('#signpassword').css("border-color", "red");
                 
-                // swal("Username and password is wmpty");
-
                 }
             }
         });

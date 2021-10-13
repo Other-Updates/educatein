@@ -1242,24 +1242,25 @@
             $(this).remove();
         });
     });
-
     $(document).ready(function () {
         $(".formsubmit").on('click',function (event) {
-            // var usermail = $("#useremail").val();
-            // $.ajax({
-            //         type: "POST",
-            //         data: {usermail:usermail},
-            //         url: "<?php echo base_url("schools/admin/email_exist") ?>",
-            //         dataType: "json",
-            //         success: function (data) {
-            //             if (data.status == "error") {
-            //                 swal(data.message.title);
-            //                 return false;   
-            //             }else{
-            //                 $('#signupschool').submit();
-            //             }
-            //         }
-            // });
+            var usermail = $("#useremail").val();
+            $.ajax({
+                    type: "POST",
+                    data: {usermail:usermail},
+                    url: "<?php echo base_url("schools/admin/email_exist") ?>",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "error") {
+                            // event.preventDefault();
+                            swal(data.message.title);
+                            // return false;   
+                        }
+                        if(data.status == "success"){
+                            $('#signupschool').submit();
+                        }
+                    }
+            });
             if($("#category").val() == 'school') {
                 $("#signupschool").validate({
                     rules: {
@@ -1304,6 +1305,10 @@
                         element.parents('.form-group').append(error);
                 }
                 });
+                // if ($("#signupschool").valid()) {
+                //     $("signupschool").submit();
+                // }
+                // event.preventDefault();
             }
             if($("#category").val() == 'summer_class'){
                 $("#signupschool").validate({
@@ -1348,7 +1353,10 @@
                     }
                 });
             }
-
+            if ($("#signupschool").valid()) {
+                    $("signupschool").submit();
+                }
+                event.preventDefault();
             
         });
         $(".formsubmit").on('click',function (e) {

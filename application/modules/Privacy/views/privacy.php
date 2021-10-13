@@ -208,7 +208,7 @@
 
     <div class="feedback-body">
         <h5 class="mb-3">Submit A Enquiry Form</h5>
-        <form  action="<?php echo base_url() ?>terms/enquiry" method="post">
+        <form  action="<?php echo base_url() ?>terms/enquiry" id="enquiry_form" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Your Name*"  required>
             </div>
@@ -225,12 +225,17 @@
             <div class="form-group">
                 <select class="form-control" name="city" id="city" required>
                     <option value="" selected disabled>-- Select City --</option>
-                    <option value="Coimbatore">Coimbatore</option>
-                    <option value="Chennai">Chennai</option>
-                    <option value="Bangalore">Bangalore</option>
-                    <option value="Madurai">Madurai</option>
-                    <option value="Tripur">Tripur</option>
-                    <option value="Salem">Salem</option>
+                    <?php
+                    $this->db->select('*')->where('is_active =', 1);
+                    $this->db->from('cities');
+                    $city = $this->db->get();
+                    foreach ($city->result() as $cities) {
+                        ?>
+                        <option value="<?php echo $cities->city_name; ?>"><?php echo $cities->city_name; ?></option>
+
+                        <?php
+                    }
+                    ?>
                 </select>
             </div>
             <div class="form-group">
@@ -238,7 +243,7 @@
             </div>
 
             <!-- Button trigger modal -->
-            <button type="submit" class="btn btn-primary btn-block mb-2" data-toggle="modal">Submit</button>
+            <button type="submit" class="btn btn-primary btn-block mb-2" id="enquiry_submit" data-toggle="modal">Submit</button>
         </form>
     </div><!-- /feedback-body -->
 </div><!-- /feedback-form -->
@@ -321,5 +326,29 @@ $ip = $_SERVER['REMOTE_ADDR'];
         $('.toggle').click(function () {
             $('.feedback-form').toggleClass('active')
         })
+        
+        $('#enquiry_submit').on('click',function(){
+            $("#enquiry_form").validate({
+            rules: {
+                name: "required",
+                city: "required",
+                mobile: {
+                    minlength: 10,
+                    maxlength: 10,
+                },
+                email: "required",
+                comment: "required",
+            },
+            errorElement: 'div',
+            errorLabelContainer: '.errorTxt',
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "terms")
+                    element.parents('.custom-checkbox').append(error);
+                else
+                    element.parents('.form-group').append(error);
+            }
+            });
+        });
     })
 </script> 
+<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  
