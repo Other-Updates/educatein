@@ -6,6 +6,7 @@ class Privacy extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->output->set_template('simple');
     }
 
     function index(){
