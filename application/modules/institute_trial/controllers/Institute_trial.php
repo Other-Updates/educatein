@@ -292,7 +292,7 @@ class Institute_trial extends CI_Controller {
 
     public function update_trial($school_id){
         $data = array();
-        $data[] = array(
+        $data = array(
             'position_id' => 4,
             'valitity' => 30,
             'paid' => 0,
