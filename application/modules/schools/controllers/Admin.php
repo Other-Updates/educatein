@@ -2466,7 +2466,7 @@ class admin extends CI_Controller {
         }
 
         //plan history
-        if(!empty($_POST['expiry_status']) && $_POST['expiry_status'] == 0)){
+        if(!empty($_POST['expiry_status']) && $_POST['expiry_status'] == 0){
             if($_POST['position'] == 1){
                 $plan = 'PLATINUM';
                 $amount = 65000;
