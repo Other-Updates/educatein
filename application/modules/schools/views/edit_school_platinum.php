@@ -239,6 +239,12 @@ $about_img = $this->db->get()->result_array();
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
+                            <label for="area">Pincode<span class="error">*</span></label>
+                            <input type="number" name="pincode" class="form-control" id="area" value="<?php echo $school[0]['pincode']; ?>" placeholder="654001" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-group">
                             <label for="level">Grade Level</label>
                             <select class="form-control" name="level" id="exampleFormControlSelect1" required>
                                 <option value="" >e.g. Elementary School</option>

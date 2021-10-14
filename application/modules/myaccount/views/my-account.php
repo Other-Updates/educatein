@@ -34,6 +34,7 @@ if ($user->num_rows() > 0) {
         $pincode = $users->pincode;
         $image = $users->image;
         $cityid = $users->city_id;
+        $ip = $users->ip;
 
         // echo $image;
         // exit();
@@ -250,7 +251,7 @@ if ($user->num_rows() > 0) {
                 </div> -->
 
 
-                <?php if ($address == NULL) { ?>
+                <?php if ($ip == NULL) { ?>
 
                     <h3 class="mb-3">Personal Information</h3>
                     <form class="" enctype="multipart/form-data" name="Form" onsubmit="return validateForm()" method="post" >
@@ -258,7 +259,7 @@ if ($user->num_rows() > 0) {
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <!-- <label for="">Address Line 1</label> -->
-                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required>
+                                    <input type="text" class="form-control" id="address" name="address" <?php if(!empty($users->address)){ ?> value="<?php echo $address ?>" <?php } ?> placeholder="Enter your address" required>
 
                                 </div>
                             </div>

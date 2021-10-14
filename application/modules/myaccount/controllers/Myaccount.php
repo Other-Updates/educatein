@@ -53,6 +53,7 @@ class Myaccount extends CI_Controller {
             'state' => $this->input->post('state'),
             'country' => $this->input->post('country'),
             'pincode' => $this->input->post('pincode'),
+            'ip' => $_SERVER['REMOTE_ADDR'],
         );
         if(!empty($_FILES['image'])){
             $profile = $_FILES['image']['name'];
@@ -141,7 +142,7 @@ class Myaccount extends CI_Controller {
 
     public function edit($user_id){
         $data = array(
-            'address' =>null
+            'ip' =>null
         );
         $this->db->update('user_register',$data,array('id'=>base64_decode($user_id)));
         redirect('myaccount');

@@ -1097,6 +1097,12 @@ $ip = $_SERVER['REMOTE_ADDR'];
     })
     $(document).ready(function(){
         $('#enquiry_submit').on('click',function(){
+            // $.validator.addMethod(
+            //     "regex",
+            //     function(value, element, regexp) {
+            //         var re = new RegExp(regexp);
+            //         return this.optional(element) || re.test(value);
+            //     }
             $("#enquiry_form").validate({
             rules: {
                 name: "required",
@@ -1105,7 +1111,10 @@ $ip = $_SERVER['REMOTE_ADDR'];
                     minlength: 10,
                     maxlength: 10,
                 },
-                email: "required",
+                email: {
+                required: true,
+                email: true,
+                },
                 comment: "required",
             },
             errorElement: 'div',

@@ -1483,7 +1483,7 @@ class admin extends CI_Controller {
             $this->db->update('school_details',$data,array('id'=>$school_id));
         }
 
-        if(!empty($_POST['expiry_status'] == 0)){
+        if(!empty($_POST['expiry_status']) && $_POST['expiry_status'] == 0){
             if($_POST['school_category'] == 1){
                 $plan = 'PLATINUM';
                 $amount = 65000;
@@ -1516,6 +1516,7 @@ class admin extends CI_Controller {
             'email' => $_POST['email'],
             'address' => $_POST['address'],
             'city_id' => $yourcity_id,
+            'pincode' => $_POST['pincode'],
             'area_id' => $area_id,
             // 'school_category_id' => $_POST['school_category'],
             'affiliation_id' => $schoolboard_id,
@@ -2465,7 +2466,7 @@ class admin extends CI_Controller {
         }
 
         //plan history
-        if(!empty($_POST['expiry_status'] == 0)){
+        if(!empty($_POST['expiry_status']) && $_POST['expiry_status'] == 0)){
             if($_POST['position'] == 1){
                 $plan = 'PLATINUM';
                 $amount = 65000;
@@ -3992,7 +3993,6 @@ class admin extends CI_Controller {
                 'is_active' => 1,
                 'valitity'=> $validity,
             );
-            echo "<pre>";print_r($_POST);exit;
             $this->db->insert('institute_details', $classinsert);
 
             $this->db->select('*')->where('slug =', $_POST['institutename']);

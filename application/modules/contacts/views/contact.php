@@ -217,7 +217,7 @@ if ($ip->num_rows() > 0) {
                             <input type="text" name="subject" class="form-control" placeholder="Subject" required>
                         </div>
                         <div class="col-lg-6 col-sm-6 mab-30">
-                            <input type="text" name="phone" class="form-control" placeholder="Phone Number*" pattern="[6789][0-9]{9}" required>
+                            <input type="number" name="phone" class="form-control" placeholder="Phone Number*" pattern="[6789][0-9]{9}" required>
                         </div>
                     </div><!-- /row -->
 

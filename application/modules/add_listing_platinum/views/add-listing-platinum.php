@@ -101,7 +101,7 @@ foreach ($user->result() as $users) {
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="area">Pincode<span class="error">*</span></label>
-                            <input type="text" name="pincode" class="form-control" id="area" placeholder="654001" required>
+                            <input type="number" name="pincode" class="form-control" id="area" placeholder="654001" required>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
