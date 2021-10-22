@@ -2587,30 +2587,30 @@ class admin extends CI_Controller {
         $sub = 'Edugatein - Your School - '.$data['school'][0]['school_name'].' has been approved';
 
 
-        // $config['protocol']    = 'smtp';
-        // $config['smtp_host']    = 'ssl://smtp.googlemail.com';
-        // $config['smtp_port']    = '465';
-        // $config['smtp_timeout'] = '7';
-        // $config['smtp_user']    = 'ftwoftesting@gmail.com';
-        // $config['smtp_pass']    = 'MotivationS@1';
-        // $config['charset']    = 'utf-8';
-        // $config['newline']    = "\r\n";
-        // $config['mailtype'] = 'html'; 
-        // $config['validation'] = TRUE; // bool whether to validate email or not      
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.googlemail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'ftwoftesting@gmail.com';
+        $config['smtp_pass']    = 'MotivationS@1';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html'; 
+        $config['validation'] = TRUE; // bool whether to validate email or not      
 
-        // $this->load->library('email',$config);
+        $this->load->library('email',$config);
 
-        // $this->email->initialize($config);
+        $this->email->initialize($config);
 
-        // $this->email->from('ftwoftesting@gmail.com','Tester');
-        // $this->email->to('sundarabui2k21@gmail.com'); 
-        // $this->email->subject($sub);
-        // $this->email->message($msg);  
+        $this->email->from('ftwoftesting@gmail.com','Tester');
+        $this->email->to('sundarabui2k21@gmail.com'); 
+        $this->email->subject($sub);
+        $this->email->message($msg);  
 
-        // if($this->email->send())
-        // {
-        //     $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-        // }
+        if($this->email->send())
+        {
+            $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+        }
         // else
         // {
         // show_error($this->email->print_debugger());
@@ -2618,27 +2618,53 @@ class admin extends CI_Controller {
 
 
             // Authorisation details.
-        $username = "manikandan@haunuzinfosystems.com";
-        $hash = "cbbb512a1a514916c35b040283ac6dc7df975411a4c6669f738aeab42bfeb128";
+        // $username = "manikandan@haunuzinfosystems.com";
+        // $hash = "viHeFyvXfbw-ILrFTib5Ue23iDmqZD7QXKEOYo7byb";
 
-        // Config variables. Consult http://api.textlocal.in/docs for more info.
-        $test = "0";
+        // // Config variables. Consult http://api.textlocal.in/docs for more info.
+        // $test = "0";
 
-        // Data for text message. This is the text message data.
-        $sender = "TXTLCL"; // This is who the message appears to be from.
-        $numbers = "8667579048"; // A single number or a comma-seperated list of numbers
-        $message = "Hello ".$user_name." your school ".$school_name." has validated and displayed on site,Thank you";
-        // 612 chars or less
-        // A single number or a comma-seperated list of numbers
-        $message = urlencode($message);
-        $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
-        $ch = curl_init('http://api.textlocal.in/send/?');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch); // This is the result from the API
-        curl_close($ch);
+        // // Data for text message. This is the text message data.
+        // $sender = "TXTLCL"; // This is who the message appears to be from.
+        // $numbers = "8667579048"; // A single number or a comma-seperated list of numbers
+        // $message = "Hello ".$user_name." your school ".$school_name." has validated and displayed on site,Thank you";
+        // // 612 chars or less
+        // // A single number or a comma-seperated list of numbers
+        // $message = urlencode($message);
+        // $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+        // $ch = curl_init('http://api.textlocal.in/send/?');
+        // curl_setopt($ch, CURLOPT_POST, true);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // $result = curl_exec($ch); // This is the result from the API
+        // curl_close($ch);
 
+
+
+    //     $username = "manikandan@haunuzinfosystems.com";
+	// $hash = "cbbb512a1a514916c35b040283ac6dc7df975411a4c6669f738aeab42bfeb128";
+
+	// // Config variables. Consult http://api.textlocal.in/docs for more info.
+	// $test = "0";
+
+	// // Data for text message. This is the text message data.
+	// $sender = "TXTLCL"; // This is who the message appears to be from.
+	// $numbers = "8667579048"; // A single number or a comma-seperated list of numbers
+	// // $message = "This is a otp message from the edugatein.the otp is ($numbers)";
+	// // $message = "This is a otp message from the edugatein.the otp is ($numbers)";
+	// // 612 chars or less
+	// // A single number or a comma-seperated list of numbers
+	// $message = urlencode($message);
+	// $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+	// $ch = curl_init('http://api.textlocal.in/send/?');
+	// curl_setopt($ch, CURLOPT_POST, true);
+	// curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// $result = curl_exec($ch); // This is the result from the API
+	// curl_close($ch);
+
+
+            // print_r($result);exit;
         redirect('admin/schools/view_school?id='.$school_id);
     }
 
@@ -4451,7 +4477,8 @@ class admin extends CI_Controller {
             $this->db->select('sd.id,sd.school_name,ci.city_name,sd.created_at,ur.name as user,sd.status,sd.paid,sd.school_category_id,sd.expiry_date,sd.expiry_status');
             $this->db->where('sd.deleted_at',NULL);
             $this->db->from('school_details as sd');
-            // $this->db->join('plan_details as pd','sd.id=pd.school_id','left');
+            $this->db->join('plan_details as pd','sd.id=pd.school_id','left');
+            // $this->db->group_by('pd.school_id');
             if($input_data['type'] == 'approved'){
                 $this->db->where('sd.status',1);
                 // $this->db->where('sd.expiry_status',0);
