@@ -352,8 +352,9 @@ if ($user->num_rows() > 0) {
                                 </div>
                                 <div class="col-lg-4 col-sm-6" style="display:none">
                                     <div class="form-group">
-                                        <label for="">email</label>
+                                        <label for="">email</label>userid
                                         <input type="email" class="form-control" id="newemail" name="newemail" value="<?php echo $email ?>">
+                                        <input type="hidden" class="form-control" id="userid" name="userid" value="<?php echo $userid ?>">
                                     </div>
                                 </div>
 
@@ -455,6 +456,7 @@ if ($user->num_rows() > 0) {
                                     <div class="form-group">
                                         <label for="">email</label>
                                         <input type="email" class="form-control" id="newemail" name="newemail" value="<?php echo $email ?>">
+                                        <input type="hidden" class="form-control" id="userid" name="userid" value="<?php echo $userid ?>">
                                     </div>
                                 </div>
 
@@ -585,7 +587,7 @@ if ($user->num_rows() > 0) {
 
         if (newpassword1 != newpassword2)
         {
-            alert("Your Password is Not Matching");
+            swal("Your Password is Not Matching");
             event.preventDefault();
         }
 
