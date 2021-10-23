@@ -2294,55 +2294,55 @@ class admin extends CI_Controller {
     // }
 
         //about image
-        // $aboutimgupdate = array(); $aboutimginsert = array();
-        // // print_r($_FILES['aboutimage']);exit;
-        // if(!empty($_FILES['aboutimage'])){
-        //     $aboutimage = $_FILES['aboutimage']['name'];
-        //     $aboutimage_ext = pathinfo($aboutimage, PATHINFO_EXTENSION);
-        //     // echo $banner1_ext;
-        //     // exit();
-        //     $aboutimage_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $aboutimage_ext;
-        //     $aboutimage_type = $_FILES['aboutimage']['type'];
-        //     $aboutimage_size = $_FILES['aboutimage']['size'];
-        //     $aboutimage_tem_loc = $_FILES['aboutimage']['tmp_name'];
-        //     $aboutimage_store = FCPATH . "/laravel/public/" . $aboutimage_name;
+        $aboutimgupdate = array(); $aboutimginsert = array();
+        // print_r($_FILES['aboutimage']);exit;
+        if(!empty($_FILES['aboutimage']['name'])){
+            $aboutimage = $_FILES['aboutimage']['name'];
+            $aboutimage_ext = pathinfo($aboutimage, PATHINFO_EXTENSION);
+            // echo $banner1_ext;
+            // exit();
+            $aboutimage_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $aboutimage_ext;
+            $aboutimage_type = $_FILES['aboutimage']['type'];
+            $aboutimage_size = $_FILES['aboutimage']['size'];
+            $aboutimage_tem_loc = $_FILES['aboutimage']['tmp_name'];
+            $aboutimage_store = FCPATH . "/laravel/public/" . $aboutimage_name;
 
-        //     $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
+            $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
 
-        //     if(in_array($aboutimage_ext, $allowed)) {
-        //         if(move_uploaded_file($aboutimage_tem_loc, $aboutimage_store)) {
-        //             $image = $aboutimage_name;
-        //         }
-        //     }
-        // } else {
-        //     $image = $_POST['aboutoldimage'];
-        // }
+            if(in_array($aboutimage_ext, $allowed)) {
+                if(move_uploaded_file($aboutimage_tem_loc, $aboutimage_store)) {
+                    $image = $aboutimage_name;
+                }
+            }
+        } else {
+            $image = $_POST['aboutoldimage'];
+        }
         
-        // if(!empty($_POST['aboutoldimage_id'])){
-        //     $aboutimgupdate[] = array(
-        //         'id' => $_POST['aboutoldimage_id'],
-        //         'category_id' => 1,
-        //         'image' => $image,
-        //         'is_active' => 1
-        //     );
-        // }else{
-        //     $aboutimginsert[] = array(
-        //         'institute_id' => $school_id,
-        //         'category_id' => 1,
-        //         'image' => $image,
-        //         'is_active' => 1
-        //     );
-        // }
-        // // echo "<pre>";print_r($aboutimgupdate);print_r($aboutimginsert); exit;
-        // if(!empty($aboutimgupdate)){
-        //     $this->db->update('institute_images', $aboutimgupdate,array('id'=>$_POST['aboutoldimage_id']));
-        // }
-        // if(!empty($aboutimginsert)){
-        //     $this->db->insert('institute_images', $aboutimginsert);
-        // }
+        if(!empty($_POST['aboutoldimage_id'])){
+            $aboutimgupdate = array(
+                'id' => $_POST['aboutoldimage_id'],
+                'category_id' => 1,
+                'image' => $image,
+                'is_active' => 1
+            );
+        }else{
+            $aboutimginsert = array(
+                'institute_id' => $school_id,
+                'category_id' => 1,
+                'image' => $image,
+                'is_active' => 1
+            );
+        }
+        // echo "<pre>";print_r($aboutimgupdate);print_r($aboutimginsert); exit;
+        if(!empty($aboutimgupdate)){
+            $this->db->update('institute_images', $aboutimgupdate,array('id'=>$_POST['aboutoldimage_id']));
+        }
+        if(!empty($aboutimginsert)){
+            $this->db->insert('institute_images', $aboutimginsert);
+        }
 
-        if(!empty($_FILES['newsbanner'])){
+        if(!empty($_FILES['newsbanner']['name'])){
             $newsbanner1 = $_FILES['newsbanner']['name'];
             $newsbanner1_ext = pathinfo($newsbanner1, PATHINFO_EXTENSION);
             // echo $banner1_ext;
@@ -2405,7 +2405,7 @@ class admin extends CI_Controller {
                 }
             }
         }
-        if(isset($_FILES['banner'])){
+        if(!empty($_FILES['banner1']['name'])){
             $banner1 = $_FILES['banner1']['name'];
             $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
             // echo $banner1_ext;
@@ -2430,7 +2430,7 @@ class admin extends CI_Controller {
         }
         if(!empty($_POST['old_logo_imageid'])){
             $banner1update = array(
-                        'id' => $_POST['old_logo_imageid'],
+                        // 'id' => $_POST['old_logo_imageid'],
                         'category_id' => 3,
                         'image' => $banner1_name,
                         'is_active' => 1
@@ -2446,7 +2446,7 @@ class admin extends CI_Controller {
         if(!empty($banner1update)){
             $this->db->update('institute_images',$banner1update,array('id'=>$_POST['old_logo_imageid']));
         }
-        if(!empty($bannerinsert)){
+        if(!empty($banner1insert)){
             $this->db->insert('institute_images',$banner1insert);
         }
         if(!empty($_POST['expiry_status'] == 1)){
