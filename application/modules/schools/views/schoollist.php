@@ -1112,20 +1112,33 @@ $ip = $_SERVER['REMOTE_ADDR'];
                     maxlength: 10,
                 },
                 email: {
-                required: true,
-                email: true,
+                    required:  {
+                                depends:function(){
+                                    $(this).val($.trim($(this).val()));
+                                    return true;
+                                }   
+                            },
+                        customemail: true
                 },
                 comment: "required",
             },
             errorElement: 'div',
             errorLabelContainer: '.errorTxt',
             errorPlacement: function (error, element) {
-                if (element.attr("name") == "terms")
-                    element.parents('.custom-checkbox').append(error);
-                else
-                    element.parents('.form-group').append(error);
+                if (element.attr("name") == "terms"){
+                    element.parents('.custom-checkbox').append(error); }
+                else{
+                    element.parents('.form-group').append(error); }
             }
+            
+            
             });
+            $.validator.addMethod("customemail", 
+                function(value, element) {
+                return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
+                    }, 
+                "Please enter a valid email address."
+            );
         });
     });
 

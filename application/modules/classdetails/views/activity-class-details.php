@@ -739,46 +739,74 @@ $similar_school = $this->db->get();
     $(document).ready(function(){
         $('#enquiry_submit').on('click',function(){
             $("#enquiry_form").validate({
-            rules: {
-                firstname: "required",
-                mobile: {
-                    minlength: 10,
-                    maxlength: 10,
+                rules: {
+                    firstname: "required",
+                    mobile: {
+                        minlength: 10,
+                        maxlength: 10,
+                    },
+                    email: {
+                        required:  {
+                                    depends:function(){
+                                        $(this).val($.trim($(this).val()));
+                                        return true;
+                                    }   
+                                },
+                            customemail: true
+                    },
+                    enquiry: "required",
                 },
-                email: "required",
-                enquiry: "required",
-            },
-            errorElement: 'div',
-            errorLabelContainer: '.errorTxt',
-            errorPlacement: function (error, element) {
-                if (element.attr("name") == "terms")
-                    element.parents('.custom-checkbox').append(error);
-                else
-                    element.parents('.form-group').append(error);
-            }
+                errorElement: 'div',
+                errorLabelContainer: '.errorTxt',
+                errorPlacement: function (error, element) {
+                    if (element.attr("name") == "terms")
+                        element.parents('.custom-checkbox').append(error);
+                    else
+                        element.parents('.form-group').append(error);
+                }
             });
+            $.validator.addMethod("customemail", 
+                function(value, element) {
+                return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
+                    }, 
+                "Please enter a valid email address."
+            );
         });
         $('#submit_enq').on('click',function(){
             $("#enquiry_form1").validate({
-            rules: {
-                name: "required",
-                city: "required",
-                mobile: {
-                    minlength: 10,
-                    maxlength: 10,
+                rules: {
+                    name: "required",
+                    city: "required",
+                    mobile: {
+                        minlength: 10,
+                        maxlength: 10,
+                    },
+                    email: {
+                        required:  {
+                                    depends:function(){
+                                        $(this).val($.trim($(this).val()));
+                                        return true;
+                                    }   
+                                },
+                            customemail: true
+                    },
+                    comment: "required",
                 },
-                email: "required",
-                comment: "required",
-            },
-            errorElement: 'div',
-            errorLabelContainer: '.errorTxt',
-            errorPlacement: function (error, element) {
-                if (element.attr("name") == "terms")
-                    element.parents('.custom-checkbox').append(error);
-                else
-                    element.parents('.form-group').append(error);
-            }
+                errorElement: 'div',
+                errorLabelContainer: '.errorTxt',
+                errorPlacement: function (error, element) {
+                    if (element.attr("name") == "terms")
+                        element.parents('.custom-checkbox').append(error);
+                    else
+                        element.parents('.form-group').append(error);
+                }
             });
+            $.validator.addMethod("customemail", 
+                function(value, element) {
+                return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
+                    }, 
+                "Please enter a valid email address."
+            );
         });
     });
     $('#sd-menu a').click(function(e) {

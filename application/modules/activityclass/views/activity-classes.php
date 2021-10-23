@@ -1196,7 +1196,15 @@ $ip = $_SERVER['REMOTE_ADDR'];
                     minlength: 10,
                     maxlength: 10,
                 },
-                email: "required",
+                email: {
+                    required:  {
+                                depends:function(){
+                                    $(this).val($.trim($(this).val()));
+                                    return true;
+                                }   
+                            },
+                        customemail: true
+                },
                 comment: "required",
             },
             errorElement: 'div',
@@ -1208,6 +1216,12 @@ $ip = $_SERVER['REMOTE_ADDR'];
                     element.parents('.form-group').append(error);
             }
             });
+            $.validator.addMethod("customemail", 
+                function(value, element) {
+                return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
+                    }, 
+                "Please enter a valid email address."
+            );
         });
     });
     $(document).ready(function(){
