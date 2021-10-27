@@ -108,7 +108,7 @@
                         </div>
                     </div><!-- /row -->
 
-                    <p class="new-signin-copyright">&copy; 2021 Edugatein.com All Rights Reserved.</p>
+                    <!-- <p class="new-signin-copyright">&copy; 2021 Edugatein.com All Rights Reserved.</p> -->
                 </div><!-- /new-signin-right -->
             </div>
         </div><!-- /row -->
@@ -207,7 +207,7 @@
                         } else {
                             $("#mobileshort").text(data.data.mobile);
                             $("#contact_email").val(data.data.contact_email);
-                            $("#otp").val(data.data.otp);
+                            // $("#otp").val(data.data.otp);
                             $('#exampleModalCenter').modal('show');
                         }
                     }
