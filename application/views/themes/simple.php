@@ -162,7 +162,7 @@
                             </li>
                         <?php } else { ?>
                             <li class="nav-item dropdown login-dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login/Register</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Post Free/Login</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item"  href="<?php echo base_url() ?>signin" target="_blank">
                                         <div class="media" id="school">
