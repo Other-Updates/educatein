@@ -124,7 +124,7 @@ if($uccity == "Enquiry" || $uccity == "Otp")
 						<form action="<?php echo base_url() ?>schools-list" method="get">
 							<div class="input-group">
 							  	<input type="text" class="form-control search_filter" name="search_class" id="search_class" placeholder="Search your activity classes..." aria-label="Recipient's username" aria-describedby="button-addon2">
-							  	<input type="hidden" class="form-control" name="city" value="<?php echo $yourcity; ?>"  aria-label="Recipient's username" aria-describedby="button-addon2">
+							  	<input type="hidden" class="form-control" name="searchcity" value="<?php echo $yourcity; ?>"  aria-label="Recipient's username" aria-describedby="button-addon2">
 								  <div class="search-list"><ul id="suggesstion-box"></ul></div>
 			
 							  	<div class="input-group-append">

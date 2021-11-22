@@ -45,7 +45,7 @@ class Search extends CI_Controller {
     }
 
 
-    public function search_school($search,$limit=null, $start=null){
+    public function search_school($search){
         $session = $this->session->userdata();
         $where = "sd.is_active=1 AND sd.status=1 AND sd.expiry_status !=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
         $this->db->select('sd.*,af.affiliation_name,ar.area_name');
@@ -61,16 +61,16 @@ class Search extends CI_Controller {
         $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
         $this->db->join('areas as ar','sd.area_id=ar.id','left');
         $data["search"] = "Schools in " . ucfirst($session["search_city"]);
-        if(!empty($limit)){
-            $this->db->limit($limit, $start);
+        // if(!empty($limit)){
+            $this->db->limit(12);
             $data['schools'] = $this->db->get()->result_array();
             return $data;
-        }else{
-            return $this->db->get()->num_rows();
-        }
+        // }else{
+            // return $this->db->get()->num_rows();
+        // }
     }
 
-    public function search_class($search,$limit=null, $start=null){
+    public function search_class($search){
         $session = $this->session->userdata();
         $where = "ind.is_active=1 AND ind.status=1 AND ind.expiry_status !=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
         $this->db->select('ind.*,ic.category_name,ar.area_name');
@@ -84,13 +84,13 @@ class Search extends CI_Controller {
         $this->db->join('areas as ar','ind.area_id=ar.id','left');
         // $data['activityclass'] = $this->db->get()->result_array();
         $data["search"] = "Activity Classes in " . ucfirst($session["search_city"]);
-        if(!empty($limit)){
-            $this->db->limit($limit, $start);
+        // if(!empty($limit)){
+            $this->db->limit(12);
             $data['activityclass'] = $this->db->get()->result_array();
             return $data;
-        }else{
-            return $this->db->get()->num_rows();
-        }
+        // }else{
+        //     return $this->db->get()->num_rows();
+        // }
     }
 
     public function createPageinatation($count,$link,$params=''){
@@ -106,7 +106,6 @@ class Search extends CI_Controller {
         return $this->pagination->create_links();
     }
 
-
     public function index() {
         if(!empty($_GET['searchcity'])){
             $this->db->select('*');
@@ -121,6 +120,8 @@ class Search extends CI_Controller {
         $data = array("search" => "");
         $session = $this->session->userdata();
         // print_r($session['city_id']);
+        $data['search_school'] = $school;
+        $data['search_class'] = $activityclass;
         $data["city"] = $session["search_city"];
         $fields = 'sd.*,af.affiliation_name,a.area_name';
         $join_tables[] = array(
@@ -138,16 +139,16 @@ class Search extends CI_Controller {
         // }
         // $data['schools'] = $this->Base_Model->getAdvanceList('school_details sd ', $join_tables, $fields, $sub_where, array('return' => 'result_array'), 'sd.id', '', '', 6);
         if(isset($_GET['search'])){
-            $data["links"] = $this->createPageinatation($this->search_school($_GET['search']),'schools-list','search');
-            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-            $data1 = $this->search_school($_GET['search'],$this->page_count, $page);
+            // $data["links"] = $this->createPageinatation($this->search_school($_GET['search']),'schools-list','search');
+            // $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $data1 = $this->search_school($_GET['search']);
             $data['schools'] =  $data1['schools'];
             $data['search'] =  $data1['search'];
         }
         if(isset($_GET['search_class'])){
-            $data["links"] = $this->createPageinatation($this->search_class($_GET['search_class']),'schools-list','search_class');
-            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-            $data1 = $this->search_class($_GET['search_class'],$this->page_count, $page);
+            // $data["links"] = $this->createPageinatation($this->search_class($_GET['search_class']),'schools-list','search_class');
+            // $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+            $data1 = $this->search_class($_GET['search_class']);
 
             $data['activityclass'] =  $data1['activityclass'];
             $data['search'] =  $data1['search'];
@@ -163,6 +164,51 @@ class Search extends CI_Controller {
         $data['allcity'] = $this->db->get()->result();
 
         $this->load->view('search-list', $data);
+    }
+
+    public function autoload_school(){
+        $limit = 12;
+        $page = $_POST['page'];
+        $search = $_POST['search'];
+        $session = $this->session->userdata();
+        $where = "sd.is_active=1 AND sd.status=1 AND sd.expiry_status !=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
+        $this->db->select('sd.*,af.affiliation_name,ar.area_name');
+        if(!empty($session['city_id']))
+        $this->db->where('sd.city_id',$session['city_id']);
+        if(!empty($session['search_city']))
+        $this->db->where('ci.city_name',ucfirst($session['search_city']));
+        $this->db->where($where);
+        $this->db->like('sd.school_name',$search);
+        $this->db->order_by('school_category_id');
+        $this->db->from('school_details as sd');
+        $this->db->join('cities as ci','sd.city_id=ci.id','left');
+        $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
+        $this->db->join('areas as ar','sd.area_id=ar.id','left');
+        $this->db->limit($page,$limit);
+        $query = $this->db->get()->result_array();
+        echo json_encode($query);
+        exit;
+    }
+
+    public function autoload_class(){
+        $limit = 12;
+        $page = $_POST['page'];
+        $search = $_POST['search'];
+        $session = $this->session->userdata();
+        $where = "ind.is_active=1 AND ind.status=1 AND ind.expiry_status !=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+        $this->db->select('ind.*,ic.category_name,ar.area_name');
+        if(!empty($session['city_id']))
+        $this->db->where('ind.city_id',$session['city_id']);
+        $this->db->where($where);
+        $this->db->like('ind.institute_name',$search);
+        $this->db->order_by('position_id');
+        $this->db->from('institute_details as ind');
+        $this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
+        $this->db->join('areas as ar','ind.area_id=ar.id','left');
+        $this->db->limit($page,$limit);
+        $query = $this->db->get()->result_array();
+        echo json_encode($query);
+        exit;
     }
 
 }

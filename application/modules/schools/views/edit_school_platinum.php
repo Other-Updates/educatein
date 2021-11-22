@@ -183,7 +183,7 @@ $about_img = $this->db->get()->result_array();
             </div>
         </div><!-- /section-title -->
         <div class="listing-section mat-30">
-            <form action="<?php echo base_url() ?>schools/admin/update_school" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url() ?>schools/admin/update_school" id="edit_form" method="post" enctype="multipart/form-data">
             <div class="edit-school-inner">
                 <div class="form-row">
                     <div class="col-lg-3 col-sm-6" style="display:none">
@@ -744,28 +744,43 @@ $about_img = $this->db->get()->result_array();
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="schoolboard">Expiry status</label>
-                            <select class="form-control" name="expiry_status" id="exampleFormControlSelect1" required>
+                            <select class="form-control expiry_status" name="expiry_status" id="exampleFormControlSelect1" required>
                                 <option value="1"<?php if('1' == $school[0]['expiry_status']){echo "selected";} ?>>Expired</option>
                                 <option value="0"<?php if('0' == $school[0]['expiry_status']){echo "selected";} ?>>Extend</option>
                                 <!-- <option>Other</option> -->
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-3 col-sm-6 select_plan">
                         <div class="form-group">
                             <label for="schoolboard">Plan</label>
-                            <select class="form-control" name="school_category" id="exampleFormControlSelect1" required>
+                            <select class="form-control" name="school_category" id="exampleFormControlSelect1" >
                             <option value="" >--Select--</option>
                                         <option value="1" <?php if('1' == $school[0]['school_category_id']){ echo "selected"; } ?>>Platinum</option>
                                         <option value="2" <?php if('2' == $school[0]['school_category_id']){ echo "selected"; } ?>>Premium</option>
                                         <option value="3" <?php if('3' == $school[0]['school_category_id']){ echo "selected"; } ?>>Spectrum</option>
-                                        <option value="4" <?php if('4' == $school[0]['school_category_id']){ echo "selected"; } ?>>Trial</option>
                                 <!-- <option>Other</option> -->
                             </select>
                         </div>
                     </div>
                 </div>
             <?php } ?>
+            <div class="edit-school-inner">
+                <div class="form-row form-group custom-checkbox">
+                    <ul style="list-style: none;">
+                    <li><label>Upgrade Plan &nbsp;</label>
+                <input class="upgrade" type="checkbox" class="custom-control-input" name="upgrade" value="1" onchange="valueChanged()"/></li>
+            </ul>
+            <!-- <label for="schoolboard">Plan</label> -->
+                            <select class="form-control upgrade_plan" name="upgrade_plan" id="exampleFormControlSelect1">
+                            <option value="" >--Select--</option>
+                                        <option value="1" <?php if('1' == $school[0]['school_category_id']){ echo "selected"; } ?>>Platinum</option>
+                                        <option value="2" <?php if('2' == $school[0]['school_category_id']){ echo "selected"; } ?>>Premium</option>
+                                        <option value="3" <?php if('3' == $school[0]['school_category_id']){ echo "selected"; } ?>>Spectrum</option>
+                                <!-- <option>Other</option> -->
+                            </select>
+                </div><!-- /form-row -->
+            </div>
             <div class="edit-school-inner">
             <a href="<?php echo base_url('schools/admin')?>"><button type="button" class="btn btn-danger">CANCEL</button></a>
                 <button class="btn btn-primary btn-save float-right" id="formsubmit">SUBMIT</button>
@@ -775,8 +790,26 @@ $about_img = $this->db->get()->result_array();
     </div><!-- /container -->
 </div><!-- /dashboard-content -->
 <script>
+    function valueChanged()
+    {
+        if($('.upgrade').is(":checked"))   
+            $(".upgrade_plan").show();
+        else
+            $(".upgrade_plan").hide();
+    }
     $(document).ready(function () {
+        $(".upgrade_plan").hide();
+        $(".select_plan").hide();
 
+        function DropdownChanged()
+        {
+            if($('.expiry_status').val() == 0 )   
+            // console.log($('.expiry_status').val());
+                $(".select_plan").show();
+            else
+                $(".select_plan").hide();
+        }
+        $(".expiry_status").on("change", DropdownChanged);
         //activity add more
         var max_fields = 50; //maximum input boxes allowed
         var activity = $("#actmore"); //Fields wrapper
@@ -819,5 +852,30 @@ $about_img = $this->db->get()->result_array();
             x--;
         })
 
+        // if($('.upgrade').is(":checked")){
+            // $('#formsubmit').on('click',function(){
+            //     $("#edit_form").validate({
+            //         rules: {
+            //             upgrade_plan: 
+            //             required: function (element){
+            //             if($('.upgrade').is(":checked")){
+            //                 element.parents('.custom-checkbox').append(error);
+                            
+            //             }
+            //             // else{
+            //             //     return false;
+            //             // }
+            //             }
+            //         },
+            //         // errorElement: 'div',
+            //         // errorLabelContainer: '.errorTxt',
+            //         // errorPlacement: function (error, element) {
+            //         //         element.parents('.custom-checkbox').append(error);
+            //         // }
+            //     });
+            // });
+        // }   
+
     });
 </script>
+<script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>  

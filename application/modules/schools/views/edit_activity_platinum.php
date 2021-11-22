@@ -484,28 +484,43 @@ $user = $this->db->get()->result_array();
                     <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="schoolboard">Expiry status</label>
-                            <select class="form-control" name="expiry_status" id="exampleFormControlSelect1" required>
+                            <select class="form-control expiry_status" name="expiry_status" id="exampleFormControlSelect1" required>
                                 <option value="1"<?php if('1' == $institute[0]['expiry_status']){echo "selected";} ?>>Expired</option>
                                 <option value="0"<?php if('0' == $institute[0]['expiry_status']){echo "selected";} ?>>Extend</option>
                                 <!-- <option>Other</option> -->
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-3 col-sm-6 select_plan">
                         <div class="form-group">
                             <label for="schoolboard">Plan</label>
-                            <select class="form-control" name="position" id="exampleFormControlSelect1" required>
+                            <select class="form-control" name="position" id="exampleFormControlSelect1" >
                             <option value="" >--Select--</option>
                                         <option value="1" <?php if('1' == $institute[0]['position_id']){ echo "selected"; } ?>>Platinum</option>
                                         <option value="2" <?php if('2' == $institute[0]['position_id']){ echo "selected"; } ?>>Premium</option>
                                         <option value="3" <?php if('3' == $institute[0]['position_id']){ echo "selected"; } ?>>Spectrum</option>
-                                        <option value="4" <?php if('4' == $institute[0]['position_id']){ echo "selected"; } ?>>Trial</option>
                                 <!-- <option>Other</option> -->
                             </select>
                         </div>
                     </div>
                 </div>
             <?php } ?>
+            <div class="edit-school-inner">
+                <div class="form-row form-group custom-checkbox">
+                    <ul style="list-style: none;">
+                    <li><label>Upgrade Plan &nbsp;</label>
+                <input class="upgrade" type="checkbox" class="custom-control-input" name="upgrade" value="1" onchange="valueChanged()"/></li>
+            </ul>
+            <!-- <label for="schoolboard">Plan</label> -->
+                            <select class="form-control upgrade_plan" name="upgrade_plan" id="exampleFormControlSelect1">
+                            <option value="" >--Select--</option>
+                                        <option value="1" <?php if('1' == $institute[0]['position_id']){ echo "selected"; } ?>>Platinum</option>
+                                        <option value="2" <?php if('2' == $institute[0]['position_id']){ echo "selected"; } ?>>Premium</option>
+                                        <option value="3" <?php if('3' == $institute[0]['position_id']){ echo "selected"; } ?>>Spectrum</option>
+                                <!-- <option>Other</option> -->
+                            </select>
+                </div><!-- /form-row -->
+            </div>
             <div class="edit-school-inner">
                 <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger ">CANCEL</button></a>
                 <button type="submit" class="btn btn-primary btn-save float-right">SUBMIT</button>
@@ -521,8 +536,25 @@ $user = $this->db->get()->result_array();
 //   $("#actmore").append('<div class="form-row mt-3" id="actmore"><div class="col-lg-3 col-sm-6 form-group"><input type="text" class="form-control" id="activity" name="activity" placeholder="Sports"></div><div class="col-lg-7 col-sm-6"><div class="input-group mb-3 custom-file"><input type="file" class="" id="activityimage" name="activityimage" accept="image/x-png,image/gif,image/jpeg" id="" aria-describedby=""></div></div><div class="col-lg-2 col-sm-6 form-group"><a class="btn btn-primary addmore-show  add_field_button1" id="addmore">Add More</a><a href="#" class="btn btn-danger">Remove</a></div></div>');
 // });
 
-
+    function valueChanged()
+        {
+            if($('.upgrade').is(":checked"))   
+                $(".upgrade_plan").show();
+            else
+                $(".upgrade_plan").hide();
+        }
     $(document).ready(function () {
+        $(".upgrade_plan").hide();
+        $(".select_plan").hide();
+
+        function DropdownChanged()
+        {
+            if($('.expiry_status').val() == 0 )   
+                $(".select_plan").show();
+            else
+                $(".select_plan").hide();
+        }
+        $(".expiry_status").on("change", DropdownChanged);
 //categories add more
         var max_fields = 50; //maximum input boxes allowed
         var activity = $("#insmore"); //Fields wrapper

@@ -175,6 +175,18 @@
                                             </div>
                                         </div><!-- /media -->
                                     </a>
+                                    <a class="dropdown-item" href="<?php echo base_url() ?>schools/post_free" target="_blank">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <img src="<?php echo base_url() ?>assets/front/images/dashboard/student.png" width="40px" alt="">
+                                            </div>
+                                            <div class="media-body pl-3">
+                                                <h6>Post free</h6>
+                                                <small></small>
+                                            </div>
+                                        </div>
+                                        <!-- /media -->
+                                    </a>
                                     <!-- <a class="dropdown-item" href="<?php echo base_url() ?>signin-student" target="_blank">
                                         <div class="media">
                                             <div class="media-left">

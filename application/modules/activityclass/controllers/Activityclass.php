@@ -194,6 +194,25 @@ class Activityclass extends CI_Controller {
         $this->load->view('activity-classes', $query);
     }
 
+    public function get_class(){
+        $limit = 12; 
+        $affiliation = $_POST['affiliation'];
+        $yourcity_id = $_POST['yourcity_id'];
+        $page = $_POST['page'];
+        $page = $limit * $page;
+        $where2 = "ind.is_active=1 AND (ind.position_id=3 OR ind.position_id=4) AND ind.expiry_status !=1 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
+        $this->db->select('ind.*')->where($where2);
+        if(!empty($this->session->userdata('search_city')))
+        $this->db->where('ci.city_name',ucfirst($this->session->userdata('search_city')));
+        $this->db->order_by('ind.institute_name');
+        $this->db->join('cities as ci','ind.city_id=ci.id','left');
+        $this->db->from('institute_details as ind');
+        $this->db->limit($page,$limit);
+        $school_spectrum = $this->db->get()->result_array();
+        echo json_encode($school_spectrum);
+        exit;
+    }
+
     function home_page_count() {
 
 //        Welcome_message page top Start

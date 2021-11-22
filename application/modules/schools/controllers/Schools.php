@@ -127,4 +127,25 @@ class Schools extends CI_Controller {
         return $this->pagination->create_links();
     }
 
+    public function get_schools(){
+        // $limit = 12; 
+        // $page = $limit * $_POST['page'];
+        $page = $_POST['page'];
+        $limit = $_POST['limit'];
+        $where2 = "sd.is_active=1 AND sd.status=1 AND sd.activated_at != 'NULL' AND sd.valitity != 'NULL' AND (sd.school_category_id=4 OR sd.school_category_id=3) AND sd.expiry_status !=1 AND sd.affiliation_id=" . $_POST['affiliation'] . " AND sd.city_id =" . $_POST['yourcity_id'] . " AND sd.deleted_at is NULL";
+                $this->db->select('sd.*,st.school_type')->where($where2);
+                $this->db->order_by('sd.school_category_id');
+                $this->db->join('school_types as st','sd.schooltype_id=st.id','left');
+                $this->db->from('school_details as sd');
+                $this->db->limit($page,$limit);
+                $school_spectrum = $this->db->get()->result_array();
+                // echo $this->db->last_query();
+                echo json_encode($school_spectrum);
+                exit;
+    }
+
+    public function post_free(){
+        $this->load->view('post_free');
+    }
+
 }

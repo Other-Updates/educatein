@@ -505,7 +505,8 @@ if ($aff_url == "dance-class") {
             $this->db->order_by('ind.institute_name');
             $this->db->join('cities as ci','ind.city_id=ci.id','left');
             $this->db->from('institute_details as ind');
-            $this->db->limit(12, $page);
+            // $this->db->limit(12, $page);
+            $this->db->limit(12);
             $school_spectrum = $this->db->get()->result_array();
 
             $where2 = "ind.is_active=1 AND (ind.position_id=3 OR ind.position_id=4) AND ind.expiry_status !=1 AND ind.status=1 AND ind.category_id=" . $affiliation . " AND ind.city_id =" . $yourcity_id . " AND ind.valitity IS NOT NULL AND ind.deleted_at IS NULL";
@@ -524,6 +525,8 @@ if ($aff_url == "dance-class") {
             $school_links = customcreatePageinatation($school_spectrum_count,$page,$link);
             
             ?>
+            <input type="hidden" name="affiliation" id="affiliation" value="<?php echo $affiliation ?>">
+            <input type="hidden" name="yourcity_id" id="yourcity_id" value="<?php echo $yourcity_id ?>">
 
         <?php if(!empty($topschool->result()) || !empty($school_premium) || !empty($school_spectrum) ){ ?>
             <?php if($topschool->num_rows() != 0 ){ ?>
@@ -665,52 +668,58 @@ if ($aff_url == "dance-class") {
                     </div><!-- /owl-carousel -->
                 </div><!-- /top-school-widget -->
             <?php } ?>
+            <input type="hidden" name="AffiliationName" id="AffiliationName" value="<?php echo strtolower($aff_name) ?>">
+            <input type="hidden" name="YourCity" id="YourCity" value="<?php echo $yourcity?>">
             <?php if(!empty($school_spectrum)){ ?>
                 <div class="third-cat mab-50 home-tsw top-school-widget mab-20">
+                    <input type="hidden" id="school_spectrum_current_count" value="<?php echo count($school_spectrum);?>"/>
+                    <input type="hidden" id="school_spectrum_data_exists" value="<?php echo (count($school_spectrum) < 12) ? 0 : 1;?>"/>
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <span><?php echo $yourcity; ?></span></h3>
                     </div>
-                    <div class="row equal">
-                        <?php foreach($school_spectrum as $spectrum){ 
-                            $class = strtolower($aff_name);
-                            $class = str_replace(" ","-",$class);
-                            ?>
-                            <div class="col-md-3">
-                                <?php if($spectrum['position_id'] == 3){ ?>
-                                <div class="schoolist-inner spectrum">
-                                    <?php } ?>
-                                    <?php if($spectrum['position_id'] == 4){ ?>
-                                <div class="schoolist-inner trial">
-                                        <?php } ?>
-                                    <a href="<?php echo base_url() ?>list-of-best-<?php echo $class ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['institute_name']); ?>" target="_blank">
-                                        <figure>
-                                            <?php if($spectrum['position_id'] == 3){ ?>
-                                                <div class="package-name">Spectrum</div>
+                    <!-- <div class="scroll_class"> -->
+                            <div class="row equal">
+                                <?php foreach($school_spectrum as $spectrum){ 
+                                    $class = strtolower($aff_name);
+                                    $class = str_replace(" ","-",$class);
+                                    ?>
+                                    <div class="col-md-3">
+                                        <?php if($spectrum['position_id'] == 3){ ?>
+                                        <div class="schoolist-inner spectrum">
                                             <?php } ?>
                                             <?php if($spectrum['position_id'] == 4){ ?>
-                                                <div class="package-name">Trial</div>
-                                            <?php } ?>
-                                            <div class="object-fit">
-                                            <?php if(file_exists(FCPATH.'laravel/public/'.$spectrum['logo']) && !empty($spectrum['logo'])){ ?>
-                                                <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100">
-                                            <?php }else{ ?>
-                                                <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
-                                            <?php } ?>
-                                            </div>
-                                            <figcaption class="item-footer">
-                                                <h6><?php echo ucfirst($spectrum['institute_name']) ?></h6>
-                                                <?php if(!empty($spectrum['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $spectrum['year_of_establish'] ?></b></p><?php } ?>
-                                                <!-- <p>Area : <?php echo $spectrum['area_name'] ?></p> -->
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
+                                        <div class="schoolist-inner trial">
+                                                <?php } ?>
+                                            <a href="<?php echo base_url() ?>list-of-best-<?php echo $class ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$spectrum['institute_name']); ?>" target="_blank">
+                                                <figure>
+                                                    <?php if($spectrum['position_id'] == 3){ ?>
+                                                        <div class="package-name">Spectrum</div>
+                                                    <?php } ?>
+                                                    <?php if($spectrum['position_id'] == 4){ ?>
+                                                        <div class="package-name">Trial</div>
+                                                    <?php } ?>
+                                                    <div class="object-fit">
+                                                    <?php if(file_exists(FCPATH.'laravel/public/'.$spectrum['logo']) && !empty($spectrum['logo'])){ ?>
+                                                        <img src="<?php echo base_url("laravel/public/") ?><?php echo $spectrum['logo'] ?>" class="w-100">
+                                                    <?php }else{ ?>
+                                                        <img src="<?php echo base_url("assets/front/") ?>images/list-default.png" class="w-100" alt="best <?php echo $aff_name ?> in <?php echo $yourcity ?>">
+                                                    <?php } ?>
+                                                    </div>
+                                                    <figcaption class="item-footer">
+                                                        <h6><?php echo ucfirst($spectrum['institute_name']) ?></h6>
+                                                        <?php if(!empty($spectrum['year_of_establish'])){ ?><p><i class="fa fa-building-o"></i>  Establishment Year : <b><?php echo $spectrum['year_of_establish'] ?></b></p><?php } ?>
+                                                        <!-- <p>Area : <?php echo $spectrum['area_name'] ?></p> -->
+                                                    </figcaption>
+                                                </figure>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- </div> -->
+                                <?php } ?>
                             </div>
-                            <!-- </div> -->
-                        <?php } ?>
-                        <div class="custom-pagination pagination"><?php echo $school_links ?></div>
-                        
+                            <!-- <div class="custom-pagination pagination"><?php echo $school_links ?></div> -->
                     <div>
+                    <div class="scroll_class"></div>
                 </div>
                 <?php } ?>
                 <?php }else{ ?>
@@ -1249,3 +1258,87 @@ function customcreatePageinatation($count,$page,$link){
     return $CI->pagination->create_links();
 }
 ?>
+<script>
+$(document).ready(function(){
+        var SITEURL = "<?php echo base_url(); ?>";
+        var isDataLoading = true;
+        var isLoading = false;
+
+        $(window).scroll(function () {
+            var page = $('#school_spectrum_current_count').val();
+            var data_exists = $('#school_spectrum_data_exists').val();
+            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
+                if (isLoading == false) {
+                    isLoading = true;
+                    if (isDataLoading && data_exists == 1) {
+                        load_more(page);
+                    }
+                }
+            }
+        });
+
+        function load_more(page) {
+            var affiliation = $('#affiliation').val();
+            var yourcity_id = $('#yourcity_id').val();
+            var page = page;
+            var affname = $('#AffiliationName').val();
+            var city = $('#YourCity').val();
+            $.ajax({
+                url: SITEURL+"activityclass/get_class",
+                type: "POST",
+                data: {affiliation:affiliation,yourcity_id:yourcity_id,page:page},
+                // dataType: "html",
+            }).done(function (data) {
+                isLoading = false;
+                if (data.length == 0) {
+                    isDataLoading = false;
+                    // $('#loader').hide();
+                    return;
+                }
+                data = $.parseJSON(data);
+                // console.log(data);
+                var school = '';
+                    school += '<div class="row equal">';
+                $.each(data, function(index,value) {
+                    school += '<div class="col-md-3">';
+                    if(value.position_id == 3){
+                    school += '<div class="schoolist-inner spectrum">';
+                    }
+                    if(value.position_id == 4){
+                        school += '<div class="schoolist-inner trial">';
+                    }
+                    school += '<a href='+SITEURL+'list-of-best-'+affname.replace(" ","-")+'-in-'+city+'/'+value.institute_name.replace(" ","-")+' target="_blank">';
+                    school += '<figure>';
+                    if(value.position_id == 3){
+                        school += '<div class="package-name">Spectrum</div>';
+                    }
+                    if(value.position_id == 4){
+                        school += '<div class="package-name">Trial</div>';
+                    }
+                    school +='<div class="object-fit">';
+                    if(value.logo != ''){
+                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >'
+                    }else{
+                        school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >'
+                    }
+                    school += '</div>';
+                    school +='<figcaption class="item-footer">';
+                    school +='<h6>'+value.institute_name+'</h6>';
+                    school +='<p><i class="fa fa-university"></i> Establishment Year : <b>'+value.year_of_establish+'</b></p>';
+                    school +='</figcaption>';
+                    school +='</figure>';
+                    school +='</a>';
+                    school +='</div>';
+                    school +='</div>';
+                })
+                school +='</div>';
+                // console.log(school);
+                $('.scroll_class').html(school);
+                var current_length = parseInt(data.length) + 12;
+                $('#school_spectrum_current_count').val(current_length);
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('No response');
+            });
+        }
+    })
+</script>

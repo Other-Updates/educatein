@@ -1507,6 +1507,7 @@ class admin extends CI_Controller {
             );
             $this->db->insert('plan_details',$data);
         }
+
         //school details update
          
         $school_update=array(
@@ -1547,6 +1548,24 @@ class admin extends CI_Controller {
             'is_active' => 1,
         );
         $this->db->update('school_details',$school_update,array('id'=>$_POST['school_id']));
+
+        //upgrade plan
+        if(!empty($_POST['upgrade'])){
+            if($_POST['upgrade_plan'] == 1){
+                $plan = 1;
+            }
+            if($_POST['upgrade_plan'] == 2){
+                $plan = 2;
+            }
+            if($_POST['upgrade_plan'] == 3){
+                $plan = 3;
+            }
+            $upgrade_plan = array(
+                'school_category_id' => $plan,
+            );
+            $this->db->update('school_details',$upgrade_plan,array('id'=>$school_id));
+        }
+
         redirect('admin/schools');
 
     }
@@ -2526,6 +2545,24 @@ class admin extends CI_Controller {
             // 'valitity'=>100
         );
         $this->db->update('institute_details',$schoolupdate,array('id'=>$school_id));
+
+        //upgrade plan
+        if(!empty($_POST['upgrade'])){
+            if($_POST['upgrade_plan'] == 1){
+                $plan = 1;
+            }
+            if($_POST['upgrade_plan'] == 2){
+                $plan = 2;
+            }
+            if($_POST['upgrade_plan'] == 3){
+                $plan = 3;
+            }
+            $upgrade_plan = array(
+                'position_id' => $plan,
+            );
+            $this->db->update('institute_details',$upgrade_plan,array('id'=>$school_id));
+        }
+
         redirect('admin/schools/institute');
     }
 
@@ -2641,28 +2678,32 @@ class admin extends CI_Controller {
 
 
 
-    //     $username = "manikandan@haunuzinfosystems.com";
-	// $hash = "cbbb512a1a514916c35b040283ac6dc7df975411a4c6669f738aeab42bfeb128";
+        // Authorisation details.
+	$username = "manikandan@haunuzinfosystems.com";
+	$hash = "cbbb512a1a514916c35b040283ac6dc7df975411a4c6669f738aeab42bfeb128";
 
-	// // Config variables. Consult http://api.textlocal.in/docs for more info.
-	// $test = "0";
-
-	// // Data for text message. This is the text message data.
-	// $sender = "TXTLCL"; // This is who the message appears to be from.
-	// $numbers = "8667579048"; // A single number or a comma-seperated list of numbers
-	// // $message = "This is a otp message from the edugatein.the otp is ($numbers)";
-	// // $message = "This is a otp message from the edugatein.the otp is ($numbers)";
-	// // 612 chars or less
-	// // A single number or a comma-seperated list of numbers
-	// $message = urlencode($message);
-	// $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
-	// $ch = curl_init('http://api.textlocal.in/send/?');
-	// curl_setopt($ch, CURLOPT_POST, true);
-	// curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	// $result = curl_exec($ch); // This is the result from the API
-	// curl_close($ch);
-
+	// Config variables. Consult http://api.textlocal.in/docs for more info.
+	$test = "0";
+    $user = 'tester';
+    $school = 'matric school';
+	// Data for text message. This is the text message data.
+	$sender = "EDUGAT"; // This is who the message appears to be from.
+	$numbers = "8667579048"; // A single number or a comma-seperated list of numbers
+	$message = "Dear text Your school text has been validated and approved.
+    You can check it on our site .Thank you-Edugatein
+    https://www.edugatein.com";
+	// 612 chars or less
+	// A single number or a comma-seperated list of numbers
+	$message = urlencode($message);
+	$data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+	$ch = curl_init('http://api.textlocal.in/send/?');
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$result = curl_exec($ch); // This is the result from the API
+	curl_close($ch);
+    print_r($result);exit;
+            
 
             // print_r($result);exit;
         redirect('admin/schools/view_school?id='.$school_id);

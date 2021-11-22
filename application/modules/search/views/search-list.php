@@ -145,6 +145,13 @@
                 </div><!-- /sidebar-categories -->
             </div><!-- /sticky -->
         </div><!-- /sidebar -->
+        <input type="hidden" name="search_school" id="get_school_search" value="<?php echo $search_school; ?>">
+        <input type="hidden" name="search_class" id="get_class_search" value="<?php echo $search_class; ?>">
+        <input type="hidden" name="school_search_current_count" id="school_search_current_count" value="<?php echo count($schools); ?>">
+        <input type="hidden" name="class_search_current_count" id="class_search_current_count" value="<?php echo count($activityclass); ?>">
+        <input type="hidden" name="get_city_name" id="get_city_name" value="<?php echo strtolower($city); ?>">
+        <input type="hidden" name="school_spectrum_data_exists" id="school_spectrum_data_exists" value="<?php echo (count($schools) < 12) ? 0 : 1;?>">
+        <input type="hidden" name="class_search_data_exists" id="class_search_data_exists" value="<?php echo (count($activityclass) < 12) ? 0 : 1;?>">
         <?php if(!empty($schools) || !empty($activityclass)){ ?>
             <?php if(!empty($schools)){ ?>
                 <div id="main" class="mab-30">
@@ -200,9 +207,9 @@
                             </div>
                         <?php }
                         ?>
-                        <div class="custom-pagination pagination"><?php echo $links ?></div>
-
+                        <!-- <div class="custom-pagination pagination"><?php echo $links ?></div> -->
                     </div>
+                    <div class="scroll_school"></div>
 
                 </div>
             <?php } ?>
@@ -262,9 +269,9 @@
                             </div>
                         <?php }
                         ?>
-                        <div class="custom-pagination pagination"><?php echo $links ?></div>
+                        <!-- <div class="custom-pagination pagination"><?php echo $links ?></div> -->
                     </div>
-
+                        <div class="scroll_class"></div>
                 </div>
             <?php } ?>
         <?php }else{ ?>
@@ -380,7 +387,6 @@
                 </div>
             </div>
         <?php } ?>
-
     </div>
 </div>
 
@@ -427,36 +433,36 @@
         })
     })
 
-    $(function () { //document ready
-        if ($('#sticky').length) { //make sure "#sticky" elements exists
-            var el = $('#sticky');
-            var stickyTop = $('#sticky').offset().top; //returns number
-            var stickyHeight = $('#sticky').height();
+    // $(function () { //document ready
+    //     if ($('#sticky').length) { //make sure "#sticky" elements exists
+    //         var el = $('#sticky');
+    //         var stickyTop = $('#sticky').offset().top; //returns number
+    //         var stickyHeight = $('#sticky').height();
 
-            $(window).scroll(function () { //Scroll event
-                var limit = $('#footer').offset().top - stickyHeight - 30;
+    //         $(window).scroll(function () { //Scroll event
+    //             var limit = $('#footer').offset().top - stickyHeight - 30;
 
-                var windowTop = $(window).scrollTop(); //returns number
+    //             var windowTop = $(window).scrollTop(); //returns number
 
-                if (stickyTop < windowTop) {
-                    el.css({
-                        position: 'fixed',
-                        top: 0,
-                        bottom: '50px'
-                    });
-                } else {
-                    el.css('position', 'static');
-                }
+    //             if (stickyTop < windowTop) {
+    //                 el.css({
+    //                     position: 'fixed',
+    //                     top: 0,
+    //                     bottom: '50px'
+    //                 });
+    //             } else {
+    //                 el.css('position', 'static');
+    //             }
 
-                if (limit < windowTop) {
-                    var diff = limit - windowTop;
-                    el.css({
-                        top: diff
-                    });
-                }
-            });
-        }
-    });
+    //             if (limit < windowTop) {
+    //                 var diff = limit - windowTop;
+    //                 el.css({
+    //                     top: diff
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
 
     // Swiper-3d-Effect
     var swiper = new Swiper('.swiper-container', {
@@ -522,4 +528,206 @@
             $(this).removeClass('search-err');
         }
     });
+    $(document).ready(function(){
+        var SITEURL = "<?php echo base_url(); ?>";
+        var isDataLoading = true;
+        var isLoading = false;
+        //search school autoload
+        if($('#get_school_search').val() != ''){
+            $(window).scroll(function () {
+                var search = $('#get_school_search').val();
+                var page = $('#school_search_current_count').val();
+                var data_exists = $('#school_spectrum_data_exists').val();
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
+                    if (isLoading == false) {
+                        isLoading = true;
+                        if (isDataLoading && data_exists == 1) {
+                            load_more(page,search);
+                        }
+                    }
+                }
+            });
+        }
+        
+
+        function load_more(page,search) {
+            // var affiliation = $('#affiliation').val();
+            // var yourcity_id = $('#yourcity_id').val();
+            var page = page;
+            var search = search;
+            // var affname = $('#AffiliationName').val();
+            // var city = $('#YourCity').val();
+            $.ajax({
+                url: SITEURL+"search/autoload_school",
+                type: "POST",
+                data: {page:page,search:search},
+                // dataType: "html",
+            }).done(function (data) {
+                isLoading = false;
+                if (data.length == 0) {
+                    isDataLoading = false;
+                    // $('#loader').hide();
+                    return;
+                }
+                data = $.parseJSON(data);
+                console.log(data);
+                var city = $('#get_city_name').val();
+                var school = '';
+                    
+                school += '<div class="row search-schoolist">';
+                $.each(data, function(index,value) {
+                    schoolname = value.school_name.toLowerCase();
+                    school += '<div class="col-lg-4 col-sm-6 home-tsw">';
+                    if(value.school_category_id == 1){
+                        school +='<div class="nearby-widget mab-30 wow fadeInUp platinum">';
+                    }
+                    if(value.school_category_id == 2){
+                        school +='<div class="nearby-widget mab-30 wow fadeInUp premium">';
+                    }
+                    if(value.school_category_id == 3){
+                        school +='<div class="nearby-widget mab-30 wow fadeInUp spectrum">';
+                    }
+                    if(value.school_category_id == 4){
+                        school +='<div class="nearby-widget mab-30 wow fadeInUp trial">';
+                    }
+                    school += '<a href='+SITEURL+'list-of-best-'+value.affiliation_name+'-schools-in-'+city+'/'+schoolname.replace(/\s/g,"-")+' target="_blank">';
+                    if(value.school_category_id == 1){
+                        school += '<div class="package-name">Platinum</div>';
+                    }
+                    if(value.school_category_id == 2){
+                        school += '<div class="package-name">Premium</div>';
+                    }
+                    if(value.school_category_id == 3){
+                        school += '<div class="package-name">Spectrum</div>';
+                    }
+                    if(value.school_category_id == 4){
+                        school += '<div class="package-name">Trial</div>';
+                    }
+                    school += '<div class="object-fit">';
+                    if(value.logo != ''){
+                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'">';
+                    }else{
+                        school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" " />';
+                    } 
+                    school += '<div>';
+                    school +='</a>';
+                    school += '<div class="nearby-widget-body">';
+                    school += '<h6 class="mb-2"><a href="'+SITEURL+'list-of-best-'+value.affiliation_name+'-schools-in-'+city+'/'+schoolname.replace(/\s/g,"-")+'">'+value.school_name+'</a></h6>';
+                    school += '<ul class="list-unstyled">';
+                    school += '<li class="mb-1"><i class="fa fa-fw fa-book"></i> '+value.affiliation_name+' School</li>';
+                    school += '<li><i class="fa fa-fw fa-map-marker"></i> '+value.area_name+'</li>';
+                    school += '</ul> ';
+                    school += '</div>';
+                    school += '</div>';
+                    school += '</div>';
+                    school += '</div>';
+                    school += '</div>';
+                })
+                school += '</div>';
+                $('.scroll_school').html(school);
+                var current_length = parseInt(data.length) + 12;
+                $('#school_search_current_count').val(current_length);
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('No response');
+            });
+        }
+
+        //search class autoload
+        if($('#get_class_search').val() != ''){
+            $(window).scroll(function () {
+                var search = $('#get_class_search').val();
+                var page = $('#class_search_current_count').val();
+                var data_exists = $('#class_search_data_exists').val();
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
+                    if (isLoading == false) {
+                        isLoading = true;
+                        if (isDataLoading && data_exists == 1) {
+                            load_more_class(page,search);
+                        }
+                    }
+                }
+            });
+        }
+
+        function load_more_class(page,search) {
+            // var affiliation = $('#affiliation').val();
+            // var yourcity_id = $('#yourcity_id').val();
+            var page = page;
+            var search = search;
+            // var affname = $('#AffiliationName').val();
+            // var city = $('#YourCity').val();
+            $.ajax({
+                url: SITEURL+"search/autoload_class",
+                type: "POST",
+                data: {page:page,search:search},
+                // dataType: "html",
+            }).done(function (data) {
+                isLoading = false;
+                if (data.length == 0) {
+                    isDataLoading = false;
+                    // $('#loader').hide();
+                    return;
+                }
+                data = $.parseJSON(data);
+                console.log(data);
+                var city = $('#get_city_name').val();
+                var school = '';
+                    
+                school += '<div class="row search-schoolist">';
+                    $.each(data, function(index,value) {
+                        institutename = value.institute_name.toLowerCase();
+                        category_name = value.category_name.toLowerCase();
+                        school += '<div class="col-lg-4 col-sm-6 home-tsw">';
+                            if(value.position_id == 1){
+                                school +='<div class="nearby-widget mab-30 wow fadeInUp platinum">';
+                            }
+                            if(value.position_id == 2){
+                                school +='<div class="nearby-widget mab-30 wow fadeInUp premium">';
+                            }
+                            if(value.position_id == 3){
+                                school +='<div class="nearby-widget mab-30 wow fadeInUp spectrum">';
+                            }
+                            if(value.position_id == 4){
+                                school +='<div class="nearby-widget mab-30 wow fadeInUp trial">';
+                            }
+                                school += '<a href='+SITEURL+'list-of-best-'+category_name.replace(" ","-")+'-in-'+city+'/'+institutename.replace(/\s/g,"-")+' target="_blank">';
+                                    if(value.position_id == 1){
+                                        school += '<div class="package-name">Platinum</div>';
+                                    }
+                                    if(value.position_id == 2){
+                                        school += '<div class="package-name">Premium</div>';
+                                    }
+                                    if(value.position_id == 3){
+                                        school += '<div class="package-name">Spectrum</div>';
+                                    }
+                                    if(value.position_id == 4){
+                                        school += '<div class="package-name">Trial</div>';
+                                    }
+                                    school += '<div class="object-fit">';
+                                        if(value.logo != ''){
+                                            school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'">';
+                                        }else{
+                                            school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" " />';
+                                        } 
+                                    school += '</div>';
+                                school +='</a>';
+                                school += '<div class="nearby-widget-body">';
+                                    school += '<h6 class="mb-2"><a href="'+SITEURL+'list-of-best-'+category_name.replace(" ","-")+'-in-'+city+'/'+institutename.replace(/\s/g,"-")+'">'+value.institute_name+'</a></h6>';
+                                    school += '<ul class="list-unstyled">';
+                                        school += '<li class="mb-1"><i class="fa fa-fw fa-book"></i> '+value.category_name+' School</li>';
+                                        school += '<li><i class="fa fa-fw fa-map-marker"></i> '+value.area_name+'</li>';
+                                school += '</ul> ';
+                            school += '</div>';
+                            school += '</div>';
+                        school += '</div>';
+                    })
+                school += '</div>';
+                $('.scroll_class').html(school);
+                var current_length = parseInt(data.length) + 12;
+                $('#class_search_current_count').val(current_length);
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('No response');
+            });
+        }
+    })
 </script>
