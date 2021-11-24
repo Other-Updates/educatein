@@ -3275,3 +3275,7 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
 	height: 100%;
     object-fit: cover;
 }
+#loading {
+    padding-top: 20px;
+    position: relative;
+}

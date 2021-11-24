@@ -1339,7 +1339,7 @@ function customcreatePageinatation1($count,$page,$link){
             if (isLoading == false) {
                 isLoading = true;
                 if (isDataLoading && data_exists == 1) {
-                $('#loading').html("<img src='"+SITEURL+"laravel/public/loader.gif' />");
+                $('#loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
                     load_more(page,limit);
                 }
             }
