@@ -1339,7 +1339,7 @@ function customcreatePageinatation1($count,$page,$link){
             if (isLoading == false) {
                 isLoading = true;
                 if (isDataLoading && data_exists == 1) {
-                $('#loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
+                // $('#loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
                     load_more(page,limit);
                 }
             }
@@ -1351,6 +1351,8 @@ function customcreatePageinatation1($count,$page,$link){
         var yourcity_id = $('#yourcity_id').val();
         var affname = $('#AffiliationName').val();
         var city = $('#YourCity').val();
+        $('#loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
+
         $.ajax({
             url: SITEURL+"schools/get_schools",
             type: "POST",
@@ -1395,11 +1397,13 @@ function customcreatePageinatation1($count,$page,$link){
                     type:'HEAD',
                     error: function()
                     {
+                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
                         school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                        
                     },
                     success: function()
                     {
-                        school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
                     }
                 });
                 school += '</div>';

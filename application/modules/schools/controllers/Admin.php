@@ -2954,7 +2954,7 @@ class admin extends CI_Controller {
             // }
         }
         //insert school
-        if($_POST['category'] == 'school' ||){
+        if($_POST['category'] == 'school'){
             $school['schoolname'] = $_POST['schoolname'];
             $school['schoolboard'] = $_POST['schoolboard'];
             $school['city'] = $_POST['school_city'];

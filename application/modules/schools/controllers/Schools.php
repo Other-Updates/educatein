@@ -190,7 +190,7 @@ class Schools extends CI_Controller {
             // }
         }
         //insert school
-        if($_POST['category'] == 'school' || $_POST['category'] == 'schoolid'){
+        if($_POST['category'] == 'schoolid'){
             $school['schoolname'] = $_POST['schoolname'];
             $school['schoolboard'] = $_POST['schoolboard'];
             $school['city'] = $_POST['school_city'];
@@ -1136,7 +1136,7 @@ class Schools extends CI_Controller {
                 $user_email = $users->email;
                 $user_phone = $users->phone;
             }
-            redirect('admin/schools');
+            // redirect('admin/schools');
         }
 
 
@@ -1678,8 +1678,10 @@ class Schools extends CI_Controller {
             //     $user_email = $users->email;
             //     $user_phone = $users->phone;
             // }
-            redirect("schools/admin/institute");
+            // redirect("schools/admin/institute");
         }
+        $this->session->set_userdata('user_id',$user_id);
+        redirect('my-account?id='.base64_encode($user_id));
 
     }
 

@@ -212,6 +212,7 @@
                     <div class="scroll_school"></div>
 
                 </div>
+            <div class="loading"></div>
             <?php } ?>
 
             <?php if(!empty($activityclass)){ ?>
@@ -273,6 +274,7 @@
                     </div>
                         <div class="scroll_class"></div>
                 </div>
+            <div class="loading"></div>
             <?php } ?>
         <?php }else{ ?>
             <div id="main" class="no-data-list">
@@ -643,6 +645,7 @@
                         isLoading = true;
                         if (isDataLoading && data_exists == 1) {
                             load_more_class(page,search);
+                            $('.loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
                         }
                     }
                 }
