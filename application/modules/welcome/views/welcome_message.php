@@ -343,11 +343,26 @@ $uccity = ucfirst($yourcity);
     </div> -->
 <?php //} ?>
 <div class="container">
-    <div class="ads-school-widget mab-30">
-        <div class="row">
-            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+    <div class="ads-school-widget top-school-widget mab-30">
+        <div class="owl-carousel owl-carousel-4 owl-theme">
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/1-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
         </div>
     </div>
 </div>
@@ -475,15 +490,33 @@ $uccity = ucfirst($yourcity);
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="ads-school-widget-bottom mab-30">
-        <div class="row">
-            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/4-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/5-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/6-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/4-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/7-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-            <div class="col-md-2"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/8-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>            
+<div class="container-fluid">    
+    <div class="ads-school-widget-bottom top-school-widget">
+        <div class="owl-carousel owl-carousel-3 owl-theme">
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/4-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/5-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/6-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/7-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/8-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/4-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/5-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
+            <div class="item wow bounceIn">
+                <img src="<?php echo base_url() ?>assets/front/images/static-ads/6-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+            </div>
         </div>
     </div>
 </div>
@@ -572,8 +605,8 @@ $ip = $_SERVER['REMOTE_ADDR'];
     </div>
 </div>
 <!-- /modal --> 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">  
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="<?php echo base_url('assets/front/css/jquery-ui.css'); ?>">  
+<script src="<?php echo base_url('assets/front/js/jquery-ui.js'); ?>"></script>
 <script type="text/javascript">
 
     $(window).on("load", function () {
@@ -719,6 +752,52 @@ $ip = $_SERVER['REMOTE_ADDR'];
     //         }
     //     })
     // });
+$(".owl-carousel-3").owlCarousel({
+    loop:true,
+    margin:10,
+    responsiveClass:true,
+    autoplay:true,
+    autoplayTimeout:2000,
+    dots: false,
+    autoplayHoverPause:true,
+    responsive:{
+        0:{
+            items:1,
+            nav:true
+        },
+        600:{
+            items:3,
+            nav:false
+        },
+        1000:{
+            items:6,
+            nav:true
+        }
+    }
+});
+$(".owl-carousel-4").owlCarousel({
+    loop:true,
+    margin:10,
+    responsiveClass:true,
+    autoplay:true,
+    autoplayTimeout:3000,
+    dots: false,
+    autoplayHoverPause:true,
+    responsive:{
+        0:{
+            items:1,
+            nav:true
+        },
+        600:{
+            items:3,
+            nav:false
+        },
+        1000:{
+            items:3,
+            nav:true
+        }
+    }
+});
 $(document).ready(function(){
 	$("#search_school").keyup(function(){
 		$.ajax({
@@ -819,7 +898,6 @@ $('#get_location').on('click',function(){
 <!-- <script src="<?php echo base_url('assets/admin/js/jquery.validate.min.js'); ?>" ></script>   -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-</script> 
 <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script> -->
 <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
 
