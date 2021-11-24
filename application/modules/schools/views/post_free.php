@@ -722,14 +722,16 @@
                             </div>
 
 
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select class="form-control" name="school_status" id="exampleFormControlSelect1" required>
-                                        <option value="" >--select--</option>
-                                        <option value="0">Hold</option>
-                                        <option value="1">Approve</option>
-                                    </select>
+                                    <!-- <div class="col-lg-4 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="status">Status</label>
+                                            <select class="form-control" name="school_status" id="exampleFormControlSelect1" required>
+                                                <option value="" >--select--</option>
+                                                <option value="0">Hold</option>
+                                                <option value="1">Approve</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -1085,7 +1087,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-sm-6">
+                                <!-- <div class="col-lg-4 col-sm-6">
                                     <div class="form-group">
                                         <label for="city">Status</label>
                                         <select class="form-control" name="status" id="exampleFormControlSelect1" required>
@@ -1094,7 +1096,7 @@
                                             <option value="1">Approve</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="edit-school-inner">
