@@ -721,6 +721,8 @@ if ($aff_url == "dance-class") {
                     <div>
                     <div class="scroll_class"></div>
                 </div>
+                <div style="align:center;" id="loading"></div>
+
                 <?php } ?>
                 <?php }else{ ?>
                     <div class="no-data-list">
@@ -1270,7 +1272,9 @@ $(document).ready(function(){
             if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
                 if (isLoading == false) {
                     isLoading = true;
+                    // $('#loading').hide();
                     if (isDataLoading && data_exists == 1) {
+                        $('#loading').html("<img src='"+SITEURL+"laravel/public/loader.gif' />");
                         load_more(page);
                     }
                 }
@@ -1292,7 +1296,7 @@ $(document).ready(function(){
                 isLoading = false;
                 if (data.length == 0) {
                     isDataLoading = false;
-                    // $('#loader').hide();
+                    // $('#loading').hide();
                     return;
                 }
                 data = $.parseJSON(data);
@@ -1300,6 +1304,8 @@ $(document).ready(function(){
                 var school = '';
                     school += '<div class="row equal">';
                 $.each(data, function(index,value) {
+                    $('#loading').hide();
+                    institutename = value.institute_name.toLowerCase();
                     school += '<div class="col-md-3">';
                     if(value.position_id == 3){
                     school += '<div class="schoolist-inner spectrum">';
@@ -1307,7 +1313,7 @@ $(document).ready(function(){
                     if(value.position_id == 4){
                         school += '<div class="schoolist-inner trial">';
                     }
-                    school += '<a href='+SITEURL+'list-of-best-'+affname.replace(" ","-")+'-in-'+city+'/'+value.institute_name.replace(" ","-")+' target="_blank">';
+                    school += '<a href='+SITEURL+'list-of-best-'+affname.replace(" ","-")+'-in-'+city+'/'+institutename.replace(/\s/g,"-")+' target="_blank">';
                     school += '<figure>';
                     if(value.position_id == 3){
                         school += '<div class="package-name">Spectrum</div>';

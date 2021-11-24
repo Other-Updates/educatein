@@ -741,6 +741,7 @@ $allcity = $this->db->get()->result();
                                         <div class="scroll_school">
                                                     </div>
                 </div>
+                <div style="align:center;" id="loading"></div>
             <?php } ?>
         <?php }else{ ?>
             <!-- Data Not Found -->
@@ -1338,6 +1339,7 @@ function customcreatePageinatation1($count,$page,$link){
             if (isLoading == false) {
                 isLoading = true;
                 if (isDataLoading && data_exists == 1) {
+                $('#loading').html("<img src='"+SITEURL+"laravel/public/loader.gif' />");
                     load_more(page,limit);
                 }
             }
@@ -1358,8 +1360,7 @@ function customcreatePageinatation1($count,$page,$link){
             isLoading = false;
             if (data.length == 0) {
                 isDataLoading = false;
-                $('#school_spectrum_data_exists').val(0);
-                // $('#loader').hide();
+                // $('#school_spectrum_data_exists').val(0);
                 return;
             }
             data = $.parseJSON(data);
@@ -1367,6 +1368,7 @@ function customcreatePageinatation1($count,$page,$link){
             var school = '';
                   school += '<div class="row equal">';
             $.each(data, function(index,value) {
+                schoolname = value.school_name.toLowerCase();
                 school += '<div class="col-md-3">';
                 if(value.school_category_id == 3){
                 school += '<div class="schoolist-inner spectrum">';
@@ -1374,7 +1376,7 @@ function customcreatePageinatation1($count,$page,$link){
                 if(value.school_category_id == 4){
                     school += '<div class="schoolist-inner trial">';
                 }
-                school += '<a href='+SITEURL+'list-of-best-'+affname+'-schools-in-'+city+'/'+value.school_name.replace(" ","-")+' target="_blank">';
+                school += '<a href='+SITEURL+'list-of-best-'+affname+'-schools-in-'+city+'/'+schoolname.replace(/\s/g,"-")+' target="_blank">';
                 school += '<figure>';
                 if(value.school_category_id == 3){
                     school += '<div class="package-name">Spectrum</div>';
