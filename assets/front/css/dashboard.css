@@ -776,7 +776,7 @@ body {
   	border-radius: 0.25rem;
   	transition: .3s ease-in-out;
   	box-shadow: 0 1.5rem 4rem rgba(22,28,45,.15)!important;
-  	left: -40px;
+  	left: -70px;
   	top: 50px;
 }
 .login-dropdown .dropdown:hover>.dropdown-menu {

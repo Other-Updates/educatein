@@ -678,11 +678,26 @@ $similar_school = $this->db->get();
         </div>
     <?php } ?>
     <div class="container">
-        <div class="ads-school-widget mab-50">
-            <div class="row">
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/11-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/12-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
-                <div class="col-md-4"><div class="ads-inner"><img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" /></div></div>
+        <div class="ads-school-widget top-school-widget mab-30">
+            <div class="owl-carousel owl-carousel-4 owl-theme">
+                <div class="item wow bounceIn">
+                    <img src="<?php echo base_url() ?>assets/front/images/static-ads/9-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+                </div>
+                <div class="item wow bounceIn">
+                    <img src="<?php echo base_url() ?>assets/front/images/static-ads/10-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+                </div>
+                <div class="item wow bounceIn">
+                    <img src="<?php echo base_url() ?>assets/front/images/static-ads/11-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+                </div>
+                <div class="item wow bounceIn">
+                    <img src="<?php echo base_url() ?>assets/front/images/static-ads/12-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+                </div>
+                <div class="item wow bounceIn">
+                    <img src="<?php echo base_url() ?>assets/front/images/static-ads/2-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+                </div>
+                <div class="item wow bounceIn">
+                    <img src="<?php echo base_url() ?>assets/front/images/static-ads/3-ads.png" class="w-100" alt="Best Offer in <?php echo $city; ?>" />
+                </div>
             </div>
         </div>
     </div>
@@ -1018,6 +1033,29 @@ $ip = $_SERVER['REMOTE_ADDR'];
     });
     $(document).ready(function(){
       	// Owl-carousel
+        $(".owl-carousel-4").owlCarousel({
+            loop:true,
+            margin:10,
+            responsiveClass:true,
+            autoplay:true,
+            autoplayTimeout:3000,
+            dots: false,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:3,
+                    nav:false
+                },
+                1000:{
+                    items:3,
+                    nav:true
+                }
+            }
+        });
         $('.owl-carousel').owlCarousel({
             loop:true,
             // center: true,

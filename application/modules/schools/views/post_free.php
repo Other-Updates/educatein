@@ -22,7 +22,7 @@
             <div class="">
                 <div class="">
                     <div class="">
-                        <h1 class="section-title mb-2">Enter Registration Details</h1>
+                        <h3 class="section-title mb-2">Enter Registration Details</h3>
                         <div class="">
                             <div class="edit-school-inner">
                             <!-- <form action="<?php echo base_url() ?>schools/admin/admin_insert" method="post"  enctype="multipart/form-data"  id="signupschool" autocomplete="off">-->
@@ -120,8 +120,8 @@
                         <h3>Enter School Details</h3>
                         <!-- <span>(Platinum Package)</span> -->
                     </div><!-- /section-title -->
-                    <hr>
-                    <div class="listing-section mat-30">
+                    <hr class="mb-3">
+                    <div class="listing-section">
                         <!-- <form action="<?php echo base_url() ?>schools/admin/insert_school" id="form1" class="form1"method="post" enctype="multipart/form-data"> -->
                             <div class="edit-school-inner">
                                 <div class="form-row">
