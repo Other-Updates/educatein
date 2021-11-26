@@ -733,7 +733,23 @@
                 var school = '';
                     
                 school += '<div class="row search-schoolist">';
-                    $.each(data, function(index,value) {
+                        $.each(data, function(index,value) {
+                                $.ajax({
+                            url:SITEURL+'laravel/public/'+value.logo,
+                            type:'HEAD',
+                            error: function(msg)
+                            {
+                                if(msg.statusText == "Not Found"){
+                                    $('#image_status').val(msg.statusText);
+                                }
+                                // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                                // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                            },
+                            success: function(msg)
+                            {
+                                // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                            }
+                        });
                         institutename = value.institute_name.toLowerCase();
                         category_name = value.category_name.toLowerCase();
                         school += '<div class="col-lg-4 col-sm-6 home-tsw">';
@@ -763,11 +779,11 @@
                                         school += '<div class="package-name">Trial</div>';
                                     }
                                     school += '<div class="object-fit">';
-                                        if(value.logo != ''){
-                                            school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'">';
-                                        }else{
-                                            school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" " />';
-                                        } 
+                                    if($('#image_status').val() == "Not Found"){
+                                        school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" " />';
+                                    }else{
+                                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'">';
+                                    }
                                     school += '</div>';
                                 school +='</a>';
                                 school += '<div class="nearby-widget-body">';
