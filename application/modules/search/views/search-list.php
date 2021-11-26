@@ -185,6 +185,8 @@
         <input type="hidden" name="get_city_name" id="get_city_name" value="<?php echo strtolower($city); ?>">
         <input type="hidden" name="school_spectrum_data_exists" id="school_spectrum_data_exists" value="<?php echo (count($schools) < 12) ? 0 : 1;?>">
         <input type="hidden" name="class_search_data_exists" id="class_search_data_exists" value="<?php echo (count($activityclass) < 12) ? 0 : 1;?>">
+        <input type="hidden" id="image_status" value=""/>
+
         <?php if(!empty($schools) || !empty($activityclass)){ ?>
             <?php if(!empty($schools)){ ?>
                 <div id="main" class="mab-30">
@@ -613,6 +615,22 @@
                     
                 school += '<div class="row search-schoolist">';
                 $.each(data, function(index,value) {
+                    $.ajax({
+                    url:SITEURL+'laravel/public/'+value.logo,
+                    type:'HEAD',
+                    error: function(msg)
+                    {
+                        if(msg.statusText == "Not Found"){
+                            $('#image_status').val(msg.statusText);
+                        }
+                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                    },
+                    success: function(msg)
+                    {
+                        // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                    }
+                });
                     schoolname = value.school_name.toLowerCase();
                     school += '<div class="col-lg-4 col-sm-6 home-tsw">';
                     if(value.school_category_id == 1){
@@ -641,10 +659,10 @@
                         school += '<div class="package-name">Trial</div>';
                     }
                     school += '<div class="object-fit">';
-                    if(value.logo != ''){
-                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'">';
-                    }else{
+                    if($('#image_status').val() == "Not Found"){
                         school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" " />';
+                    }else{
+                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'">';
                     } 
                     school += '<div>';
                     school +='</a>';
