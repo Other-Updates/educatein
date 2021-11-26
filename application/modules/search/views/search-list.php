@@ -145,8 +145,41 @@
                 </div><!-- /sidebar-categories -->
             </div><!-- /sticky -->
         </div><!-- /sidebar -->
+        <?php 
+        $session = $this->session->userdata();
+        $where = "sd.is_active=1 AND sd.status=1 AND sd.expiry_status !=1 AND sd.valitity IS NOT NULL AND sd.deleted_at is NULL ";
+        $this->db->select('sd.*,af.affiliation_name,ar.area_name');
+        if(!empty($session['city_id']))
+        $this->db->where('sd.city_id',$session['city_id']);
+        if(!empty($session['search_city']))
+        $this->db->where('ci.city_name',ucfirst($session['search_city']));
+        $this->db->where($where);
+        $this->db->like('sd.school_name',$search_school);
+        $this->db->order_by('school_category_id');
+        $this->db->from('school_details as sd');
+        $this->db->join('cities as ci','sd.city_id=ci.id','left');
+        $this->db->join('affiliations as af','sd.affiliation_id=af.id','left');
+        $this->db->join('areas as ar','sd.area_id=ar.id','left');
+        $total_school_count = $this->db->get()->num_rows();
+
+        $session = $this->session->userdata();
+        $where = "ind.is_active=1 AND ind.status=1 AND ind.expiry_status !=1 AND ind.valitity IS NOT NULL AND ind.deleted_at is NULL ";
+        $this->db->select('ind.*,ic.category_name,ar.area_name');
+        if(!empty($session['city_id']))
+        $this->db->where('ind.city_id',$session['city_id']);
+        $this->db->where($where);
+        $this->db->like('ind.institute_name',$search_class);
+        $this->db->order_by('position_id');
+        $this->db->from('institute_details as ind');
+        $this->db->join('institute_categories as ic','ind.category_id=ic.id','left');
+        $this->db->join('areas as ar','ind.area_id=ar.id','left');
+        $this->db->limit($page,$limit);
+        $total_class_count = $this->db->get()->num_rows();
+        ?>
         <input type="hidden" name="search_school" id="get_school_search" value="<?php echo $search_school; ?>">
         <input type="hidden" name="search_class" id="get_class_search" value="<?php echo $search_class; ?>">
+        <input type="hidden" name="search_class" id="total_school_count" value="<?php echo $total_school_count; ?>">
+        <input type="hidden" name="search_class" id="total_class_count" value="<?php echo $total_class_count; ?>">
         <input type="hidden" name="school_search_current_count" id="school_search_current_count" value="<?php echo count($schools); ?>">
         <input type="hidden" name="class_search_current_count" id="class_search_current_count" value="<?php echo count($activityclass); ?>">
         <input type="hidden" name="get_city_name" id="get_city_name" value="<?php echo strtolower($city); ?>">
@@ -546,6 +579,7 @@
                         isLoading = true;
                         if (isDataLoading && data_exists == 1) {
                             load_more(page,search);
+                            $('.loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
                         }
                     }
                 }
@@ -630,6 +664,9 @@
                 $('.scroll_school').html(school);
                 var current_length = parseInt(data.length) + 12;
                 $('#school_search_current_count').val(current_length);
+                if($('#total_school_count').val() == current_length){
+                    // $('.loading').hide();
+                }
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('No response');
             });
@@ -729,6 +766,9 @@
                 $('.scroll_class').html(school);
                 var current_length = parseInt(data.length) + 12;
                 $('#class_search_current_count').val(current_length);
+                if($('#total_class_count').val() == current_length){
+                    $('.loading').hide();
+                }
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('No response');
             });

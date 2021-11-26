@@ -1369,6 +1369,22 @@ function customcreatePageinatation1($count,$page,$link){
             var school = '';
                   school += '<div class="row equal">';
             $.each(data, function(index,value) {
+                $.ajax({
+                    url:SITEURL+'laravel/public/'+value.logo,
+                    type:'HEAD',
+                    error: function(msg)
+                    {
+                        if(msg.statusText == "Not Found"){
+                            $('#image_status').val(msg.statusText);
+                        }
+                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                    },
+                    success: function(msg)
+                    {
+                        // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                    }
+                });
                 schoolname = value.school_name.toLowerCase();
                 school += '<div class="col-md-3">';
                 if(value.school_category_id == 3){
@@ -1386,27 +1402,6 @@ function customcreatePageinatation1($count,$page,$link){
                     school += '<div class="package-name">Trial</div>';
                 }
                 school +='<div class="object-fit">';
-                // if(value.logo != ''){
-                //     school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
-                // }else{
-                //     school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                // }
-                $.ajax({
-                    url:SITEURL+'laravel/public/'+value.logo,
-                    type:'HEAD',
-                    error: function(msg)
-                    {
-                        if(msg.statusText == "Not Found"){
-                            $('#image_status').val(msg.statusText);
-                        }
-                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                    },
-                    success: function(msg)
-                    {
-                        // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
-                    }
-                });
                 if($('#image_status').val() == "Not Found"){
                         school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
                 }else{

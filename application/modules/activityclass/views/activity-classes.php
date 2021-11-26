@@ -675,6 +675,7 @@ if ($aff_url == "dance-class") {
                     <input type="hidden" id="school_spectrum_current_count" value="<?php echo count($school_spectrum);?>"/>
                     <input type="hidden" id="total_school_count" value="<?php echo $school_spectrum_count;?>"/>
                     <input type="hidden" id="school_spectrum_data_exists" value="<?php echo (count($school_spectrum) < 12) ? 0 : 1;?>"/>
+                    <input type="hidden" id="image_status" value=""/>
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <span><?php echo $yourcity; ?></span></h3>
                     </div>
@@ -1303,6 +1304,23 @@ $(document).ready(function(){
                 var school = '';
                     school += '<div class="row equal">';
                 $.each(data, function(index,value) {
+                    $.ajax({
+                    url:SITEURL+'laravel/public/'+value.logo,
+                    type:'HEAD',
+                    error: function(msg)
+                    {
+                        if(msg.statusText == "Not Found"){
+                            $('#image_status').val(msg.statusText);
+                        }
+                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                    },
+                    success: function(msg)
+                    {
+                        console.log(msg);
+                        // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                    }
+                });
                     institutename = value.institute_name.toLowerCase();
                     school += '<div class="col-md-3">';
                     if(value.position_id == 3){
@@ -1320,10 +1338,10 @@ $(document).ready(function(){
                         school += '<div class="package-name">Trial</div>';
                     }
                     school +='<div class="object-fit">';
-                    if(value.logo != ''){
-                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >'
-                    }else{
+                    if($('#image_status').val() == "Not Found"){
                         school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >'
+                    }else{
+                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >'
                     }
                     school += '</div>';
                     school +='<figcaption class="item-footer">';
@@ -1336,7 +1354,6 @@ $(document).ready(function(){
                     school +='</div>';
                 })
                 school +='</div>';
-                // console.log(school);
                 $('.scroll_class').html(school);
                 var current_length = parseInt(data.length) + 12;
                 $('#school_spectrum_current_count').val(current_length);
