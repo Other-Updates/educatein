@@ -243,9 +243,9 @@
                         <!-- <div class="custom-pagination pagination"><?php echo $links ?></div> -->
                     </div>
                     <div class="scroll_school"></div>
-
+                    <div class="loading" id="loading"></div>                                    
                 </div>
-            <div class="loading"></div>
+            
             <?php } ?>
 
             <?php if(!empty($activityclass)){ ?>
@@ -306,7 +306,7 @@
                         <!-- <div class="custom-pagination pagination"><?php echo $links ?></div> -->
                     </div>
                     <div class="scroll_class"></div>
-                    <div class="loading"></div>
+                    <div class="loading" id="loading"></div>
 
                 </div>
             <?php } ?>

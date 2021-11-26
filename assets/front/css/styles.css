@@ -3276,7 +3276,7 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
     object-fit: cover;
 }
 #loading {
-    padding-top: 20px;
+    padding: 20px 0;
     position: relative;
 }
 #loading .preloader {
