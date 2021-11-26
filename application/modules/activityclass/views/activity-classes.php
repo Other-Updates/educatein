@@ -673,6 +673,7 @@ if ($aff_url == "dance-class") {
             <?php if(!empty($school_spectrum)){ ?>
                 <div class="third-cat mab-50 home-tsw top-school-widget mab-20">
                     <input type="hidden" id="school_spectrum_current_count" value="<?php echo count($school_spectrum);?>"/>
+                    <input type="hidden" id="total_school_count" value="<?php echo $school_spectrum_count;?>"/>
                     <input type="hidden" id="school_spectrum_data_exists" value="<?php echo (count($school_spectrum) < 12) ? 0 : 1;?>"/>
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <span><?php echo $yourcity; ?></span></h3>
@@ -1304,7 +1305,6 @@ $(document).ready(function(){
                 var school = '';
                     school += '<div class="row equal">';
                 $.each(data, function(index,value) {
-                    $('#loading').hide();
                     institutename = value.institute_name.toLowerCase();
                     school += '<div class="col-md-3">';
                     if(value.position_id == 3){
@@ -1342,6 +1342,10 @@ $(document).ready(function(){
                 $('.scroll_class').html(school);
                 var current_length = parseInt(data.length) + 12;
                 $('#school_spectrum_current_count').val(current_length);
+                var total_count = $('#total_school_count').val();
+                if(current_length == total_count){
+                    $('#loading').hide();
+                }
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('No response');
             });

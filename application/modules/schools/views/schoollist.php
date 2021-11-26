@@ -699,6 +699,8 @@ $allcity = $this->db->get()->result();
                     <input type="hidden" id="school_spectrum_current_count" value="<?php echo count($school_spectrum);?>"/>
                     <input type="hidden" id="school_spectrum_data_exists" value="<?php echo (count($school_spectrum) < 12) ? 0 : 1;?>"/>
                     <input type="hidden" id="school_spectrum_limit" value="12"/>
+                    <input type="hidden" id="total_school_count" value="<?php echo $school_spectrum_count ?>"/>
+                    <input type="hidden" id="image_status" value=""/>
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <span><?php echo $yourcity; ?></span></h3>
                     </div>
@@ -1366,7 +1368,6 @@ function customcreatePageinatation1($count,$page,$link){
                 return;
             }
             data = $.parseJSON(data);
-            // console.log(data);
             var school = '';
                   school += '<div class="row equal">';
             $.each(data, function(index,value) {
@@ -1395,17 +1396,24 @@ function customcreatePageinatation1($count,$page,$link){
                 $.ajax({
                     url:SITEURL+'laravel/public/'+value.logo,
                     type:'HEAD',
-                    error: function()
+                    error: function(msg)
                     {
+                        if(msg.statusText == "Not Found"){
+                            $('#image_status').val(msg.statusText);
+                        }
                         // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                        school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                        
+                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
                     },
-                    success: function()
+                    success: function(msg)
                     {
-                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                        // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
                     }
                 });
+                if($('#image_status').val() == "Not Found"){
+                        school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                }else{
+                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                }
                 school += '</div>';
                 school +='<figcaption class="item-footer">';
                 school +='<h6>'+value.school_name+'</h6>';
@@ -1420,6 +1428,10 @@ function customcreatePageinatation1($count,$page,$link){
             $('.scroll_school').html(school);
             var current_length = parseInt(data.length) + 12;
             $('#school_spectrum_current_count').val(current_length);
+            var total_school = $('#total_school_count').val();
+            if(current_length == total_school){
+                $('#loading').hide();
+            }
         }).fail(function (jqXHR, ajaxOptions, thrownError) {
             console.log('No response');
         });
