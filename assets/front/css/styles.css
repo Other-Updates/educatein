@@ -3279,3 +3279,6 @@ ul.sd-menu-list li a.active, ul.sd-menu-list li a:hover {
     padding-top: 20px;
     position: relative;
 }
+#loading .preloader {
+	margin-top: 0;
+}
