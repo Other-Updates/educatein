@@ -695,7 +695,7 @@ $allcity = $this->db->get()->result();
             <input type="hidden" name="affiliation" id="AffiliationName" value="<?php echo $aff_url ?>">
             <input type="hidden" name="yourcity" id="YourCity" value="<?php echo $yourcity?>">
             <?php if(!empty($school_spectrum)){ ?>
-                <div class="third-cat mab-50 home-tsw top-school-widget mab-10 ">
+                <div class="third-cat home-tsw top-school-widget mab-10 ">
                     <input type="hidden" id="school_spectrum_current_count" value="<?php echo count($school_spectrum);?>"/>
                     <input type="hidden" id="school_spectrum_data_exists" value="<?php echo (count($school_spectrum) < 12) ? 0 : 1;?>"/>
                     <input type="hidden" id="school_spectrum_limit" value="12"/>
