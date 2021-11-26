@@ -272,9 +272,10 @@
                         ?>
                         <!-- <div class="custom-pagination pagination"><?php echo $links ?></div> -->
                     </div>
-                        <div class="scroll_class"></div>
+                    <div class="scroll_class"></div>
+                    <div class="loading"></div>
+
                 </div>
-            <div class="loading"></div>
             <?php } ?>
         <?php }else{ ?>
             <div id="main" class="no-data-list">

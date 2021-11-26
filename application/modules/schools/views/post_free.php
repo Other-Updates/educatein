@@ -716,7 +716,7 @@
                                     </div>
                                 </div><!-- /form-row -->
                             </div>
-                            <div class="edit-school-inner">
+                            <!-- <div class="edit-school-inner">
                                 <h4>Plan Details</h4>
                                 <hr class="mb-4">
                                 <div class="form-row">
@@ -725,16 +725,16 @@
                                             <label for="school_category">Select Plan</label>
                                             <select class="form-control" name="school_category" id="exampleFormControlSelect1" required>
                                                 <option value="" >--Select--</option>
-                                                <!-- <option value="1">Platinum</option>
+                                                <option value="1">Platinum</option>
                                                 <option value="2">Premium</option>
-                                                <option value="3">Spectrum</option> -->
+                                                <option value="3">Spectrum</option>
                                                 <option value="4">Trial</option>
                                             </select>
                                         </div>
                                     </div>
 
 
-                                    <!-- <div class="col-lg-4 col-sm-6">
+                                    <div class="col-lg-4 col-sm-6">
                                         <div class="form-group">
                                             <label for="status">Status</label>
                                             <select class="form-control" name="school_status" id="exampleFormControlSelect1" required>
@@ -743,9 +743,9 @@
                                                 <option value="1">Approve</option>
                                             </select>
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="edit-school-inner">
                                 <!-- <button class="btn btn-danger">CANCEL</button> -->
                                 <button class="btn btn-primary btn-save buy_now formsubmit float-right" id="formsubmit">SUBMIT</button>
@@ -1091,7 +1091,7 @@
                                 </div>
                             </div><!-- /form-row -->
                         </div>
-                        <div class="edit-school-inner">
+                        <!-- <div class="edit-school-inner">
                             <h4>Plan Details</h4>
                             <hr class="mb-4">
                             <div class="form-row">
@@ -1100,14 +1100,14 @@
                                         <label for="plan">Select Plan</label>
                                         <select class="form-control" name="position_id" id="exampleFormControlSelect1" required>
                                             <option value="" >--Select--</option>
-                                            <!-- <option value="1" >Platinum</option>
+                                            <option value="1" >Platinum</option>
                                             <option value="2">Premium</option>
-                                            <option value="3">Spectrum</option> -->
+                                            <option value="3">Spectrum</option>
                                             <option value="4">Trial</option>
                                         </select>
                                     </div>
                                 </div>
-                                <!-- <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-4 col-sm-6">
                                     <div class="form-group">
                                         <label for="city">Status</label>
                                         <select class="form-control" name="status" id="exampleFormControlSelect1" required>
@@ -1116,9 +1116,9 @@
                                             <option value="1">Approve</option>
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="edit-school-inner">
                             <button class="btn btn-primary btn-save buy_now formsubmit float-right" id="formsubmit1">SUBMIT</button>
                             <a href="<?php echo base_url('schools/admin/institute')?>"><button type="button" class="btn btn-danger">CANCEL</button></a>

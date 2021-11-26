@@ -372,7 +372,7 @@ class Schools extends CI_Controller {
                 'pincode' => $_POST['pincode'],
                 'affiliation_id' => $schoolboard_id,
                 'schooltype_id' => $level_id,
-                'school_category_id' => $_POST['school_category'],
+                'school_category_id' => 4,
                 'status' => $status,
                 'about' => $school['about'],
                 'website_url' => $_POST['school_website'],
@@ -387,7 +387,7 @@ class Schools extends CI_Controller {
                 // 'type'=>$school['address'],
                 'hostel' => $customRadio1,
                 'rte' => $customRadio,
-                'paid' => $paid,
+                'paid' => 0,
                 'students' => $school['school_students'],
                 'teachers' => $school['school_teachers'],
                 'facebook' => $school['facebook'],
@@ -398,7 +398,7 @@ class Schools extends CI_Controller {
                 'logo' => $banner1_name,
                 'activated_at' => $act_date,
                 'is_active' => 1,
-                'valitity' => $validity,
+                'valitity' => 30,
             );
             $this->db->insert('school_details', $schoolinsert);
 
@@ -1271,7 +1271,7 @@ class Schools extends CI_Controller {
 
             $classinsert = array(
                 'category_id' => $category_id,
-                'position_id' => $_POST['position_id'],
+                'position_id' => 4,
                 'status' => $status,
                 'institute_name' => $_POST['institutename'],
                 'slug' => $_POST['institutename'],
@@ -1290,11 +1290,11 @@ class Schools extends CI_Controller {
                 'website_url' => $_POST['website'],
                 'timings' => $_POST['timing'],
                 'logo' => $banner1_name,
-                'paid' => $paid,
+                'paid' => 0,
                 'news_image' => $newsbanner1_name,
                 'activated_at' => $act_date,
                 'is_active' => 1,
-                'valitity'=> $validity,
+                'valitity'=> 30,
             );
             $this->db->insert('institute_details', $classinsert);
 
