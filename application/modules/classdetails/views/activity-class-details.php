@@ -644,18 +644,32 @@ $similar_school = $this->db->get();
                         $type = strtolower($similar->type);
                         $type = str_replace(" ","-",$type);
                         ?>
-                            <?php //if($similar->position_id == 1){ ?> 
-                        <!-- <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;"> -->
-                            <?php //}else if($smiliar->position_id == 2){ ?>
-                            <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
-                            <?php //}else if($smiliar->position_id == 3){ ?>
-                        <!-- <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;"> -->
-                            <?php //}else if($smiliar->position_id == 4){ ?>
-                        <!-- <div class="item wow bounceIn trial" style="animation-delay: .<?php echo $delay; ?>s;"> -->
-                            <?php //} ?>
+                        <?php if($similar->position_id == 1){ ?>
+                        <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php } ?>
+                        <?php if($similar->position_id == 2){ ?>
+                        <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php } ?>
+                        <?php if($similar->position_id == 3){ ?>
+                        <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php } ?>
+                        <?php if($similar->position_id == 4){ ?>
+                        <div class="item wow bounceIn trial" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php } ?>
                             <a href="<?php echo base_url() ?>list-of-best-<?php echo $type ?>-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->institute_name); ?>" target="_blank">
                                 <figure>
+                                    <?php if($similar->position_id == 1){ ?>
+                                    <div class="package-name">Platinum</div>
+                                    <?php } ?>
+                                    <?php if($similar->position_id == 2){ ?>
                                     <div class="package-name">Premium</div>
+                                    <?php } ?>
+                                    <?php if($similar->position_id == 3){ ?>
+                                    <div class="package-name">Spectrum</div>
+                                    <?php } ?>
+                                    <?php if($similar->position_id == 4){ ?>
+                                    <div class="package-name">Trial</div>
+                                    <?php } ?>
                                     <div class="object-fit">
                                         <?php if(file_exists(FCPATH.'laravel/public/'.$similar->logo) && !empty($similar->logo)){ ?>
                                             <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100" />

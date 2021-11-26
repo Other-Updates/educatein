@@ -878,10 +878,32 @@ if ($uccity == "Enquiry" || $uccity == "Otp") {
             <div class="home-tsw top-school-widget mab-50">
                 <div class="owl-two owl-carousel owl-theme">
                     <?php foreach($similar_school as $key=>$similar){ ?>
+                        <?php if($similar->school_category_id == 1){ ?>
+                        <div class="item wow bounceIn platinum" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php } ?>
+                        <?php if($similar->school_category_id == 2){ ?>
                         <div class="item wow bounceIn premium" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php } ?>
+                        <?php if($similar->school_category_id == 3){ ?>
+                        <div class="item wow bounceIn spectrum" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php } ?>
+                        <?php if($similar->school_category_id == 4){ ?>
+                        <div class="item wow bounceIn trial" style="animation-delay: .<?php echo $delay; ?>s;">
+                        <?php } ?>
                             <a href="<?php echo base_url() ?>list-of-best-<?php echo $similar->aff ?>-schools-in-<?php echo $yourcity; ?>/<?php echo str_replace(" ","-",$similar->school_name); ?>" target="_blank">
                                 <figure>
+                                    <?php if($similar->school_category_id == 1){ ?>
+                                    <div class="package-name">Platinum</div>
+                                    <?php } ?>
+                                    <?php if($similar->school_category_id == 2){ ?>
                                     <div class="package-name">Premium</div>
+                                    <?php } ?>
+                                    <?php if($similar->school_category_id == 3){ ?>
+                                    <div class="package-name">Spectrum</div>
+                                    <?php } ?>
+                                    <?php if($similar->school_category_id == 4){ ?>
+                                    <div class="package-name">Trial</div>
+                                    <?php } ?>
                                     <div class="object-fit">
                                         <?php if(file_exists(FCPATH.'laravel/public/'.$similar->logo) && !empty($similar->logo)){ ?>
                                             <img src="<?php echo base_url() ?>laravel/public/<?php echo $similar->logo ?>" class="w-100"  />
