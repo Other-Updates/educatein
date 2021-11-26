@@ -665,7 +665,7 @@
                 var current_length = parseInt(data.length) + 12;
                 $('#school_search_current_count').val(current_length);
                 if($('#total_school_count').val() == current_length){
-                    // $('.loading').hide();
+                    $('.loading').hide();
                 }
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('No response');
