@@ -1372,17 +1372,14 @@ function customcreatePageinatation1($count,$page,$link){
                 $.ajax({
                     url:SITEURL+'laravel/public/'+value.logo,
                     type:'HEAD',
+                    async: false,
                     error: function(msg)
                     {
-                        if(msg.statusText == "Not Found"){
-                            $('#image_status').val(msg.statusText);
-                        }
-                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                        $('#image_status').val(msg.statusText);
                     },
-                    success: function(msg)
+                    success: function()
                     {
-                        // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                        $('#image_status').val("Found");
                     }
                 });
                 schoolname = value.school_name.toLowerCase();
@@ -1404,8 +1401,9 @@ function customcreatePageinatation1($count,$page,$link){
                 school +='<div class="object-fit">';
                 if($('#image_status').val() == "Not Found"){
                         school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                }else{
-                        school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                }
+                if($('#image_status').val() == "Found"){
+                    school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
                 }
                 school += '</div>';
                 school +='<figcaption class="item-footer">';

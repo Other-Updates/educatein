@@ -1307,18 +1307,14 @@ $(document).ready(function(){
                     $.ajax({
                     url:SITEURL+'laravel/public/'+value.logo,
                     type:'HEAD',
+                    async: false,
                     error: function(msg)
                     {
-                        if(msg.statusText == "Not Found"){
-                            $('#image_status').val(msg.statusText);
-                        }
-                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                        $('#image_status').val("Not Found");
                     },
                     success: function(msg)
                     {
-                        console.log(msg);
-                        // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                        $('#image_status').val("Found");
                     }
                 });
                     institutename = value.institute_name.toLowerCase();
@@ -1340,7 +1336,8 @@ $(document).ready(function(){
                     school +='<div class="object-fit">';
                     if($('#image_status').val() == "Not Found"){
                         school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >'
-                    }else{
+                    }
+                    if($('#image_status').val() == "Found"){
                         school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >'
                     }
                     school += '</div>';

@@ -2606,17 +2606,20 @@ class admin extends CI_Controller {
         $date = strtotime($data['school'][0]['activated_at']);
         $date = strtotime("+30 day", $date);
         $date = date('Y-m-d', $date);
+        $validity = 30;
         
         }else{
             $date = strtotime($data['school'][0]['activated_at']);
             $date = strtotime("+100 day", $date);
             $date = date('Y-m-d', $date);
+            $validity = 100;
         }
-        $date = array(
+        $date1 = array(
             'expiry_date' => $date,
+            'valitity' => $validity,
         );
         $this->db->where('id',base64_decode($school_id));
-        $this->db->update('school_details',$date);
+        $this->db->update('school_details',$date1);
         
         
         
@@ -3849,7 +3852,7 @@ class admin extends CI_Controller {
                             'image' => $facility4_name,
                             'is_active' => 1
                         );
-                        $this->db->insert('school_facilities', $schoolfaciltyinsert1);
+                        $this->db->insert('school_facilities', $schoolfaciltyinsert4);
                     }
                 }
             }

@@ -645,20 +645,17 @@ class Schools extends CI_Controller {
             }
 
 
-
-
-
-
+            
             // banner1 image save
             if (isset($_FILES['school_banner1']['name'])) {
-                $banner1 = $_FILES['banner1']['name'];
+                $banner1 = $_FILES['school_banner1']['name'];
                 $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
+
                 $banner1_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
                 $banner1_type = $_FILES['school_banner1']['type'];
                 $banner1_size = $_FILES['school_banner1']['size'];
                 $banner1_tem_loc = $_FILES['school_banner1']['tmp_name'];
                 $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
-
                 $allowed = array('gif', 'png', 'jpg', 'jpeg');
 
                 if (in_array($banner1_ext, $allowed)) {
@@ -682,15 +679,14 @@ class Schools extends CI_Controller {
             $this->db->update('school_details',$logo,array('id' => $school_id));
 
             if (isset($_FILES['school_banner2']['name'])) {
-                $banner2 = $_FILES['banner2']['name'];
-                $banner2_ext = pathinfo($banner2, PATHINFO_EXTENSION);
+                $banner2 = $_FILES['school_banner2']['name'];
+                $banner2_ext = pathinfo($banner1, PATHINFO_EXTENSION);
 
                 $banner2_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner2_ext;
                 $banner2_type = $_FILES['school_banner2']['type'];
                 $banner2_size = $_FILES['school_banner2']['size'];
                 $banner2_tem_loc = $_FILES['school_banner2']['tmp_name'];
                 $banner2_store = FCPATH . "/laravel/public/" . $banner2_name;
-
                 $allowed = array('gif', 'png', 'jpg', 'jpeg');
                 if (in_array($banner2_ext, $allowed)) {
                     if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
@@ -708,14 +704,15 @@ class Schools extends CI_Controller {
 
             // banner3 image save
             if (isset($_FILES['school_banner3']['name'])) {
-                $banner3 = $_FILES['banner3']['name'];
-                $banner3_ext = pathinfo($banner3, PATHINFO_EXTENSION);
+                $banner3 = $_FILES['school_banner3']['name'];
+                $banner3_ext = pathinfo($banner1, PATHINFO_EXTENSION);
 
-                $banner3_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner3_ext;
+                $banner3_name = $school['schoolname'] . "-" . rand(10000, 10000000) . "." . $banner2_ext;
                 $banner3_type = $_FILES['school_banner3']['type'];
                 $banner3_size = $_FILES['school_banner3']['size'];
                 $banner3_tem_loc = $_FILES['school_banner3']['tmp_name'];
                 $banner3_store = FCPATH . "/laravel/public/" . $banner3_name;
+                $allowed = array('gif', 'png', 'jpg', 'jpeg');
 
                 $allowed = array('gif', 'png', 'jpg', 'jpeg');
                 if (in_array($banner3_ext, $allowed)) {
@@ -1086,7 +1083,7 @@ class Schools extends CI_Controller {
                             'image' => $facility4_name,
                             'is_active' => 1
                         );
-                        $this->db->insert('school_facilities', $schoolfaciltyinsert1);
+                        $this->db->insert('school_facilities', $schoolfaciltyinsert4);
                     }
                 }
             }
@@ -1335,16 +1332,15 @@ class Schools extends CI_Controller {
             }
             // banner1 image save
             if (isset($_FILES['banner1']['name'])) {
-                $banner1 = $_FILES['banner1']['name'];
+                $banner1 = $_FILES['banner1'];
                 $banner1_ext = pathinfo($banner1, PATHINFO_EXTENSION);
-            // echo $banner1_ext;
-            // exit();
+                // echo $banner1_ext;
+                // exit();
                 $banner1_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner1_ext;
                 $banner1_type = $_FILES['banner1']['type'];
                 $banner1_size = $_FILES['banner1']['size'];
                 $banner1_tem_loc = $_FILES['banner1']['tmp_name'];
                 $banner1_store = FCPATH . "/laravel/public/" . $banner1_name;
-
                 $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
 
                 if (in_array($banner1_ext, $allowed)) {
@@ -1379,7 +1375,8 @@ class Schools extends CI_Controller {
             if (isset($_FILES['banner2']['name'])) {
                 $banner2 = $_FILES['banner2']['name'];
                 $banner2_ext = pathinfo($banner2, PATHINFO_EXTENSION);
-
+                // echo $banner1_ext;
+                // exit();
                 $banner2_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner2_ext;
                 $banner2_type = $_FILES['banner2']['type'];
                 $banner2_size = $_FILES['banner2']['size'];
@@ -1387,8 +1384,8 @@ class Schools extends CI_Controller {
                 $banner2_store = FCPATH . "/laravel/public/" . $banner2_name;
 
                 $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-            // echo $file_type;
-            // exit();
+                // echo $file_type;
+                // exit();
                 if (in_array($banner2_ext, $allowed)) {
                     if (move_uploaded_file($banner2_tem_loc, $banner2_store)) {
                         $banner2insert = array(
@@ -1407,7 +1404,8 @@ class Schools extends CI_Controller {
             if (isset($_FILES['banner3']['name'])) {
                 $banner3 = $_FILES['banner3']['name'];
                 $banner3_ext = pathinfo($banner3, PATHINFO_EXTENSION);
-
+                // echo $banner1_ext;
+                // exit();
                 $banner3_name = $_POST['institutename'] . "-" . rand(10000, 10000000) . "." . $banner3_ext;
                 $banner3_type = $_FILES['banner3']['type'];
                 $banner3_size = $_FILES['banner3']['size'];
@@ -1415,8 +1413,8 @@ class Schools extends CI_Controller {
                 $banner3_store = FCPATH . "/laravel/public/" . $banner3_name;
 
                 $allowed = array('gif', 'png', 'jpg', 'jpeg', 'GIF', 'PNG', 'JPG', 'JPEG');
-            // echo $file_type;
-            // exit();
+                // echo $file_type;
+                // exit();
                 if (in_array($banner3_ext, $allowed)) {
                     if (move_uploaded_file($banner3_tem_loc, $banner3_store)) {
                         $banner3insert = array(
@@ -1681,7 +1679,21 @@ class Schools extends CI_Controller {
             // redirect("schools/admin/institute");
         }
         $this->session->set_userdata('user_id',$user_id);
-        redirect('my-account?id='.base64_encode($user_id));
+        // redirect('my-account?id='.base64_encode($user_id));
+        ?>
+        <script src="<?php echo base_url() ?>assets/front/js/jquery.min.js"></script>
+        <script>
+               $(document).ready(function () {
+                swal({
+                    title: "Trial package added successfully",
+                    text: "It will be validated within two working days",
+                    icon: "success",
+                }).then(function() {
+                    window.location = "<?php echo base_url() ?>myaccount?id=<?php echo base64_encode($userid); ?>";
+                });
+            }); 
+        </script>
+        <?php
 
     }
 

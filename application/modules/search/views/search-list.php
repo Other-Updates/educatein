@@ -618,17 +618,14 @@
                     $.ajax({
                     url:SITEURL+'laravel/public/'+value.logo,
                     type:'HEAD',
+                    async: false,
                     error: function(msg)
                     {
-                        if(msg.statusText == "Not Found"){
-                            $('#image_status').val(msg.statusText);
-                        }
-                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                        // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
+                            $('#image_status').val("Not Found");
                     },
                     success: function(msg)
                     {
-                        // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
+                        $('#image_status').val("Found");
                     }
                 });
                     schoolname = value.school_name.toLowerCase();
@@ -661,7 +658,8 @@
                     school += '<div class="object-fit">';
                     if($('#image_status').val() == "Not Found"){
                         school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" " />';
-                    }else{
+                    }
+                    if($('#image_status').val() == "Found"){
                         school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'">';
                     } 
                     school += '<div>';
@@ -728,28 +726,24 @@
                     return;
                 }
                 data = $.parseJSON(data);
-                console.log(data);
                 var city = $('#get_city_name').val();
                 var school = '';
                     
                 school += '<div class="row search-schoolist">';
                         $.each(data, function(index,value) {
-                                $.ajax({
-                            url:SITEURL+'laravel/public/'+value.logo,
-                            type:'HEAD',
-                            error: function(msg)
-                            {
-                                if(msg.statusText == "Not Found"){
-                                    $('#image_status').val(msg.statusText);
+                            $.ajax({
+                                url:SITEURL+'laravel/public/'+value.logo,
+                                type:'HEAD',
+                                async: false,
+                                error: function(msg)
+                                {
+                                        $('#image_status').val("Not Found");
+                                },
+                                success: function(msg)
+                                {
+                                    $('#image_status').val("Found");
                                 }
-                                // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                                // school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" >';
-                            },
-                            success: function(msg)
-                            {
-                                // school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'" class="w-100" >';
-                            }
-                        });
+                            });
                         institutename = value.institute_name.toLowerCase();
                         category_name = value.category_name.toLowerCase();
                         school += '<div class="col-lg-4 col-sm-6 home-tsw">';
@@ -781,7 +775,8 @@
                                     school += '<div class="object-fit">';
                                     if($('#image_status').val() == "Not Found"){
                                         school += '<img src="'+SITEURL+'assets/front/images/list-default.png" class="w-100" " />';
-                                    }else{
+                                    }
+                                    if($('#image_status').val() == "Found"){
                                         school += '<img src="'+SITEURL+'laravel/public/'+value.logo+'">';
                                     }
                                     school += '</div>';
