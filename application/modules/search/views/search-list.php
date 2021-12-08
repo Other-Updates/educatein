@@ -186,6 +186,7 @@
         <input type="hidden" name="school_spectrum_data_exists" id="school_spectrum_data_exists" value="<?php echo (count($schools) < 12) ? 0 : 1;?>">
         <input type="hidden" name="class_search_data_exists" id="class_search_data_exists" value="<?php echo (count($activityclass) < 12) ? 0 : 1;?>">
         <input type="hidden" id="image_status" value=""/>
+        <input type="hidden" id="ajax_call" value="0"/>
 
         <?php if(!empty($schools) || !empty($activityclass)){ ?>
             <?php if(!empty($schools)){ ?>
@@ -576,10 +577,11 @@
                 var search = $('#get_school_search').val();
                 var page = $('#school_search_current_count').val();
                 var data_exists = $('#school_spectrum_data_exists').val();
+                var ajax_call = $('#ajax_call').val();
                 if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
                     if (isLoading == false) {
                         isLoading = true;
-                        if (isDataLoading && data_exists == 1) {
+                        if (isDataLoading && data_exists == 1 && ajax_call == 0) {
                             load_more(page,search);
                             $('.loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
                         }
@@ -682,6 +684,7 @@
                 $('#school_search_current_count').val(current_length);
                 if($('#total_school_count').val() == current_length){
                     $('.loading').hide();
+                    $('#ajax_call').val('1');
                 }
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('No response');
@@ -694,10 +697,11 @@
                 var search = $('#get_class_search').val();
                 var page = $('#class_search_current_count').val();
                 var data_exists = $('#class_search_data_exists').val();
+                var ajax_call = $('#ajax_call').val();
                 if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
                     if (isLoading == false) {
                         isLoading = true;
-                        if (isDataLoading && data_exists == 1) {
+                        if (isDataLoading && data_exists == 1 && ajax_call==0) {
                             load_more_class(page,search);
                             $('.loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
                         }
@@ -797,6 +801,7 @@
                 $('#class_search_current_count').val(current_length);
                 if($('#total_class_count').val() == current_length){
                     $('.loading').hide();
+                    $('#ajax_call').val('1');
                 }
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('No response');
