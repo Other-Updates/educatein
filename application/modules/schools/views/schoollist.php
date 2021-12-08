@@ -701,6 +701,7 @@ $allcity = $this->db->get()->result();
                     <input type="hidden" id="school_spectrum_limit" value="12"/>
                     <input type="hidden" id="total_school_count" value="<?php echo $school_spectrum_count ?>"/>
                     <input type="hidden" id="image_status" value=""/>
+                    <input type="hidden" id="ajax_call" value="0"/>
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> Schools in <span><?php echo $yourcity; ?></span></h3>
                     </div>
@@ -1335,10 +1336,11 @@ function customcreatePageinatation1($count,$page,$link){
         var limit = $('#school_spectrum_limit').val();
         var page = $('#school_spectrum_current_count').val();
         var data_exists = $('#school_spectrum_data_exists').val();
+        var ajax_call = $('#ajax_call').val();
         if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
             if (isLoading == false) {
                 isLoading = true;
-                if (isDataLoading && data_exists == 1) {
+                if (isDataLoading && data_exists == 1 && ajax_call ==0) {
                 // $('#loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
                     load_more(page,limit);
                 }
@@ -1353,7 +1355,7 @@ function customcreatePageinatation1($count,$page,$link){
         var city = $('#YourCity').val();
         $('#loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
 
-        $.ajax({
+        var xhr = $.ajax({
             url: SITEURL+"schools/get_schools",
             type: "POST",
             data: {affiliation:affiliation,yourcity_id:yourcity_id,page:page,limit:limit},
@@ -1422,6 +1424,7 @@ function customcreatePageinatation1($count,$page,$link){
             var total_school = $('#total_school_count').val();
             if(current_length == total_school){
                 $('#loading').hide();
+                $('#ajax_call').val('1');
             }
         }).fail(function (jqXHR, ajaxOptions, thrownError) {
             console.log('No response');

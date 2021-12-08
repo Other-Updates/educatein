@@ -676,6 +676,7 @@ if ($aff_url == "dance-class") {
                     <input type="hidden" id="total_school_count" value="<?php echo $school_spectrum_count;?>"/>
                     <input type="hidden" id="school_spectrum_data_exists" value="<?php echo (count($school_spectrum) < 12) ? 0 : 1;?>"/>
                     <input type="hidden" id="image_status" value=""/>
+                    <input type="hidden" id="ajax_call" value="0"/>
                     <div class="custom-section-title mab-30">
                         <h3 class="mb-2"><?php echo ucfirst($aff_name); ?> in <span><?php echo $yourcity; ?></span></h3>
                     </div>
@@ -1269,11 +1270,12 @@ $(document).ready(function(){
         $(window).scroll(function () {
             var page = $('#school_spectrum_current_count').val();
             var data_exists = $('#school_spectrum_data_exists').val();
+            var ajax_call = $('#ajax_call').val();
             if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500) {
                 if (isLoading == false) {
                     isLoading = true;
                     // $('#loading').hide();
-                    if (isDataLoading && data_exists == 1) {
+                    if (isDataLoading && data_exists == 1 && ajax_call==0) {
                         $('#loading').html("<div class='preloader'><span></span><span></span><span></span><span></span><span></span></div>");
                         load_more(page);
                     }
@@ -1357,6 +1359,7 @@ $(document).ready(function(){
                 var total_count = $('#total_school_count').val();
                 if(current_length == total_count){
                     $('#loading').hide();
+                    $('#ajax_call').val('1');
                 }
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('No response');
